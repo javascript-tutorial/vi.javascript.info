@@ -1,8 +1,8 @@
-The HTML code:
+Mã HTML:
 
 [html src="index.html"]
 
-For the file `alert.js` in the same folder:
+Đây là tệp `alert.js` trong cùng thư mục:
 
 [js src="alert.js"]
 

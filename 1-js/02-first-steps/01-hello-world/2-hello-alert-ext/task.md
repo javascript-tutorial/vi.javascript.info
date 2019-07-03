@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Show an alert with an external script
+# Hiển thị thông báo bằng một script ngoài
 
-Take the solution of the previous task <info:task/hello-alert>. Modify it by extracting the script content into an external file `alert.js`, residing in the same folder.
+Lấy lời giải của bài trước <info:task/hello-alert>. Sửa nó bằng cách đưa script ra một tệp riêng có tên `alert.js` đặt trong cùng thư mục.
 
-Open the page, ensure that the alert works.
+Mở trang web và chắc chắn rằng thông báo làm việc.

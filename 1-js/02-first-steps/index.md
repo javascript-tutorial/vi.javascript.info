@@ -1,3 +1,3 @@
 # JavaScript Fundamentals
 
-Let's learn the fundamentals of script building.
+Cùng học các nguyên tắc cơ bản để viết một chương trình.
