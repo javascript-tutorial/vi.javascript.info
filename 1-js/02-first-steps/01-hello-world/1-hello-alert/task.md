@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Show an alert
+# Hiện một thông báo
 
-Create a page that shows a message "I'm JavaScript!".
+Tạo một trang web hiển thị thông báo "Tôi là Javascript!".
 
-Do it in a sandbox, or on your hard drive, doesn't matter, just ensure that it works.
+Có thể viết nó trong một sandbox, hoặc trên ổ cứng.
 
 [demo src="solution"]
 
