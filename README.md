@@ -1,65 +1,65 @@
-# The Modern JavaScript Tutorial in Vietnamese
+# The Modern JavaScript Tutorial bằng Tiếng Việt
 
-This repository hosts the translation of <https://javascript.info> in Vietnamese.
+Repository này chứa phiên bản tiếng Việt của <https://javascript.info>.
 
 
-**That's how you can contribute:**
+**Bạn có thể đóng góp vào bản dịch này bằng cách:**
 
-- See the [Vietnamese Translate Progress](https://github.com/javascript-tutorial/vi.javascript.info/issues/1) issue.
-- Choose an unchecked article you'd like to translate.
-- Add a comment with the article title to the issue, e.g. `An Introduction to JavaScript`.
-    - Our bot will mark it in the issue, for everyone to know that you're translating it.
-    - Your comment should contain only the title.
-- Fork the repository, translate and send a PR when done.
-    - PR title should match article title, the bot will write it's number into the issue.
+- Xem issue [Vietnamese Translate Progress](https://github.com/javascript-tutorial/vi.javascript.info/issues/1).
+- Chọn một bài chưa được dịch (chưa được check) mà bạn muốn dịch.
+- Thêm bình luận vào issue với nội dung là tiêu đề bài bạn muốn dịch, ví dụ `An Introduction to JavaScript`.
+    - Bot của chúng tôi tự động đánh dấu nó trong issue, để cho người khác biết rằng bạn đang dịch bài này.
+    - Bình luận của bạn chỉ nên chứa một tiêu đề duy nhất.
+- Fork repository này, dịch và gửi một Pull Request khi hoàn thành.
+    - Tiêu đề của Pull Request nên trùng với tiêu đề bài dịch, giúp bot tự động ghi số của bài vào issue.
 
-Please kindly allow maintainers to review and merge or request changes in your translation.
+Vui lòng cho phép các maintainer (nhà bào trì) xem xét (review) và hợp nhất (merge) các thay đổi của bạn vào bản dịch.
    
-If maintainers do not respond, or if you'd like to become a maintainer, write us at the [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
+Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành một maintainer, nói cho chúng tôi tại [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
     
-**Let others know what you're translating, in message boards or chats in your language. Invite them to join!**
+**Cho người khác biết rằng bạn đang dịch trong bảng thông báo hoặc nói chuyện bằng ngôn ngữ của bạn. Mời họ cùng tham gia!**
 
-🎉 Thank you!
+🎉 Cảm ơn!
 
-Your name and the contribution size will appear in the "About project" page when the translation gets published.
+Tên và phần đóng góp của bạn sẽ xuất hiện trong trang "About project" khi bản dịch được xuất bản.
 
-P.S. The full list of languages can be found at <https://javascript.info/translate>.
+P.S. Danh sách đầy đủ các ngôn ngữ có thể thấy tại <https://javascript.info/translate>.
 
-## Structure
+## Cấu trúc
 
-Every chapter, an article or a task resides in its own folder.
+Mỗi chương, mỗi bài hoặc mỗi bài tập đều được đặt trong một thư mục riêng.
 
-The folder is named `N-url`, where `N` – is the number for sorting (articles are ordered), and `url` is the URL-slug on the site.
+Tên thư mục đặt theo cấu trúc `N-url`, ở đó `N` là số thứ tự dùng để sắp xếp (các bài được sắp xếp theo thứ tự), và `url` là URL-slug của nó trên website.
 
-The folder has one of files:
+Một thư mục có nhiều tệp:
 
-- `index.md` for a section,
-- `article.md` for an article,
-- `task.md` for a task formulation (+`solution.md` with the solution text if any).
+- `index.md` cho một chương,
+- `article.md` cho một bài,
+- `task.md` cho một bài tập (+`solution.md` cho lời giải).
 
-A file starts with the `# Title Header`, and then the text in Markdown-like format, editable in a simple text editor. 
+Một tệp bắt đầu bằng `# Title Header`, và sau đó là văn bản viết theo định dạng Markdown, có thể chỉnh sửa bằng một trình soạn thảo đơn giản.
 
-Additional resources and examples for the article or the task, are also in the same folder.
+Các tài nguyên bổ sung và các ví dụ cho bài học hoặc bài tập cũng nằm trong cùng thư mục.
 
-## Translation Tips
+## Hướng dẫn dịch
 
-Please keep line breaks and paragraphs "as is": don't add newlines and don't remove existing ones. Makes it easy to merge future changes from the English version into the translation. 
+Vui lòng giữ nguyên các đoạn và dấu xuống dòng: đừng thêm các dấu xuống dòng mới cũng như không xóa các dấu xuống dòng hiện tại. Việc này giúp việc hợp nhất các thay đổi từ phiên bản Tiếng Anh sang phiên bản Tiếng Việt trong tương lai trở nên dễ dàng.
 
-If you see that the English version can be improved – great, please send a PR to it.
+Nếu bạn thấy rằng phiên bản Tiếng Anh còn có thể cải thiện - tuyệt, hãy gửi một Pull Request cho nó.
 
-### Terms
+### Các thuật ngữ
 
-- Some specification terms are not to be translated, e.g. "Function Declaration" can be left "as is".
-- For other terms like `resolved promise`, `slash`, `regexp`, and so on - look for a glossary, hopefully there's one for your language already. If not, look for translations in manuals, such as [MDN](https://developer.mozilla.org/en-US/).
+- Một số thuật ngữ kỹ thuật không có trong ngôn ngữ, ví dụ "Function Declaration" thì để nguyên.
+- Với các thuật ngữ khác như `resolved promise`, `slash`, `regexp` ... - cố tìm một bản dịch đã có trong ngôn ngữ của bạn. Nếu không tìm các bản dịch đã có trong hướng dẫn sử dụng như [MDN](https://developer.mozilla.org/en-US/).
 
-### Text in Code Blocks
+### Văn bản trong khối mã
 
-- Translate comments.
-- Translate user-messages and example strings.
-- Don't translate variables, classes, identifiers.
-- Ensure that the code works after the translation :)
+- Dịch các chú thích
+- Có thể dịch các thông báo gửi tới người dùng và các chuỗi ví dụ.
+- Đừng dịch các biến, class và các định danh.
+- Chắc chắn rằng mã vẫn chạy sau khi bạn dịch nó :)
 
-Example:
+Ví dụ:
 
 ```js
 // Example
@@ -67,47 +67,47 @@ const text = "Hello, world";
 document.querySelector('.hello').innerHTML = text;
 ```
 
-✅ DO (translate comment):
+✅ LÀM (dịch chú thích, chuỗi thông báo, chuỗi ví dụ):
 
 ```js
-// Ejemplo
-const text = 'Hola mundo';
+// Ví dụ
+const text = 'Chào thế giới';
 document.querySelector('.hello').innerHTML = text;
 ```
 
-❌ DON'T (translate class):
+❌ KHÔNG LÀM (dịch class):
 
 ```js
-// Ejemplo
-const text = 'Hola mundo';
-// ".hello" is a class
-// DO NOT TRANSLATE
-document.querySelector('.hola').innerHTML = text;
+// Ví dụ
+const text = 'Chào thế giới';
+// ".hello" là một class
+// KHÔNG ĐƯỢC DỊCH
+document.querySelector('.xinchào').innerHTML = text;
 ```
 
-### External Links
+### Các liên kết ngoài
 
-If an external link is to Wikipedia, e.g. `https://en.wikipedia.org/wiki/JavaScript`, and a version of that article exists in your language that is of decent quality, link to that version instead.
+Nếu là một liên kết tới Wikipedia, ví dụ `https://en.wikipedia.org/wiki/JavaScript`, và có một phiên bản viết bằng ngôn ngữ của bạn, hay chuyển sang phiên bản này.
 
-Example:
+Ví dụ
 
 ```md
 [JavaScript](https://en.wikipedia.org/wiki/JavaScript) is a programming language.
 ```
 
-✅ OK (en -> es):
+✅ OK (en -> vi):
 
 ```md
-[JavaScript](https://es.wikipedia.org/wiki/JavaScript) es un lenguaje de programación.
+[JavaScript](https://vi.wikipedia.org/wiki/JavaScript) là một ngôn ngữ lập trình.
 ```
 
-For links to MDN, a partially translated version is ok.
+Nếu là liên kết tới MDN, cố gắng đưa tới phiên bản có dịch một phần sang ngôn ngữ của bạn.
 
-If a linked article has no translated version, leave the link "as is".
+Nếu liên kết tới nội dung không có bằng ngôn ngữ của bạn, hãy để nguyên.
 
 ### Metadata
 
-Some files, usually tasks, have YAML metadata at the top, delimited by `---`:
+Một số tệp, thường là các bài tập, có YAML metadata ở đầu, ngăn cách với phần dưới bằng `---`:
 
 ```md
 importance: 5
@@ -116,20 +116,20 @@ importance: 5
 ...
 ```
 
-Please don't translate "importance" (and other top metadata).
+Vui lòng không dịch "importance" (cũng như các metadata khác).
 
-### Anchors
+### Các anchor
 
-Some headers have `[#anchor]` at the end, e.g.
+Một vài tiêu đề có `[#anchor]` ở cuối, ví dụ:
 
 ```md
 ## Spread operator [#spread-operator]
 ```
 
-Please don't translate or remove the `[#...]` part, it's for URL anchors.
+Vui lòng không dịch và không xóa `[#...]`, nó được dùng làm các URL anchor.
 
-## Running locally
+## Chạy trên máy tính
 
-You can run the tutorial server locally to see how the translation looks.
+Bạn có thể chạy phiên bản dịch trên máy chủ để xem nó trông như thế nào.
 
-The server and install instructions are at <https://github.com/javascript-tutorial/server>. 
+Hướng dẫn cài đặt và chạy thử có tại <https://github.com/javascript-tutorial/server>. 
