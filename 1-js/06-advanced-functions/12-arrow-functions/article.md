@@ -1,31 +1,31 @@
-# Arrow functions revisited
+# Nhắc lại về hàm mũi tên
 
-Let's revisit arrow functions.
+Cùng xem lại hàm mũi tên.
 
-Arrow functions are not just a "shorthand" for writing small stuff.
+Hàm mũi tên không đơn giản chỉ là một cách viết tắt của hàm.
 
-JavaScript is full of situations where we need to write a small function, that's executed somewhere else.
+JavaScript có đầy những tình huống ở đó chúng ta cần viết một hàm nhỏ để chạy ở một nơi khác.
 
-For instance:
+Ví dụ:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
-- ...there are more.
+- `arr.forEach(func)` -- `func` được chạy bởi `forEach` với mỗi phần tử của mảng.
+- `setTimeout(func)` -- `func` được chạy bởi bộ lập lịch.
+- ...và nhiều nữa.
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+Nó cũng là linh hồn của JavaScript khi mà ta cần tạo một hàm và truyền nó tới một nơi khác.
 
-And in such functions we usually don't want to leave the current context.
+Những hàm này tạo ra để chạy ở chỗ khác cho nên nó không cần đến ngữ cảnh nơi nó được tạo.
 
-## Arrow functions have no "this"
+## Các hàm mũi tên không có "this"
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+Như ta đã nói ở bài <info:object-methods>, hàm mũi tên không có `this`. Nếu `this` được truy cập nó được lấy từ bên ngoài.
 
-For instance, we can use it to iterate inside an object method:
+Ví dụ, chúng ta có thể sử dụng nó trong vòng lặp bên trong phương thức của một đối tượng:
 
 ```js run
 let group = {
-  title: "Our Group",
-  students: ["John", "Pete", "Alice"],
+  title: "Nhóm của chúng tôi",
+  students: ["Hùng", "Mạnh", "Ngọc"],
 
   showList() {
 *!*
@@ -39,19 +39,19 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+Hàm mũi tên được sử dụng trong `forEach`, `this.title` của nó giống như của phương thức ngoài `showList`. Đó là: `group.title`.
 
-If we used a "regular" function, there would be an error:
+Nếu sử dụng hàm bình thường, sẽ có lỗi:
 
 ```js run
 let group = {
-  title: "Our Group",
-  students: ["John", "Pete", "Alice"],
+  title: "Nhóm của chúng tôi",
+  students: ["Hùng", "Mạnh", "Ngọc"],
 
   showList() {
 *!*
     this.students.forEach(function(student) {
-      // Error: Cannot read property 'title' of undefined
+      // Lỗi: Không thể truy cập thuộc tính 'title' của undefined
       alert(this.title + ': ' + student)
     });
 */!*
@@ -61,28 +61,28 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+Lỗi này xuất hiện bởi `forEach` chạy hàm với `this=undefined`, dẫn tới việc truy cập `undefined.title`.
 
-That doesn't affect arrow functions, because they just don't have `this`.
+Điều này không sảy ra với hàm mũi tên vì nó không có `this`.
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+```warn header="Hãm mũi tên không thể chạy với `new`"
+Bởi không có `this`, hàm mũi tên không thể sử dụng làm constructor và do đó không thể chạy với toán tử `new`.
 ```
 
-```smart header="Arrow functions VS bind"
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+```smart header="Hàm mũi tên khi sử dụng với `bind`"
+Có một sự khác biệt nhỏ giữa hàm mũi tên `=>` và hàm thông thường khi sử dụng `.bind(this)`:
 
-- `.bind(this)` creates a "bound version" of the function.
-- The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
+- `.bind(this)` tạo "phiên bản ràng buộc `this`" của hàm thông thường.
+- Hàm mũi tên `=>` không tạo ra bất cứ ràng buộc nào. Đơn giản là bởi vì nó không có `this`.
 ```
 
-## Arrows have no "arguments"
+## Hàm mũi tên không có "arguments"
 
-Arrow functions also have no `arguments` variable.
+Hàm mũi tên cũng không có biến `arguments`.
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
+Nó rất tối ưu cho các decorator, khi chúng ta cần chuyển lời gọi hàm cùng với `this` và `arguments` của hàm hiện tại.
 
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+Ví dụ, `defer(f, ms)` nhận hàm `f` và trả về hàm bao làm trễ việc chạy `f` đi `ms` mi-li-giây.
 
 ```js run
 function defer(f, ms) {
@@ -92,14 +92,14 @@ function defer(f, ms) {
 }
 
 function sayHi(who) {
-  alert('Hello, ' + who);
+  alert('Xin chào, ' + who);
 }
 
 let sayHiDeferred = defer(sayHi, 2000);
-sayHiDeferred("John"); // Hello, John after 2 seconds
+sayHiDeferred("Hùng"); // Xin chào, Hùng sau 2 giây
 ```
 
-The same without an arrow function would look like:
+Nếu không dùng hàm mũi tên thì phải viết như sau:
 
 ```js
 function defer(f, ms) {
@@ -112,15 +112,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+Ta cần tạo thêm hai biến `args` và `ctx` để hàm bên trong `setTimeout` có thể nhận chúng.
 
-## Summary
+## Tóm tắt
 
-Arrow functions:
+Hàm mũi tên:
 
-- Do not have `this`.
-- Do not have `arguments`.
-- Can't be called with `new`.
-- (They also don't have `super`, but we didn't study it. Will be in the chapter <info:class-inheritance>).
+- Không có `this`.
+- Không có `arguments`.
+- Không thể gọi bằng `new`.
+- (Chúng cũng không có `super`, nhưng chúng ta chưa học. Sẽ học ở bài <info:class-inheritance>).
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather works in the current one. And they really shine in that use case.
+Đó là bởi vì hàm mũi tên là một hàm ngắn được tạo ra với mục địch chạy ở bất cứ đâu, nên nó không cần giữ lại ngữ cảnh nơi nó được tạo.
