@@ -1,44 +1,44 @@
-# Code structure
+# Câu lệnh và chú thích
 
-The first thing we'll study is the building blocks of code.
+Đầu tiên chúng ta sẽ học về các thành phần cơ bản nhất của mã JavaScript là câu lệnh và chú thích.
 
-## Statements
+## Các câu lệnh
 
-Statements are syntax constructs and commands that perform actions.
+Các câu lệnh (statement) là các cấu trúc cú pháp và các lệnh nhằm thực hiện các hành động cụ thể.
 
-We've already seen a statement, `alert('Hello, world!')`, which shows the message "Hello, world!".
+Chúng ta đã thấy một câu lệnh là `alert('Chào thế giới!')` nhằm hiển thị thông báo có nội dung "Chào thế giới!".
 
-We can have as many statements in our code as we want. Statements can be separated with a semicolon.
+Thường thì mã gồm nhiều câu lệnh. Các câu lệnh được ngăn cách với nhau bởi một dấu chấm phảy.
 
-For example, here we split "Hello World" into two alerts:
-
-```js run no-beautify
-alert('Hello'); alert('World');
-```
-
-Usually, statements are written on separate lines to make the code more readable:
+Ví dụ, ta chia "Chào thế giới!" thành hai thông báo:
 
 ```js run no-beautify
-alert('Hello');
-alert('World');
+alert('Chào'); alert('thế giới!');
 ```
 
-## Semicolons [#semicolon]
-
-A semicolon may be omitted in most cases when a line break exists.
-
-This would also work:
+Mỗi câu lệnh thường viết trên một dòng để dễ đọc hơn:
 
 ```js run no-beautify
-alert('Hello')
-alert('World')
+alert('Chào');
+alert('thế giới!');
 ```
 
-Here, JavaScript interprets the line break as an "implicit" semicolon. This is called an [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+## Các dấu chấm phảy [#semicolon]
 
-**In most cases, a newline implies a semicolon. But "in most cases" does not mean "always"!**
+Hầu như có thể bỏ qua dấu chấm phảy nếu mỗi lệnh được viết trên một dòng.
 
-There are cases when a newline does not mean a semicolon. For example:
+Cách viết sau vẫn hoạt động:
+
+```js run no-beautify
+alert('Chào')
+alert('thế giới!')
+```
+
+Ở đây, JavaScript hiểu "ngầm" mỗi dấu xuống dòng là một dấu chấm phảy. Tính năng này gọi là [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) (tự động chèn dấu chấm phảy).
+
+**Trong hầu hết trường hợp, một dấu xuống dòng ngụ ý một dấu chấm phảy. Nhưng cũng có trường hợp ngoại lệ!**
+
+Trong các trường hợp này dấu xuống dòng không được JavaScript xem là dấu chấm phảy. Ví dụ:
 
 ```js run no-beautify
 alert(3 +
@@ -46,114 +46,114 @@ alert(3 +
 + 2);
 ```
 
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so the semicolon is not required. And in this case that works as intended.
+Đoạn mã trên xuất ra giá trị `6` vì JavaScript không tự động chèn dấu chấm phảy vào vị trí dấu xuống dòng. Nó cho rằng nếu một dòng kết thúc bằng dấu cộng "+", thì nó là một biểu thức chưa hoàn chỉnh, nên không cần dấu chấm phảy đặt vào đó.Trong tình huống này JavaScript đã làm đúng!
 
-**But there are situations where JavaScript "fails" to assume a semicolon where it is really needed.**
+**Nhưng có những tình huống JavaScript làm sai, không đặt dấu chấm phảy vào nơi cần có.**
 
-Errors which occur in such cases are quite hard to find and fix.
+Các lỗi xảy ra trong trường hợp này khá khó thấy và sửa.
 
-````smart header="An example of an error"
-If you're curious to see a concrete example of such an error, check this code out:
+````smart header="Một ví dụ về lỗi"
+Nếu bạn tò mò muốn xem một lỗi như vậy, hãy kiểm tra mã này:
 
 ```js run
 [1, 2].forEach(alert)
 ```
 
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of the code: it shows `1` then `2`.
+Lúc này, chưa cần biết về ý nghĩa của các dấu ngoặc vuông `[]` và `forEach`. Chúng ta sẽ học chúng sau. Bây giờ chỉ cần nhớ rằng kết quả của nó là hai thông báo liên tiếp `1` và `2`.
 
-Now, let's add an `alert` before the code and *not* finish it with a semicolon:
+Bây giờ, thêm một `alert` trước mã trên và *không* kết thúc nó bằng dấu chấm phảy:
 
 ```js run no-beautify
-alert("There will be an error")
+alert("Sẽ có một lỗi")
 
 [1, 2].forEach(alert)
 ```
 
-Now if we run the code, only the first `alert` is shown and then we have an error!
+Nếu ta chạy mã trên, chỉ `alert` đầu tiên hiển thị thông báo và sau đó có một lỗi!
 
-But everything is fine again if we add a semicolon after `alert`:
+Nhưng mọi thứ sẽ ổn nếu chúng ta thêm dấu chấm phảy sau `alert`:
 ```js run
-alert("All fine now");
+alert("Mọi thứ đã ổn");
 
 [1, 2].forEach(alert)  
 ```
 
-Now we have the "All fine now" message followed by `1` and `2`.
+Giờ ta có thông báo "Mọi thứ đã ổn" sau đó là hai thông báo `1` và `2`.
 
 
-The error in the no-semicolon variant occurs because JavaScript does not assume a semicolon before square brackets `[...]`.
+Lỗi trong trường hợp không có dấu chấm phảy ở trên xuất hiện bởi vì JavaScript không tự động đặt dấu chấm phảy ở phía trước các dấu ngoặc vuông `[]`.
 
-So, because the semicolon is not auto-inserted, the code in the first example is treated as a single statement. Here's how the engine sees it:
+Bởi dấu chấm phảy không tự động được thêm vào, đoạn mã trên được xem như một lệnh duy nhất. JavaScript thấy nó như:
 
 ```js run no-beautify
-alert("There will be an error")[1, 2].forEach(alert)
+alert("Sẽ có một lỗi")[1, 2].forEach(alert)
 ```
 
-But it should be two separate statements, not one. Such a merging in this case is just wrong, hence the error. This can happen in other situations.
+Cách thấy này hiển nhiên sai vì thực ra đó là hai câu lệnh, đó đó gây ra lỗi. Sai sót này cũng có thể xảy ra trong các tình huống khác.
 ````
 
-We recommend putting semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
+Chúng tôi khuyên bạn nên đặt dấu chấm phảy giữa các câu lệnh ngay cả khi mỗi lệnh viết trên một dòng. Quy tắc này được cộng đồng áp dụng rộng rãi. Cùng nhắc lại một lần nữa -- *có thể* bỏ qua dấu chấm phảy trong hầu hết trường hợp. Nhưng để an toàn -- đặc biệt cho những người mới -- hãy luôn sử dụng chúng.
 
-## Comments
+## Các chú thích
 
-As time goes on, programs become more and more complex. It becomes necessary to add *comments* which describe what the code does and why.
+Theo thời gian, chương trình ngày càng phức tạp. Trong chương trình ta cần bổ sung thêm các "chú thích" để diễn giải hoạt động của mã trong chương trình.
 
-Comments can be put into any place of a script. They don't affect its execution because the engine simply ignores them.
+Các chú thích (comment) có thể đặt ở bất cứ đâu trong script. Nó không ảnh hưởng đến việc chạy script bởi JavaScript bỏ qua nó khi chạy.
 
-**One-line comments start with two forward slash characters `//`.**
+**Chú thích một dòng bắt đầu bằng hai dấu gạch chéo `//`.**
 
-The rest of the line is a comment. It may occupy a full line of its own or follow a statement.
+Toàn bộ phần còn lại của dòng là chú thích. Chú thích một dòng có thể chiếm cả dòng, hoặc theo sau một câu lệnh.
 
-Like here:
+Ví dụ:
 ```js run
-// This comment occupies a line of its own
-alert('Hello');
+// Chú thích này chiếm cả dòng
+alert('Chào');
 
-alert('World'); // This comment follows the statement
+alert('thế giới!'); // Chú thích này theo sau một câu lệnh
 ```
 
-**Multiline comments start with a forward slash and an asterisk <code>/&#42;</code> and end with an asterisk and a forward slash <code>&#42;/</code>.**
+**Chú thích nhiều dòng bắt đầu bằng một dấu gạch chéo và một dấu sao <code>/&#42;</code> và kết thúc bằng một dấu sao và một dấu gạch chéo <code>&#42;/</code>.**
 
-Like this:
+Ví dụ:
 
 ```js run
-/* An example with two messages.
-This is a multiline comment.
+/* Một ví dụ về hai thông báo.
+Đây là một chú thích nhiều dòng
 */
-alert('Hello');
-alert('World');
+alert('Chào');
+alert('thế giới!');
 ```
 
-The content of comments is ignored, so if we put code inside <code>/&#42; ... &#42;/</code>, it won't execute.
+Nội dung của chú thích bị bỏ qua, nên nếu đặt mã JavaScript trong <code>/&#42; ... &#42;/</code> nó sẽ không chạy.
 
-Sometimes it can be handy to temporarily disable a part of code:
+Có thể lợi dụng điều này để tạm thời vô hiệu hóa một phần mã:
 
 ```js run
-/* Commenting out the code
-alert('Hello');
+/* "Chú thích hóa" mã để vô hiệu hóa nó
+alert('Chào');
 */
-alert('World');
+alert('thế giới!');
 ```
 
-```smart header="Use hotkeys!"
-In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl`.
+```smart header="Dùng phím tắt!"
+Trong hầu hết các trình soạn thảo mã, có thể chú thích hóa một dòng mã bằng tổ hợp phím `key:Ctrl+/`, nhiều dòng mã bằng tổ hợp phím `key:Ctrl+Shift+/`. Trên máy Mac, dùng `key:Cmd` thay cho `key:Ctrl`.
 ```
 
-````warn header="Nested comments are not supported!"
-There may not be `/*...*/` inside another `/*...*/`.
+````warn header="Không được phép đặt một chú thích trong một chú thích khác (nested comment)!"
+Không thể đặt `/*...*/` trong một `/*...*/` khác.
 
-Such code will die with an error:
+Mã sau không chạy và dẫn tới một lỗi:
 
 ```js run no-beautify
 /*
-  /* nested comment ?!? */
+  /* chú thích trong chú thích ?!? */
 */
-alert( 'World' );
+alert( 'thế giới!' );
 ```
 ````
 
-Please, don't hesitate to comment your code.
+Đừng do dự hãy chú thích ngay cho mã của bạn.
 
-Comments increase the overall code footprint, but that's not a problem at all. There are many tools which minify code before publishing to a production server. They remove comments, so they don't appear in the working scripts. Therefore, comments do not have negative effects on production at all.
+Chú thích tuy làm tăng kích thước mã, nhưng điều đó không thành vấn đê. Có nhiều công cụ thu nhỏ mã trước khi đưa lên máy chủ. Chúng xóa các chú thích và chú thích không xuất hiện trong mã sản phẩm chính thức. Bởi vậy chú thích không gây ra các ảnh hưởng tiêu cực tới chương trình.
 
-Later in the tutorial there will be a chapter <info:code-quality> that also explains how to write better comments.
+Sau này trong chương <info:code-quality> chúng ta sẽ học cách viết chú thích sao cho hiệu quả.
