@@ -1,9 +1,9 @@
 
-The error occurs because `ask` gets functions `loginOk/loginFail` without the object.
+Có lỗi xuất hiện vì `askPassword` chỉ nhận hàm `loginOk/loginFail` chứ không nhận được đối tượng `user` do vậy `this` bị mất.
 
-When it calls them, they naturally assume `this=undefined`.
+Khi gọi các hàm này `this=undefined`.
 
-Let's `bind` the context:
+Cùng ràng buộc `this` bằng `bind`:
 
 ```js run
 function askPassword(ok, fail) {
@@ -13,14 +13,14 @@ function askPassword(ok, fail) {
 }
 
 let user = {
-  name: 'John',
+  name: 'Hùng',
 
   loginOk() {
-    alert(`${this.name} logged in`);
+    alert(`${this.name} đã đăng nhập`);
   },
 
   loginFail() {
-    alert(`${this.name} failed to log in`);
+    alert(`${this.name} đăng nhập thất bại`);
   },
 
 };
@@ -30,14 +30,14 @@ askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 */!*
 ```
 
-Now it works.
+Giờ nó đã làm việc.
 
-An alternative solution could be:
+Cũng có thể sử dụng các hàm bao:
 ```js
 //...
 askPassword(() => user.loginOk(), () => user.loginFail());
 ```
 
-Usually that also works and looks good.
+Thường thì cách này cũng làm việc tốt.
 
-It's a bit less reliable though in more complex situations where `user` variable might change *after* `askPassword` is called, but *before* the visitor answers and calls `() => user.loginOk()`. 
+Nhưng nó có chút không tin cậy vì biến `user` có thể thay đổi trước khi người dùng nhập mật khẩu hoặc trước khi `() => user.loginOk()` và `() => user.loginFail()` được gọi.

@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Function property after bind
+# Thuộc tính hàm sau khi ràng buộc
 
-There's a value in the property of a function. Will it change after `bind`? Why, elaborate?
+Có một giá trị trong thuộc tính của một hàm. Nó có bị thay đổi sau khi `bind` không? Tại sao?
 
 ```js run
 function sayHi() {
@@ -14,10 +14,10 @@ sayHi.test = 5;
 
 *!*
 let bound = sayHi.bind({
-  name: "John"
+  name: "Hùng"
 });
 
-alert( bound.test ); // what will be the output? why?
+alert( bound.test ); // sẽ hiển thị gì? Tại sao?
 */!*
 ```
 

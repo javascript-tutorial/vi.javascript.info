@@ -1,4 +1,4 @@
-The answer: `undefined`.
+Trả lời: `undefined`.
 
-The result of `bind` is another object. It does not have the `test` property.
+Kết quả của `bind` là một đối tượng khác. Đối tượng này không có thuộc tính `test`.
 

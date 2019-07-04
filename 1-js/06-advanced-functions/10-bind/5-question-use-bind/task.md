@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Fix a function that loses "this"
+# Sửa một hàm bị mất "this"
 
-The call to `askPassword()` in the code below should check the password and then call `user.loginOk/loginFail` depending on the answer.
+Hàm `askPassword` dưới đây kiểm tra mật khẩu và sau đó gọi `user.loginOk/loginFail` phụ thuộc mật khẩu nhận vào có khớp không.
 
-But it leads to an error. Why?
+Nhưng có một lỗi. Tại sao?
 
-Fix the highlighted line for everything to start working right (other lines are not to be changed).
+Chỉ sửa lại dòng cuối cùng (được tô sáng) để mọi thứ hoạt động đúng (các dòng khác để nguyên).
 
 ```js run
 function askPassword(ok, fail) {
@@ -18,14 +18,14 @@ function askPassword(ok, fail) {
 }
 
 let user = {
-  name: 'John',
+  name: 'Hùng',
 
   loginOk() {
-    alert(`${this.name} logged in`);
+    alert(`${this.name} đã đăng nhập`);
   },
 
   loginFail() {
-    alert(`${this.name} failed to log in`);
+    alert(`${this.name} đăng nhập thất bại`);
   },
 
 };
