@@ -1,15 +1,15 @@
-The answer: **John**.
+Trả lời: **Việt**.
 
 ```js run no-beautify
 function f() {
   alert(this.name);
 }
 
-f = f.bind( {name: "John"} ).bind( {name: "Pete"} );
+f = f.bind( {name: "Việt"} ).bind( {name: "Nam"} );
 
-f(); // John
+f(); // Việt
 ```
 
-The exotic [bound function](https://tc39.github.io/ecma262/#sec-bound-function-exotic-objects) object returned by `f.bind(...)` remembers the context (and arguments if provided) only at creation time. 
+Hàm ràng buộc [(bound function)](https://tc39.github.io/ecma262/#sec-bound-function-exotic-objects) trả về bởi `f.bind(...)` chỉ ghi nhớ `context` (và các đối số khác nếu có) tại thời điểm nó được tạo.
 
-A function cannot be re-bound.
+Sau đó không có cách nào ràng buộc lại nó.

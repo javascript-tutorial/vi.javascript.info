@@ -1,4 +1,4 @@
-The answer: `null`.
+Trả lời: `null`.
 
 
 ```js run
@@ -13,6 +13,6 @@ let user = {
 user.g();
 ```
 
-The context of a bound function is hard-fixed. There's just no way to further change it.
+Giá trị `this` của hàm ràng buộc được cố định thành `null` và không thể thay đổi nó.
 
-So even while we run `user.g()`, the original function is called with `this=null`.
+Cho nên dù ta chạy hàm ràng buộc từ một đối tượng khác `user.g()`, hàm gốc vẫn luôn được gọi với `this=null`.

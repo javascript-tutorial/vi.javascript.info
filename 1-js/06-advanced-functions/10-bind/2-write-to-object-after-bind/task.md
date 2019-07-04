@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Bound function as a method
+# Dùng hàm ràng buộc làm phương thức
 
-What will be the output?
+Cái gì sẽ được xuất ra?
 
 ```js
 function f() {

@@ -2,18 +2,18 @@ importance: 5
 
 ---
 
-# Second bind
+# Ràng buộc thứ hai
 
-Can we change `this` by additional binding?
+Có thể thay đổi `this` bằng một ràng buộc thứ hai không?
 
-What will be the output?
+Cái gì được xuất ra?
 
 ```js no-beautify
 function f() {
   alert(this.name);
 }
 
-f = f.bind( {name: "John"} ).bind( {name: "Ann" } );
+f = f.bind( {name: "Việt"} ).bind( {name: "Nam" } );
 
 f();
 ```
