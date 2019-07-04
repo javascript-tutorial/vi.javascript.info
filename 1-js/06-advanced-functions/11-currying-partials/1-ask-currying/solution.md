@@ -1,16 +1,16 @@
 
 
-1. Either use a wrapper function, an arrow to be concise:
+1. Có thể sử dụng hàm bao hoặc hàm mũi tên cho ngắn gọn:
 
     ```js 
     askPassword(() => user.login(true), () => user.login(false)); 
     ```
 
-    Now it gets `user` from outer variables and runs it the normal way.
+    Đối tượng`user` được lấy từ bên ngoài và chạy như bình thường.
 
-2. Or create a partial function from `user.login` that uses `user` as the context and has the correct first argument:
+2. Hoặc tạo một hàm riêng từ `user.login` để sử dụng `user` làm `this`:
 
 
     ```js 
-    askPassword(user.login.bind(user, true), user.login.bind(user, false)); 
+    askPassword(user.login.bind(user, true), user.login.bind(user, false));
     ```
