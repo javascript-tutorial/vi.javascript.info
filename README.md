@@ -1,4 +1,4 @@
-# The Modern JavaScript Tutorial bằng Tiếng Việt
+# Modern JavaScript Tutorial bằng Tiếng Việt
 
 Repository này chứa phiên bản tiếng Việt của <https://javascript.info>.
 
