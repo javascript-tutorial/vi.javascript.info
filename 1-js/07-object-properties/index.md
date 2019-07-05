@@ -1,3 +1,3 @@
-# Object properties configuration
+# Cấu hình cho các thuộc tính
 
-In this section we return to objects and study their properties even more in-depth.
+Trong chương này chúng ta quay lại và tìm hiểu kỹ hơn về đối tượng và các thuộc tính của nó.
