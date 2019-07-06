@@ -167,7 +167,7 @@ Mọi thứ khá đơn giản, chỉ có vài lưu ý sau:
 Nếu cài đặt `prototype` cho một đối tượng thông thường, nó không còn gì đặc biệt:
 ```js
 let user = {
-  name: "John",
+  name: "Hùng",
   prototype: "Bla-bla" // không có gì đặc biệt
 };
 ```
