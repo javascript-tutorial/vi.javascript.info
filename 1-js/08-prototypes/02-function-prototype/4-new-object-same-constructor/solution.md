@@ -1,23 +1,23 @@
-We can use such approach if we are sure that `"constructor"` property has the correct value.
+Chúng ta chỉ có thể làm vậy nếu chắn chắn rằng thuộc tính `"constructor"` chứa giá trị đúng.
 
-For instance, if we don't touch the default `"prototype"`, then this code works for sure:
+Ví dụ, nếu thuộc tính `"prototype"` mặc định không bị thay đổi, thì đoạn mã chắc chắn làm việc được:
 
 ```js run
 function User(name) {
   this.name = name;
 }
 
-let user = new User('John');
-let user2 = new user.constructor('Pete');
+let user = new User('Việt');
+let user2 = new user.constructor('Nam');
 
-alert( user2.name ); // Pete (worked!)
+alert( user2.name ); // Nam (làm việc!)
 ```
 
-It worked, because `User.prototype.constructor == User`.
+Nó làm việc đúng bởi vì `User.prototype.constructor == User`.
 
-..But if someone, so to say, overwrites `User.prototype` and forgets to recreate `"constructor"`, then it would fail.
+...Nhưng nếu ai đó ghi đè mất `User.prototype` và quên tạo lại `"constructor"`, đoạn mã sẽ không làm việc đúng nữa:
 
-For instance:
+Ví dụ:
 
 ```js run
 function User(name) {
@@ -27,18 +27,18 @@ function User(name) {
 User.prototype = {}; // (*)
 */!*
 
-let user = new User('John');
-let user2 = new user.constructor('Pete');
+let user = new User('Việt');
+let user2 = new user.constructor('Nam');
 
 alert( user2.name ); // undefined
 ```
 
-Why `user2.name` is `undefined`?
+Tại sao `user2.name` là `undefined`?
 
-Here's how `new user.constructor('Pete')` works:
+Đây là cách `new user.constructor('Nam')` làm việc:
 
-1. First, it looks for `constructor` in `user`. Nothing.
-2. Then it follows the prototype chain. The prototype of `user` is `User.prototype`, and it also has nothing.
-3. The value of `User.prototype` is a plain object `{}`, its prototype is `Object.prototype`. And there is `Object.prototype.constructor == Object`. So it is used.
+1. Trước tiên nó tìm `constructor` trong `user`. Không có.
+2. Sau đó nó theo chuỗi nguyên mẫu. Nguyên mẫu của `user` là `User.prototype`, và cũng không có.
+3. Giá trị của `User.prototype` là đối tượng trống `{}`, nên mặc định nó thừa kế từ `Object.prototype`. Và có `Object.prototype.constructor == Object`. Nên `Object` được sử dụng.
 
-At the end, we have `let user2 = new Object('Pete')`. The built-in `Object` constructor ignores arguments, it always creates an empty object -- that's what we have in `user2` after all.
+Cuối cùng chúng ta có `let user2 = new Object('Nam')`. `Object` là một hàm tạo có sẵn, nó bỏ qua mọi đối số truyền vào và tạo ra một đối tượng trống -- vậy `user2` là đối tượng trống không có thuộc tính nào.

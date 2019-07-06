@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Changing "prototype"
+# Thay đổi "prototype"
 
-In the code below we create `new Rabbit`, and then try to modify its prototype.
+Trong mã dưới đây chúng ta định nghĩa một hàm tạo, tạo ra đối tượng và thay đổi prototype mặc định của hàm tạo.
 
-In the start, we have this code:
+Ban đầu, chúng ta có mã:
 
 ```js run
 function Rabbit() {}
@@ -20,7 +20,7 @@ alert( rabbit.eats ); // true
 ```
 
 
-1. We added one more string (emphasized), what `alert` shows now?
+1. Nếu thêm một lệnh nữa (được tô sáng), thì `alert` sẽ hiển thị gì?
 
     ```js
     function Rabbit() {}
@@ -37,7 +37,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-2. ...And if the code is like this (replaced one line)?
+2. ...Và nếu mã trở thành như sau(thay đổi một dòng) thì `alert` sẽ hiển thị gì?
 
     ```js
     function Rabbit() {}
@@ -54,7 +54,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-3. Like this (replaced one line)?
+3. Câu hỏi tương tự nếu mã như sau(thay đổi một dòng)?
 
     ```js
     function Rabbit() {}
@@ -71,7 +71,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-4. The last variant:
+4. Và phiên bản cuối cùng:
 
     ```js
     function Rabbit() {}
