@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Why two hamsters are full?
+# Tại sao cả hai con hamster đều no?
 
-We have two hamsters: `speedy` and `lazy` inheriting from the general `hamster` object. 
+Ta có hai con hamster: `speedy` và `lazy` đều thừa kế từ đối tượng `hamster`. 
 
-When we feed one of them, the other one is also full. Why? How to fix it?
+Khi chúng ta cho một trong số chúng ăn no, con kia cũng no. Tại sao? Sửa lại như thế nào?
 
 ```js run
 let hamster = {
@@ -25,11 +25,11 @@ let lazy = {
   __proto__: hamster
 };
 
-// This one found the food
+// Cho một con ăn no
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// This one also has it, why? fix please.
+// Con kia cũng vậy! Tại sao? Hãy sửa lại?
 alert( lazy.stomach ); // apple
 ```
 

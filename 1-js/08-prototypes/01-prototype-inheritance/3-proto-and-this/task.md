@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Where it writes?
+# Dữ liệu ghi vào đối tượng nào?
 
-We have `rabbit` inheriting from `animal`.
+Chúng ta có `rabbit` thừa kế từ `animal`.
 
-If we call `rabbit.eat()`, which object receives the `full` property: `animal` or `rabbit`? 
+Nếu chúng ta gọi `rabbit.eat()`, đối tượng nào nhận được thuộc tính `full`: `animal` hay `rabbit`? 
 
 ```js
 let animal = {

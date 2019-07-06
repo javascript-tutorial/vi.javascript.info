@@ -1,5 +1,5 @@
 
-1. Let's add `__proto__`:
+1. Thêm `__proto__` như sau:
 
     ```js run
     let head = {
@@ -27,6 +27,6 @@
     alert( table.money ); // undefined
     ```
 
-2. In modern engines, performance-wise, there's no difference whether we take a property from an object or its prototype. They remember where the property was found and reuse it in the next request.
+2. Trong các JavaScript engine hiện đại, hiệu năng rất tốt, không có khác biệt nào giữa việc lấy thuộc tính từ đối tượng hay từ nguyên mẫu. Chúng nhớ nơi thuộc tính được tìm thấy để tái sử dụng trong những lần sau.
 
-    For instance, for `pockets.glasses` they remember where they found `glasses` (in `head`), and next time will search right there. They are also smart enough to update internal caches if something changes, so that optimization is safe.
+    Ví dụ, với `pockets.glasses` engine nhớ nơi nó tìm thấy `glasses` (trong `head`), và trong lần sau sẽ tìm ngay trong đó. Nó cũng đủ thông minh để cập nhật lại nếu có gì đó thay đổi, để việc tối ưu hóa vẫn an toàn.

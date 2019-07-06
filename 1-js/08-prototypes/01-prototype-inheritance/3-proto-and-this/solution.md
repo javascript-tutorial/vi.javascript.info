@@ -1,6 +1,6 @@
-**The answer: `rabbit`.**
+**Trả lời: `rabbit`.**
 
-That's because `this` is an object before the dot, so `rabbit.eat()` modifies `rabbit`.
+Bởi vì `this` là đối tượng trước dấu chấm, nên `rabbit.eat()` thay đổi `rabbit`.
 
-Property lookup and execution are two different things.
-The method `rabbit.eat` is first found in the prototype, then executed with `this=rabbit`
+Tìm thuộc tính và chạy thuộc tính là hai việc khác nhau.
+Phương thức `rabbit.eat` tìm thấy trong nguyên mẫu, nhưng lại chạy trong `rabbit`.
