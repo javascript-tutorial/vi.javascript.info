@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Working with prototype
+# Làm việc với nguyên mẫu
 
-Here's the code that creates a pair of objects, then modifies them.
+Đây là mã tạo một cặp đối tượng, sau đó sửa chúng.
 
-Which values are shown in the process?
+Giá tri nào sẽ được hiển thị?
 
 ```js
 let animal = {
@@ -28,4 +28,4 @@ delete animal.jumps;
 alert( rabbit.jumps ); // ? (3)
 ```
 
-There should be 3 answers.
+Sẽ có 3 câu trả lời.

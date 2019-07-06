@@ -1,18 +1,18 @@
-Let's look carefully at what's going on in the call `speedy.eat("apple")`.
+Cùng xem xét cẩn thận chuyện xảy ra khi gọi `speedy.eat("apple")`.
 
-1. The method `speedy.eat` is found in the prototype (`=hamster`), then executed with `this=speedy` (the object before the dot).
+1. Phương thức `speedy.eat` tìm thấy trong nguyên mẫu (`=hamster`), sau đó chạy trong `speedy` (`this=speedy`).
 
-2. Then `this.stomach.push()` needs to find `stomach` property and call `push` on it. It looks for `stomach` in `this` (`=speedy`), but nothing found.
+2. Tiếp theo `this.stomach.push()` cần tìm thuộc tính `stomach` và gọi phương thức `push` từ đó. Trước tiên `stomach` được tìm trong `this` (`=speedy`), nhưng không thấy.
 
-3. Then it follows the prototype chain and finds `stomach` in `hamster`.
+3. Sau đó `stomach` được tìm thấy trong nguyên mẫu `hamster` từ giờ `this.stomach` là `hamster.stomach`.
 
-4. Then it calls `push` on it, adding the food into *the stomach of the prototype*.
+4. Khi gọi `this.stomach.push` thì `"apple"` được thêm vào `hamster.stomach`.
 
-So all hamsters share a single stomach!
+Vậy nên cả hai con hamsters đều dùng chung `hamster.stomach` - tức có cùng một cái dạ dày! Khi một con no, con kia cũng no là vì thế.
 
-Every time the `stomach` is taken from the prototype, then `stomach.push` modifies it "at place".
+Mỗi khi `stomach` được lấy từ nguyên mẫu, thì `this.stomach.push` lại làm thay đổi `hamster.stomach`.
 
-Please note that such thing doesn't happen in case of a simple assignment `this.stomach=`:
+Chú ý rằng chuyện này không xảy ra nếu ta gán `this.stomach=`:
 
 ```js run
 let hamster = {
@@ -20,7 +20,7 @@ let hamster = {
 
   eat(food) {
 *!*
-    // assign to this.stomach instead of this.stomach.push
+    // gán tới to this.stomach thay vì this.stomach.push
     this.stomach = [food];
 */!*
   }
@@ -34,17 +34,17 @@ let lazy = {
   __proto__: hamster
 };
 
-// Speedy one found the food
+// Speedy ăn táo
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// Lazy one's stomach is empty
-alert( lazy.stomach ); // <nothing>
+// Lazy không được ăn theo
+alert( lazy.stomach ); // <không có gì>
 ```
 
-Now all works fine, because `this.stomach=` does not perform a lookup of `stomach`. The value is written directly into `this` object.
+Giờ tất cả làm việc, vì `this.stomach=` là hành động ghi nên không sử dụng thuộc tính `stomach` của nguyên mẫu `hamster`. Giá trị được ghi vào đối tượng `this` (tức đối tượng được thừa kế).
 
-Also we can totally evade the problem by making sure that each hamster has their own stomach:
+Ta cũng có thể tránh được vấn đề trên bằng cách tạo riêng cho mỗi con hamster một cái dạ dày:
 
 ```js run
 let hamster = {
@@ -69,12 +69,12 @@ let lazy = {
 */!*
 };
 
-// Speedy one found the food
+// Speedy ăn táo
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// Lazy one's stomach is empty
-alert( lazy.stomach ); // <nothing>
+// Dạ dày của Lazy vẫn trống
+alert( lazy.stomach ); // <không có gì>
 ```
 
-As a common solution, all properties that describe the state of a particular object, like `stomach` above, are usually written into that object. That prevents such problems.
+Đây là giải pháp tổng quát, các thuộc tính mô tả trạng thái của đối tượng, giống `stomach` ở trên nên được ghi riêng vào đối tượng đó, không nên dùng chung từ một nguyên mẫu. Điều này giúp ta không gặp phải vấn đề trên.

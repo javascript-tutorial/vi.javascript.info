@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Searching algorithm
+# Thuật toán tìm thuộc tính
 
-The task has two parts.
+Bài tập có hai phần.
 
-We have an object:
+Chúng ta có một đối tượng:
 
 ```js
 let head = {
@@ -27,5 +27,5 @@ let pockets = {
 };
 ```
 
-1. Use `__proto__` to assign prototypes in a way that any property lookup will follow the path: `pockets` -> `bed` -> `table` -> `head`. For instance, `pockets.pen` should be `3` (found in `table`), and `bed.glasses` should be `1` (found in `head`).
-2. Answer the question: is it faster to get `glasses` as `pockets.glasses` or `head.glasses`? Benchmark if needed.
+1. Sử dụng `__proto__` để tạo chuỗi nguyên mẫu, sao cho bất kỳ thuộc tính nào đều được tìm theo thứ tự: `pockets` -> `bed` -> `table` -> `head`. Ví dụ, `pockets.pen` là `3` (tìm thấy trong `table`), và `bed.glasses` là `1` (tìm thấy trong `head`).
+2. Trả lời câu hỏi: có thể lấy `glasses` bằng `pockets.glasses` hoặc `head.glasses`, cách nào nhanh hơn?
