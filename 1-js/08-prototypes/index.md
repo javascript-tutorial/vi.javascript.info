@@ -1,1 +1,1 @@
-# Prototypes, inheritance
+# Nguyên mẫu, thừa kế

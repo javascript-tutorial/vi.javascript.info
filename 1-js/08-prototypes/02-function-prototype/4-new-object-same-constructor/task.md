@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Create an object with the same constructor
+# Tạo đối tượng có cùng constructor
 
-Imagine, we have an arbitrary object `obj`, created by a constructor function -- we don't know which one, but we'd like to create a new object using it.
+Tưởng tượng, ta có đối tượng bất kỳ `obj`, tạo ra từ một hàm tạo -- chúng ta không biết về hàm này, nhưng lại muốn tạo đối tượng khác bằng nó.
 
-Can we do it like that?
+Có thể làm như thế này không?
 
 ```js
 let obj2 = new obj.constructor();
 ```
 
-Give an example of a constructor function for `obj` which lets such code work right. And an example that makes it work wrong.
+Cho biết khi nào đoạn mã trên làm việc và không làm việc, cho ví dụ minh họa từng trường hợp?
