@@ -1,6 +1,6 @@
 # Chào thế giới!
 
-Trong phần này chúng ta học về JavaScript thuần. Nhờ những kiến thức này bạn có thể học Node.js (JavaScript trên máy chủ) cũng như các nền tảng khác có sử dụng JavaScript.
+Trong phần này chúng ta học về JavaScript thuần. Nhờ những kiến thức này bạn có thể học Node.js (JavaScript chạy phía máy chủ) cũng như các nền tảng khác có sử dụng JavaScript.
 
 Nhưng để chạy được JavaScript chúng ta cần một môi trường (enviroment), và bởi các hướng dẫn này được đưa lên webiste, môi trường trình duyệt (browser) là sự lựa chọn tốt hơn cả. Chúng ta phải sử dụng một số lệnh chỉ có trên môi trường trình duyệt (như `alert`) nhưng chúng không nhiều. Nếu bạn có kế hoạch học JavaScript để làm việc trên môi trường khác (như Node.js) bạn cũng sẽ không mất quá nhiều thời gian để học chúng. Ở [phần sau](/ui) của hướng dẫn này chúng ta sẽ tập trung vào cách sử dụng JavaScript trên trình duyệt.
 
