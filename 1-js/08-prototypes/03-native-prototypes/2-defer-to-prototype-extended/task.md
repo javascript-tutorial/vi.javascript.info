@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Add the decorating "defer()" to functions
+# Thêm hàm trang trí "defer()" cho mọi hàm
 
-Add to the prototype of all functions the method `defer(ms)`, that returns a wrapper, delaying the call by `ms` milliseconds.
+Thêm vào nguyên mẫu của các hàm phương thức `defer(ms)`, trả về một hàm bao, làm chậm lời gọi hàm đi `ms` mi-li-giây.
 
-Here's an example of how it should work:
+Đây là ví dụ về cách làm việc của nó:
 
 ```js
 function f(a, b) {
   alert( a + b );
 }
 
-f.defer(1000)(1, 2); // shows 3 after 1 second
+f.defer(1000)(1, 2); // hiện 3 sau 1 giây
 ```
 
-Please note that the arguments should be passed to the original function.
+Chú ý rằng các đối số được truyền tới hàm gốc.

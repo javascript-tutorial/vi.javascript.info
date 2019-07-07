@@ -8,10 +8,10 @@ Function.prototype.defer = function(ms) {
   }
 };
 
-// check it
+// kiểm tra
 function f(a, b) {
   alert( a + b );
 }
 
-f.defer(1000)(1, 2); // shows 3 after 1 sec
+f.defer(1000)(1, 2); // hiện 3 sau 1 giây
 ```

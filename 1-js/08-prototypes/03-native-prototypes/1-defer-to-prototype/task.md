@@ -2,16 +2,16 @@ importance: 5
 
 ---
 
-# Add method "f.defer(ms)" to functions
+# Thêm phương thức "f.defer(ms)" tới các hàm
 
-Add to the prototype of all functions the method `defer(ms)`, that runs the function after `ms` milliseconds.
+Thêm vào nguyên mẫu của các hàm phương thức `defer(ms)`, chạy hàm sau `ms` mi-li-giây.
 
-After you do it, such code should work:
+Đảm bảo đoạn mã sau làm việc:
 
 ```js
 function f() {
-  alert("Hello!");
+  alert("Xin chào!");
 }
 
-f.defer(1000); // shows "Hello!" after 1 second
+f.defer(1000); // hiện "Xin chào!" sau 1 giây
 ```

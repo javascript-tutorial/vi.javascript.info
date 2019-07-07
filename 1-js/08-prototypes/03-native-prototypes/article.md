@@ -1,33 +1,33 @@
-# Native prototypes
+# Các nguyên mẫu có sẵn
 
-The `"prototype"` property is widely used by the core of JavaScript itself. All built-in constructor functions use it.
+Thuộc tính `"prototype"` được dùng rất nhiều bởi chính JavaScript. Tất cả các constructor có sẵn đều sử dụng nó.
 
-We'll see how it is for plain objects first, and then for more complex ones.
+Trước tiên ta tìm hiểu về hàm tạo ra các đối tượng thuần, sau đó là các đối tượng có sẵn phức tạp hơn.
 
 ## Object.prototype
 
-Let's say we output an empty object:
+Giả sử chúng ta có một đối tượng trống:
 
 ```js run
 let obj = {};
 alert( obj ); // "[object Object]" ?
 ```
 
-Where's the code that generates the string `"[object Object]"`? That's a built-in `toString` method, but where is it? The `obj` is empty!
+Giá trị xuất ra là chuỗi `"[object Object]"` là do phương thức `toString`, còn thực tế `obj` là rỗng và không hề có `toString`. Vậy `toString` lấy ở đâu?
 
-...But the short notation `obj = {}` is the same as `obj = new Object()`, where `Object` is a built-in object constructor function, with its own `prototype` referencing a huge object with `toString` and other methods.
+...Thực ra cách viết `obj = {}` hoàn toàn giống `obj = new Object()`, ở đó `Object` là constructor có sẵn, có thuộc tính `prototype` tham chiếu tới một đối tượng khổng lồ chứa rất nhiều phương thức trong đó có `toString`.
 
-Here's what's going on:
+Đây là hình ảnh mô tả chuyện gì đã xảy ra:
 
 ![](object-prototype.png)
 
-When `new Object()` is called (or a literal object `{...}` is created), the `[[Prototype]]` of it is set to `Object.prototype` according to the rule that we discussed in the previous chapter:
+Khi tạo đối tượng bằng `new Object()` (hoặc bằng `{...}`), `Object.prototype` được gán cho `[[Prototype]]` của đối tượng, đây là quy tắc ta đã học ở bài trước:
 
 ![](object-prototype-1.png)
 
-So then when `obj.toString()` is called the method is taken from `Object.prototype`.
+Cho nên khi gọi `obj.toString()` thì phương thức này được lấy từ `Object.prototype`.
 
-We can check it like this:
+Ta có thể kiểm tra điều này:
 
 ```js run
 let obj = {};
@@ -36,80 +36,80 @@ alert(obj.__proto__ === Object.prototype); // true
 // obj.toString === obj.__proto__.toString == Object.prototype.toString
 ```
 
-Please note that there is no additional `[[Prototype]]` in the chain above `Object.prototype`:
+Chú ý rằng `Object.prototype` không có nguyên mẫu, thuộc tính `[[Prototype]]` của nó là `null`:
 
 ```js run
 alert(Object.prototype.__proto__); // null
 ```
 
-## Other built-in prototypes
+## Các nguyên mẫu có sẵn khác
 
-Other built-in objects such as `Array`, `Date`, `Function` and others also keep methods in prototypes.
+Các constructor khác như `Array`, `Date`, `Function` ... cũng có thuộc tính `prototype` nơi giữ các phương thức có sẵn.
 
-For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is  used internally. So the array data is written into the new object, and `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
+Ví dụ, khi tạo tạo mảng `[1, 2, 3]`, JavaScript tự động gọi `new Array()`. Mảng là đối tượng được tạo ra từ `Array`, và do vậy `Array.prototype` trở thành nguyên mẫu của mảng và cung cấp cho mảng nhiều phương thức có sẵn.
 
-By specification, all of the built-in prototypes have `Object.prototype` on the top. Sometimes people say that "everything inherits from objects".
+Tuy nhiên khác với `Object.prototype` các nguyên mẫu này vẫn có nguyên mẫu. Nguyên mẫu của chúng chính là `Object.prototype`. Do vậy người ta còn nói "mọi thứ đều thừa kế từ `Object.prototype`".
 
-Here's the overall picture (for 3 built-ins to fit):
+Đây là hình ảnh minh họa với 3 nguyên mẫu:
 
 ![](native-prototypes-classes.png)
 
-Let's check the prototypes manually:
+Cùng kiểm tra lại:
 
 ```js run
 let arr = [1, 2, 3];
 
-// it inherits from Array.prototype?
+// arr thừa kế từ Array.prototype?
 alert( arr.__proto__ === Array.prototype ); // true
 
-// then from Object.prototype?
+// Array.prototype thừa kế từ Object.prototype?
 alert( arr.__proto__.__proto__ === Object.prototype ); // true
 
-// and null on the top.
+// Object.prototype không thừa kế từ ai cả
 alert( arr.__proto__.__proto__.__proto__ ); // null
 ```
 
-Some methods in prototypes may overlap, for instance, `Array.prototype` has its own `toString` that lists comma-delimited elements:
+Các phương thức trong các nguyên mẫu có thể "đè" lên nhau, ví dụ, `Array.prototype` có phương thức `toString` giúp liệt kê các phần tử của mảng với dấu phảy ngăn cách:
 
 ```js run
 let arr = [1, 2, 3]
-alert(arr); // 1,2,3 <-- the result of Array.prototype.toString
+alert(arr); // 1,2,3 <-- là kết quả của Array.prototype.toString
 ```
 
-As we've seen before, `Object.prototype` has `toString` as well, but `Array.prototype` is closer in the chain, so the array variant is used.
+Nhưng `Object.prototype` cũng có `toString`. Vậy `arr` lấy `toString` từ `Array.prototype` hay từ `Object.prototype`? Câu trả lời rất đơn giản: nó lấy từ nguyên mẫu gần nó nhất tức `Array.prototype`.
 
 
 ![](native-prototypes-array-tostring.png)
 
 
-In-browser tools like Chrome developer console also show inheritance (`console.dir` may need to be used for built-in objects):
+Trong Developer console của trình duyệt bạn cũng có thể thấy được chuỗi thừa kế bằng lệnh `console.dir`:
 
 ![](console_dir_array.png)
 
-Other built-in objects also work the same way. Even functions -- they are objects of a built-in `Function` constructor, and their methods (`call`/`apply` and others) are taken from `Function.prototype`. Functions have their own `toString` too.
+Các đối tượng có sẵn khác cũng làm việc tương tự. Ngay cả các hàm -- là đối tượng tạo ra bởi constructor `Function`, thực ra lấy các phương thức của nó(`call`/`apply` và phương thức khác) từ `Function.prototype`. Các hàm cũng có được phương thức `toString` từ đây.
 
 ```js run
 function f() {}
 
 alert(f.__proto__ == Function.prototype); // true
-alert(f.__proto__.__proto__ == Object.prototype); // true, inherit from objects
+alert(f.__proto__.__proto__ == Object.prototype); // true
 ```
 
-## Primitives
+## Các giá trị kiểu cơ sở
 
-The most intricate thing happens with strings, numbers and booleans.
+Đối với các giá trị kiểu cơ sở như chuỗi, số và giá trị lôgic câu chuyện có phức tạp hơn đôi chút.
 
-As we remember, they are not objects. But if we try to access their properties, then temporary wrapper objects are created using built-in constructors `String`, `Number`, `Boolean`, they provide the methods and disappear.
+Như ta đã biết, chúng không phải là các đối tượng. Nhưng nếu ta cố tình truy cập các thuộc tính hay phương thức của chúng, một đối tượng bao được tạo bằng các constructor `String`, `Number`, `Boolean` sẽ thay thế và cung cấp các thuộc tính và phương thức này. Sau khi sử dụng xong đối tượng bảo bị xóa.
 
-These objects are created invisibly to us and most engines optimize them out, but the specification describes it exactly this way. Methods of these objects also reside in prototypes, available as `String.prototype`, `Number.prototype` and `Boolean.prototype`.
+Các thuộc tính và phương thức của đối tượng thực ra cũng được lấy từ các nguyên mẫu sẵn có đó là `String.prototype`, `Number.prototype` và `Boolean.prototype`.
 
-```warn header="Values `null` and `undefined` have no object wrappers"
-Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes too.
+```warn header="Các giá trị `null` and `undefined` không có đối tượng bao"
+Các giá trị `null` và `undefined` khác với tất cả các giá trị cơ sở khác. Chúng không có đối tượng bao, nên cũng không có các thuộc tính và phương thức. Và do đó cũng không có nguyên mẫu.
 ```
 
-## Changing native prototypes [#native-prototype-change]
+## Thay đổi các nguyên mẫu có sẵn [#native-prototype-change]
 
-Native prototypes can be modified. For instance, if we add a method to `String.prototype`,  it becomes available to all strings:
+Các nguyên mẫu có sẵn có thể thay đổi được. Ví dụ, nếu bạn thêm vào `String.prototype` một phương thức, phương thức này có thể được dùng cho mọi chuỗi:
 
 ```js run
 String.prototype.show = function() {
@@ -119,32 +119,32 @@ String.prototype.show = function() {
 "BOOM!".show(); // BOOM!
 ```
 
-During the process of development, we may have ideas for new built-in methods we'd like to have, and we may be tempted to add them to native prototypes. But that is generally a bad idea.
+Trong quá trình phát triển, chúng ta có thể có những ý tưởng về các phương thức mới và muốn thêm nó vào các nguyên mẫu có sẵn. Nhưng đây không phải là cách làm tốt.
 
 ```warn
-Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the other.
+Các nguyên mẫu được dùng ở mọi nơi, nên rất dễ xảy ra xung đột. Nếu hai thư viện cùng thêm phương thức `String.prototype.show`, một trong số chúng sẽ ghi đè lên thư viện kia.
 
-So, generally, modifying a native prototype is considered a bad idea.
+Vì thế, nói chung sửa đổi nguyên mẫu có sẵn là một ý tưởng tồi.
 ```
 
-**In modern programming, there is only one case where modifying native prototypes is approved. That's polyfilling.**
+**Trong lập trình hiện đại, chỉ có một trường hợp duy nhất có thể thay đổi nguyên mẫu có sẵn.Đó là polyfilling.**
 
-Polyfilling is a term for making a substitute for a method that exists in JavaScript specification, but not yet supported by current JavaScript engine.
+Polyfilling là tạo một phương thức thay thế cho một phương thức đã có trong đặc tả nhưng chưa được hỗ trợ bởi JavaScript engine hiện tại.
 
-Then we may implement it manually and populate the built-in prototype with it.
+Lúc này ta phải tự viết phương thức sao cho nó hoạt động giống như phương thức trong đặc tả, sau đó thêm nó vào nguyên mẫu như trong đặc tả.
 
-For instance:
+Ví dụ:
 
 ```js run
-if (!String.prototype.repeat) { // if there's no such method
-  // add it to the prototype
+if (!String.prototype.repeat) { // nếu không có phương thức
+  // thêm nó vào nguyên mẫu này
 
   String.prototype.repeat = function(n) {
-    // repeat the string n times
+    // lặp lại chuỗi n lần
 
-    // actually, the code should be a little bit more complex than that
-    // (the full algorithm is in the specification)
-    // but even an imperfect polyfill is often considered good enough
+    // thực tế mã phức tạp hơn một chút
+    // (toàn bộ thuật toán có trong đặc tả)
+    // nhưng một phiên bản polyfill chưa hoàn hảo cũng đủ dùng rồi
     return new Array(n + 1).join(this);
   };
 }
@@ -153,22 +153,22 @@ alert( "La".repeat(3) ); // LaLaLa
 ```
 
 
-## Borrowing from prototypes
+## Mượn phương thức từ các nguyên mẫu
 
-In the chapter <info:call-apply-decorators#method-borrowing> we talked about method borrowing.
+Trong bài <info:call-apply-decorators#method-borrowing> chúng ta đã nói về mượn phương thức.
 
-That's when we take a method from one object and copy it into another.
+Đó là khi chúng ta lấy phương thức của một đối tượng và dùng cho đối tượng khác.
 
-Some methods of native prototypes are often borrowed.
+Một số phương thức của các nguyên mẫu có sẵn cũng có thể mượn được.
 
-For instance, if we're making an array-like object, we may want to copy some array methods to it.
+Ví dụ, nếu chúng ta tạo một mảng giả, chúng ta muốn lấy vài phương thức của mảng thật cho nó.
 
-E.g.
+Ví dụ:
 
 ```js run
 let obj = {
-  0: "Hello",
-  1: "world!",
+  0: "Chào",
+  1: "thế giới!",
   length: 2,
 };
 
@@ -176,21 +176,21 @@ let obj = {
 obj.join = Array.prototype.join;
 */!*
 
-alert( obj.join(',') ); // Hello,world!
+alert( obj.join(',') ); // Chào thế giới!
 ```
 
-It works, because the internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property, it doesn't check that the object is indeed the array. And many built-in methods are like that.
+Nó làm việc, bởi vì thuật toán bên trong của `join` hoàn toàn áp dụng được cho mảng giả. Còn nhiều phương thức có sẵn khác cũng có thể mượn được như vậy.
 
-Another possibility is to inherit by setting `obj.__proto__` to `Array.prototype`, so all `Array` methods are automatically available in `obj`.
+Có một cách khác đó là cài đặt `obj.__proto__` thành `Array.prototype`, và `obj` mượn được tất cả các phương thức của mảng.
 
-But that's impossible if `obj` already inherits from another object. Remember, we only can inherit from one object at a time.
+Điều này không thể thực hiện nếu `obj` đã có một nguyên mẫu khác. Nhớ rằng, một đối tượng tại một thời điểm chỉ có một nguyên mẫu.
 
-Borrowing methods is flexible, it allows to mix functionality from different objects if needed.
+Việc mượn phương thức rất mềm dẻo, nó cho phép phối hợp các tính năng từ nhiều đối tượng để áp dụng cho đối tượng hiện tại.
 
-## Summary
+## Tóm tắt
 
-- All built-in objects follow the same pattern:
-    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype` etc).
-    - The object itself stores only the data (array items, object properties, the date).
-- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects.
-- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. Probably the only allowable cause is when we add-in a new standard, but not yet supported by the engine JavaScript method.
+- Tất cả các đối tượng có sẵn đều tuân theo mô hình:
+    - Các phương thức lưu trong nguyên mẫu (`Array.prototype`, `Object.prototype`, `Date.prototype`...).
+    - Đối tượng chỉ chứa dữ liệu (phần tử mảng, thuộc tính, ngày/tháng...).
+- Các giá trị cơ sở giữ phương thức trong nguyên mẫu của đối tượng bao: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Chỉ `undefined` và `null` không có đối tượng bao.
+- Các nguyên mẫu có sẵn có thể thay đổi được hoặc bổ sung thêm phương thức mới. Nhưng không nên sửa chúng. Chỉ nên sửa nếu ta cần thêm các phương thức mới có trong đặc tả nhưng chưa được JavaScript engine hỗ trợ.
