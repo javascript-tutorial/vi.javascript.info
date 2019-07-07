@@ -2,30 +2,30 @@ importance: 5
 
 ---
 
-# Add toString to the dictionary
+# Thêm toString vào từ điển
 
-There's an object `dictionary`, created as `Object.create(null)`, to store any `key/value` pairs.
+Có đối tượng `dictionary`, tạo bằng `Object.create(null)`, để chứa bất cứ cặp `key/value` nào.
 
-Add method `dictionary.toString()` into it, that should return a comma-delimited list of keys. Your `toString` should not show up in `for..in` over the object.
+Thêm phương thức `dictionary.toString()` vào nó, phương thức này trả về danh sách các key ngăn cách bởi dấu phảy. Phương thức `toString` không nên xuất hiện trong `for..in`.
 
-Here's how it should work:
+Đây là cách nó làm việc:
 
 ```js
 let dictionary = Object.create(null);
 
 *!*
-// your code to add dictionary.toString method
+// thêm dictionary.toString ở đây
 */!*
 
-// add some data
-dictionary.apple = "Apple";
-dictionary.__proto__ = "test"; // __proto__ is a regular property key here
+// thêm dữ liệu
+dictionary.apple = "Táo";
+dictionary.__proto__ = "kiểm tra"; // __proto__ is là thuộc tính bình thường
 
-// only apple and __proto__ are in the loop
+// chỉ apple và __proto__ được liệt kê
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple", sau đó là "__proto__"
 }  
 
-// your toString in action
+// hoạt động của toString
 alert(dictionary); // "apple,__proto__"
 ```

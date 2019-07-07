@@ -1,7 +1,7 @@
 
-The first call has `this == rabbit`, the other ones have `this` equal to `Rabbit.prototype`, because it's actually the object before the dot.
+Lần gọi đầu có `this == rabbit`, các lần khác `this` là `Rabbit.prototype`, bởi chúng là đối tượng trước dấu chấm.
 
-So only the first call shows `Rabbit`, other ones show `undefined`:
+Cho nên chỉ lần gọi đầu xuất ra `Thỏ`, các lần khác xuất ra `undefined`:
 
 ```js run
 function Rabbit(name) {
@@ -11,9 +11,9 @@ Rabbit.prototype.sayHi = function() {
   alert( this.name );
 }
 
-let rabbit = new Rabbit("Rabbit");
+let rabbit = new Rabbit("Thỏ");
 
-rabbit.sayHi();                        // Rabbit
+rabbit.sayHi();                        // Thỏ
 Rabbit.prototype.sayHi();              // undefined
 Object.getPrototypeOf(rabbit).sayHi(); // undefined
 rabbit.__proto__.sayHi();              // undefined
