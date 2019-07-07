@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The difference between calls
+# Sự khác nhau giữa các lần gọi
 
-Let's create a new `rabbit` object:
+Cùng tạo đối tượng `rabbit` mới:
 
 ```js
 function Rabbit(name) {
@@ -14,10 +14,10 @@ Rabbit.prototype.sayHi = function() {
   alert(this.name);
 };
 
-let rabbit = new Rabbit("Rabbit");
+let rabbit = new Rabbit("Thỏ");
 ```
 
-These calls do the same thing or not?
+Các lần gọi sau có cùng làm một việc không?
 
 ```js
 rabbit.sayHi();

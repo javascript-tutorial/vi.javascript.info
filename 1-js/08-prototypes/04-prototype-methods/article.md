@@ -1,41 +1,41 @@
 
-# Prototype methods, objects without __proto__
+# Truy cập nguyên mẫu không dùng __proto__
 
-In the first chapter of this section, we mentioned that there are modern methods to setup a prototype.
+Trong bài đầu của chương, chúng ta đã nói về các phương thức hiện đại để lấy và cài đặt nguyên mẫu.
 
-The `__proto__` is considered outdated and somewhat deprecated (in browser-only part of the JavaScript standard).
+Thuộc tính truy cập `__proto__` được coi là lỗi thời và không được dùng nữa (chỉ trên môi trường trình duyệt).
 
-The modern methods are:
+Các phương thức hiện đại là:
 
-- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
-- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returns the `[[Prototype]]` of `obj`.
-- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto`.
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- tạo đối tượng có nguyên mẫu là `proto` (cài đặt cho `[[Prototype]]`) và có thể dùng `descriptors` làm các "property descriptor".
+- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- trả về `[[Prototype]]` của `obj`.
+- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- cài đặt `proto` làm `[[Prototype]]` của `obj`.
 
-These should be used instead of `__proto__`.
+Chúng nên được dùng thay cho `__proto__`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let animal = {
   eats: true
 };
 
-// create a new object with animal as a prototype
+// tạo đối tượng nhận animal làm nguyên mẫu
 *!*
 let rabbit = Object.create(animal);
 */!*
 
 alert(rabbit.eats); // true
 *!*
-alert(Object.getPrototypeOf(rabbit) === animal); // get the prototype of rabbit
+alert(Object.getPrototypeOf(rabbit) === animal); // lấy nguyên mẫu của rabbit
 */!*
 
 *!*
-Object.setPrototypeOf(rabbit, {}); // change the prototype of rabbit to {}
+Object.setPrototypeOf(rabbit, {}); // đổi nguyên mẫu của rabbit thành {}
 */!*
 ```
 
-`Object.create` has an optional second argument: property descriptors. We can provide additional properties to the new object there, like this:
+`Object.create` có đối số không bắt buộc là các "property descriptor". Chúng ta có thể thêm các thuộc tính vào đối tượng được tạo:
 
 ```js run
 let animal = {
@@ -51,116 +51,116 @@ let rabbit = Object.create(animal, {
 alert(rabbit.jumps); // true
 ```
 
-The descriptors are in the same format as described in the chapter <info:property-descriptors>.
+Các "property descriptor" đã được nói đến trong bài <info:property-descriptors>.
 
-We can use `Object.create` to perform an object cloning more powerful than copying properties in `for..in`:
+Chúng ta có thể sử dụng `Object.create` để nhân bản đối tượng thay vì sao chép các thuộc tính trong `for..in`:
 
 ```js
-// fully identical shallow clone of obj
+// nhân bản đối tượng obj
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```
 
-This call makes a truly exact copy of `obj`, including all properties: enumerable and non-enumerable, data properties and setters/getters -- everything, and with the right `[[Prototype]]`.
+Nó sao chép tất cả các thuộc tính: liệt kê lẫn không liệt kê, thuộc trính truy cập cũng như thuộc tính dữ liệu, sao chép cả nguyên mẫu từ `[[Prototype]]`.
 
-## Brief history
+## Tóm tắt lịch sử
 
-If we count all the ways to manage `[[Prototype]]`, there's a lot! Many ways to do the same!
+Nếu chúng ta đếm tất cả các cách để quản lý `[[Prototype]]`, sẽ có rất nhiều! Rất nhiều cách để cùng làm một thứ!
 
-Why so?
+Tại sao lại như vậy?
 
-That's for historical reasons.
+Nó do lịch sử để lại.
 
-- The `"prototype"` property of a constructor function works since very ancient times.
-- Later in the year 2012: `Object.create` appeared in the standard. It allowed to create objects with the given prototype, but did not allow to get/set it. So browsers implemented non-standard `__proto__` accessor that allowed to get/set a prototype at any time.
-- Later in the year 2015: `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard, to perform the same functionality as `__proto__`. As `__proto__` was de-facto implemented everywhere, it was kind-of deprecated and made its way to the Annex B of the standard, that is optional for non-browser environments.
+- Thuộc tính `"prototype"` của constructor có từ rất lâu.
+- Sau đó vào năm 2012: `Object.create` xuất hiện trong tiêu chuẩn JavaScript. Nó cho phép tạo các đối tượng với nguyên mẫu cho trước, nhưng không cho phép lấy/cài đặt nguyên mẫu. Vậy nên các trình duyệt tự thực thi phương thức truy cập `__proto__` để lấy và cài đặt nguyên mẫu trong thời gian này.
+- Tới năm 2015: `Object.setPrototypeOf` và `Object.getPrototypeOf` được thêm vào tiêu chuẩn JavaScript để thực hiện các chức năng của `__proto__`. Vì `__proto__` có ở nhiều nơi, nó không được dùng và chuyển sang phụ lục B của tiêu chuẩn, là tùy chọn cho các môi trường không phải trình duyệt.
 
-As of now we have all these ways at our disposal.
+Kết quả là giờ chúng ta có tất cả những cách này để quản lý `[[Prototype]]`.
 
-Why was `__proto__` replaced by the functions `getPrototypeOf/setPrototypeOf`? That's an interesting question, requiring us to understand why `__proto__` is bad. Read on to get the answer.
+Tại sao `__proto__` bị thay thế bởi `getPrototypeOf/setPrototypeOf`? Đó là một câu hỏi thú vị, yêu cầu bạn phải hiểu tại sao `__proto__` không tốt. Hãy đọc để có câu trả lời.
 
-```warn header="Don't reset `[[Prototype]]` unless the speed doesn't matter"
-Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify: `rabbit` inherits from `animal`, and that is not going to change.
+```warn header="Không đặt lại `[[Prototype]]` trừ khi không cần chạy nhanh"
+Về mặt kỹ thuật, chúng ta có thể lấy/cài đặt `[[Prototype]]` bất cứ lúc nào. Nhưng thường ta chỉ cài đặt nó một lần khi tạo đối tượng và sau đó không thay đổi nữa: `rabbit` thừa kế từ `animal`, sau đó không thay đổi nữa.
 
-And JavaScript engines are highly optimized to that. Changing a prototype "on-the-fly" with `Object.setPrototypeOf` or `obj.__proto__=` is a very slow operation, it breaks internal optimizations for object property access operations. So evade it unless you know what you're doing, or JavaScript speed totally doesn't matter for you.
+Và JavaScript dựa vào điều này để tối ưu hóa tốc độ truy cập thuộc tính của các đối tượng. Thay đổi nguyên mẫu với `Object.setPrototypeOf` hoặc `obj.__proto__=` phá vỡ sự tối ưu này. Vì vậy hãnh tránh hành động này trừ khi bạn biết nó không ảnh hưởng tới mình.
 ```
 
-## "Very plain" objects
+## Đối tượng không có nguyên mẫu
 
-As we know, objects can be used as associative arrays to store key/value pairs.
+Như đã biết, đối tượng có thể dùng như mảng liên kết để lưu các cặp key/value.
 
-...But if we try to store *user-provided* keys in it (for instance, a user-entered dictionary), we can see an interesting glitch: all keys work fine except `"__proto__"`.
+...Nhưng nếu chúng ta muốn lưu các key *do người dùng cung cấp* trong đối tượng, bạn thấy mọi key đều hoạt động ngoại trừ `"__proto__"`.
 
-Check out the example:
+Cùng kiểm tra bằng ví dụ:
 
 ```js run
 let obj = {};
 
-let key = prompt("What's the key?", "__proto__");
-obj[key] = "some value";
+let key = prompt("Nhập key?", "__proto__");
+obj[key] = "giá trị nào đó";
 
-alert(obj[key]); // [object Object], not "some value"!
+alert(obj[key]); // [object Object], không phải "giá trị nào đó"!
 ```
 
-Here if the user types in `__proto__`, the assignment is ignored!
+Ở đây nếu nhập key là  `"__proto__"`, lệnh gán bị bỏ qua!
 
-That shouldn't surprise us. The `__proto__` property is special: it must be either an object or `null`, a string can not become a prototype.
+Không có gì ngạc nhiên. Thuộc tính `__proto__` là thuộc tính đặc biệt: nó phải là đối tượng hoặc `null`, một chuỗi không thể là nguyên mẫu được.
 
-But we didn't *intend* to implement such behavior, right? We want to store key/value pairs, and the key named `"__proto__"` was not properly saved. So that's a bug!
+Trong những tình huống ta cần lưu key `"__proto__"` thì nó sẽ không được lưu và đây là nhược điểm của `__proto__`.
 
-Here the consequences are not terrible. But in other cases, we may be assigning object values, then the prototype may indeed be changed. As the result, the execution will go wrong in totally unexpected ways.
+Nhược điểm trên không gây ra hậu quả quá khủng khiếp. Nhưng trong các trường hợp khác, chúng ta có thể vô tình gán một đối tượng vào `"__proto__"` và gây ra sự thay đổi nguyên mẫu mà ta nói ở trên. Điều này dẫn đến hậu quả rất nghiệm trọng vì toàn bộ mã sẽ chạy sai.
 
-What's worst -- usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+Điều tồi tệ nhất đối với nhà phát triển đó là các lỗi như vậy rất khó nhận thấy và chúng trở thành các lỗ hổng trong chương trình, đặc biệt khi JavaScript được dùng ở phía máy chủ.
 
-Unexpected things also may happen when accessing `toString` property -- that's a function by default, and other built-in properties.
+Kết quả bất thường cũng có thể xuất hiện với `toString` -- nó có thể là hàm hoặc thuộc tính của các đối tượng có sẵn.
 
-How to evade the problem?
+Làm sao để tránh vấn đề này?
 
-First, we can just switch to using `Map`, then everything's fine.
+Trước tiên, ta có thể chuyển sang dùng `Map`, và mọi thứ sẽ ổn.
 
-But `Object` also can serve us well here, because language creators gave a thought to that problem long ago.
+Nhưng `Object` cũng có thể làm tốt chuyện này, bởi người tạo ra ngôn ngữ đã lường trước được vấn đề này từ lâu.
 
-The `__proto__` is not a property of an object, but an accessor property of `Object.prototype`:
+Thực ra `__proto__` là một thuộc tính truy cập được thừa kế từ `Object.prototype`:
 
 ![](object-prototype-2.png)
 
-So, if `obj.__proto__` is read or set, the corresponding getter/setter is called from its prototype, and it gets/sets `[[Prototype]]`.
+Cho nên, nếu `obj.__proto__` được đọc hoặc ghi, các getter/setter tương ứng được lấy từ nguyên mẫu, nó lấy/cài đặt `[[Prototype]]` của đối tượng hiện tại.
 
-As it was said in the beginning of this tutorial section: `__proto__` is a way to access `[[Prototype]]`, it is not `[[Prototype]]` itself.
+Đúng như ta đã nói ở bài đầu chương này: `__proto__` chỉ là cách truy cập `[[Prototype]]`, không phải là `[[Prototype]]`.
 
-Now, if we want to use an object as an associative array, we can do it with a little trick:
+Giờ, nếu muốn sử dụng một đối tượng làm mảng liên kết, chúng ta có thể thực hiện một mẹo nhỏ:
 
 ```js run
 *!*
 let obj = Object.create(null);
 */!*
 
-let key = prompt("What's the key?", "__proto__");
-obj[key] = "some value";
+let key = prompt("Nhập key?", "__proto__");
+obj[key] = "giá trị nào đó";
 
-alert(obj[key]); // "some value"
+alert(obj[key]); // "giá trị nào đó"
 ```
 
-`Object.create(null)` creates an empty object without a prototype (`[[Prototype]]` is `null`):
+`Object.create(null)` tạo một đối tượng không có nguyên mẫu (`[[Prototype]]` là `null`):
 
 ![](object-prototype-null.png)
 
-So, there is no inherited getter/setter for `__proto__`. Now it is processed as a regular data property, so the example above works right.
+Cho nên nó không thuộc tính truy cập `__proto__` lấy từ nguyên mẫu. Lúc này `__proto__` được xem là thuộc tính dữ liệu thông thường và ví dụ trên đã làm việc.
 
-We can call such object "very plain" or "pure dictionary objects", because they are even simpler than regular plain object `{...}`.
+Chúng ta còn gọi đối tượng được tạo ra theo cách này là đối tượng "thuần", bởi nó còn đơn giản hơn cả một đối tượng trống `{...}`.
 
-A downside is that such objects lack any built-in object methods, e.g. `toString`:
+Nhược điểm của đối tượng "thuần" là thiếu đi rất nhiều phương thức có sẵn, ví dụ `toString`.
 
 ```js run
 *!*
 let obj = Object.create(null);
 */!*
 
-alert(obj); // Error (no toString)
+alert(obj); // Lỗi (không có toString)
 ```
 
-...But that's usually fine for associative arrays.
+...Nhưng nó lại dùng tốt với mảng liên kết.
 
-Please note that most object-related methods are `Object.something(...)`, like `Object.keys(obj)` -- they are not in the prototype, so they will keep working on such objects:
+Mặt khác, các thuộc tính dạng `Object.something(...)`, ví dụ `Object.keys(obj)` không nằm trong nguyên mẫu, nên nó vẫn có thể sử dụng được với đối tượng "thuần nhất":
 
 
 ```js run
@@ -171,33 +171,33 @@ chineseDictionary.bye = "再见";
 alert(Object.keys(chineseDictionary)); // hello,bye
 ```
 
-## Summary
+## Tóm tắt
 
-Modern methods to setup and directly access the prototype are:
+Các phương thức hiện đại để truy cập trực tiếp đến nguyên mẫu là:
 
-- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` (can be `null`) and optional property descriptors.
-- [Object.getPrototypeOf(obj)](mdn:js/Object.getPrototypeOf) -- returns the `[[Prototype]]` of `obj` (same as `__proto__` getter).
-- [Object.setPrototypeOf(obj, proto)](mdn:js/Object.setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto` (same as `__proto__` setter).
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- tạo đối tượng có nguyên mẫu là `proto` (có thể là `null`) và có thể có `descriptors` là các "property descriptor".
+- [Object.getPrototypeOf(obj)](mdn:js/Object.getPrototypeOf) -- trả về `[[Prototype]]` của `obj` (giống như getter `__proto__`).
+- [Object.setPrototypeOf(obj, proto)](mdn:js/Object.setPrototypeOf) -- cài đặt `proto` làm `[[Prototype]]` của `obj` (giống setter `__proto__`).
 
-The built-in `__proto__` getter/setter is unsafe if we'd want to put user-generated keys in to an object. Just because a user may enter "__proto__" as the key, and there'll be an error with hopefully easy, but generally unpredictable consequences.
+Getter/setter `__proto__` không an toàn khi muốn dùng đối tượng làm mảng liên kết. Bởi vì người dùng lưu `"__proto__"` làm key, sẽ gây ra lỗi không mong muốn và không thể đoán trước được.
 
-So we can either use `Object.create(null)` to create a "very plain" object without `__proto__`, or stick to `Map` objects for that.
+Để khắc phục có thể sử dụng `Object.create(null)` để tạo đối tượng "thuần" `__proto__`, hoặc chuyển sang dùng `Map`.
 
-Also, `Object.create` provides an easy way to shallow-copy an object with all descriptors:
+`Object.create` cũng cấp cấp một cách để nhân bản đối tượng.
 
 ```js
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```
 
 
-- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs.
-- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- returns an array of all own symbolic keys.
-- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- returns an array of all own string keys.
-- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- returns an array of all own keys.
-- [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) keytt named `key`.
+- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- trả về mảng chứa tên/giá trị/cặp key-value của các thuộc tính liệt kê.
+- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- trả về mảng chứa key của các thuộc tính symbol riêng.
+- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- trả về mảng chứa key của các thuộc tính riêng.
+- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- trả về mảng chứa key của tất cả thuộc tính riêng (gồm cả symbol).
+- [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): trả về `true` nếu `obj` có thuộc tính riêng (không được thừa kế) có tên là `key`.
 
-We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just as other methods.
+Chúng ta cũng làm sáng tỏ rằng `__proto__` là getter/setter của `[[Prototype]]` và nằm trong `Object.prototype`, như các phương thức khác.
 
-We can create an object without a prototype by `Object.create(null)`. Such objects are used as "pure dictionaries", they have no issues with `"__proto__"` as the key.
+Chúng ta có thể tạo đối tượng không có nguyên mẫu bằng `Object.create(null)`. Các đối tượng này thường dùng như "từ điển thuần túy", chúng không gặp phải vấn đề với key `"__proto__"`.
 
-All methods that return object properties (like `Object.keys` and others) -- return "own" properties. If we want inherited ones, then we can use `for..in`.
+Tất cả các phương thức trả về các thuộc tính của đối tượng (như `Object.keys`...) -- chỉ trả về thuộc tính riêng. Nếu muốn cả các thuộc tính được thừa kế, chúng ta có thể sử dụng `for..in`.

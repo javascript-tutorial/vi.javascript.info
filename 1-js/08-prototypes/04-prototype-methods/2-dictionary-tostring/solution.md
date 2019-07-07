@@ -1,31 +1,31 @@
 
-The method can take all enumerable keys using `Object.keys` and output their list.
+Phương thức này có thể lấy tất cả các key có thể liệt kê bằng `Object.keys` và in ra danh sách này.
 
-To make `toString` non-enumerable, let's define it using a property descriptor. The syntax of `Object.create` allows us to provide an object with property descriptors as the second argument.
+Để `toString` không được liệt kê, định nghĩa nó bằng một property descriptor. `Object.create` cũng cho phép ta làm điều này.
 
 ```js run
 *!*
 let dictionary = Object.create(null, {
-  toString: { // define toString property
-    value() { // the value is a function
+  toString: { // định nghĩa phương thức toString
+    value() { // giá trị là hàm
       return Object.keys(this).join();
     }
   }
 });
 */!*
 
-dictionary.apple = "Apple";
-dictionary.__proto__ = "test";
+dictionary.apple = "Táo";
+dictionary.__proto__ = "kiểm tra";
 
-// apple and __proto__ is in the loop
+// apple và __proto__ được liệt kê
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple", sau đó là "__proto__"
 }  
 
-// comma-separated list of properties by toString
+// toString trả về danh sách thuộc tính
 alert(dictionary); // "apple,__proto__"
 ```
 
-When we create a property using a descriptor, its flags are `false` by default. So in the code above, `dictionary.toString` is non-enumerable.
+Khi tạo thuộc tính bằng descriptor, tất cả các cờ không được cung cấp có giá trị mặc định là `false`. Cho nên, `dictionary.toString` không thể liệt kê.
 
-See the the chapter [](info:property-descriptors) for review.
+Xem lại bài [](info:property-descriptors) để hiểu rõ hơn.
