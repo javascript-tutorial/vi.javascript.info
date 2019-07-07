@@ -3,7 +3,7 @@ libs:
 
 ---
 
-# Ràng buộc hàm
+# Ràng buộc "this" cho hàm
 
 Có một vấn đề chúng ta đã biết khi dùng `setTimeout` với các phương thức của đối tượng hoặc truyền những phương thức này từ hàm này sang hàm khác đó là mất `this`.
 
