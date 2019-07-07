@@ -1,5 +1,5 @@
 
-# Truy cập nguyên mẫu không dùng __proto__
+# Truy cập nguyên mẫu không dùng "__proto__"
 
 Trong bài đầu của chương, chúng ta đã nói về các phương thức hiện đại để lấy và cài đặt nguyên mẫu.
 
