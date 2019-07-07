@@ -1,6 +1,6 @@
 # Câu lệnh và chú thích
 
-Đầu tiên chúng ta sẽ học về các thành phần cơ bản nhất của mã JavaScript là câu lệnh và chú thích.
+Đầu tiên chúng ta sẽ học về các thành phần cơ bản nhất của một chương trình JavaScript là câu lệnh và chú thích.
 
 ## Các câu lệnh
 
