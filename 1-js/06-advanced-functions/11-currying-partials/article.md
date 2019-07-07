@@ -7,7 +7,7 @@ libs:
 
 Ở bài trước ta đã học cách ràng buộc `this`. Cùng tiến thêm một bước nữa ở bài này.
 
-Không chỉ `this` ta còn có thể ràng buộc cả các tham số của hàm nữa. Hiếm khi được dùng nhưng đôi khi nó khá tiện lợi.
+Không chỉ `this` ta còn có thể ràng buộc cả các tham số của hàm. Nó hiếm khi được dùng nhưng đôi khi nó khá tiện lợi.
 
 Cú pháp đầy đủ của `bind`:
 
