@@ -1,22 +1,22 @@
 
-# Class basic syntax
+# Cú pháp tạo class
 
 ```quote author="Wikipedia"
-In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
+Trong lập trình hướng đối tượng, một *class* là một mã chương trình mở rộng (extensible program-code-template) dùng tạo các đối tượng, khởi tạo các giá trị ban đầu cho trạng thái (các biến thành viên) và thực thi các hành động (hàm thành viên hay phương thức) của đối tượng.
 ```
 
-In practice, we often need to create many objects of the same kind, like users, or goods or whatever.
+Trong thực tế, chúng ta thường phải tạo ra hàng loạt các đối tượng cùng kiểu, như các người dùng, các mặt hàng trong một cửa hàng trực tuyến...
 
-As we already know from the chapter <info:constructor-new>, `new function` can help with that.
+Như đã biết ở bài <info:constructor-new>, có thể dùng `new Function` đê thực hiện việc này.
 
-But in the modern JavaScript, there's a more advanced "class" construct, that introduces great new features which are useful for object-oriented programming.
+Nhưng trong JavaScript hiện đại, có thêm một cách tạo các đối tượng khác đó là "class", nó là một cấu trúc cú pháp nâng cao mới được giới thiệu đi cùng với nhiều tính năng tuyệt vời khác, rất hữu ích cho lập trình hướng đối tượng.
 
-## The "class" syntax
+## Cú pháp tạo "class"
 
-The basic syntax is:
+Cú pháp cơ bản là:
 ```js
 class MyClass {
-  // class methods
+  // các phương thức của class
   constructor() { ... }
   method1() { ... }
   method2() { ... }
@@ -25,11 +25,11 @@ class MyClass {
 }
 ```
 
-Then `new MyClass()` creates a new object with all the listed methods.
+Sau đó gọi `new MyClass()` để tạo đối tượng mới có đầy đủ các phương thức trên.
 
-The `constructor()` method is called automatically by `new`, so we can initialize the object there.
+Phương thức `constructor()` tự động được gọi bởi `new`, nên nó là nơi được dùng để khởi tạo giá trị các thuộc tính cho đối tượng.
 
-For example:
+Ví dụ:
 
 ```js run
 class User {
@@ -44,33 +44,33 @@ class User {
 
 }
 
-// Usage:
-let user = new User("John");
+// Sử dụng:
+let user = new User("Hùng");
 user.sayHi();
 ```
 
-When `new User("John")` is called:
-1. A new object is created.
-2. The `constructor` runs with the given argument and assigns `this.name` to it.
+Khi gọi `new User("Hùng")`:
+1. Một đối tượng mới được tạo.
+2. Hàm `constructor` chạy với đối số `"Hùng"` và gán cho `this.name`.
 
-...Then we can call methods, such as `user.sayHi`.
+...Sau đó chúng ta có thể gọi các phương thức từ đối tượng trên, chẳng hạn như `user.sayHi`.
 
 
-```warn header="No comma between class methods"
-A common pitfall for novice developers is to put a comma between class methods, which would result in a syntax error.
+```warn header="Không có dấu phảy ngăn cách các phương thức"
+Có một lỗi phổ biến mà những người mới làm quen với JavaScript hay mắc phải là đặt dấu phảy giữa các phương thức của class, điều này dẫn tới lỗi cú pháp.
 
-The notation here is not to be confused with object literals. Within the class, no commas are required.
+Chúng ta không được nhầm lẫn cách viết "class" và cách việt literal đối tượng. Trong class không cần dấu phảy.
 ```
 
-## What is a class?
+## Class thực sự là gì?
 
-So, what exactly is a `class`? That's not an entirely new language-level entity, as one might think.
+Vậy thì chính xác `class` là gì? Thường thì người ta nghĩ rằng nó là một cái gì hoàn toàn mới của JavaScript, nhưng thực ra không phải.
 
-Let's unveil any magic and see what a class really is. That'll help in understanding many complex aspects.
+Cùng lột trần để thấy thực sự nó là gì. Điều này giúp ta hiểu được nhiều khía cạnh phức tạp.
 
-In JavaScript, a class is a kind of a function.
+Trong JavaScript, class thực ra là một hàm.
 
-Here, take a look:
+Đoạn mã sau cho thấy điều này:
 
 ```js run
 class User {
@@ -78,24 +78,24 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// proof: User is a function
+// bằng chứng cho việc User là một hàm
 *!*
 alert(typeof User); // function
 */!*
 ```
 
-What `class User {...}` construct really does is:
-1. Creates a function named `User`, that becomes the result of the class declaration.
-    - The function code is taken from the `constructor` method (assumed empty if we don't write such method).
-3. Stores all methods, such as `sayHi`, in `User.prototype`.
+Cấu trúc `class User {...}` thực ra là một khai báo hàm và làm những công việc sau:
+1. Tạo hàm có tên `User`.
+    - Thân hàm lấy từ phương thức `constructor` (nếu không viết `constructor` thì thân hàm trống).
+3. Lưu tất cả các phương thức, chẳng hạn như `sayHi`, trong `User.prototype`.
 
-Afterwards, for new objects, when we call a method, it's taken from the prototype, just as  described in the chapter <info:function-prototype>. So a `new User` object has access to class methods.
+Sau đó khi gọi các phương thức của đối tượng mới, các phương thức này được lấy từ nguyên mẫu, giống như được mô tả trong bài <info:function-prototype>. Vậy nên đối tượng tạo ra từ `new User` có thể truy cập các phương thức của class.
 
-We can illustrate the result of `class User` declaration as:
+Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
 
 ![](class-user.png)
 
-Here's the code to introspect it:
+Đây là đoạn mã giúp ta quan sát điều này:
 
 
 ```js run
@@ -104,50 +104,50 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// class is a function
+// class là một hàm
 alert(typeof User); // function
 
-// ...or, more precisely, the constructor method
+// ...hoặc chính xác hơn, là phương thức constructor
 alert(User === User.prototype.constructor); // true
 
-// The methods are in User.prototype, e.g:
+// Các phương thức của class nằm trong User.prototype, ví dụ:
 alert(User.prototype.sayHi); // alert(this.name);
 
-// there are exactly two methods in the prototype
+// có 2 phương thức trong User.prototype
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
-## Not just a syntax sugar
+## Class không chỉ là một "syntax sugar"
 
-Sometimes people say that `class` is a "syntax sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new) in JavaScript, because we could actually declare the same without `class` keyword at all:
+Đôi khi người ta nói rằng `class` là một "syntax sugar" (cú pháp ngắn gọn được thiết kế để thay thế cho một đoạn mã phức tạp thực hiện công việc tương tự) của JavaScript, bởi chúng ta có thể khai báo một hàm constructor, thêm phương thức vào `prototype` của nó mà không cần sử dụng `class`:
 
 ```js run
-// rewriting class User in pure functions
+// viết lại class mà mà không dùng cấu trúc "class"
 
-// 1. Create constructor function
+// 1. Tạo hàm constructor
 function User(name) {
   this.name = name;
 }
-// any function prototype has constructor property by default,
-// so we don't need to create it
+// mọi hàm đều có `prototype` có sẵn thuộc tính constructor
+// nên không cần phải thêm constructor vào User.prototype
 
-// 2. Add the method to prototype
+// 2. Thêm phương thức vào User.prototype
 User.prototype.sayHi = function() {
   alert(this.name);
 };
 
-// Usage:
-let user = new User("John");
+// Sử dụng:
+let user = new User("Hùng");
 user.sayHi();
 ```
 
-The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntax sugar to define a constructor together with its prototype methods.
+Kết quả hoàn toàn giống như khi sử dụng "class". Đó là lý do tại sao `class` có thể xem như một syntax sugar để định nghĩa một constructor cùng với các phương thức trong prototype của nó.
 
-Although, there are important differences.
+Mặc dù vậy, vẫn có những khác biệt quan trọng.
 
-1. First, a function created by `class` is labelled by a special internal property `[[FunctionKind]]:"classConstructor"`. So it's not entirely the same as creating it manually.
+1. Trước tiên, hàm tạo bởi `class` có thêm một thuộc tính đặc biệt `[[FunctionKind]]:"classConstructor"`. Các hàm tạo ra bằng cách thông thường không có thuộc tính này.
 
-    Unlike a regular function, a class constructor can't be called without `new`:
+    Không như hàm thông thường, một "class constructor" (hàm tạo bởi `class`) bắt buộc phải gọi với `new`:
 
     ```js run
     class User {
@@ -155,10 +155,10 @@ Although, there are important differences.
     }
 
     alert(typeof User); // function
-    User(); // Error: Class constructor User cannot be invoked without 'new'
+    User(); // Lỗi: "Class constructor" User không thể gọi mà không có 'new'
     ```
 
-    Also, a string representation of a class constructor in most JavaScript engines starts with the "class..."
+    Cũng như vậy, biểu diễn chuỗi của một class constructor trong hầu hết các JavaScript engine đều bắt đầu với "class..."
 
     ```js run
     class User {
@@ -168,55 +168,55 @@ Although, there are important differences.
     alert(User); // class User { ... }
     ```
 
-2. Class methods are non-enumerable.
-    A class definition sets `enumerable` flag to `false` for all methods in the `"prototype"`.
+2. Các phương thức của class đều không thể liệt kê.
+    Định nghĩa một class sẽ cài đặt cờ `enumerable` là `false` cho mọi phương thức trong `"prototype"`.
 
-    That's good, because if we `for..in` over an object, we usually don't want its class methods.
+    Điều này tốt, bởi vì nếu chúng ta `for..in` một đối tượng, chúng ta thường không cần đến các phương thức class của nó.
 
-3. Classes always `use strict`.
-    All code inside the class construct is automatically in strict mode.
+3. Các class luôn mặc định sử dụng `use strict`.
+    Tất cả mã bên trong cấu trúc class tự động sử dụng `use strict`.
 
 
-Also, in addition to its basic operation, the `class` syntax brings many other features with it which we'll explore later.
+Ngoài các tính năng cơ bản, cú pháp `class` còn mang đến nhiều tính năng khác mà chúng ta sẽ học trong các bài sau.
 
-## Class Expression
+## Biểu thức class
 
-Just like functions, classes can be defined inside another expression, passed around, returned, assigned etc.
+Giống như hàm, class cũng có thể được khai báo bằng một biểu thức gọi là biểu thức class.
 
-Here's an example of a class expression:
+Đây là ví dụ về một biểu thức class:
 
 ```js
 let User = class {
   sayHi() {
-    alert("Hello");
+    alert("Xin chào");
   }
 };
 ```
 
-Similar to Named Function Expressions, class expressions may or may not have a name.
+Tương tự như Biểu thức hàm có tên (NFE), chúng ta cũng có "Biểu thức class có tên" (Named Class Expression).
 
-If a class expression has a name, it's visible inside the class only:
+Nếu một biểu thức class có tên, tên này chỉ có thể thấy được trong class:
 
 ```js run
-// "Named Class Expression"
-// (no such term in the spec, but that's similar to Named Function Expression)
+// "Biểu thức class có tên"
+// (trong đặc tả không có thuật ngữ này, nhưng nó tương tự NFE)
 let User = class *!*MyClass*/!* {
   sayHi() {
-    alert(MyClass); // MyClass is visible only inside the class
+    alert(MyClass); // MyClass chỉ thấy được trong class
   }
 };
 
-new User().sayHi(); // works, shows MyClass definition
+new User().sayHi(); // làm việc, hiện thị định nghĩa của MyClass
 
-alert(MyClass); // error, MyClass not visible outside of the class
+alert(MyClass); // lỗi, MyClass không sử dụng được ngoài class
 ```
 
 
-We can even make classes dynamically "on-demand", like this:
+Chúng ta có thể tạo một class từ một hàm, ví dụ:
 
 ```js run
 function makeClass(phrase) {
-  // declare a class and return it
+  // trả về class
   return class {
     sayHi() {
       alert(phrase);
@@ -224,24 +224,24 @@ function makeClass(phrase) {
   };
 }
 
-// Create a new class
-let User = makeClass("Hello");
+// Tạo một class mới
+let User = makeClass("Xin chào");
 
-new User().sayHi(); // Hello
+new User().sayHi(); // Xin chào
 ```
 
 
-## Getters/setters, other shorthands
+## Getter/setter, và các thuộc tính đặc biệt khác
 
-Just like literal objects, classes may include getters/setters, generators, computed properties etc.
+Giống literal đối tượng, các class có thể có getter/setter, các generator, các thuộc tính "computed"...
 
-Here's an example for `user.name` implemented using `get/set`:
+Đây là ví dụ tạo thuộc tính truy cập `user.name` sử dụng `get/set`:
 
 ```js run
 class User {
 
   constructor(name) {
-    // invokes the setter
+    // gọi setter
     this.name = name;
   }
 
@@ -255,7 +255,7 @@ class User {
   set name(value) {
 */!*
     if (value.length < 4) {
-      alert("Name is too short.");
+      alert("Tên quá ngắn.");
       return;
     }
     this._name = value;
@@ -263,13 +263,13 @@ class User {
 
 }
 
-let user = new User("John");
-alert(user.name); // John
+let user = new User("Hùng");
+alert(user.name); // Hùng
 
-user = new User(""); // Name too short.
+user = new User(""); // Tên quá ngắn.
 ```
 
-The class declaration creates getters and setters in `User.prototype`, like this:
+Khai báo class tạo các getter và setter trong `User.prototype` như sau:
 
 ```js
 Object.defineProperties(User.prototype, {
@@ -284,14 +284,14 @@ Object.defineProperties(User.prototype, {
 });
 ```
 
-Here's an example with computed properties:
+Đây là ví dụ với các thuộc tính computed:
 
 ```js run
 function f() { return "sayHi"; }
 
 class User {
   [f()]() {
-    alert("Hello");
+    alert("Xin chào");
   }
 
 }
@@ -299,53 +299,53 @@ class User {
 new User().sayHi();
 ```
 
-For a generator method, similarly, prepend it with `*`.
+Với phương thức generator, đặt `*` đằng trước. Nhưng chúng ta sẽ học về generator ở một bài học sau.
 
-## Class properties
+## Các thuộc tính của class
 
-```warn header="Old browsers may need a polyfill"
-Class-level properties are a recent addition to the language.
+```warn header="Trên các trình duyệt cũ chúng ta cần polyfill"
+Các thuộc tính của class gần đây mới được thêm vào JavaScript, nên một số trình duyệt cũ có thể chưa hỗ trợ.
 ```
 
-In the example above, `User` only had methods. Let's add a property:
+Trong các ví dụ trên, `User` chỉ có các phương thức. Giờ thêm các thuộc tính:
 
 ```js run
 class User {
-  name = "Anonymous";
+  name = "Vô danh";
 
   sayHi() {
-    alert(`Hello, ${this.name}!`);
+    alert(`Xin chào, ${this.name}!`);
   }
 }
 
 new User().sayHi();
 ```
 
-The property is not placed into `User.prototype`. Instead, it is created by `new`, separately for every object. So, the property will never be shared between different objects of the same class.
+Khác với phương thức các thuộc tính không đặt trong `User.prototype`. Thay vì thế, nó tạo bởi `new`, đặt trong mỗi đối tượng được tạo. Vậy nên, mỗi đối tượng sở hữu các thuộc tính riêng, nhưng dùng chung phương thức từ nguyên mẫu.
 
 
-## Summary
+## Tóm tắt
 
-The basic class syntax looks like this:
+Cú pháp cơ bản để tạo class trông như sau:
 
 ```js
 class MyClass {
-  prop = value; // field
+  prop = value; // thuộc tính (trường)
 
   constructor(...) { // constructor
     // ...
   }
 
-  method(...) {} // method
+  method(...) {} // phương thức
 
-  get something(...) {} // getter method
-  set something(...) {} // setter method
+  get something(...) {} // phương thức getter
+  set something(...) {} // phương thức setter
 
-  [Symbol.iterator]() {} // method with computed name/symbol name
+  [Symbol.iterator]() {} // phương thức computed, phương thức symbol
   // ...
 }
 ```
 
-`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and settors are written to `MyClass.prototype`.
+`MyClass` thực ra là một hàm (được lấy từ `constructor`), trong khi đó các phương thức, getter và setter được ghi vào `MyClass.prototype`.
 
-In the next chapters we'll learn more about classes, including inheritance and other features.
+Trong bài sau, chúng ta sẽ học thêm về class, gồm thừa kế và các tính năng khác.
