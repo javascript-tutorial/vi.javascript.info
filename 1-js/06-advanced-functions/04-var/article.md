@@ -1,25 +1,25 @@
 
-# The old "var"
+# Từ khóa "var"
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+Ở chương [variables](info:variables), ta biết rằng có ba cách khai báo biến sau:
 
 1. `let`
 2. `const`
 3. `var`
 
-`let` and `const` behave exactly the same way in terms of Lexical Environments.
+`let` và `const` tương tự nhau nếu xét về khía cạnh Lexical Environments.
 
-But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+Nhưng `var` thì lại khác, nó được sử dụng từ lâu khi Javascript còn chưa hỗ trợ `let` và `const`. Nhìn chung, nó không còn được sử dụng trong các đoạn scripts hiện đại nữa, tuy nhiên nó vẫn còn tồn tại.
 
-If you don't plan on meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
+Chương này có thể được bỏ qua hoặc hoãn lại nếu bạn cảm thấy không cần thiết, tuy nhiên những kiến thức này có thể giúp ích bạn trong tương lai.
 
-From the first sight, `var` behaves similar to `let`. That is, declares a variable:
+Nếu nhìn thoáng qua, `var` tương tự với `let`. Cả hai đều được dùng để khai báo một biến:
 
 ```js run
 function sayHi() {
-  var phrase = "Hello"; // local variable, "var" instead of "let"
+  var phrase = "Xin chào"; // biến cục bộ, "var" thay vì "let"
 
-  alert(phrase); // Hello
+  alert(phrase); // Xin chào
 }
 
 sayHi();
@@ -27,31 +27,31 @@ sayHi();
 alert(phrase); // Error, phrase is not defined
 ```
 
-...But here are the differences.
+...Tuy vậy có vài sự khác biệt.
 
-## "var" has no block scope
+## "var" không hỗ trợ block scope
 
-`var` variables are either function-wide or global, they are visible through blocks.
+Các biến được khai báo với `var` hoặc là biến cục bộ, hoặc là biến toàn cục.
 
-For instance:
+Lấy ví dụ:
 
 ```js run
 if (true) {
-  var test = true; // use "var" instead of "let"
+  var test = true; // dùng "var" thay vì "let"
 }
 
 *!*
-alert(test); // true, the variable lives after if
+alert(test); // true, biến này tồn tại ngoài khối lệnh if
 */!*
 ```
 
-`var` ignores code blocks, so we've got a global variable `test`.
+`var` bỏ qua các khối lệnh (code blocks), vậy nên ta có một biến toàn cục `test`.
 
-If we used `let test` instead of `var test`, then the variable would only be visible inside `if`:
+Nếu đổi sang `let test` thay vì `var test`, thì khi đó biến này sẽ chỉ tồn tại bên trong  `if`:
 
 ```js run
 if (true) {
-  let test = true; // use "let"
+  let test = true; // dùng "let"
 }
 
 *!*
@@ -59,7 +59,7 @@ alert(test); // Error: test is not defined
 */!*
 ```
 
-The same thing for loops: `var` cannot be block- or loop-local:
+Tương tự với vòng lặp: `var` không thể bị block:
 
 ```js
 for (var i = 0; i < 10; i++) {
@@ -67,38 +67,38 @@ for (var i = 0; i < 10; i++) {
 }
 
 *!*
-alert(i); // 10, "i" is visible after loop, it's a global variable
+alert(i); // 10, "i" vẫn tồn tại sau khi vòng lặp kết thúc, nó đã trở thành biến toàn cục
 */!*
 ```
 
-If a code block is inside a function, then `var` becomes a function-level variable:
+Nếu một khối lệnh tồn tại bên trọng một hàm, thì khi đó `var` sẽ trở thành một biến cục bộ:
 
 ```js run
 function sayHi() {
   if (true) {
-    var phrase = "Hello";
+    var phrase = "Xin chào";
   }
 
-  alert(phrase); // works
+  alert(phrase); // chạy bình thường
 }
 
 sayHi();
-alert(phrase); // Error: phrase is not defined (Check the Developer Console)
+alert(phrase); // Error: phrase is not defined (Kiểm tra Developer Console)
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
+Như ta thấy, `var` "đi xuyên qua" `if`, `for` hay các khối lệnh khác. Đó là bởi vì lúc trước Javascripts chưa tồn tại khái niệm Lexical Environments. Và `var` là kết quả của việc đó .
 
-## "var" declarations are processed at the function start
+## Khai báo với "var" được tạo khi function bắt đầu chạy
 
-`var` declarations are processed when the function starts (or script starts for globals).
+Khai báo với "var" được Javascript xử lý ngay khi hàm bắt đầu chạy (hay khi script bắt đầu chạy).
 
-In other words, `var` variables are defined from the beginning of the function, no matter where the definition is (assuming that the definition is not in the nested function).
+Nói cách khác, các biến "var" được định nghĩa từ lúc bắt đầu của mọi hàm, bất kể việc định nghĩa ấy nằm ở đâu (giả sử rằng việc định nghĩa không nằm trong các hàm lồng nhau).
 
-So this code:
+Đoạn code sau:
 
 ```js run
 function sayHi() {
-  phrase = "Hello";
+  phrase = "Xin chào";
 
   alert(phrase);
 
@@ -109,7 +109,7 @@ function sayHi() {
 sayHi();
 ```
 
-...Is technically the same as this (moved `var phrase` above):
+...tương tự với đoạn code này (chuyển `var phrase` lên trên):
 
 ```js run
 function sayHi() {
@@ -117,18 +117,18 @@ function sayHi() {
   var phrase;
 */!*
 
-  phrase = "Hello";
+  phrase = "Xin chào";
 
   alert(phrase);
 }
 sayHi();
 ```
 
-...Or even as this (remember, code blocks are ignored):
+...hay đoạn code này (các khối lệnh bị bỏ qua):
 
 ```js run
 function sayHi() {
-  phrase = "Hello"; // (*)
+  phrase = "Xin chào"; // (*)
 
   *!*
   if (false) {
@@ -141,60 +141,60 @@ function sayHi() {
 sayHi();
 ```
 
-People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
+Người ta thường gọi hành vi này là "hoisting" (đưa lên), bởi vì tất cả các biến `var` đã bị "đưa lên" trên cùng của hàm.
 
-So in the example above, `if (false)` branch never executes, but that doesn't matter. The `var` inside it is processed in the beginning of the function, so at the moment of `(*)` the variable exists.
+Với ví dụ ở trên, nhánh `if (false)` chưa bao giờ được thực thi, nhưng nó không đáng bận tâm. Biến `var` đã được xử lý ngay từ lúc bắt đầu hàm, vậy nên biến đã tồn tại ở lúc `(*)` rồi.
 
-**Declarations are hoisted, but assignments are not.**
+**Chỉ có phần khai báo (decalarations) là được đưa lên (hoisted), các phép gán (assignments) thì không.**
 
-That's better to demonstrate with an example, like this:
+Lấy ví dụ
 
 ```js run
 function sayHi() {
   alert(phrase);  
 
 *!*
-  var phrase = "Hello";
+  var phrase = "Xin chào";
 */!*
 }
 
 sayHi();
 ```
 
-The line `var phrase = "Hello"` has two actions in it:
+Ở dòng code `var phrase = "Xin chào"` xảy ra hai việc:
 
-1. Variable declaration `var`
-2. Variable assignment `=`.
+1. Khai báo biến với `var`
+2. Gán biến với `=`.
 
-The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
+Phần khai báo được đưa lên ngay lúc hàm bắt đầu thực thi, nhưng phép gán thì luôn luôn chỉ được thực thi tại chỗ. Vậy nên đoạn code trên sẽ nhìn giống như sau:
 
 ```js run
 function sayHi() {
 *!*
-  var phrase; // declaration works at the start...
+  var phrase; // Khai báo biến diễn ra lúc bắt đầu...
 */!*
 
   alert(phrase); // undefined
 
 *!*
-  phrase = "Hello"; // ...assignment - when the execution reaches it.
+  phrase = "Hello"; // ...phép gán - thực thi tại chỗ.
 */!*
 }
 
 sayHi();
 ```
 
-Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
+Vì các khai báo với `var` được xử lý ngay lúc hàm bắt đầu, ta có thể khai báo nó ở bất cứ đâu trong hàm. Tuy nhiên nó sẽ mang giá trị `undifined` cho tới khi phép gán được thực thi.
 
-In both examples above `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+Trong hai ví dụ trên, `alert` được thực thi mà không gặp bất kì lỗi nào, bởi vì biến `pharse` đã tồn tại. Nhưng giá trị của nó thì chưa có, vậy nên `undifined` được hiện ra.
 
-## Summary
+## Tóm tắt
 
-There are two main differences of `var` compared to `let/const`:
+Có hai sự khác biệt chính giữa `var` và `let/const` :
 
-1. `var` variables have no block scope, they are visible minimum at the function level.
-2. `var` declarations are processed at function start (script start for globals).
+1. Các biến `var` không bị giới hạn bởi các khối lệnh.
+2. Khai báo với `var` được xử lý ngay khi hàm (hoặc script) bắt đầu.
 
-There's one more minor difference related to the global object, we'll cover that in the next chapter.
+Có một chút xíu sự khác biệt nho nhỏ liên quan tới global object, ta sẽ tìm hiểu ở chương sau.
 
-These differences make `var` worse than `let` most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+Thông thường với các sự khác biệt như vậy đã khiến `var` tệ hơn `let`. Việc các biến chỉ tồn tại trong các khối lệnh thực sự giúp ích rất nhiều. Đây cũng chính là lý do việc sử dụng `let` (và `const`) để khai báo biến trở nên thông dụng.
