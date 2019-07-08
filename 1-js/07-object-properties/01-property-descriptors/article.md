@@ -122,8 +122,13 @@ user.name = "Mạnh"; // Lỗi: Không thể gán cho thuộc tính chỉ đọc
 
 Lúc này không thể thay đổi giá trị của thuộc tính nữa trừ khi đặt lại `writable` thành `true` bằng `defineProperty` một lần nữa.
 
+<<<<<<< HEAD
 ```smart header="Lỗi chỉ xuất hiện trong chế độ nghiêm ngặt"
 Nếu không sử dụng chế độ nghiệm ngặt (`"use strict"`) sẽ không có lỗi xảy ra khi thay đổi giá trị của thuộc tính chỉ đọc. Nhưng hành động này vẫn không thể thực hiện thành công.
+=======
+```smart header="Errors appear only in strict mode"
+In the non-strict mode, no errors occur when writing to read-only properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
+>>>>>>> 5e9eca374f644ea85c7d548bbe344fd30e5fb89d
 ```
 
 Cũng như trên, nhưng đây là trường hợp thuộc tính không tồn tại:
