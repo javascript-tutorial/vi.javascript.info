@@ -1,6 +1,6 @@
-That's because the child constructor must call `super()`.
+Bởi phương thức constructor con phải gọi `super()`.
 
-Here's the corrected code:
+Đây là mã đúng:
 
 ```js run
 class Animal {
@@ -21,7 +21,7 @@ class Rabbit extends Animal {
 }
 
 *!*
-let rabbit = new Rabbit("White Rabbit"); // ok now
+let rabbit = new Rabbit("Thỏ trắng"); // ok
 */!*
-alert(rabbit.name); // White Rabbit
+alert(rabbit.name); // Thỏ trắng
 ```

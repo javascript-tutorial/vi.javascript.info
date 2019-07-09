@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Class extends Object?
+# Class thừa kế Object?
 
-As we know, all objects normally inherit from `Object.prototype` and get access to "generic" object methods like `hasOwnProperty` etc.
+Như chúng ta biết, tất cả đối tượng thừa kế từ `Object.prototype` và truy cập được các phương thức chung như `hasOwnProperty`...
 
-For instance:
+Ví dụ:
 
 ```js run
 class Rabbit {
@@ -18,17 +18,17 @@ class Rabbit {
 let rabbit = new Rabbit("Rab");
 
 *!*
-// hasOwnProperty method is from Object.prototype
+// hasOwnProperty thừa kế từ from Object.prototype
 // rabbit.__proto__ === Object.prototype
 alert( rabbit.hasOwnProperty('name') ); // true
 */!*
 ```
 
-But if we spell it out explicitly like `"class Rabbit extends Object"`, then the result would be different from a simple `"class Rabbit"`?
+Nhưng nếu thực thi sự thừa kế trên bằng cách viết `"class Rabbit extends Object"`, thì kết quả khác gì so với `"class Rabbit"`?
 
-What's the difference?
+Sự khác biệt là gì?
 
-Here's an example of such code (it doesn't work -- why? fix it?):
+Đây là ví dụ đoạn mã viết theo cách trên (nếu nó không làm việc, hãy cho biết vì sao? Sửa lại?):
 
 ```js
 class Rabbit extends Object {
