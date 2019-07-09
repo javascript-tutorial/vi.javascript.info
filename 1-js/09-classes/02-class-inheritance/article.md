@@ -1,7 +1,7 @@
 
-# Class inheritance
+# Thừa kế một class
 
-Let's say we have two classes.
+Giả sử chúng ta có hai class:
 
 `Animal`:
 
@@ -13,11 +13,11 @@ class Animal {
   }
   run(speed) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} chạy với tốc độ ${this.speed}.`);
   }
   stop() {
     this.speed = 0;
-    alert(`${this.name} stopped.`);
+    alert(`${this.name} đã dừng lại.`);
   }
 }
 
@@ -27,7 +27,7 @@ let animal = new Animal("My animal");
 ![](rabbit-animal-independent-animal.png)
 
 
-...And `Rabbit`:
+...Và `Rabbit`:
 
 ```js
 class Rabbit {
@@ -35,7 +35,7 @@ class Rabbit {
     this.name = name;
   }
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} ẩn nấp!`);
   }
 }
 
@@ -45,13 +45,13 @@ let rabbit = new Rabbit("My rabbit");
 ![](rabbit-animal-independent-rabbit.png)
 
 
-Right now they are fully independent.
+Hiện tại chúng hoàn toàn đôc lập với nhau.
 
-But we'd want `Rabbit` to extend `Animal`. In other words, rabbits should be based on animals, have access to methods of `Animal` and extend them with its own methods.
+Nhưng chúng ta muốn `Rabbit` thừa kế từ `Animal`. Nói cách khác, các đối tượng rabbit thừa kế từ các đối tượng animal, có thể truy cập các phương thức của `Animal` cũng như có thể có riêng các phương thức của nó.
 
-To inherit from another class, we should specify `"extends"` and the parent class before the braces `{..}`.
+Để thừa kế từ một class, ta đặt `"extends"` sau đó là tên của class đó đằng trước `{..}`.
 
-Here `Rabbit` inherits from `Animal`:
+Ở đây `Rabbit` (class con) thừa kế từ class `Animal` (class cha):
 
 ```js run
 class Animal {
@@ -61,43 +61,43 @@ class Animal {
   }
   run(speed) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} chạy với tốc độ ${this.speed}.`);
   }
   stop() {
     this.speed = 0;
-    alert(`${this.name} stopped.`);
+    alert(`${this.name} đã dừng.`);
   }
 }
 
-// Inherit from Animal by specifying "extends Animal"
+// Rabbit thừa kế từ Animal
 *!*
 class Rabbit extends Animal {
 */!*
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} ẩn nấp!`);
   }
 }
 
 let rabbit = new Rabbit("White Rabbit");
 
-rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.hide(); // White Rabbit hides!
+rabbit.run(5); // White Rabbit chạy với tốc độ 5.
+rabbit.hide(); // White Rabbit ẩn nấp!
 ```
 
-Now the `Rabbit` code became a bit shorter, as it uses `Animal` constructor by default, and it also can `run`, as animals do.
+Mã của class `Rabbit` trở nên ngắn hơn, vì mặc định nó sử dụng constructor của `Animal`, và cũng thừa kế được phương thức `run` từ `Animal`.
 
-Internally, `extends` keyword adds `[[Prototype]]` reference from `Rabbit.prototype` to `Animal.prototype`:
+Sâu bên trong, từ khóa `extends` thêm `[[Prototype]]` cho `Rabbit.prototype` để nó tham chiếu đến `Animal.prototype`:
 
 ![](animal-rabbit-extends.png)
 
-So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+Cho nên, nếu một phương thức không tìm thấy trong `Rabbit.prototype`, JavaScript lấy nó từ `Animal.prototype`.
 
-As we can recall from the chapter <info:native-prototypes>, JavaScript uses the same prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
+Như đã học ở bài <info:native-prototypes>, JavaScript cũng sử dụng cách này cho các đối tượng có sẵn. Ví dụ `Date.prototype.[[Prototype]]` là `Object.prototype`, nên các đối tượng date cũng có các phương thức chung như mọi đối tượng có.
 
-````smart header="Any expression is allowed after `extends`"
-Class syntax allows to specify not just a class, but any expression after `extends`.
+````smart header="Sau `extends` có thể là một biểu thức trả về một class"
+Cú pháp thừa kế class cho phép một biểu thức sau `extends` là biểu thức trả về một class.
 
-For instance, a function call that generates the parent class:
+Ví dụ, biểu thức là một lời gọi hàm trả về class cha:
 
 ```js run
 function f(phrase) {
@@ -107,39 +107,39 @@ function f(phrase) {
 }
 
 *!*
-class User extends f("Hello") {}
+class User extends f("Xin chào") {}
 */!*
 
-new User().sayHi(); // Hello
+new User().sayHi(); // Xin chào
 ```
-Here `class User` inherits from the result of `f("Hello")`.
+Ở đây `class User` thừa kế từ class trả về của `f("Hello")`.
 
-That may be useful for advanced programming patterns when we use functions to generate classes depending on many conditions and can inherit from them.
+Nó hữu ích trong các mô hình lập trình nâng cao khi chúng ta sử dụng các hàm tạo ra các class dựa theo nhiều điều kiện và có thể thừa kế từ chúng.
 ````
 
-## Overriding a method
+## Ghi đè phương thức
 
-Now let's move forward and override a method. As of now, `Rabbit` inherits the `stop` method that sets `this.speed = 0` from `Animal`.
+Giờ cùng tìm hiểu về ghi đè phương thức. Đến lúc này, `Rabbit` thừa kế phương thức `stop` từ `Animal`.
 
-If we specify our own `stop` in `Rabbit`, then it will be used instead:
+Nếu ta cũng thêm phương thức `stop` riêng trong `Rabbit`, nó sẽ được dùng chứ không phải `stop` của class cha. Ta nói phương thức của class con ghi đè phương thức của class cha cùng tên.
 
 ```js
 class Rabbit extends Animal {
   stop() {
-    // ...this will be used for rabbit.stop()
+    // ...được dùng cho rabbit.stop()
   }
 }
 ```
 
 
-...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+...Nhưng thường chúng ta không muốn thay thế toàn bộ phương thức của class cha, mà muốn dựa vào phương thức này rồi tinh chỉnh cũng như bổ sung thêm một số tính năng khác. Chúng ta làm việc này trong phương thức của class con nhưng gọi phương thức của class cha trước hoặc sau khi thực hiện.
 
-Classes provide `"super"` keyword for that.
+Các class cung cấp từ khóa `"super"` để làm việc này.
 
-- `super.method(...)` to call a parent method.
-- `super(...)` to call a parent constructor (inside our constructor only).
+- `super.method(...)` gọi phương thức `method` của class cha.
+- `super(...)` gọi constructor của class cha (trong constructor của class con).
 
-For instance, let our rabbit autohide when stopped:
+Ví dụ, làm cho rabbit tự động ẩn nấp sau khi đã dừng:
 
 ```js run
 class Animal {
@@ -151,69 +151,69 @@ class Animal {
 
   run(speed) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} chạy với tốc độ ${this.speed}.`);
   }
 
   stop() {
     this.speed = 0;
-    alert(`${this.name} stopped.`);
+    alert(`${this.name} đã dừng.`);
   }
 
 }
 
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} ẩn nấp!`);
   }
 
 *!*
   stop() {
-    super.stop(); // call parent stop
-    this.hide(); // and then hide
+    super.stop(); // gọi phương thức stop của class cha
+    this.hide(); // và sau đó gọi hide của class con
   }
 */!*
 }
 
-let rabbit = new Rabbit("White Rabbit");
+let rabbit = new Rabbit("Thỏ trắng");
 
-rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.stop(); // White Rabbit stopped. White rabbit hides!
+rabbit.run(5); // Thỏ trắng chạy với tốc độ 5.
+rabbit.stop(); // Thỏ trắng đã dừng. Thỏ trắng ẩn nấp!
 ```
 
-Now `Rabbit` has the `stop` method that calls the parent `super.stop()` in the process.
+Giờ `Rabbit` có riêng `stop` và gọi `super.stop()` trong quá trình xử lý.
 
-````smart header="Arrow functions have no `super`"
-As was mentioned in the chapter <info:arrow-functions>, arrow functions do not have `super`.
+````smart header="Hàm mũi tên không có `super`"
+Như đã nói trong bài <info:arrow-functions>, hàm mũi tên không có `super`.
 
-If accessed, it's taken from the outer function. For instance:
+Nếu truy cập, nó được lấy từ hàm ngoài. Ví dụ:
 ```js
 class Rabbit extends Animal {
   stop() {
-    setTimeout(() => super.stop(), 1000); // call parent stop after 1sec
+    setTimeout(() => super.stop(), 1000); // gọi phương stop của cha sau 1 giây
   }
 }
 ```
 
-The `super` in the arrow function is the same as in `stop()`, so it works as intended. If we specified a "regular" function here, there would be an error:
+`super` trong hàm mũi tên là `super` trong `stop()`. Nếu dùng hàm thông thường, sẽ có lối:
 
 ```js
-// Unexpected super
+// Sai super
 setTimeout(function() { super.stop() }, 1000);
 ```
 ````
 
 
-## Overriding constructor
+## Ghi đè constructor
 
-With constructors it gets a little bit tricky.
+Với constructor điều kiện khắt khe hơn.
 
-Till now, `Rabbit` did not have its own `constructor`.
+Đến giờ, `Rabbit` chưa có `constructor` riêng.
 
-According to the [specification](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation), if a class extends another class and has no `constructor`, then the following "empty" `constructor` is generated:
+Theo đặc tả [(specification)](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation), nếu một class thừa kế từ một class khác và không có `constructor` riêng, thì JavaScript tự động tạo `constructor` trống cho nó như sau:
 
 ```js
 class Rabbit extends Animal {
-  // generated for extending classes without own constructors
+  // tự động tạo constructor trống cho Rabbit như sau
 *!*
   constructor(...args) {
     super(...args);
@@ -222,9 +222,9 @@ class Rabbit extends Animal {
 }
 ```
 
-As we can see, it basically calls the parent `constructor` passing it all the arguments. That happens if we don't write a constructor of our own.
+Như ta thấy, nó cơ bản sẽ gọi `constructor` cha và truyền mọi đối số cho `constructor` cha. Chuyện này chỉ sảy ra nếu ta không viết `constructor` cho class con.
 
-Now let's add a custom constructor to `Rabbit`. It will specify the `earLength` in addition to `name`:
+Giờ ta thêm `constructor` riêng cho `Rabbit`. Nó cài đặt thêm thuộc tính `earLength` cùng với thuộc tính `name`:
 
 ```js run
 class Animal {
@@ -249,29 +249,29 @@ class Rabbit extends Animal {
 }
 
 *!*
-// Doesn't work!
-let rabbit = new Rabbit("White Rabbit", 10); // Error: this is not defined.
+// Không làm việc!
+let rabbit = new Rabbit("Thỏ trắng", 10); // Lỗi: this chưa được định nghĩa.
 */!*
 ```
 
-Whoops! We've got an error. Now we can't create rabbits. What went wrong?
+Chúng ta có một lỗi và không thể tạo đối tượng rabbit. Vậy nó sai chỗ nào?
 
-The short answer is: constructors in inheriting classes must call `super(...)`, and (!) do it before using `this`.
+Câu trả lời ngắn gọn như sau: `constructor` của class con bắt buộc phải gọi `constructor` của class cha: `super(...)`, và phải làm việc này mới có thể sử dụng `this`.
 
-...But why? What's going on here? Indeed, the requirement seems strange.
+...Nhưng tại sao? Chuyện gì xảy ra ở đây? Yêu cầu này có vẻ kỳ lạ.
 
-Of course, there's an explanation. Let's get into details, so you'd really understand what's going on.
+Tất nhiên, có một lời giải thích. Hãy đi sâu vào chi tiết để bạn có thể hiểu chuyện gì đang diễn ra.
 
-In JavaScript, there's a distinction between a "constructor function of an inheriting class" and all others. In an inheriting class, the corresponding constructor function is labelled with a special internal property `[[ConstructorKind]]:"derived"`.
+Trong JavaScript, có sự khác biệt giữa hàm `constructor` của một class con và các hàm `constructor` khác. Trong class con, hàm `constructor` được "đánh dấu" nhờ một thuộc tính đặc biệt `[[ConstructorKind]]:"derived"`.
 
-The difference is:
+Sự khác biêt là:
 
-- When a normal constructor runs, it creates an empty object as `this` and continues with it.
-- But when a derived constructor runs, it doesn't do it. It expects the parent constructor to do this job.
+- Khi một hàm `constructor` bình thường chạy, nó tạo một đối tượng trống và gán cho `this` và tiếp tục thay đổi đối tượng này thông qua `this`.
+- Nhưng khi hàm `constructor` của class con chạy, nó không tạo ra đối tượng nào cả. Thay vào đó nó trông chờ `constructor` của class cha làm việc này cho nó.
 
-So if we're making a constructor of our own, then we must call `super`, because otherwise the object with `this` reference to it won't be created. And we'll get an error.
+Cho nên nếu chúng ta tạo ra `constructor` riêng cho class con, chúng ta buộc phải gọi `super`, bởi nếu không gọi, đối tượng mà `this` tham chiếu đến sẽ không được tạo. Và chúng ta có lỗi như trên.
 
-For `Rabbit` to work, we need to call `super()` before using `this`, like here:
+Để `Rabbit` làm việc, chúng ta cần gọi `super()` trước khi dùng `this`, như sau:
 
 ```js run
 class Animal {
@@ -297,33 +297,33 @@ class Rabbit extends Animal {
 }
 
 *!*
-// now fine
-let rabbit = new Rabbit("White Rabbit", 10);
-alert(rabbit.name); // White Rabbit
+// chạy tốt
+let rabbit = new Rabbit("Thỏ trắng", 10);
+alert(rabbit.name); // Thỏ trắng
 alert(rabbit.earLength); // 10
 */!*
 ```
 
 
-## Super: internals, [[HomeObject]]
+## Tìm hiểu sâu về super, [[HomeObject]]
 
-Let's get a little deeper under the hood of `super`. We'll see some interesting things by the way.
+Hãy tìm hiểu sâu hơn về cách làm việc của `super`. Chúng ta sẽ thấy vài điều thú vị.
 
-First to say, from all that we've learned till now, it's impossible for `super` to work at all!
+Trước tiên cần nói rằng, với tất cả những gì ta đã được học, ta không thể hiểu cách làm việc của `super`!
 
-Yeah, indeed, let's ask ourselves, how it could technically work? When an object method runs, it gets the current object as `this`. If we call `super.method()` then, it needs to retrieve the `method` from the prototype of the current object.
+Vâng, bạn hãy tự hỏi làm cách nào để nó có thể làm việc về mặt kỹ thuật? Khi đối tượng chạy các phương thức, các phương thức này lấy đối tượng đó làm `this`. Sau đó nếu chúng ta gọi `super.method()`, nó cần lấy `method` từ nguyên mẫu của đối tượng hiện tại.
 
-The task may seem simple, but it isn't. The engine knows the current object `this`, so it could get the parent `method` as `this.__proto__.method`. Unfortunately, such a "naive" solution won't work.
+Chuyện này tưởng như đơn giản, nhưng không. Bạn có thể nghĩ đơn giản: JavaScript engine biết đối tượng hiện tại như `this`, nên nó lấy phương thức cha `method` như `this.__proto__.method`. Không may, giải pháp này không làm việc.
 
-Let's demonstrate the problem. Without classes, using plain objects for the sake of simplicity.
+Cùng làm rõ vấn đề này bằng cách chỉ dùng đối tượng đơn thuần.
 
-In the example below, `rabbit.__proto__ = animal`. Now let's try: in `rabbit.eat()` we'll call `animal.eat()`, using `this.__proto__`:
+Trong ví dụ dưới, `rabbit.__proto__ = animal`, trong `rabbit.eat()` gọi `animal.eat()`, bằng `this.__proto__`:
 
 ```js run
 let animal = {
   name: "Animal",
   eat() {
-    alert(`${this.name} eats.`);
+    alert(`${this.name} ăn.`);
   }
 };
 
@@ -332,33 +332,33 @@ let rabbit = {
   name: "Rabbit",
   eat() {
 *!*
-    // that's how super.eat() could presumably work
+    // đây có thể là cách super.eat() hoạt dộng
     this.__proto__.eat.call(this); // (*)
 */!*
   }
 };
 
-rabbit.eat(); // Rabbit eats.
+rabbit.eat(); // Rabbit ăn.
 ```
 
-At the line `(*)` we take `eat` from the prototype (`animal`) and call it in the context of the current object. Please note that `.call(this)` is important here, because a simple `this.__proto__.eat()` would execute parent `eat` in the context of the prototype, not the current object.
+Tại dòng `(*)` chúng ta lấy `eat` từ nguyên mẫu (`animal`) và truyền đối tượng hiện tại làm `this`. Chú ý phải có `.call(this)` nếu không `this.__proto__.eat()` chạy `eat` với `this` là nguyên mẫu (`this.__proto__`), chứ không phải đối tượng hiện tại.
 
-And in the code above it actually works as intended: we have the correct `alert`.
+Và đoạn mã hoạt động như dự định: chúng ta có thông báo `alert` chính xác.
 
-Now let's add one more object to the chain. We'll see how things break:
+Giờ thêm một hoặc nhiều đối tượng vào chuỗi thừa kế và ghi đè phương thức theo cách tương tự. Chúng ta sẽ thấy vấn đề:
 
 ```js run
 let animal = {
   name: "Animal",
   eat() {
-    alert(`${this.name} eats.`);
+    alert(`${this.name} ăn.`);
   }
 };
 
 let rabbit = {
   __proto__: animal,
   eat() {
-    // ...bounce around rabbit-style and call parent (animal) method
+    // ...gọi phương thức cha (animal.eat) với this là rabbit
     this.__proto__.eat.call(this); // (*)
   }
 };
@@ -366,72 +366,72 @@ let rabbit = {
 let longEar = {
   __proto__: rabbit,
   eat() {
-    // ...do something with long ears and call parent (rabbit) method
+    // ...làm giống hệt như rabbit.eat
     this.__proto__.eat.call(this); // (**)
   }
 };
 
 *!*
-longEar.eat(); // Error: Maximum call stack size exceeded
+longEar.eat(); // Lỗi: Vượt qua số stack tối đa
 */!*
 ```
 
-The code doesn't work anymore! We can see the error trying to call `longEar.eat()`.
+Đoạn mã không còn làm việc được nữa! Chúng ta thấy lỗi khi gọi `longEar.eat()`.
 
-It may be not that obvious, but if we trace `longEar.eat()` call, then we can see why. In both lines `(*)` and `(**)` the value of `this` is the current object (`longEar`). That's essential: all object methods get the current object as `this`, not a prototype or something.
+Có vẻ không rõ ràng, nhưng nếu lần theo `longEar.eat()`, chúng ta sẽ hiểu tại sao. Trong hai dòng `(*)` và `(**)` giá trị của `this` là đối tượng hiện tại (`longEar`). Điều này rất cơ bản: tất cả phương thức lấy đối tượng trước dấu chấm làm `this`, không phải nguyên mẫu hay bất cứ thứ gì.
 
-So, in both lines `(*)` and `(**)` the value of `this.__proto__` is exactly the same: `rabbit`. They both call `rabbit.eat` without going up the chain in the endless loop.
+Cho nên trong hai dòng `(*)` và `(**)` giá trị của `this.__proto__` đều là: `rabbit`. Nên `rabbit.eat` gọi đi gọi lại chính nó (đệ quy) mãi mãi.
 
-Here's the picture of what happens:
+Đây là hình ảnh chuyện gì đã xảy ra:
 
 ![](this-super-loop.png)
 
-1. Inside `longEar.eat()`, the line `(**)` calls `rabbit.eat` providing it with `this=longEar`.
+1. Tron `longEar.eat()`, dòng `(**)` gọi `rabbit.eat` cung cấp `this=longEar`.
     ```js
-    // inside longEar.eat() we have this = longEar
+    // bên trong longEar.eat() ta có this = longEar
     this.__proto__.eat.call(this) // (**)
-    // becomes
+    // trở thành
     longEar.__proto__.eat.call(this)
-    // that is
+    // cũng chính là
     rabbit.eat.call(this);
     ```
-2. Then in the line `(*)` of `rabbit.eat`, we'd like to pass the call even higher in the chain, but `this=longEar`, so `this.__proto__.eat` is again `rabbit.eat`!
+2. Sau đó trong dòng `(*)` của `rabbit.eat`, chúng ta muốn chuyển lời gọi cho phương thức của đối tượng cao hơn trong chuỗi nguyên mẫu, nhưng `this=longEar`, nên `this.__proto__.eat` lại là `rabbit.eat`!
 
     ```js
-    // inside rabbit.eat() we also have this = longEar
+    // bên trong rabbit.eat() ta vẫn có this = longEar
     this.__proto__.eat.call(this) // (*)
-    // becomes
+    // trở thành
     longEar.__proto__.eat.call(this)
-    // or (again)
+    // hoặc (một lần nữa)
     rabbit.eat.call(this);
     ```
 
-3. ...So `rabbit.eat` calls itself in the endless loop, because it can't ascend any further.
+3. ...Nên `rabbit.eat` gọi chính nó mãi mãi.
 
-The problem can't be solved by using `this` alone.
+Vấn đề không thể được giải quyết nếu chỉ sử dụng `this`.
 
 ### `[[HomeObject]]`
 
-To provide the solution, JavaScript adds one more special internal property for functions: `[[HomeObject]]`.
+Để cung cấp giải pháp, JavaScript bổ sung thêm một thuộc tính đặc biệt cho các hàm: `[[HomeObject]]`.
 
-When a function is specified as a class or object method, its `[[HomeObject]]` property becomes that object.
+Khi một hàm đóng vai trò như phương thức của class hoặc phương thức của một đối tượng, thuộc tính `[[HomeObject]]` tham chiếu tới class/đối tượng này.
 
-Then `super` uses it to resolve the parent prototype and its methods.
+Sau đó `super` sử dụng `[[HomeObject]]` để tìm nguyên mẫu và lấy các phương thức cần thiết.
 
-Let's see how it works, first with plain objects:
+Cùng xem cách nó làm việc, qua một ví dụ sử chỉ sử dụng đối tượng:
 
 ```js run
 let animal = {
   name: "Animal",
-  eat() {         // animal.eat.[[HomeObject]] == animal
-    alert(`${this.name} eats.`);
+  eat() {   // animal.eat.[[HomeObject]] == animal
+    alert(`${this.name} ăn.`);
   }
 };
 
 let rabbit = {
   __proto__: animal,
   name: "Rabbit",
-  eat() {         // rabbit.eat.[[HomeObject]] == rabbit
+  eat() {   // rabbit.eat.[[HomeObject]] == rabbit
     super.eat();
   }
 };
@@ -439,33 +439,33 @@ let rabbit = {
 let longEar = {
   __proto__: rabbit,
   name: "Long Ear",
-  eat() {         // longEar.eat.[[HomeObject]] == longEar
+  eat() {   // longEar.eat.[[HomeObject]] == longEar
     super.eat();
   }
 };
 
 *!*
-// works correctly
-longEar.eat();  // Long Ear eats.
+// Làm việc đúng
+longEar.eat();  // Long Ear ăn.
 */!*
 ```
 
-It works as intended, due to `[[HomeObject]]` mechanics. A method, such as `longEar.eat`, knows its `[[HomeObject]]` and takes the parent method from its prototype. Without any use of `this`.
+Nó làm việc như chủ định dựa vào `[[HomeObject]]`. Một phương thức, như `longEar.eat`, biết `[[HomeObject]]` của nó và lấy phương thức cha từ nguyên mẫu của `[[HomeObject]]`. Không dùng `this`.
 
-### Methods are not "free"
+### Các phương thức không "tự do"
 
-As we've known before, generally functions are "free", not bound to objects in JavaScript. So they can be copied between objects and called with another `this`.
+Như ta đã biết, các hàm thông thường là "tự do", không bị ràng buộc vào đối tượng nào trong JavaScript. Nên chúng ta có thể sao chép chúng cho nhiều đối tượng và gọi với một `this` khác.
 
-The very existance of `[[HomeObject]]` violates that principle, because methods remember their objects. `[[HomeObject]]` can't be changed, so this bond is forever.
+Sự tồn tại của `[[HomeObject]]` vi phạm nguyên tắc này, bởi phương thức luôn nhớ đối tượng chứa nó. `[[HomeObject]]` không thể thay đổi, nên ràng buộc này tồn tại mãi mãi.
 
-The only place in the language where `[[HomeObject]]` is used -- is `super`. So, if a method does not use `super`, then we can still consider it free and copy between objects. But with `super` things may go wrong.
+May mắn `[[HomeObject]]` chỉ được dùng với `super`. Nên nếu phương thức không dùng `super`, chúng ta vẫn có thể xem nó là "tự do".
 
-Here's the demo of a wrong `super` call:
+Đây là ví dụ một phương thức sử dụng `super` sẽ hoạt động sai khi sao chép cho đối tượng khác:
 
 ```js run
 let animal = {
   sayHi() {
-    console.log(`I'm an animal`);
+    alert("Tôi là động vật");
   }
 };
 
@@ -478,7 +478,7 @@ let rabbit = {
 
 let plant = {
   sayHi() {
-    console.log("I'm a plant");
+    alert("Tôi là thực vật");
   }
 };
 
@@ -490,30 +490,30 @@ let tree = {
 };
 
 *!*
-tree.sayHi();  // I'm an animal (?!?)
+tree.sayHi();  // Tôi là động vật (?!?)
 */!*
 ```
 
-A call to `tree.sayHi()` shows "I'm an animal". Definitevely wrong.
+Gọi `tree.sayHi()` sẽ hiển thị "Tôi là động vật". Đây là kết quả sai.
 
-The reason is simple:
-- In the line `(*)`, the method `tree.sayHi` was copied from `rabbit`. Maybe we just wanted to avoid code duplication?
-- So its `[[HomeObject]]` is `rabbit`, as it was created in `rabbit`. There's no way to change `[[HomeObject]]`.
-- The code of `tree.sayHi()` has `super.sayHi()` inside. It goes up from `rabbit` and takes the method from `animal`.
+Lý do đơn giản:
+- Trong dòng `(*)`, phương thức `tree.sayHi` được sao chép từ `rabbit.sayHi` (thực ra chúng là một).
+- Cho nên `[[HomeObject]]` là `rabbit`, vì nó được tạo từ đầu trong `rabbit`. Không có cách nào thay đổi `[[HomeObject]]`.
+- Mã của `tree.sayHi()` có `super.sayHi()` bên trong. Nó tìm tới `rabbit` và lấy phương thức từ `animal`.
 
 ![](super-homeobject-wrong.png)
 
-### Methods, not function properties
+### Phương thức, không phải thuộc tính hàm
 
-`[[HomeObject]]` is defined for methods both in classes and in plain objects. But for objects, methods must be specified exactly as `method()`, not as `"method: function()"`.
+`[[HomeObject]]` được định nghĩa cho các phương thức trong cả đối tượng lần trong class. Nhưng với các đối tượng, phương thức này buộc phải khai báo theo kiểu phương thức `method()`, không khai báo theo kiểu thuộc tính `"method: function()"`.
 
-The difference may be non-essential for us, but it's important for JavaScript.
+Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó rất quan trọng với JavaScript.
 
-In the example below a non-method syntax is used for comparison. `[[HomeObject]]` property is not set and the inheritance doesn't work:
+Ở ví dụ sau. phương thức được khai báo theo kiểu thuộc tính. Thuộc tính `[[HomeObject]]` không được cài đặt và `super` không hoạt động:
 
 ```js run
 let animal = {
-  eat: function() { // should be the short syntax: eat() {...}
+  eat: function() { // phải phải dùng cú pháp: eat() {...}
     // ...
   }
 };
@@ -526,21 +526,21 @@ let rabbit = {
 };
 
 *!*
-rabbit.eat();  // Error calling super (because there's no [[HomeObject]])
+rabbit.eat();  // Lỗi khi gọi super (vì không có [[HomeObject]])
 */!*
 ```
 
-## Summary
+## Tóm tắt
 
-1. To extend a class: `class Child extends Parent`:
-    - That means `Child.prototype.__proto__` will be `Parent.prototype`, so methods are inherited.
-2. When overriding a constructor:
-    - We must call parent constructor as `super()` in `Child` constructor before using `this`.
-3. When overriding another method:
-    - We can use `super.method()` in a `Child` method to call `Parent` method.
-4. Internals:
-    - Methods remember their class/object in the internal `[[HomeObject]]` property. That's how `super` resolves parent methods.
-    - So it's not safe to copy a method with `super` from one object to another.
+1. Để thừa kế một class: `class Child extends Parent`:
+    - Có nghĩa rằng `Child.prototype.__proto__` sẽ là `Parent.prototype`.
+2. Khi ghi đè constructor:
+    - Chúng ta phải gọi constructor cha `super()` trong constructor của `Child` trước khi sử dụng `this`.
+3. Khi ghi đè phương thức khác:
+    - Chúng ta có thể sử dụng `super.method()` trong phương thức của `Child` để gọi phương thức của `Parent`.
+4. Sâu bên trong:
+    - Phương thức nhớ class/đối tượng chứa nó trong thuộc tính `[[HomeObject]]`. Nó giúp `super` tìm thấy các phương thức cha.
+    - Không an toàn khi sao chép các phương thức có `super` từ đối tượng này tới đối tượng khác.
 
-Also:
-- Arrow functions don't have own `this` or `super`, so they transparently fit into the surrounding context.
+Cũng cần biết:
+- Các hàm mũi tên không có `this` và `super`.

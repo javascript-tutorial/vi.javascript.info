@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Extended clock
+# Tạo lớp thừa kế từ Clock
 
-We've got a `Clock` class. As of now, it prints the time every second.
+Chúng ta có class `Clock` trong file `clock.js`. Lúc này, nó in ra thời gian sau mỗi giây.
 
 
 [js src="source.view/clock.js"]
 
-Create a new class `ExtendedClock` that inherits from `Clock` and adds the parameter `precision` -- the number of `ms` between "ticks". Should be `1000` (1 second) by default.
+Tạo class `ExtendedClock` thừa kế từ `Clock` thêm tham số `precision` -- là số `ms` giữa hai lần in thời gian. Mặc định là `1000` (1 giây).
 
-- Your code should be in the file `extended-clock.js`
-- Don't modify the original `clock.js`. Extend it.
+- Mã của bạn nên đặt trong file `extended-clock.js`
+- Đừng sửa file `clock.js`. Chỉ thừa kế nó.

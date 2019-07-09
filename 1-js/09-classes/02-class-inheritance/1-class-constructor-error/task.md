@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Error creating an instance
+# Lỗi khi tạo đối tượng
 
-Here's the code with `Rabbit` extending `Animal`.
+Đây là mã khai báo `Rabbit` thừa kế từ `Animal`.
 
-Unfortunately, `Rabbit` objects can't be created. What's wrong? Fix it.
+Không may, không thể tạo đối tượng từ `Rabbit`. Cho biết đã sai gì? Sửa lại cho đúng?
 ```js run
 class Animal {
 
@@ -24,7 +24,7 @@ class Rabbit extends Animal {
 }
 
 *!*
-let rabbit = new Rabbit("White Rabbit"); // Error: this is not defined
+let rabbit = new Rabbit("White Rabbit"); // Lỗi
 */!*
 alert(rabbit.name);
 ```

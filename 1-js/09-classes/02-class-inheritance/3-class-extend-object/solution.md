@@ -1,14 +1,14 @@
-First, let's see why the latter code doesn't work.
+Trước tiên, hãy xem tại sao đoạn mã không hoạt động.
 
-The reason becomes obvious if we try to run it. An inheriting class constructor must call `super()`. Otherwise `"this"` won't be "defined".
+Lý do sẽ rõ ràng nếu ta thử chạy nó. Constructor của class con phải gọ `super()`. Nếu không `"this"` không được "định nghĩa".
 
-So here's the fix:
+Đây là mã đã sửa:
 
 ```js run
 class Rabbit extends Object {
   constructor(name) {
 *!*
-    super(); // need to call the parent constructor when inheriting
+    super(); // cần gọi constructor cha để thừa kế
 */!*
     this.name = name;
   }
@@ -19,16 +19,16 @@ let rabbit = new Rabbit("Rab");
 alert( rabbit.hasOwnProperty('name') ); // true
 ```
 
-But that's not all yet.
+Nhưng đó chưa phải là tất cả.
 
-Even after the fix, there's still important difference in `"class Rabbit extends Object"` versus `class Rabbit`.
+Thậm chí sau khi sửa, vẫn có một điểm khác biệt quan trọng giữa `"class Rabbit extends Object"` và `class Rabbit`.
 
-As we know, the "extends" syntax sets up two prototypes:
+Như chúng ta đã biết, cú pháp "extends" cài đặt hai nguyên mẫu:
 
-1. Between `"prototype"` of the constructor functions (for methods).
-2. Between the constructor functions itself (for static methods).
+1. Giữa `"prototype"` của các hàm constructor (đề thừa kế các phương thức).
+2. Giữa chính các hàm constructor (đề thừa kế phương thức tĩnh).
 
-In our case, for `class Rabbit extends Object` it means:
+Trong trường hợp của chúng ta, `class Rabbit extends Object` nghĩa là:
 
 ```js run
 class Rabbit extends Object {}
@@ -37,45 +37,45 @@ alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) true
 ```
 
-So `Rabbit` now provides access to static methods of `Object` via `Rabbit`, like this:
+Nên `Rabbit` có khả năng truy cập tới các phương thức tĩnh của `Object` thông qua `Rabbit`, như sau:
 
 ```js run
 class Rabbit extends Object {}
 
 *!*
-// normally we call Object.getOwnPropertyNames
+// có thể gọi getOwnPropertyNames qua Rabbit: Rabbit.getOwnPropertyNames
 alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // a,b
 */!*
 ```
 
-But if we don't have `extends Object`, then `Rabbit.__proto__` is not set to `Object`.
+Nhưng nếu không viết `extends Object`, thì `Rabbit.__proto__` không được đặt thành `Object`.
 
-Here's the demo:
+Đây là minh họa:
 
 ```js run
 class Rabbit {}
 
 alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) false (!)
-alert( Rabbit.__proto__ === Function.prototype ); // as any function by default
+alert( Rabbit.__proto__ === Function.prototype ); // như mọi hàm khác
 
 *!*
-// error, no such function in Rabbit
-alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Error
+// Lỗi, không có hàm trong Rabbit
+alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Lỗi
 */!*
 ```
 
-So `Rabbit` doesn't provide access to static methods of `Object` in that case.
+Giờ `Rabbit` không thể truy cập tới các phương thức tĩnh của `Object`.
 
-By the way, `Function.prototype` has "generic" function methods, like `call`, `bind` etc. They are ultimately available in both cases, because for the built-in `Object` constructor, `Object.__proto__ === Function.prototype`.
+Nhận tiện cũng nói luôn, `Function.prototype` có các phương thức "chung", như `call`, `bind`... Chúng có sẵn trong cả hai trường hợp, bởi `Object.__proto__ === Function.prototype`.
 
-Here's the picture:
+Đây là hình ảnh minh họa:
 
 ![](rabbit-extends-object.png)
 
-So, to put it short, there are two differences:
+Tóm lại, có hai điểm khác biệt:
 
 | class Rabbit | class Rabbit extends Object  |
 |--------------|------------------------------|
-| --             | needs to call `super()` in constructor |
+| --             | cần gọi `super()` trong constructor |
 | `Rabbit.__proto__ === Function.prototype` | `Rabbit.__proto__ === Object` |
