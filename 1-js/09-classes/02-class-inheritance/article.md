@@ -194,7 +194,7 @@ class Rabbit extends Animal {
 }
 ```
 
-`super` trong hàm mũi tên là `super` trong `stop()`. Nếu dùng hàm thông thường, sẽ có lối:
+`super` trong hàm mũi tên là `super` trong `stop()`. Nếu dùng hàm thông thường, sẽ có lỗi:
 
 ```js
 // Sai super
@@ -386,7 +386,7 @@ Cho nên trong hai dòng `(*)` và `(**)` giá trị của `this.__proto__` đ�
 
 ![](this-super-loop.png)
 
-1. Tron `longEar.eat()`, dòng `(**)` gọi `rabbit.eat` cung cấp `this=longEar`.
+1. Trong `longEar.eat()`, dòng `(**)` gọi `rabbit.eat` cung cấp `this=longEar`.
     ```js
     // bên trong longEar.eat() ta có this = longEar
     this.__proto__.eat.call(this) // (**)
@@ -505,7 +505,7 @@ Lý do đơn giản:
 
 ### Phương thức, không phải thuộc tính hàm
 
-`[[HomeObject]]` được định nghĩa cho các phương thức trong cả đối tượng lần trong class. Nhưng với các đối tượng, phương thức này buộc phải khai báo theo kiểu phương thức `method()`, không khai báo theo kiểu thuộc tính `"method: function()"`.
+`[[HomeObject]]` được định nghĩa cho các phương thức trong cả đối tượng lẫn trong class. Nhưng với các đối tượng, phương thức này buộc phải khai báo theo kiểu phương thức `method()`, không khai báo theo kiểu thuộc tính `"method: function()"`.
 
 Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó rất quan trọng với JavaScript.
 
