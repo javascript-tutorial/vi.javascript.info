@@ -1,9 +1,9 @@
 
-# Static properties and methods
+# Các thuộc tính và phương thức tĩnh
 
-We can also assign a method to the class function, not to its `"prototype"`. Such methods are called *static*.
+Chúng ta có thể thêm các phương thức thẳng vào hàm class, không thêm vào `"prototype"` của hàm. Chúng được gọi là các phương thức tĩnh (static method).
 
-An example:
+Ví dụ:
 
 ```js run
 class User {
@@ -17,7 +17,7 @@ class User {
 User.staticMethod(); // true
 ```
 
-That actually does the same as assigning it as a property:
+Hoặc có thể gán hàm trực tiếp cho phương thức của `User`:
 
 ```js
 class User() { }
@@ -27,11 +27,11 @@ User.staticMethod = function() {
 };
 ```
 
-The value of `this` inside `User.staticMethod()` is the class constructor `User` itself (the "object before dot" rule).
+Giá trị của `this` bên trong `User.staticMethod()` là constructor của class `User` (vẫn theo quy tắc "đối tượng trước dấu chấm").
 
-Usually, static methods are used to implement functions that belong to the class, but not to any particular object of it.
+Các phương thức tĩnh thường được sử dụng để chạy các hàm thuộc về class, không thuộc về một đối tượng cụ thể nào.
 
-For instance, we have `Article` objects and need a function to compare them. The natural choice would be `Article.compare`, like this:
+Ví dụ, chúng ta có các đối tượng `Article` và cần một hàm để so sánh chúng. Lựa chọn tự nhiên là dùng phương thức `Article.compare`, như sau:
 
 ```js run
 class Article {
@@ -47,7 +47,7 @@ class Article {
 */!*
 }
 
-// usage
+// sử dụng
 let articles = [
   new Article("HTML", new Date(2019, 1, 1)),
   new Article("CSS", new Date(2019, 0, 1)),
@@ -61,17 +61,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
-Here `Article.compare` stands "over" the articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+Ở đây `Article.compare` dùng để so sánh hai đối tượng article, muốn vậy nó phải "ở trên" mọi đối tượng article. Nó không thuộc về bất cứ đối tượng nào, mà thuộc về class đại diện cho các đối tượng.
 
-Another example would be a so-called "factory" method. Imagine, we need few ways to create an article:
+Một ví dụ khác là phương thức "factory". Tưởng tượng ta cần tạo nhiều phiên bản của article:
 
-1. Create by given parameters (`title`, `date` etc).
-2. Create an empty article with today's date.
+1. Bằng cách cung cấp các tham số (`title`, `date`...).
+2. Tạo đối tượng trống với `date` hiện tại.
 3. ...
 
-The first way can be implemented by the constructor. And for the second one we can make a static method of the class.
+Cách đầu tiên có thể thực hiện bằng constructor. Cách thứ hai có thể thực hiện bằng cách tạo một phương thức tĩnh.
 
-Like `Article.createTodays()` here:
+Chẳng hạn `Article.createTodays()`:
 
 ```js run
 class Article {
@@ -82,7 +82,7 @@ class Article {
 
 *!*
   static createTodays() {
-    // remember, this = Article
+    // nhớ rằng, this = Article
     return new this("Today's digest", new Date());
   }
 */!*
@@ -93,41 +93,41 @@ let article = Article.createTodays();
 alert( article.title ); // Todays digest
 ```
 
-Now every time we need to create a today's digest, we can call `Article.createTodays()`. Once again, that's not a method of an article, but a method of the whole class.
+Giờ ta có thể tạo đối tượng có tiêu đề "Today's digest" với `date` là ngày hiện tại bằng cách gọi phương thức tính `Article.createTodays()`.
 
-Static methods are also used in database-related classes to search/save/remove entries from the database, like this:
+Các phương thức tĩnh cũng được sử dụng trong các class liên quan đến cơ sở dữ liệu để tìm kiếm/lưu trữ/xóa dữ liệu từ cơ sở dữ liệu,chẳng hạn như:
 
 ```js
-// assuming Article is a special class for managing articles
-// static method to remove the article:
+// giả sử Article là class quản lý các article
+// phương thức tính dùng xóa article
 Article.remove({id: 12345});
 ```
 
-## Static properties
+## Các thuộc tính tĩnh
 
 [recent browser=Chrome]
 
-Static properties are also possible, just like regular class properties:
+Cũng có thể tạo các thuộc tính tĩnh, giống như các thuộc tính class thông thường:
 
 ```js run
 class Article {
-  static publisher = "Ilya Kantor";
+  static publisher = "Phùng Hùng";
 }
 
-alert( Article.publisher ); // Ilya Kantor
+alert( Article.publisher ); // Phùng Hùng
 ```
 
-That is the same as a direct assignment to `Article`:
+Hoặc có thể gán giá trị trực tiếp cho thuộc tính của `Article`:
 
 ```js
-Article.publisher = "Ilya Kantor";
+Article.publisher = "Phùng Hùng";
 ```
 
-## Statics and inheritance
+## Sự thừa kế
 
-Statics are inherited, we can access `Parent.method` as `Child.method`.
+Các thuộc tính/phương thức tĩnh cũng được thừa kế, chúng ta có thể truy cập `Parent.method` bằng `Child.method`.
 
-For instance, `Animal.compare` in the code below is inherited and accessible as `Rabbit.compare`:
+Ví dụ, `Animal.compare` trong đoạn mã dưới đây được thừa kế và gọi từ class con `Rabbit.compare`:
 
 ```js run
 class Animal {
@@ -139,7 +139,7 @@ class Animal {
 
   run(speed = 0) {
     this.speed += speed;
-    alert(`${this.name} runs with speed ${this.speed}.`);
+    alert(`${this.name} chạy với tốc độ ${this.speed}.`);
   }
 
 *!*
@@ -150,10 +150,10 @@ class Animal {
 
 }
 
-// Inherit from Animal
+// Thừa kế từ Animal
 class Rabbit extends Animal {
   hide() {
-    alert(`${this.name} hides!`);
+    alert(`${this.name} ẩn nấp!`);
   }
 }
 
@@ -166,43 +166,43 @@ let rabbits = [
 rabbits.sort(Rabbit.compare);
 */!*
 
-rabbits[0].run(); // Black Rabbit runs with speed 5.
+rabbits[0].run(); // Black Rabbit chạy với tốc độ 5.
 ```
 
-Now we can call `Rabbit.compare` assuming that the inherited `Animal.compare` will be called.
+Giờ chúng ta có thể gọi `Rabbit.compare` và `Animal.compare` sẽ được sử dụng.
 
-How does it work? Again, using prototypes. As you might have already guessed, `extends` gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
+Nó làm việc như thế nào? Một lần nữa, lại sử dụng các nguyên mẫu. Có thể bạn đã đoán được, `extends` đặt `[[Prototype]]` của `Rabbit` để nó tham chiếu tới `Animal`.
 
 
 ![](animal-rabbit-static.png)
 
-So, `Rabbit` function now inherits from `Animal` function. And `Animal` function normally has `[[Prototype]]` referencing `Function.prototype`, because it doesn't `extend` anything.
+Nên, hàm `Rabbit` thừa kế từ hàm `Animal`. Và hàm `Animal` đến lượt nó lại có `[[Prototype]]` tham chiếu tới `Function.prototype`, bởi nó không được `extend` từ cái gì.
 
-Here, let's check that:
+Chúng ta kiểm tra điều này qua ví dụ:
 
 ```js run
 class Animal {}
 class Rabbit extends Animal {}
 
-// for static properties and methods
+// dùng để thừa kế phương thức và thuộc tính tĩnh
 alert(Rabbit.__proto__ === Animal); // true
 
-// the next step up leads to Function.prototype
+// đi lên một nấc nữa sẽ đến Function.prototype
 alert(Animal.__proto__ === Function.prototype); // true
 
-// the "normal" prototype chain for object methods
+// chuỗi thừa kế thông thường dùng cho thừa kế các phương thức thông thường
 alert(Rabbit.prototype.__proto__ === Animal.prototype);
 ```
 
-This way `Rabbit` has access to all static methods of `Animal`.
+Đó là cách `Rabbit` có thể truy cập tới các phương thức tĩnh của `Animal`.
 
-## Summary
+## Tóm tắt
 
-Static methods are used for the functionality that doesn't relate to a concrete class instance, doesn't require an instance to exist, but rather belongs to the class as a whole, like `Article.compare` -- a generic method to compare two articles.
+Các phương thức tĩnh được sử dụng để thực hiện các chức năng không liên quan tới từng đối tượng, nó thuộc về bản thân class, như `Article.compare` -- phương thức chung để so sánh hai đối tượng article.
 
-Static properties are used when we'd like to store class-level data, also not bound to an instance.
+Các thuộc tính tĩnh được sử dụng khi cần lưu trữ dữ liệu ngay trong class, không lưu trong đối tượng cụ thể nào.
 
-The syntax is:
+Cú pháp là:
 
 ```js
 class MyClass {
@@ -214,13 +214,13 @@ class MyClass {
 }
 ```
 
-That's technically the same as assigning to the class itself:
+Cũng có thể tạo bằng cách gán:
 
 ```js
 MyClass.property = ...
 MyClass.method = ...
 ```
 
-Static properties are inherited.
+Các thuộc tính và phương thức tĩnh cũng được thừa kế.
 
-Technically, for `class B extends A` the prototype of the class `B` itself points to `A`: `B.[[Prototype]] = A`. So if a field is not found in `B`, the search continues in `A`.
+Về mặt kỹ thuật, khi `class B extends A` nguyên mẫu của `B` chính là `A`: `B.[[Prototype]] = A`. Nên nếu một trường không có trong `B`, thì nó được tìm trong `A`.
