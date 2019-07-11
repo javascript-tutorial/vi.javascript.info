@@ -1,102 +1,102 @@
 
-# Private and protected properties and methods
+# Thuộc tính và phương thức riêng, được bảo vệ
 
-One of the most important principles of object oriented programming -- delimiting internal interface from the external one.
+Một trong những nguyên tắc quan trọng nhất của lập trình hướng đối tượng đó là phân tách giao diện bên trong với giao diện bên ngoài.
 
-That is "a must" practice in developing anything more complex than a "hello world" app.
+Đây là nguyên tắc mà bạn "phải tuân theo" nếu muốn phát triển bất cứ ứng dụng nào phức tạp hơn ứng dụng "Hello World".
 
-To understand this, let's break away from development and turn our eyes into the real world.
+Để hiểu điều này chúng ta cùng trở lại thế giới thực.
 
-Usually, devices that we're using are quite complex. But delimiting the internal interface from the external one allows to use them without problems.
+Thường các thiết bị chúng ta đang dùng khá phức tạp. Nhưng phân tách giao diện bên trong với giao diện bên ngoài cho phép ta sử dụng chúng mà không gặp phải vấn đề gì.
 
-## A real-life example
+## Một ví dụ thực tế
 
-For instance, a coffee machine. Simple from outside: a button, a display, a few holes...And, surely, the result -- great coffee! :)
+Ví dụ, máy pha cà phê. Nhìn ở bên ngoài (giao diện bên ngoài) trông nó khá đơn giản: một cái nút, một màn hình hiển thị, vài lỗ trống...
 
 ![](coffee.jpg)
 
-But inside... (a picture from the repair manual)
+Nhưng bên trong (giao diện bên trong)...
 
 ![](coffee-inside.jpg)
 
-A lot of details. But we can use it without knowing anything.
+Có rất nhiều chi tiết. Nhưng chúng ta có thể sử dụng mà không cần biết gì về chúng.
 
-Coffee machines are quite reliable, aren't they? We can use one for years, and only if something goes wrong -- bring it for repairs.
+Máy pha cà phê hoạt động rất tin cậy phải không? Chúng ta có thể sử dụng chúng nhiều năm mà không hỏng, và nếu có hỏng hóc gì chỉ cần mang nó đi sửa.
 
-The secret of reliability and simplicity of a coffee machine -- all details are well-tuned and *hidden* inside.
+Bí mật về độ tin cậy và đơn giản của máy pha cà phê đó là giấu đi toàn bộ các chi tiết bên trong.
 
-If we remove the protective cover from the coffee machine, then using it will be much more complex (where to press?), and dangerous (it can electrocute).
+Nếu bạn tháo toàn bộ vỏ ngoài của của chúng, bạn sẽ thấy khó sử dụng hơn vì không biết phải bấm vào đâu, hơn nửa còn nguy hiểm (do hở điện), và dễ gây hỏng hóc.
 
-As we'll see, in programming objects are like coffee machines.
+Như bạn sẽ thấy, trong lập trình, các đối tượng cũng giống các máy pha cà phê.
 
-But in order to hide inner details, we'll use not a protective cover, but rather special syntax of the language and conventions.
+Nhưng để giấu đi các chi tiết bên trong, chúng ta không dùng các vỏ bảo vệ, mà sử dụng các cú pháp đặc biệt.
 
-## Internal and external interface
+## Giao diện bên trong và giao diện bên ngoài
 
-In object-oriented programming, properties and methods are split into two groups:
+Trong lập trình hướng đối tượng, các thuộc tính và phương thức được chia thành hai nhóm:
 
-- *Internal interface* -- methods and properties, accessible from other methods of the class, but not from the outside.
-- *External interface* -- methods and properties, accessible also from outside the class.
+- Nhóm thuộc về giao diện bên trong (Internal interface) -- các thuộc tính và phương thức chỉ có thể truy cập từ các phương thức của class, không truy cập được từ bên ngoài.
+- Nhóm thuộc về giao diện bên ngoài (External interface) -- các thuộc tính và phương thức có thể truy cập được từ bên ngoài class.
 
-If we continue the analogy with the coffee machine -- what's hidden inside: a boiler tube, heating element, and so on -- is its internal interface.
+Đối chiếu với máy pha cà phê -- những thứ được giấu: ống hơi, bộ phận làm nóng... -- thuộc về giao diện bên trong.
 
-An internal interface is used for the object to work, its details use each other. For instance, a boiler tube is attached to the heating element.
+Giao diện bên trong được dùng bởi chính đối tượng, khi nó hoạt động các chi tiết bên trong của nó tương tác với nhau. Ví dụ ống hơi được nối với bộ phận làm nóng.
 
-But from the outside a coffee machine is closed by the protective cover, so that no one can reach those. Details are hidden and inaccessible. We can use its features via the external interface.
+Từ bên ngoài máy pha cà phê được che kín bởi vỏ bảo vệ để không ai có thể thấy, hay chạm vào được các chi tiết bên trong của nó. Các chi tiết này bị ẩn đi và không thể truy cập được. Chúng ta chỉ có thể sử dụng các tính năng của máy pha cà phê qua giao diện bên ngoài.
 
-So, all we need to use an object is to know its external interface. We may be completely unaware how it works inside, and that's great.
+Vậy nên, để sử dụng một đối tượng thì tất cả những gì chúng ta phải biết là giao diện bên ngoài của nó. Chúng ta không cần quan tâm về cách làm việc bên trong của đối tượng, và điều này thật tuyệt!
 
-That was a general introduction.
+Đó chỉ là sự giới thiệu chung, dưới đây ta đi vào chi tiết.
 
-In JavaScript, there are two types of object fields (properties and methods):
+Trong JavaScript, có hai kiểu trường (là cách gọi chung các thuộc tính và phương thức):
 
-- Public: accessible from anywhere. They comprise the external interface. Till now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
+- Public (trường công khai): có thể truy cập được từ mọi nơi. Chúng thuộc về giao diện bên ngoài. Cho đến lúc này chúng ta mới chỉ sử dụng các trường kiểu này.
+- Private (trường riêng tư): chỉ truy cập được từ bên trong class. Chúng là giao diện bên trong.
 
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it. They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
+Trong nhiều ngôn ngữ khác còn có kiểu khác là "protected" (trường được bảo vệ): truy cập được từ bên trong class và các class thừa kế từ class này. Chúng cũng có thể dùng cho giao diện bên trong và thường được dùng nhiều hơn so với trường "private".
 
-Protected fields are not implemented in JavaScript on the language level, but in practice they are very convenient, so they are emulated.
+JavaScript không hỗ trợ trường "protected" ở cấp ngôn ngữ, nhưng vì chúng hay được dùng, nên chúng được mô phỏng.
 
-Now we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
+Bây giờ chúng ta sẽ tạo một máy pha cà phê trong JavaScript sử dụng các kiểu trên. Chúng có rất nhiều chi tiết, nhưng để đơn giản chúng không mô phỏng lại (mặc dù có thể).
 
-## Protecting "waterAmount"
+## Thuộc tính công khai "waterAmount"
 
-Let's make a simple coffee machine class first:
+Tạo một class máy pha cà phê đơn giản trước:
 
 ```js run
 class CoffeeMachine {
-  waterAmount = 0; // the amount of water inside
+  waterAmount = 0; // lượng nước bên trong
 
   constructor(power) {
     this.power = power;
-    alert( `Created a coffee-machine, power: ${power}` );
+    alert( `Đã tạo máy pha cà phê có công suất: ${power}` );
   }
 
 }
 
-// create the coffee machine
+// tạo máy pha cà phê có công suất 100
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
+// thêm nước
 coffeeMachine.waterAmount = 200;
 ```
 
-Right now the properties `waterAmount` and `power` are public. We can easily get/set them from the outside to any value.
+Các thuộc tính `waterAmount` và `power` là public. Chúng ta có thể dễ dàng lấy/cài đặt nó từ bên ngoài.
 
-Let's change `waterAmount` property to protected to have more control over it. For instance, we don't want anyone to set it below zero.
+Chúng ta không muốn ai cũng có thể thay đổi mức nước, nên sẽ thay đổi thuộc tính `waterAmount` thành thuộc tính "protected". Ví dụ, ta không muốn bất cứ ai cài đặt nó dưới không.
 
-**Protected properties are usually prefixed with an underscore `_`.**
+**Các thuộc tính được bảo vệ thường bắt đầu bằng `_`.**
 
-That is not enforced on the language level, but there's a well-known convention between programmers that such properties and methods should not be accessed from the outside.
+Đây là quy ước giữa các lập trình viên khi viết các thuộc tính và phương thức không nên truy cập từ bên ngoài.
 
-So our property will be called `_waterAmount`:
+Phương thức được đặt tên lại là `_waterAmount`:
 
 ```js run
 class CoffeeMachine {
   _waterAmount = 0;
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Lượng nước âm");
     this._waterAmount = value;
   }
 
@@ -110,22 +110,22 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// tạo máy pha cà phê công suất 100
 let coffeeMachine = new CoffeeMachine(100);
 
-// add water
-coffeeMachine.waterAmount = -10; // Error: Negative water
+// Thêm nước
+coffeeMachine.waterAmount = -10; // Lỗi: Lượng nước âm
 ```
 
-Now the access is under control, so setting the water below zero fails.
+Giờ việc truy cập thuộc tính bị kiểm soát, nên cài đặt dưới không bị thất bại.
 
-## Read-only "power"
+## Thuộc tính chỉ đọc "power"
 
-For `power` property, let's make it read-only. It sometimes happens that a property must be set at creation time only, and then never modified.
+Với thuộc tính `power`, ta khiến nó trở thành thuộc tính chỉ đọc. Nó cần khi một thuộc tính được cài đặt một lần và sau đó không được sửa lại.
 
-That's exactly the case for a coffee machine: power never changes.
+Đó chính xác là thứ ta cần với máy pha cà phê, công suất không bao giờ thay đổi.
 
-To do so, we only need to make getter, but not the setter:
+Để thực hiện chúng ta chỉ tạo getter mà không tạo setter:
 
 ```js run
 class CoffeeMachine {
@@ -141,25 +141,25 @@ class CoffeeMachine {
 
 }
 
-// create the coffee machine
+// tạo máy pha cà phê
 let coffeeMachine = new CoffeeMachine(100);
 
-alert(`Power is: ${coffeeMachine.power}W`); // Power is: 100W
+alert(`Công suất là: ${coffeeMachine.power}W`); // Công suất là: 100W
 
-coffeeMachine.power = 25; // Error (no setter)
+coffeeMachine.power = 25; // Lỗi (không có setter)
 ```
 
-````smart header="Getter/setter functions"
-Here we used getter/setter syntax.
+````smart header="Các hàm getter/setter"
+Ở đây chúng ta sử dụng cú pháp getter/setter.
 
-But most of the time `get.../set...` functions are preferred, like this:
+Nhưng thường các hàm `get.../set...` được ưa thích sử dụng hơn, giống như:
 
 ```js
 class CoffeeMachine {
   _waterAmount = 0;
 
   *!*setWaterAmount(value)*/!* {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Lượng nước âm");
     this._waterAmount = value;
   }
 
@@ -171,26 +171,26 @@ class CoffeeMachine {
 new CoffeeMachine().setWaterAmount(100);
 ```
 
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now).
+Dù trông có vẻ dài, nhưng các hàm này mềm dẻo hơn. Chúng có thể nhận nhiều đối số (kể cả khi lúc này ta không cần).
 
-On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
+Nhưng ưu điểm của get/set là nó ngắn hơn. Vậy nên không có quy tắc nào bắt buộc ở đây. Việc sử dụng cái nào là do bạn.
 ````
 
-```smart header="Protected fields are inherited"
-If we inherit `class MegaMachine extends CoffeeMachine`, then nothing prevents us from accessing `this._waterAmount` or `this._power` from the methods of the new class.
+```smart header="Các trường protected được thừa kế"
+Nếu chúng ta thừa kế `class MegaMachine extends CoffeeMachine`, thì không có gì ngắn cấm truy cập `this._waterAmount` hoặc `this._power` từ các phương thức của class mới.
 
-So protected fields are naturally inheritable. Unlike private ones that we'll see below.
+Vậy nên các trường "protected" được thừa kế một cách tự nhiên. Không như các trường private mà ta sẽ thấy dưới đây.
 ```
 
-## Private "#waterLimit"
+## Thuộc tính riêng "#waterLimit"
 
 [recent browser=none]
 
-There's a finished JavaScript proposal, almost in the standard, that provides language-level support for private properties and methods.
+Gần đây trong tiêu chuẩn, JavaScript đã hộ trợ ở cấp độ ngôn ngữ các phương thức và thuộc tính "private".
 
-Privates should start with `#`. They are only accessible from inside the class.
+Chúng được bắt đầu bằng `#`. Và chúng chỉ có thể truy cập được từ bên trong lớp.
 
-For instance, here's a private `#waterLimit` property and the water-checking private method `#checkWater`:
+Ví dụ, `#waterLimit` là thuộc tính private và `#checkWater` là phương thức private:
 
 ```js run
 class CoffeeMachine {
@@ -200,8 +200,8 @@ class CoffeeMachine {
 
 *!*
   #checkWater(value) {
-    if (value < 0) throw new Error("Negative water");
-    if (value > this.#waterLimit) throw new Error("Too much water");
+    if (value < 0) throw new Error("Lượng nước âm");
+    if (value > this.#waterLimit) throw new Error("Quá nhiều nước");
   }
 */!*
 
@@ -210,17 +210,17 @@ class CoffeeMachine {
 let coffeeMachine = new CoffeeMachine();
 
 *!*
-// can't access privates from outside of the class
-coffeeMachine.#checkWater(); // Error
-coffeeMachine.#waterLimit = 1000; // Error
+// không thể truy cập từ ngoài
+coffeeMachine.#checkWater(); // Lỗi
+coffeeMachine.#waterLimit = 1000; // Lỗi
 */!*
 ```
 
-On the language level, `#` is a special sign that the field is private. We can't access it from outside or from inheriting classes.
+Ở cấp độ ngôn ngữ, `#` là ký tự đặc biệt để đánh dấu các trường private. Chúng ta không thể truy cập chúng từ ngoài và từ các class thừa kế.
 
-Private fields do not conflict with public ones. We can have both private `#waterAmount` and public `waterAmount` fields at the same time.
+Các trường private không xung đột với trường public cùng tên. Chúng ta có thể đồng thời có `#waterAmount` và `waterAmount`.
 
-For instance, let's make `waterAmount` an accessor for `#waterAmount`:
+Ví dụ, khiến `waterAmount` thành thuộc tính truy cập cho `#waterAmount`:
 
 ```js run
 class CoffeeMachine {
@@ -232,7 +232,7 @@ class CoffeeMachine {
   }
 
   set waterAmount(value) {
-    if (value < 0) throw new Error("Negative water");
+    if (value < 0) throw new Error("Lượng nước âm");
     this.#waterAmount = value;
   }
 }
@@ -240,29 +240,29 @@ class CoffeeMachine {
 let machine = new CoffeeMachine();
 
 machine.waterAmount = 100;
-alert(machine.#waterAmount); // Error
+alert(machine.#waterAmount); // Lỗi
 ```
 
-Unlike protected ones, private fields are enforced by the language itself. That's a good thing.
+Không như các trường "protected", trường "private" được cấm truy cập từ ngoài bởi chính ngôn ngữ.
 
-But if we inherit from `CoffeeMachine`, then we'll have no direct access to `#waterAmount`. We'll need to rely on `waterAmount` getter/setter:
+Nhưng nếu ta thừa kế từ `CoffeeMachine`, thì không thể truy cập được `#waterAmount`. Chúng ta cần getter/setter `waterAmount`:
 
 ```js
 class MegaCoffeeMachine extends CoffeeMachine() {
   method() {
 *!*
-    alert( this.#waterAmount ); // Error: can only access from CoffeeMachine
+    alert( this.#waterAmount ); // Lỗi: chỉ truy cập được CoffeeMachine
 */!*
   }
 }
 ```
 
-In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reason to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
+Trong nhiều tình huống giới hạn trên rất nghiệm trọng. Nếu chúng ta thừa kế `CoffeeMachine`, chúng ta có lý do chính đáng để truy cập thuộc tính bên trong `CoffeeMachine`. Đó là lý do tại sao các trường "protected" được sử dụng nhiều hơn, mặc dù chúng không được hỗ trợ bởi một cú pháp riêng.
 
-````warn header="Private fields are not available as this[name]"
-Private fields are special.
+````warn header="Trường private không truy cập được bằng cú pháp this[name]"
+Các trường private rất đặc biệt.
 
-As we know, usually we can access fields using `this[name]`:
+Như chúng ta biết, các trường có thể truy cập được bằng `this[name]`:
 
 ```js
 class User {
@@ -274,43 +274,43 @@ class User {
 }
 ```
 
-With private fields that's impossible: `this['#name']` doesn't work. That's a syntax limitation to ensure privacy.
+Với các trường private `this['#name']` không làm việc. Đó là giới hạn cú pháp để đảm bảo sự riêng tư.
 ````
 
-## Summary
+## Tóm tắt
 
-In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation]("https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)").
+Trong thuật ngữ của OOP, phân tách giao diện bên trong với giao diện bên ngoài gọi là [đóng gói(encapsulation)]("https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)").
 
-It gives the following benefits:
+Nó cung cấp các lợi ích sau:
 
-Protection for users, so that they don't shoot themselves in the feet
-: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
+Bảo vệ người dùng, để họ không tự bắn vào chân mình
+: Tưởng tượng có một nhóm người sử dụng một máy pha cà phê. Nó được tạo bởi công ty "Best CoffeeMachine" và đang chạy tốt, nhưng lớp vỏ đã bị bóc. Các bộ phận bên trong bị phơi bày.
 
-    All developers are civilized -- they use the coffee machine as intended. But one of them, John, decided that he's the smartest one, and made some tweaks in the coffee machine internals. So the coffee machine failed two days later.
+    Tất cả thành viên đều là người văn minh -- họ sử dụng máy pha cà phê như dự định. Nhưng một trong số họ, John, đã quyết định rằng anh ấy là người thông minh nhất, thực hiện một số điều chỉnh trong máy pha cà phê. Thế là máy cà phê hỏng hai ngày sau đó.
 
-    That's surely not John's fault, but rather the person who removed the protective cover and let John do his manipulations.
+    Chắc chắn lỗi không phải của John, mà là người đã tháo vỏ máy và để cho John thực hiện thao tác của mình.
 
-    The same in programming. If a user of a class will change things not intended to be changed from the outside -- the consequences are unpredictable.
+    Trong lập trình cũng như vậy. Nếu một người dùng class thay đổi thứ gì đó không nên được thay đổi từ bên ngoài -- hậu quả không thể lường trước.
 
-Supportable
-: The situation in programming is more complex than with a real-life coffee machine, because we don't just buy it once. The code constantly undergoes development and improvement.
+Khả năng hỗ trợ
+: Tình huống trong lập trình phức tạp hơn máy pha cà phê ngoài đời, bởi chúng ta không mua các ứng dụng một lần. Các ứng dụng liên tục trải qua sự phát triển và cải tiến.
 
-    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users.**
+    **Nếu chúng ta tách riêng giao diện bên trong và giao diện bên ngoài, thì người viết class có thể tự do thay đổi các thuộc tính và phương thức bên trong class, mà không cần thông báo cho người dùng.**
 
-    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them. 
+    Nhà phát triển có thể đổi tên thuộc tính bên trong một cách an toàn, thay đổi các tham số của chúng, thậm chí xóa bỏ, bởi không có mã bên ngoài nào dùng trực tiếp chúng cả.
 
-    For users, when a new version comes out, it may be a total overhaul internally, but still simple to upgrade if the external interface is the same.
+    Với người dùng, khi có phiên bản ứng dụng mới, nó có thể được đại tu hoàn toàn từ bên trong, nhưng giao diện bên ngoài hay cách sử dụng không thay đổi.
 
-Hiding complexity
-: People adore to use things that are simple. At least from outside. What's inside is a different thing.
+Che giấu những thứ phức tạp không cần thiết
+: Mọi người thích sử dụng những thứ đơn giản. Ít nhất là từ bên ngoài. Những thứ phức tạp bên trong họ thường không quan tâm.
 
-    Programmers are not an exception.
+    Các lập trình viên cũng vậy.
 
-    **It's always convenient when implementation details are hidden, and a simple, well-documented external interface is available.**
+    **Sẽ thuận tiện hơn khi cách thực thi chi tiết bên trong bị ẩn đi để giữ cho giao diện bên ngoài đơn giản, kết hợp với tài liệu sử dụng cho giao diện ngoài được viết tốt.**
 
-To hide internal interface we use either protected or private properties:
+Để ẩn giao diện bên trong chúng ta có thể sử dụng các thuộc tính "protected" hoặc "private":
 
-- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
-- Private fields start with `#`. JavaScript makes sure we only can access those from inside the class.
+- Trường "protected" bắt đầu với `_`. Nó chỉ là quy ước, không bắt buộc bởi ngôn ngữ. Các lập trình viên không nên truy cập trực tiếp các trường này từ bên ngoài, chỉ truy cập từ bên trong class hoặc từ các class thừa kế.
+- Trường "private" bắt đầu với `#`. JavaScript sẽ đảm bảo chúng ta chỉ có thể sử dụng chúng từ bên trong class.
 
-Right now, private fields are not well-supported among browsers, but can be polyfilled.
+Lúc này, trường riêng tư chưa được hỗ trợ bởi tất cả trình duyệt, nhưng chúng ta có thể polyfill chúng.
