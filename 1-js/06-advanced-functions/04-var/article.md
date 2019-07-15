@@ -31,7 +31,11 @@ alert(phrase); // Error, phrase is not defined
 
 ## "var" không hỗ trợ block scope
 
+<<<<<<< HEAD
 Các biến được khai báo với `var` hoặc là biến cục bộ, hoặc là biến toàn cục.
+=======
+Variables, declared with `var`, are either function-wide or global. They are visible through blocks.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Lấy ví dụ:
 
@@ -45,7 +49,11 @@ alert(test); // true, biến này tồn tại ngoài khối lệnh if
 */!*
 ```
 
+<<<<<<< HEAD
 `var` bỏ qua các khối lệnh (code blocks), vậy nên ta có một biến toàn cục `test`.
+=======
+As `var` ignores code blocks, we've got a global variable `test`.
+>>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
 Nếu đổi sang `let test` thay vì `var test`, thì khi đó biến này sẽ chỉ tồn tại bên trong  `if`:
 
