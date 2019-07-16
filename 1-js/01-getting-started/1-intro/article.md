@@ -1,121 +1,121 @@
-# An Introduction to JavaScript
+# Mở đầu về Javascript
 
-Let's see what's so special about JavaScript, what we can achieve with it, and which other technologies play well with it.
+Hãy cùng xem Javascript có gì đặc biệt, chúng ta có thể hoàn thành những gì với nó, và những công nghệ kết hợp tốt với ngôn ngữ này.
 
-## What is JavaScript?
+## JavaScript là gì?
 
-*JavaScript* was initially created to *"make web pages alive"*.
+*JavaScript* ban đầu được tạo ra để *"make web pages alive"*.
 
-The programs in this language are called *scripts*. They can be written right in a web page's HTML and run automatically as the page loads.
+Các chương trình trong ngôn ngữ này được gọi là *kịch bản (scripts)*. Chúng có thể được viết ngay trong HTML của trang web và chạy khi tải trang.
 
-Scripts are provided and executed as plain text. They don't need special preparation or compilation to run.
+Các tập lệnh (scripts) được cung cấp và thực thi dưới dạng văn bản thuần túy. Chúng không cần chuẩn bị hay biên dịch để có thể chạy được.
 
-In this aspect, JavaScript is very different from another language called [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
+Ở khía cạnh này, JavaScript rất khác với ngôn ngữ lập trình có tên là [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
-```smart header="Why <u>Java</u>Script?"
-When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+```smart header="Vì sao lại gọi là <u>Java</u>Script?"
+Khi Javascript được tạo ra, ban đầu nó có một cái tên khác: "LiveScript". Nhưng lúc này Java đang rất phổ biến, vì vậy người ta đã quyết định rằng đặt một ngôn ngữ mới là "em trai" của Java sẽ có ích.
 
-But as it evolved, JavaScript became a fully independent language with its own specification called [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), and now it has no relation to Java at all.
+Nhưng với sự phát triển của mình, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập, với những đặc điểm kỹ thuật riêng của mình được gọi là [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), và bây giờ nó chẳng liên quan gì đến Java cả.
 ```
 
-Today, JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+Ngày nay, JavaScript không những có thể thực thi trên trình duyệt, mà còn trên cả máy chủ (server), hoặc trên bất cứ nơi nào có chương trình tên là [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
 
-The browser has an embedded engine sometimes called a "JavaScript virtual machine".
+Trình duyệt đã có sẵn một Javascript engine đôi khi được gọi là "JavaScript virtual machine".
 
-Different engines have different "codenames". For example:
+Những engine khác nhau thì sẽ có những "tên mã" khác nhau. Chẳng hạn:
 
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
-- ...There are other codenames like "Trident" and "Chakra" for different versions of IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- trong Chrome và Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- trong Firefox.
+- ...Có một số tên mã khác là "Trident" và "Chakra" cho những phiên bản khác nhau của IE, "ChakraCore" cho Microsoft Edge, "Nitro" và "SquirrelFish" cho Safari, etc.
 
-The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome and Opera.
+Nên ghi nhớ các thuật ngữ trên bởi vì chúng được sử dụng khá nhiều trong các bài viết dành cho nhà phát triển (developer) trên Internet, và cả chúng ta. Ví dụ, nếu "tính năng X được hỗ trợ bởi V8", vậy nó có lẽ sẽ hoạt động trên Chrome và Opera.
 
-```smart header="How do engines work?"
+```smart header="Engine hoạt động như thế nào?"
 
-Engines are complicated. But the basics are easy.
+Engine khá phức tạp, tuy nhiên có thể hiểu đơn giản như sau:
 
-1. The engine (embedded if it's a browser) reads ("parses") the script.
-2. Then it converts ("compiles") the script to the machine language.
-3. And then the machine code runs, pretty fast.
+1. Engine (được nhúng nếu là trình duyệt) đọc ("phân tích cú pháp") tập lệnh.
+2. Tiếp theo nó chuyển đổi ("biên dịch") tập lệnh sang mã máy.
+3. Và sau đó mã máy chạy, khá nhanh.
 
-The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and applies optimizations to the machine code based on that knowledge. When it's done, scripts run quite fast.
+Engine đều áp dụng tối ưu hóa ở các quy trình. Nó thậm chí còn xem tập lệnh được biên dịch khi đang chạy, phân tích dữ liệu chảy qua nó và áp dụng tối ưu hóa cho mã máy. Vì vậy tập lệnh có tốc độ khá nhanh sau khi được hoàn tất.
 ```
 
-## What can in-browser JavaScript do?
+## JavaScript có thể làm gì trong trình duyệt?
 
-Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or CPU, because it was initially created for browsers which do not require it.
+Javascript hiện đại là một ngôn ngữ lập trình "an toàn". Nó không cung cấp quyền truy cập cấp thấp vào bộ nhớ hay CPU, bởi vì ban đầu nó được tạo ra cho trình duyệt vốn dĩ không yêu cầu những điều đó.
 
-JavaScript's capabilities greatly depend on the environment it's running in. For instance, [Node.js](https://wikipedia.org/wiki/Node.js) supports functions that allow JavaScript to read/write arbitrary files, perform network requests, etc.
+Sức mạnh của Javascript phụ thuộc rất lớn vào môi trường mà nó đang hoạt động. Chẳng hạn, [Node.js](https://wikipedia.org/wiki/Node.js) hỗ trợ các hàm giúp cho Javascript có thể đọc/ghi các tập tin tùy ý, thực hiện các yêu cầu mạng, etc.
 
-In-browser JavaScript can do everything related to webpage manipulation, interaction with the user, and the webserver.
+Javascript trong trình duyệt có thể làm mọi thứ có liên quan đến thao tác của trang web, tương tác với người dùng, và máy chủ web (webserver).
 
-For instance, in-browser JavaScript is able to:
+Ví dụ, JavaScript trong trình duyệt có khả năng:
 
-- Add new HTML to the page, change the existing content, modify styles.
-- React to user actions, run on mouse clicks, pointer movements, key presses.
-- Send requests over the network to remote servers, download and upload files (so-called [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) technologies).
-- Get and set cookies, ask questions to the visitor, show messages.
-- Remember the data on the client-side ("local storage").
+- Thêm HTML mới vào trang, thay đổi nội dung có sẵn, sửa đổi phong cách (styles).
+- Phản ứng với các hành động của người dùng, chạy khi nhấp chuột, chuyển động của con trỏ, nhấn phím.
+- Gửi yêu cầu qua mạng đến các máy chủ từ xa, tải xuống và tải lên file (cái gọi là [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) và công nghệ [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) ).
+- Lấy và đặt cookie, đặt câu hỏi cho người truy cập, hiện tin nhắn.
+- Ghi nhớ dữ liệu ở phía máy khách ("lưu trữ cục bộ - local storage").
 
-## What CAN'T in-browser JavaScript do?
+## JavaScript không thể làm gì trong trình duyệt?
 
-JavaScript's abilities in the browser are limited for the sake of the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+Nhiều tính năng của Javascript trong trình duyệt bị giới hạn vì lợi ích an toàn của người dùng. Mục đích là để ngăn chặn những trang web độc hại truy cập thông tin cá nhân hoặc gây hại đến dữ liệu của người dùng.
 
-Examples of such restrictions include:
+Một số hạn chế có thể kể là:
 
-- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS system functions.
+- Javascript trên trang web không thể đọc/ghi các tập tin tùy ý, sao chép hoặc thực thi một chương trình. Nó cũng không có cách nào trực tiếp truy cập vào các hàm hệ thống của Hệ điều hành.
 
-    Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like "dropping" a file into a browser window or selecting it via an `<input>` tag.
+    Nhiều trình duyệt hiện đại cho phép làm việc với tập tin, nhưng bị giới hạn và chỉ được truy cập nếu như người dùng thực hiện một hành động nhất định nào đó, ví dụ như "thả" các tập tin vào cửa sổ trình duyệt hoặc chọn chúng qua thẻ `<input>`.
 
-    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+    Có nhiều cách để tương tác với camera/microphone và thiết bị khác, nhưng chúng yêu cầu sự cho phép rõ ràng của người dùng. Vì vậy, một trang web hỗ trợ Javascript sẽ không bật lén camera, quan sát và gửi thông tin cho [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Các tab/cửa sổ nhìn chung không biết gì về nhau. Thỉnh thoảng có, ví dụ như một cửa sổ dùng Javascript để mở cửa sổ khác. Nhưng kể cả như vậy, JavaScript từ trang này vẫn không thể can thiệp vào trang kia nếu như chúng đến từ tên miền, giao thức hoặc port khác.
 
-    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and contain a special JavaScript code that handles it. We'll cover that in the tutorial.
+    Cái này được gọi là "Same Origin Policy". Để làm việc với nó, *cả 2 trang web* cần phải đồng ý cho việc trao đổi dữ liệu và bao gồm cả các đoạn mã Javascript đặc biệt nhằm xử lí nó. Chúng ta sẽ nhắc đến trong phần hướng dẫn sau.
 
-    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com` and steal information from there.
-- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+    Hạn chế ở đây là, một lần nữa, cho an toàn của người dùng. Một trang web từ `http://anysite.com` mà người dùng vừa mở không được can thiệp vào trang web có URL là `http://gmail.com` ở tab khác với mục đích đánh cắp thông tin cá nhân.
+- Javascript có thể dễ dàng giao tiếp qua mạng để đến máy chủ - nơi đang chứa trang web hiện tại. Nhưng khả năng nhận dữ liệu từ trang web khác hoàn toàn bị tê liệt. Mặc dù có thể, nó đòi hỏi phải có thỏa thuận rõ ràng (được thể hiện trong HTTP headers) từ phía điều khiển. Lại lần nữa, đây là giới hạn vì an toàn.
 
 ![](limitations.png)
 
-Such limits do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugin/extensions which may ask for extended permissions.
+Những giới hạn trên sẽ không tồn tại nếu như Javascript được sử dụng bên ngoài trình duyệt, như máy chủ chẳng hạn. Các trình duyệt hiện đại cũng cho phép các plugin/tiện ích có thể hỏi cho các quyền mở rộng.
 
-## What makes JavaScript unique?
+## Điều gì khiến cho Javascript khác biệt?
 
-There are at least *three* great things about JavaScript:
+Có ít nhất *ba* điều tuyệt vời ở Javascript:
 
 ```compare
-+ Full integration with HTML/CSS.
-+ Simple things are done simply.
-+ Support by all major browsers and enabled by default.
++ Tích hợp hoàn toàn với HTML/CSS.
++ Những điều đơn giản được thực hiện một cách đơn giản.
++ Được hỗ trợ bởi tất cả các trình duyệt chính và được bật theo mặc định.
 ```
-JavaScript is the only browser technology that combines these three things.
+Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều trên.
 
-That's what makes JavaScript unique. That's why it's the most widespread tool for creating browser interfaces.
+Đó là cách khiến cho Javascript khác biệt. Đó là cách tại sao nó là công cụ phổ biến nhất để tạo giao diện cho trình duyệt.
 
-While planning to learn a new technology, it's beneficial to check its perspectives. So let's move on to the modern trends affecting it,  including new languages and browser abilities.
+Trong khi đang lên kế hoạch tìm hiểu một công nghệ mới, việc kiểm tra các quan điểm của nó là có lợi. Vì vậy, hãy chuyển sang các xu hướng hiện đại ảnh hưởng đến nó, bao gồm các ngôn ngữ mới và khả năng của trình duyệt.
 
 
-## Languages "over" JavaScript
+## Những ngôn ngữ "trên nền tảng" JavaScript
 
-The syntax of JavaScript does not suit everyone's needs. Different people want different features.
+Cú pháp của Javascript không phù hợp cho tất cả mọi người. Những người khác nhau lại muốn các tính năng khác nhau.
 
-That's to be expected, because projects and requirements are different for everyone.
+Đó là điều được mong đợi, vì các dự án và yêu cầu đều khác nhau đối với mọi người.
 
-So recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+Vì vậy gần đây có rất nhiêu ngôn ngữ mới xuất hiện, chúng được *dịch mã* (chuyển đổi) sang Javascript trước khi chúng chạy trên trình duyệt.
 
-Modern tools make the transpilation very fast and transparent, actually allowing developers to code in another language and auto-converting it "under the hood".
+Những công cụ hiện đại làm cho việc dịch trở nên nhanh chóng và minh bạch, thực sự cho phép các nhà phát triển viết mã bằng ngôn ngữ khác và tự động chuyển đổi nó trơn tru và hiệu quả.
 
-Examples of such languages:
+Có thể kể đến một số ngôn ngữ:
 
-- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [CoffeeScript](http://coffeescript.org/) là một "cú pháp đặc biệt" cho JavaScript. Nó giới thiệu cú pháp ngắn hơn, cho phép chúng ta viết mã rõ ràng và chính xác hơn. Thông thường thì các nhà phát triển Ruby thích nó.
+- [TypeScript](http://www.typescriptlang.org/) được tập trung cho việc "gõ dự liệu một cách nghiêm ngặt" nhằm đơn giản hóa việc phát triển và hỗ trợ các hệ thống phức tạp. Nó được phát triển bởi Microsoft.
+- [Flow](http://flow.org/) cũng thêm một vài cách gõ dữ liệu, nhưng theo một cách khác. Phát triển bởi Facebook.
+- [Dart](https://www.dartlang.org/) là một ngôn ngữ độc lập có engine riêng và có thể chạy trong môi trường khác ngoài trình duyệt, nó cũng có thể được dịch sang Javascript. Phát triển bởi Google.
 
-There are more. Of course, even if we use one of transpiled languages, we should also know JavaScript to really understand what we're doing.
+Sẽ có nhiều hơn số kể trên. Dĩ nhiên, ngay cả khi chúng ta sử dụng một trong những ngôn ngữ đó, chúng ta cũng nên biết Javascript để thực sự hiểu chúng ta đang làm gì.
 
-## Summary
+## Tổng kết
 
-- JavaScript was initially created as a browser-only language, but is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration with HTML/CSS.
-- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+- Javascript được tạo ra với mục đích ban đầu chỉ cho trình duyệt, nhưng bây giờ đã được sử dụng rộng rãi trên nhiều môi trường khác.
+- Ngày nay, Javascript có một vị trí khác biệt như là ngôn ngữ trình duyệt được sử dụng rộng rãi nhất với sự tích hợp đầy đủ với HTML/CSS.
+- Có nhiều ngôn ngữ được "dịch" sang JavaScript và cung cấp một số tính năng nhất định. Nên xem qua chúng, ít nhất là một thời gian ngắn sau khi thành thạo JavaScript.
