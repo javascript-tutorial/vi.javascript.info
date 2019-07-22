@@ -84,19 +84,27 @@ alert(typeof User); // function
 */!*
 ```
 
+<<<<<<< HEAD
 Cấu trúc `class User {...}` thực ra là một khai báo hàm và làm những công việc sau:
 1. Tạo hàm có tên `User`.
     - Thân hàm lấy từ phương thức `constructor` (nếu không viết `constructor` thì thân hàm trống).
 3. Lưu tất cả các phương thức, chẳng hạn như `sayHi`, trong `User.prototype`.
 
 Sau đó khi gọi các phương thức của đối tượng mới, các phương thức này được lấy từ nguyên mẫu, giống như được mô tả trong bài <info:function-prototype>. Vậy nên đối tượng tạo ra từ `new User` có thể truy cập các phương thức của class.
+=======
+What `class User {...}` construct really does is:
+
+1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
+2. Stores class methods, such as `sayHi`, in `User.prototype`.
+
+Afterwards, for `new User` objects, when we call a method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
 
 ![](class-user.png)
 
 Đây là đoạn mã giúp ta quan sát điều này:
-
 
 ```js run
 class User {
@@ -119,7 +127,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 
 ## Class không chỉ là một "syntax sugar"
 
+<<<<<<< HEAD
 Đôi khi người ta nói rằng `class` là một "syntax sugar" (cú pháp ngắn gọn được thiết kế để thay thế cho một đoạn mã phức tạp thực hiện công việc tương tự) của JavaScript, bởi chúng ta có thể khai báo một hàm constructor, thêm phương thức vào `prototype` của nó mà không cần sử dụng `class`:
+=======
+Sometimes people say that `class` is a "syntax sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ```js run
 // viết lại class mà mà không dùng cấu trúc "class"
@@ -147,7 +159,11 @@ Mặc dù vậy, vẫn có những khác biệt quan trọng.
 
 1. Trước tiên, hàm tạo bởi `class` có thêm một thuộc tính đặc biệt `[[FunctionKind]]:"classConstructor"`. Các hàm tạo ra bằng cách thông thường không có thuộc tính này.
 
+<<<<<<< HEAD
     Không như hàm thông thường, một "class constructor" (hàm tạo bởi `class`) bắt buộc phải gọi với `new`:
+=======
+    Unlike a regular function, a class constructor must be called with `new`:
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
     ```js run
     class User {
@@ -176,8 +192,12 @@ Mặc dù vậy, vẫn có những khác biệt quan trọng.
 3. Các class luôn mặc định sử dụng `use strict`.
     Tất cả mã bên trong cấu trúc class tự động sử dụng `use strict`.
 
+<<<<<<< HEAD
 
 Ngoài các tính năng cơ bản, cú pháp `class` còn mang đến nhiều tính năng khác mà chúng ta sẽ học trong các bài sau.
+=======
+Besides, `class` syntax brings many other features that we'll explore later.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ## Biểu thức class
 
