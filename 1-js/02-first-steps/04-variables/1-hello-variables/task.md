@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Working with variables
+# Làm việc với các biến
 
-1. Declare two variables: `admin` and `name`.
-2. Assign the value `"John"` to `name`.
-3. Copy the value from `name` to `admin`.
-4. Show the value of `admin` using `alert` (must output "John").
+1. Khai báo hai biến: `admin` và `name`.
+2. Gán giá trị `"John"` tới `name`.
+3. Sao chép giá trị từ `name` tới `admin`.
+4. Hiển thị giá trị của `admin` bằng `alert` (phải xuất ra "John").

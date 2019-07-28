@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Uppercase const?
+# Các hằng viết hoa?
 
-Examine the following code:
+Xét đoạn mã sau:
 
 ```js
 const birthday = '18.04.1982';
@@ -12,13 +12,13 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-Here we have a constant `birthday` date and the `age` is calculated from `birthday` with the help of some code (it is not provided for shortness, and because details don't matter here).
+Ở đây chúng ta hằng ngày sinh `birthday` và tuổi `age` được tính từ `birthday` nhờ hàm `someCode` nào đó.
 
-Would it be right to use upper case for `birthday`? For `age`? Or even for both?
+Hằng nào nên được viết hoa? `birthday`? hay `age`? Hay là cả hai?
 
 ```js
-const BIRTHDAY = '18.04.1982'; // make uppercase?
+const BIRTHDAY = '18.04.1982'; // có viết hoa không?
 
-const AGE = someCode(BIRTHDAY); // make uppercase?
+const AGE = someCode(BIRTHDAY); // có viết hoa không?
 ```
 
