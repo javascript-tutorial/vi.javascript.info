@@ -19,11 +19,11 @@ Giá trị xuất ra là chuỗi `"[object Object]"` là do phương thức `toS
 
 Đây là hình ảnh mô tả chuyện gì đã xảy ra:
 
-![](object-prototype.png)
+![](object-prototype.svg)
 
 Khi tạo đối tượng bằng `new Object()` (hoặc bằng `{...}`), `Object.prototype` được gán cho `[[Prototype]]` của đối tượng, đây là quy tắc ta đã học ở bài trước:
 
-![](object-prototype-1.png)
+![](object-prototype-1.svg)
 
 Cho nên khi gọi `obj.toString()` thì phương thức này được lấy từ `Object.prototype`.
 
@@ -52,7 +52,7 @@ Tuy nhiên khác với `Object.prototype` các nguyên mẫu này vẫn có nguy
 
 Đây là hình ảnh minh họa với 3 nguyên mẫu:
 
-![](native-prototypes-classes.png)
+![](native-prototypes-classes.svg)
 
 Cùng kiểm tra lại:
 
@@ -79,7 +79,7 @@ alert(arr); // 1,2,3 <-- là kết quả của Array.prototype.toString
 Nhưng `Object.prototype` cũng có `toString`. Vậy `arr` lấy `toString` từ `Array.prototype` hay từ `Object.prototype`? Câu trả lời rất đơn giản: nó lấy từ nguyên mẫu gần nó nhất tức `Array.prototype`.
 
 
-![](native-prototypes-array-tostring.png)
+![](native-prototypes-array-tostring.svg)
 
 
 Trong Developer console của trình duyệt bạn cũng có thể thấy được chuỗi thừa kế bằng lệnh `console.dir`:

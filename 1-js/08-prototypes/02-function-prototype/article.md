@@ -36,7 +36,7 @@ Cài đặt `Rabbit.prototype = animal` có nghĩa là: "Khi một đối tượ
 
 Đây là hình ảnh của kết quả:
 
-![](proto-constructor-animal-rabbit.png)
+![](proto-constructor-animal-rabbit.svg)
 
 Ở hình trên, `"prototype"` là một mũi tên nằm ngang, mang nghĩa là một thuộc tính thông thường, và `[[Prototype]]` là mũi tên thẳng đứng, mang nghĩa `rabbit` thừa kế từ `animal`.
 
@@ -62,7 +62,7 @@ Rabbit.prototype = { constructor: Rabbit };
 */
 ```
 
-![](function-prototype-constructor.png)
+![](function-prototype-constructor.svg)
 
 Chúng ta có thể kiểm tra điều này:
 
@@ -86,7 +86,7 @@ let rabbit = new Rabbit(); // thừa kế từ {constructor: Rabbit}
 alert(rabbit.constructor == Rabbit); // true (lấy từ nguyên mẫu)
 ```
 
-![](rabbit-prototype-constructor.png)
+![](rabbit-prototype-constructor.svg)
 
 Chúng ta có thể sử dụng thuộc tính `constructor` để tạo đối tượng mới từ constructor của một đối tượng đã có:
 
