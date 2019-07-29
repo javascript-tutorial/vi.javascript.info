@@ -102,7 +102,7 @@ Afterwards, for `new User` objects, when we call a method, it's taken from the p
 
 Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
 
-![](class-user.png)
+![](class-user.svg)
 
 Đây là đoạn mã giúp ta quan sát điều này:
 

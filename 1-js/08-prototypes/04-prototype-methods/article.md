@@ -125,7 +125,7 @@ Nhưng `Object` cũng có thể làm tốt chuyện này, bởi người tạo r
 
 Thực ra `__proto__` là một thuộc tính truy cập được thừa kế từ `Object.prototype`:
 
-![](object-prototype-2.png)
+![](object-prototype-2.svg)
 
 Cho nên, nếu `obj.__proto__` được đọc hoặc ghi, các getter/setter tương ứng được lấy từ nguyên mẫu, nó lấy/cài đặt `[[Prototype]]` của đối tượng hiện tại.
 
@@ -146,7 +146,7 @@ alert(obj[key]); // "giá trị nào đó"
 
 `Object.create(null)` tạo một đối tượng không có nguyên mẫu (`[[Prototype]]` là `null`):
 
-![](object-prototype-null.png)
+![](object-prototype-null.svg)
 
 Cho nên nó không thuộc tính truy cập `__proto__` lấy từ nguyên mẫu. Lúc này `__proto__` được xem là thuộc tính dữ liệu thông thường và ví dụ trên đã làm việc.
 

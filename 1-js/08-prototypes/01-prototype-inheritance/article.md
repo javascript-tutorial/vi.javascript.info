@@ -10,7 +10,7 @@ Tính năng *Thừa kế nguyên mẫu* (Prototypal inheritance) của JavaScrip
 
 Trong JavaScript, mọi đối tượng có một thuộc tính ẩn đặc biệt là `[[Prototype]]` , nó hoặc mang giá trị `null` hoặc tham chiếu tới một đối tượng khác. Đối tượng này được gọi là "nguyên mẫu" (prototype):
 
-![prototype](object-prototype-empty.png)
+![prototype](object-prototype-empty.svg)
 
 Khi đọc một thuộc tính không tồn tại của `object`, JavaScript tự động lấy thuộc tính này từ nguyên mẫu. Trong lập trình người ta gọi nó là "thừa kế từ nguyên mẫu": một đối tượng được thừa hưởng các thuộc tính/phương thức từ nguyên mẫu của nó. Nhiều tính năng hay ho của ngôn ngữ và nhiều kỹ thuật lập trình dựa trên khái niệm này.
 
@@ -66,7 +66,7 @@ Dòng `(*)` cài đặt `animal` cho `rabbit.__proto__`, tức làm `[[Prototype
 
 Sau đó, khi `alert` cố đọc `rabbit.eats` `(**)`, vì thuộc tính này không có trong `rabbit`, nên JavaScript đi theo `[[Prototype]]` tìm đến `animal` và lấy `eats` từ đây (tìm theo dấu mũi tên):
 
-![](proto-animal-rabbit.png)
+![](proto-animal-rabbit.svg)
 
 Ta nói "`animal` là nguyên mẫu của `rabbit`" hoặc "`rabbit` được thừa hưởng nguyên mẫu từ `animal`".
 
@@ -97,7 +97,7 @@ rabbit.walk(); // Động vật biết đi
 
 Phương thức tự động lấy từ nguyên mẫu theo sơ đồ sau:
 
-![](proto-animal-rabbit-walk.png)
+![](proto-animal-rabbit-walk.svg)
 
 Chuỗi nguyên mẫu có thể dài hơn:
 
@@ -129,7 +129,7 @@ longEar.walk(); // Động vật biết đi
 alert(longEar.jumps); // true (lấy từ rabbit)
 ```
 
-![](proto-animal-rabbit-chain.png)
+![](proto-animal-rabbit-chain.svg)
 
 Thực tế có hai giới hạn:
 
@@ -169,7 +169,7 @@ rabbit.walk(); // Rabbit! Bounce-bounce!
 
 Từ giờ, `rabbit.walk()` được tìm thấy và gọi ngay trong `rabbit`, không sử dụng `walk` của `animal`:
 
-![](proto-animal-rabbit-walk-2.png)
+![](proto-animal-rabbit-walk-2.svg)
 
 Nhưng nó chỉ đúng với thuộc tính dữ liệu, không đúng với thuộc tính truy cập. Về bản chất việc đọc/ghi thuộc tính truy cập dẫn đến việc gọi hàm getter/setter, nên chúng được gọi từ nguyên mẫu.
 
@@ -245,7 +245,7 @@ alert(animal.isSleeping); // undefined (không có thuộc tính này trong nguy
 
 Hình ảnh của kết quả trên:
 
-![](proto-animal-rabbit-walk-3.png)
+![](proto-animal-rabbit-walk-3.svg)
 
 Nếu ta có các đối tượng khác như `bird`, `snake` ... thừa kế từ `animal`, chúng cũng có thể truy cập các phương thức của `animal`. Nhưng `this` thì luôn là `bird`, `snake`... không phải `animal`. Cho nên khi ta ghi dữ liệu vào `this`, nó lưu trong các đối tượng này, không lưu vào nguyên mẫu.
 
@@ -305,7 +305,7 @@ for(let prop in rabbit) {
 
 Ở đây ta có chuỗi thừa kế sau: `rabbit` thừa kế từ `animal`, `animal` thừa kế từ `Object.prototype` (mọi đối tượng tạo bằng literal `{...}` mặc định nhận `Object.prototype` làm nguyên mẫu), `Object.prototype` không có nguyên mẫu nên `[[Prototype]]` của nó là `null`:
 
-![](rabbit-animal-object.png)
+![](rabbit-animal-object.svg)
 
 Nhờ chuỗi thừa kế này mà ta có thể gọi `rabbit.hasOwnProperty`. Bản thân `rabbit` không có `hasOwnProperty`, JavaScript tìm ngược lên chuỗi thừa kế và thấy trong `Object.prototype`. Nói cách khác `rabbit.hasOwnProperty` là phương thức được thừa kế từ `Object.prototype`.
 

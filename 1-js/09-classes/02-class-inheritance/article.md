@@ -24,7 +24,7 @@ class Animal {
 let animal = new Animal("My animal");
 ```
 
-![](rabbit-animal-independent-animal.png)
+![](rabbit-animal-independent-animal.svg)
 
 
 ...Và `Rabbit`:
@@ -42,7 +42,7 @@ class Rabbit {
 let rabbit = new Rabbit("My rabbit");
 ```
 
-![](rabbit-animal-independent-rabbit.png)
+![](rabbit-animal-independent-rabbit.svg)
 
 
 Hiện tại chúng hoàn toàn đôc lập với nhau.
@@ -88,7 +88,7 @@ Mã của class `Rabbit` trở nên ngắn hơn, vì mặc định nó sử dụ
 
 Sâu bên trong, từ khóa `extends` thêm `[[Prototype]]` cho `Rabbit.prototype` để nó tham chiếu đến `Animal.prototype`:
 
-![](animal-rabbit-extends.png)
+![](animal-rabbit-extends.svg)
 
 Cho nên, nếu một phương thức không tìm thấy trong `Rabbit.prototype`, JavaScript lấy nó từ `Animal.prototype`.
 
@@ -384,7 +384,7 @@ Cho nên trong hai dòng `(*)` và `(**)` giá trị của `this.__proto__` đ�
 
 Đây là hình ảnh chuyện gì đã xảy ra:
 
-![](this-super-loop.png)
+![](this-super-loop.svg)
 
 1. Trong `longEar.eat()`, dòng `(**)` gọi `rabbit.eat` cung cấp `this=longEar`.
     ```js
@@ -501,7 +501,7 @@ Lý do đơn giản:
 - Cho nên `[[HomeObject]]` là `rabbit`, vì nó được tạo từ đầu trong `rabbit`. Không có cách nào thay đổi `[[HomeObject]]`.
 - Mã của `tree.sayHi()` có `super.sayHi()` bên trong. Nó tìm tới `rabbit` và lấy phương thức từ `animal`.
 
-![](super-homeobject-wrong.png)
+![](super-homeobject-wrong.svg)
 
 ### Phương thức, không phải thuộc tính hàm
 

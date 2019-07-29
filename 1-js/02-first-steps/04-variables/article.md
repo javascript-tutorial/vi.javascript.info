@@ -99,7 +99,7 @@ Chúng ta có thể dễ dàng nắm bắt khái niệm "biến" nếu tưởng 
 
 Ví dụ, biến `message` có thể xem như một hộp gắn nhãn `"message"` lưu giá trị `"Hello!"` bên trong:
 
-![](variable.png)
+![](variable.svg)
 
 Ta có thể đặt bất cứ giá trị nào trong hộp:
 
@@ -116,7 +116,7 @@ alert(message);
 
 Khi thay đổi giá trị, giá trị cũ bị loại bỏ, giá trị mới thay thế cho nó:
 
-![](variable-change.png)
+![](variable-change.svg)
 
 Chúng ta có thể khai báo hai biến và sao chép dữ liệu từ biến này sang biến kia.
 

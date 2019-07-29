@@ -174,7 +174,7 @@ Giờ chúng ta có thể gọi `Rabbit.compare` và `Animal.compare` sẽ đư�
 Nó làm việc như thế nào? Một lần nữa, lại sử dụng các nguyên mẫu. Có thể bạn đã đoán được, `extends` đặt `[[Prototype]]` của `Rabbit` để nó tham chiếu tới `Animal`.
 
 
-![](animal-rabbit-static.png)
+![](animal-rabbit-static.svg)
 
 Nên, hàm `Rabbit` thừa kế từ hàm `Animal`. Và hàm `Animal` đến lượt nó lại có `[[Prototype]]` tham chiếu tới `Function.prototype`, bởi nó không được `extend` từ cái gì.
 
