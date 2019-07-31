@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Trước tiên, biến cho tên của hành tinh của chúng ta.
+=======
+## The variable for our planet
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Nó khá đơn giản:
 
@@ -8,7 +12,11 @@ let ourPlanetName = "Earth";
 
 Chú ý, chúng ta có thể dùng tên ngắn hơn là `planet`, nhưng nó không chỉ rõ đó là hành tinh nào. Tốt hơn mọi thứ nên rõ ràng, cho dù tên biến có hơi dài một chút.
 
+<<<<<<< HEAD
 Thứ hai, tên của người khách hiện tại:
+=======
+## The name of the current visitor
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ```js
 let currentUserName = "John";

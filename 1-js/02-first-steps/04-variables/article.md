@@ -323,8 +323,14 @@ Bởi các minifier và trình duyệt hiện đại sẽ tối ưu được vi�
 
 Chúng ta có thể tạo ra các biến để lưu dữ liệu bằng cách sử dụng các từ khóa `var`, `let`, hoặc `const`.
 
+<<<<<<< HEAD
 - `let` -- là cách khai báo hiện đại. Khi đoạn mã sử dụng chế độ strict thì bắt buộc phải khai báo bằng `let`.
 - `var` -- là cách khai báo cũ. Thường chúng ta không còn dùng nó nữa, nhưng ta cũng sẽ chỉ ra chút khác biệt của nó so với `let` ở bài <info:var>, nếu bạn cần biết.
 - `const` -- giống như `let`, nhưng giá trị của biến không thay đổi được.
+=======
+- `let` -- is a modern variable declaration.
+- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
+- `const` -- is like `let`, but the value of the variable can't be changed.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Các biến nên được đặt tên sao cho dễ hiểu được dữ liệu bên trong nó.

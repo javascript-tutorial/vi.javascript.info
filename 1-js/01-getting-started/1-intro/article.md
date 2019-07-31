@@ -92,8 +92,12 @@ Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều
 
 Đó là cách khiến cho Javascript khác biệt. Đó là cách tại sao nó là công cụ phổ biến nhất để tạo giao diện cho trình duyệt.
 
+<<<<<<< HEAD
 Trong khi đang lên kế hoạch tìm hiểu một công nghệ mới, việc kiểm tra các quan điểm của nó là có lợi. Vì vậy, hãy chuyển sang các xu hướng hiện đại ảnh hưởng đến nó, bao gồm các ngôn ngữ mới và khả năng của trình duyệt.
 
+=======
+That said, JavaScript also allows to create servers, mobile applications, etc.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ## Những ngôn ngữ "trên nền tảng" JavaScript
 
