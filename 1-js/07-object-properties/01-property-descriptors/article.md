@@ -63,7 +63,11 @@ Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 `obj`, `propertyName`
+<<<<<<< HEAD
 : Đối tượng và tên thuộc tính cần thay đổi.
+=======
+: The object and its property to apply the descriptor.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 `descriptor`
 : Đối tượng "descriptor" sử dụng.
@@ -116,7 +120,11 @@ Object.defineProperty(user, "name", {
 });
 
 *!*
+<<<<<<< HEAD
 user.name = "Mạnh"; // Lỗi: Không thể gán cho thuộc tính chỉ đọc 'name'...
+=======
+user.name = "Pete"; // Error: Cannot assign to read only property 'name'
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 */!*
 ```
 
@@ -131,26 +139,43 @@ In the non-strict mode, no errors occur when writing to read-only properties and
 >>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 ```
 
+<<<<<<< HEAD
 Cũng như trên, nhưng đây là trường hợp thuộc tính không tồn tại:
+=======
+Here's the same example, but the property is created from scratch:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 let user = { };
 
 Object.defineProperty(user, "name", {
 *!*
+<<<<<<< HEAD
   value: "Hùng",
   // đặt các cờ khác là true
+=======
+  value: "John",
+  // for new properties need to explicitly list what's true
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   enumerable: true,
   configurable: true
 */!*
 });
 
+<<<<<<< HEAD
 alert(user.name); // Hùng
 user.name = "Ngọc"; // Lỗi
 ```
 
 
 ## Thuộc tính "không liệt kê"
+=======
+alert(user.name); // John
+user.name = "Pete"; // Error
+```
+
+## Non-enumerable
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Giờ thay đổi phương thức `toString` trong `user`.
 

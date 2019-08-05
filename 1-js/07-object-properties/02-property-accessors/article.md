@@ -34,7 +34,11 @@ let user = {
 };
 ```
 
+<<<<<<< HEAD
 Giờ ta muốn thêm thuộc tính `fullName` có giá trị là `"Phùng Hùng"`. Tất nhiên, chúng ta không sao chép thủ công các thông tin hiện có làm giá trị của `fullName`. Chúng ta có thể thực hiện việc này bằng một getter:
+=======
+Now we want to add a `fullName` property, that should be `"John Smith"`. Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 let user = {
@@ -55,7 +59,25 @@ alert(user.fullName); // Phùng Hùng
 
 Từ bên ngoài, các thuộc tính truy cập trông như thuộc tính dữ liệu. Nó cũng là ý tưởng cho sự xuất hiện của các thuộc tính truy cập. Chúng ta không gọi `user.fullName` như gọi phương thức, mà gọi giống như *đọc* một thuộc tính bình thường: getter sẽ tự động chạy "phía sau hậu trường".
 
+<<<<<<< HEAD
 Đến giờ, `fullName` mới chỉ có getter. Nếu chúng ta muốn thay đổi giá trị của nó bằng cách gán `user.fullName=` thì sẽ có lỗi:
+=======
+As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error:
+
+На данный момент `fullName` имеет только геттер. Если попытаться присвоить значение свойству `user.fullName`, то это вызовет ошибку:
+
+```js run
+let user = {
+  get fullName() {
+    return `...`;
+  }
+};
+
+*!*
+user.fullName = "Test"; // Error (property has only a getter)
+*/!*
+```
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Để có thể gán giá trị cho một thuộc tính truy cập, cần tạo setter cho nó. Cùng thêm một setter cho `user.fullName`:
 
@@ -84,6 +106,7 @@ alert(user.surname); // Phùng
 
 Kết quả là chúng ta có một thuộc tính "ảo" `fullName`. Ta có thể đọc và ghi nó, nhưng thực tế nó không tồn tại trong đối tượng.
 
+<<<<<<< HEAD
 ```smart header="Các thuộc tính truy cập chỉ có thể truy cập nhờ getter và setter"
 Khi một thuộc tính đã được định nghĩa với `get prop()` hoặc `set prop()`, nó trở thành một thuộc tính truy cập, không phải là thuộc tính dữ liệu nữa.
 
@@ -91,6 +114,10 @@ Khi một thuộc tính đã được định nghĩa với `get prop()` hoặc `
 - Chúng ta chỉ có thể ghi thuộc tính truy cập `object.prop=...` nếu có setter cho nó.
 
 Và trong cả hai trường hợp, ta không thể xóa một thuộc tính truy cập.
+=======
+```smart header="No support for `delete`"
+An attempt to `delete` on accessor property causes an error.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 
@@ -100,7 +127,11 @@ Các descriptor của thuộc trính truy cập khác với descriptor của thu
 
 Nó không có `value` và `writable`, mà thay bằng hai hàm `get` và `set`.
 
+<<<<<<< HEAD
 Cụ thể descriptor của thuộc tính truy cập có:
+=======
+That is, an accessor descriptor may have:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 - **`get`** -- hàm không có tham số, chạy khi đọc thuộc tính,
 - **`set`** -- hàm có một tham số, chạy khi ghi thuộc tính,
@@ -132,7 +163,11 @@ alert(user.fullName); // Phùng Hùng
 for(let key in user) alert(key); // name, surname
 ```
 
+<<<<<<< HEAD
 Vui lòng chú ý một lần nữa, một thuộc tính chỉ có thể là thuộc tính truy cập hoặc thuộc tính dữ liệu, không thể là cả hai cùng lúc.
+=======
+Please note once again that a property can be either an accessor (has `get/set` methods) or a data property (has a `value`), not both.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Nếu đưa cả `get` và `value` trong một descriptor, sẽ gây ra lỗi:
 
@@ -151,9 +186,15 @@ Object.defineProperty({}, 'prop', {
 
 ## Getter/setter thông minh hơn
 
+<<<<<<< HEAD
 Getters/setters có thể dùng như một thuộc tính "bao" lấy thuộc tính thực thực, để kiểm soát giá trị được đưa vào.
 
 Ví dụ, nếu chúng ta muốn chặn một tên quá ngắn cho `user`, chúng ta có thể tạo một thuộc tính truy cập `name` lưu trong thuộc tính thực `_name` và thêm bước kiểm tra vào trong setter:
+=======
+Getters/setters can be used as wrappers over "real" property values to gain more control over operations with them.
+
+For instance, if we want to forbid too short names for `user`, we can have a setter `name` and keep the value in a separate property `_name`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 let user = {
@@ -176,14 +217,26 @@ alert(user.name); // Hùng
 user.name = ""; // Tên quá ngắn, cần nhiều hơn 4 ký tự
 ```
 
+<<<<<<< HEAD
 Vễ mặt kỹ thuật, mã bên ngoài vẫn có thể truy cập và thay đổi trực tiếp thuộc tính `user._name`. Nhưng có một thỏa thuận được chấp nhận rộng rãi rằng các thuộc tính có tên bắt đầu bằng `"_"` được coi là thuộc tính riêng của đối tượng và không nên truy cập hay thay đổi trực tiếp từ bên ngoài.
+=======
+So, the name is stored in `_name` property, and the access is done via getter and setter.
+
+Technically, external code is able to access the name directly by using `user._name`. But there is a widely known convention that properties starting with an underscore `"_"` are internal and should not be touched from outside the object.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 
 ## Cung cấp sự tương thích
 
+<<<<<<< HEAD
 Các getter và setter cho phép ta thay thế một thuộc tính dữ liệu thông thường bằng phiên bản khác sử dụng thuộc tính truy cập với khả năng kiểm soát tốt hơn.
 
 Giả sử chúng ta tạo đối tượng người dùng có hai thuộc tính `name` và `age`:
+=======
+One of the great uses of accessors -- they allow to take control over a "regular" data property at any moment by replacing it with getter and setter and tweak its behavior.
+
+Imagine, we started implementing user objects using data properties `name` and `age`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js
 function User(name, age) {
@@ -209,7 +262,13 @@ let hung = new User("Hùng", new Date(1986, 8, 3));
 
 Giờ ta phải làm gì với những mã cũ vẫn còn sử dụng thuộc tính `age`?
 
+<<<<<<< HEAD
 Chúng ta có thể tìm và sửa lại, nhưng nó tốn rất nhiều thời gian và rất khó nếu mã được viết bởi những người khác. Hơn nữa sự có mặt của thuộc tính `age` trong đối tượng người dùng vẫn hợp lý và ta chỉ muốn thay đổi ở một số chỗ mà thôi.
+=======
+We can try to find all such places and fix them, but that takes time and can be hard to do if that code is used by many other people. And besides, `age` is a nice thing to have in `user`, right?
+
+Let's keep it.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Thêm thuộc tính truy cập cho `age` sẽ giải quyết được vấn đề này:
 

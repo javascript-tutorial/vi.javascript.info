@@ -26,6 +26,7 @@ let rabbit = Object.create(animal);
 */!*
 
 alert(rabbit.eats); // true
+
 *!*
 alert(Object.getPrototypeOf(rabbit) === animal); // lấy nguyên mẫu của rabbit
 */!*
@@ -78,8 +79,13 @@ Kết quả là giờ chúng ta có tất cả những cách này để quản l
 
 Tại sao `__proto__` bị thay thế bởi `getPrototypeOf/setPrototypeOf`? Đó là một câu hỏi thú vị, yêu cầu bạn phải hiểu tại sao `__proto__` không tốt. Hãy đọc để có câu trả lời.
 
+<<<<<<< HEAD
 ```warn header="Không đặt lại `[[Prototype]]` trừ khi không cần chạy nhanh"
 Về mặt kỹ thuật, chúng ta có thể lấy/cài đặt `[[Prototype]]` bất cứ lúc nào. Nhưng thường ta chỉ cài đặt nó một lần khi tạo đối tượng và sau đó không thay đổi nữa: `rabbit` thừa kế từ `animal`, sau đó không thay đổi nữa.
+=======
+```warn header="Don't change `[[Prototype]]` on existing objects if speed matters"
+Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify: `rabbit` inherits from `animal`, and that is not going to change.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Và JavaScript dựa vào điều này để tối ưu hóa tốc độ truy cập thuộc tính của các đối tượng. Thay đổi nguyên mẫu với `Object.setPrototypeOf` hoặc `obj.__proto__=` phá vỡ sự tối ưu này. Vì vậy hãnh tránh hành động này trừ khi bạn biết nó không ảnh hưởng tới mình.
 ```
@@ -115,7 +121,11 @@ Nhược điểm trên không gây ra hậu quả quá khủng khiếp. Nhưng t
 
 Điều tồi tệ nhất đối với nhà phát triển đó là các lỗi như vậy rất khó nhận thấy và chúng trở thành các lỗ hổng trong chương trình, đặc biệt khi JavaScript được dùng ở phía máy chủ.
 
+<<<<<<< HEAD
 Kết quả bất thường cũng có thể xuất hiện với `toString` -- nó có thể là hàm hoặc thuộc tính của các đối tượng có sẵn.
+=======
+Unexpected things also may happen when assigning to `toString` -- that's a function by default, and other built-in methods.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Làm sao để tránh vấn đề này?
 
@@ -164,7 +174,11 @@ alert(obj); // Lỗi (không có toString)
 
 ...Nhưng nó lại dùng tốt với mảng liên kết.
 
+<<<<<<< HEAD
 Mặt khác, các thuộc tính dạng `Object.something(...)`, ví dụ `Object.keys(obj)` không nằm trong nguyên mẫu, nên nó vẫn có thể sử dụng được với đối tượng "thuần nhất":
+=======
+Note that most object-related methods are `Object.something(...)`, like `Object.keys(obj)` -- they are not in the prototype, so they will keep working on such objects:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 
 ```js run

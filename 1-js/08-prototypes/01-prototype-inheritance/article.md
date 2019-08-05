@@ -101,7 +101,6 @@ Phương thức tự động lấy từ nguyên mẫu theo sơ đồ sau:
 
 Chuỗi nguyên mẫu có thể dài hơn:
 
-
 ```js run
 let animal = {
   eats: true,
@@ -131,10 +130,17 @@ alert(longEar.jumps); // true (lấy từ rabbit)
 
 ![](proto-animal-rabbit-chain.svg)
 
+<<<<<<< HEAD
 Thực tế có hai giới hạn:
 
 1. Không được thừa kế vòng, nếu không JavaScript sẽ báo lỗi.
 2. Giá trị `__proto__` chỉ có thể là đối tượng hoặc `null`, các giá trị cơ sở bị bỏ qua.
+=======
+There are only two limitations:
+
+1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
+2. The value of `__proto__` can be either an object or `null`. Other types are ignored.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Mỗi đối tượng chỉ có một thuộc tính `[[Prototype]]` và thuộc tính này chỉ tham chiếu tới một đối tượng. Cho nên một đối tượng chỉ có một nguyên mẫu.
 
@@ -171,7 +177,11 @@ Từ giờ, `rabbit.walk()` được tìm thấy và gọi ngay trong `rabbit`, 
 
 ![](proto-animal-rabbit-walk-2.svg)
 
+<<<<<<< HEAD
 Nhưng nó chỉ đúng với thuộc tính dữ liệu, không đúng với thuộc tính truy cập. Về bản chất việc đọc/ghi thuộc tính truy cập dẫn đến việc gọi hàm getter/setter, nên chúng được gọi từ nguyên mẫu.
+=======
+Accessor properties are an exception, as assignment is handled by a setter function. So writing to such a property is actually the same as calling a function.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Ví dụ:
 
@@ -247,7 +257,11 @@ Hình ảnh của kết quả trên:
 
 ![](proto-animal-rabbit-walk-3.svg)
 
+<<<<<<< HEAD
 Nếu ta có các đối tượng khác như `bird`, `snake` ... thừa kế từ `animal`, chúng cũng có thể truy cập các phương thức của `animal`. Nhưng `this` thì luôn là `bird`, `snake`... không phải `animal`. Cho nên khi ta ghi dữ liệu vào `this`, nó lưu trong các đối tượng này, không lưu vào nguyên mẫu.
+=======
+If we had other objects like `bird`, `snake` etc inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Ta có kết luận chung: các phương thức được chia sẻ, nhưng trạng thái đối tượng thì không.
 
@@ -313,8 +327,13 @@ Nhờ chuỗi thừa kế này mà ta có thể gọi `rabbit.hasOwnProperty`. B
 
 Câu trả lời hóa ra rất đơn giản: nó là thuộc tính không liệt kê. Trong JavaScipt mọi thuộc tính của `Object.prototype`, đều có cờ `enumerable:false`. Đó là lý do tại sao `hasOwnProperty` không xuất hiện trong `for..in`.
 
+<<<<<<< HEAD
 ```smart header="Mọi phương thức duyệt đều bỏ qua các thuộc tính được thừa kế"
 Không giống như vòng lặp `for..in` mọi phương thức lấy các cặp key/value của một đối tượng, như `Object.keys`, `Object.values`... đều bỏ qua thuộc tính được thừa kế.
+=======
+```smart header="Almost all other key/value-getting methods ignore inherited properties"
+Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Chúng chỉ hoạt động trên bản thân đối tượng mà không đoái hoài gì đến nguyên mẫu.
 ```
