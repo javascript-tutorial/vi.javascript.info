@@ -17,7 +17,11 @@ class Animal {
   }
   stop() {
     this.speed = 0;
+<<<<<<< HEAD
     alert(`${this.name} đã dừng lại.`);
+=======
+    alert(`${this.name} stands still.`);
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 }
 
@@ -65,7 +69,11 @@ class Animal {
   }
   stop() {
     this.speed = 0;
+<<<<<<< HEAD
     alert(`${this.name} đã dừng.`);
+=======
+    alert(`${this.name} stands still.`);
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 }
 
@@ -92,7 +100,11 @@ Sâu bên trong, từ khóa `extends` thêm `[[Prototype]]` cho `Rabbit.prototyp
 
 Cho nên, nếu một phương thức không tìm thấy trong `Rabbit.prototype`, JavaScript lấy nó từ `Animal.prototype`.
 
+<<<<<<< HEAD
 Như đã học ở bài <info:native-prototypes>, JavaScript cũng sử dụng cách này cho các đối tượng có sẵn. Ví dụ `Date.prototype.[[Prototype]]` là `Object.prototype`, nên các đối tượng date cũng có các phương thức chung như mọi đối tượng có.
+=======
+As we can recall from the chapter <info:native-prototypes>, JavaScript uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ````smart header="Sau `extends` có thể là một biểu thức trả về một class"
 Cú pháp thừa kế class cho phép một biểu thức sau `extends` là biểu thức trả về một class.
@@ -131,8 +143,12 @@ class Rabbit extends Animal {
 }
 ```
 
+<<<<<<< HEAD
 
 ...Nhưng thường chúng ta không muốn thay thế toàn bộ phương thức của class cha, mà muốn dựa vào phương thức này rồi tinh chỉnh cũng như bổ sung thêm một số tính năng khác. Chúng ta làm việc này trong phương thức của class con nhưng gọi phương thức của class cha trước hoặc sau khi thực hiện.
+=======
+...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Các class cung cấp từ khóa `"super"` để làm việc này.
 
@@ -156,7 +172,11 @@ class Animal {
 
   stop() {
     this.speed = 0;
+<<<<<<< HEAD
     alert(`${this.name} đã dừng.`);
+=======
+    alert(`${this.name} stands still.`);
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 
 }
@@ -176,8 +196,13 @@ class Rabbit extends Animal {
 
 let rabbit = new Rabbit("Thỏ trắng");
 
+<<<<<<< HEAD
 rabbit.run(5); // Thỏ trắng chạy với tốc độ 5.
 rabbit.stop(); // Thỏ trắng đã dừng. Thỏ trắng ẩn nấp!
+=======
+rabbit.run(5); // White Rabbit runs with speed 5.
+rabbit.stop(); // White Rabbit stands still. White rabbit hides!
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 Giờ `Rabbit` có riêng `stop` và gọi `super.stop()` trong quá trình xử lý.
@@ -266,12 +291,21 @@ Trong JavaScript, có sự khác biệt giữa hàm `constructor` của một cl
 
 Sự khác biêt là:
 
+<<<<<<< HEAD
 - Khi một hàm `constructor` bình thường chạy, nó tạo một đối tượng trống và gán cho `this` và tiếp tục thay đổi đối tượng này thông qua `this`.
 - Nhưng khi hàm `constructor` của class con chạy, nó không tạo ra đối tượng nào cả. Thay vào đó nó trông chờ `constructor` của class cha làm việc này cho nó.
 
 Cho nên nếu chúng ta tạo ra `constructor` riêng cho class con, chúng ta buộc phải gọi `super`, bởi nếu không gọi, đối tượng mà `this` tham chiếu đến sẽ không được tạo. Và chúng ta có lỗi như trên.
 
 Để `Rabbit` làm việc, chúng ta cần gọi `super()` trước khi dùng `this`, như sau:
+=======
+- When a normal constructor runs, it creates an empty object and assigns it to `this`.
+- But when a derived constructor runs, it doesn't do this. It expects the parent constructor to do this job.
+
+So if we're making a constructor of our own, then we must call `super`, because otherwise the object for `this` won't be created. And we'll get an error.
+
+For `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 class Animal {
@@ -307,17 +341,37 @@ alert(rabbit.earLength); // 10
 
 ## Tìm hiểu sâu về super, [[HomeObject]]
 
+<<<<<<< HEAD
 Hãy tìm hiểu sâu hơn về cách làm việc của `super`. Chúng ta sẽ thấy vài điều thú vị.
+=======
+```warn header="Advanced information"
+If you're reading the tutorial for the first time - this section may be skipped.
+
+It's about the internal mechanisms behind inheritance and `super`.
+```
+
+Let's get a little deeper under the hood of `super`. We'll see some interesting things by the way.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Trước tiên cần nói rằng, với tất cả những gì ta đã được học, ta không thể hiểu cách làm việc của `super`!
 
+<<<<<<< HEAD
 Vâng, bạn hãy tự hỏi làm cách nào để nó có thể làm việc về mặt kỹ thuật? Khi đối tượng chạy các phương thức, các phương thức này lấy đối tượng đó làm `this`. Sau đó nếu chúng ta gọi `super.method()`, nó cần lấy `method` từ nguyên mẫu của đối tượng hiện tại.
+=======
+Yeah, indeed, let's ask ourselves, how it should technically work? When an object method runs, it gets the current object as `this`. If we call `super.method()` then, the engine needs to get the `method` from the prototype of the current object. But how?
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Chuyện này tưởng như đơn giản, nhưng không. Bạn có thể nghĩ đơn giản: JavaScript engine biết đối tượng hiện tại như `this`, nên nó lấy phương thức cha `method` như `this.__proto__.method`. Không may, giải pháp này không làm việc.
 
 Cùng làm rõ vấn đề này bằng cách chỉ dùng đối tượng đơn thuần.
 
+<<<<<<< HEAD
 Trong ví dụ dưới, `rabbit.__proto__ = animal`, trong `rabbit.eat()` gọi `animal.eat()`, bằng `this.__proto__`:
+=======
+You may skip this part and go below to the `[[HomeObject]]` subsection if you don't want to know the details. That won't harm. Or read on if you're interested in understanding things in-depth.
+
+In the example below, `rabbit.__proto__ = animal`. Now let's try: in `rabbit.eat()` we'll call `animal.eat()`, using `this.__proto__`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 let animal = {
@@ -460,7 +514,11 @@ Sự tồn tại của `[[HomeObject]]` vi phạm nguyên tắc này, bởi phư
 
 May mắn `[[HomeObject]]` chỉ được dùng với `super`. Nên nếu phương thức không dùng `super`, chúng ta vẫn có thể xem nó là "tự do".
 
+<<<<<<< HEAD
 Đây là ví dụ một phương thức sử dụng `super` sẽ hoạt động sai khi sao chép cho đối tượng khác:
+=======
+Here's the demo of a wrong `super` result after copying:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 let animal = {
@@ -469,6 +527,7 @@ let animal = {
   }
 };
 
+// rabbit inherits from animal
 let rabbit = {
   __proto__: animal,
   sayHi() {
@@ -482,6 +541,7 @@ let plant = {
   }
 };
 
+// tree inherits from plant
 let tree = {
   __proto__: plant,
 *!*
@@ -496,10 +556,19 @@ tree.sayHi();  // Tôi là động vật (?!?)
 
 Gọi `tree.sayHi()` sẽ hiển thị "Tôi là động vật". Đây là kết quả sai.
 
+<<<<<<< HEAD
 Lý do đơn giản:
 - Trong dòng `(*)`, phương thức `tree.sayHi` được sao chép từ `rabbit.sayHi` (thực ra chúng là một).
 - Cho nên `[[HomeObject]]` là `rabbit`, vì nó được tạo từ đầu trong `rabbit`. Không có cách nào thay đổi `[[HomeObject]]`.
 - Mã của `tree.sayHi()` có `super.sayHi()` bên trong. Nó tìm tới `rabbit` và lấy phương thức từ `animal`.
+=======
+The reason is simple:
+- In the line `(*)`, the method `tree.sayHi` was copied from `rabbit`. Maybe we just wanted to avoid code duplication?
+- Its `[[HomeObject]]` is `rabbit`, as it was created in `rabbit`. There's no way to change `[[HomeObject]]`.
+- The code of `tree.sayHi()` has `super.sayHi()` inside. It goes up from `rabbit` and takes the method from `animal`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+
+Here's the diagram of what happens:
 
 ![](super-homeobject-wrong.svg)
 

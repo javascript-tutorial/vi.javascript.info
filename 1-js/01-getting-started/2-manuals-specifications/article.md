@@ -28,7 +28,11 @@ Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các th�
 
 ## Bảng tương thích
 
+<<<<<<< HEAD
 JavaScript là một ngôn ngữ đang phát triển, các tính năng mới được bổ sung thường xuyên.
+=======
+- **MSDN** – Microsoft manual with a lot of information, including JavaScript (often referred to as JScript). If one needs something specific to Internet Explorer, better go there: <http://msdn.microsoft.com/>.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Để xem sự hỗ trợ của nó giữa các trình duyệt và engine khác:
 

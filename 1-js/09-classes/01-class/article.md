@@ -25,7 +25,11 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 Sau đó gọi `new MyClass()` để tạo đối tượng mới có đầy đủ các phương thức trên.
+=======
+Then use `new MyClass()` to create a new object with all the listed methods.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Phương thức `constructor()` tự động được gọi bởi `new`, nên nó là nơi được dùng để khởi tạo giá trị các thuộc tính cho đối tượng.
 
@@ -53,7 +57,11 @@ Khi gọi `new User("Hùng")`:
 1. Một đối tượng mới được tạo.
 2. Hàm `constructor` chạy với đối số `"Hùng"` và gán cho `this.name`.
 
+<<<<<<< HEAD
 ...Sau đó chúng ta có thể gọi các phương thức từ đối tượng trên, chẳng hạn như `user.sayHi`.
+=======
+...Then we can call object methods, such as `user.sayHi()`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 
 ```warn header="Không có dấu phảy ngăn cách các phương thức"
@@ -213,7 +221,11 @@ let User = class {
 };
 ```
 
+<<<<<<< HEAD
 Tương tự như Biểu thức hàm có tên (NFE), chúng ta cũng có "Biểu thức class có tên" (Named Class Expression).
+=======
+Similar to Named Function Expressions, class expressions may have a name.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Nếu một biểu thức class có tên, tên này chỉ có thể thấy được trong class:
 
@@ -222,13 +234,21 @@ Nếu một biểu thức class có tên, tên này chỉ có thể thấy đư�
 // (trong đặc tả không có thuật ngữ này, nhưng nó tương tự NFE)
 let User = class *!*MyClass*/!* {
   sayHi() {
+<<<<<<< HEAD
     alert(MyClass); // MyClass chỉ thấy được trong class
+=======
+    alert(MyClass); // MyClass name is visible only inside the class
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 };
 
 new User().sayHi(); // làm việc, hiện thị định nghĩa của MyClass
 
+<<<<<<< HEAD
 alert(MyClass); // lỗi, MyClass không sử dụng được ngoài class
+=======
+alert(MyClass); // error, MyClass name isn't visible outside of the class
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 
@@ -304,14 +324,24 @@ Object.defineProperties(User.prototype, {
 });
 ```
 
+<<<<<<< HEAD
 Đây là ví dụ với các thuộc tính computed:
+=======
+Here's an example with a computed property in brackets `[...]`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
-function f() { return "sayHi"; }
-
 class User {
+<<<<<<< HEAD
   [f()]() {
     alert("Xin chào");
+=======
+
+*!*
+  ['say' + 'Hi']() {
+*/!*
+    alert("Hello");
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 
 }
@@ -331,7 +361,13 @@ Trong các ví dụ trên, `User` chỉ có các phương thức. Giờ thêm c�
 
 ```js run
 class User {
+<<<<<<< HEAD
   name = "Vô danh";
+=======
+*!*
+  name = "Anonymous";
+*/!*
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
   sayHi() {
     alert(`Xin chào, ${this.name}!`);
@@ -341,8 +377,12 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Khác với phương thức các thuộc tính không đặt trong `User.prototype`. Thay vì thế, nó tạo bởi `new`, đặt trong mỗi đối tượng được tạo. Vậy nên, mỗi đối tượng sở hữu các thuộc tính riêng, nhưng dùng chung phương thức từ nguyên mẫu.
 
+=======
+The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling constructor, it's the property of the object itself.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ## Tóm tắt
 
@@ -350,7 +390,11 @@ Cú pháp cơ bản để tạo class trông như sau:
 
 ```js
 class MyClass {
+<<<<<<< HEAD
   prop = value; // thuộc tính (trường)
+=======
+  prop = value; // property
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
   constructor(...) { // constructor
     // ...
@@ -361,7 +405,11 @@ class MyClass {
   get something(...) {} // phương thức getter
   set something(...) {} // phương thức setter
 
+<<<<<<< HEAD
   [Symbol.iterator]() {} // phương thức computed, phương thức symbol
+=======
+  [Symbol.iterator]() {} // method with computed name (symbol here)
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   // ...
 }
 ```
