@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# String quotes
+# Các quote
 
-What is the output of the script?
+Script sau hiển thị gì?
 
 ```js
 let name = "Ilya";
