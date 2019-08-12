@@ -64,8 +64,6 @@ Từ bên ngoài, các thuộc tính truy cập trông như thuộc tính dữ l
 =======
 As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error:
 
-На данный момент `fullName` имеет только геттер. Если попытаться присвоить значение свойству `user.fullName`, то это вызовет ошибку:
-
 ```js run
 let user = {
   get fullName() {

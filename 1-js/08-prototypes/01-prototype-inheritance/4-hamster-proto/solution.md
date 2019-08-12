@@ -10,7 +10,11 @@ Cùng xem xét cẩn thận chuyện xảy ra khi gọi `speedy.eat("apple")`.
 
 Vậy nên cả hai con hamsters đều dùng chung `hamster.stomach` - tức có cùng một cái dạ dày! Khi một con no, con kia cũng no là vì thế.
 
+<<<<<<< HEAD
 Mỗi khi `stomach` được lấy từ nguyên mẫu, thì `this.stomach.push` lại làm thay đổi `hamster.stomach`.
+=======
+Both for `lazy.stomach.push(...)` and `speedy.stomach.push()`, the property `stomach` is found in the prototype (as it's not in the object itself), then the new data is pushed into it.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 Chú ý rằng chuyện này không xảy ra nếu ta gán `this.stomach=`:
 
@@ -77,4 +81,8 @@ alert( speedy.stomach ); // apple
 alert( lazy.stomach ); // <không có gì>
 ```
 
+<<<<<<< HEAD
 Đây là giải pháp tổng quát, các thuộc tính mô tả trạng thái của đối tượng, giống `stomach` ở trên nên được ghi riêng vào đối tượng đó, không nên dùng chung từ một nguyên mẫu. Điều này giúp ta không gặp phải vấn đề trên.
+=======
+As a common solution, all properties that describe the state of a particular object, like `stomach` above, should be written into that object. That prevents such problems.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
