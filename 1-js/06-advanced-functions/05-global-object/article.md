@@ -1,12 +1,17 @@
 
 # Đối tượng Global
 
+<<<<<<< HEAD
 Đối tượng global cung cấp các biến và hàm có thể được sử dụng ở mọi nơi. Thông thường, đối tượng này luôn được tích hợp sẵn trong ngôn ngữ.
+=======
+The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Trong trình duyệt, đối tượng global có tên là `window`, trong Node.js là `global`, ở các môi trường khác nhau, nó có thể mang các cái tên khác nhau.
 
 Gần đây, `globalThis` đã được thêm vào để chuẩn hóa tên cho đối tượng global, và sẽ sớm được hỗ trợ ở mọi môi trường. Tuy nhiên ở một số trình duyệt, cụ thể là non-Chromium Edge, vẫn chưa hỗ trợ `globalThis` nhưng nó có thể dễ dàng được thêm vào.
 
+<<<<<<< HEAD
 Tất cả các thuộc tính của đối tượng global có thể được truy cập một cách trực tiếp:
 
 ```js run
@@ -17,6 +22,19 @@ window.alert("Xin chào");
 ```
 
 Trong trình duyệt, các biến và hàm toàn cục được khai báo với `var` sẽ trở thành thuộc tính của đối tượng global:
+=======
+We'll use `window` here, assuming that our environment is a browser. If your script may run in other environments, it's better to use `globalThis` instead.
+
+All properties of the global object can be accessed directly:
+
+```js run
+alert("Hello");
+// is the same as
+window.alert("Hello");
+```
+
+In a browser, global functions and variables declared with `var` (not `let/const`!) become the property of the global object:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run untrusted refresh
 var gVar = 5;
@@ -24,9 +42,15 @@ var gVar = 5;
 alert(window.gVar); // 5 (trở thành thuộc tính của đối tượng global)
 ```
 
+<<<<<<< HEAD
 Cân nhắc khi sử dụng việc này ! Hành vi này tồn tại chỉ để phục vụ cho khả năng tương thích trong ngôn ngữ. Nó sẽ không xảy ra trong các đoạn scripts hiện đại, nơi mà thường hay sử dụng Javascript modules. Ta sẽ tìm hiểu ở chương [Modules](info:modules).
 
 Một điều nữa, các cách khai báo biến với `let` và `const` hoàn toàn không bị ảnh hưởng bởi hành vi này:
+=======
+Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such thing doesn't happen.
+
+If we used `let` instead, such thing wouldn't happen:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run untrusted refresh
 let gLet = 5;
@@ -52,7 +76,11 @@ alert(currentUser.name);  // Đăng
 alert(window.currentUser.name); // Đăng
 ```
 
+<<<<<<< HEAD
 Nói chung, việc sử dụng các biến toàn cục không được khuyến khích. Hạn chế sử dụng các biến toàn cục giúp code của bạn trở nên rõ ràng, giảm thiểu được lỗi và dễ dàng để test hơn.
+=======
+That said, using global variables is generally discouraged. There should be as few global variables as possible. The code design where a function gets "input" variables and produces certain "outcome" is clearer, less prone to errors and easier to test than if it uses outer or global variables.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ## Sử dụng cho polyfills
 

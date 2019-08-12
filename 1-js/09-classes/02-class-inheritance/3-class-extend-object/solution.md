@@ -71,7 +71,7 @@ Nhận tiện cũng nói luôn, `Function.prototype` có các phương thức "c
 
 Đây là hình ảnh minh họa:
 
-![](rabbit-extends-object.png)
+![](rabbit-extends-object.svg)
 
 Tóm lại, có hai điểm khác biệt:
 

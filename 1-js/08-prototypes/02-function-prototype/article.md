@@ -36,7 +36,7 @@ Cài đặt `Rabbit.prototype = animal` có nghĩa là: "Khi một đối tượ
 
 Đây là hình ảnh của kết quả:
 
-![](proto-constructor-animal-rabbit.png)
+![](proto-constructor-animal-rabbit.svg)
 
 Ở hình trên, `"prototype"` là một mũi tên nằm ngang, mang nghĩa là một thuộc tính thông thường, và `[[Prototype]]` là mũi tên thẳng đứng, mang nghĩa `rabbit` thừa kế từ `animal`.
 
@@ -62,7 +62,7 @@ Rabbit.prototype = { constructor: Rabbit };
 */
 ```
 
-![](function-prototype-constructor.png)
+![](function-prototype-constructor.svg)
 
 Chúng ta có thể kiểm tra điều này:
 
@@ -86,7 +86,7 @@ let rabbit = new Rabbit(); // thừa kế từ {constructor: Rabbit}
 alert(rabbit.constructor == Rabbit); // true (lấy từ nguyên mẫu)
 ```
 
-![](rabbit-prototype-constructor.png)
+![](rabbit-prototype-constructor.svg)
 
 Chúng ta có thể sử dụng thuộc tính `constructor` để tạo đối tượng mới từ constructor của một đối tượng đã có:
 
@@ -160,9 +160,15 @@ Trong bài này chúng ta đã mô tả ngắn gọn cách cài đặt `[[Protot
 
 Mọi thứ khá đơn giản, chỉ có vài lưu ý sau:
 
+<<<<<<< HEAD
 - Thuộc tính `F.prototype` không phải là `[[Prototype]]`. Giá trị của `F.prototype` được gán cho `[[Prototype]]` khi gọi `new F()`, sau đó chúng hoàn toàn độc lập nhau.
 - Giá trị của `F.prototype` có thể là đối tượng hoặc null: mọi giá trị kiểu cơ sở đều không hoạt động.
 - Thuộc tính `"prototype"` chỉ có tác dụng khi cài đặt nó cho một hàm tạo và gọi hàm này bằng `new`.
+=======
+- The `F.prototype` property (don't mess with `[[Prototype]]`) sets `[[Prototype]]` of new objects when `new F()` is called.
+- The value of `F.prototype` should be either an object or `null`: other values won't work.
+-  The `"prototype"` property only has such a special effect when set on a constructor function, and invoked with `new`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Nếu cài đặt `prototype` cho một đối tượng thông thường, nó không còn gì đặc biệt:
 ```js

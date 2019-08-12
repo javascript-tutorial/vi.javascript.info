@@ -75,7 +75,7 @@ Một số hạn chế có thể kể là:
     Hạn chế ở đây là, một lần nữa, cho an toàn của người dùng. Một trang web từ `http://anysite.com` mà người dùng vừa mở không được can thiệp vào trang web có URL là `http://gmail.com` ở tab khác với mục đích đánh cắp thông tin cá nhân.
 - Javascript có thể dễ dàng giao tiếp qua mạng để đến máy chủ - nơi đang chứa trang web hiện tại. Nhưng khả năng nhận dữ liệu từ trang web khác hoàn toàn bị tê liệt. Mặc dù có thể, nó đòi hỏi phải có thỏa thuận rõ ràng (được thể hiện trong HTTP headers) từ phía điều khiển. Lại lần nữa, đây là giới hạn vì an toàn.
 
-![](limitations.png)
+![](limitations.svg)
 
 Những giới hạn trên sẽ không tồn tại nếu như Javascript được sử dụng bên ngoài trình duyệt, như máy chủ chẳng hạn. Các trình duyệt hiện đại cũng cho phép các plugin/tiện ích có thể hỏi cho các quyền mở rộng.
 
@@ -92,8 +92,12 @@ Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều
 
 Đó là cách khiến cho Javascript khác biệt. Đó là cách tại sao nó là công cụ phổ biến nhất để tạo giao diện cho trình duyệt.
 
+<<<<<<< HEAD
 Trong khi đang lên kế hoạch tìm hiểu một công nghệ mới, việc kiểm tra các quan điểm của nó là có lợi. Vì vậy, hãy chuyển sang các xu hướng hiện đại ảnh hưởng đến nó, bao gồm các ngôn ngữ mới và khả năng của trình duyệt.
 
+=======
+That said, JavaScript also allows to create servers, mobile applications, etc.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ## Những ngôn ngữ "trên nền tảng" JavaScript
 

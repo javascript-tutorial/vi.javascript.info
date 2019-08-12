@@ -4,7 +4,11 @@ Một thời gian dài, JavaScript phát triển mà không gặp vấn đề t�
 
 Lợi ích của việc này là các mã cũ luôn chạy được. Nhưng nhược điểm là những điểm không tốt không bị loại bỏ.
 
+<<<<<<< HEAD
 Việc này tiếp diễn cho đến năm 2009 khi ECMAScript 5 (ES5) xuất hiện. Nó đã thêm nhiều tính năng mới cho JavaScript và sửa lại vài tính năng cũ. Để đảm bảo các mã cũ vẫn chạy, các thay đổi này mặc định bị tắt đi. Nếu bạn không gặp phải vấn đề với những mã cũ bạn có thể kích hoạt những thay đổi này bằng cách sử dụng chỉ dẫn: `"use strict"`.
+=======
+This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most such modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ## "use strict"
 
@@ -19,9 +23,17 @@ Ví dụ:
 ...
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 Chúng ta sẽ học về các hàm (là cách nhóm các lệnh) ở một bài học gần đây.
 
 Chú ý rằng `"use strict"` có thể đặt ở đầu một hàm thay vì đầu của script. Việc làm này chỉ bật chế độ "strict" bên trong hàm mà thôi. Tuy nhiên, thường thì mọi người thích đặt nó ở đầu script hơn.
+=======
+We will learn functions (a way to group commands) soon. Looking ahead, let's note that `"use strict"` can be put at the start of most kinds of functions instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+=======
+We will learn functions (a way to group commands) soon. Looking ahead, let's note that `"use strict"` can be put at the beginning of the function body instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 
 
 ````warn header="Phải chắc chắn rằng đặt \"use strict\" ở đầu"

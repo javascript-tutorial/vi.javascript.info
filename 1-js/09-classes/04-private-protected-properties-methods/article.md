@@ -53,7 +53,11 @@ Trong JavaScript, có hai kiểu trường (là cách gọi chung các thuộc t
 - Public (trường công khai): có thể truy cập được từ mọi nơi. Chúng thuộc về giao diện bên ngoài. Cho đến lúc này chúng ta mới chỉ sử dụng các trường kiểu này.
 - Private (trường riêng tư): chỉ truy cập được từ bên trong class. Chúng là giao diện bên trong.
 
+<<<<<<< HEAD
 Trong nhiều ngôn ngữ khác còn có kiểu khác là "protected" (trường được bảo vệ): truy cập được từ bên trong class và các class thừa kế từ class này. Chúng cũng có thể dùng cho giao diện bên trong và thường được dùng nhiều hơn so với trường "private".
+=======
+In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it (like private, but plus access from inheriting classes). They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 JavaScript không hỗ trợ trường "protected" ở cấp ngôn ngữ, nhưng vì chúng hay được dùng, nên chúng được mô phỏng.
 
@@ -297,7 +301,11 @@ Khả năng hỗ trợ
 
     **Nếu chúng ta tách riêng giao diện bên trong và giao diện bên ngoài, thì người viết class có thể tự do thay đổi các thuộc tính và phương thức bên trong class, mà không cần thông báo cho người dùng.**
 
+<<<<<<< HEAD
     Nhà phát triển có thể đổi tên thuộc tính bên trong một cách an toàn, thay đổi các tham số của chúng, thậm chí xóa bỏ, bởi không có mã bên ngoài nào dùng trực tiếp chúng cả.
+=======
+    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
     Với người dùng, khi có phiên bản ứng dụng mới, nó có thể được đại tu hoàn toàn từ bên trong, nhưng giao diện bên ngoài hay cách sử dụng không thay đổi.
 

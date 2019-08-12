@@ -1,6 +1,10 @@
 # Chào thế giới!
 
+<<<<<<< HEAD
 Trong phần này chúng ta học về JavaScript thuần. Nhờ những kiến thức này bạn có thể học Node.js (JavaScript chạy phía máy chủ) cũng như các nền tảng khác có sử dụng JavaScript.
+=======
+This part of the tutorial is about core JavaScript, the language itself.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Nhưng để chạy được JavaScript chúng ta cần một môi trường (enviroment), và bởi các hướng dẫn này được đưa lên webiste, môi trường trình duyệt (browser) là sự lựa chọn tốt hơn cả. Chúng ta phải sử dụng một số lệnh chỉ có trên môi trường trình duyệt (như `alert`) nhưng chúng không nhiều. Nếu bạn có kế hoạch học JavaScript để làm việc trên môi trường khác (như Node.js) bạn cũng sẽ không mất quá nhiều thời gian để học chúng. Ở [phần sau](/ui) của hướng dẫn này chúng ta sẽ tập trung vào cách sử dụng JavaScript trên trình duyệt.
 
@@ -45,8 +49,13 @@ Bạn có thể chạy ví dụ trên bằng cách click vào nút "Play" ở g�
 
 Thẻ `<script>` có vài thuộc tính ngày nay hiếm khi được sử dụng nhưng vẫn có thể gặp đâu đó trong các chương trình cũ:
 
+<<<<<<< HEAD
 Thuộc tính `type`: <code>&lt;script <u>type</u>=...&gt;</code>
 : Chuẩn HTML4 cũ yêu cầu mỗi script phải có một `type`. Thường là `type="text/javascript"`. Nhưng hiện nay nó không còn cần thiết nữa. Chuẩn HTML5 hiện đại vẫn sử dụng thuộc tính `type` nhưng với mục đích hoàn toàn khác. Bây giờ `type` được dùng cho các JavaScript module. Nhưng nó là một chủ đề nâng cao sẽ được nói đến trong một phần khác của loạt bài hướng dẫn này.
+=======
+The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Thuộc tính `language`: <code>&lt;script <u>language</u>=...&gt;</code>
 : Thuộc tính này cho biết script được viết bằng ngôn ngữ nào. Ngày nay JavaScript trở thành ngôn ngữ script mặc định, thuộc tính này không còn cần thiết nữa.
@@ -73,9 +82,13 @@ Script đặt trong tệp này gọi là script ngoài và có thể đưa vào 
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 Ở đây, `/path/to/script.js` là đường dẫn tuyệt đối tới tệp chứa script (tính từ thư mục gốc của website).
 
 Bạn cũng có thể cung cấp đường dẫn tương đối so với trang web hiện tại. Ví dụ, `src="script.js"` chỉ đến tệp `"script.js"` trong thư mục hiện tại.
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Một địa chỉ URL cũng được cho phép, ví dụ:
 

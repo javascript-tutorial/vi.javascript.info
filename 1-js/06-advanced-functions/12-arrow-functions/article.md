@@ -2,7 +2,11 @@
 
 Cùng xem lại hàm mũi tên.
 
+<<<<<<< HEAD
 Hàm mũi tên không đơn giản chỉ là một cách viết tắt của hàm.
+=======
+Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 JavaScript có đầy những tình huống ở đó chúng ta cần viết một hàm nhỏ để chạy ở một nơi khác.
 
@@ -14,7 +18,11 @@ Ví dụ:
 
 Nó cũng là linh hồn của JavaScript khi mà ta cần tạo một hàm và truyền nó tới một nơi khác.
 
+<<<<<<< HEAD
 Những hàm này tạo ra để chạy ở chỗ khác cho nên nó không cần đến ngữ cảnh nơi nó được tạo.
+=======
+And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
+>>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 ## Các hàm mũi tên không có "this"
 

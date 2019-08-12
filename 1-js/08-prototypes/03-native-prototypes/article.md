@@ -2,7 +2,11 @@
 
 Thuộc tính `"prototype"` được dùng rất nhiều bởi chính JavaScript. Tất cả các constructor có sẵn đều sử dụng nó.
 
+<<<<<<< HEAD
 Trước tiên ta tìm hiểu về hàm tạo ra các đối tượng thuần, sau đó là các đối tượng có sẵn phức tạp hơn.
+=======
+First we'll see at the details, and then how to use it for adding new capabilities to built-in objects.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ## Object.prototype
 
@@ -19,11 +23,11 @@ Giá trị xuất ra là chuỗi `"[object Object]"` là do phương thức `toS
 
 Đây là hình ảnh mô tả chuyện gì đã xảy ra:
 
-![](object-prototype.png)
+![](object-prototype.svg)
 
 Khi tạo đối tượng bằng `new Object()` (hoặc bằng `{...}`), `Object.prototype` được gán cho `[[Prototype]]` của đối tượng, đây là quy tắc ta đã học ở bài trước:
 
-![](object-prototype-1.png)
+![](object-prototype-1.svg)
 
 Cho nên khi gọi `obj.toString()` thì phương thức này được lấy từ `Object.prototype`.
 
@@ -36,7 +40,11 @@ alert(obj.__proto__ === Object.prototype); // true
 // obj.toString === obj.__proto__.toString == Object.prototype.toString
 ```
 
+<<<<<<< HEAD
 Chú ý rằng `Object.prototype` không có nguyên mẫu, thuộc tính `[[Prototype]]` của nó là `null`:
+=======
+Please note that there is no more `[[Prototype]]` in the chain above `Object.prototype`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
 alert(Object.prototype.__proto__); // null
@@ -46,13 +54,19 @@ alert(Object.prototype.__proto__); // null
 
 Các constructor khác như `Array`, `Date`, `Function` ... cũng có thuộc tính `prototype` nơi giữ các phương thức có sẵn.
 
+<<<<<<< HEAD
 Ví dụ, khi tạo tạo mảng `[1, 2, 3]`, JavaScript tự động gọi `new Array()`. Mảng là đối tượng được tạo ra từ `Array`, và do vậy `Array.prototype` trở thành nguyên mẫu của mảng và cung cấp cho mảng nhiều phương thức có sẵn.
 
 Tuy nhiên khác với `Object.prototype` các nguyên mẫu này vẫn có nguyên mẫu. Nguyên mẫu của chúng chính là `Object.prototype`. Do vậy người ta còn nói "mọi thứ đều thừa kế từ `Object.prototype`".
+=======
+For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is used internally. So `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
+
+By specification, all of the built-in prototypes have `Object.prototype` on the top. That's why some people say that "everything inherits from objects".
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Đây là hình ảnh minh họa với 3 nguyên mẫu:
 
-![](native-prototypes-classes.png)
+![](native-prototypes-classes.svg)
 
 Cùng kiểm tra lại:
 
@@ -79,7 +93,7 @@ alert(arr); // 1,2,3 <-- là kết quả của Array.prototype.toString
 Nhưng `Object.prototype` cũng có `toString`. Vậy `arr` lấy `toString` từ `Array.prototype` hay từ `Object.prototype`? Câu trả lời rất đơn giản: nó lấy từ nguyên mẫu gần nó nhất tức `Array.prototype`.
 
 
-![](native-prototypes-array-tostring.png)
+![](native-prototypes-array-tostring.svg)
 
 
 Trong Developer console của trình duyệt bạn cũng có thể thấy được chuỗi thừa kế bằng lệnh `console.dir`:
@@ -122,7 +136,11 @@ String.prototype.show = function() {
 Trong quá trình phát triển, chúng ta có thể có những ý tưởng về các phương thức mới và muốn thêm nó vào các nguyên mẫu có sẵn. Nhưng đây không phải là cách làm tốt.
 
 ```warn
+<<<<<<< HEAD
 Các nguyên mẫu được dùng ở mọi nơi, nên rất dễ xảy ra xung đột. Nếu hai thư viện cùng thêm phương thức `String.prototype.show`, một trong số chúng sẽ ghi đè lên thư viện kia.
+=======
+Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the method of the other.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Vì thế, nói chung sửa đổi nguyên mẫu có sẵn là một ý tưởng tồi.
 ```
@@ -142,9 +160,15 @@ if (!String.prototype.repeat) { // nếu không có phương thức
   String.prototype.repeat = function(n) {
     // lặp lại chuỗi n lần
 
+<<<<<<< HEAD
     // thực tế mã phức tạp hơn một chút
     // (toàn bộ thuật toán có trong đặc tả)
     // nhưng một phiên bản polyfill chưa hoàn hảo cũng đủ dùng rồi
+=======
+    // actually, the code should be a little bit more complex than that
+    // (the full algorithm is in the specification)
+    // but even an imperfect polyfill is often considered good enough for use
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
     return new Array(n + 1).join(this);
   };
 }
@@ -161,7 +185,11 @@ Trong bài <info:call-apply-decorators#method-borrowing> chúng ta đã nói v�
 
 Một số phương thức của các nguyên mẫu có sẵn cũng có thể mượn được.
 
+<<<<<<< HEAD
 Ví dụ, nếu chúng ta tạo một mảng giả, chúng ta muốn lấy vài phương thức của mảng thật cho nó.
+=======
+For instance, if we're making an array-like object, we may want to copy some `Array` methods to it.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Ví dụ:
 

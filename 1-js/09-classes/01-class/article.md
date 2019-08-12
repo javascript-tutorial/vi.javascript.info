@@ -25,7 +25,11 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 Sau đó gọi `new MyClass()` để tạo đối tượng mới có đầy đủ các phương thức trên.
+=======
+Then use `new MyClass()` to create a new object with all the listed methods.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Phương thức `constructor()` tự động được gọi bởi `new`, nên nó là nơi được dùng để khởi tạo giá trị các thuộc tính cho đối tượng.
 
@@ -53,7 +57,11 @@ Khi gọi `new User("Hùng")`:
 1. Một đối tượng mới được tạo.
 2. Hàm `constructor` chạy với đối số `"Hùng"` và gán cho `this.name`.
 
+<<<<<<< HEAD
 ...Sau đó chúng ta có thể gọi các phương thức từ đối tượng trên, chẳng hạn như `user.sayHi`.
+=======
+...Then we can call object methods, such as `user.sayHi()`.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 
 ```warn header="Không có dấu phảy ngăn cách các phương thức"
@@ -84,19 +92,27 @@ alert(typeof User); // function
 */!*
 ```
 
+<<<<<<< HEAD
 Cấu trúc `class User {...}` thực ra là một khai báo hàm và làm những công việc sau:
 1. Tạo hàm có tên `User`.
     - Thân hàm lấy từ phương thức `constructor` (nếu không viết `constructor` thì thân hàm trống).
 3. Lưu tất cả các phương thức, chẳng hạn như `sayHi`, trong `User.prototype`.
 
 Sau đó khi gọi các phương thức của đối tượng mới, các phương thức này được lấy từ nguyên mẫu, giống như được mô tả trong bài <info:function-prototype>. Vậy nên đối tượng tạo ra từ `new User` có thể truy cập các phương thức của class.
+=======
+What `class User {...}` construct really does is:
+
+1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
+2. Stores class methods, such as `sayHi`, in `User.prototype`.
+
+Afterwards, for `new User` objects, when we call a method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
 
-![](class-user.png)
+![](class-user.svg)
 
 Đây là đoạn mã giúp ta quan sát điều này:
-
 
 ```js run
 class User {
@@ -119,7 +135,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 
 ## Class không chỉ là một "syntax sugar"
 
+<<<<<<< HEAD
 Đôi khi người ta nói rằng `class` là một "syntax sugar" (cú pháp ngắn gọn được thiết kế để thay thế cho một đoạn mã phức tạp thực hiện công việc tương tự) của JavaScript, bởi chúng ta có thể khai báo một hàm constructor, thêm phương thức vào `prototype` của nó mà không cần sử dụng `class`:
+=======
+Sometimes people say that `class` is a "syntax sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ```js run
 // viết lại class mà mà không dùng cấu trúc "class"
@@ -147,7 +167,11 @@ Mặc dù vậy, vẫn có những khác biệt quan trọng.
 
 1. Trước tiên, hàm tạo bởi `class` có thêm một thuộc tính đặc biệt `[[FunctionKind]]:"classConstructor"`. Các hàm tạo ra bằng cách thông thường không có thuộc tính này.
 
+<<<<<<< HEAD
     Không như hàm thông thường, một "class constructor" (hàm tạo bởi `class`) bắt buộc phải gọi với `new`:
+=======
+    Unlike a regular function, a class constructor must be called with `new`:
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
     ```js run
     class User {
@@ -176,8 +200,12 @@ Mặc dù vậy, vẫn có những khác biệt quan trọng.
 3. Các class luôn mặc định sử dụng `use strict`.
     Tất cả mã bên trong cấu trúc class tự động sử dụng `use strict`.
 
+<<<<<<< HEAD
 
 Ngoài các tính năng cơ bản, cú pháp `class` còn mang đến nhiều tính năng khác mà chúng ta sẽ học trong các bài sau.
+=======
+Besides, `class` syntax brings many other features that we'll explore later.
+>>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
 
 ## Biểu thức class
 
@@ -193,7 +221,11 @@ let User = class {
 };
 ```
 
+<<<<<<< HEAD
 Tương tự như Biểu thức hàm có tên (NFE), chúng ta cũng có "Biểu thức class có tên" (Named Class Expression).
+=======
+Similar to Named Function Expressions, class expressions may have a name.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Nếu một biểu thức class có tên, tên này chỉ có thể thấy được trong class:
 
@@ -202,13 +234,21 @@ Nếu một biểu thức class có tên, tên này chỉ có thể thấy đư�
 // (trong đặc tả không có thuật ngữ này, nhưng nó tương tự NFE)
 let User = class *!*MyClass*/!* {
   sayHi() {
+<<<<<<< HEAD
     alert(MyClass); // MyClass chỉ thấy được trong class
+=======
+    alert(MyClass); // MyClass name is visible only inside the class
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 };
 
 new User().sayHi(); // làm việc, hiện thị định nghĩa của MyClass
 
+<<<<<<< HEAD
 alert(MyClass); // lỗi, MyClass không sử dụng được ngoài class
+=======
+alert(MyClass); // error, MyClass name isn't visible outside of the class
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 ```
 
 
@@ -284,14 +324,24 @@ Object.defineProperties(User.prototype, {
 });
 ```
 
+<<<<<<< HEAD
 Đây là ví dụ với các thuộc tính computed:
+=======
+Here's an example with a computed property in brackets `[...]`:
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ```js run
-function f() { return "sayHi"; }
-
 class User {
+<<<<<<< HEAD
   [f()]() {
     alert("Xin chào");
+=======
+
+*!*
+  ['say' + 'Hi']() {
+*/!*
+    alert("Hello");
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 
 }
@@ -311,7 +361,13 @@ Trong các ví dụ trên, `User` chỉ có các phương thức. Giờ thêm c�
 
 ```js run
 class User {
+<<<<<<< HEAD
   name = "Vô danh";
+=======
+*!*
+  name = "Anonymous";
+*/!*
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
   sayHi() {
     alert(`Xin chào, ${this.name}!`);
@@ -321,8 +377,12 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Khác với phương thức các thuộc tính không đặt trong `User.prototype`. Thay vì thế, nó tạo bởi `new`, đặt trong mỗi đối tượng được tạo. Vậy nên, mỗi đối tượng sở hữu các thuộc tính riêng, nhưng dùng chung phương thức từ nguyên mẫu.
 
+=======
+The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling constructor, it's the property of the object itself.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 ## Tóm tắt
 
@@ -330,7 +390,11 @@ Cú pháp cơ bản để tạo class trông như sau:
 
 ```js
 class MyClass {
+<<<<<<< HEAD
   prop = value; // thuộc tính (trường)
+=======
+  prop = value; // property
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
   constructor(...) { // constructor
     // ...
@@ -341,7 +405,11 @@ class MyClass {
   get something(...) {} // phương thức getter
   set something(...) {} // phương thức setter
 
+<<<<<<< HEAD
   [Symbol.iterator]() {} // phương thức computed, phương thức symbol
+=======
+  [Symbol.iterator]() {} // method with computed name (symbol here)
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   // ...
 }
 ```

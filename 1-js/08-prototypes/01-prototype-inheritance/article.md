@@ -10,7 +10,7 @@ Tính năng *Thừa kế nguyên mẫu* (Prototypal inheritance) của JavaScrip
 
 Trong JavaScript, mọi đối tượng có một thuộc tính ẩn đặc biệt là `[[Prototype]]` , nó hoặc mang giá trị `null` hoặc tham chiếu tới một đối tượng khác. Đối tượng này được gọi là "nguyên mẫu" (prototype):
 
-![prototype](object-prototype-empty.png)
+![prototype](object-prototype-empty.svg)
 
 Khi đọc một thuộc tính không tồn tại của `object`, JavaScript tự động lấy thuộc tính này từ nguyên mẫu. Trong lập trình người ta gọi nó là "thừa kế từ nguyên mẫu": một đối tượng được thừa hưởng các thuộc tính/phương thức từ nguyên mẫu của nó. Nhiều tính năng hay ho của ngôn ngữ và nhiều kỹ thuật lập trình dựa trên khái niệm này.
 
@@ -66,7 +66,7 @@ Dòng `(*)` cài đặt `animal` cho `rabbit.__proto__`, tức làm `[[Prototype
 
 Sau đó, khi `alert` cố đọc `rabbit.eats` `(**)`, vì thuộc tính này không có trong `rabbit`, nên JavaScript đi theo `[[Prototype]]` tìm đến `animal` và lấy `eats` từ đây (tìm theo dấu mũi tên):
 
-![](proto-animal-rabbit.png)
+![](proto-animal-rabbit.svg)
 
 Ta nói "`animal` là nguyên mẫu của `rabbit`" hoặc "`rabbit` được thừa hưởng nguyên mẫu từ `animal`".
 
@@ -97,10 +97,9 @@ rabbit.walk(); // Động vật biết đi
 
 Phương thức tự động lấy từ nguyên mẫu theo sơ đồ sau:
 
-![](proto-animal-rabbit-walk.png)
+![](proto-animal-rabbit-walk.svg)
 
 Chuỗi nguyên mẫu có thể dài hơn:
-
 
 ```js run
 let animal = {
@@ -129,12 +128,19 @@ longEar.walk(); // Động vật biết đi
 alert(longEar.jumps); // true (lấy từ rabbit)
 ```
 
-![](proto-animal-rabbit-chain.png)
+![](proto-animal-rabbit-chain.svg)
 
+<<<<<<< HEAD
 Thực tế có hai giới hạn:
 
 1. Không được thừa kế vòng, nếu không JavaScript sẽ báo lỗi.
 2. Giá trị `__proto__` chỉ có thể là đối tượng hoặc `null`, các giá trị cơ sở bị bỏ qua.
+=======
+There are only two limitations:
+
+1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
+2. The value of `__proto__` can be either an object or `null`. Other types are ignored.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Mỗi đối tượng chỉ có một thuộc tính `[[Prototype]]` và thuộc tính này chỉ tham chiếu tới một đối tượng. Cho nên một đối tượng chỉ có một nguyên mẫu.
 
@@ -169,9 +175,13 @@ rabbit.walk(); // Rabbit! Bounce-bounce!
 
 Từ giờ, `rabbit.walk()` được tìm thấy và gọi ngay trong `rabbit`, không sử dụng `walk` của `animal`:
 
-![](proto-animal-rabbit-walk-2.png)
+![](proto-animal-rabbit-walk-2.svg)
 
+<<<<<<< HEAD
 Nhưng nó chỉ đúng với thuộc tính dữ liệu, không đúng với thuộc tính truy cập. Về bản chất việc đọc/ghi thuộc tính truy cập dẫn đến việc gọi hàm getter/setter, nên chúng được gọi từ nguyên mẫu.
+=======
+Accessor properties are an exception, as assignment is handled by a setter function. So writing to such a property is actually the same as calling a function.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Ví dụ:
 
@@ -245,9 +255,13 @@ alert(animal.isSleeping); // undefined (không có thuộc tính này trong nguy
 
 Hình ảnh của kết quả trên:
 
-![](proto-animal-rabbit-walk-3.png)
+![](proto-animal-rabbit-walk-3.svg)
 
+<<<<<<< HEAD
 Nếu ta có các đối tượng khác như `bird`, `snake` ... thừa kế từ `animal`, chúng cũng có thể truy cập các phương thức của `animal`. Nhưng `this` thì luôn là `bird`, `snake`... không phải `animal`. Cho nên khi ta ghi dữ liệu vào `this`, nó lưu trong các đối tượng này, không lưu vào nguyên mẫu.
+=======
+If we had other objects like `bird`, `snake` etc inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Ta có kết luận chung: các phương thức được chia sẻ, nhưng trạng thái đối tượng thì không.
 
@@ -305,7 +319,7 @@ for(let prop in rabbit) {
 
 Ở đây ta có chuỗi thừa kế sau: `rabbit` thừa kế từ `animal`, `animal` thừa kế từ `Object.prototype` (mọi đối tượng tạo bằng literal `{...}` mặc định nhận `Object.prototype` làm nguyên mẫu), `Object.prototype` không có nguyên mẫu nên `[[Prototype]]` của nó là `null`:
 
-![](rabbit-animal-object.png)
+![](rabbit-animal-object.svg)
 
 Nhờ chuỗi thừa kế này mà ta có thể gọi `rabbit.hasOwnProperty`. Bản thân `rabbit` không có `hasOwnProperty`, JavaScript tìm ngược lên chuỗi thừa kế và thấy trong `Object.prototype`. Nói cách khác `rabbit.hasOwnProperty` là phương thức được thừa kế từ `Object.prototype`.
 
@@ -313,10 +327,19 @@ Nhờ chuỗi thừa kế này mà ta có thể gọi `rabbit.hasOwnProperty`. B
 
 Câu trả lời hóa ra rất đơn giản: nó là thuộc tính không liệt kê. Trong JavaScipt mọi thuộc tính của `Object.prototype`, đều có cờ `enumerable:false`. Đó là lý do tại sao `hasOwnProperty` không xuất hiện trong `for..in`.
 
+<<<<<<< HEAD
 ```smart header="Mọi phương thức duyệt đều bỏ qua các thuộc tính được thừa kế"
 Không giống như vòng lặp `for..in` mọi phương thức lấy các cặp key/value của một đối tượng, như `Object.keys`, `Object.values`... đều bỏ qua thuộc tính được thừa kế.
+=======
+```smart header="Almost all other key/value-getting methods ignore inherited properties"
+Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
+>>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
+<<<<<<< HEAD
 Chúng chỉ hoạt động trên bản thân đối tượng mà không đoái hoài gì đến nguyên mẫu.
+=======
+They only operate on the object itself. Properties from the prototype are *not* taken into account.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## Tóm tắt

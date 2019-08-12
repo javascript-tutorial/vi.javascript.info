@@ -86,7 +86,7 @@ Here's the full list:
 |`\\`|Backslash|
 |`\t`|Tab|
 |`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- kept for compatibility, not used nowadays. |
-|`\xXX`|Unicode character with the given hexadimal unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
+|`\xXX`|Unicode character with the given hexadecimal unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
 |`\uXXXX`|A unicode symbol with the hex code `XXXX` in UTF-16 encoding, for instance `\u00A9` -- is a unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
 |`\u{X…XXXXXX}` (1 to 6 hex characters)|A unicode symbol with the given UTF-32 encoding. Some rare characters are encoded with two unicode symbols, taking 4 bytes. This way we can insert long codes. |
 
@@ -314,7 +314,7 @@ if (str.indexOf("Widget") != -1) {
 
 One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
 
-For 32-bit integers the call `~n` means exactly the same as `-(n+1)` (due to IEEE-754 format).
+In practice, that means a simple thing: for 32-bit integers `~n` equals `-(n+1)`.
 
 For instance:
 
@@ -345,7 +345,7 @@ It is usually not recommended to use language features in a non-obvious way, but
 
 Just remember: `if (~str.indexOf(...))` reads as "if found".
 
-Technically speaking, numbers are truncated to 32 bits by `~` operator, so there exist other big numbers that give `0`, the smallest is `~4294967295=0`. That makes such check is correct only if a string is not that long.
+To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check is correct only if a string is not that long.
 
 Right now we can see this trick only in the old code, as modern JavaScript provides `.includes` method (see below).
 
@@ -519,7 +519,7 @@ alert( str );
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
 
-See? Capital characters go first, then a few special ones, then lowercase characters.
+See? Capital characters go first, then a few special ones, then lowercase characters, and `Ö` near the end of the output.
 
 Now it becomes obvious why `a > Z`.
 
@@ -538,10 +538,10 @@ Luckily, all modern browsers (IE10- requires the additional library [Intl.JS](ht
 
 It provides a special method to compare strings in different languages, following their rules.
 
-The call [str.localeCompare(str2)](mdn:js/String/localeCompare) returns an integer indicating whether `str` comes before, after or is equivalent to `str2` according to the language rules:
+The call [str.localeCompare(str2)](mdn:js/String/localeCompare) returns an integer indicating whether `str` is less, equal or greater than `str2` according to the language rules:
 
-- Returns a negative number if `str` is less than `str2`, i.e. `str` occurs before `str2`.
-- Returns a positive number if `str` is greater than `str2`, i.e. `str` occurs after `str2`.
+- Returns a negative number if `str` is less than `str2`.
+- Returns a positive number if `str` is greater than `str2`.
 - Returns `0` if they are equivalent.
 
 For instance:
@@ -631,10 +631,12 @@ This provides great flexibility, but also an interesting problem: two characters
 For instance:
 
 ```js run
-alert( 'S\u0307\u0323' ); // Ṩ, S + dot above + dot below
-alert( 'S\u0323\u0307' ); // Ṩ, S + dot below + dot above
+let s1 = 'S\u0307\u0323'; // Ṩ, S + dot above + dot below
+let s2 = 'S\u0323\u0307'; // Ṩ, S + dot below + dot above
 
-alert( 'S\u0307\u0323' == 'S\u0323\u0307' ); // false, different characters (?!)
+alert( `s1: ${s1}, s2: ${s2}` );
+
+alert( s1 == s2 ); // false though the characters look identical (?!)
 ```
 
 To solve this, there exists a "unicode normalization" algorithm that brings each string to the single "normal" form.
