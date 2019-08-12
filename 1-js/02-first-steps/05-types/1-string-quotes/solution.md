@@ -1,5 +1,5 @@
 
-Backticks embed the expression inside `${...}` into the string.
+Backtick đã nhúng các biểu thức bên trong `${...}` vào chuỗi.
 
 ```js run
 let name = "Ilya";
