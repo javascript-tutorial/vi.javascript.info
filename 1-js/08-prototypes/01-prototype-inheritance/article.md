@@ -335,7 +335,11 @@ Không giống như vòng lặp `for..in` mọi phương thức lấy các cặp
 Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
+<<<<<<< HEAD
 Chúng chỉ hoạt động trên bản thân đối tượng mà không đoái hoài gì đến nguyên mẫu.
+=======
+They only operate on the object itself. Properties from the prototype are *not* taken into account.
+>>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
 ```
 
 ## Tóm tắt
