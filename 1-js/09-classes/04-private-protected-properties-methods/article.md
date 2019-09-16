@@ -309,8 +309,13 @@ Khả năng hỗ trợ
 
     Với người dùng, khi có phiên bản ứng dụng mới, nó có thể được đại tu hoàn toàn từ bên trong, nhưng giao diện bên ngoài hay cách sử dụng không thay đổi.
 
+<<<<<<< HEAD
 Che giấu những thứ phức tạp không cần thiết
 : Mọi người thích sử dụng những thứ đơn giản. Ít nhất là từ bên ngoài. Những thứ phức tạp bên trong họ thường không quan tâm.
+=======
+Hiding complexity
+: People adore using things that are simple. At least from outside. What's inside is a different thing.
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
     Các lập trình viên cũng vậy.
 

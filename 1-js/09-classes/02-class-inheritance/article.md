@@ -582,7 +582,11 @@ Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó
 
 ```js run
 let animal = {
+<<<<<<< HEAD
   eat: function() { // phải phải dùng cú pháp: eat() {...}
+=======
+  eat: function() { // intentially writing like this instead of eat() {...
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
     // ...
   }
 };

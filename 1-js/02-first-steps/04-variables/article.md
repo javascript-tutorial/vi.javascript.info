@@ -12,7 +12,11 @@ Một [biến (variable)](https://vi.wikipedia.org/wiki/Bi%E1%BA%BFn_(khoa_h%E1%
 
 Để tạo biến trong JavaScript, sử dụng từ khóa `let`.
 
+<<<<<<< HEAD
 Câu lệnh dưới đây tạo (còn gọi là *khai báo* hay *định nghĩa*) một biến có tên "message":
+=======
+The statement below creates (in other words: *declares*) a variable with the name "message":
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 ```js
 let message;

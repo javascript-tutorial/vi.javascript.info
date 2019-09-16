@@ -27,7 +27,7 @@ Phương thức getter chạy khi truy cập `obj.propName`, setter chạy khi g
 
 Ví dụ, ta có đối tượng `user` với thuộc tính `name` và `surname`:
 
-```js run
+```js
 let user = {
   name: "Hùng",
   surname: "Phùng"
@@ -105,6 +105,7 @@ alert(user.surname); // Phùng
 Kết quả là chúng ta có một thuộc tính "ảo" `fullName`. Ta có thể đọc và ghi nó, nhưng thực tế nó không tồn tại trong đối tượng.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```smart header="Các thuộc tính truy cập chỉ có thể truy cập nhờ getter và setter"
 Khi một thuộc tính đã được định nghĩa với `get prop()` hoặc `set prop()`, nó trở thành một thuộc tính truy cập, không phải là thuộc tính dữ liệu nữa.
 
@@ -120,6 +121,13 @@ An attempt to `delete` on accessor property causes an error.
 
 
 ## Descriptor của thuộc tính truy cập
+=======
+```smart header="No way to handle `delete`"
+There's no similar method to handle deletion of an accessor property. Only getter/setter methods may exist.
+```
+
+## Accessor descriptors
+>>>>>>> 646989dd470395510e1006c220e05e85a06eb78a
 
 Các descriptor của thuộc trính truy cập khác với descriptor của thuộc tính dữ liệu mà ta đã học.
 
