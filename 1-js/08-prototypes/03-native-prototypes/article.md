@@ -147,7 +147,11 @@ Vì thế, nói chung sửa đổi nguyên mẫu có sẵn là một ý tưởng
 
 **Trong lập trình hiện đại, chỉ có một trường hợp duy nhất có thể thay đổi nguyên mẫu có sẵn.Đó là polyfilling.**
 
+<<<<<<< HEAD
 Polyfilling là tạo một phương thức thay thế cho một phương thức đã có trong đặc tả nhưng chưa được hỗ trợ bởi JavaScript engine hiện tại.
+=======
+Polyfilling is a term for making a substitute for a method that exists in JavaScript specification, but is not yet supported by current JavaScript engine.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 Lúc này ta phải tự viết phương thức sao cho nó hoạt động giống như phương thức trong đặc tả, sau đó thêm nó vào nguyên mẫu như trong đặc tả.
 

@@ -273,7 +273,11 @@ new User().sayHi(); // Xin chào
 
 ## Getter/setter, và các thuộc tính đặc biệt khác
 
+<<<<<<< HEAD
 Giống literal đối tượng, các class có thể có getter/setter, các generator, các thuộc tính "computed"...
+=======
+Just like literal objects, classes may include getters/setters, computed properties etc.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 Đây là ví dụ tạo thuộc tính truy cập `user.name` sử dụng `get/set`:
 
@@ -349,9 +353,13 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Với phương thức generator, đặt `*` đằng trước. Nhưng chúng ta sẽ học về generator ở một bài học sau.
 
 ## Các thuộc tính của class
+=======
+## Class properties
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 ```warn header="Trên các trình duyệt cũ chúng ta cần polyfill"
 Các thuộc tính của class gần đây mới được thêm vào JavaScript, nên một số trình duyệt cũ có thể chưa hỗ trợ.

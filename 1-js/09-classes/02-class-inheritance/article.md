@@ -289,7 +289,11 @@ Tất nhiên, có một lời giải thích. Hãy đi sâu vào chi tiết để
 
 Trong JavaScript, có sự khác biệt giữa hàm `constructor` của một class con và các hàm `constructor` khác. Trong class con, hàm `constructor` được "đánh dấu" nhờ một thuộc tính đặc biệt `[[ConstructorKind]]:"derived"`.
 
+<<<<<<< HEAD
 Sự khác biêt là:
+=======
+Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 <<<<<<< HEAD
 - Khi một hàm `constructor` bình thường chạy, nó tạo một đối tượng trống và gán cho `this` và tiếp tục thay đổi đối tượng này thông qua `this`.
@@ -582,7 +586,11 @@ Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó
 
 ```js run
 let animal = {
+<<<<<<< HEAD
   eat: function() { // phải phải dùng cú pháp: eat() {...}
+=======
+  eat: function() { // intentially writing like this instead of eat() {...
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
     // ...
   }
 };

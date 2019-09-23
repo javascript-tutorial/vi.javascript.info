@@ -8,7 +8,11 @@ Hàm mũi tên không đơn giản chỉ là một cách viết tắt của hàm
 Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
 >>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
+<<<<<<< HEAD
 JavaScript có đầy những tình huống ở đó chúng ta cần viết một hàm nhỏ để chạy ở một nơi khác.
+=======
+JavaScript is full of situations where we need to write a small function that's executed somewhere else.
+>>>>>>> 4d654318ccb6d37d6cefc9b859cf111ff3c96b27
 
 Ví dụ:
 
