@@ -252,7 +252,7 @@ Không như các trường "protected", trường "private" được cấm truy 
 Nhưng nếu ta thừa kế từ `CoffeeMachine`, thì không thể truy cập được `#waterAmount`. Chúng ta cần getter/setter `waterAmount`:
 
 ```js
-class MegaCoffeeMachine extends CoffeeMachine() {
+class MegaCoffeeMachine extends CoffeeMachine {
   method() {
 *!*
     alert( this.#waterAmount ); // Lỗi: chỉ truy cập được CoffeeMachine
@@ -309,8 +309,13 @@ Khả năng hỗ trợ
 
     Với người dùng, khi có phiên bản ứng dụng mới, nó có thể được đại tu hoàn toàn từ bên trong, nhưng giao diện bên ngoài hay cách sử dụng không thay đổi.
 
+<<<<<<< HEAD
 Che giấu những thứ phức tạp không cần thiết
 : Mọi người thích sử dụng những thứ đơn giản. Ít nhất là từ bên ngoài. Những thứ phức tạp bên trong họ thường không quan tâm.
+=======
+Hiding complexity
+: People adore using things that are simple. At least from outside. What's inside is a different thing.
+>>>>>>> 0e4f5e425aff4a9767546f75b378ad4a2a2493ea
 
     Các lập trình viên cũng vậy.
 
