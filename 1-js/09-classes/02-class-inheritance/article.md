@@ -144,11 +144,15 @@ class Rabbit extends Animal {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ...Nhưng thường chúng ta không muốn thay thế toàn bộ phương thức của class cha, mà muốn dựa vào phương thức này rồi tinh chỉnh cũng như bổ sung thêm một số tính năng khác. Chúng ta làm việc này trong phương thức của class con nhưng gọi phương thức của class cha trước hoặc sau khi thực hiện.
 =======
 ...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+...But usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Các class cung cấp từ khóa `"super"` để làm việc này.
 
@@ -289,11 +293,17 @@ Tất nhiên, có một lời giải thích. Hãy đi sâu vào chi tiết để
 
 Trong JavaScript, có sự khác biệt giữa hàm `constructor` của một class con và các hàm `constructor` khác. Trong class con, hàm `constructor` được "đánh dấu" nhờ một thuộc tính đặc biệt `[[ConstructorKind]]:"derived"`.
 
+<<<<<<< HEAD
 Sự khác biêt là:
 
 <<<<<<< HEAD
 - Khi một hàm `constructor` bình thường chạy, nó tạo một đối tượng trống và gán cho `this` và tiếp tục thay đổi đối tượng này thông qua `this`.
 - Nhưng khi hàm `constructor` của class con chạy, nó không tạo ra đối tượng nào cả. Thay vào đó nó trông chờ `constructor` của class cha làm việc này cho nó.
+=======
+Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
+
+In JavaScript, there's a distinction between a "constructor function of an inheriting class" and all others. In an inheriting class, the corresponding constructor function is labeled with a special internal property `[[ConstructorKind]]:"derived"`.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Cho nên nếu chúng ta tạo ra `constructor` riêng cho class con, chúng ta buộc phải gọi `super`, bởi nếu không gọi, đối tượng mà `this` tham chiếu đến sẽ không được tạo. Và chúng ta có lỗi như trên.
 
@@ -350,8 +360,12 @@ If you're reading the tutorial for the first time - this section may be skipped.
 It's about the internal mechanisms behind inheritance and `super`.
 ```
 
+<<<<<<< HEAD
 Let's get a little deeper under the hood of `super`. We'll see some interesting things by the way.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Let's get a little deeper under the hood of `super`. We'll see some interesting things along the way.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Trước tiên cần nói rằng, với tất cả những gì ta đã được học, ta không thể hiểu cách làm việc của `super`!
 
@@ -582,7 +596,11 @@ Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó
 
 ```js run
 let animal = {
+<<<<<<< HEAD
   eat: function() { // phải phải dùng cú pháp: eat() {...}
+=======
+  eat: function() { // intentially writing like this instead of eat() {...
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
     // ...
   }
 };

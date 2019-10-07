@@ -15,7 +15,11 @@ alert( user2.name ); // Nam (làm việc!)
 
 Nó làm việc đúng bởi vì `User.prototype.constructor == User`.
 
+<<<<<<< HEAD
 ...Nhưng nếu ai đó ghi đè mất `User.prototype` và quên tạo lại `"constructor"`, đoạn mã sẽ không làm việc đúng nữa:
+=======
+..But if someone, so to speak, overwrites `User.prototype` and forgets to recreate `"constructor"`, then it would fail.
+>>>>>>> 71ff8f81b05e2438a3c56507888e06c528a71182
 
 Ví dụ:
 
