@@ -12,7 +12,11 @@ Một [biến (variable)](https://vi.wikipedia.org/wiki/Bi%E1%BA%BFn_(khoa_h%E1%
 
 Để tạo biến trong JavaScript, sử dụng từ khóa `let`.
 
+<<<<<<< HEAD
 Câu lệnh dưới đây tạo (còn gọi là *khai báo* hay *định nghĩa*) một biến có tên "message":
+=======
+The statement below creates (in other words: *declares*) a variable with the name "message":
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ```js
 let message;
@@ -237,7 +241,11 @@ num = 5; // lỗi: num chưa định nghĩa
 const myBirthday = '18.04.1982';
 ```
 
+<<<<<<< HEAD
 Biến khai báo bằng từ khóa `const` được gọi hà "hằng" (constant). Chúng không thể thay đổi được. Nếu cố tình thay đổi giá trị hằng sẽ dẫn tới một lỗi:
+=======
+Variables declared using `const` are called "constants". They cannot be reassigned. An attempt to do so would cause an error:
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -290,7 +298,11 @@ Nói cách khác, hằng chỉ được viết hoa nếu giá trị của nó đ
 
 Nói về biến, có một thứ cực kỳ quan trọng.
 
+<<<<<<< HEAD
 Tên biến cần rõ ràng, mang nhiều ý nghĩa, mô tả dữ liệu nó chứa.
+=======
+A variable name should have a clean, obvious meaning, describing the data that it stores.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Đặt tên biến sao cho có nghĩa là một trong những kỹ năng quan trọng và phức tạp nhất trong lập trình. Nhìn thoáng qua tên biến ta có thể phân biệt được đây là đoạn mã viết bởi một lập trình viên dày dạn kinh nghiệm hay lập trình viên nghiệp dư.
 

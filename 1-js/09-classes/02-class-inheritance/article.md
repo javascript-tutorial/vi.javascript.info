@@ -1,9 +1,17 @@
 
 # Thừa kế một class
 
+<<<<<<< HEAD
 Giả sử chúng ta có hai class:
+=======
+Class inheritance is a way for one class to extend another class.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
-`Animal`:
+So we can create new functionality on top of the existing.
+
+## The "extends" keyword
+
+Let's say with have class `Animal`:
 
 ```js
 class Animal {
@@ -28,6 +36,7 @@ class Animal {
 let animal = new Animal("My animal");
 ```
 
+<<<<<<< HEAD
 ![](rabbit-animal-independent-animal.svg)
 
 
@@ -78,6 +87,21 @@ class Animal {
 }
 
 // Rabbit thừa kế từ Animal
+=======
+Here's how we can represent `animal` object and `Animal` class graphically:
+
+![](rabbit-animal-independent-animal.svg)
+
+...And we would like to create another `class Rabbit`.
+
+As rabbits are animals, `Rabbit` class should be based on `Animal`, have access to animal methods, so that rabbits can do what "generic" animals can do.
+
+The syntax to extend another class is: `class Child extends Parent`.
+
+Let's create `class Rabbit` that inherits from `Animal`:
+
+```js
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 *!*
 class Rabbit extends Animal {
 */!*
@@ -92,6 +116,7 @@ rabbit.run(5); // White Rabbit chạy với tốc độ 5.
 rabbit.hide(); // White Rabbit ẩn nấp!
 ```
 
+<<<<<<< HEAD
 Mã của class `Rabbit` trở nên ngắn hơn, vì mặc định nó sử dụng constructor của `Animal`, và cũng thừa kế được phương thức `run` từ `Animal`.
 
 Sâu bên trong, từ khóa `extends` thêm `[[Prototype]]` cho `Rabbit.prototype` để nó tham chiếu đến `Animal.prototype`:
@@ -105,6 +130,20 @@ Như đã học ở bài <info:native-prototypes>, JavaScript cũng sử dụng 
 =======
 As we can recall from the chapter <info:native-prototypes>, JavaScript uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Object of `Rabbit` class have access to both `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+
+Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+
+![](animal-rabbit-extends.svg)
+
+For instance, to find `rabbit.run` method, the engine checks (bottom-up on the picture):
+1. The `rabbit` object (has no `run`).
+2. Its prototype, that is `Rabbit.prototype` (has `hide`, but not `run`).
+3. Its prototype, that is (due to `extends`) `Animal.prototype`, that finally has the `run` method.
+
+As we can recall from the chapter <info:native-prototypes>, JavaScript itself uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`. That's why dates have access to generic object methods.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ````smart header="Sau `extends` có thể là một biểu thức trả về một class"
 Cú pháp thừa kế class cho phép một biểu thức sau `extends` là biểu thức trả về một class.
@@ -131,24 +170,39 @@ Nó hữu ích trong các mô hình lập trình nâng cao khi chúng ta sử d�
 
 ## Ghi đè phương thức
 
+<<<<<<< HEAD
 Giờ cùng tìm hiểu về ghi đè phương thức. Đến lúc này, `Rabbit` thừa kế phương thức `stop` từ `Animal`.
 
 Nếu ta cũng thêm phương thức `stop` riêng trong `Rabbit`, nó sẽ được dùng chứ không phải `stop` của class cha. Ta nói phương thức của class con ghi đè phương thức của class cha cùng tên.
+=======
+Now let's move forward and override a method. By default, all methods that are not specified in `class Rabbit` are taken directly "as is" from `class Animal`.
+
+But if we specify our own method in `Rabbit`, such as `stop()` then it will be used instead:
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 ```js
 class Rabbit extends Animal {
   stop() {
+<<<<<<< HEAD
     // ...được dùng cho rabbit.stop()
+=======
+    // ...now this will be used for rabbit.stop()
+    // instead of stop() from class Animal
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
   }
 }
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 ...Nhưng thường chúng ta không muốn thay thế toàn bộ phương thức của class cha, mà muốn dựa vào phương thức này rồi tinh chỉnh cũng như bổ sung thêm một số tính năng khác. Chúng ta làm việc này trong phương thức của class con nhưng gọi phương thức của class cha trước hoặc sau khi thực hiện.
 =======
 ...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Các class cung cấp từ khóa `"super"` để làm việc này.
 
@@ -289,11 +343,17 @@ Tất nhiên, có một lời giải thích. Hãy đi sâu vào chi tiết để
 
 Trong JavaScript, có sự khác biệt giữa hàm `constructor` của một class con và các hàm `constructor` khác. Trong class con, hàm `constructor` được "đánh dấu" nhờ một thuộc tính đặc biệt `[[ConstructorKind]]:"derived"`.
 
+<<<<<<< HEAD
 Sự khác biêt là:
 
 <<<<<<< HEAD
 - Khi một hàm `constructor` bình thường chạy, nó tạo một đối tượng trống và gán cho `this` và tiếp tục thay đổi đối tượng này thông qua `this`.
 - Nhưng khi hàm `constructor` của class con chạy, nó không tạo ra đối tượng nào cả. Thay vào đó nó trông chờ `constructor` của class cha làm việc này cho nó.
+=======
+Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
+
+In JavaScript, there's a distinction between a "constructor function of an inheriting class" and all others. In an inheriting class, the corresponding constructor function is labeled with a special internal property `[[ConstructorKind]]:"derived"`.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Cho nên nếu chúng ta tạo ra `constructor` riêng cho class con, chúng ta buộc phải gọi `super`, bởi nếu không gọi, đối tượng mà `this` tham chiếu đến sẽ không được tạo. Và chúng ta có lỗi như trên.
 
@@ -350,8 +410,12 @@ If you're reading the tutorial for the first time - this section may be skipped.
 It's about the internal mechanisms behind inheritance and `super`.
 ```
 
+<<<<<<< HEAD
 Let's get a little deeper under the hood of `super`. We'll see some interesting things by the way.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Let's get a little deeper under the hood of `super`. We'll see some interesting things along the way.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Trước tiên cần nói rằng, với tất cả những gì ta đã được học, ta không thể hiểu cách làm việc của `super`!
 
@@ -582,7 +646,11 @@ Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó
 
 ```js run
 let animal = {
+<<<<<<< HEAD
   eat: function() { // phải phải dùng cú pháp: eat() {...}
+=======
+  eat: function() { // intentially writing like this instead of eat() {...
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
     // ...
   }
 };

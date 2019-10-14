@@ -118,7 +118,7 @@ class Article {
 
 let article = Article.createTodays();
 
-alert( article.title ); // Todays digest
+alert( article.title ); // Today's digest
 ```
 
 Giờ ta có thể tạo đối tượng có tiêu đề "Today's digest" với `date` là ngày hiện tại bằng cách gọi phương thức tính `Article.createTodays()`.
@@ -257,7 +257,7 @@ Các phương thức tĩnh được sử dụng để thực hiện các chức 
 alert(Rabbit.__proto__ === Animal); // true
 
 // for regular methods
-alert(Rabbit.prototype.__proto__ === Animal.prototype);
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
 ## Summary

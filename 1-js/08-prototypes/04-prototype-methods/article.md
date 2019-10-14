@@ -28,7 +28,11 @@ let rabbit = Object.create(animal);
 alert(rabbit.eats); // true
 
 *!*
+<<<<<<< HEAD
 alert(Object.getPrototypeOf(rabbit) === animal); // lấy nguyên mẫu của rabbit
+=======
+alert(Object.getPrototypeOf(rabbit) === animal); // true
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 */!*
 
 *!*
@@ -71,9 +75,15 @@ Tại sao lại như vậy?
 
 Nó do lịch sử để lại.
 
+<<<<<<< HEAD
 - Thuộc tính `"prototype"` của constructor có từ rất lâu.
 - Sau đó vào năm 2012: `Object.create` xuất hiện trong tiêu chuẩn JavaScript. Nó cho phép tạo các đối tượng với nguyên mẫu cho trước, nhưng không cho phép lấy/cài đặt nguyên mẫu. Vậy nên các trình duyệt tự thực thi phương thức truy cập `__proto__` để lấy và cài đặt nguyên mẫu trong thời gian này.
 - Tới năm 2015: `Object.setPrototypeOf` và `Object.getPrototypeOf` được thêm vào tiêu chuẩn JavaScript để thực hiện các chức năng của `__proto__`. Vì `__proto__` có ở nhiều nơi, nó không được dùng và chuyển sang phụ lục B của tiêu chuẩn, là tùy chọn cho các môi trường không phải trình duyệt.
+=======
+- The `"prototype"` property of a constructor function has worked since very ancient times.
+- Later, in the year 2012, `Object.create` appeared in the standard. It gave the ability to create objects with a given prototype, but did not provide the ability to get/set it. So browsers implemented the non-standard `__proto__` accessor that allowed the user to get/set a prototype at any time.
+- Later, in the year 2015, `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard, to perform the same functionality as `__proto__`. As `__proto__` was de-facto implemented everywhere, it was kind-of deprecated and made its way to the Annex B of the standard, that is: optional for non-browser environments.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Kết quả là giờ chúng ta có tất cả những cách này để quản lý `[[Prototype]]`.
 
@@ -87,7 +97,11 @@ Về mặt kỹ thuật, chúng ta có thể lấy/cài đặt `[[Prototype]]` b
 Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify: `rabbit` inherits from `animal`, and that is not going to change.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
+<<<<<<< HEAD
 Và JavaScript dựa vào điều này để tối ưu hóa tốc độ truy cập thuộc tính của các đối tượng. Thay đổi nguyên mẫu với `Object.setPrototypeOf` hoặc `obj.__proto__=` phá vỡ sự tối ưu này. Vì vậy hãnh tránh hành động này trừ khi bạn biết nó không ảnh hưởng tới mình.
+=======
+And JavaScript engines are highly optimized for this. Changing a prototype "on-the-fly" with `Object.setPrototypeOf` or `obj.__proto__=` is a very slow operation, it breaks internal optimizations for object property access operations. So avoid it unless you know what you're doing, or JavaScript speed totally doesn't matter for you.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 ```
 
 <<<<<<< HEAD
@@ -117,6 +131,7 @@ Không có gì ngạc nhiên. Thuộc tính `__proto__` là thuộc tính đặc
 
 Trong những tình huống ta cần lưu key `"__proto__"` thì nó sẽ không được lưu và đây là nhược điểm của `__proto__`.
 
+<<<<<<< HEAD
 Nhược điểm trên không gây ra hậu quả quá khủng khiếp. Nhưng trong các trường hợp khác, chúng ta có thể vô tình gán một đối tượng vào `"__proto__"` và gây ra sự thay đổi nguyên mẫu mà ta nói ở trên. Điều này dẫn đến hậu quả rất nghiệm trọng vì toàn bộ mã sẽ chạy sai.
 
 Điều tồi tệ nhất đối với nhà phát triển đó là các lỗi như vậy rất khó nhận thấy và chúng trở thành các lỗ hổng trong chương trình, đặc biệt khi JavaScript được dùng ở phía máy chủ.
@@ -128,10 +143,23 @@ Unexpected things also may happen when assigning to `toString` -- that's a funct
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Làm sao để tránh vấn đề này?
+=======
+Here the consequences are not terrible. But in other cases we may be assigning object values, and then the prototype may indeed be changed. As the result, the execution will go wrong in totally unexpected ways.
+
+What's worse -- usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+
+Unexpected things also may happen when assigning to `toString`, which is a function by default, and to other built-in methods.
+
+How to avoid the problem?
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Trước tiên, ta có thể chuyển sang dùng `Map`, và mọi thứ sẽ ổn.
 
+<<<<<<< HEAD
 Nhưng `Object` cũng có thể làm tốt chuyện này, bởi người tạo ra ngôn ngữ đã lường trước được vấn đề này từ lâu.
+=======
+But `Object` also can serve us well here, because language creators gave thought to that problem long ago.
+>>>>>>> a0bfa924a17cad8e7fee213904b27dbf57c2dbac
 
 Thực ra `__proto__` là một thuộc tính truy cập được thừa kế từ `Object.prototype`:
 
@@ -211,7 +239,7 @@ The built-in `__proto__` getter/setter is unsafe if we'd want to put user-genera
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```
 
-We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just as other methods.
+We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just like other methods.
 
 We can create an object without a prototype by `Object.create(null)`. Such objects are used as "pure dictionaries", they have no issues with `"__proto__"` as the key.
 
