@@ -147,7 +147,11 @@ Vì thế, nói chung sửa đổi nguyên mẫu có sẵn là một ý tưởng
 
 **Trong lập trình hiện đại, chỉ có một trường hợp duy nhất có thể thay đổi nguyên mẫu có sẵn.Đó là polyfilling.**
 
+<<<<<<< HEAD
 Polyfilling là tạo một phương thức thay thế cho một phương thức đã có trong đặc tả nhưng chưa được hỗ trợ bởi JavaScript engine hiện tại.
+=======
+Polyfilling is a term for making a substitute for a method that exists in JavaScript specification, but is not yet supported by current JavaScript engine.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
 
 Lúc này ta phải tự viết phương thức sao cho nó hoạt động giống như phương thức trong đặc tả, sau đó thêm nó vào nguyên mẫu như trong đặc tả.
 
@@ -217,8 +221,16 @@ Việc mượn phương thức rất mềm dẻo, nó cho phép phối hợp cá
 
 ## Tóm tắt
 
+<<<<<<< HEAD
 - Tất cả các đối tượng có sẵn đều tuân theo mô hình:
     - Các phương thức lưu trong nguyên mẫu (`Array.prototype`, `Object.prototype`, `Date.prototype`...).
     - Đối tượng chỉ chứa dữ liệu (phần tử mảng, thuộc tính, ngày/tháng...).
 - Các giá trị cơ sở giữ phương thức trong nguyên mẫu của đối tượng bao: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Chỉ `undefined` và `null` không có đối tượng bao.
 - Các nguyên mẫu có sẵn có thể thay đổi được hoặc bổ sung thêm phương thức mới. Nhưng không nên sửa chúng. Chỉ nên sửa nếu ta cần thêm các phương thức mới có trong đặc tả nhưng chưa được JavaScript engine hỗ trợ.
+=======
+- All built-in objects follow the same pattern:
+    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype` etc).
+    - The object itself stores only the data (array items, object properties, the date).
+- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects.
+- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. Probably the only allowable case is when we add-in a new standard, but not yet supported by the engine JavaScript method.
+>>>>>>> 30e3fa723721909ee25115562e676db2452cf8d1
