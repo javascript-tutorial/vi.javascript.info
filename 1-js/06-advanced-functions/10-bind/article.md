@@ -112,7 +112,11 @@ Mọi hàm đều có sẵn một phương thức có tên [bind](mdn:js/Functio
 Cú pháp cơ bản là:
 
 ```js
+<<<<<<< HEAD
 // cú pháp phức tạp hơn sẽ nói sau
+=======
+// more complex syntax will come a little later
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 let boundFunc = func.bind(context);
 ```
 
@@ -275,7 +279,7 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Why do we usually make a partial function?
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide first argument of every time as it's fixed with `bind`.
+The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide the first argument every time as it's fixed with `bind`.
 
 In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
 

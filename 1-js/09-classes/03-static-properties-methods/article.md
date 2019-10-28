@@ -118,7 +118,7 @@ class Article {
 
 let article = Article.createTodays();
 
-alert( article.title ); // Todays digest
+alert( article.title ); // Today's digest
 ```
 
 Giờ ta có thể tạo đối tượng có tiêu đề "Today's digest" với `date` là ngày hiện tại bằng cách gọi phương thức tính `Article.createTodays()`.
@@ -208,10 +208,14 @@ rabbits[0].run(); // Black Rabbit chạy với tốc độ 5.
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Giờ chúng ta có thể gọi `Rabbit.compare` và `Animal.compare` sẽ được sử dụng.
 =======
 Now when we can call `Rabbit.compare`, the inherited `Animal.compare` will be called.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 Nó làm việc như thế nào? Một lần nữa, lại sử dụng các nguyên mẫu. Có thể bạn đã đoán được, `extends` đặt `[[Prototype]]` của `Rabbit` để nó tham chiếu tới `Animal`.
 
@@ -227,7 +231,7 @@ So, `Rabbit extends Animal` creates two `[[Prototype]]` references:
 1. `Rabbit` function prototypally inherits from `Animal` function.
 2. `Rabbit.prototype` prototypally inherits from `Animal.prototype`.
 
-As the result, inheritance works both for regular and static methods.
+As a result, inheritance works both for regular and static methods.
 
 Here, let's check that by code:
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
@@ -257,12 +261,12 @@ Các phương thức tĩnh được sử dụng để thực hiện các chức 
 alert(Rabbit.__proto__ === Animal); // true
 
 // for regular methods
-alert(Rabbit.prototype.__proto__ === Animal.prototype);
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
 ## Summary
 
-Static methods are used for the functionality that belongs to the class "as a whole", doesn't relate to a concrete class instance.
+Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
 
 For example, a method for comparison `Article.compare(article1, article2)` or a factory method `Article.createTodays()`.
 

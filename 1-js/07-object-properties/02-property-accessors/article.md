@@ -3,7 +3,11 @@
 
 Có hai loại thuộc tính.
 
+<<<<<<< HEAD
 Đầu tiên là *thuộc tính dữ liệu* (data properties). Chúng ta đã biết và làm việc với chúng. Tất cả các thuộc tính chúng ta đã sử dụng cho đến giờ đều là các thuộc tính dữ liệu.
+=======
+The first kind is *data properties*. We already know how to work with them. All properties that we've been using until now were data properties.
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 Loại thứ hai sẽ được học trong bài này gọi là các *thuộc tính truy cập* (accessor properties). Về cơ bản chúng là các hàm có tác dụng lấy và cài đặt một giá trị - (tức là các phương thức), nhưng cách sử dụng giống một thuộc tính bình thường.
 
@@ -27,7 +31,7 @@ Phương thức getter chạy khi truy cập `obj.propName`, setter chạy khi g
 
 Ví dụ, ta có đối tượng `user` với thuộc tính `name` và `surname`:
 
-```js run
+```js
 let user = {
   name: "Hùng",
   surname: "Phùng"
@@ -105,6 +109,7 @@ alert(user.surname); // Phùng
 Kết quả là chúng ta có một thuộc tính "ảo" `fullName`. Ta có thể đọc và ghi nó, nhưng thực tế nó không tồn tại trong đối tượng.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```smart header="Các thuộc tính truy cập chỉ có thể truy cập nhờ getter và setter"
 Khi một thuộc tính đã được định nghĩa với `get prop()` hoặc `set prop()`, nó trở thành một thuộc tính truy cập, không phải là thuộc tính dữ liệu nữa.
 
@@ -124,6 +129,17 @@ An attempt to `delete` on accessor property causes an error.
 Các descriptor của thuộc trính truy cập khác với descriptor của thuộc tính dữ liệu mà ta đã học.
 
 Nó không có `value` và `writable`, mà thay bằng hai hàm `get` và `set`.
+=======
+```smart header="No way to handle `delete`"
+There's no similar method to handle deletion of an accessor property. Only getter/setter methods may exist.
+```
+
+## Accessor descriptors
+
+Descriptors for accessor properties are different from those for data properties.
+
+For accessor properties, there is no `value` or `writable`, but instead there are `get` and `set` functions.
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 <<<<<<< HEAD
 Cụ thể descriptor của thuộc tính truy cập có:
@@ -229,12 +245,18 @@ Technically, external code is able to access the name directly by using `user._n
 <<<<<<< HEAD
 Các getter và setter cho phép ta thay thế một thuộc tính dữ liệu thông thường bằng phiên bản khác sử dụng thuộc tính truy cập với khả năng kiểm soát tốt hơn.
 
+<<<<<<< HEAD
 Giả sử chúng ta tạo đối tượng người dùng có hai thuộc tính `name` và `age`:
 =======
 One of the great uses of accessors -- they allow to take control over a "regular" data property at any moment by replacing it with getter and setter and tweak its behavior.
 
 Imagine, we started implementing user objects using data properties `name` and `age`:
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+One of the great uses of accessors is that they allow to take control over a "regular" data property at any moment by replacing it with a getter and a setter and tweak its behavior.
+
+Imagine we started implementing user objects using data properties `name` and `age`:
+>>>>>>> 70ca842bef2390bc26d13dea2b856838aa890fe0
 
 ```js
 function User(name, age) {
