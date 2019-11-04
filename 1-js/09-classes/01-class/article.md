@@ -76,7 +76,11 @@ Vậy thì chính xác `class` là gì? Thường thì người ta nghĩ rằng 
 
 Cùng lột trần để thấy thực sự nó là gì. Điều này giúp ta hiểu được nhiều khía cạnh phức tạp.
 
+<<<<<<< HEAD
 Trong JavaScript, class thực ra là một hàm.
+=======
+In JavaScript, a class is a kind of function.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Đoạn mã sau cho thấy điều này:
 
@@ -105,8 +109,12 @@ What `class User {...}` construct really does is:
 1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
 2. Stores class methods, such as `sayHi`, in `User.prototype`.
 
+<<<<<<< HEAD
 Afterwards, for `new User` objects, when we call a method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
 
@@ -163,15 +171,23 @@ user.sayHi();
 
 Kết quả hoàn toàn giống như khi sử dụng "class". Đó là lý do tại sao `class` có thể xem như một syntax sugar để định nghĩa một constructor cùng với các phương thức trong prototype của nó.
 
+<<<<<<< HEAD
 Mặc dù vậy, vẫn có những khác biệt quan trọng.
+=======
+Still, there are important differences.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 1. Trước tiên, hàm tạo bởi `class` có thêm một thuộc tính đặc biệt `[[FunctionKind]]:"classConstructor"`. Các hàm tạo ra bằng cách thông thường không có thuộc tính này.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     Không như hàm thông thường, một "class constructor" (hàm tạo bởi `class`) bắt buộc phải gọi với `new`:
 =======
     Unlike a regular function, a class constructor must be called with `new`:
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+    And unlike a regular function, a class constructor must be called with `new`:
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
     ```js run
     class User {
@@ -209,7 +225,11 @@ Besides, `class` syntax brings many other features that we'll explore later.
 
 ## Biểu thức class
 
+<<<<<<< HEAD
 Giống như hàm, class cũng có thể được khai báo bằng một biểu thức gọi là biểu thức class.
+=======
+Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Đây là ví dụ về một biểu thức class:
 
@@ -273,7 +293,11 @@ new User().sayHi(); // Xin chào
 
 ## Getter/setter, và các thuộc tính đặc biệt khác
 
+<<<<<<< HEAD
 Giống literal đối tượng, các class có thể có getter/setter, các generator, các thuộc tính "computed"...
+=======
+Just like literal objects, classes may include getters/setters, computed properties etc.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Đây là ví dụ tạo thuộc tính truy cập `user.name` sử dụng `get/set`:
 
@@ -349,9 +373,13 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Với phương thức generator, đặt `*` đằng trước. Nhưng chúng ta sẽ học về generator ở một bài học sau.
 
 ## Các thuộc tính của class
+=======
+## Class properties
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 ```warn header="Trên các trình duyệt cũ chúng ta cần polyfill"
 Các thuộc tính của class gần đây mới được thêm vào JavaScript, nên một số trình duyệt cũ có thể chưa hỗ trợ.
@@ -378,11 +406,15 @@ new User().sayHi();
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Khác với phương thức các thuộc tính không đặt trong `User.prototype`. Thay vì thế, nó tạo bởi `new`, đặt trong mỗi đối tượng được tạo. Vậy nên, mỗi đối tượng sở hữu các thuộc tính riêng, nhưng dùng chung phương thức từ nguyên mẫu.
 
 =======
 The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling constructor, it's the property of the object itself.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling the constructor, it's a property of the object itself.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 ## Tóm tắt
 
@@ -414,6 +446,10 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 `MyClass` thực ra là một hàm (được lấy từ `constructor`), trong khi đó các phương thức, getter và setter được ghi vào `MyClass.prototype`.
+=======
+`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and setters are written to `MyClass.prototype`.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Trong bài sau, chúng ta sẽ học thêm về class, gồm thừa kế và các tính năng khác.

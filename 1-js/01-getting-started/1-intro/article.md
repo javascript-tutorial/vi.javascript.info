@@ -12,8 +12,13 @@ Các tập lệnh (scripts) được cung cấp và thực thi dưới dạng v�
 
 Ở khía cạnh này, JavaScript rất khác với ngôn ngữ lập trình có tên là [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
+<<<<<<< HEAD
 ```smart header="Vì sao lại gọi là <u>Java</u>Script?"
 Khi Javascript được tạo ra, ban đầu nó có một cái tên khác: "LiveScript". Nhưng lúc này Java đang rất phổ biến, vì vậy người ta đã quyết định rằng đặt một ngôn ngữ mới là "em trai" của Java sẽ có ích.
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 
 Nhưng với sự phát triển của mình, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập, với những đặc điểm kỹ thuật riêng của mình được gọi là [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), và bây giờ nó chẳng liên quan gì đến Java cả.
 ```

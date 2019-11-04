@@ -97,10 +97,19 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
+<<<<<<< HEAD
 // ...trong vòng 1 giây
 user = { sayHi() { alert("Một người dùng khác trong setTimeout!"); } };
 
 // Một người dùng khác trong setTimeout?!?
+=======
+// ...the value of user changes within 1 second
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+
+// Another user in setTimeout!
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 ```
 
 Giải pháp tiếp tiếp theo giúp khắc phục lỗ hổng trên.
@@ -112,7 +121,11 @@ Mọi hàm đều có sẵn một phương thức có tên [bind](mdn:js/Functio
 Cú pháp cơ bản là:
 
 ```js
+<<<<<<< HEAD
 // cú pháp phức tạp hơn sẽ nói sau
+=======
+// more complex syntax will come a little later
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 let boundFunc = func.bind(context);
 ```
 
@@ -173,9 +186,22 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
+<<<<<<< HEAD
 sayHi(); // Xin chào, Hùng!
 
 setTimeout(sayHi, 1000); // Xin chào, Hùng!
+=======
+// can run it without an object
+sayHi(); // Hello, John!
+
+setTimeout(sayHi, 1000); // Hello, John!
+
+// even if the value of user changes within 1 second
+// sayHi uses the pre-bound value
+user = {
+  sayHi() { alert("Another user in setTimeout!"); }
+};
+>>>>>>> ec21af8aef6930388c06ee4cd8f8f6769f9d305b
 ```
 
 Tại dòng `(*)` ta lấy phương thức `user.sayHi` và ràng buộc `this` của nó với `user`. Hàm `sayHi` là hàm đã ràng buộc, có thể gọi một mình hoặc truyền đi bất cứ đâu để chạy mà không bị mất `this`.
@@ -275,7 +301,7 @@ alert( triple(5) ); // = mul(3, 5) = 15
 
 Why do we usually make a partial function?
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide first argument of every time as it's fixed with `bind`.
+The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide the first argument every time as it's fixed with `bind`.
 
 In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
 
