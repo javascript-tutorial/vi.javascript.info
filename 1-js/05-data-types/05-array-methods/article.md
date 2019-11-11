@@ -36,7 +36,7 @@ That's natural, because `delete obj.key` removes a value by the `key`. It's all 
 
 So, special methods should be used.
 
-The [arr.splice(str)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+The [arr.splice(start)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
 
 The syntax is:
 
@@ -119,7 +119,7 @@ The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking 
 The syntax is:
 
 ```js
-arr.slice(start, end)
+arr.slice([start], [end])
 ```
 
 It returns a new array copying to it all items from index `start` to `end` (not including `end`). Both `start` and `end` can be negative, in that case position from array end is assumed.
@@ -135,6 +135,8 @@ alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
 
 alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
 ```
+
+We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
 
 ### concat
 
@@ -158,16 +160,16 @@ For instance:
 let arr = [1, 2];
 
 // create an array from: arr and [3,4]
-alert( arr.concat([3, 4])); // 1,2,3,4
+alert( arr.concat([3, 4]) ); // 1,2,3,4
 
 // create an array from: arr and [3,4] and [5,6]
-alert( arr.concat([3, 4], [5, 6])); // 1,2,3,4,5,6
+alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
 // create an array from: arr and [3,4], then add values 5 and 6
-alert( arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6
+alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays. Other objects, even if they look like arrays, added as a whole:
+Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
 
 ```js run
 let arr = [1, 2];
@@ -178,10 +180,9 @@ let arrayLike = {
 };
 
 alert( arr.concat(arrayLike) ); // 1,2,[object Object]
-//[1, 2, arrayLike]
 ```
 
-...But if an array-like object has a special property `Symbol.isConcatSpreadable` property, the it's treated as array by `concat`: its elements are added instead:
+...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
 
 ```js run
 let arr = [1, 2];
@@ -267,7 +268,7 @@ alert( arr.includes(NaN) );// true (correct)
 
 Imagine we have an array of objects. How do we find an object with the specific condition?
 
-Here the [arr.find](mdn:js/Array/find) method comes in handy.
+Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
 
 The syntax is:
 ```js
@@ -446,7 +447,7 @@ alert(arr);  // *!*1, 2, 15*/!*
 ````
 
 ````smart header="Arrow functions for the best"
-Remember [arrow functions](info:function-expressions-arrows#arrow-functions)? We can use them here for neater sorting:
+Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
 
 ```js
 arr.sort( (a, b) => a - b );
@@ -573,7 +574,7 @@ The calculation flow:
 
 Or in the form of a table, where each row represents a function call on the next array element:
 
-|   |`sum`|`current`|`result`|
+|   |`sum`|`current`|result|
 |---|-----|---------|---------|
 |the first call|`0`|`1`|`1`|
 |the second call|`1`|`2`|`3`|
@@ -653,31 +654,37 @@ arr.map(func, thisArg);
 
 The value of `thisArg` parameter becomes `this` for `func`.
 
-For instance, here we use an object method as a filter and `thisArg` helps with that:
+For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
 
 ```js run
-let user = {
-  age: 18,
-  younger(otherUser) {
-    return otherUser.age < this.age;
+let army = {
+  minAge: 18,
+  maxAge: 27,
+  canJoin(user) {
+    return user.age >= this.minAge && user.age < this.maxAge;
   }
 };
 
 let users = [
-  {age: 12},
   {age: 16},
-  {age: 32}
+  {age: 20},
+  {age: 23},
+  {age: 30}
 ];
 
 *!*
-// find all users younger than user
-let youngerUsers = users.filter(user.younger, user);
+// find users, for who army.canJoin returns true
+let soldiers = users.filter(army.canJoin, army);
 */!*
 
-alert(youngerUsers.length); // 2
+alert(soldiers.length); // 2
+alert(soldiers[0].age); // 20
+alert(soldiers[1].age); // 23
 ```
 
-In the call above, we use `user.younger` as a filter and also provide `user` as the context for it. If we didn't provide the context, `users.filter(user.younger)` would call `user.younger` as a standalone function, with `this=undefined`. That would mean an instant error.
+If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+
+A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The former is used more often, as it's a bit easier to understand for most people.
 
 ## Summary
 

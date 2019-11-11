@@ -7,7 +7,11 @@ Answers:
 
 2. `false`. 
 
+<<<<<<< HEAD
     Đối tượng được gán theo tham chiếu. Đối tượng từ `Rabbit.prototype` không được nhân bản khi gán cho `[[Prototype]]` cho nên `Rabbit.prototype` và `[[Prototype]]` của `rabbit` là hai tham chiếu tới một đối tượng.
+=======
+    Objects are assigned by reference. The object from `Rabbit.prototype` is not duplicated, it's still a single object referenced both by `Rabbit.prototype` and by the `[[Prototype]]` of `rabbit`. 
+>>>>>>> 2b5ac971c1bd8abe7b17cdcf724afd84799b6cbd
 
     Nên khi ta thay đổi đối tượng qua một tham chiếu, sự thay đổi này cũng thấy được từ tham chiếu kia.
 
