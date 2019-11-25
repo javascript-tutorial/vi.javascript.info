@@ -18,8 +18,12 @@ class Rabbit {
 let rabbit = new Rabbit("Rab");
 
 *!*
+<<<<<<< HEAD
 // hasOwnProperty thừa kế từ from Object.prototype
 // rabbit.__proto__ === Object.prototype
+=======
+// hasOwnProperty method is from Object.prototype
+>>>>>>> 79417c6e73645d37f184f0cc7e4bc3353e85224f
 alert( rabbit.hasOwnProperty('name') ); // true
 */!*
 ```
