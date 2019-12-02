@@ -25,8 +25,13 @@ Thậm chí sau khi sửa, vẫn có một điểm khác biệt quan trọng gi�
 
 Như chúng ta đã biết, cú pháp "extends" cài đặt hai nguyên mẫu:
 
+<<<<<<< HEAD
 1. Giữa `"prototype"` của các hàm constructor (đề thừa kế các phương thức).
 2. Giữa chính các hàm constructor (đề thừa kế phương thức tĩnh).
+=======
+1. Between `"prototype"` of the constructor functions (for methods).
+2. Between the constructor functions themselves (for static methods).
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 Trong trường hợp của chúng ta, `class Rabbit extends Object` nghĩa là:
 
