@@ -9,7 +9,11 @@ The global object provides variables and functions that are available anywhere. 
 
 Trong trình duyệt, đối tượng global có tên là `window`, trong Node.js là `global`, ở các môi trường khác nhau, nó có thể mang các cái tên khác nhau.
 
+<<<<<<< HEAD
 Gần đây, `globalThis` đã được thêm vào để chuẩn hóa tên cho đối tượng global, và sẽ sớm được hỗ trợ ở mọi môi trường. Tuy nhiên ở một số trình duyệt, cụ thể là non-Chromium Edge, vẫn chưa hỗ trợ `globalThis` nhưng nó có thể dễ dàng được thêm vào.
+=======
+Recently, `globalThis` was added to the language, as a standardized name for a global object, that should be supported across all environments. In some browsers, namely non-Chromium Edge, `globalThis` is not yet supported, but can be easily polyfilled.
+>>>>>>> 28ed5a3f7df9e015cf81c126423c76c9408d7117
 
 <<<<<<< HEAD
 Tất cả các thuộc tính của đối tượng global có thể được truy cập một cách trực tiếp:
