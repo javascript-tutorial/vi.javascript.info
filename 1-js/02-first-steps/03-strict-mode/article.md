@@ -56,7 +56,11 @@ Chỉ các chú thích được phép xuất hiện trước `"use strict"`.
 ```warn header="Không có cách hủy `use strict`"
 Không có chỉ dẫn nào kiểu như `"no use strict"` để tắt chế độ strict sau khi đã bật.
 
+<<<<<<< HEAD
 Một khi đã vào chế độ strict, không còn đường quay lại.
+=======
+Once we enter strict mode, there's no going back.
+>>>>>>> 14e4e9f96bcc2bddc507f409eb4716ced897f91a
 ```
 
 ## Console của trình duyệt
