@@ -69,7 +69,11 @@ Các chú thích trước và sau script.
     //--></script>
     ```
 
+<<<<<<< HEAD
     Mẹo này không được sử dụng trong JavaScript hiện đại. Mục đích của chú thích là ẩn đi mã JavaScript trong các trình duyệt cũ không hỗ trợ thẻ `<script>`. Các trình duyệt phát hành trong 15 năm gần đây không gặp phải vấn đề này, kiểu đặt chú thích như thế này chỉ gặp trong nhưng đoạn mã rất cũ.
+=======
+    This trick isn't used in modern JavaScript. These comments hide JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+>>>>>>> db3b3f8e7a08c153ad8fa0ae50633cdf95fa8912
 
 
 ## Các script ngoài
