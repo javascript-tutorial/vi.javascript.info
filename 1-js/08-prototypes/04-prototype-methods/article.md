@@ -28,7 +28,11 @@ let rabbit = Object.create(animal);
 alert(rabbit.eats); // true
 
 *!*
+<<<<<<< HEAD
 alert(Object.getPrototypeOf(rabbit) === animal); // lấy nguyên mẫu của rabbit
+=======
+alert(Object.getPrototypeOf(rabbit) === animal); // true
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 */!*
 
 *!*
@@ -65,15 +69,27 @@ Nó sao chép tất cả các thuộc tính: liệt kê lẫn không liệt kê,
 
 ## Tóm tắt lịch sử
 
+<<<<<<< HEAD
 Nếu chúng ta đếm tất cả các cách để quản lý `[[Prototype]]`, sẽ có rất nhiều! Rất nhiều cách để cùng làm một thứ!
 
 Tại sao lại như vậy?
+=======
+If we count all the ways to manage `[[Prototype]]`, there are a lot! Many ways to do the same!
+
+Why?
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Nó do lịch sử để lại.
 
+<<<<<<< HEAD
 - Thuộc tính `"prototype"` của constructor có từ rất lâu.
 - Sau đó vào năm 2012: `Object.create` xuất hiện trong tiêu chuẩn JavaScript. Nó cho phép tạo các đối tượng với nguyên mẫu cho trước, nhưng không cho phép lấy/cài đặt nguyên mẫu. Vậy nên các trình duyệt tự thực thi phương thức truy cập `__proto__` để lấy và cài đặt nguyên mẫu trong thời gian này.
 - Tới năm 2015: `Object.setPrototypeOf` và `Object.getPrototypeOf` được thêm vào tiêu chuẩn JavaScript để thực hiện các chức năng của `__proto__`. Vì `__proto__` có ở nhiều nơi, nó không được dùng và chuyển sang phụ lục B của tiêu chuẩn, là tùy chọn cho các môi trường không phải trình duyệt.
+=======
+- The `"prototype"` property of a constructor function has worked since very ancient times.
+- Later, in the year 2012, `Object.create` appeared in the standard. It gave the ability to create objects with a given prototype, but did not provide the ability to get/set it. So browsers implemented the non-standard `__proto__` accessor that allowed the user to get/set a prototype at any time.
+- Later, in the year 2015, `Object.setPrototypeOf` and `Object.getPrototypeOf` were added to the standard, to perform the same functionality as `__proto__`. As `__proto__` was de-facto implemented everywhere, it was kind-of deprecated and made its way to the Annex B of the standard, that is: optional for non-browser environments.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Kết quả là giờ chúng ta có tất cả những cách này để quản lý `[[Prototype]]`.
 
@@ -84,10 +100,16 @@ Tại sao `__proto__` bị thay thế bởi `getPrototypeOf/setPrototypeOf`? Đ�
 Về mặt kỹ thuật, chúng ta có thể lấy/cài đặt `[[Prototype]]` bất cứ lúc nào. Nhưng thường ta chỉ cài đặt nó một lần khi tạo đối tượng và sau đó không thay đổi nữa: `rabbit` thừa kế từ `animal`, sau đó không thay đổi nữa.
 =======
 ```warn header="Don't change `[[Prototype]]` on existing objects if speed matters"
+<<<<<<< HEAD
 Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time, and then do not modify: `rabbit` inherits from `animal`, and that is not going to change.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Và JavaScript dựa vào điều này để tối ưu hóa tốc độ truy cập thuộc tính của các đối tượng. Thay đổi nguyên mẫu với `Object.setPrototypeOf` hoặc `obj.__proto__=` phá vỡ sự tối ưu này. Vì vậy hãnh tránh hành động này trừ khi bạn biết nó không ảnh hưởng tới mình.
+=======
+Technically, we can get/set `[[Prototype]]` at any time. But usually we only set it once at the object creation time and don't modify it anymore: `rabbit` inherits from `animal`, and that is not going to change.
+
+And JavaScript engines are highly optimized for this. Changing a prototype "on-the-fly" with `Object.setPrototypeOf` or `obj.__proto__=` is a very slow operation as it breaks internal optimizations for object property access operations. So avoid it unless you know what you're doing, or JavaScript speed totally doesn't matter for you.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 ```
 
 <<<<<<< HEAD
@@ -111,12 +133,19 @@ obj[key] = "giá trị nào đó";
 alert(obj[key]); // [object Object], không phải "giá trị nào đó"!
 ```
 
+<<<<<<< HEAD
 Ở đây nếu nhập key là  `"__proto__"`, lệnh gán bị bỏ qua!
 
 Không có gì ngạc nhiên. Thuộc tính `__proto__` là thuộc tính đặc biệt: nó phải là đối tượng hoặc `null`, một chuỗi không thể là nguyên mẫu được.
+=======
+Here, if the user types in `__proto__`, the assignment is ignored!
+
+That shouldn't surprise us. The `__proto__` property is special: it must be either an object or `null`. A string can not become a prototype.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Trong những tình huống ta cần lưu key `"__proto__"` thì nó sẽ không được lưu và đây là nhược điểm của `__proto__`.
 
+<<<<<<< HEAD
 Nhược điểm trên không gây ra hậu quả quá khủng khiếp. Nhưng trong các trường hợp khác, chúng ta có thể vô tình gán một đối tượng vào `"__proto__"` và gây ra sự thay đổi nguyên mẫu mà ta nói ở trên. Điều này dẫn đến hậu quả rất nghiệm trọng vì toàn bộ mã sẽ chạy sai.
 
 Điều tồi tệ nhất đối với nhà phát triển đó là các lỗi như vậy rất khó nhận thấy và chúng trở thành các lỗ hổng trong chương trình, đặc biệt khi JavaScript được dùng ở phía máy chủ.
@@ -128,12 +157,27 @@ Unexpected things also may happen when assigning to `toString` -- that's a funct
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Làm sao để tránh vấn đề này?
+=======
+Here the consequences are not terrible. But in other cases we may be assigning object values, and then the prototype may indeed be changed. As a result, the execution will go wrong in totally unexpected ways.
+
+What's worse -- usually developers do not think about such possibility at all. That makes such bugs hard to notice and even turn them into vulnerabilities, especially when JavaScript is used on server-side.
+
+Unexpected things also may happen when assigning to `toString`, which is a function by default, and to other built-in methods.
+
+How can we avoid this problem?
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Trước tiên, ta có thể chuyển sang dùng `Map`, và mọi thứ sẽ ổn.
 
+<<<<<<< HEAD
 Nhưng `Object` cũng có thể làm tốt chuyện này, bởi người tạo ra ngôn ngữ đã lường trước được vấn đề này từ lâu.
 
 Thực ra `__proto__` là một thuộc tính truy cập được thừa kế từ `Object.prototype`:
+=======
+But `Object` can also serve us well here, because language creators gave thought to that problem long ago.
+
+`__proto__` is not a property of an object, but an accessor property of `Object.prototype`:
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 ![](object-prototype-2.svg)
 
@@ -160,7 +204,11 @@ alert(obj[key]); // "giá trị nào đó"
 
 Cho nên nó không thuộc tính truy cập `__proto__` lấy từ nguyên mẫu. Lúc này `__proto__` được xem là thuộc tính dữ liệu thông thường và ví dụ trên đã làm việc.
 
+<<<<<<< HEAD
 Chúng ta còn gọi đối tượng được tạo ra theo cách này là đối tượng "thuần", bởi nó còn đơn giản hơn cả một đối tượng trống `{...}`.
+=======
+We can call such objects "very plain" or "pure dictionary" objects, because they are even simpler than the regular plain object `{...}`.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Nhược điểm của đối tượng "thuần" là thiếu đi rất nhiều phương thức có sẵn, ví dụ `toString`.
 
@@ -191,6 +239,7 @@ alert(Object.keys(chineseDictionary)); // hello,bye
 
 ## Tóm tắt
 
+<<<<<<< HEAD
 Các phương thức hiện đại để truy cập trực tiếp đến nguyên mẫu là:
 
 - [Object.create(proto[, descriptors])](mdn:js/Object/create) -- tạo đối tượng có nguyên mẫu là `proto` (có thể là `null`) và có thể có `descriptors` là các "property descriptor".
@@ -202,6 +251,15 @@ Getter/setter `__proto__` không an toàn khi muốn dùng đối tượng làm 
 =======
 The built-in `__proto__` getter/setter is unsafe if we'd want to put user-generated keys in to an object. Just because a user may enter `"__proto__"` as the key, and there'll be an error, with hopefully light, but generally unpredictable consequences.
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+Modern methods to set up and directly access the prototype are:
+
+- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with a given `proto` as `[[Prototype]]` (can be `null`) and optional property descriptors.
+- [Object.getPrototypeOf(obj)](mdn:js/Object.getPrototypeOf) -- returns the `[[Prototype]]` of `obj` (same as `__proto__` getter).
+- [Object.setPrototypeOf(obj, proto)](mdn:js/Object.setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto` (same as `__proto__` setter).
+
+The built-in `__proto__` getter/setter is unsafe if we'd want to put user-generated keys into an object. Just because a user may enter `"__proto__"` as the key, and there'll be an error, with hopefully light, but generally unpredictable consequences.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
 
 Để khắc phục có thể sử dụng `Object.create(null)` để tạo đối tượng "thuần" `__proto__`, hoặc chuyển sang dùng `Map`.
 
@@ -211,7 +269,7 @@ The built-in `__proto__` getter/setter is unsafe if we'd want to put user-genera
 let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
 ```
 
-We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just as other methods.
+We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just like other methods.
 
 We can create an object without a prototype by `Object.create(null)`. Such objects are used as "pure dictionaries", they have no issues with `"__proto__"` as the key.
 
@@ -228,6 +286,7 @@ Other methods:
 - [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- returns an array of all own symbolic keys.
 - [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- returns an array of all own string keys.
 - [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- returns an array of all own keys.
+<<<<<<< HEAD
 - [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) key named `key`.
 >>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
 
@@ -240,3 +299,8 @@ Tất cả các phương thức trả về các thuộc tính của đối tư�
 =======
 All methods that return object properties (like `Object.keys` and others) -- return "own" properties. If we want inherited ones, then we can use `for..in`.
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+- [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): returns `true` if `obj` has its own (not inherited) key named `key`.
+
+All methods that return object properties (like `Object.keys` and others) -- return "own" properties. If we want inherited ones, we can use `for..in`.
+>>>>>>> ff042a03191dfad1268219ae78758193a5803b38
