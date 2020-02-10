@@ -2,7 +2,11 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Dữ liệu ghi vào đối tượng nào?
+=======
+# Where does it write?
+>>>>>>> 10c7807f49122f475f7cda5d07a324247091c080
 
 Chúng ta có `rabbit` thừa kế từ `animal`.
 
