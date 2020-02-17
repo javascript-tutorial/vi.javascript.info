@@ -79,7 +79,7 @@ So, the development is *iterative*. We write the spec, implement it, make sure t
 
 Let's see this development flow in our practical case.
 
-The first step is already complete: we have an initial spec for `pow`. Now, before making the implementaton, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
 
 ## The spec in action
 
@@ -159,8 +159,8 @@ We can select one of two ways to organize the test here:
         assert.equal(pow(2, 3), 8);
       });
 
-      it("3 raised to power 3 is 27", function() {
-        assert.equal(pow(3, 3), 27);
+      it("3 raised to power 4 is 81", function() {
+        assert.equal(pow(3, 4), 81);
       });
 
     });
@@ -182,7 +182,7 @@ The result:
 
 [iframe height=250 src="pow-2" edit border="1"]
 
-As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `27`.
+As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `81`.
 
 ## Improving the implementation
 

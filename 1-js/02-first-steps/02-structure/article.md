@@ -94,7 +94,11 @@ Cách thấy này hiển nhiên sai vì thực ra đó là hai câu lệnh, đó
 
 Chúng tôi khuyên bạn nên đặt dấu chấm phảy giữa các câu lệnh ngay cả khi mỗi lệnh viết trên một dòng. Quy tắc này được cộng đồng áp dụng rộng rãi. Cùng nhắc lại một lần nữa -- *có thể* bỏ qua dấu chấm phảy trong hầu hết trường hợp. Nhưng để an toàn -- đặc biệt cho những người mới -- hãy luôn sử dụng chúng.
 
+<<<<<<< HEAD
 ## Các chú thích
+=======
+## Comments [#code-comments]
+>>>>>>> 9acc1302a14a3bbabbc9bf95d04581094bd0f1a8
 
 Theo thời gian, chương trình ngày càng phức tạp. Trong chương trình ta cần bổ sung thêm các "chú thích" để diễn giải hoạt động của mã trong chương trình.
 
