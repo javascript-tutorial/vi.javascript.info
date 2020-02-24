@@ -2,7 +2,11 @@
 
 Nhớ rằng, các đối tượng có thể tạo bằng hàm tạo (constructor), chẳng hạn như `new F()`.
 
+<<<<<<< HEAD
 Nếu `F.prototype` là một đối tượng, thì toán tử `new` dùng nó để đặt cho `[[Prototype]]` của đối tượng mới được tạo ra.
+=======
+If `F.prototype` is an object, then the `new` operator uses it to set `[[Prototype]]` for the new object.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 ```smart
 Từ thuở ban đầu JavaScript đã có thừa kế nguyên mẫu. Đây là một trong những tính năng cốt lõi của ngôn ngữ này.
@@ -158,6 +162,7 @@ Rabbit.prototype = {
 
 Trong bài này chúng ta đã mô tả ngắn gọn cách cài đặt `[[Prototype]]` cho các đối tượng tạo ra bằng hàm tạo. Sau này bạn sẽ thấy nhiều mô hình lập trình dựa vào nó.
 
+<<<<<<< HEAD
 Mọi thứ khá đơn giản, chỉ có vài lưu ý sau:
 
 <<<<<<< HEAD
@@ -166,6 +171,11 @@ Mọi thứ khá đơn giản, chỉ có vài lưu ý sau:
 - Thuộc tính `"prototype"` chỉ có tác dụng khi cài đặt nó cho một hàm tạo và gọi hàm này bằng `new`.
 =======
 - The `F.prototype` property (don't mess with `[[Prototype]]`) sets `[[Prototype]]` of new objects when `new F()` is called.
+=======
+Everything is quite simple, just a few notes to make things clear:
+
+- The `F.prototype` property (don't mistake it for `[[Prototype]]`) sets `[[Prototype]]` of new objects when `new F()` is called.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 - The value of `F.prototype` should be either an object or `null`: other values won't work.
 -  The `"prototype"` property only has such a special effect when set on a constructor function, and invoked with `new`.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a

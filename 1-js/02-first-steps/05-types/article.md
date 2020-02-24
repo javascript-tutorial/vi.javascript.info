@@ -10,9 +10,15 @@ message = 123456;
 
 Ngôn ngữ lập trình cho phép điều này gọi là "ngôn ngữ có kiểu động" hay "dynamically typed", nghĩa là vẫn có các kiểu dữ liệu khác nhau, nhưng một biến không bị ràng buộc với một kiểu dữ liệu duy nhất.
 
+<<<<<<< HEAD
 Có 7 kiểu dữ liệu "cơ bản" trong JavaScript. Ở bài này ta chỉ giới thiệu qua về chúng và ở những bài sau sẽ tìm hiểu chi tiết từng kiểu dữ liệu.
 
 ## Kiểu số
+=======
+There are eight basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+
+## Number
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 ```js
 let n = 123;
@@ -62,14 +68,37 @@ Các giá trị đặc biệt được đặt vào kiểu "số". Tất nhiên c
 
 Ta sẽ học được nhiều hơn về các số ở bài <info:number>.
 
+<<<<<<< HEAD
 ## Kiểu chuỗi
+=======
+## BigInt
+
+In JavaScript, the "number" type cannot represent integer values larger than <code>2<sup>53</sup></code> (or less than <code>-2<sup>53</sup></code> for negatives), that's a technical limitation caused by their internal representation. That's about 16 decimal digits, so for most purposes the limitation isn't a problem, but sometimes we need really big numbers, e.g. for cryptography or microsecond-precision timestamps.
+
+`BigInt` type was recently added to the language to represent integers of arbitrary length.
+
+A `BigInt` is created by appending `n` to the end of an integer literal:
+
+```js
+// the "n" at the end means it's a BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+As `BigInt` numbers are rarely needed, we devoted them a separate chapter <info:bigint>.
+
+```smart header="Compatability issues"
+Right now `BigInt` is supported in Firefox and Chrome, but not in Safari/IE/Edge.
+```
+
+## String
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Một chuỗi trong JavaScript bắt buộc phải nằm giữa các quote.
 
 ```js
 let str = "Hello";
 let str2 = 'Single quotes are ok too';
-let phrase = `can embed ${str}`;
+let phrase = `can embed another ${str}`;
 ```
 
 Trong JavaScript, có 3 kiểu quote:
@@ -78,7 +107,11 @@ Trong JavaScript, có 3 kiểu quote:
 2. Single quote: `'Hello'`.
 3. Backtick: <code>&#96;Hello&#96;</code>.
 
+<<<<<<< HEAD
 Double và single quotes là các quote "đơn giản". Không có sự khác biệt nào giữa chúng trong JavaScript.
+=======
+Double and single quotes are "simple" quotes. There's practically no difference between them in JavaScript.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Backtick được xem là quote được mở rộng tính năng. Nó cho phép ta nhúng biến và biểu thức vào chuỗi bằng cách đặt chúng trong `${…}`, ví dụ:
 
@@ -101,13 +134,22 @@ alert( "the result is ${1 + 2}" ); // the result is ${1 + 2}
 
 Chúng ta sẽ tìm hiểu về chuỗi kỹ hơn ở bài <info:string>.
 
+<<<<<<< HEAD
 ```smart header="Không có kiểu *ký tự*."
 Trong một số ngôn ngữ khác, có một kiểu dữ liệu đặc biệt gọi là kiểu "ký tự" dùng để biểu diễn một kí tự. Ví dụ, trong ngôn ngữ C và trong Java nó là `char`.
+=======
+```smart header="There is no *character* type."
+In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is called "char".
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Trong JavaScript, không có kiểu này. Chỉ có kiểu chuỗi: `string`. Một chuỗi có thể gồm chỉ một kí tự hoặc nhiều kí tự.
 ```
 
+<<<<<<< HEAD
 ## Kiểu lôgic
+=======
+## Boolean (logical type)
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Kiểu lôgic chỉ có hai giá trị: `true` và `false`.
 
@@ -198,6 +240,8 @@ typeof undefined // "undefined"
 
 typeof 0 // "number"
 
+typeof 10n // "bigint"
+
 typeof true // "boolean"
 
 typeof "foo" // "string"
@@ -223,6 +267,7 @@ Ba dòng cuối cần phải giải thích thêm:
 2. Kết quả của `typeof null` là `"object"`. Điều này sai. Nó là một lỗi được chấp nhận của `typeof`, được giữ lại để tương thích với các phiên bản cũ của ngôn ngữ. Tất nhiên, `null` không phải là đối tượng. Nó là một giá trị đặc biệt tạo nên một kiểu riêng. Một lần nữa nhắc lại đây là một lỗi của ngôn ngữ JavaScript.
 3. Kết quả của `typeof alert` là `"function"`, bởi `alert` là một hàm (function). Chúng ta sẽ học về các hàm ở một bài tiếp theo, ở đó ta sẽ thấy rằng không có kiểu nào gọi là "function" trong JavaScript cả. Các hàm (function) cũng là các đối tượng. Nhưng `typeof` coi nó khác đi, trả về `"function"`. Điều này tuy không chính xác, nhưng lại rất tiện lợi khi lập trình.
 
+<<<<<<< HEAD
 
 ## Tóm tắt
 
@@ -235,6 +280,20 @@ Có 7 kiểu dữ liệu cơ bản trong JavaScript.
 - `undefined` biểu diễn giá trị chưa gán -- kiểu này chỉ gồm một giá trị duy nhất là `undefined`.
 - `object` biểu diễn các cấu trúc dữ liệu phức tạp, lưu trữ cùng lúc nhiều thứ.
 - `symbol` biểu diễn các định danh duy nhất.
+=======
+## Summary
+
+There are 8 basic data types in JavaScript.
+
+- `number` for numbers of any kind: integer or floating-point, integers are limited by ±2<sup>53</sup>.
+- `bigint` is for integer numbers of arbitrary length.
+- `string` for strings. A string may have one or more characters, there's no separate single-character type.
+- `boolean` for `true`/`false`.
+- `null` for unknown values -- a standalone type that has a single value `null`.
+- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+- `object` for more complex data structures.
+- `symbol` for unique identifiers.
+>>>>>>> 405150f1f286db19a3c1ed913fa3e905fcefbe46
 
 Toán tử `typeof` cho phép chúng ta biết kiểu của giá trị lưu trong một biến.
 
