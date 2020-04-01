@@ -1,10 +1,10 @@
-# Debugging in Chrome
+# Gỡ lỗi trong Chrome
 
-Before writing more complex code, let's talk about debugging.
+Trước khi viết mã phức tạp hơn, hãy nói về gỡ lỗi.
 
-[Debugging](https://en.wikipedia.org/wiki/Debugging) is the process of finding and fixing errors within a script. All modern browsers and most other environments support debugging tools -- a special UI in developer tools that makes debugging much easier. It also allows to trace the code step by step to see what exactly is going on.
+[Gỡ lỗi](https://en.wikipedia.org/wiki/Debugging) là quá trình tìm và sửa lỗi trong tập lệnh. Tất cả các trình duyệt hiện đại và hầu hết các môi trường khác đều hỗ trợ các công cụ gỡ lỗi -- một giao diện người dùng đặc biệt trong các công cụ dành cho nhà phát triển giúp việc gỡ lỗi dễ dàng hơn nhiều. Nó cũng cho phép theo dõi mã từng bước để xem chính xác những gì đang xảy ra.
 
-We'll be using Chrome here, because it has enough features, most other browsers have a similar process`.
+Chúng tôi sẽ sử dụng Chrome tại đây, vì nó có đủ tính năng, hầu hết các trình duyệt khác cũng có quy trình tương tự.
 
 ## The "Sources" panel
 
