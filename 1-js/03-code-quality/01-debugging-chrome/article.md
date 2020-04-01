@@ -17,6 +17,7 @@ Phiên bản Chrome của bạn có thể trông hơi khác một chút, nhưng 
 Đây là những gì bạn nên xem nếu bạn đang làm nó lần đầu tiên:
 
 ![](chrome-open-sources.svg)
+
 Nút chuyển đổi <span class="devtools" style="background-position:-168px -76px"></span> mở tab với các tệp.
 
 Hãy nhấp vào nó và chọn `hello.js` trong chế độ xem dạng cây. Đây là những gì sẽ hiển thị:
@@ -29,7 +30,7 @@ Hãy nhấp vào nó và chọn `hello.js` trong chế độ xem dạng cây. Đ
 2. **Source zone** hiển thị mã nguồn.
 3. **Information and control zone** là để gỡ lỗi, chúng ta sẽ sớm khám phá nó.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-200px -76px"></span> again to hide the resources list and give the code some space.
+Bây giờ bạn có thể nhấp vào cùng một nút chuyển đổi <span class="devtools" style="background-position:-200px -76px"></span> một lần nữa để ẩn danh sách tài nguyên và cung cấp cho mã một số khoảng trống.
 
 ## Console
 
