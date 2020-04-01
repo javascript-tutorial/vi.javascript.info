@@ -6,29 +6,28 @@ Trước khi viết mã phức tạp hơn, hãy nói về gỡ lỗi.
 
 Chúng tôi sẽ sử dụng Chrome tại đây, vì nó có đủ tính năng, hầu hết các trình duyệt khác cũng có quy trình tương tự.
 
-## The "Sources" panel
+## Bảng "Sources"
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+Phiên bản Chrome của bạn có thể trông hơi khác một chút, nhưng vẫn rõ ràng những gì ở đó.
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `Sources` panel.
+- Mở [trang ví dụ](debugging/index.html) trong Chrome.
+- Bật công cụ dành cho nhà phát triển với `key:F12` (Mac: `key:Cmd+Opt+I`).
+- Chọn bảng `Sources`.
 
-Here's what you should see if you are doing it for the first time:
+Đây là những gì bạn nên xem nếu bạn đang làm nó lần đầu tiên:
 
 ![](chrome-open-sources.svg)
+Nút chuyển đổi <span class="devtools" style="background-position:-168px -76px"></span> mở tab với các tệp.
 
-The toggler button <span class="devtools" style="background-position:-168px -76px"></span> opens the tab with files.
-
-Let's click it and select `hello.js` in the tree view. Here's what should show up:
+Hãy nhấp vào nó và chọn `hello.js` trong chế độ xem dạng cây. Đây là những gì sẽ hiển thị:
 
 ![](chrome-tabs.svg)
 
-Here we can see three zones:
+Ở đây chúng ta có thể thấy ba khu vực:
 
-1. The **Resources zone** lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
-2. The **Source zone** shows the source code.
-3. The **Information and control zone** is for debugging, we'll explore it soon.
+1. **Resources zone** liệt kê HTML, JavaScript, CSS và các tệp khác, bao gồm các hình ảnh được đính kèm vào trang. Tiện ích mở rộng Chrome cũng có thể xuất hiện ở đây.
+2. **Source zone** hiển thị mã nguồn.
+3. **Information and control zone** là để gỡ lỗi, chúng ta sẽ sớm khám phá nó.
 
 Now you could click the same toggler <span class="devtools" style="background-position:-200px -76px"></span> again to hide the resources list and give the code some space.
 
