@@ -76,7 +76,11 @@ Vậy thì chính xác `class` là gì? Thường thì người ta nghĩ rằng 
 
 Cùng lột trần để thấy thực sự nó là gì. Điều này giúp ta hiểu được nhiều khía cạnh phức tạp.
 
+<<<<<<< HEAD
 Trong JavaScript, class thực ra là một hàm.
+=======
+In JavaScript, a class is a kind of function.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 Đoạn mã sau cho thấy điều này:
 
@@ -105,8 +109,12 @@ What `class User {...}` construct really does is:
 1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
 2. Stores class methods, such as `sayHi`, in `User.prototype`.
 
+<<<<<<< HEAD
 Afterwards, for `new User` objects, when we call a method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+After `new User` object is created, when we call its method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
 
@@ -133,6 +141,7 @@ alert(User.prototype.sayHi); // alert(this.name);
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
+<<<<<<< HEAD
 ## Class không chỉ là một "syntax sugar"
 
 <<<<<<< HEAD
@@ -140,6 +149,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 =======
 Sometimes people say that `class` is a "syntax sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+## Not just a syntactic sugar
+
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 ```js run
 // viết lại class mà mà không dùng cấu trúc "class"
@@ -161,17 +175,27 @@ let user = new User("Hùng");
 user.sayHi();
 ```
 
+<<<<<<< HEAD
 Kết quả hoàn toàn giống như khi sử dụng "class". Đó là lý do tại sao `class` có thể xem như một syntax sugar để định nghĩa một constructor cùng với các phương thức trong prototype của nó.
 
 Mặc dù vậy, vẫn có những khác biệt quan trọng.
+=======
+The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntactic sugar to define a constructor together with its prototype methods.
+
+Still, there are important differences.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 1. Trước tiên, hàm tạo bởi `class` có thêm một thuộc tính đặc biệt `[[FunctionKind]]:"classConstructor"`. Các hàm tạo ra bằng cách thông thường không có thuộc tính này.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     Không như hàm thông thường, một "class constructor" (hàm tạo bởi `class`) bắt buộc phải gọi với `new`:
 =======
     Unlike a regular function, a class constructor must be called with `new`:
 >>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+=======
+    And unlike a regular function, a class constructor must be called with `new`:
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
     ```js run
     class User {
@@ -209,7 +233,11 @@ Besides, `class` syntax brings many other features that we'll explore later.
 
 ## Biểu thức class
 
+<<<<<<< HEAD
 Giống như hàm, class cũng có thể được khai báo bằng một biểu thức gọi là biểu thức class.
+=======
+Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 Đây là ví dụ về một biểu thức class:
 
@@ -273,7 +301,11 @@ new User().sayHi(); // Xin chào
 
 ## Getter/setter, và các thuộc tính đặc biệt khác
 
+<<<<<<< HEAD
 Giống literal đối tượng, các class có thể có getter/setter, các generator, các thuộc tính "computed"...
+=======
+Just like literal objects, classes may include getters/setters, computed properties etc.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 Đây là ví dụ tạo thuộc tính truy cập `user.name` sử dụng `get/set`:
 
@@ -306,7 +338,11 @@ class User {
 let user = new User("Hùng");
 alert(user.name); // Hùng
 
+<<<<<<< HEAD
 user = new User(""); // Tên quá ngắn.
+=======
+user = new User(""); // Name is too short.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 ```
 
 Khai báo class tạo các getter và setter trong `User.prototype` như sau:
@@ -325,10 +361,14 @@ Object.defineProperties(User.prototype, {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Đây là ví dụ với các thuộc tính computed:
 =======
 Here's an example with a computed property in brackets `[...]`:
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Here's an example with a computed property name in brackets `[...]`:
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 ```js run
 class User {
@@ -349,6 +389,7 @@ class User {
 new User().sayHi();
 ```
 
+<<<<<<< HEAD
 Với phương thức generator, đặt `*` đằng trước. Nhưng chúng ta sẽ học về generator ở một bài học sau.
 
 ## Các thuộc tính của class
@@ -358,6 +399,19 @@ Các thuộc tính của class gần đây mới được thêm vào JavaScript,
 ```
 
 Trong các ví dụ trên, `User` chỉ có các phương thức. Giờ thêm các thuộc tính:
+=======
+## Class fields
+
+```warn header="Old browsers may need a polyfill"
+Class fields are a recent addition to the language.
+```
+
+Previously, classes only had methods.
+
+"Class fields" is a syntax that allows to add any properties.
+
+For instance, let's add `name` property to `class User`:
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 ```js run
 class User {
@@ -375,14 +429,100 @@ class User {
 }
 
 new User().sayHi();
+
+alert(User.prototype.sayHi); // placed in User.prototype
+alert(User.prototype.name); // undefined, not placed in User.prototype
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Khác với phương thức các thuộc tính không đặt trong `User.prototype`. Thay vì thế, nó tạo bởi `new`, đặt trong mỗi đối tượng được tạo. Vậy nên, mỗi đối tượng sở hữu các thuộc tính riêng, nhưng dùng chung phương thức từ nguyên mẫu.
 
 =======
 The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling constructor, it's the property of the object itself.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+The important thing about class fields is that they are set on individual objects, not `User.prototype`.
+
+Technically, they are processed after the constructor has done it's job.
+
+### Making bound methods with class fields
+
+As demonstrated in the chapter <info:bind> functions in JavaScript have a dynamic `this`. It depends on the context of the call.
+
+So if an object method is passed around and called in another context, `this` won't be a reference to its object any more.
+
+For instance, this code will show `undefined`:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+
+  click() {
+    alert(this.value);
+  }
+}
+
+let button = new Button("hello");
+
+*!*
+setTimeout(button.click, 1000); // undefined
+*/!*
+```
+
+The problem is called "losing `this`".
+
+There are two approaches to fixing it, as discussed in the chapter <info:bind>:
+
+1. Pass a wrapper-function, such as `setTimeout(() => button.click(), 1000)`.
+2. Bind the method to object, e.g. in the constructor:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+*!*
+    this.click = this.click.bind(this);
+*/!*
+  }
+
+  click() {
+    alert(this.value);
+  }
+}
+
+let button = new Button("hello");
+
+*!*
+setTimeout(button.click, 1000); // hello
+*/!*
+```
+
+Class fields provide a more elegant syntax for the latter solution:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+*!*
+  click = () => {
+    alert(this.value);
+  }
+*/!*
+}
+
+let button = new Button("hello");
+
+setTimeout(button.click, 1000); // hello
+```
+
+The class field `click = () => {...}` creates an independent function on each `Button` object, with `this` bound to the object. Then we can pass `button.click` around anywhere, and it will be called with the right `this`.
+
+That's especially useful in browser environment, when we need to setup a method as an event listener.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 ## Tóm tắt
 
@@ -414,6 +554,10 @@ class MyClass {
 }
 ```
 
+<<<<<<< HEAD
 `MyClass` thực ra là một hàm (được lấy từ `constructor`), trong khi đó các phương thức, getter và setter được ghi vào `MyClass.prototype`.
+=======
+`MyClass` is technically a function (the one that we provide as `constructor`), while methods, getters and setters are written to `MyClass.prototype`.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 Trong bài sau, chúng ta sẽ học thêm về class, gồm thừa kế và các tính năng khác.

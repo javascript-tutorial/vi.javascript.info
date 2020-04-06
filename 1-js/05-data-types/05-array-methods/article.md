@@ -36,7 +36,7 @@ That's natural, because `delete obj.key` removes a value by the `key`. It's all 
 
 So, special methods should be used.
 
-The [arr.splice(str)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+The [arr.splice(start)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
 
 The syntax is:
 
@@ -119,7 +119,7 @@ The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking 
 The syntax is:
 
 ```js
-arr.slice(start, end)
+arr.slice([start], [end])
 ```
 
 It returns a new array copying to it all items from index `start` to `end` (not including `end`). Both `start` and `end` can be negative, in that case position from array end is assumed.
@@ -135,6 +135,8 @@ alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
 
 alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
 ```
+
+We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
 
 ### concat
 
@@ -158,16 +160,16 @@ For instance:
 let arr = [1, 2];
 
 // create an array from: arr and [3,4]
-alert( arr.concat([3, 4])); // 1,2,3,4
+alert( arr.concat([3, 4]) ); // 1,2,3,4
 
 // create an array from: arr and [3,4] and [5,6]
-alert( arr.concat([3, 4], [5, 6])); // 1,2,3,4,5,6
+alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
 // create an array from: arr and [3,4], then add values 5 and 6
-alert( arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6
+alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays. Other objects, even if they look like arrays, added as a whole:
+Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
 
 ```js run
 let arr = [1, 2];
@@ -178,10 +180,9 @@ let arrayLike = {
 };
 
 alert( arr.concat(arrayLike) ); // 1,2,[object Object]
-//[1, 2, arrayLike]
 ```
 
-...But if an array-like object has a special property `Symbol.isConcatSpreadable` property, the it's treated as array by `concat`: its elements are added instead:
+...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
 
 ```js run
 let arr = [1, 2];
@@ -267,7 +268,7 @@ alert( arr.includes(NaN) );// true (correct)
 
 Imagine we have an array of objects. How do we find an object with the specific condition?
 
-Here the [arr.find](mdn:js/Array/find) method comes in handy.
+Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
 
 The syntax is:
 ```js
@@ -383,7 +384,7 @@ The order became `1, 15, 2`. Incorrect. But why?
 
 **The items are sorted as strings by default.**
 
-Literally, all elements are converted to strings for comparisons. For strings,  lexicographic ordering is applied and indeed `"2" > "15"`.
+Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed `"2" > "15"`.
 
 To use our own sorting order, we need to supply a function as the argument of `arr.sort()`.
 
@@ -430,7 +431,6 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 
 The algorithm may compare an element with multiple others in the process, but it tries to make as few comparisons as possible.
 
-
 ````smart header="A comparison function may return any number"
 Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
 
@@ -446,13 +446,29 @@ alert(arr);  // *!*1, 2, 15*/!*
 ````
 
 ````smart header="Arrow functions for the best"
-Remember [arrow functions](info:function-expressions-arrows#arrow-functions)? We can use them here for neater sorting:
+Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
 This works exactly the same as the longer version above.
+````
+
+````smart header="Use `localeCompare` for strings"
+Remember [strings](info:string#correct-comparisons) comparison algorithm? It compares letters by their codes by default.
+
+For many alphabets, it's better to use `str.localeCompare` method to correctly sort letters, such as `Ö`.
+
+For example, let's sort a few countries in German:
+
+```js run
+let countries = ['Österreich', 'Andorra', 'Vietnam'];
+
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+```
 ````
 
 ### reverse
@@ -529,7 +545,7 @@ The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array
 The syntax is:
 
 ```js
-let value = arr.reduce(function(previousValue, item, index, array) {
+let value = arr.reduce(function(accumulator, item, index, array) {
   // ...
 }, [initial]);
 ```
@@ -538,14 +554,16 @@ The function is applied to all array elements one after another and "carries on"
 
 Arguments:
 
-- `previousValue` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
+- `accumulator` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
 - `item` -- is the current array item.
 - `index` -- is its position.
 - `array` -- is the array.
 
 As function is applied, the result of the previous function call is passed to the next one as the first argument.
 
-Sounds complicated, but it's not if you think about the first argument as the "accumulator" that stores the combined result of all previous execution. And at the end it becomes the result of `reduce`.
+So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end it becomes the result of `reduce`.
+
+Sounds complicated?
 
 The easiest way to grasp that is by example.
 
@@ -573,7 +591,7 @@ The calculation flow:
 
 Or in the form of a table, where each row represents a function call on the next array element:
 
-|   |`sum`|`current`|`result`|
+|   |`sum`|`current`|result|
 |---|-----|---------|---------|
 |the first call|`0`|`1`|`1`|
 |the second call|`1`|`2`|`3`|
@@ -609,7 +627,6 @@ let arr = [];
 // if the initial value existed, reduce would return it for the empty arr.
 arr.reduce((sum, current) => sum + current);
 ```
-
 
 So it's advised to always specify the initial value.
 
@@ -653,31 +670,37 @@ arr.map(func, thisArg);
 
 The value of `thisArg` parameter becomes `this` for `func`.
 
-For instance, here we use an object method as a filter and `thisArg` helps with that:
+For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
 
 ```js run
-let user = {
-  age: 18,
-  younger(otherUser) {
-    return otherUser.age < this.age;
+let army = {
+  minAge: 18,
+  maxAge: 27,
+  canJoin(user) {
+    return user.age >= this.minAge && user.age < this.maxAge;
   }
 };
 
 let users = [
-  {age: 12},
   {age: 16},
-  {age: 32}
+  {age: 20},
+  {age: 23},
+  {age: 30}
 ];
 
 *!*
-// find all users younger than user
-let youngerUsers = users.filter(user.younger, user);
+// find users, for who army.canJoin returns true
+let soldiers = users.filter(army.canJoin, army);
 */!*
 
-alert(youngerUsers.length); // 2
+alert(soldiers.length); // 2
+alert(soldiers[0].age); // 20
+alert(soldiers[1].age); // 23
 ```
 
-In the call above, we use `user.younger` as a filter and also provide `user` as the context for it. If we didn't provide the context, `users.filter(user.younger)` would call `user.younger` as a standalone function, with `this=undefined`. That would mean an instant error.
+If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+
+A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The former is used more often, as it's a bit easier to understand for most people.
 
 ## Summary
 
