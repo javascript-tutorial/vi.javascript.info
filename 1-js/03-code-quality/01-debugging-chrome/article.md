@@ -14,7 +14,7 @@ Phiên bản Chrome của bạn có thể trông hơi khác một chút, nhưng 
 - Bật công cụ dành cho nhà phát triển với `key:F12` (Mac: `key:Cmd+Opt+I`).
 - Chọn bảng `Sources`.
 
-Đây là những gì bạn nên xem nếu bạn đang làm nó lần đầu tiên:
+Đây là những gì bạn sẽ thấy nếu bạn đang làm nó lần đầu tiên:
 
 ![](chrome-open-sources.svg)
 
