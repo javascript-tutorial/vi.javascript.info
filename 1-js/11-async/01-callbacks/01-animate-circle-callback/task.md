@@ -1,15 +1,15 @@
 
-# Animated circle with callback
+# Hiệu ứng hình tròn với hàm gọi lại
 
-In the task <info:task/animate-circle> an animated growing circle is shown.
+Trong bài tập này <info:task/animate-circle> sẽ hiển thị hiệu ứng phát triển hình tròn.
 
-Now let's say we need not just a circle, but to show a message inside it. The message should appear *after* the animation is complete (the circle is fully grown), otherwise it would look ugly.
+Hiện tại có thể nói ta chưa cần có một hình tròn, nhưng ta cần hiển thị thông báo trong nó. Thông báo cần được xuất hiện *sau* khi hiệu ứng hoàn thành (hình tròn đã phát triển lớn nhất), mặt khác thì nó sẽ trông xấu xí.
 
-In the solution of the task, the function `showCircle(cx, cy, radius)` draws the circle, but gives no way to track when it's ready.
+Giải pháp trong bài tập này, có hàm `showCircle(cx, cy, radius)` vẽ ra hình tròn nhưng không đưa cách nào để biết nó đã sẵn sàng.
 
-Add a callback argument: `showCircle(cx, cy, radius, callback)` to be called when the animation is complete. The `callback` should receive the circle `<div>` as an argument.
+Thêm biến có tên callback: `showCircle(cx, cy, radius, callback)` để được gọi sau khi hiệu ứng hoàn thành. `callback` nên nhận hình tròn `<div>` như là một biến truyền vào.
 
-Here's the example:
+Đây là ví dụ:
 
 ```js
 showCircle(150, 150, 100, div => {
@@ -22,4 +22,4 @@ Demo:
 
 [iframe src="solution" height=260]
 
-Take the solution of the task <info:task/animate-circle> as the base.
+Lấy cách làm của bài <info:task/animate-circle> như cơ sở.

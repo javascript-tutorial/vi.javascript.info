@@ -1,10 +1,10 @@
 
 
-# Introduction: callbacks
+# Giới thiệu: callbacks
 
-Many actions in JavaScript are *asynchronous*.
+Có rất nhiều hành động trong Javascript là *bất đồng bộ*.
 
-For instance, take a look at the function `loadScript(src)`:
+Có ví dụ sau, hãy nhìn vào hàm `loadScript(src)`:
 
 ```js
 function loadScript(src) {
@@ -14,41 +14,41 @@ function loadScript(src) {
 }
 ```
 
-The purpose of the function is to load a new script. When it adds the `<script src="…">` to the document, the browser loads and executes it.
+Mục đích của hàm trên dùng để nạp 1 đoạn code mới vào. Khi thêm dòng `<script src="…">` vào code, trình duyệt sẽ nạp đoạn code đó vào và chạy chúng.
 
-We can use it like this:
+Ta có thể sử dụng chúng như sau:
 
 ```js
-// loads and executes the script
+// nạp và chạy đoạn code
 loadScript('/my/script.js');
 ```
 
-The function is called "asynchronously," because the action (script loading) finishes not now, but later.
+Hàm trên được gọi là "bất đồng bộ," bởi vì hành động (nạp code từ tệp js) không kết thúc ngay lập tức mà sau đó mới hoàn thành xong.
 
-If there's a code below `loadScript(…)`, it doesn't wait until the loading finishes.
+Hãy xem đoạn code dưới gọi hàm `loadScript(…)`, khi hàm dưới chạy nó sẽ không đợi nạp hết code trong hàm.
 
 ```js
 loadScript('/my/script.js');
-// the code below loadScript
-// doesn't wait for the script loading to finish
+// đoạn code trong loadScript
+// sẽ không đợi nạp hết code trong hàm
 // ...
 ```
 
-We'd like to use the new script as soon as it loads. It declares new functions, and we want to run them.
+Ta muốn sử dụng một đoạn mã sớm nhất có thể khi nó được nạp. Trong đó có nhiều hàm và ta muốn chạy chúng.
 
-But if we do that immediately after the `loadScript(…)` call, that wouldn't work:
+Nhưng khi ta gọi lập ngay tức sau hàm `loadScript(…)`, các hàm đó không hoạt động:
 
 ```js
-loadScript('/my/script.js'); // the script has "function newFunction() {…}"
+loadScript('/my/script.js'); // đoạn mã có "function newFunction() {…}"
 
 *!*
-newFunction(); // no such function!
+newFunction(); // không tìm thấy hàm
 */!*
 ```
 
-Naturally, the browser probably didn't have time to load the script. As of now, the `loadScript` function doesn't provide a way to track the load completion. The script loads and eventually runs, that's all. But we'd like to know when it happens, to use new functions and variables from that script.
+Như đã biết, trình duyệt hầu như không có đủ thời gian để nạp hết tất cả các code. Hiện tại, hàm `loadScript` không cho ta biết khi nào nạp hết code trong nó. Đoạn code được nạp và cuối cùng sẽ chạy, đó là tất cả. Nhưng ta muốn biết khi nào chúng xảy ra, ta sử dụng các hàm và biến mới trong tệp js đó.
 
-Let's add a `callback` function as a second argument to `loadScript` that should execute when the script loads:
+Thêm hàm `callback` như là tham số thứ 2 vào trong `loadScript` để nó được chạy khi đoạn mã được nạp vào:
 
 ```js
 function loadScript(src, *!*callback*/!*) {
@@ -63,20 +63,18 @@ function loadScript(src, *!*callback*/!*) {
 }
 ```
 
-Now if we want to call new functions from the script, we should write that in the callback:
+Bây giờ nếu ta muốn gọi một hàm mới trong đoạn mã, ta nên viết chúng trong vào tham số thứ 2:
 
 ```js
 loadScript('/my/script.js', function() {
-  // the callback runs after the script is loaded
-  newFunction(); // so now it works
+  // tham số thứ 2 sẽ được chạy khi toàn bộ code trong tệp js được nạp xong
+  newFunction(); // bây giờ nó sẽ chạy như ta mong muốn
   ...
 });
 ```
 
-That's the idea: the second argument is a function (usually anonymous) that runs when the action is completed.
-
-Here's a runnable example with a real script:
-
+Ý tưởng trên là: đưa tham số thứ 2 như là một hàm (thường là hàm vô danh) sau đó chúng sẽ chạy khi mà hành động trước đó thành công. 
+Đây là ví dụ với đoạn mã thực tế:
 ```js run
 function loadScript(src, callback) {
   let script = document.createElement('script');
@@ -88,20 +86,20 @@ function loadScript(src, callback) {
 *!*
 loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
   alert(`Cool, the ${script.src} is loaded`);
-  alert( _ ); // function declared in the loaded script
+  alert( _ ); // hàm sẽ được định danh sau khi nạp xong tệp js 
 });
 */!*
 ```
 
-That's called a "callback-based" style of asynchronous programming. A function that does something asynchronously should provide a `callback` argument where we put the function to run after it's complete.
+Cách làm trên được gọi là cách viết "gọi lại" trong lập trình bất đồng bộ. Một hàm làm việc gì đó bất đồng bộ nên cung cấp một biến `callback` để chúng ta có thể đưa vào một hàm khác để chạy sau khi hàm đó đã chạy thành công. 
 
-Here we did it in `loadScript`, but of course, it's a general approach.
+Tại đây ta đã làm trong `loadScript`, tất nhiên đây là cách tiếp cận thường gặp.
 
-## Callback in callback
+## Gọi hàm trong gọi hàm
 
-How can we load two scripts sequentially: the first one, and then the second one after it?
+Làm thế nào để ta có thể nạp 2 tệp js một cách tuần tự: nạp xong tệp đầu rồi mới nạp tiếp tệp sau?
 
-The natural solution would be to put the second `loadScript` call inside the callback, like this:
+Cách thông thường sẽ là gọi lại `loadScript` trong hàm gọi lại, ví dụ: 
 
 ```js
 loadScript('/my/script.js', function(script) {
@@ -117,9 +115,9 @@ loadScript('/my/script.js', function(script) {
 });
 ```
 
-After the outer `loadScript` is complete, the callback initiates the inner one.
+Sau khi `loadScript` ở ngoài cùng thành công, hàm gọi lại sẽ được khởi tạo trong đó.
 
-What if we want one more script...?
+Sẽ làm sao nếu ta muốn nạp thêm tệp js...?
 
 ```js
 loadScript('/my/script.js', function(script) {
@@ -128,7 +126,7 @@ loadScript('/my/script.js', function(script) {
 
 *!*
     loadScript('/my/script3.js', function(script) {
-      // ...continue after all scripts are loaded
+      // ...tiếp tục nạp sau khi tất cả tệp js trên thành công
     });
 */!*
 
@@ -137,13 +135,13 @@ loadScript('/my/script.js', function(script) {
 });
 ```
 
-So, every new action is inside a callback. That's fine for few actions, but not good for many, so we'll see other variants soon.
+Như đã thấy, mỗi hành động sẽ được để trong hàm gọi lại. Điều này ổn khi có vài hành động nhưng sẽ xấu khi có nhiều, ta sẽ nhiều trường hợp khác sau.
 
-## Handling errors
+## Xử lý lỗi
 
-In the above examples we didn't consider errors. What if the script loading fails? Our callback should be able to react on that.
+Ở những ví dụ trên ta không quan tâm đến các lỗi. Nhưng nếu tệp js nạp bị lỗi? Hàm gọi lại của ta nên xử lý chúng trong trường hợp lỗi.
 
-Here's an improved version of `loadScript` that tracks loading errors:
+Đây là phiên bản được cải thiện của `loadScript` để xử lý khi có lỗi:
 
 ```js run
 function loadScript(src, callback) {
@@ -159,32 +157,32 @@ function loadScript(src, callback) {
 }
 ```
 
-It calls `callback(null, script)` for successful load and `callback(error)` otherwise.
+Nó sẽ gọi `callback(null, script)` khi nạp thành công và `callback(error)` trong khi bị lỗi.
 
-The usage:
+Cách dùng:
 ```js
 loadScript('/my/script.js', function(error, script) {
   if (error) {
-    // handle error
+    // xử lý lỗi
   } else {
-    // script loaded successfully
+    // tệp js được nạp thành công
   }
 });
 ```
 
-Once again, the recipe that we used for `loadScript` is actually quite common. It's called the "error-first callback" style.
+Một lần nữa, cách làm trên ta sử dụng cho `loadScript` là một cách thường gặp. Nó được gọi là "trả về lỗi trước khi gọi lại".
 
-The convention is:
-1. The first argument of the `callback` is reserved for an error if it occurs. Then `callback(err)` is called.
-2. The second argument (and the next ones if needed) are for the successful result. Then `callback(null, result1, result2…)` is called.
+Quy chuẩn:
+1. Tham số đầu tiên trong `callback` được phục vụ khi có lỗi xảy ra. Sau đó `callback(err)` được gọi.
+2. Tham số thứ 2 (và tham số kế tiếp nếu cần) sẽ là kết quả khi thành công. Sau đó `callback(null, result1, result2…)` sẽ đuọc gọi.
 
-So the single `callback` function is used both for reporting errors and passing back results.
+Do đó một hàm `callback` được sử dụng cho cả báo lỗi và trả về kết quả thành công.
 
 ## Pyramid of Doom
 
-From the first look, it's a viable way of asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+Từ cái nhìn đầu tiên, nó là có thể là một cách cách xử lý mã bất đồng bộ. Và quả thật đúng vậy. Cho một hoặc có lẽ hai gọi lồng nhau thì nó cũng ổn.
 
-But for multiple asynchronous actions that follow one after another we'll have code like this:
+Nhưng cho nhiều hành động bất đồng bộ đi theo lần lượt ta sẽ có mã như thế này:
 
 ```js
 loadScript('1.js', function(error, script) {
@@ -203,7 +201,7 @@ loadScript('1.js', function(error, script) {
             handleError(error);
           } else {
   *!*
-            // ...continue after all scripts are loaded (*)
+            // ...tiếp tục sau tất cả các tệp js được nạp thành công (*)
   */!*
           }
         });
@@ -214,14 +212,14 @@ loadScript('1.js', function(error, script) {
 });
 ```
 
-In the code above:
-1. We load `1.js`, then if there's no error.
-2. We load `2.js`, then if there's no error.
-3. We load `3.js`, then if there's no error -- do something else `(*)`.
+Trong đoạn mã trên:
+1. Ta nạp tệp `1.js`, sau đó không có lỗi trả về.
+2. Ta nạp tệp `2.js`, sau đó không có lỗi trả về.
+3. Ta nạp tệp `3.js`, sau đó không có lỗi trả về -- ta làm hành động gì đó trong else `(*)`.
 
-As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have a real code instead of `...`, that may include more loops, conditional statements and so on.
+Như cách gọi gọi lồng nhiều cấp trên, đoạn code sẽ trở nên phức tạp hơn để quản lý chúng, đặc biệt nếu ta thực tại ta cần xử lý nhiều hơn ở các chỗ `...`, các chỗ đó có thể nhiều vòng lặp hoặc các điều kiện và hơn thế.
 
-That's sometimes called "callback hell" or "pyramid of doom."
+Chúng ta thường gọi chúng "callback hell" hoặc "pyramid of doom."
 
 <!--
 loadScript('1.js', function(error, script) {
@@ -249,11 +247,11 @@ loadScript('1.js', function(error, script) {
 
 ![](callback-hell.svg)
 
-The "pyramid" of nested calls grows to the right with every asynchronous action. Soon it spirals out of control.
+"Hình chóp" của gọi lồng nhau tăng trưởng lên đến quyền với mỗi hành động không đồng bộ. Sớm nhất có thể, nó sẽ tăng vùn vụt tới mức không kiểm soát được.
 
-So this way of coding isn't very good.
+Do đó cách này không phải là cách tốt.
 
-We can try to alleviate the problem by making every action a standalone function, like this:
+Ta có thể thử thay thế vấn đề trên bằng cách tạo ra mỗi hành động tương ứng với mỗi hàm như sau:
 
 ```js
 loadScript('1.js', step1);
@@ -280,17 +278,16 @@ function step3(error, script) {
   if (error) {
     handleError(error);
   } else {
-    // ...continue after all scripts are loaded (*)
+    // ...tiếp tục sau tất cả các hành động trên thành công (*)
   }
 };
 ```
 
-See? It does the same, and there's no deep nesting now because we made every action a separate top-level function.
+Như bạn thấy? Nó là như nhau, và không có lồng nhiều cấp nữa bởi vì ta đã tạo mỗi hành động là mỗi hàm khác nhau.
+Nó có hoạt động, nhưng đoạn mã trông thành nhiều phần khác nhau. Nó khó đọc, và có lẽ bạn nhận cần chú ý hơn khi đọc những hàm trên. Điều đó thật bất tiện, nhất là nếu độc giả chưa quen với mã và không biết cách đọc mã. 
 
-It works, but the code looks like a torn apart spreadsheet. It's difficult to read, and you probably noticed that one needs to eye-jump between pieces while reading it. That's inconvenient, especially if the reader is not familiar with the code and doesn't know where to eye-jump.
+Hơn nữa, các hàm được đặt tên `step*` chỉ làm một công việc duy nhất, chúng được tạo ra để tránh "pyramid of doom". Không hàm nào sẽ sử dụng lại chúng bên ngoài chuỗi hành động. Vậy là có một chút sự bừa bộn ở đây.
 
-Also, the functions named `step*` are all of single use, they are created only to avoid the "pyramid of doom." No one is going to reuse them outside of the action chain. So there's a bit of a namespace cluttering here.
+Ta muốn có cái gì tốt hơn.
 
-We'd like to have something better.
-
-Luckily, there are other ways to avoid such pyramids. One of the best ways is to use "promises," described in the next chapter.
+May mắn thay, có một số cách có thể tránh được "pyramid of doom". Một trong những cách tốt nhất là sử dụng "promises", điều này sẽ được nói về chương tiếp theo.
