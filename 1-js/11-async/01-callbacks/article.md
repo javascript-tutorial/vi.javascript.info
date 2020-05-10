@@ -180,7 +180,7 @@ Do đó một hàm `callback` được sử dụng cho cả báo lỗi và trả
 
 ## Pyramid of Doom
 
-Từ cái nhìn đầu tiên, nó là có thể là một cách cách xử lý mã bất đồng bộ. Và quả thật đúng vậy. Cho một hoặc có lẽ hai gọi lồng nhau thì nó cũng ổn.
+Từ cái nhìn đầu tiên, nó là có thể là một cách cách xử lý mã bất đồng bộ. Và đúng vậy. Cho một hoặc có lẽ hai gọi lồng nhau thì nó cũng ổn.
 
 Nhưng cho nhiều hành động bất đồng bộ đi theo lần lượt ta sẽ có mã như thế này:
 
