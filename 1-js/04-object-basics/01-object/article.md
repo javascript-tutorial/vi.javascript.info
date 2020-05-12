@@ -1,60 +1,62 @@
 
 # Objects
 
-As we know from the chapter <info:types>, there are seven data types in JavaScript. Six of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+Như chúng ta đã biết từ chương <info:types>, có 6 loại dữ liệu trong JavaScript. Chúng được gọi là "nguyên thủy", bởi vì giá trị của chúng chỉ chứa một thứ duy nhất (đó có thể là một chuỗi hoặc một số hoặc cái gì đó khác).
 
-In contrast, objects are used to store keyed collections of various data and more complex entities. In JavaScript, objects penetrate almost every aspect of the language. So we must understand them first before going in-depth anywhere else.
+Ngược lại, các đối tượng được sử dụng để lưu trữ các bộ sưu tập có khóa của các dữ liệu khác nhau và các thực thể phức tạp hơn. Trong JavaScript, các đối tượng thâm nhập vào hầu hết mọi khía cạnh của ngôn ngữ. Vì vậy, chúng ta phải hiểu chúng trước khi đi sâu vào bất cứ nơi nào khác.
 
-An object can be created with figure brackets `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
+Một đối tượng có thể được tạo bằng dấu ngoặc hình `{…}` với một danh sách *thuộc tính* tùy chọn. Một thuộc tính là một cặp "khóa: giá trị", trong đó `khóa` là một chuỗi (còn được gọi là "tên thuộc tính"), và `giá trị` có thể là bất cứ thứ gì.
 
-We can imagine an object as a cabinet with signed files. Every piece of data is stored in its file by the key. It's easy to find a file by its name or add/remove a file.
+Chúng ta có thể tưởng tượng một đối tượng như một cái tủ với các tập tin đã ký. Mỗi phần dữ liệu được lưu trữ trong tệp của nó bằng từ khóa. Thật dễ dàng để tìm một tệp theo tên của nó hoặc thêm/xóa một tệp.
 
 ![](object.svg)
 
-An empty object ("empty cabinet") can be created using one of two syntaxes:
+Một đối tượng rỗng ("tủ rỗng") có thể được tạo bằng một hoặc hai cú pháp:
 
 ```js
-let user = new Object(); // "object constructor" syntax
-let user = {};  // "object literal" syntax
+let user = new Object(); // cú pháp "đối tượng constructor"
+let user = {};  // cú pháp "đối tượng theo nghĩa đen"
 ```
 
 ![](object-user-empty.svg)
 
-Usually, the figure brackets `{...}` are used. That declaration is called an *object literal*.
+Thông thường, dấu ngoặc `{...}` được sử dụng. Loại khai báo đó được gọi là *đối tượng theo nghĩa đen*.
 
-## Literals and properties
+## Đối tượng theo nghĩa đen và thuộc tính
 
-We can immediately put some properties into `{...}` as "key: value" pairs:
+Chúng ta có thể ngay lập tức đặt một số thuộc tính vào `{...}` dưới dạng các cặp "khóa: giá trị":
 
 ```js
-let user = {     // an object
-  name: "John",  // by key "name" store value "John"
-  age: 30        // by key "age" store value 30
+let user = {     // một đối tượng
+  name: "John",  // khóa "name" lưu giá trị "John"
+  age: 30        // khóa "age" lưu giá trị 30
 };
 ```
 
-A property has a key (also known as "name" or "identifier") before the colon `":"` and a value to the right of it.
+Một thuộc tính có một khóa (còn được gọi là "tên" hoặc "định danh") trước dấu hai chấm `":"` và một giá trị ở bên phải của nó.
 
-In the `user` object, there are two properties:
+Trong đối tượng `user`, có hai thuộc tính:
 
-1. The first property has the name `"name"` and the value `"John"`.
-2. The second one has the name `"age"` and the value `30`.
+1. Thuộc tính thứ nhất có tên là `"name"` và giá trị là `"John"`.
+2. Thuộc tính thứ hai có tên là `"age"` và giá trị là `30`.
 
 The resulting `user` object can be imagined as a cabinet with two signed files labeled "name" and "age".
 
+Kết quả là đối tượng `user` có thể được tưởng tượng như một cái tủ với hai tệp được ký có nhãn "name" và "age".
+
 ![user object](object-user.svg)
 
-We can add, remove and read files from it any time.
+Chúng ta có thể thêm, xóa và đọc tệp từ chúng mọi lúc.
 
-Property values are accessible using the dot notation:
+Các giá trị của thuộc tính có thể truy cập bằng cách sử dụng dấu chấm:
 
 ```js
-// get property values of the object:
+// lấy giá trị của thuộc tính trong đối tượng:
 alert( user.name ); // John
 alert( user.age ); // 30
 ```
 
-The value can be of any type. Let's add a boolean one:
+Giá trị có thể là bất kỳ kiểu dữ liệu nào. Hãy thêm một giá trị boolean:
 
 ```js
 user.isAdmin = true;
@@ -62,7 +64,7 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
-To remove a property, we can use `delete` operator:
+Để xóa thuộc tính, ta có thể dùng `delete`:
 
 ```js
 delete user.age;
@@ -70,40 +72,40 @@ delete user.age;
 
 ![user object 3](object-user-delete.svg)
 
-We can also use multiword property names, but then they must be quoted:
+Chúng ta cũng có thể sử dụng tên thuộc tính có nhiều từ, nhưng sau đó chúng phải được bọc lại:
 
 ```js
 let user = {
   name: "John",
   age: 30,
-  "likes birds": true  // multiword property name must be quoted
+  "likes birds": true  // tên thuộc tính nhiều từ phải được bọc lại bằng dấu ngoặc kép
 };
 ```
 
 ![](object-user-props.svg)
 
 
-The last property in the list may end with a comma:
+Thuộc tính cuối cùng trong danh sách có thể kết thúc bằng dấu phẩy:
 ```js
 let user = {
   name: "John",
   age: 30*!*,*/!*
 }
 ```
-That is called a "trailing" or "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
+Đó được gọi là dấu phẩy "trailing" hay "hanging". Nó khiến dễ dàng thêm/xóa/di chuyển xung quanh các thuộc tính, bởi vì tất cả các dòng trở nên giống nhau.
 
-## Square brackets
+## Dấu ngoặc vuông
 
-For multiword properties, the dot access doesn't work:
+Với thuộc tính nhiều từ, truy cập bằng dấu chấm không hoạt động:
 
 ```js run
-// this would give a syntax error
+// sẽ có lỗi cú pháp
 user.likes birds = true
 ```
 
-That's because the dot requires the key to be a valid variable identifier. That is: no spaces and other limitations.
+Đó là vì dấu chấm yêu cầu khóa phải là một biến định danh hợp lệ. Đó là: không chứa khoảng trắng và các giới hạn khác.
 
-There's an alternative "square bracket notation" that works with any string:
+Có một thay thế là "dấu ngoặc vuông" sẽ hoạt động với bất cứ chuỗi nào:
 
 ```js run
 let user = {};
@@ -118,20 +120,20 @@ alert(user["likes birds"]); // true
 delete user["likes birds"];
 ```
 
-Now everything is fine. Please note that the string inside the brackets is properly quoted (any type of quotes will do).
+Bây giờ mọi thứ đã tốt. Hãy lưu ý rằng chuỗi bên trong ngoặc được bao bọc chính xác (bất kỳ loại bao bọc nào cũng được).
 
-Square brackets also provide a way to obtain the property name as the result of any expression -- as opposed to a literal string -- like from a variable as follows:
+Dấu ngoặc vuông cũng cung cấp một cách để có được tên thuộc tính là kết quả của bất kỳ biểu thức nào -- trái ngược với chuỗi ký tự -- giống như từ một biến như sau:
 
 ```js
 let key = "likes birds";
 
-// same as user["likes birds"] = true;
+// giống như user["likes birds"] = true;
 user[key] = true;
 ```
 
-Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+Ở đây, biến `key` có thể được tính vào thời gian chạy hoặc phụ thuộc vào đầu vào của người dùng. Và sau đó chúng ta sử dụng nó để truy cập vào thuộc tính. Điều đó giúp chúng ta linh hoạt hơn.
 
-For instance:
+Ví dụ:
 
 ```js run
 let user = {
@@ -139,13 +141,13 @@ let user = {
   age: 30
 };
 
-let key = prompt("What do you want to know about the user?", "name");
+let key = prompt("Bạn muốn biết điều gì về người dùng?", "name");
 
-// access by variable
-alert( user[key] ); // John (if enter "name")
+// truy cập vào biến
+alert( user[key] ); // John (nếu nhập "name")
 ```
 
-The dot notation cannot be used in a similar way:
+Dấu chấm không thể dùng theo cách như vậy:
 
 ```js run
 let user = {
@@ -157,40 +159,40 @@ let key = "name";
 alert( user.key ) // undefined
 ```
 
-### Computed properties
+### Thuộc tính computed
 
-We can use square brackets in an object literal. That's called *computed properties*.
+Chúng ta có thể sử dụng dấu ngoặc vuông trong một đối tượng theo nghĩa đen. Đó gọi là *thuộc tính computed*.
 
-For instance:
+Ví dụ:
 
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("Mua loại trái cây nào?", "apple");
 
 let bag = {
 *!*
-  [fruit]: 5, // the name of the property is taken from the variable fruit
+  [fruit]: 5, // tên của thuộc tính được lấy từ biến fruit
 */!*
 };
 
-alert( bag.apple ); // 5 if fruit="apple"
+alert( bag.apple ); // 5 nếu fruit="apple"
 ```
 
-The meaning of a computed property is simple: `[fruit]` means that the property name should be taken from `fruit`.
+Ý nghĩa của thuộc tính computed rất đơn giản: `[fruit]` có nghĩa là tên thuộc tính nên được lấy từ` fruit`.
 
-So, if a visitor enters `"apple"`, `bag` will become `{apple: 5}`.
+Do vậy, nếu người dùng nhập `"apple"`, `bag` sẽ thành `{apple: 5}`.
 
-Essentially, that works the same as:
+Về cơ bản, nó hoạt động giống như:
 ```js run
-let fruit = prompt("Which fruit to buy?", "apple");
+let fruit = prompt("Mua loại trái cây nào?", "apple");
 let bag = {};
 
-// take property name from the fruit variable
+// lấy tên thuộc tính từ biến fruit
 bag[fruit] = 5;
 ```
 
-...But looks nicer.
+...Nhưng nhìn tốt hơn.
 
-We can use more complex expressions inside square brackets:
+Chúng ta có thể sử dụng các biểu thức phức tạp hơn trong dấu ngoặc vuông:
 
 ```js
 let fruit = 'apple';
@@ -199,16 +201,16 @@ let bag = {
 };
 ```
 
-Square brackets are much more powerful than the dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+Dấu ngoặc vuông có mạnh hơn dấu chấm. Chúng chấp nhận bất cứ tên của thuộc tính và biến nào. Nhưng ngoài ra chúng cũng cồng kềnh khi viết.
 
-So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
+Vì vậy hầu hết thời gian, khi tên thuộc tính được biết và đơn giản, dấu chấm được sử dụng. Và nếu chúng ta cần một cái gì đó phức tạp hơn, thì chúng ta chuyển sang dấu ngoặc vuông.
 
 
 
 ````smart header="Reserved words are allowed as property names"
-A variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+Một biến không thể có tên bằng một trong những từ dành riêng cho ngôn ngữ như "for", "let", "return", vâng vâng.
 
-But for an object property, there's no such restriction. Any name is fine:
+Nhưng đối với một thuộc tính đối tượng, không có hạn chế đó. Tên nào cũng được:
 
 ```js run
 let obj = {
@@ -220,7 +222,7 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-Basically, any name is allowed, but there's a special one: `"__proto__"` that gets special treatment for historical reasons. For instance, we can't set it to a non-object value:
+Về cơ bản, bất kỳ tên nào cũng được cho phép, nhưng có một tên đặc biệt: `" __proto __ "` được đối xử đặc biệt vì lý do lịch sử. Chẳng hạn, chúng ta không thể đặt nó vào một giá trị phi đối tượng:
 
 ```js run
 let obj = {};
@@ -228,15 +230,15 @@ obj.__proto__ = 5;
 alert(obj.__proto__); // [object Object], didn't work as intended
 ```
 
-As we see from the code, the assignment to a primitive `5` is ignored.
+Như chúng ta thấy từ code, việc gán cho một biến nguyên thủy `5` bị bỏ qua.
 
-That can become a source of bugs and even vulnerabilities if we intend to store arbitrary key-value pairs in an object, and allow a visitor to specify the keys.
+Điều đó có thể trở thành nguyên nhân gây ra lỗi và thậm chí là lỗ hổng nếu ta dự định lưu trữ các cặp khóa-giá trị tùy ý trong một đối tượng và cho phép người dùng truy cập các khóa cụ thể.
 
-In that case the visitor may choose `__proto__` as the key, and the assignment logic will be ruined (as shown above).
+Trong trường hợp đó, người dùng có thể chọn `__proto__` làm khóa và logic gán sẽ bị hủy (như được hiển thị ở trên).
 
-There is a way to make objects treat `__proto__` as a regular property, which we'll cover later, but first we need to know more about objects.
+Có một cách để làm cho các đối tượng coi `__proto__` như một thuộc tính thông thường, chúng ta sẽ đề cập sau, nhưng trước tiên chúng ta cần biết thêm về các đối tượng.
 
-There's also another data structure [Map](info:map-set), that we'll learn in the chapter <info:map-set>, which supports arbitrary keys.
+Ngoài ra còn có một cấu trúc dữ liệu khác [Map](info:map-set), mà chúng ta sẽ tìm hiểu trong chương <info:map-set>, nó hỗ trợ các khóa tùy ý.
 ````
 
 
