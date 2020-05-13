@@ -242,18 +242,18 @@ Ngoài ra còn có một cấu trúc dữ liệu khác [Map](info:map-set), mà 
 ````
 
 
-## Property value shorthand
+## Tốc ký giá trị của thuộc tính
 
-In real code we often use existing variables as values for property names.
+Trong code chúng ta thường sử dụng các biến sẵn có làm giá trị cho tên của các thuộc tính.
 
-For instance:
+Ví dụ:
 
 ```js run
 function makeUser(name, age) {
   return {
     name: name,
     age: age
-    // ...other properties
+    // ...các thuộc tính khác
   };
 }
 
@@ -261,102 +261,101 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
-In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+Trong ví dụ trên, các thuộc tính có cùng tên với các biến. Trường hợp sử dụng để tạo một thuộc tính từ một biến là rất phổ biến, do đó có một loại *tốc ký giá trị của thuộc tính* làm cho nó ngắn hơn.
 
-Instead of `name:name` we can just write `name`, like this:
+Thay vì `name:name` chúng ta có thể viết `name`, như thế này:
 
 ```js
 function makeUser(name, age) {
 *!*
   return {
-    name, // same as name: name
-    age   // same as age: age
+    name, // giống như name: name
+    age   // giống như age: age
     // ...
   };
 */!*
 }
 ```
 
-We can use both normal properties and shorthands in the same object:
+Chúng ta có thể sử dụng cả thuộc tính bình thường và tốc ký trong cùng một đối tượng:
 
 ```js
 let user = {
-  name,  // same as name:name
+  name,  // giống như name:name
   age: 30
 };
 ```
 
-## Existence check
+## Kiểm tra tồn tại
 
-A notable objects feature is that it's possible to access any property. There will be no error if the property doesn't exist! Accessing a non-existing property just returns `undefined`. It provides a very common way to test whether the property exists -- to get it and compare vs undefined:
+Một tính năng đáng chú ý của đối tượng là có thể truy cập bất kỳ thuộc tính nào. Sẽ không có lỗi nếu thuộc tính không tồn tại! Truy cập một thuộc tính không tồn tại chỉ trả về `undefined`. Nó cung cấp một cách rất phổ biến để kiểm tra xem thuộc tính có tồn tại hay không - lấy nó và so sánh với undefined:
 
 ```js run
 let user = {};
 
-alert( user.noSuchProperty === undefined ); // true means "no such property"
+alert( user.noSuchProperty === undefined ); // true có nghĩa là "no such property"
 ```
 
-There also exists a special operator `"in"` to check for the existence of a property.
+Ngoài ra còn tồn tại một toán tử đặc biệt `"in"` để kiểm tra sự tồn tại của một thuộc tính.
 
-The syntax is:
+Cú pháp:
 ```js
 "key" in object
 ```
 
-For instance:
+Ví dụ:
 
 ```js run
 let user = { name: "John", age: 30 };
 
-alert( "age" in user ); // true, user.age exists
-alert( "blabla" in user ); // false, user.blabla doesn't exist
+alert( "age" in user ); // true, user.age tồn tại
+alert( "blabla" in user ); // false, user.blabla không tồn tại
 ```
 
-Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
+Hãy lưu ý rằng ở phía bên trái của `in` phải có *tên thuộc tính*. Đó thường là một chuỗi được bao bọc trong dấu ngoặc kép.
 
-If we omit quotes, that would mean a variable containing the actual name will be tested. For instance:
+Nếu chúng ta bỏ qua dấu ngoặc kép, điều đó có nghĩa là một biến chứa tên thực tế sẽ được kiểm tra. Ví dụ:
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
-alert( *!*key*/!* in user ); // true, takes the name from key and checks for such property
+alert( *!*key*/!* in user ); // true, lấy tên từ key và kiểm tra thuộc tính đó
 ```
 
 ````smart header="Using \"in\" for properties that store `undefined`"
-Usually, the strict comparison `"=== undefined"` check the property existance just fine. But there's a special case when it fails, but `"in"` works correctly.
+Thông thường, sự so sánh chặt `"=== undefined"` kiểm tra sự tồn tại của thuộc tính. Có một trường hợp đặc biệt nó sẽ sai, nhưng với `"in"` thì chạy chính xác.
 
-It's when an object property exists, but stores `undefined`:
+Đó là khi một thuộc tính trong đối tượng tồn tại, nhưng lưu trữ là `undefined`:
 
 ```js run
 let obj = {
   test: undefined
 };
 
-alert( obj.test ); // it's undefined, so - no such property?
+alert( obj.test ); // thuộc tính không tồn tại, do đó - nó không phải là thuộc tính?
 
-alert( "test" in obj ); // true, the property does exist!
+alert( "test" in obj ); // true, thuộc tính tồn tại!
 ```
 
 
-In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+Trong đoạn code trên, thuộc tính `obj.test` về mặt kỹ thuật tồn tại. Vì vậy, toán tử `in` hoạt động đúng.
 
-Situations like this happen very rarely, because `undefined` is usually not assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
-````
+Các tình huống như thế này rất hiếm khi xảy ra, vì `undefined` thường không được chỉ định. Chúng ta chủ yếu sử dụng `null` cho các giá trị "không xác định" hoặc "rỗng". Vì vậy, toán tử `in` là một vị khách kỳ lạ trong code.
 
-## The "for..in" loop
+## Vòng lặp "for..in"
 
-To walk over all keys of an object, there exists a special form of the loop: `for..in`. This is a completely different thing from the `for(;;)` construct that we studied before.
+Để đi qua tất cả các khóa của một đối tượng, ta có một dạng vòng lặp đặc biệt: `for..in`. Đây là một điều hoàn toàn khác với cấu trúc `for (;;)` mà chúng ta đã học trước đây.
 
-The syntax:
+Cú pháp:
 
 ```js
 for (key in object) {
-  // executes the body for each key among object properties
+  // thực thi phần thân cho mỗi key của thuộc tính trong đối tượng
 }
 ```
 
-For instance, let's output all properties of `user`:
+Ví dụ, in ra tất cả các thuộc tính của `user`:
 
 ```js run
 let user = {
@@ -366,33 +365,33 @@ let user = {
 };
 
 for (let key in user) {
-  // keys
+  // các khóa
   alert( key );  // name, age, isAdmin
-  // values for the keys
+  // giá trị của các khóa
   alert( user[key] ); // John, 30, true
 }
 ```
 
-Note that all "for" constructs allow us to declare the looping variable inside the loop, like `let key` here.
+Lưu ý rằng tất cả các cấu trúc "for" cho phép chúng ta khai báo biến vòng lặp bên trong vòng lặp, như `let key` ở đây.
 
-Also, we could use another variable name here instead of `key`. For instance, `"for (let prop in obj)"` is also widely used.
+Ngoài ra, chúng ta có thể sử dụng một tên biến khác ở đây thay vì `key`. Chẳng hạn, `"for (let prop in obj)"` cũng được sử dụng rộng rãi.
 
 
-### Ordered like an object
+### Sắp xếp một đối tượng
 
-Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added? Can we rely on this?
+Đối tượng có được sắp xếp không? Nói cách khác, nếu chúng ta lặp qua một đối tượng, chúng ta có nhận được tất cả các thuộc tính theo cùng thứ tự chúng đã được thêm không? Chúng ta có thể tin vào điều này không?
 
-The short answer is: "ordered in a special fashion": integer properties are sorted, others appear in creation order. The details follow.
+Câu trả lời là: "sắp xếp theo kiểu đặc biệt": thuộc tính số nguyên được sắp xếp, những cái khác xuất hiện theo thứ tự tạo. Các chi tiết theo sau.
 
-As an example, let's consider an object with the phone codes:
+Ví dụ: hãy xem xét một đối tượng có chứa mã điện thoại:
 
 ```js run
 let codes = {
-  "49": "Germany",
-  "41": "Switzerland",
-  "44": "Great Britain",
+  "49": "Đức",
+  "41": "Thụy Sĩ",
+  "44": "Anh",
   // ..,
-  "1": "USA"
+  "1": "Mỹ"
 };
 
 *!*
@@ -402,56 +401,56 @@ for (let code in codes) {
 */!*
 ```
 
-The object may be used to suggest a list of options to the user. If we're making a site mainly for German audience then we probably want `49` to be the first.
+Đối tượng có thể được sử dụng để đề xuất một danh sách các tùy chọn cho người dùng. Nếu chúng ta tạo một trang chủ yếu cho người Đức thì có lẽ chúng ta muốn `49` đứng đầu tiên.
 
-But if we run the code, we see a totally different picture:
+Nhưng nếu chúng ta chạy code, chúng ta sẽ thấy một bức tranh hoàn toàn khác:
 
-- USA (1) goes first
-- then Switzerland (41) and so on.
+- Mỹ (1) đứng đầu
+- sau đó Thụy Sỹ (41) và cứ thế.
 
-The phone codes go in the ascending sorted order, because they are integers. So we see `1, 41, 44, 49`.
+Các mã điện thoại đi theo thứ tự tăng dần, bởi vì chúng là số nguyên. Vì vậy, chúng ta thấy `1, 41, 44, 49`.
 
 ````smart header="Integer properties? What's that?"
-The "integer property" term here means a string that can be converted to-and-from an integer without a change.
+Thuật ngữ "thuộc tính số nguyên" ở đây có nghĩa là một chuỗi có thể được chuyển đổi thành và từ một số nguyên mà không thay đổi.
 
-So, "49" is an integer property name, because when it's transformed to an integer number and back, it's still the same. But "+49" and "1.2" are not:
+Do đó, "49" là thuộc thuộc tính số nguyên, vì khi nó được chuyển đổi sang số nguyên và ngược lại, nó vẫn giống nhau. Nhưng "+49" và "1.2" thì không:
 
 ```js run
-// Math.trunc is a built-in function that removes the decimal part
-alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
-alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
-alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+// Math.trunc là một hàm dựng sẵn để xóa một phần của số thập phân
+alert( String(Math.trunc(Number("49"))) ); // "49", giống nhau, thuộc tính số nguyên
+alert( String(Math.trunc(Number("+49"))) ); // "49", không giống "+49" ⇒ không phải thuộc tính số nguyên
+alert( String(Math.trunc(Number("1.2"))) ); // "1", không giống "1.2" ⇒ không phải thuộc tính số nguyên
 ```
 ````
 
-...On the other hand, if the keys are non-integer, then they are listed in the creation order, for instance:
+...Mặt khác, nếu các khóa không phải là số nguyên, thì chúng được liệt kê theo thứ tự tạo, Ví dụ:
 
 ```js run
 let user = {
   name: "John",
   surname: "Smith"
 };
-user.age = 25; // add one more
+user.age = 25; // thêm một thuộc tính nữa
 
 *!*
-// non-integer properties are listed in the creation order
+// thuộc tính không nguyên được liệt kê theo thứ tự tạo
 */!*
 for (let prop in user) {
   alert( prop ); // name, surname, age
 }
 ```
 
-So, to fix the issue with the phone codes, we can "cheat" by making the codes non-integer. Adding a plus `"+"` sign before each code is enough.
+Vì vậy, để khắc phục sự cố với mã điện thoại, chúng ta có thể "gian lận" bằng cách làm cho mã không nguyên. Thêm dấu cộng `"+"` trước mỗi mã là đủ.
 
-Like this:
+Như sau:
 
 ```js run
 let codes = {
-  "+49": "Germany",
-  "+41": "Switzerland",
-  "+44": "Great Britain",
+  "+49": "Đức",
+  "+41": "Thụy Sỹ",
+  "+44": "Anh",
   // ..,
-  "+1": "USA"
+  "+1": "Mỹ"
 };
 
 for (let code in codes) {
@@ -459,7 +458,7 @@ for (let code in codes) {
 }
 ```
 
-Now it works as intended.
+Bây giờ nó hoạt động như ý muốn.
 
 ## Copying by reference
 
@@ -467,7 +466,7 @@ One of the fundamental differences of objects vs primitives is that they are sto
 
 Primitive values: strings, numbers, booleans -- are assigned/copied "as a whole value".
 
-For instance:
+Ví dụ:
 
 ```js
 let message = "Hello!";
@@ -498,7 +497,7 @@ Here, the object is stored somewhere in memory. And the variable `user` has a "r
 
 If we imagine an object as a cabinet, then a variable is a key to it. Copying a variable duplicates the key, but not the cabinet itself.
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let user = { name: "John" };
@@ -557,7 +556,7 @@ For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj 
 
 An object declared as `const` *can* be changed.
 
-For instance:
+Ví dụ:
 
 ```js run
 const user = {
@@ -573,7 +572,7 @@ alert(user.age); // 25
 
 It might seem that the line `(*)` would cause an error, but no, there's totally no problem. That's because `const` fixes only value of `user` itself. And here `user` stores the reference to the same object all the time. The line `(*)` goes *inside* the object, it doesn't reassign `user`.
 
-The `const` would give an error if we try to set `user` to something else, for instance:
+The `const` would give an error if we try to set `user` to something else, Ví dụ:
 
 ```js run
 const user = {
