@@ -1,4 +1,4 @@
-importance: 5
+importance: 3
 
 ---
 
@@ -18,8 +18,12 @@ class Rabbit {
 let rabbit = new Rabbit("Rab");
 
 *!*
+<<<<<<< HEAD
 // hasOwnProperty thừa kế từ from Object.prototype
 // rabbit.__proto__ === Object.prototype
+=======
+// hasOwnProperty method is from Object.prototype
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74
 alert( rabbit.hasOwnProperty('name') ); // true
 */!*
 ```
@@ -39,5 +43,5 @@ class Rabbit extends Object {
 
 let rabbit = new Rabbit("Rab");
 
-alert( rabbit.hasOwnProperty('name') ); // true
+alert( rabbit.hasOwnProperty('name') ); // Error
 ```
