@@ -1,95 +1,95 @@
-# Comparisons
+# Các phép so sánh
 
-We know many comparison operators from maths:
+Chúng ta biết có nhiều phép toán so sánh trong toán học:
 
-- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
-- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
-- Equals: `a == b` (please note the double equals sign `=`. A single symbol `a = b` would mean an assignment).
-- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as an assignment with an exclamation sign before it: <code>a != b</code>.
+- Lớn hơn/nhỏ hơn: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Lớn hơn/nhỏ hơn hoặc bằng: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- So sánh bằng: `a == b` (hãy để ý là có 2 dấu bằng `=`. Nếu chỉ có 1 ký hiệu `a = b` thì có nghĩa đây là 1 phép gán).
+- So sánh khác. Trong toán học có ký hiệu là <code>&ne;</code>, còn trong JavaScript nó được viết như là một phép gán với một dấu chấm than phía trước: <code>a != b</code>.
 
-## Boolean is the result
+## Kết quả sẽ là giá trị Boolean
 
-Like all other operators, a comparison returns a value. In this case, the value is a boolean.
+Giống như tất cả các phép toán khác, phép so sánh có kết quả là 1 giá trị. Trong trường hợp này, giá trị đó là một boolean.
 
-- `true` -- means "yes", "correct" or "the truth".
-- `false` -- means "no", "wrong" or "not the truth".
+- `true` -- nghĩa là "có", "đúng" hay "sự thật".
+- `false` -- nghĩa là "không", "sai" hay "không đúng sự thật".
 
-For example:
-
-```js run
-alert( 2 > 1 );  // true (correct)
-alert( 2 == 1 ); // false (wrong)
-alert( 2 != 1 ); // true (correct)
-```
-
-A comparison result can be assigned to a variable, just like any value:
+Ví dụ:
 
 ```js run
-let result = 5 > 4; // assign the result of the comparison
-alert( result ); // true
+alert(2 > 1); // true (đúng)
+alert(2 == 1); // false (sai)
+alert(2 != 1); // true (đúng)
 ```
 
-## String comparison
-
-To see whether a string is greater than another, JavaScript uses the so-called "dictionary" or "lexicographical" order.
-
-In other words, strings are compared letter-by-letter.
-
-For example:
+Kết quả của 1 phép so sánh có thể được gán vào 1 biến khác, như bất cứ giá trị nào:
 
 ```js run
-alert( 'Z' > 'A' ); // true
-alert( 'Glow' > 'Glee' ); // true
-alert( 'Bee' > 'Be' ); // true
+let result = 5 > 4; // gán kết quả của phép so sánh
+alert(result); // true
 ```
 
-The algorithm to compare two strings is simple:
+## So sánh chuỗi
 
-1. Compare the first character of both strings.
-2. If the first character from the first string is greater (or less) than the other string's, then the first string is greater (or less) than the second. We're done.
-3. Otherwise, if both strings' first characters are the same, compare the second characters the same way.
-4. Repeat until the end of either string.
-5. If both strings end at the same length, then they are equal. Otherwise, the longer string is greater.
+Để kiểm tra 1 chuỗi ký tự có lớn hơn 1 chuỗi khác hay không, JavaScript sử dụng thứ tự từ điển.
 
-In the examples above, the comparison `'Z' > 'A'` gets to a result at the first step while the strings `"Glow"` and `"Glee"` are compared character-by-character:
+Nói cách khác, các chuỗi được so sánh từng chữ cái.
 
-1. `G` is the same as `G`.
-2. `l` is the same as `l`.
-3. `o` is greater than `e`. Stop here. The first string is greater.
+Ví dụ:
+
+```js run
+alert("Z" > "A"); // true
+alert("Glow" > "Glee"); // true
+alert("Bee" > "Be"); // true
+```
+
+Thuật toán để so sánh 2 chuỗi ký tự đơn giản như sau:
+
+1. So sánh ký tự đầu tiên của cả 2 chuỗi.
+2. Nếu ký tự đầu tiên của chuỗi thứ nhất lớn hơn (hoặc nhỏ hơn) ký tự đầu tiên của chuỗi còn lại, nghĩa là chuỗi thứ nhất lớn hơn (hoặc nhỏ hơn) chuỗi thứ hai. Chúng ta đã xong.
+3. Mặt khác, nếu các ký tự đầu tiên của cả hai chuỗi giống nhau, chúng ta sẽ so sánh các ký tự thứ hai giống như vậy.
+4. Lặp lại cho tới ký tự cuối của một trong hai chuỗi.
+5. Nếu cả 2 chuỗi có cùng chiều dài, thì 2 chuỗi bằng nhau. Ngược lại, chuỗi dài hơn thì lớn hơn.
+
+Trong ví dụ trên, phép so sánh `'Z' > 'A'` có kết quả ở ngay bước đầu tiên trong khi 2 chuỗi `"Glow"` và `"Glee"` được so sánh từng ký tự như sau:
+
+1. `G` hoàn toàn giống với `G`.
+2. `l` hoàn toàn giống với `l`.
+3. `o` thì lớn hơn `e`. Dừng lại. Chuỗi đầu tiên lớn hơn.
 
 ```smart header="Not a real dictionary, but Unicode order"
-The comparison algorithm given above is roughly equivalent to the one used in dictionaries or phone books, but it's not exactly the same.
+Thuật toán so sánh được đưa ra ở trên gần tương đương với thuật toán được sử dụng trong từ điển hoặc danh bạ điện thoại, nhưng nó không hoàn toàn giống nhau.
 
-For instance, case matters. A capital letter `"A"` is not equal to the lowercase `"a"`. Which one is greater? The lowercase `"a"`. Why? Because the lowercase character has a greater index in the internal encoding table JavaScript uses (Unicode). We'll get back to specific details and consequences of this in the chapter <info:string>.
+Ví dụ, chữ thường và chữ hoa. Một chữ cái viết hoa `"A"` sẽ không bằng chữ thường `"a"`. Vậy cái nào lớn hơn? Chữ thường `"a"`. Tại sao? Bởi vì ký tự chữ thường có chỉ mục lớn hơn trong bảng mã hóa nội bộ mà JavaScript sử dụng (Unicode). Chúng ta sẽ quay lại chi tiết cụ thể và hậu quả của việc này trong chương này<info:string>.
 ```
 
-## Comparison of different types
+## So sánh khác kiểu
 
-When comparing values of different types, JavaScript converts the values to numbers.
+Khi so sánh giá trị của các kiểu dữ liệu khác nhau, JavaScript chuyển đổi các giá trị về kiểu số.
 
-For example:
+Ví dụ:
 
 ```js run
-alert( '2' > 1 ); // true, string '2' becomes a number 2
-alert( '01' == 1 ); // true, string '01' becomes a number 1
+alert("2" > 1); // true, chuỗi '2' trở thành số 2
+alert("01" == 1); // true, chuỗi '01' trở thành số 1
 ```
 
-For boolean values, `true` becomes `1` and `false` becomes `0`.
+Với các giá trị boolean, `true` trở thành `1` và `false` trở thành `0`.
 
-For example:
+Ví dụ:
 
 ```js run
-alert( true == 1 ); // true
-alert( false == 0 ); // true
+alert(true == 1); // true
+alert(false == 0); // true
 ```
 
-````smart header="A funny consequence"
-It is possible that at the same time:
+````smart header="Một kết quả hay ho"
+Có khả năng sẽ xảy ra cùng 1 lúc:
 
-- Two values are equal.
-- One of them is `true` as a boolean and the other one is `false` as a boolean.
+- Hai giá trị bằng nhau.
+- Một là `true` trong kiểu boolean và giá trị còn lại là `false` trong kiểu boolean.
 
-For example:
+Ví dụ:
 
 ```js run
 let a = 0;
@@ -101,109 +101,109 @@ alert( Boolean(b) ); // true
 alert(a == b); // true!
 ```
 
-From JavaScript's standpoint, this result is quite normal. An equality check converts values using the numeric conversion (hence `"0"` becomes `0`), while the explicit `Boolean` conversion uses another set of rules.
+Với JavaScript, kết quả này là khá bình thường. Việc kiểm tra bằng nhau sẽ chuyển đổi các giá trị về kiểu số (vì thế `"0"` trở thành `0`), trong khi rõ ràng việc chuyển đổi về `Boolean` sử dụng 1 tập các quy tắc khác.
 ````
 
-## Strict equality
+## So sánh bằng nhau một cách chặt chẽ
 
-A regular equality check `==` has a problem. It cannot differentiate `0` from `false`:
-
-```js run
-alert( 0 == false ); // true
-```
-
-The same thing happens with an empty string:
+Việc kiểm tra bằng thông thường `==` có 1 vấn đề. Nó không thể phân biệt `0` với `false`:
 
 ```js run
-alert( '' == false ); // true
+alert(0 == false); // true
 ```
 
-This happens because operands of different types are converted to numbers by the equality operator `==`. An empty string, just like `false`, becomes a zero.
-
-What to do if we'd like to differentiate `0` from `false`?
-
-**A strict equality operator `===` checks the equality without type conversion.**
-
-In other words, if `a` and `b` are of different types, then `a === b` immediately returns `false` without an attempt to convert them.
-
-Let's try it:
+Điều tương tự cũng xảy ra với chuỗi rỗng:
 
 ```js run
-alert( 0 === false ); // false, because the types are different
+alert("" == false); // true
 ```
 
-There is also a "strict non-equality" operator `!==` analogous to `!=`.
+Điều này xảy ra vì các giá trị khác kiểu đều được chuyển thành kiểu số với phép so sánh bằng `==`. Một chuỗi rỗng, cũng như `false`, đều trở thành 0.
 
-The strict equality operator is a bit longer to write, but makes it obvious what's going on and leaves less room for errors.
+Vậy nếu chúng ta muốn phân biệt `0` với `false`?
 
-## Comparison with null and undefined
+**Một phép toán kiểm tra bằng nhau chặt chẽ `===` sẽ kiểm tra bằng nhau mà không chuyển đổi kiểu.**
 
-There's a non-intuitive behavior when `null` or `undefined` are compared to other values.
+Nói cách khác, nếu `a` và `b` khác kiểu dữ liệu, thì `a === b` ngay lập tức trả về `false` mà không cần chuyển đổi chúng.
 
-For a strict equality check `===`
-: These values are different, because each of them is a different type.
+Hãy thử xem:
+
+```js run
+alert(0 === false); // false, vì kiểu dữ liệu khác nhau
+```
+
+Cũng có một phép toán "kiểm tra khác nhau chặt chẽ" `!==` tương tự như `!=`.
+
+Phép toán kiểm tra bằng nhau chặt chẽ có thể dài hơn 1 chút khi viết, nhưng làm cho nó rõ ràng những gì đang xảy ra và để lại ít lỗi hơn.
+
+## So sánh với null và undefined
+
+Có một hành vi không trực quan khi `null` hay `undefined` được so sánh với các giá trị khác.
+
+Với việc kiểm tra bằng nhau chặt chẽ `===`
+: Các giá trị này khác nhau, vì chúng có kiểu dữ liệu khác nhau.
 
     ```js run
     alert( null === undefined ); // false
     ```
 
-For a non-strict check `==`
-: There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
+Với việc kiểm tra không chặt chẽ `==`
+: Có 1 quy tắc đặc biệt. Hai giá trị này là một "cặp đôi ngọt ngào": chúng bằng nhau (trong nghĩa của `==`), nhưng không bằng giá trị khác.
 
     ```js run
     alert( null == undefined ); // true
     ```
 
-For maths and other comparisons `< > <= >=`
-: `null/undefined` are converted to numbers: `null` becomes `0`, while `undefined` becomes `NaN`.
+Với toán học và các phép so sánh khác `< > <= >=`
+: `null/undefined` được chuyển sang số: `null` trở thành `0`, trong khi `undefined` trở thành `NaN`.
 
-Now let's see some funny things that happen when we apply these rules. And, what's more important, how to not fall into a trap with them.
+Bây giờ chúng ta hãy xem những điều hay ho khi chúng ta áp dụng những quy tắc này. Và quan trọng hơn, làm sao để không rơi vào bẫy với chúng.
 
-### Strange result: null vs 0
+### Kết quả lạ lùng: null vs 0
 
-Let's compare `null` with a zero:
-
-```js run
-alert( null > 0 );  // (1) false
-alert( null == 0 ); // (2) false
-alert( null >= 0 ); // (3) *!*true*/!*
-```
-
-Mathematically, that's strange. The last result states that "`null` is greater than or equal to zero", so in one of the comparisons above it must be `true`, but they are both false.
-
-The reason is that an equality check `==` and comparisons `> < >= <=` work differently. Comparisons convert `null` to a number, treating it as `0`. That's why (3) `null >= 0` is true and (1) `null > 0` is false.
-
-On the other hand, the equality check `==` for `undefined` and `null` is defined such that, without any conversions, they equal each other and don't equal anything else. That's why (2) `null == 0` is false.
-
-### An incomparable undefined
-
-The value `undefined` shouldn't be compared to other values:
+Chúng ta hãy so sánh `null` với số 0:
 
 ```js run
-alert( undefined > 0 ); // false (1)
-alert( undefined < 0 ); // false (2)
-alert( undefined == 0 ); // false (3)
+alert(null > 0); // (1) false
+alert(null == 0); // (2) false
+alert(null >= 0); // (3) *!*true*/!*
 ```
 
-Why does it dislike zero so much? Always false!
+Về mặt toán học, thật lạ lùng. Kết quả cuối cùng cho thấy rằng "`null` thì lớn hơn hoặc bằng với số 0", vì vậy một trong 2 phép so sánh phía trên chắc hẳn phải là `true`, nhưng cả 2 lại là false.
 
-We get these results because:
+Nguyên nhân là vì phép so sánh bằng `==` và các phép so sánh `> < >= <=` hoạt động khác nhau. Các phép so sánh sẽ chuyển đổi `null` thành số, có giá trị là `0`. Chính vì vậy (3) `null >= 0` là true và (1) `null > 0` là false.
 
-- Comparisons `(1)` and `(2)` return `false` because `undefined` gets converted to `NaN` and `NaN` is a special numeric value which returns `false` for all comparisons.
-- The equality check `(3)` returns `false` because `undefined` only equals `null`, `undefined`, and no other value.
+Mặt khác, việc kiểm tra bằng nhau `==` với `undefined` và `null` được định nghĩa sao cho, không có bất kỳ sự chuyển đổi kiểu nào, chúng luôn bằng nhau và khác các giá trị khác. Vì vậy (2) `null == 0` thì false.
 
-### Evade problems
+### Không thể so sánh được với undefined
 
-Why did we go over these examples? Should we remember these peculiarities all the time? Well, not really. Actually, these tricky things will gradually become familiar over time, but there's a solid way to evade problems with them:
+Giá trị `undefined` không nên được so sánh với các giá trị khác:
 
-Just treat any comparison with `undefined/null` except the strict equality `===` with exceptional care.
+```js run
+alert(undefined > 0); // false (1)
+alert(undefined < 0); // false (2)
+alert(undefined == 0); // false (3)
+```
 
-Don't use comparisons `>= > < <=` with a variable which may be `null/undefined`, unless you're really sure of what you're doing. If a variable can have these values, check for them separately.
+Tại sao nó không thích số 0 đến vậy? Luôn luôn sai!
 
-## Summary
+Có kết quả như vậy là vì:
 
-- Comparison operators return a boolean value.
-- Strings are compared letter-by-letter in the "dictionary" order.
-- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
-- The values `null` and `undefined` equal `==` each other and do not equal any other value.
-- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+- Các phép so sánh `(1)` và `(2)` trả về `false` vì `undefined` được chuyển đổi thành `NaN` và `NaN` là 1 giá trị số đặc biệt mà sẽ trả về `false` với tất cả các phép so sánh.
+- Việc kiểm tra bằng nhau `(3)` trả về `false` vì `undefined` chỉ bằng với `null`, `undefined`, và khác các giá trị khác.
+
+### Hạn chế vấn đề
+
+Tại sao chúng ta có những ví dụ này? Chúng ta có nên ghi nhớ những đặc thù này mọi lúc không? Uhmmm, không thực sự cần thiết. Trên thực tế, những vấn đề khó này sẽ dần dần trở nên quen thuộc theo thời gian, nhưng có một cách chắc chắn để né những vấn đề với chúng:
+
+Chỉ cần có sự quản lý lỗi đặc biệt khi so sánh với `undefined/null` ngoại trừ sử dụng phép so sánh bằng nhau chặt chẽ `===`.
+
+Không sử dụng các phép so sánh `>= > < <=` với 1 biến có khả năng `null/undefined`, nếu bạn không thật sự biết chắc bạn đang làm gì. Nếu 1 biến có thể có những giá trị này , hãy kiểm tra chúng riêng biệt.
+
+## Tóm lược
+
+- Các phép toán so sánh trả về 1 giá trị boolean.
+- Các chuỗi được so sánh từng ký tự (letter-by-letter) theo thứ tự từ điển.
+- Khi các giá trị khác kiểu được so sánh, chúng sẽ được chuyển đổi thành kiểu số (trong trường hợp không kiểm tra bằng một cách chặt chẽ).
+- Các giá trị `null` và `undefined` thì bằng nhau `==` và khác tất cả các giá trị khác.
+- Hãy cẩn thận khi sử dụng phép so sánh như `>` hay `<` với các biến có khả năng là `null/undefined`. Sẽ tốt hơn nếu kiểm tra `null/undefined` riêng biệt.
