@@ -2,17 +2,16 @@ importance: 5
 
 ---
 
-# Comparisons
+# Các phép so sánh
 
-What will be the result for these expressions?
+Hãy cho biết kết quả của các phép so sánh sau?
 
 ```js no-beautify
-5 > 4
-"apple" > "pineapple"
-"2" > "12"
-undefined == null
-undefined === null
-null == "\n0\n"
-null === +"\n0\n"
+5 > 4;
+"apple" > "pineapple";
+"2" > "12";
+undefined == null;
+undefined === null;
+null == "\n0\n";
+null === +"\n0\n";
 ```
-
