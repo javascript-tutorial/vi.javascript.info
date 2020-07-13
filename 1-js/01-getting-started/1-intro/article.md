@@ -4,7 +4,11 @@ Hãy cùng xem Javascript có gì đặc biệt, chúng ta có thể hoàn thàn
 
 ## JavaScript là gì?
 
+<<<<<<< HEAD
 *JavaScript* ban đầu được tạo ra để *"make web pages alive"*.
+=======
+*JavaScript* was initially created to "make web pages alive".
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439
 
 Các chương trình trong ngôn ngữ này được gọi là *kịch bản (scripts)*. Chúng có thể được viết ngay trong HTML của trang web và chạy khi tải trang.
 
@@ -12,8 +16,13 @@ Các tập lệnh (scripts) được cung cấp và thực thi dưới dạng v�
 
 Ở khía cạnh này, JavaScript rất khác với ngôn ngữ lập trình có tên là [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
+<<<<<<< HEAD
 ```smart header="Vì sao lại gọi là <u>Java</u>Script?"
 Khi Javascript được tạo ra, ban đầu nó có một cái tên khác: "LiveScript". Nhưng lúc này Java đang rất phổ biến, vì vậy người ta đã quyết định rằng đặt một ngôn ngữ mới là "em trai" của Java sẽ có ích.
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439
 
 Nhưng với sự phát triển của mình, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập, với những đặc điểm kỹ thuật riêng của mình được gọi là [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), và bây giờ nó chẳng liên quan gì đến Java cả.
 ```
@@ -38,7 +47,11 @@ Engine khá phức tạp, tuy nhiên có thể hiểu đơn giản như sau:
 2. Tiếp theo nó chuyển đổi ("biên dịch") tập lệnh sang mã máy.
 3. Và sau đó mã máy chạy, khá nhanh.
 
+<<<<<<< HEAD
 Engine đều áp dụng tối ưu hóa ở các quy trình. Nó thậm chí còn xem tập lệnh được biên dịch khi đang chạy, phân tích dữ liệu chảy qua nó và áp dụng tối ưu hóa cho mã máy. Vì vậy tập lệnh có tốc độ khá nhanh sau khi được hoàn tất.
+=======
+The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439
 ```
 
 ## JavaScript có thể làm gì trong trình duyệt?
@@ -63,7 +76,11 @@ Nhiều tính năng của Javascript trong trình duyệt bị giới hạn vì 
 
 Một số hạn chế có thể kể là:
 
+<<<<<<< HEAD
 - Javascript trên trang web không thể đọc/ghi các tập tin tùy ý, sao chép hoặc thực thi một chương trình. Nó cũng không có cách nào trực tiếp truy cập vào các hàm hệ thống của Hệ điều hành.
+=======
+- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439
 
     Nhiều trình duyệt hiện đại cho phép làm việc với tập tin, nhưng bị giới hạn và chỉ được truy cập nếu như người dùng thực hiện một hành động nhất định nào đó, ví dụ như "thả" các tập tin vào cửa sổ trình duyệt hoặc chọn chúng qua thẻ `<input>`.
 
