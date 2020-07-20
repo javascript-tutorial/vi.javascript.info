@@ -7,10 +7,14 @@ importance: 5
 Bài tập có hai phần.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Chúng ta có một đối tượng:
 =======
 We have objects:
 >>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
+=======
+Given the following objects:
+>>>>>>> ae1171069c2e50b932d030264545e126138d5bdc
 
 ```js
 let head = {
