@@ -4,7 +4,11 @@ importance: 5
 
 # Thuộc tính hàm sau khi ràng buộc
 
+<<<<<<< HEAD
 Có một giá trị trong thuộc tính của một hàm. Nó có bị thay đổi sau khi `bind` không? Tại sao?
+=======
+There's a value in the property of a function. Will it change after `bind`? Why, or why not?
+>>>>>>> cdf382de4cf3ed39ca70cb7df60c4c4886f2d22e
 
 ```js run
 function sayHi() {
