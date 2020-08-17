@@ -2,11 +2,19 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Tại sao cả hai con hamster đều no?
+=======
+# Why are both hamsters full?
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
 Ta có hai con hamster: `speedy` và `lazy` đều thừa kế từ đối tượng `hamster`. 
 
+<<<<<<< HEAD
 Khi chúng ta cho một trong số chúng ăn no, con kia cũng no. Tại sao? Sửa lại như thế nào?
+=======
+When we feed one of them, the other one is also full. Why? How can we fix it?
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
 ```js run
 let hamster = {

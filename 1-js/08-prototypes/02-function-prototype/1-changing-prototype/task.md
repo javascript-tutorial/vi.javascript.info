@@ -20,7 +20,11 @@ alert( rabbit.eats ); // true
 ```
 
 
+<<<<<<< HEAD
 1. Nếu thêm một lệnh nữa (được tô sáng), thì `alert` sẽ hiển thị gì?
+=======
+1. We added one more string (emphasized). What will `alert` show now?
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
     ```js
     function Rabbit() {}
@@ -54,7 +58,11 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
+<<<<<<< HEAD
 3. Câu hỏi tương tự nếu mã như sau(thay đổi một dòng)?
+=======
+3. And like this (replaced one line)?
+>>>>>>> fe571b36ed9e225f29239e82947005b08d74ac05
 
     ```js
     function Rabbit() {}
