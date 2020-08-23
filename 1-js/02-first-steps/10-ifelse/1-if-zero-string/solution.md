@@ -1,12 +1,12 @@
-**Yes, it will.**
+**Có, sẽ hiện ra.**
 
-Any string except an empty one (and `"0"` is not empty) becomes `true` in the logical context.
+Bất kì chuỗi văn bản nào trừ chuỗi trống (và `"0"` không trống) trở thành `true` trong hoàn cảnh logic.
 
-We can run and check:
+Ta có thể chạy và kiểm tra:
 
 ```js run
 if ("0") {
-  alert( 'Hello' );
+  alert( 'Xin chào' );
 }
 ```
 
