@@ -2,21 +2,21 @@ importance: 5
 
 ---
 
-# Rewrite 'if..else' into '?'
+# Viết lại 'if..else' thành '?'
 
-Rewrite `if..else` using multiple ternary operators `'?'`.
+Viết lại `if..else` dùng nhiều toán tử ba ngôi `'?'`.
 
-For readability, it's recommended to split the code into multiple lines.
+Để dễ đọc, nên chia mã thành nhiều dòng.
 
 ```js
 let message;
 
-if (login == 'Employee') {
-  message = 'Hello';
-} else if (login == 'Director') {
-  message = 'Greetings';
+if (login == 'Nhân viên') {
+  message = 'Chào';
+} else if (login == 'Giám đốc') {
+  message = 'Xin kính chào';
 } else if (login == '') {
-  message = 'No login';
+  message = 'Không đăng nhập';
 } else {
   message = '';
 }
