@@ -2,16 +2,16 @@ importance: 5
 
 ---
 
-# Rewrite 'if' into '?'
+# Viết lại 'if' thành '?'
 
-Rewrite this `if` using the conditional operator `'?'`:
+Viết lại lệnh `if` này dùng toán tử điều kiện `'?'`:
 
 ```js
 let result;
 
 if (a + b < 4) {
-  result = 'Below';
+  result = 'Dưới';
 } else {
-  result = 'Over';
+  result = 'Trên';
 }
 ```

@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# Show the sign
+# Hiện dấu
 
-Using `if..else`, write the code which gets a number via `prompt` and then shows in `alert`:
+Dùng `if..else`, viết mã nhận vào một số qua `prompt` và hiện trong `alert`:
 
-- `1`, if the value is greater than zero,
-- `-1`, if less than zero,
-- `0`, if equals zero.
+- `1`, nếu giá trị lớn hơn không,
+- `-1`, nếu bé hơn không,
+- `0`, nếu bằng không.
 
-In this task we assume that the input is always a number.
+Trong bài tập này ta giả sử giá trị nhập vào luôn là một số.
 
 [demo src="if_sign"]
