@@ -1,105 +1,105 @@
-# Tương tác: alert, prompt, confirm
+# Interaction: alert, prompt, confirm
 
-Vì chúng ta sẽ sử dụng trình duyệt làm môi trường demo, hãy xem qua một vài hàm dùng để tương tác với người dùng: `alert`, `prompt` và `confirm`.
+As we'll be using the browser as our demo environment, let's see a couple of functions to interact with the user: `alert`, `prompt` and `confirm`.
 
 ## alert
 
-Cái này chúng ta đã thấy rồi. Nó hiển thị một thông báo và đợi người dùng nhấn "OK".
+This one we've seen already. It shows a message and waits for the user to press "OK".
 
-Ví dụ:
+For example:
 
 ```js run
 alert("Hello");
 ```
 
-Một cửa sổ nhỏ với thông báo được gọi là *cửa sổ modal*. Từ "modal" có nghĩa là người dùng không thể tương tác với phần còn lại của trang, nhấn các nút khác, vâng vâng, đến khi họ phải làm việc với cái cửa sổ đó. Trong trường hợp này là -- đến lúc họ nhấn nút "OK".
+The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc, until they have dealt with the window. In this case -- until they press "OK".
 
 ## prompt
 
-Hàm `prompt` nhận vào hai đối số:
+The function `prompt` accepts two arguments:
 
 ```js no-beautify
 result = prompt(title, [default]);
 ```
 
-Nó hiển thị một cửa sổ modal với một thông báo, một ô nhập liệu cho người dùng, và các nút OK/Cancel.
+It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
 
 `title`
-: Đoạn text để hiển thị cho người dùng.
+: The text to show the visitor.
 
 `default`
-: Tham số thứ hai không bắt buộc, là giá trị khởi tạo cho ô nhập liệu.
+: An optional second parameter, the initial value for the input field.
 
-```smart header="Dấu ngoặc vuông trong cú pháp `[...]`"
-Dấu ngoặc vuông bao quanh `default` trong cú pháp trên biểu thị nó là tham số tùy chọn, không bắt buộc.
+```smart header="The square brackets in syntax `[...]`"
+The square brackets around `default` in the syntax above denote that the parameter is optional, not required.
 ```
 
-Người dùng có thể gõ gì đó vào ô nhập liệu và nhấn OK. Sau đó chúng ta lấy đoạn text trong `result`. Hoặc họ có thể hủy nhập bằng cách nhấn Cancel hoặc nhấn phím `key:Esc`, và chúng ta có giá trị `null` cho `result`.
+The visitor can type something in the prompt input field and press OK. Then we get that text in the `result`. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key, then we get `null` as the `result`.
 
-Việc gọi `prompt` trả về đoạn text từ ô nhập liệu hoặc `null` nếu ô nhập liệu bị hủy.
+The call to `prompt` returns the text from the input field or `null` if the input was canceled.
 
-Ví dụ:
+For instance:
 
 ```js run
-let age = prompt('Bạn bao nhiêu tuổi rồi?', 100);
+let age = prompt('How old are you?', 100);
 
-alert(`Bạn được ${age} tuổi!`); // Bạn được 100 tuổi!
+alert(`You are ${age} years old!`); // You are 100 years old!
 ```
 
-````warn header="Trong IE: luôn cung cấp một `default`"
-Đối số thứ hai không bắt buộc, nhưng nếu chúng ta không cung cấp nó, Internet Explorer sẽ chèn `"undefined"` vào trong prompt.
+````warn header="In IE: always supply a `default`"
+The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
 
-Chạy code này trên Internet Explorer sẽ thấy:
+Run this code in Internet Explorer to see:
 
 ```js run
 let test = prompt("Test");
 ```
 
-Vì vậy, để prompts hoạt động tốt trên IE, chúng tôi khuyên bạn nên cung cấp đối số thứ hai:
+So, for prompts to look good in IE, we recommend always providing the second argument:
 
 ```js run
-let test = prompt("Test", ''); // <-- cho IE
+let test = prompt("Test", ''); // <-- for IE
 ```
 ````
 
 ## confirm
 
-Cú pháp:
+The syntax:
 
 ```js
 result = confirm(question);
 ```
 
-Hàm `confirm` hiển thị một cửa sổ modal với một `question` và hai nút: OK và Cancel.
+The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
 
-Kết quả là `true` nếu OK được chọn và `false` nếu ngược lại.
+The result is `true` if OK is pressed and `false` otherwise.
 
-Ví dụ:
+For example:
 
 ```js run
-let isBoss = confirm("Bạn có phải ông chủ không?");
+let isBoss = confirm("Are you the boss?");
 
-alert( isBoss ); // true nếu OK được chọn
+alert( isBoss ); // true if OK is pressed
 ```
 
-## Tóm tắt
+## Summary
 
-Chúng ta đã tìm hiểu qua 3 hàm dành riêng cho trình duyệt để tương tác với người dùng:
+We covered 3 browser-specific functions to interact with visitors:
 
 `alert`
-: hiển thị một thông báo.
+: shows a message.
 
 `prompt`
-: hiển thị một thông báo yêu cầu người dùng nhập vào đoạn text. Nó trả về đoạn text hoặc, nếu nút Cancel hoặc `key:Esc` được bấm, `null`.
+: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
 
 `confirm`
-: hiển thị một thông báo và đợi người dùng nhấn "OK" hoặc "Cancel". Nó trả về `true` cho OK và `false` cho Cancel/`key:Esc`.
+: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
 
-Tất cả các hàm này đều là modal: chúng dừng thực thi script và ngăn người dùng tương tác với phần còn lại của trang đến khi cửa sổ được tắt đi.
+All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
 
-Có hai hạn chế tồn tại ở các hàm trên:
+There are two limitations shared by all the methods above:
 
-1. Vị trí chính xác của cửa sổ modal được xác định bởi trình duyệt. Thông thường, nó sẽ ở giữa màn hình.
-2. Hình dạng của cửa sổ cũng dựa trên trình duyệt. Chúng ta không thể thay đổi nó.
+1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
+2. The exact look of the window also depends on the browser. We can't modify it.
 
-Đó là cái giá phải trả cho sự đơn giản. Có nhiều cách khác để hiển thị phần cửa sổ đẹp và dễ dàng tương tác với người dùng hơn, nhưng nếu dùng "chuông hay còi" đều không quan trọng, thì dùng những hàm trên là được rồi.
+That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
