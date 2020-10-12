@@ -9,11 +9,19 @@ Nhưng với việc được chính thức hóa, ban đầu nó khá là khó hi
 
 Dự thảo mới nhất: <https://tc39.es/ecma262/>.
 
+<<<<<<< HEAD
 Để đọc về những tính năng mới nhất, bao gồm cả các tính năng gần như tiêu chuẩn (được gọi là "stage-3") xem tại: <https://github.com/tc39/proposals>.
+=======
+[The ECMA-262 specification](https://www.ecma-international.org/publications/standards/Ecma-262.htm) contains the most in-depth, detailed and formalized information about JavaScript. It defines the language.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các thông số kỹ thuật khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
 
+<<<<<<< HEAD
 ## Cẩm nang
+=======
+A new specification version is released every year. In-between these releases, the latest specification draft is at <https://tc39.es/ecma262/>.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 - **Tài liệu tham khảo Javascript MDN (Mozilla)** là một tài liệu hướng dẫn với các ví dụ và thông tin khác gồm những thông tin chuyên sâu khá bổ ích về các hàm, phương thức (methods) etc.
 
