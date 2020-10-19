@@ -94,7 +94,11 @@ Cách thấy này hiển nhiên sai vì thực ra đó là hai câu lệnh, đó
 
 Chúng tôi khuyên bạn nên đặt dấu chấm phảy giữa các câu lệnh ngay cả khi mỗi lệnh viết trên một dòng. Quy tắc này được cộng đồng áp dụng rộng rãi. Cùng nhắc lại một lần nữa -- *có thể* bỏ qua dấu chấm phảy trong hầu hết trường hợp. Nhưng để an toàn -- đặc biệt cho những người mới -- hãy luôn sử dụng chúng.
 
+<<<<<<< HEAD
 ## Các chú thích
+=======
+## Comments [#code-comments]
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 Theo thời gian, chương trình ngày càng phức tạp. Trong chương trình ta cần bổ sung thêm các "chú thích" để diễn giải hoạt động của mã trong chương trình.
 
@@ -135,8 +139,13 @@ alert('Chào');
 alert('thế giới!');
 ```
 
+<<<<<<< HEAD
 ```smart header="Dùng phím tắt!"
 Trong hầu hết các trình soạn thảo mã, có thể chú thích hóa một dòng mã bằng tổ hợp phím `key:Ctrl+/`, nhiều dòng mã bằng tổ hợp phím `key:Ctrl+Shift+/`. Trên máy Mac, dùng `key:Cmd` thay cho `key:Ctrl`.
+=======
+```smart header="Use hotkeys!"
+In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 ```
 
 ````warn header="Không được phép đặt một chú thích trong một chú thích khác (nested comment)!"

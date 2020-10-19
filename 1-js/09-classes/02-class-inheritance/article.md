@@ -1,9 +1,17 @@
 
 # Thừa kế một class
 
+<<<<<<< HEAD
 Giả sử chúng ta có hai class:
+=======
+Class inheritance is a way for one class to extend another class.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
-`Animal`:
+So we can create new functionality on top of the existing.
+
+## The "extends" keyword
+
+Let's say we have class `Animal`:
 
 ```js
 class Animal {
@@ -12,8 +20,13 @@ class Animal {
     this.name = name;
   }
   run(speed) {
+<<<<<<< HEAD
     this.speed += speed;
     alert(`${this.name} chạy với tốc độ ${this.speed}.`);
+=======
+    this.speed = speed;
+    alert(`${this.name} runs with speed ${this.speed}.`);
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
   }
   stop() {
     this.speed = 0;
@@ -28,6 +41,7 @@ class Animal {
 let animal = new Animal("My animal");
 ```
 
+<<<<<<< HEAD
 ![](rabbit-animal-independent-animal.svg)
 
 
@@ -47,8 +61,13 @@ let rabbit = new Rabbit("My rabbit");
 ```
 
 ![](rabbit-animal-independent-rabbit.svg)
+=======
+Here's how we can represent `animal` object and `Animal` class graphically:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
+![](rabbit-animal-independent-animal.svg)
 
+<<<<<<< HEAD
 Hiện tại chúng hoàn toàn đôc lập với nhau.
 
 Nhưng chúng ta muốn `Rabbit` thừa kế từ `Animal`. Nói cách khác, các đối tượng rabbit thừa kế từ các đối tượng animal, có thể truy cập các phương thức của `Animal` cũng như có thể có riêng các phương thức của nó.
@@ -78,6 +97,17 @@ class Animal {
 }
 
 // Rabbit thừa kế từ Animal
+=======
+...And we would like to create another `class Rabbit`.
+
+As rabbits are animals, `Rabbit` class should be based on `Animal`, have access to animal methods, so that rabbits can do what "generic" animals can do.
+
+The syntax to extend another class is: `class Child extends Parent`.
+
+Let's create `class Rabbit` that inherits from `Animal`:
+
+```js
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 *!*
 class Rabbit extends Animal {
 */!*
@@ -92,6 +122,7 @@ rabbit.run(5); // White Rabbit chạy với tốc độ 5.
 rabbit.hide(); // White Rabbit ẩn nấp!
 ```
 
+<<<<<<< HEAD
 Mã của class `Rabbit` trở nên ngắn hơn, vì mặc định nó sử dụng constructor của `Animal`, và cũng thừa kế được phương thức `run` từ `Animal`.
 
 Sâu bên trong, từ khóa `extends` thêm `[[Prototype]]` cho `Rabbit.prototype` để nó tham chiếu đến `Animal.prototype`:
@@ -105,6 +136,20 @@ Như đã học ở bài <info:native-prototypes>, JavaScript cũng sử dụng 
 =======
 As we can recall from the chapter <info:native-prototypes>, JavaScript uses prototypal inheritance for build-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`, so dates have generic object methods.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Object of `Rabbit` class have access to both `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+
+Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
+
+![](animal-rabbit-extends.svg)
+
+For instance, to find `rabbit.run` method, the engine checks (bottom-up on the picture):
+1. The `rabbit` object (has no `run`).
+2. Its prototype, that is `Rabbit.prototype` (has `hide`, but not `run`).
+3. Its prototype, that is (due to `extends`) `Animal.prototype`, that finally has the `run` method.
+
+As we can recall from the chapter <info:native-prototypes>, JavaScript itself uses prototypal inheritance for built-in objects. E.g. `Date.prototype.[[Prototype]]` is `Object.prototype`. That's why dates have access to generic object methods.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ````smart header="Sau `extends` có thể là một biểu thức trả về một class"
 Cú pháp thừa kế class cho phép một biểu thức sau `extends` là biểu thức trả về một class.
@@ -131,24 +176,39 @@ Nó hữu ích trong các mô hình lập trình nâng cao khi chúng ta sử d�
 
 ## Ghi đè phương thức
 
+<<<<<<< HEAD
 Giờ cùng tìm hiểu về ghi đè phương thức. Đến lúc này, `Rabbit` thừa kế phương thức `stop` từ `Animal`.
 
 Nếu ta cũng thêm phương thức `stop` riêng trong `Rabbit`, nó sẽ được dùng chứ không phải `stop` của class cha. Ta nói phương thức của class con ghi đè phương thức của class cha cùng tên.
+=======
+Now let's move forward and override a method. By default, all methods that are not specified in `class Rabbit` are taken directly "as is" from `class Animal`.
+
+But if we specify our own method in `Rabbit`, such as `stop()` then it will be used instead:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js
 class Rabbit extends Animal {
   stop() {
+<<<<<<< HEAD
     // ...được dùng cho rabbit.stop()
+=======
+    // ...now this will be used for rabbit.stop()
+    // instead of stop() from class Animal
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
   }
 }
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 ...Nhưng thường chúng ta không muốn thay thế toàn bộ phương thức của class cha, mà muốn dựa vào phương thức này rồi tinh chỉnh cũng như bổ sung thêm một số tính năng khác. Chúng ta làm việc này trong phương thức của class con nhưng gọi phương thức của class cha trước hoặc sau khi thực hiện.
 =======
 ...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 Các class cung cấp từ khóa `"super"` để làm việc này.
 
@@ -166,8 +226,13 @@ class Animal {
   }
 
   run(speed) {
+<<<<<<< HEAD
     this.speed += speed;
     alert(`${this.name} chạy với tốc độ ${this.speed}.`);
+=======
+    this.speed = speed;
+    alert(`${this.name} runs with speed ${this.speed}.`);
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
   }
 
   stop() {
@@ -232,7 +297,11 @@ setTimeout(function() { super.stop() }, 1000);
 
 Với constructor điều kiện khắt khe hơn.
 
+<<<<<<< HEAD
 Đến giờ, `Rabbit` chưa có `constructor` riêng.
+=======
+Until now, `Rabbit` did not have its own `constructor`.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 Theo đặc tả [(specification)](https://tc39.github.io/ecma262/#sec-runtime-semantics-classdefinitionevaluation), nếu một class thừa kế từ một class khác và không có `constructor` riêng, thì JavaScript tự động tạo `constructor` trống cho nó như sau:
 
@@ -285,10 +354,17 @@ Câu trả lời ngắn gọn như sau: `constructor` của class con bắt bu�
 
 ...Nhưng tại sao? Chuyện gì xảy ra ở đây? Yêu cầu này có vẻ kỳ lạ.
 
+<<<<<<< HEAD
 Tất nhiên, có một lời giải thích. Hãy đi sâu vào chi tiết để bạn có thể hiểu chuyện gì đang diễn ra.
+=======
+The short answer is:
+
+- **Constructors in inheriting classes must call `super(...)`, and (!) do it before using `this`.**
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 Trong JavaScript, có sự khác biệt giữa hàm `constructor` của một class con và các hàm `constructor` khác. Trong class con, hàm `constructor` được "đánh dấu" nhờ một thuộc tính đặc biệt `[[ConstructorKind]]:"derived"`.
 
+<<<<<<< HEAD
 Sự khác biêt là:
 
 <<<<<<< HEAD
@@ -300,12 +376,25 @@ Cho nên nếu chúng ta tạo ra `constructor` riêng cho class con, chúng ta 
 Để `Rabbit` làm việc, chúng ta cần gọi `super()` trước khi dùng `this`, như sau:
 =======
 - When a normal constructor runs, it creates an empty object and assigns it to `this`.
+=======
+Of course, there's an explanation. Let's get into details, so you'll really understand what's going on.
+
+In JavaScript, there's a distinction between a constructor function of an inheriting class (so-called "derived constructor") and other functions. A derived constructor has a special internal property `[[ConstructorKind]]:"derived"`. That's a special internal label.
+
+That label affects its behavior with `new`.
+
+- When a regular function is executed with `new`, it creates an empty object and assigns it to `this`.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 - But when a derived constructor runs, it doesn't do this. It expects the parent constructor to do this job.
 
-So if we're making a constructor of our own, then we must call `super`, because otherwise the object for `this` won't be created. And we'll get an error.
+So a derived constructor must call `super` in order to execute its parent (base) constructor, otherwise the object for `this` won't be created. And we'll get an error.
 
+<<<<<<< HEAD
 For `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+For the `Rabbit` constructor to work, it needs to call `super()` before using `this`, like here:
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 ```js run
 class Animal {
@@ -339,7 +428,107 @@ alert(rabbit.earLength); // 10
 ```
 
 
+<<<<<<< HEAD
 ## Tìm hiểu sâu về super, [[HomeObject]]
+=======
+
+### Overriding class fields: a tricky note
+
+```warn header="Advanced note"
+This note assumes you have a certain experience with classes, maybe in other programming languages.
+
+It provides better insight into the language and also explains the behavior that might be a source of bugs (but not very often).
+
+If you find it difficult to understand, just go on, continue reading, then return to it some time later.
+```
+
+We can override not only methods, but also class fields.
+
+Although, there's a tricky behavior when we access an overridden field in parent constructor, quite different from most other programming languages.
+
+Consider this example:
+
+```js run
+class Animal {
+  name = 'animal'
+
+  constructor() {
+    alert(this.name); // (*)
+  }
+}
+
+class Rabbit extends Animal {
+  name = 'rabbit';
+}
+
+new Animal(); // animal
+*!*
+new Rabbit(); // animal
+*/!*
+```
+
+Here, class `Rabbit` extends `Animal` and overrides `name` field with its own value.
+
+There's no own constructor in `Rabbit`, so `Animal` constructor is called.
+
+What's interesting is that in both cases: `new Animal()` and `new Rabbit()`, the `alert` in the line `(*)` shows `animal`.
+
+**In other words, parent constructor always uses its own field value, not the overridden one.**
+
+What's odd about it?
+
+If it's not clear yet, please compare with methods.
+
+Here's the same code, but instead of `this.name` field we call `this.showName()` method:
+
+```js run
+class Animal {
+  showName() {  // instead of this.name = 'animal'
+    alert('animal');
+  }
+
+  constructor() {
+    this.showName(); // instead of alert(this.name);
+  }
+}
+
+class Rabbit extends Animal {
+  showName() {
+    alert('rabbit');
+  }
+}
+
+new Animal(); // animal
+*!*
+new Rabbit(); // rabbit
+*/!*
+```
+
+Please note: now the output is different.
+
+And that's what we naturally expect. When the parent constructor is called in the derived class, it uses the overridden method.
+
+...But for class fields it's not so. As said, the parent constructor always uses the parent field.
+
+Why is there the difference?
+
+Well, the reason is in the field initialization order. The class field is initialized:
+- Before constructor for the base class (that doesn't extend anything),
+- Immediately after `super()` for the derived class.
+
+In our case, `Rabbit` is the derived class. There's no `constructor()` in it. As said previously, that's the same as if there was an empty constructor with only `super(...args)`.
+
+So, `new Rabbit()` calls `super()`, thus executing the parent constructor, and (per the rule for derived classes) only after that its class fields are initialized. At the time of the parent constructor execution, there are no `Rabbit` class fields yet, that's why `Animal` fields are used.
+
+This subtle difference between fields and methods is specific to JavaScript
+
+Luckily, this behavior only reveals itself if an overridden field is used in the parent constructor. Then it may be difficult to understand what's going on, so we're explaining it here.
+
+If it becomes a problem, one can fix it by using methods or getters/setters instead of fields.
+
+
+## Super: internals, [[HomeObject]]
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 <<<<<<< HEAD
 Hãy tìm hiểu sâu hơn về cách làm việc của `super`. Chúng ta sẽ thấy vài điều thú vị.
@@ -350,8 +539,12 @@ If you're reading the tutorial for the first time - this section may be skipped.
 It's about the internal mechanisms behind inheritance and `super`.
 ```
 
+<<<<<<< HEAD
 Let's get a little deeper under the hood of `super`. We'll see some interesting things by the way.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+Let's get a little deeper under the hood of `super`. We'll see some interesting things along the way.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 Trước tiên cần nói rằng, với tất cả những gì ta đã được học, ta không thể hiểu cách làm việc của `super`!
 
@@ -510,7 +703,11 @@ Nó làm việc như chủ định dựa vào `[[HomeObject]]`. Một phương t
 
 Như ta đã biết, các hàm thông thường là "tự do", không bị ràng buộc vào đối tượng nào trong JavaScript. Nên chúng ta có thể sao chép chúng cho nhiều đối tượng và gọi với một `this` khác.
 
+<<<<<<< HEAD
 Sự tồn tại của `[[HomeObject]]` vi phạm nguyên tắc này, bởi phương thức luôn nhớ đối tượng chứa nó. `[[HomeObject]]` không thể thay đổi, nên ràng buộc này tồn tại mãi mãi.
+=======
+The very existence of `[[HomeObject]]` violates that principle, because methods remember their objects. `[[HomeObject]]` can't be changed, so this bond is forever.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 May mắn `[[HomeObject]]` chỉ được dùng với `super`. Nên nếu phương thức không dùng `super`, chúng ta vẫn có thể xem nó là "tự do".
 
@@ -523,7 +720,11 @@ Here's the demo of a wrong `super` result after copying:
 ```js run
 let animal = {
   sayHi() {
+<<<<<<< HEAD
     alert("Tôi là động vật");
+=======
+    alert(`I'm an animal`);
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
   }
 };
 
@@ -537,7 +738,11 @@ let rabbit = {
 
 let plant = {
   sayHi() {
+<<<<<<< HEAD
     alert("Tôi là thực vật");
+=======
+    alert("I'm a plant");
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
   }
 };
 
@@ -554,7 +759,11 @@ tree.sayHi();  // Tôi là động vật (?!?)
 */!*
 ```
 
+<<<<<<< HEAD
 Gọi `tree.sayHi()` sẽ hiển thị "Tôi là động vật". Đây là kết quả sai.
+=======
+A call to `tree.sayHi()` shows "I'm an animal". Definitely wrong.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 <<<<<<< HEAD
 Lý do đơn giản:
@@ -582,7 +791,11 @@ Sự khác biệt này có thể không quan trọng với chúng ta, nhưng nó
 
 ```js run
 let animal = {
+<<<<<<< HEAD
   eat: function() { // phải phải dùng cú pháp: eat() {...}
+=======
+  eat: function() { // intentionally writing like this instead of eat() {...
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
     // ...
   }
 };
@@ -611,5 +824,10 @@ rabbit.eat();  // Lỗi khi gọi super (vì không có [[HomeObject]])
     - Phương thức nhớ class/đối tượng chứa nó trong thuộc tính `[[HomeObject]]`. Nó giúp `super` tìm thấy các phương thức cha.
     - Không an toàn khi sao chép các phương thức có `super` từ đối tượng này tới đối tượng khác.
 
+<<<<<<< HEAD
 Cũng cần biết:
 - Các hàm mũi tên không có `this` và `super`.
+=======
+Also:
+- Arrow functions don't have their own `this` or `super`, so they transparently fit into the surrounding context.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d

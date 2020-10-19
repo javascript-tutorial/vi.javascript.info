@@ -393,7 +393,7 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested is another encoded object.
+As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested in another encoded object.
 
 
 ## JSON.parse
@@ -425,9 +425,9 @@ alert( numbers[1] ); // 1
 Or for nested objects:
 
 ```js run
-let user = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
 
-user = JSON.parse(user);
+let user = JSON.parse(userData);
 
 alert( user.friends[1] ); // 1
 ```
