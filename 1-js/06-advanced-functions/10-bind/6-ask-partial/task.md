@@ -8,7 +8,11 @@ Bài tập này là phiên bản phức tạp hơn của <info:task/question-use
 
 Đối tượng `user` đã được sửa đổi. Bây giờ thay vì hai hàm `loginOk/loginFail`, chỉ còn một hàm duy nhất `user.login(true/false)`.
 
+<<<<<<< HEAD
 Phải truyền gì vào `askPassword` trong đoạn mã dưới đây?
+=======
+What should we pass `askPassword` in the code below, so that it calls `user.login(true)` as `ok` and `user.login(false)` as `fail`?
+>>>>>>> dccca58f268ad6d5a6f2160613a8ea3c5cd53a2d
 
 ```js
 function askPassword(ok, fail) {
