@@ -54,8 +54,12 @@ Thuộc tính `type`: <code>&lt;script <u>type</u>=...&gt;</code>
 : Chuẩn HTML4 cũ yêu cầu mỗi script phải có một `type`. Thường là `type="text/javascript"`. Nhưng hiện nay nó không còn cần thiết nữa. Chuẩn HTML5 hiện đại vẫn sử dụng thuộc tính `type` nhưng với mục đích hoàn toàn khác. Bây giờ `type` được dùng cho các JavaScript module. Nhưng nó là một chủ đề nâng cao sẽ được nói đến trong một phần khác của loạt bài hướng dẫn này.
 =======
 The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+<<<<<<< HEAD
 : The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial.
 >>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+=======
+: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
+>>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
 
 Thuộc tính `language`: <code>&lt;script <u>language</u>=...&gt;</code>
 : Thuộc tính này cho biết script được viết bằng ngôn ngữ nào. Ngày nay JavaScript trở thành ngôn ngữ script mặc định, thuộc tính này không còn cần thiết nữa.
@@ -69,7 +73,11 @@ Các chú thích trước và sau script.
     //--></script>
     ```
 
+<<<<<<< HEAD
     Mẹo này không được sử dụng trong JavaScript hiện đại. Mục đích của chú thích là ẩn đi mã JavaScript trong các trình duyệt cũ không hỗ trợ thẻ `<script>`. Các trình duyệt phát hành trong 15 năm gần đây không gặp phải vấn đề này, kiểu đặt chú thích như thế này chỉ gặp trong nhưng đoạn mã rất cũ.
+=======
+    This trick isn't used in modern JavaScript. These comments hide JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+>>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
 
 
 ## Các script ngoài
@@ -93,7 +101,7 @@ Here, `/path/to/script.js` is an absolute path to the script from the site root.
 Một địa chỉ URL cũng được cho phép, ví dụ:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
 Để thêm nhiều script, sử dụng nhiều thẻ:

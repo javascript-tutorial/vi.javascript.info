@@ -1,12 +1,12 @@
 # Browser environment, specs
 
-The JavaScript language was initially created for web browsers. Since then, it has evolved and become a language with many uses and platforms.
+The JavaScript language was initially created for web browsers. Since then it has evolved and become a language with many uses and platforms.
 
-A platform may be a browser, or a web-server or another *host*, even a coffee machine. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+A platform may be a browser, or a web-server or another *host*, even a "smart" coffee machine, if it can run JavaScript. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
 
 A host environment provides own objects and functions additional to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
 
-Here's a bird's-eye view of what we have when JavaScript runs in a web-browser:
+Here's a bird's-eye view of what we have when JavaScript runs in a web browser:
 
 ![](windowObjects.svg)
 
@@ -49,9 +49,7 @@ document.body.style.background = "red";
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification:
-
-- **DOM Living Standard** at <https://dom.spec.whatwg.org>
+Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification: [DOM Living Standard](https://dom.spec.whatwg.org).
 
 ```smart header="DOM is not only for browsers"
 The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use DOM too.
@@ -60,14 +58,14 @@ For instance, server-side scripts that download HTML pages and process them can 
 ```
 
 ```smart header="CSSOM for styling"
-CSS rules and stylesheets are structured in a different way than HTML. There's a separate specification [CSSOM](https://www.w3.org/TR/cssom-1/) that explains how they are represented as objects, and how to read and write them.
+There's also a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/) for CSS rules and stylesheets, that explains how they are represented as objects, and how to read and write them.
 
-CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because usually CSS rules are static. We rarely need to add/remove CSS rules from JavaScript, but that's also possible.
+CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because we rarely need to modify CSS rules from JavaScript (usually we just add/remove CSS classes, not modify their CSS rules), but that's also possible.
 ```
 
-## BOM (Browser object model)
+## BOM (Browser Object Model)
 
-Browser Object Model (BOM) are additional objects provided by the browser (host environment) to work with everything except the document.
+The Browser Object Model (BOM) represents additional objects provided by the browser (host environment) for working with everything except the document.
 
 For instance:
 

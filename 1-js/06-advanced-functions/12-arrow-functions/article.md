@@ -8,7 +8,11 @@ Hàm mũi tên không đơn giản chỉ là một cách viết tắt của hàm
 Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
 >>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
+<<<<<<< HEAD
 JavaScript có đầy những tình huống ở đó chúng ta cần viết một hàm nhỏ để chạy ở một nơi khác.
+=======
+JavaScript is full of situations where we need to write a small function that's executed somewhere else.
+>>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
 
 Ví dụ:
 
@@ -126,9 +130,18 @@ Ta cần tạo thêm hai biến `args` và `ctx` để hàm bên trong `setTimeo
 
 Hàm mũi tên:
 
+<<<<<<< HEAD
 - Không có `this`.
 - Không có `arguments`.
 - Không thể gọi bằng `new`.
 - (Chúng cũng không có `super`, nhưng chúng ta chưa học. Sẽ học ở bài <info:class-inheritance>).
 
 Đó là bởi vì hàm mũi tên là một hàm ngắn được tạo ra với mục địch chạy ở bất cứ đâu, nên nó không cần giữ lại ngữ cảnh nơi nó được tạo.
+=======
+- Do not have `this`
+- Do not have `arguments`
+- Can't be called with `new`
+- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
+
+That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
+>>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
