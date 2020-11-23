@@ -1,6 +1,10 @@
 # Modern JavaScript Tutorial bằng Tiếng Việt
 
+<<<<<<< HEAD
 Repository này chứa phiên bản tiếng Việt của <https://javascript.info>.
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 
 **Bạn có thể đóng góp vào bản dịch này bằng cách:**
@@ -37,7 +41,13 @@ Một thư mục có nhiều tệp:
 - `article.md` cho một bài,
 - `task.md` cho một bài tập (+`solution.md` cho lời giải).
 
+<<<<<<< HEAD
 Một tệp bắt đầu bằng `# Title Header`, và sau đó là văn bản viết theo định dạng Markdown, có thể chỉnh sửa bằng một trình soạn thảo đơn giản.
+=======
+  - `index.md` stands for a chapter
+  - `article.md` stands for an article
+  - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 Các tài nguyên bổ sung và các ví dụ cho bài học hoặc bài tập cũng nằm trong cùng thư mục.
 

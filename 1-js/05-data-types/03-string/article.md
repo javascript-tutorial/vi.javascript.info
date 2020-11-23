@@ -50,7 +50,7 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
 
 Single and double quotes come from ancient times of language creation when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
 
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. You can read more about it in the [docs](mdn:/JavaScript/Reference/Template_literals#Tagged_template_literals). This is called "tagged templates". This feature makes it easier to wrap strings into custom templating or other functionality, but it is rarely used.
+Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This is called "tagged templates". This feature makes it easier to implement custom templating, but is rarely used in practice. You can read more about it in the [manual](mdn:/JavaScript/Reference/Template_literals#Tagged_templates). 
 
 ## Special characters
 
@@ -110,7 +110,7 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 
 As you can see, we have to prepend the inner quote by the backslash `\'`, because otherwise it would indicate the string end.
 
-Of course, only to the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+Of course, only the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
 
 ```js run
 alert( `I'm the Walrus!` ); // I'm the Walrus!
@@ -312,7 +312,7 @@ if (str.indexOf("Widget") != -1) {
 
 #### The bitwise NOT trick
 
-One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
 
 In practice, that means a simple thing: for 32-bit integers `~n` equals `-(n+1)`.
 
@@ -345,7 +345,7 @@ It is usually not recommended to use language features in a non-obvious way, but
 
 Just remember: `if (~str.indexOf(...))` reads as "if found".
 
-To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check is correct only if a string is not that long.
+To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check correct only if a string is not that long.
 
 Right now we can see this trick only in the old code, as modern JavaScript provides `.includes` method (see below).
 
@@ -394,7 +394,7 @@ There are 3 methods in JavaScript to get a substring: `substring`, `substr` and 
 
     ```js run
     let str = "st*!*ringify*/!*";
-    alert( str.slice(2) ); // ringify, from the 2nd position till the end
+    alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
     ```
 
     Negative values for `start/end` are also possible. They mean the position is counted from the string end:
@@ -403,7 +403,7 @@ There are 3 methods in JavaScript to get a substring: `substring`, `substr` and 
     let str = "strin*!*gif*/!*y";
 
     // start at the 4th position from the right, end at the 1st from the right
-    alert( str.slice(-4, -1) ); // gif
+    alert( str.slice(-4, -1) ); // 'gif'
     ```
 
 `str.substring(start [, end])`
@@ -435,14 +435,14 @@ There are 3 methods in JavaScript to get a substring: `substring`, `substr` and 
 
     ```js run
     let str = "st*!*ring*/!*ify";
-    alert( str.substr(2, 4) ); // ring, from the 2nd position get 4 characters
+    alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
     ```
 
     The first argument may be negative, to count from the end:
 
     ```js run
     let str = "strin*!*gi*/!*fy";
-    alert( str.substr(-4, 2) ); // gi, from the 4th position get 2 characters
+    alert( str.substr(-4, 2) ); // 'gi', from the 4th position get 2 characters
     ```
 
 Let's recap these methods to avoid any confusion:
@@ -534,7 +534,7 @@ The "right" algorithm to do string comparisons is more complex than it may seem,
 
 So, the browser needs to know the language to compare.
 
-Luckily, all modern browsers (IE10- requires the additional library [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+Luckily, all modern browsers (IE10- requires the additional library [Intl.js](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
 
 It provides a special method to compare strings in different languages, following their rules.
 

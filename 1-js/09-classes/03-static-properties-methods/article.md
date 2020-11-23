@@ -29,12 +29,14 @@ Hoặc có thể gán hàm trực tiếp cho phương thức của `User`:
 That actually does the same as assigning it as a property directly:
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
-```js
-class User() { }
+```js run
+class User { }
 
 User.staticMethod = function() {
   alert(this === User);
 };
+
+User.staticMethod(); // true
 ```
 
 <<<<<<< HEAD
@@ -118,7 +120,7 @@ class Article {
 
 let article = Article.createTodays();
 
-alert( article.title ); // Todays digest
+alert( article.title ); // Today's digest
 ```
 
 Giờ ta có thể tạo đối tượng có tiêu đề "Today's digest" với `date` là ngày hiện tại bằng cách gọi phương thức tính `Article.createTodays()`.
@@ -156,6 +158,7 @@ Article.publisher = "Phùng Hùng";
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## Sự thừa kế
 
 Các thuộc tính/phương thức tĩnh cũng được thừa kế, chúng ta có thể truy cập `Parent.method` bằng `Child.method`.
@@ -166,9 +169,17 @@ Static methods are inherited.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
 Ví dụ, `Animal.compare` trong đoạn mã dưới đây được thừa kế và gọi từ class con `Rabbit.compare`:
+=======
+## Inheritance of static properties and methods
+
+Static properties and methods are inherited.
+
+For instance, `Animal.compare` and `Animal.planet` in the code below are inherited and accessible as `Rabbit.compare` and `Rabbit.planet`:
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 ```js run
 class Animal {
+  static planet = "Earth";
 
   constructor(name, speed) {
     this.speed = speed;
@@ -204,6 +215,7 @@ let rabbits = [
 rabbits.sort(Rabbit.compare);
 */!*
 
+<<<<<<< HEAD
 rabbits[0].run(); // Black Rabbit chạy với tốc độ 5.
 ```
 
@@ -212,6 +224,14 @@ Giờ chúng ta có thể gọi `Rabbit.compare` và `Animal.compare` sẽ đư�
 =======
 Now when we can call `Rabbit.compare`, the inherited `Animal.compare` will be called.
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+rabbits[0].run(); // Black Rabbit runs with speed 5.
+
+alert(Rabbit.planet); // Earth
+```
+
+Now when we call `Rabbit.compare`, the inherited `Animal.compare` will be called.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 Nó làm việc như thế nào? Một lần nữa, lại sử dụng các nguyên mẫu. Có thể bạn đã đoán được, `extends` đặt `[[Prototype]]` của `Rabbit` để nó tham chiếu tới `Animal`.
 
@@ -227,7 +247,7 @@ So, `Rabbit extends Animal` creates two `[[Prototype]]` references:
 1. `Rabbit` function prototypally inherits from `Animal` function.
 2. `Rabbit.prototype` prototypally inherits from `Animal.prototype`.
 
-As the result, inheritance works both for regular and static methods.
+As a result, inheritance works both for regular and static methods.
 
 Here, let's check that by code:
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
@@ -257,12 +277,12 @@ Các phương thức tĩnh được sử dụng để thực hiện các chức 
 alert(Rabbit.__proto__ === Animal); // true
 
 // for regular methods
-alert(Rabbit.prototype.__proto__ === Animal.prototype);
+alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 ```
 
 ## Summary
 
-Static methods are used for the functionality that belongs to the class "as a whole", doesn't relate to a concrete class instance.
+Static methods are used for the functionality that belongs to the class "as a whole". It doesn't relate to a concrete class instance.
 
 For example, a method for comparison `Article.compare(article1, article2)` or a factory method `Article.createTodays()`.
 
