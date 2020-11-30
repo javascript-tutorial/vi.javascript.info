@@ -9,7 +9,11 @@ The global object provides variables and functions that are available anywhere. 
 
 Trong trình duyệt, đối tượng global có tên là `window`, trong Node.js là `global`, ở các môi trường khác nhau, nó có thể mang các cái tên khác nhau.
 
+<<<<<<< HEAD
 Gần đây, `globalThis` đã được thêm vào để chuẩn hóa tên cho đối tượng global, và sẽ sớm được hỗ trợ ở mọi môi trường. Tuy nhiên ở một số trình duyệt, cụ thể là non-Chromium Edge, vẫn chưa hỗ trợ `globalThis` nhưng nó có thể dễ dàng được thêm vào.
+=======
+Recently, `globalThis` was added to the language, as a standardized name for a global object, that should be supported across all environments. It's supported in all major browsers.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 <<<<<<< HEAD
 Tất cả các thuộc tính của đối tượng global có thể được truy cập một cách trực tiếp:
@@ -43,10 +47,15 @@ alert(window.gVar); // 5 (trở thành thuộc tính của đối tượng globa
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Cân nhắc khi sử dụng việc này ! Hành vi này tồn tại chỉ để phục vụ cho khả năng tương thích trong ngôn ngữ. Nó sẽ không xảy ra trong các đoạn scripts hiện đại, nơi mà thường hay sử dụng Javascript modules. Ta sẽ tìm hiểu ở chương [Modules](info:modules).
 
 Một điều nữa, các cách khai báo biến với `let` và `const` hoàn toàn không bị ảnh hưởng bởi hành vi này:
 =======
+=======
+The same effect have function declarations (statements with `function` keyword in the main code flow, not function expressions).
+
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such thing doesn't happen.
 
 If we used `let` instead, such thing wouldn't happen:
@@ -107,7 +116,14 @@ if (!window.Promise) {
     Bao gồm các tính năng được tích hợp sẵn trong Javascript, chẳng hạn như `Array` và các giá trị của môi trường hiện tại, chằng hạn như `window.innerHeight` - chiều cao của cửa sổ trong trình duyệt .
 - Đối tượng global có một cái tên phổ quát hơn là `globalThis`.
 
+<<<<<<< HEAD
     ...Nhưng thông thường nó được gọi bằng các tên riêng trong các môi trường cụ thể , chẳng hạn như `window` (trình duyệt) và `global` (Node.js). Cái tên `globalThis` chỉ mới được đề xuất gần đây và hiện tại vẫn chưa được hỗ trợ bởi mọi trình duyệt.
 - Chỉ nên lưu trữ giá trị trong đối tượng global nếu như thực sự cần. Hạn chế nhất có thể.
 - Trong trình duyệt, ngoại trừ khi sử dụng [Modules](info:modules), các biến và hàm toàn cục được khai báo với `var` sẽ trở thành thuộc tính của đối tượng global .
 - Để dễ dàng hơn cho việc đọc hiểu code trong tương lai, truy cập thuộc tính trực tiếp thông qua đối tượng global, chẳng hạn như `window.x`.
+=======
+    ...But more often is referred by "old-school" environment-specific names, such as `window` (browser) and `global` (Node.js).
+- We should store values in the global object only if they're truly global for our project. And keep their number at minimum.
+- In-browser, unless we're using [modules](info:modules), global functions and variables declared with `var` become a property of the global object.
+- To make our code future-proof and easier to understand, we should access properties of the global object directly, as `window.x`.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5

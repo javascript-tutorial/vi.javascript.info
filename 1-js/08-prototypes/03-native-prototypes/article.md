@@ -37,7 +37,9 @@ Ta có thể kiểm tra điều này:
 let obj = {};
 
 alert(obj.__proto__ === Object.prototype); // true
-// obj.toString === obj.__proto__.toString == Object.prototype.toString
+
+alert(obj.toString === obj.__proto__.toString); //true
+alert(obj.toString === Object.prototype.toString); //true
 ```
 
 <<<<<<< HEAD
@@ -113,12 +115,21 @@ alert(f.__proto__.__proto__ == Object.prototype); // true
 
 Đối với các giá trị kiểu cơ sở như chuỗi, số và giá trị lôgic câu chuyện có phức tạp hơn đôi chút.
 
+<<<<<<< HEAD
 Như ta đã biết, chúng không phải là các đối tượng. Nhưng nếu ta cố tình truy cập các thuộc tính hay phương thức của chúng, một đối tượng bao được tạo bằng các constructor `String`, `Number`, `Boolean` sẽ thay thế và cung cấp các thuộc tính và phương thức này. Sau khi sử dụng xong đối tượng bảo bị xóa.
+=======
+As we remember, they are not objects. But if we try to access their properties, temporary wrapper objects are created using built-in constructors `String`, `Number` and `Boolean`. They provide the methods and disappear.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 Các thuộc tính và phương thức của đối tượng thực ra cũng được lấy từ các nguyên mẫu sẵn có đó là `String.prototype`, `Number.prototype` và `Boolean.prototype`.
 
+<<<<<<< HEAD
 ```warn header="Các giá trị `null` and `undefined` không có đối tượng bao"
 Các giá trị `null` và `undefined` khác với tất cả các giá trị cơ sở khác. Chúng không có đối tượng bao, nên cũng không có các thuộc tính và phương thức. Và do đó cũng không có nguyên mẫu.
+=======
+```warn header="Values `null` and `undefined` have no object wrappers"
+Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes either.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 ```
 
 ## Thay đổi các nguyên mẫu có sẵn [#native-prototype-change]
@@ -147,9 +158,15 @@ Vì thế, nói chung sửa đổi nguyên mẫu có sẵn là một ý tưởng
 
 **Trong lập trình hiện đại, chỉ có một trường hợp duy nhất có thể thay đổi nguyên mẫu có sẵn.Đó là polyfilling.**
 
+<<<<<<< HEAD
 Polyfilling là tạo một phương thức thay thế cho một phương thức đã có trong đặc tả nhưng chưa được hỗ trợ bởi JavaScript engine hiện tại.
 
 Lúc này ta phải tự viết phương thức sao cho nó hoạt động giống như phương thức trong đặc tả, sau đó thêm nó vào nguyên mẫu như trong đặc tả.
+=======
+Polyfilling is a term for making a substitute for a method that exists in the JavaScript specification, but is not yet supported by a particular JavaScript engine.
+
+We may then implement it manually and populate the built-in prototype with it.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 Ví dụ:
 
@@ -167,8 +184,12 @@ if (!String.prototype.repeat) { // nếu không có phương thức
 =======
     // actually, the code should be a little bit more complex than that
     // (the full algorithm is in the specification)
+<<<<<<< HEAD
     // but even an imperfect polyfill is often considered good enough for use
 >>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+=======
+    // but even an imperfect polyfill is often considered good enough
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
     return new Array(n + 1).join(this);
   };
 }
@@ -207,18 +228,34 @@ obj.join = Array.prototype.join;
 alert( obj.join(',') ); // Chào thế giới!
 ```
 
+<<<<<<< HEAD
 Nó làm việc, bởi vì thuật toán bên trong của `join` hoàn toàn áp dụng được cho mảng giả. Còn nhiều phương thức có sẵn khác cũng có thể mượn được như vậy.
+=======
+It works because the internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property. It doesn't check if the object is indeed an array. Many built-in methods are like that.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 Có một cách khác đó là cài đặt `obj.__proto__` thành `Array.prototype`, và `obj` mượn được tất cả các phương thức của mảng.
 
 Điều này không thể thực hiện nếu `obj` đã có một nguyên mẫu khác. Nhớ rằng, một đối tượng tại một thời điểm chỉ có một nguyên mẫu.
 
+<<<<<<< HEAD
 Việc mượn phương thức rất mềm dẻo, nó cho phép phối hợp các tính năng từ nhiều đối tượng để áp dụng cho đối tượng hiện tại.
+=======
+Borrowing methods is flexible, it allows to mix functionalities from different objects if needed.
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ## Tóm tắt
 
+<<<<<<< HEAD
 - Tất cả các đối tượng có sẵn đều tuân theo mô hình:
     - Các phương thức lưu trong nguyên mẫu (`Array.prototype`, `Object.prototype`, `Date.prototype`...).
     - Đối tượng chỉ chứa dữ liệu (phần tử mảng, thuộc tính, ngày/tháng...).
 - Các giá trị cơ sở giữ phương thức trong nguyên mẫu của đối tượng bao: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Chỉ `undefined` và `null` không có đối tượng bao.
 - Các nguyên mẫu có sẵn có thể thay đổi được hoặc bổ sung thêm phương thức mới. Nhưng không nên sửa chúng. Chỉ nên sửa nếu ta cần thêm các phương thức mới có trong đặc tả nhưng chưa được JavaScript engine hỗ trợ.
+=======
+- All built-in objects follow the same pattern:
+    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype`, etc.)
+    - The object itself stores only the data (array items, object properties, the date)
+- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype` and `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects
+- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. The only allowable case is probably when we add-in a new standard, but it's not yet supported by the JavaScript engine
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5

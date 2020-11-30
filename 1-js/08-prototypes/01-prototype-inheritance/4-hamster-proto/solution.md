@@ -48,7 +48,11 @@ alert( lazy.stomach ); // <không có gì>
 
 Giờ tất cả làm việc, vì `this.stomach=` là hành động ghi nên không sử dụng thuộc tính `stomach` của nguyên mẫu `hamster`. Giá trị được ghi vào đối tượng `this` (tức đối tượng được thừa kế).
 
+<<<<<<< HEAD
 Ta cũng có thể tránh được vấn đề trên bằng cách tạo riêng cho mỗi con hamster một cái dạ dày:
+=======
+Also we can totally avoid the problem by making sure that each hamster has their own stomach:
+>>>>>>> e1a3f634a47c119cf1ec7420c49fc0fc7172c0b5
 
 ```js run
 let hamster = {
