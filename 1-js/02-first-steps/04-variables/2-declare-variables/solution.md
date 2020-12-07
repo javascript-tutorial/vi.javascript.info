@@ -10,7 +10,11 @@ Nó khá đơn giản:
 let ourPlanetName = "Earth";
 ```
 
+<<<<<<< HEAD
 Chú ý, chúng ta có thể dùng tên ngắn hơn là `planet`, nhưng nó không chỉ rõ đó là hành tinh nào. Tốt hơn mọi thứ nên rõ ràng, cho dù tên biến có hơi dài một chút.
+=======
+Note, we could use a shorter name `planet`, but it might not be obvious what planet it refers to. It's nice to be more verbose. At least until the variable isNotTooLong.
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 <<<<<<< HEAD
 Thứ hai, tên của người khách hiện tại:

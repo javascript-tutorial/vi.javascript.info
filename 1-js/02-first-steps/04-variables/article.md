@@ -12,7 +12,11 @@ Một [biến (variable)](https://vi.wikipedia.org/wiki/Bi%E1%BA%BFn_(khoa_h%E1%
 
 Để tạo biến trong JavaScript, sử dụng từ khóa `let`.
 
+<<<<<<< HEAD
 Câu lệnh dưới đây tạo (còn gọi là *khai báo* hay *định nghĩa*) một biến có tên "message":
+=======
+The statement below creates (in other words: *declares*) a variable with the name "message":
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 ```js
 let message;
@@ -80,9 +84,14 @@ let user = 'John'
 
 Tất cả các cách trên đều hợp lệ, chọn cách nào là do sở thích của bạn.
 
+<<<<<<< HEAD
 
 ````smart header="`var` thay vì `let`"
 Trong các mã chương trình cũ, bạn sẽ bắt gặp từ khóa `var` thay vì `let`:
+=======
+````smart header="`var` instead of `let`"
+In older scripts, you may also find another keyword: `var` instead of `let`:
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 ```js
 *!*var*/!* message = 'Hello';
@@ -135,8 +144,27 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+<<<<<<< HEAD
 ```smart header="Ngôn ngữ lập trình hàm"
 Cần chú ý rằng chúng ta cũng có các ngôn ngữ lập trình [hàm](https://en.wikipedia.org/wiki/Functional_programming), như [Scala](http://www.scala-lang.org/) hay [Erlang](http://www.erlang.org/) không cho phép thay đổi giá trị biến.
+=======
+````warn header="Declaring twice triggers an error"
+A variable should be declared only once.
+
+A repeated declaration of the same variable is an error:
+
+```js run
+let message = "This";
+
+// repeated 'let' leads to an error
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+So, we should declare a variable once and then refer to it without `let`.
+````
+
+```smart header="Functional languages"
+It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 Trong các ngôn ngữ này, một khi giá trị đã nằm trong "hộp", nó ở đó mãi mãi. Nếu cần lưu giá trị khác, chúng ta cần tạo ra "hộp" mới (khai báo một biến mới). Ta không thể tái sử dụng một biến đã có.
 
@@ -190,7 +218,11 @@ let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Toàn bộ những tên biến như vậy hợp lệ, nhưng có một quy tắc được áp dụng rộng rãi là chỉ sử dụng các chữ cái trong bảng chữ cái tiếng Anh làm tên biến. Quy tắc này đảm bảo mọi người từ nhiều quốc gia có thể hiểu được.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 ````
 
 ````warn header="Các từ khóa"
@@ -237,7 +269,11 @@ num = 5; // lỗi: num chưa định nghĩa
 const myBirthday = '18.04.1982';
 ```
 
+<<<<<<< HEAD
 Biến khai báo bằng từ khóa `const` được gọi hà "hằng" (constant). Chúng không thể thay đổi được. Nếu cố tình thay đổi giá trị hằng sẽ dẫn tới một lỗi:
+=======
+Variables declared using `const` are called "constants". They cannot be reassigned. An attempt to do so would cause an error:
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -290,7 +326,11 @@ Nói cách khác, hằng chỉ được viết hoa nếu giá trị của nó đ
 
 Nói về biến, có một thứ cực kỳ quan trọng.
 
+<<<<<<< HEAD
 Tên biến cần rõ ràng, mang nhiều ý nghĩa, mô tả dữ liệu nó chứa.
+=======
+A variable name should have a clean, obvious meaning, describing the data that it stores.
+>>>>>>> c56e6a57ac3497aab77128c5bfca13513980709b
 
 Đặt tên biến sao cho có nghĩa là một trong những kỹ năng quan trọng và phức tạp nhất trong lập trình. Nhìn thoáng qua tên biến ta có thể phân biệt được đây là đoạn mã viết bởi một lập trình viên dày dạn kinh nghiệm hay lập trình viên nghiệp dư.
 

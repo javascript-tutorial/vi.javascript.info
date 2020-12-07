@@ -24,15 +24,16 @@ To do the request, we need 3 steps:
 
 1. Create `XMLHttpRequest`:
     ```js
-    let xhr = new XMLHttpRequest(); // the constructor has no arguments
+    let xhr = new XMLHttpRequest();
     ```
+    The constructor has no arguments.
 
-2. Initialize it:
+2. Initialize it, usually right after `new XMLHttpRequest`:
     ```js
     xhr.open(method, URL, [async, user, password])
     ```
 
-    This method is usually called right after `new XMLHttpRequest`. It specifies the main parameters of the request:
+    This method specifies the main parameters of the request:
 
     - `method` -- HTTP-method. Usually `"GET"` or `"POST"`.
     - `URL` -- the URL to request, a string, can be [URL](info:url) object.
@@ -49,14 +50,14 @@ To do the request, we need 3 steps:
 
     This method opens the connection and sends the request to server. The optional `body` parameter contains the request body.
 
-    Some request methods like `GET` do not have a body. And some of them like `POST` use `body` to send the data to the server. We'll see examples later.
+    Some request methods like `GET` do not have a body. And some of them like `POST` use `body` to send the data to the server. We'll see examples of that later.
 
 4. Listen to `xhr` events for response.
 
-    These three are the most widely used:
-    - `load` -- when the result is ready, that includes HTTP errors like 404.
+    These three events are the most widely used:
+    - `load` -- when the request is complete (even if HTTP status is like 400 or 500), and the response is fully downloaded.
     - `error` -- when the request couldn't be made, e.g. network down or invalid URL.
-    - `progress` -- triggers periodically during the download, reports how much downloaded.
+    - `progress` -- triggers periodically while the response is being downloaded, reports how much has been downloaded.
 
     ```js
     xhr.onload = function() {
@@ -92,7 +93,7 @@ xhr.onload = function() {
   if (xhr.status != 200) { // analyze HTTP status of the response
     alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
   } else { // show the result
-    alert(`Done, got ${xhr.response.length} bytes`); // responseText is the server
+    alert(`Done, got ${xhr.response.length} bytes`); // response is the server response
   }
 };
 
@@ -150,7 +151,7 @@ We can use `xhr.responseType` property to set the response format:
 - `"text"` -- get as string,
 - `"arraybuffer"` -- get as `ArrayBuffer` (for binary data, see chapter <info:arraybuffer-binary-arrays>),
 - `"blob"` -- get as `Blob` (for binary data, see chapter <info:blob>),
-- `"document"` -- get as XML document (can use XPath and other XML methods),
+- `"document"` -- get as XML document (can use XPath and other XML methods) or HTML document (based on the MIME type of the received data),
 - `"json"` -- get as JSON (parsed automatically).
 
 For example, let's get the response as JSON:
@@ -189,7 +190,7 @@ All states, as in [the specification](https://xhr.spec.whatwg.org/#states):
 UNSENT = 0; // initial state
 OPENED = 1; // open called
 HEADERS_RECEIVED = 2; // response headers received
-LOADING = 3; // response is loading (a data packed is received)
+LOADING = 3; // response is loading (a data packet is received)
 DONE = 4; // request complete
 ```
 
@@ -268,7 +269,7 @@ There are 3 methods for HTTP-headers:
 
     ```warn header="Headers limitations"
     Several headers are managed exclusively by the browser, e.g. `Referer` and `Host`.
-    The full list is [in the specification](http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method).
+    The full list is [in the specification](https://xhr.spec.whatwg.org/#the-setrequestheader()-method).
 
     `XMLHttpRequest` is not allowed to change them, for the sake of user safety and correctness of the request.
     ```
@@ -331,7 +332,7 @@ There are 3 methods for HTTP-headers:
 
 ## POST, FormData
 
-To make a POST request, we can use the built-in [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object.
+To make a POST request, we can use the built-in [FormData](mdn:api/FormData) object.
 
 The syntax:
 
@@ -508,10 +509,10 @@ xhr.onerror = function() {
 };
 ```
 
-There are actually more events, the [modern specification](http://www.w3.org/TR/XMLHttpRequest/#events) lists them (in the lifecycle order):
+There are actually more events, the [modern specification](https://xhr.spec.whatwg.org/#events) lists them (in the lifecycle order):
 
 - `loadstart` -- the request has started.
-- `progress` -- a data packet of the response has arrived, the whole response body at the moment is in `responseText`.
+- `progress` -- a data packet of the response has arrived, the whole response body at the moment is in `response`.
 - `abort` -- the request was canceled by the call `xhr.abort()`.
 - `error` -- connection error has occurred, e.g. wrong domain name. Doesn't happen for HTTP-errors like 404.
 - `load` -- the request has finished successfully.
