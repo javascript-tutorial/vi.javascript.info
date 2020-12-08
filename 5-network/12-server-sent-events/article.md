@@ -39,7 +39,7 @@ data: of two lines
 
 - A message text goes after `data:`, the space after the colon is optional.
 - Messages are delimited with double line breaks `\n\n`.
-- To send a line break `\n`, we can immediately one more `data:` (3rd message above).
+- To send a line break `\n`, we can immediately send one more `data:` (3rd message above).
 
 In practice, complex messages are usually sent JSON-encoded. Line-breaks are encoded as `\n` within them, so multiline `data:` messages are not necessary.
 
@@ -66,7 +66,7 @@ eventSource.onmessage = function(event) {
 
 ### Cross-origin requests
 
-`EventSource` supports cross-origin requests, like `fetch` any other networking methods. We can use any URL:
+`EventSource` supports cross-origin requests, like `fetch` and any other networking methods. We can use any URL:
 
 ```js
 let source = new EventSource("https://another-site.com/events");
@@ -102,7 +102,7 @@ data: Hello, I set the reconnection delay to 15 seconds
 
 The `retry:` may come both together with some data, or as a standalone message.
 
-The browser should wait that many milliseconds before reconnect. Or longer, e.g. if the browser knows (from OS) that there's no network connection at the moment, it may wait until the connection appears, and then retry.
+The browser should wait that many milliseconds before reconnecting. Or longer, e.g. if the browser knows (from OS) that there's no network connection at the moment, it may wait until the connection appears, and then retry.
 
 - If the server wants the browser to stop reconnecting, it should respond with HTTP status 204.
 - If the browser wants to close the connection, it should call `eventSource.close()`:
@@ -113,7 +113,7 @@ let eventSource = new EventSource(...);
 eventSource.close();
 ```
 
-Also, there will be no reconnection if the response has an incorrect `Content-Type` or its HTTP status differs from 301, 307, 200 and 204. The connection the `"error"` event is emitted, and the browser won't reconnect.
+Also, there will be no reconnection if the response has an incorrect `Content-Type` or its HTTP status differs from 301, 307, 200 and 204. In such cases the `"error"` event will be emitted, and the browser won't reconnect.
 
 ```smart
 When a connection is finally closed, there's no way to "reopen" it. If we'd like to connect again, just create a new `EventSource`.
@@ -215,7 +215,7 @@ It offers:
 - Message ids to resume events, the last received identifier is sent in `Last-Event-ID` header upon reconnection.
 - The current state is in the `readyState` property.
 
-That makes `EventSource` a viable alternative to `WebSocket`, as it's more low-level and lacks such built-in features (though they can be implemented).
+That makes `EventSource` a viable alternative to `WebSocket`, as the latter is more low-level and lacks such built-in features (though they can be implemented).
 
 In many real-life applications, the power of `EventSource` is just enough.
 

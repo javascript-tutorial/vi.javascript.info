@@ -1,7 +1,6 @@
 # Modern JavaScript Tutorial bằng Tiếng Việt
 
-Repository này chứa phiên bản tiếng Việt của <https://javascript.info>.
-
+Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutorial, xuất bản tại [https://javascript.info](https://javascript.info).
 
 **Bạn có thể đóng góp vào bản dịch này bằng cách:**
 
@@ -14,9 +13,9 @@ Repository này chứa phiên bản tiếng Việt của <https://javascript.inf
     - Tiêu đề của Pull Request nên trùng với tiêu đề bài dịch, giúp bot tự động ghi số của bài vào issue.
 
 Vui lòng cho phép các maintainer (nhà bào trì) xem xét (review) và hợp nhất (merge) các thay đổi của bạn vào bản dịch.
-   
+
 Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành một maintainer, nói cho chúng tôi tại [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
-    
+
 **Cho người khác biết rằng bạn đang dịch trong bảng thông báo hoặc nói chuyện bằng ngôn ngữ của bạn. Mời họ cùng tham gia!**
 
 🎉 Cảm ơn!
@@ -132,4 +131,4 @@ Vui lòng không dịch và không xóa `[#...]`, nó được dùng làm các U
 
 Bạn có thể chạy phiên bản dịch trên máy chủ để xem nó trông như thế nào.
 
-Hướng dẫn cài đặt và chạy thử có tại <https://github.com/javascript-tutorial/server>. 
+Hướng dẫn cài đặt và chạy thử có tại <https://github.com/javascript-tutorial/server>.

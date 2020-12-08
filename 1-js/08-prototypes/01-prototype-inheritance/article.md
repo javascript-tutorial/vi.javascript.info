@@ -1,22 +1,22 @@
-# Thừa kế nguyên mẫu
+# Kế thừa dựa trên nguyên mẫu
 
-Khi lập trình, chúng ta thường muốn lấy một thứ gì đó rồi mở rộng nó.
+Trong lập trình, chúng ta thường muốn lấy một thứ gì đó rồi mở rộng nó.
 
-Ví dụ, chúng ta có đối tượng `user` với nhiều thuộc tính và phương thức, từ `user` ta muốn tạo ra hai đối tượng `admin` và `guest` với một chút thay đổi. Chúng ta muốn tái sử dụng những thứ đã có sẵn trong `user`, không muốn phải sao chép/viết lại các phương thức này trong `admin` và `guest`.
+Ví dụ, chúng ta có đối tượng `user` với nhiều thuộc tính và phương thức, và muốn tạo ra `admin` và `guest` như là các biến thể với một chút thay đổi từ nó. Chúng ta muốn tái sử dụng những gì chúng ta có trong `user`, không phải sao-chép/cài-đặt-lại các phương thức của nó, mà chỉ xây dựng một đối tượng mới dựa trên nó.
 
-Tính năng *Thừa kế nguyên mẫu* (Prototypal inheritance) của JavaScript giúp thực hiện điều này.
+*Kế thừa nguyên mẫu* (Prototypal inheritance) là một tính năng của ngôn ngữ giúp thực hiện điều đó.
 
 ## [[Prototype]]
 
-Trong JavaScript, mọi đối tượng có một thuộc tính ẩn đặc biệt là `[[Prototype]]` , nó hoặc mang giá trị `null` hoặc tham chiếu tới một đối tượng khác. Đối tượng này được gọi là "nguyên mẫu" (prototype):
+Trong JavaScript, các đối tượng có một thuộc tính ẩn đặc biệt `[[Prototype]]` (như được đặt tên trong đặc tả) mà tham chiếu đến một đối tượng khác hoặc là `null`. Đối tượng đó được gọi là "nguyên mẫu" (prototype):
 
 ![prototype](object-prototype-empty.svg)
 
-Khi đọc một thuộc tính không tồn tại của `object`, JavaScript tự động lấy thuộc tính này từ nguyên mẫu. Trong lập trình người ta gọi nó là "thừa kế từ nguyên mẫu": một đối tượng được thừa hưởng các thuộc tính/phương thức từ nguyên mẫu của nó. Nhiều tính năng hay ho của ngôn ngữ và nhiều kỹ thuật lập trình dựa trên khái niệm này.
+Khi chúng ta đọc một thuộc tính từ `object` và nó bị thiếu, JavaScript sẽ tự động lấy nó từ nguyên mẫu. Trong lập trình, điều đó được gọi là "kế thừa nguyên mẫu". Và chúng ta sẽ sớm nghiên cứu nhiều ví dụ về sự kế thừa như vậy, cũng như các tính năng ngôn ngữ hay ho hơn được xây dựng dựa trên nó.
 
-Thuộc tính `[[Prototype]]` là thuộc tính có sẵn bên trong đối tượng và nó bị ẩn đi, nhưng vẫn có cách để ta chạm được nó:
+Thuộc tính `[[Prototype]]` là thuộc tính nội bộ và bị ẩn đi, nhưng có nhiều cách để thiết lập nó:
 
-Một trong những cách đó là sử dụng `__proto__`, đây là mịnh họa:
+Một trong số đó là sử dụng tên đặc biệt `__proto__`, như sau:
 
 ```js run
 let animal = {
@@ -31,19 +31,11 @@ rabbit.__proto__ = animal;
 */!*
 ```
 
-```smart header="`__proto__` là getter/setter của `[[Prototype]]`"
-Chú ý là `__proto__` *không phải là* `[[Prototype]]` mà là getter/setter cho `[[Prototype]]`.
-
-Nó tồn tại vì lý do lịch sử, trong JavaScript hiện đại `__proto__` được thay thế bằng hai hàm `Object.getPrototypeOf/Object.setPrototypeOf`, cho phép lấy và cài đặt nguyên mẫu. Chúng sẽ ta tìm hiểu lý do thay thế cũng như cách sử dụng hai hàm này sau.
-
-Theo đặc tả, `__proto__` chỉ được hỗ trợ trong trình duyệt, nhưng thực tế các môi trường khác cũng hỗ trợ nó. Do `__proto__` trông rõ ràng, đơn giản, nên ở bài này chúng ta sử dụng nó trong các ví dụ.
-```
-
-Nếu ta truy cập một thuộc tính không tồn tại trong `rabbit`, JavaScript tự động lấy từ `animal`.
+Bây giờ nếu chúng ta đọc một thuộc tính từ `rabbit`, và nó bị thiếu, JavaScript sẽ tự động lấy nó từ `animal`.
 
 Ví dụ:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -55,22 +47,22 @@ let rabbit = {
 rabbit.__proto__ = animal; // (*)
 */!*
 
-// có thể đọc được cả hai thuộc tính trong rabbit
+// bây giờ chúng ta có thể tìm thấy cả hai thuộc tính trong rabbit
 *!*
-alert( rabbit.eats ); // true, lấy từ nguyên mẫu (**)
+alert( rabbit.eats ); // true (**)
 */!*
 alert( rabbit.jumps ); // true
 ```
 
-Dòng `(*)` cài đặt `animal` cho `rabbit.__proto__`, tức làm `[[Prototype]]` của `rabbit`.
+Ở đây, dòng `(*)` đặt `animal` làm nguyên mẫu của `rabbit`.
 
-Sau đó, khi `alert` cố đọc `rabbit.eats` `(**)`, vì thuộc tính này không có trong `rabbit`, nên JavaScript đi theo `[[Prototype]]` tìm đến `animal` và lấy `eats` từ đây (tìm theo dấu mũi tên):
+Sau đó, khi `alert` cố đọc thuộc tính `rabbit.eats` `(**)`, nó không có trong `rabbit`, nên JavaScript lần theo tham chiếu `[[Prototype]]` và tìm thấy nó trong `animal` (tìm từ dưới lên trên):
 
 ![](proto-animal-rabbit.svg)
 
-Ta nói "`animal` là nguyên mẫu của `rabbit`" hoặc "`rabbit` được thừa hưởng nguyên mẫu từ `animal`".
+Ở đây chúng ta có thể nói rằng "`animal` là nguyên mẫu của `rabbit`" hoặc "`rabbit` kế thừa nguyên mẫu từ `animal`".
 
-Vậy nên nếu `animal` có nhiều thuộc tính và phương thức, chúng tự động có trong `rabbit`. Các thuộc tính này gọi là các thuộc tính "được thừa kế".
+Vậy nên nếu `animal` có nhiều thuộc tính và phương thức, thì chúng tự động trở thành có sẵn trong `rabbit`. Các thuộc tính đó được gọi là "được kế thừa".
 
 Nếu chúng ta có một phương thức trong `animal`, thì nó có thể gọi từ `rabbit`:
 
@@ -79,7 +71,7 @@ let animal = {
   eats: true,
 *!*
   walk() {
-    alert("Động vật biết đi");
+    alert("Con vật bước đi");
   }
 */!*
 };
@@ -89,13 +81,13 @@ let rabbit = {
   __proto__: animal
 };
 
-// walk lấy từ nguyên mẫu
+// walk được lấy từ nguyên mẫu
 *!*
-rabbit.walk(); // Động vật biết đi
+rabbit.walk(); // Con vật bước đi
 */!*
 ```
 
-Phương thức tự động lấy từ nguyên mẫu theo sơ đồ sau:
+Phương thức được tự động lấy từ nguyên mẫu như sau:
 
 ![](proto-animal-rabbit-walk.svg)
 
@@ -105,7 +97,7 @@ Chuỗi nguyên mẫu có thể dài hơn:
 let animal = {
   eats: true,
   walk() {
-    alert("Động vật biết đi");
+    alert("Con vật bước đi");
   }
 };
 
@@ -123,40 +115,47 @@ let longEar = {
 */!*
 };
 
-// walk lấy từ chuỗi nguyên mẫu
-longEar.walk(); // Động vật biết đi
+// walk được lấy từ chuỗi nguyên mẫu
+longEar.walk(); // Con vật bước đi
 alert(longEar.jumps); // true (lấy từ rabbit)
 ```
 
 ![](proto-animal-rabbit-chain.svg)
 
-<<<<<<< HEAD
-Thực tế có hai giới hạn:
+Bây giờ nếu chúng ta đọc gì đó từ `longEar` và nó bị thiếu, JavaScript sẽ tìm nó trong `rabbit`, và sau đó trong `animal`.
 
-1. Không được thừa kế vòng, nếu không JavaScript sẽ báo lỗi.
-2. Giá trị `__proto__` chỉ có thể là đối tượng hoặc `null`, các giá trị cơ sở bị bỏ qua.
-=======
-There are only two limitations:
+Chỉ có hai hạn chế:
 
-1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
-2. The value of `__proto__` can be either an object or `null`. Other types are ignored.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+1. Các tham chiếu không thể tạo thành vòng tròn. JavaScript sẽ báo lỗi nếu chúng ta cố gán `__proto__` thành một vòng tròn.
+2. Giá trị của `__proto__` chỉ có thể là một đối tượng hoặc `null`. Các giá trị khác bị bỏ qua.
 
-Mỗi đối tượng chỉ có một thuộc tính `[[Prototype]]` và thuộc tính này chỉ tham chiếu tới một đối tượng. Cho nên một đối tượng chỉ có một nguyên mẫu.
+Ngoài ra, nó có thể là hiển nhiên, nhưng vẫn phải nói: chỉ có thể có duy nhất một `[[Prototype]]`. Một đối tượng không được kế thừa từ hai đối tượng khác.
 
-## Hành động ghi dữ liệu không sử dụng "nguyên mẫu"
+```smart header="`__proto__` là một bộ getter/setter lịch sử cho `[[Prototype]]`"
+Đó là một sai lầm phổ biến của các nhà phát triển ít kinh nghiệm khi không biết sự khác biệt giữa hai điều này.
 
-Nguyên mẫu chỉ được dùng khi đọc thuộc tính hoặc chạy phương thức mà chúng không tồn tại.
+Xin lưu ý rằng `__proto__` *không đồng nhất* với thuộc tính nội bộ `[[Prototype]]`. Nó là một bộ getter/setter cho `[[Prototype]]`. Bây giờ chúng ta chỉ cần ghi nhớ điều đó, sau này chúng ta sẽ gặp các tình huống mà điều đó là quan trọng.
 
-Việc ghi/xóa thuộc tính chỉ sử dụng đối tượng, không sử dụng nguyên mẫu của nó.
+Thuộc tính `__proto__` hơi lỗi thời một chút. Nó tồn tại vì các lí do lịch sử, JavaScript hiện đại gợi ý rằng chúng ta nên sử dụng các hàm `Object.getPrototypeOf/Object.setPrototypeOf` để lấy/thiết-lập nguyên mẫu. Chúng ta cũng sẽ đề cập đến các chức năng này sau.
 
-Trong ví dụ dưới đây, ta ghi vào `rabbit.walk` một hàm, kết quả hàm này được lưu trong `rabbit`, nguyên mẫu `animal` không được sử dụng và do đó không thay đổi:
+Theo đặc tả, `__proto__` chỉ được hỗ trợ bởi các trình duyệt. Mặc dầu vậy trên thực tế, tất cả các môi trường bao gồm cả phía server cũng hỗ trợ `__proto__`, vì vậy chúng ta khá an toàn khi sử dụng nó.
+
+Vì về mặt trực quan, ký hiệu `__proto__` trông rõ ràng hơn một chút nên chúng ta sử dụng nó trong các ví dụ.
+```
+
+## Hành động ghi dữ liệu không sử dụng nguyên mẫu
+
+Nguyên mẫu chỉ được dùng để đọc các thuộc tính.
+
+Các hoạt động ghi/xóa thực hiện trực tiếp trên đối tượng.
+
+Trong ví dụ dưới đây, chúng ta gán phương thức riêng `walk` cho `rabbit`:
 
 ```js run
 let animal = {
   eats: true,
   walk() {
-    /* phương thức này không được sử dụng bởi rabbit */  
+    /* phương thức này không được sử dụng bởi rabbit */
   }
 };
 
@@ -173,29 +172,25 @@ rabbit.walk = function() {
 rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
 
-Từ giờ, `rabbit.walk()` được tìm thấy và gọi ngay trong `rabbit`, không sử dụng `walk` của `animal`:
+Từ giờ, lời gọi `rabbit.walk()` tìm thấy phương thức ngay trong đối tượng và thực thi nó, chứ không sử dụng nguyên mẫu:
 
 ![](proto-animal-rabbit-walk-2.svg)
 
-<<<<<<< HEAD
-Nhưng nó chỉ đúng với thuộc tính dữ liệu, không đúng với thuộc tính truy cập. Về bản chất việc đọc/ghi thuộc tính truy cập dẫn đến việc gọi hàm getter/setter, nên chúng được gọi từ nguyên mẫu.
-=======
-Accessor properties are an exception, as assignment is handled by a setter function. So writing to such a property is actually the same as calling a function.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Các thuộc tính truy cập là một ngoại lệ, vì phép gán được xử lý bởi một hàm setter. Vì thế ghi dữ liệu vào một thuộc tính như thế quả thực giống như gọi một hàm.
 
-Ví dụ:
+Vì lý do đó, `admin.fullName` hoạt động chính xác trong mã bên dưới:
 
 ```js run
 let user = {
-  name: "Hùng",
-  surname: "Phùng",
+  name: "John",
+  surname: "Smith",
 
   set fullName(value) {
-    [this.surname, this.name] = value.split(" ");
+    [this.name, this.surname] = value.split(" ");
   },
 
   get fullName() {
-    return `${this.surname} ${this.name}`;
+    return `${this.name} ${this.surname}`;
   }
 };
 
@@ -204,32 +199,35 @@ let admin = {
   isAdmin: true
 };
 
-alert(admin.fullName); // Phùng Hùng (*)
+alert(admin.fullName); // John Smith (*)
 
-// chạy setter của user
-admin.fullName = "Nguyễn Trang"; // (**)
+// setter triggers!
+admin.fullName = "Alice Cooper"; // (**)
+
+alert(admin.fullName); // Alice Cooper, trạng thái của admin bị thay đổi
+alert(user.fullName); // John Smith, trái thái của user được bảo vệ
 ```
 
-Tại dòng `(*)` `admin.fullName` được đọc, do có getter trong `user` nên getter này được gọi. Tại dòng `(**)` thuộc tính `admin.fullName` được ghi, do có setter trong `user` nên setter này được gọi.
+Ở đây trong dòng `(*)` thuộc tính `admin.fullName` có một getter trong nguyên mẫu `user`, vì vậy nó được gọi. Và trong dòng `(**)`, thuộc tính có một setter trong nguyên mẫu, vì vậy nó được gọi.
 
 ## Giá trị của "this"
 
-Một câu hỏi thú vị xuất hiện trong ví dụ trên: Giá trị của `this` trong `set fullName(value)` là gì và thuộc tính `this.name` và `this.surname` được ghi vào `user` hay `admin`?
+Một câu hỏi thú vị có thể nảy sinh trong ví dụ trên: Giá trị của `this` trong `set fullName(value)` là gì? Các thuộc tính `this.name` và `this.surname` được ghi vào đâu: `user` hay `admin`?
 
-Câu trả lời rất đơn giản: `this` không bị ảnh hưởng bởi nguyên mẫu.
+Câu trả lời thật đơn giản: `this` không bị ảnh hưởng bởi nguyên mẫu chút nào.
 
-**Không quan trọng phương thức được lấy từ đâu: từ đối tượng hay từ nguyên mẫu. Khi phương thức được gọi giá trị `this` luôn là đối tượng trước dấu chấm.**
+**Bất kể phương thức được tìm thấy ở đâu: trong một đối tượng hay nguyên mẫu của nó, trong một lời gọi phương thức, `this` luôn là đối tượng trước dấu chấm.**
 
-Cho nên, khi gọi setter bằng `admin.fullName=` thì `this` là `admin` không phải là `user`.
+Cho nên, lời gọi setter `admin.fullName=` sử dụng `admin` làm `this`, chứ không phải `user`.
 
-Điều này vô cùng quan trọng, vì chúng ta có thể có một đối tượng lớn với rất nhiều phương thức được dùng làm nguyên mẫu. Sau đó các đối tượng được thừa kế có chạy những phương thức này và chỉ làm thay đổi trạng thái của nó, không làm thay đổi trạng thái của đối tượng lớn kia.
+Điều đó quả thực vô cùng quan trọng, vì chúng ta có thể có một đối tượng lớn với rất nhiều phương thức, và có nhiều đối tượng khác kế thừa từ nó. Và khi các đối tượng kế thừa chạy những phương thức kế thừa, chúng sẽ chỉ thay đổi trạng thái của riêng chúng, chứ không phải trạng thái của đối tượng lớn kia.
 
-Ví dụ, ở đây `animal` được xem như nơi "lưu trữ các phương thức" còn `rabbit` sử dụng chúng.
+Ví dụ, ở đây `animal` đại diện cho một "kho lưu trữ phương thức" và `rabbit` sử dụng nó.
 
-Lời gọi `rabbit.sleep()` cài đặt `this.isSleeping` trong đối tượng `rabbit`:
+Lời gọi `rabbit.sleep()` thiết lập `this.isSleeping` trên đối tượng `rabbit`:
 
 ```js run
-// animal chứa nhiều phương thức
+// animal có các phương thức
 let animal = {
   walk() {
     if (!this.isSleeping) {
@@ -246,7 +244,7 @@ let rabbit = {
   __proto__: animal
 };
 
-// sửa rabbit.isSleeping
+// thay đổi rabbit.isSleeping
 rabbit.sleep();
 
 alert(rabbit.isSleeping); // true
@@ -257,17 +255,13 @@ Hình ảnh của kết quả trên:
 
 ![](proto-animal-rabbit-walk-3.svg)
 
-<<<<<<< HEAD
-Nếu ta có các đối tượng khác như `bird`, `snake` ... thừa kế từ `animal`, chúng cũng có thể truy cập các phương thức của `animal`. Nhưng `this` thì luôn là `bird`, `snake`... không phải `animal`. Cho nên khi ta ghi dữ liệu vào `this`, nó lưu trong các đối tượng này, không lưu vào nguyên mẫu.
-=======
-If we had other objects like `bird`, `snake` etc inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Nếu chúng ta có các đối tượng khác như `bird`, `snake` v.v. kế thừa từ `animal`, chúng cũng có thể truy cập các phương thức của `animal`. Nhưng `this` trong mỗi lời gọi phương thức thì luôn là đối tượng tương ứng, được tính toán tại thời điểm gọi (trước dấu chấm), không phải `animal`. Cho nên khi chúng ta ghi dữ liệu vào `this`, nó được lưu trong các đối tượng này.
 
-Ta có kết luận chung: các phương thức được chia sẻ, nhưng trạng thái đối tượng thì không.
+Kết quả là, các phương thức được chia sẻ, nhưng trạng thái đối tượng thì không.
 
 ## Vòng lặp for..in
 
-Vòng lặp `for..in` liệt kê cả các thuộc tính "được thừa kế".
+Vòng lặp `for..in` liệt kê cả các thuộc tính được kế thừa.
 
 Ví dụ:
 
@@ -282,19 +276,19 @@ let rabbit = {
 };
 
 *!*
-// Object.keys không liệt kê các key được thừa kế
+// Object.keys chỉ trả về các khóa của riêng nó
 alert(Object.keys(rabbit)); // jumps
 */!*
 
 *!*
-// vòng lặp for..in liệt kê cả key được thừa kế
+// vòng lặp for..in liệt kê cả khóa riêng và khóa được kế thừa
 for(let prop in rabbit) alert(prop); // jumps, rồi eats
 */!*
 ```
 
-Nếu không muốn liệt kê các thuộc tính được thừa kế, có thể sử dụng phương thức có sẵn [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): nó trả về `true` nếu `key` là thuộc tính riêng (không được thừa kế) của `obj`.
+Nếu đó không phải là những gì chúng ta muốn, và chúng ta muốn loại trừ các thuộc tính được kế thừa, có một phương thức có sẵn [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): nó trả về `true` nếu `obj` có một thuộc tính riêng (không phải được kế thừa) tên là `key`.
 
-Nên ta có thể loại bỏ các thuộc tính được thừa kế (hoặc làm gì đó với chúng):
+Nên chúng ta có thể loại bỏ các thuộc tính được kế thừa (hoặc làm gì đó với chúng):
 
 ```js run
 let animal = {
@@ -310,44 +304,35 @@ for(let prop in rabbit) {
   let isOwn = rabbit.hasOwnProperty(prop);
 
   if (isOwn) {
-    alert(`Thuộc tính riêng: ${prop}`); // Thuộc tính riêng: jumps
+    alert(`Của chúng ta: ${prop}`); // Của chúng ta: jumps
   } else {
-    alert(`Thuộc tính được thừa kế: ${prop}`); // Thuộc tính được thừa kế: eats
+    alert(`Được kế thừa: ${prop}`); // Được kế thừa: eats
   }
 }
 ```
 
-Ở đây ta có chuỗi thừa kế sau: `rabbit` thừa kế từ `animal`, `animal` thừa kế từ `Object.prototype` (mọi đối tượng tạo bằng literal `{...}` mặc định nhận `Object.prototype` làm nguyên mẫu), `Object.prototype` không có nguyên mẫu nên `[[Prototype]]` của nó là `null`:
+Ở đây chúng ta có chuỗi thừa kế sau: `rabbit` kế thừa từ `animal`, `animal` kế thừa từ `Object.prototype` (vì `animal` là một literal object `{...}`, nên mặc định nhận `Object.prototype` làm nguyên mẫu), `Object.prototype` không có nguyên mẫu nên `[[Prototype]]` của nó là `null`:
 
 ![](rabbit-animal-object.svg)
 
-Nhờ chuỗi thừa kế này mà ta có thể gọi `rabbit.hasOwnProperty`. Bản thân `rabbit` không có `hasOwnProperty`, JavaScript tìm ngược lên chuỗi thừa kế và thấy trong `Object.prototype`. Nói cách khác `rabbit.hasOwnProperty` là phương thức được thừa kế từ `Object.prototype`.
+Lưu ý, có một điều thú vị. Phương thức `rabbit.hasOwnProperty` đến từ đâu? Chúng ta đã không định nghĩa nó. Nhìn vào chuỗi, chúng ta có thể thấy rằng phương thức được cung cấp bởi `Object.prototype.hasOwnProperty`. Nói cách khác, nó được kế thừa.
 
-...Nhưng tại sao `hasOwnProperty` lại không xuất hiện trong vòng lặp `for..in`, như `eats` và `jumps`, vì nó cũng là một thuộc tính được thừa kế mà?
+...Nhưng tại sao `hasOwnProperty` lại không xuất hiện trong vòng lặp `for..in`, như `eats` và `jumps`, nếu `for..in` cũng liệt kê các thuộc tính được kế thừa?
 
-Câu trả lời hóa ra rất đơn giản: nó là thuộc tính không liệt kê. Trong JavaScipt mọi thuộc tính của `Object.prototype`, đều có cờ `enumerable:false`. Đó là lý do tại sao `hasOwnProperty` không xuất hiện trong `for..in`.
+Câu trả lời thật đơn giản: nó là thuộc tính không liệt kê. Cũng giống như mọi thuộc tính khác của `Object.prototype`, nó có cờ `enumerable:false`. Và `for..in` chỉ liệt kê các thuộc tính liệt kê được. Đó là lý do tại sao nó và các thuộc tính còn lại của `Object.prototype` không được liệt kê.
 
-<<<<<<< HEAD
-```smart header="Mọi phương thức duyệt đều bỏ qua các thuộc tính được thừa kế"
-Không giống như vòng lặp `for..in` mọi phương thức lấy các cặp key/value của một đối tượng, như `Object.keys`, `Object.values`... đều bỏ qua thuộc tính được thừa kế.
-=======
-```smart header="Almost all other key/value-getting methods ignore inherited properties"
-Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+```smart header="Hầu hết tất cả các phương thức lấy ra khóa/giá-trị khác đều bỏ qua các thuộc tính kế thừa"
+Hầu hết tất cả các phương thức lấy ra khóa/giá-trị khác, như là `Object.keys`, `Object.values` v.v. đều bỏ qua các thuộc tính kế thừa.
 
-<<<<<<< HEAD
-Chúng chỉ hoạt động trên bản thân đối tượng mà không đoái hoài gì đến nguyên mẫu.
-=======
-They only operate on the object itself. Properties from the prototype are *not* taken into account.
->>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
+Chúng chỉ hoạt động trên chính đối tượng. Các thuộc tính từ nguyên mẫu *không* được tính đến.
 ```
 
 ## Tóm tắt
 
-- Trong JavaScript, tất cả các đối tượng có một thuộc tính ẩn là `[[Prototype]]` hoặc tham chiếu tới một đối tượng khác hoặc `null`.
-- Chúng ta có thể sử dụng `obj.__proto__` để truy cập `[[Prototype]]` (là getter/setter, có vài cách khác sẽ đề cập sau).
-- Đối tượng được tham chiếu bởi `[[Prototype]]` gọi là "nguyên mẫu" (prototype).
-- Nếu ta muốn đọc một thuộc tính hay gọi một phương thức của `obj`, mà chúng không tồn tại, thì JavaScript sẽ cố tìm chúng trong nguyên mẫu.
-- Hành động ghi/xóa một thuộc tính dữ liệu không sử dụng nguyên mẫu.
-- Nếu chúng ta gọi `obj.method()`, và `method` lấy từ nguyên mẫu, `this` vẫn là `obj`. Cho nên phương thức luôn làm việc với đối tượng hiện tại, kể cá đó là phương thức được thừa kế.
-- Vòng lặp `for..in` duyệt qua cả thuộc tính riêng lẫn thuộc tính được thừa kế của đối tượng. Mọi phương thức khác lấy các cặp key/value của đối tượng chỉ làm việc trên đối tượng hiện tại và lấy ra được thuộc tính riêng của đối tượng mà thôi.
+- Trong JavaScript, tất cả các đối tượng có một thuộc tính ẩn là `[[Prototype]]` mà tham chiếu tới một đối tượng khác hoặc `null`.
+- Chúng ta có thể sử dụng `obj.__proto__` để truy cập nó (đây là một bộ getter/setter lịch sử, còn có các cách khác nữa sẽ được đề cập sau).
+- Đối tượng được tham chiếu bởi `[[Prototype]]` được gọi là "nguyên mẫu" (prototype).
+- Nếu chúng ta muốn đọc một thuộc tính hay gọi một phương thức của `obj`, mà nó không tồn tại, thì JavaScript sẽ cố tìm chúng trong nguyên mẫu.
+- Các hoạt động ghi / xóa tiến hành trực tiếp trên đối tượng, chúng không sử dụng nguyên mẫu (giả sử đó là một thuộc tính dữ liệu, không phải một setter).
+- Nếu chúng ta gọi `obj.method()` và `method` được lấy từ nguyên mẫu, thì `this` tham chiếu đến `obj`. Cho nên các phương thức luôn làm việc với đối tượng hiện tại, ngay cả khi chúng là các phương thức được kế thừa.
+- Vòng lặp `for..in` lặp qua cả thuộc tính riêng lẫn thuộc tính được kế thừa của đối tượng. Mọi phương thức khác lấy ra các cặp khóa/giá-trị của đối tượng chỉ hoạt động trên chính đối tượng đó.

@@ -1,39 +1,31 @@
-# Nhắc lại về hàm mũi tên
+# Xem lại các hàm mũi tên
 
-Cùng xem lại hàm mũi tên.
+Hãy xem lại các hàm mũi tên.
 
-<<<<<<< HEAD
-Hàm mũi tên không đơn giản chỉ là một cách viết tắt của hàm.
-=======
-Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+Các hàm mũi tên không chỉ là một "cách viết nhanh" để viết những thứ nhỏ. Chúng có một số tính năng rất cụ thể và hữu ích.
 
-JavaScript có đầy những tình huống ở đó chúng ta cần viết một hàm nhỏ để chạy ở một nơi khác.
+JavaScript chứa đầy các tình huống mà chúng ta cần viết một hàm nhỏ được thực thi ở một nơi khác.
 
 Ví dụ:
 
-- `arr.forEach(func)` -- `func` được chạy bởi `forEach` với mỗi phần tử của mảng.
-- `setTimeout(func)` -- `func` được chạy bởi bộ lập lịch.
+- `arr.forEach(func)` -- `func` được thực thi bởi `forEach` với mỗi phần tử của mảng.
+- `setTimeout(func)` -- `func` được thực thi bởi bộ lập lịch.
 - ...và nhiều nữa.
 
-Nó cũng là linh hồn của JavaScript khi mà ta cần tạo một hàm và truyền nó tới một nơi khác.
+Đó là tinh thần của JavaScript để tạo một hàm và truyền nó tới đâu đó.
 
-<<<<<<< HEAD
-Những hàm này tạo ra để chạy ở chỗ khác cho nên nó không cần đến ngữ cảnh nơi nó được tạo.
-=======
-And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+Và trong các hàm như vậy, chúng ta thường không muốn rời khỏi bối cảnh hiện tại. Đó là nơi các hàm mũi tên trở nên hữu ích.
 
 ## Các hàm mũi tên không có "this"
 
-Như ta đã nói ở bài <info:object-methods>, hàm mũi tên không có `this`. Nếu `this` được truy cập nó được lấy từ bên ngoài.
+Như chúng ta nhớ từ chương <info:object-method>, các hàm mũi tên không có `this`. Nếu `this` được truy cập, nó được lấy từ bên ngoài.
 
-Ví dụ, chúng ta có thể sử dụng nó trong vòng lặp bên trong phương thức của một đối tượng:
+Ví dụ, chúng ta có thể sử dụng nó để lặp bên trong một phương thức của đối tượng:
 
 ```js run
 let group = {
-  title: "Nhóm của chúng tôi",
-  students: ["Hùng", "Mạnh", "Ngọc"],
+  title: "Our Group",
+  students: ["John", "Pete", "Alice"],
 
   showList() {
 *!*
@@ -47,14 +39,14 @@ let group = {
 group.showList();
 ```
 
-Hàm mũi tên được sử dụng trong `forEach`, `this.title` của nó giống như của phương thức ngoài `showList`. Đó là: `group.title`.
+Ở đây trong `forEach`, hàm mũi tên được sử dụng, vì vậy `this.title` trong nó giống hệt như trong phương thức bên ngoài `showList`. Đó là: `group.title`.
 
-Nếu sử dụng hàm bình thường, sẽ có lỗi:
+Nếu chúng ta sử dụng một hàm "thông thường", sẽ xảy ra lỗi:
 
 ```js run
 let group = {
-  title: "Nhóm của chúng tôi",
-  students: ["Hùng", "Mạnh", "Ngọc"],
+  title: "Our Group",
+  students: ["John", "Pete", "Alice"],
 
   showList() {
 *!*
@@ -69,28 +61,28 @@ let group = {
 group.showList();
 ```
 
-Lỗi này xuất hiện bởi `forEach` chạy hàm với `this=undefined`, dẫn tới việc truy cập `undefined.title`.
+Lỗi xảy ra do `forEach` chạy các hàm với `this=undefined` theo mặc định, vì vậy việc truy cập `undefined.title` được thực hiện.
 
-Điều này không sảy ra với hàm mũi tên vì nó không có `this`.
+Điều đó không ảnh hưởng đến các hàm mũi tên, bởi vì chúng không có `this`.
 
 ```warn header="Hãm mũi tên không thể chạy với `new`"
-Bởi không có `this`, hàm mũi tên không thể sử dụng làm constructor và do đó không thể chạy với toán tử `new`.
+Không có `this` tất nhiên là nguyên nhân của một hạn chế khác: không thể sử dụng các hàm mũi tên làm hàm tạo. Chúng không thể được gọi với `new`.
 ```
 
-```smart header="Hàm mũi tên khi sử dụng với `bind`"
-Có một sự khác biệt nhỏ giữa hàm mũi tên `=>` và hàm thông thường khi sử dụng `.bind(this)`:
+```smart header="Các hàm mũi tên so với bind"
+Có một sự khác biệt nhỏ giữa hàm mũi tên `=>` và hàm thông thường được gọi bằng `.bind(this)`:
 
-- `.bind(this)` tạo "phiên bản ràng buộc `this`" của hàm thông thường.
-- Hàm mũi tên `=>` không tạo ra bất cứ ràng buộc nào. Đơn giản là bởi vì nó không có `this`.
+- `.bind(this)` tạo một "phiên bản ràng buộc" của hàm.
+- Mũi tên `=>` không tạo bất kỳ ràng buộc nào. Đơn giản là hàm không có `this`. Việc tra cứu `this` được thực hiện giống hệt như tìm kiếm theo biến thông thường: trong môi trường từ vựng bên ngoài.
 ```
 
-## Hàm mũi tên không có "arguments"
+## Các hàm mũi tên không có "arguments"
 
-Hàm mũi tên cũng không có biến `arguments`.
+Các hàm mũi tên cũng không có biến `arguments`.
 
-Nó rất tối ưu cho các decorator, khi chúng ta cần chuyển lời gọi hàm cùng với `this` và `arguments` của hàm hiện tại.
+Điều đó thật tuyệt vời cho các decorator, khi chúng ta cần chuyển tiếp lời gọi với `this` và `arguments` hiện tại.
 
-Ví dụ, `defer(f, ms)` nhận hàm `f` và trả về hàm bao làm trễ việc chạy `f` đi `ms` mi-li-giây.
+Ví dụ: `defer(f, ms)` nhận một hàm và trả về một hàm bao xung quanh nó làm trễ lời gọi `ms` mili giây:
 
 ```js run
 function defer(f, ms) {
@@ -104,10 +96,10 @@ function sayHi(who) {
 }
 
 let sayHiDeferred = defer(sayHi, 2000);
-sayHiDeferred("Hùng"); // Xin chào, Hùng sau 2 giây
+sayHiDeferred("John"); // Hello, John sau 2 giây
 ```
 
-Nếu không dùng hàm mũi tên thì phải viết như sau:
+Tương tự nếu không có hàm mũi tên sẽ giống như sau:
 
 ```js
 function defer(f, ms) {
@@ -120,15 +112,15 @@ function defer(f, ms) {
 }
 ```
 
-Ta cần tạo thêm hai biến `args` và `ctx` để hàm bên trong `setTimeout` có thể nhận chúng.
+Chúng ta cần tạo thêm các biến `args` và `ctx` để hàm bên trong `setTimeout` có thể nhận chúng.
 
 ## Tóm tắt
 
-Hàm mũi tên:
+Các hàm mũi tên:
 
-- Không có `this`.
-- Không có `arguments`.
-- Không thể gọi bằng `new`.
-- (Chúng cũng không có `super`, nhưng chúng ta chưa học. Sẽ học ở bài <info:class-inheritance>).
+- Không có `this`
+- Không có `arguments`
+- Không thể gọi bằng `new`
+- Chúng cũng không có `super`, nhưng chúng ta chưa học nó. Chúng ta sẽ học ở chương <info:class-inheritance>
 
-Đó là bởi vì hàm mũi tên là một hàm ngắn được tạo ra với mục địch chạy ở bất cứ đâu, nên nó không cần giữ lại ngữ cảnh nơi nó được tạo.
+Đó là bởi vì chúng dành cho các đoạn mã ngắn không có "ngữ cảnh" của riêng chúng, mà hoạt động trong bối cảnh hiện tại. Và chúng thực sự tỏa sáng trong trường hợp sử dụng đó.

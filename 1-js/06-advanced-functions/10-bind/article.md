@@ -3,31 +3,21 @@ libs:
 
 ---
 
-# Ràng buộc "this" cho hàm
+# Ràng buộc hàm
 
-<<<<<<< HEAD
-Có một vấn đề chúng ta đã biết khi dùng `setTimeout` với các phương thức của đối tượng hoặc truyền những phương thức này từ hàm này sang hàm khác đó là mất `this`.
+Khi truyền các phương thức của đối tượng làm các callback, ví dụ cho `setTimeout`, có một vấn đề đã biết là: "mất `this`".
 
-Ngay lập tức `this` không còn làm việc đúng. Tình huống này rất thường xảy ra với các lập trình viên chưa có nhiều kinh nghiệm, nhưng đôi khi các lập trình viên có kinh nghiệm vẫn gặp phải.
-=======
-When passing object methods as callbacks, for instance to `setTimeout`, there's a known problem: "losing `this`".
-
-In this chapter we'll see the ways to fix it.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Trong chương này chúng ta sẽ xem xét các cách để sửa nó.
 
 ## Mất "this"
 
-<<<<<<< HEAD
-Như ta đã biết trong JavaScript giá trị `this` rất dễ bị mất. `this` bị mất khi một phương thức được truyền tới nơi khác, tách khỏi đối tượng chứa nó.
-=======
-We've already seen examples of losing `this`. Once a method is passed somewhere separately from the object -- `this` is lost.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Chúng ta đã thấy những ví dụ về việc mất `this`. Sau khi một phương thức được truyền vào một nơi nào đó tách biệt với đối tượng -- thì `this` bị mất.
 
-Trong ví dụ sau `this` bị mất khi phương thức được truyền vào `setTimeout`:
+Đây là cách nó có thể xảy ra với `setTimeout`:
 
 ```js run
 let user = {
-  firstName: "Hùng",
+  firstName: "John",
   sayHi() {
     alert(`Xin chào, ${this.firstName}!`);
   }
@@ -38,22 +28,18 @@ setTimeout(user.sayHi, 1000); // Xin chào, undefined!
 */!*
 ```
 
-Như bạn thấy, giá trị xuất ra không phải là "Hùng" dựa theo `this.firstName` mà là `undefined`!
+Như chúng ta có thể thấy, đầu ra không hiển thị "John" giống như `this.firstName`, mà lại là `undefined`!
 
-Đó là bởi vì `setTimeout` nhận được phương thức `user.sayHi` chứ không nhận được đối tượng `user`. Nói cách khác phương thức được truyền đi độc lập với đối tượng. Dòng cuối có thể viết lại tường mình hơn như sau:
+Đó là bởi vì `setTimeout` nhận hàm `user.sayHi`, tách biệt với đối tượng. Dòng cuối cùng có thể được viết lại như sau:
 
 ```js
 let f = user.sayHi;
-setTimeout(f, 1000); // mất đối tượng user
+setTimeout(f, 1000); // mất ngữ cảnh user
 ```
 
-<<<<<<< HEAD
-Phương thức `setTimeout` khi chạy trong trình duyệt tự động đặt `this=window` khi hàm `f` được chạy (với Node.js, `this` là đối tượng timer, nhưng nó không quan trọng ở đây). Cho nên `this.firstName` trở thành `window.firstName` là thuộc tính không tồn tại. Trong những trường hợp tương tự khác `this` thường trở thành `undefined`.
-=======
-The method `setTimeout` in-browser is a little special: it sets `this=window` for the function call (for Node.js, `this` becomes the timer object, but doesn't really matter here). So for `this.firstName` it tries to get `window.firstName`, which does not exist. In other similar cases, usually `this` just becomes `undefined`.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Phương thức `setTimeout` trong trình duyệt hơi đặc biệt: nó đặt `this=window` cho lời gọi hàm (với Node.js, `this` trở thành đối tượng timer, nhưng ở đây điều đó không thực sự quan trọng). Vì vậy, đối với `this.firstName`, nó cố gắng lấy `window.firstName`, là cái không tồn tại. Trong các trường hợp tương tự khác, thường thì `this` chỉ trở thành `undefined`.
 
-Một công việc khá điển hình đó là chúng ta muốn truyền một phương thức của đối tượng tới một nơi khác (ở trên là tới `setTimeout`) để chạy nó ở đây. Vậy làm cách nào để chắc chắn rắn nó chạy với giá trị `this` đúng?
+Tác vụ này khá điển hình - chúng ta muốn truyền một phương thức của đối tượng tới một nơi khác (ở đây - cho bộ lập lịch) nơi nó sẽ được gọi. Làm thế nào để đảm bảo rằng nó sẽ được gọi trong ngữ cảnh phù hợp?
 
 ## Giải pháp 1: sử dụng hàm bao
 
@@ -61,7 +47,7 @@ Giải pháp đơn giản nhất là sử dụng một hàm bao:
 
 ```js run
 let user = {
-  firstName: "Hùng",
+  firstName: "John",
   sayHi() {
     alert(`Xin chào, ${this.firstName}!`);
   }
@@ -69,27 +55,26 @@ let user = {
 
 *!*
 setTimeout(function() {
-  user.sayHi(); // Xin chào, Hùng!
+  user.sayHi(); // Xin chào, John!
 }, 1000);
 */!*
 ```
 
-Phương thức đã làm việc, vì hàm bao nhận được `user` từ lexical environment bên ngoài, sau đó chạy phương thức từ đối tượng `user` này.
+Bây giờ nó hoạt động, vì nó nhận `user` từ môi trường từ vựng bên ngoài, và sau đó gọi phương thức một cách bình thường.
 
-Cách viết tương tự, nhưng ngắn hơn sử dụng hàm mũi tên:
+Cách viết tương tự, nhưng ngắn hơn:
 
 ```js
-setTimeout(() => user.sayHi(), 1000); // Xin chào, Hùng!
+setTimeout(() => user.sayHi(), 1000); // Xin chào, John!
 ```
 
-Trông tốt đó, nhưng có một lỗ hổng nhỏ xuất hiện.
+Có vẻ ổn, nhưng một lỗ hổng nhỏ xuất hiện trong cấu trúc mã của chúng ta.
 
-Chuyện gì xảy ra nếu trước khi `setTimeout` kích hoạt (sau 1 giây), `user` thay đổi giá trị? Ngay lập tức nó gọi nhầm đối tượng!
-
+Điều gì sẽ xảy ra nếu trước khi `setTimeout` kích hoạt (có độ trễ một giây!) `user` thay đổi giá trị? Sau đó, đột nhiên, nó sẽ gọi nhầm đối tượng!
 
 ```js run
 let user = {
-  firstName: "Hùng",
+  firstName: "John",
   sayHi() {
     alert(`Xin chào, ${this.firstName}!`);
   }
@@ -97,13 +82,15 @@ let user = {
 
 setTimeout(() => user.sayHi(), 1000);
 
-// ...trong vòng 1 giây
-user = { sayHi() { alert("Một người dùng khác trong setTimeout!"); } };
+// ...giá trị của user thay đổi trong vòng 1 giây
+user = {
+  sayHi() { alert("Một user khác trong setTimeout!"); }
+};
 
-// Một người dùng khác trong setTimeout?!?
+// Một user khác trong setTimeout!
 ```
 
-Giải pháp tiếp tiếp theo giúp khắc phục lỗ hổng trên.
+Giải pháp tiếp theo đảm bảo rằng điều đó sẽ không xảy ra.
 
 ## Giải pháp 2: sử dụng "bind"
 
@@ -112,19 +99,19 @@ Mọi hàm đều có sẵn một phương thức có tên [bind](mdn:js/Functio
 Cú pháp cơ bản là:
 
 ```js
-// cú pháp phức tạp hơn sẽ nói sau
+// cú pháp phức tạp hơn sẽ được bàn đến sau một lát
 let boundFunc = func.bind(context);
 ```
 
-Kết quả của `func.bind(context)` là một đối tượng giống hàm, có thể gọi được như hàm, chuyển lời gọi này cho `func` và đặt `this=context`.
+Kết quả của `func.bind (context)` là một "đối tượng kỳ lạ" đặc biệt giống hàm, có thể được gọi như hàm, và khi được gọi sẽ chuyển lời gọi này cho `func` và đặt `this=context`.
 
-Nói cách khác gọi `boundFunc` giống như gọi `func` nhưng với `this` luôn là `context`.
+Nói cách khác, gọi `boundFunc` giống như gọi `func` nhưng với `this` luôn là `context`.
 
 Ví dụ, ở đây `funcUser` chuyển lời gọi cho `func` với `this=user`:
 
-```js run  
+```js run
 let user = {
-  firstName: "Hùng"
+  firstName: "John"
 };
 
 function func() {
@@ -133,17 +120,17 @@ function func() {
 
 *!*
 let funcUser = func.bind(user);
-funcUser(); // Hùng  
+funcUser(); // John
 */!*
 ```
 
-Ở đây `func.bind(user)` có thể coi là một "biến thể đã ràng buộc `this`" của `func`, với `this` bị ràng buộc với `user`.
+Ở đây `func.bind(user)` có thể coi là một "biến thể đã ràng buộc" của `func`, với `this` cố định là `user`.
 
-Tất cả đối số truyền cho `funcUser` được chuyển nguyên vẹn cho `func`, ví dụ:
+Tất cả đối số được truyền "nguyên trạng" cho hàm `func` gốc, ví dụ:
 
-```js run  
+```js run
 let user = {
-  firstName: "Hùng"
+  firstName: "John"
 };
 
 function func(phrase) {
@@ -154,16 +141,15 @@ function func(phrase) {
 let funcUser = func.bind(user);
 
 *!*
-funcUser("Xin chào"); // Xin chào, Hùng (đối số "Xin chào" được chuyển cho func, và this=user)
+funcUser("Xin chào"); // Xin chào, John (đối số "Xin chào" được truyền cho func, và this=user)
 */!*
 ```
 
 Bây giờ thử áp dụng với phương thức của một đối tượng:
 
-
 ```js run
 let user = {
-  firstName: "Hùng",
+  firstName: "John",
   sayHi() {
     alert(`Xin chào, ${this.firstName}!`);
   }
@@ -173,18 +159,25 @@ let user = {
 let sayHi = user.sayHi.bind(user); // (*)
 */!*
 
-sayHi(); // Xin chào, Hùng!
+// có thể chạy nó mà không cần một đối tượng
+sayHi(); // Xin chào, John!
 
-setTimeout(sayHi, 1000); // Xin chào, Hùng!
+setTimeout(sayHi, 1000); // Xin chào, John!
+
+// ngay cả khi giá trị của user thay đổi trong vòng 1 giây
+// sayHi sử dụng giá trị ràng buộc trước (pre-bound) là một tham chiếu đến đối tượng user cũ
+user = {
+  sayHi() { alert("Một user khác trong setTimeout!"); }
+};
 ```
 
-Tại dòng `(*)` ta lấy phương thức `user.sayHi` và ràng buộc `this` của nó với `user`. Hàm `sayHi` là hàm đã ràng buộc, có thể gọi một mình hoặc truyền đi bất cứ đâu để chạy mà không bị mất `this`.
+Trong dòng `(*)`, chúng ta lấy phương thức `user.sayHi` và ràng buộc nó với `user`. `SayHi` là một hàm "bị ràng buộc", có thể được gọi một mình hoặc được truyền cho `setTimeout` -- không quan trọng, ngữ cảnh sẽ đúng.
 
-Các đối số được truyền nguyên vẹn tới hàm gốc, chỉ `this` bị cố định bởi `bind`:
+Ở đây chúng ta có thể thấy rằng các đối số được truyền "nguyên trạng", chỉ có `this` được cố định bởi `bind`:
 
 ```js run
 let user = {
-  firstName: "Hùng",
+  firstName: "John",
   say(phrase) {
     alert(`${phrase}, ${this.firstName}!`);
   }
@@ -192,12 +185,12 @@ let user = {
 
 let say = user.say.bind(user);
 
-say("Xin chào"); // Xin chào, Hùng ("Xin chào" được truyền tới say)
-say("Tạm biệt"); // Tạm biệt, Hùng ("Tạm biệt" được truyền tới say)
+say("Hello"); // Xin chào, John (đối số "Xin chào" được truyền tới say)
+say("Bye"); // Tạm biệt, John ("Tạm biệt" được truyền tới say)
 ```
 
-````smart header="Phương thức tiện lợi: `bindAll`"
-Nếu một đối tượng có nhiều phương thức ta có thể sử dụng một vòng lặp `for..in` để ràng buộc tất cả các phương thức này:
+````smart header="Convenience method: `bindAll`"
+Nếu một đối tượng có nhiều phương thức và chúng ta dự định chủ động truyền nó xung quanh, thì chúng ta có thể ràng buộc tất cả chúng trong một vòng lặp:
 
 ```js
 for (let key in user) {
@@ -207,27 +200,24 @@ for (let key in user) {
 }
 ```
 
-Một số thư viện JavaScript cung cấp các hàm để ràng buộc hàng loạt như trên, ví dụ [_.bindAll(obj)](http://lodash.com/docs#bindAll) trong thư viện lodash.
+Các thư viện JavaScript cũng cung cấp các chức năng để thuận tiện ràng buộc hàng loạt, ví dụ [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) trong lodash.
 ````
 
-<<<<<<< HEAD
-## Tóm tắt
-=======
-## Partial functions
+## Các hàm một phần
 
-Until now we have only been talking about binding `this`. Let's take it a step further.
+Cho đến giờ chúng ta chỉ nói về ràng buộc `this`. Hãy tiến thêm một bước nữa.
 
-We can bind not only `this`, but also arguments. That's rarely done, but sometimes can be handy.
+Chúng ta có thể ràng buộc không chỉ `this`, mà còn cả các đối số. Điều đó hiếm khi được thực hiện, nhưng đôi khi có thể hữu ích.
 
-The full syntax of `bind`:
+Cú pháp đầy đủ của `bind`:
 
 ```js
 let bound = func.bind(context, [arg1], [arg2], ...);
 ```
 
-It allows to bind context as `this` and starting arguments of the function.
+Nó cho phép ràng buộc ngữ cảnh là `this` và các đối số bắt đầu của hàm.
 
-For instance, we have a multiplication function `mul(a, b)`:
+Ví dụ, chúng ta có một hàm nhân `mul(a, b)`:
 
 ```js
 function mul(a, b) {
@@ -235,7 +225,7 @@ function mul(a, b) {
 }
 ```
 
-Let's use `bind` to create a function `double` on its base:
+Hãy sử dụng `bind` để tạo một hàm `double` trên cơ sở của nó:
 
 ```js run
 function mul(a, b) {
@@ -251,13 +241,13 @@ alert( double(4) ); // = mul(2, 4) = 8
 alert( double(5) ); // = mul(2, 5) = 10
 ```
 
-The call to `mul.bind(null, 2)` creates a new function `double` that passes calls to `mul`, fixing `null` as the context and `2` as the first argument. Further arguments are passed "as is".
+Lời gọi đến `mul.bind(null, 2)` tạo ra một hàm mới `double` mà chuyển các lời gọi đến `mul`, cố định `null` làm ngữ cảnh và `2` là đối số đầu tiên. Các đối số khác được truyền "nguyên trạng".
 
-That's called [partial function application](https://en.wikipedia.org/wiki/Partial_application) -- we create a new function by fixing some parameters of the existing one.
+Đó được gọi là [ứng dụng hàm một phần] (https://en.wikipedia.org/wiki/Partial_application) - chúng ta tạo một hàm mới bằng cách cố định một số tham số của hàm hiện có.
 
-Please note that here we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+Xin lưu ý rằng chúng ta không thực sự sử dụng `this` ở đây. Nhưng `bind` yêu cầu nó, vì vậy chúng ta phải để vào một cái gì đó như `null`.
 
-The function `triple` in the code below triples the value:
+Hàm `triple` trong đoạn mã dưới đây tăng gấp ba lần giá trị:
 
 ```js run
 function mul(a, b) {
@@ -273,23 +263,23 @@ alert( triple(4) ); // = mul(3, 4) = 12
 alert( triple(5) ); // = mul(3, 5) = 15
 ```
 
-Why do we usually make a partial function?
+Tại sao chúng ta thường tạo một hàm một phần?
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide first argument of every time as it's fixed with `bind`.
+Lợi ích là chúng ta có thể tạo một hàm độc lập với tên có thể đọc được (`double`, `triple`). Chúng ta có thể sử dụng nó và không phải cung cấp đối số đầu tiên vì nó được cố định bằng `bind`.
 
-In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
+Trong các trường hợp khác, ứng dụng một phần sẽ hữu ích khi chúng ta có một hàm rất tổng quát và muốn một biến thể ít tổng quát hơn của nó để thuận tiện.
 
-For instance, we have a function `send(from, to, text)`. Then, inside a `user` object we may want to use a partial variant of it: `sendTo(to, text)` that sends from the current user.
+Ví dụ, chúng ta có một hàm `send(from, to, text)`. Sau đó, bên trong một đối tượng `user`, chúng ta có thể muốn sử dụng một biến thể một phần của nó: `sendTo(to, text)` gửi từ user hiện tại.
 
-## Going partial without context
+## Đi một phần không có ngữ cảnh
 
-What if we'd like to fix some arguments, but not the context `this`? For example, for an object method.
+Điều gì sẽ xảy ra nếu chúng ta muốn cố định một số đối số, nhưng không phải là ngữ cảnh `this`? Ví dụ, đối với một phương thức của đối tượng.
 
-The native `bind` does not allow that. We can't just omit the context and jump to arguments.
+Hàm `bind` không cho phép điều đó. Chúng ta không thể bỏ qua ngữ cảnh và chuyển sang đối số.
 
-Fortunately, a helper function `partial` for binding only arguments can be easily implemented.
+May mắn thay, một hàm `partial` mà chỉ ràng buộc các đối số có thể được cài đặt dễ dàng.
 
-Like this:
+Như thế này:
 
 ```js run
 *!*
@@ -300,7 +290,7 @@ function partial(func, ...argsBound) {
 }
 */!*
 
-// Usage:
+// Sử dụng:
 let user = {
   firstName: "John",
   say(time, phrase) {
@@ -308,34 +298,29 @@ let user = {
   }
 };
 
-// add a partial method with fixed time
+// thêm một phương thức một phần với thời gian cố định
 user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
 
-user.sayNow("Hello");
-// Something like:
-// [10:00] John: Hello!
+user.sayNow("Xin chào");
+// Cái gì đó giống như:
+// [10:00] John: Xin chào!
 ```
 
-The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that calls `func` with:
-- Same `this` as it gets (for `user.sayNow` call it's `user`)
-- Then gives it `...argsBound` -- arguments from the `partial` call (`"10:00"`)
-- Then gives it `...args` -- arguments given to the wrapper (`"Hello"`)
+Kết quả của lời gọi `partial(func[, arg1, arg2...])` là một hàm bao `(*)` mà gọi hàm `func` với:
+- Cùng `this` như nó nhận được (đối với `user.sayNow` thì gọi `user` của nó)
+- Sau đó cung cấp cho nó `...argsBound` -- các đối số từ lời gọi `partial` (`"10:00"`)
+- Sau đó cung cấp cho nó `...args` -- các đối số cho hàm bao (`"Hello"`)
 
-So easy to do it with the spread operator, right?
+Quá dễ dàng để thực hiện nó với cú pháp spread phải không?
 
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
+Ngoài ra, có một cài đặt [_.partial](https://lodash.com/docs#partial) sẵn sàng từ thư viện lodash.
 
-## Summary
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+## Tóm tắt
 
-Phương thức `func.bind(context, ...args)` trả về một phiên bản đã ràng buộc `this` của hàm `func`, nó ràng buộc `this` với đối số đầu tiên nếu có.
+Phương thức `func.bind (context, ... args)` trả về "biến thể bị ràng buộc" của hàm `func` để cố định ngữ cảnh `this` và các đối số đầu tiên nếu được cung cấp.
 
-<<<<<<< HEAD
-Thường ta sử dụng `bind` để cố định `this` trong phương thức của đối tượng để có thể truyền phương thức tới nơi khác. Ví dụ, tới `setTimeout`. Còn vài lý do nữa để sử dụng `bind` trong lập trình hiện đại, chúng ta sẽ còn gặp nó sau này.
-=======
-Usually we apply `bind` to fix `this` for an object method, so that we can pass it somewhere. For example, to `setTimeout`.
+Thông thường, chúng ta áp dụng `bind` để cố định `this` cho một phương thức của đối tượng để chúng ta có thể truyền nó đi đâu đó. Ví dụ, tới `setTimeout`.
 
-When we fix some arguments of an existing function, the resulting (less universal) function is called *partially applied* or *partial*.
+Khi chúng ta cố định một số đối số của một hàm hiện có, hàm kết quả (ít phổ biến hơn) được gọi là hàm *áp dụng một phần* hoặc hàm *một phần*.
 
-Partials are convenient when we don't want to repeat the same argument over and over again. Like if we have a `send(from, to)` function, and `from` should always be the same for our task, we can get a partial and go on with it.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Các hàm *một phần* thuận tiện khi chúng ta không muốn lặp đi lặp lại cùng một đối số. Giống như nếu chúng ta có một hàm `send (from, to)`, và `from` phải luôn giống nhau cho tác vụ của chúng ta, chúng ta có thể lấy hàm *một phần* và tiếp tục với nó.

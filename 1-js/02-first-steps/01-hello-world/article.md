@@ -1,19 +1,14 @@
 # Chào thế giới!
 
-<<<<<<< HEAD
-Trong phần này chúng ta học về JavaScript thuần. Nhờ những kiến thức này bạn có thể học Node.js (JavaScript chạy phía máy chủ) cũng như các nền tảng khác có sử dụng JavaScript.
-=======
-This part of the tutorial is about core JavaScript, the language itself.
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+Phần này của hướng dẫn bàn về cốt lõi của JavaScript, về bản thân ngôn ngữ.
 
 Nhưng để chạy được JavaScript chúng ta cần một môi trường (enviroment), và bởi các hướng dẫn này được đưa lên webiste, môi trường trình duyệt (browser) là sự lựa chọn tốt hơn cả. Chúng ta phải sử dụng một số lệnh chỉ có trên môi trường trình duyệt (như `alert`) nhưng chúng không nhiều. Nếu bạn có kế hoạch học JavaScript để làm việc trên môi trường khác (như Node.js) bạn cũng sẽ không mất quá nhiều thời gian để học chúng. Ở [phần sau](/ui) của hướng dẫn này chúng ta sẽ tập trung vào cách sử dụng JavaScript trên trình duyệt.
 
 Đầu tiên, chúng ta học cách làm sao để đưa một script (một đoạn mã JavaScript) vào một trang web. Trong môi trường máy chủ (như Node.js), bạn có thể đặt script này trong tệp `my.js` và chạy chỉ bằng một câu lệnh `"node my.js"`.
 
-
 ## Thẻ "script"
 
-Có thể chèn các script vào một trang web (tài liệu HTML) bằng cách sử dụng thẻ `<script>`.
+Các chương trình JavaScript có thể được chèn vào hầu như bất kỳ đâu trong một tài liệu HTML bằng cách sử dụng thẻ `<script>`.
 
 Ví dụ:
 
@@ -44,18 +39,12 @@ Bạn có thể chạy ví dụ trên bằng cách click vào nút "Play" ở g�
 
 Đoạn mã JavaScript bên trong thẻ `<script>` sẽ tự động chạy khi trình duyệt xử lý thẻ này.
 
-
-## Cách viết cũ của thẻ "script"
+## Cách đánh dấu hiện đại
 
 Thẻ `<script>` có vài thuộc tính ngày nay hiếm khi được sử dụng nhưng vẫn có thể gặp đâu đó trong các chương trình cũ:
 
-<<<<<<< HEAD
 Thuộc tính `type`: <code>&lt;script <u>type</u>=...&gt;</code>
-: Chuẩn HTML4 cũ yêu cầu mỗi script phải có một `type`. Thường là `type="text/javascript"`. Nhưng hiện nay nó không còn cần thiết nữa. Chuẩn HTML5 hiện đại vẫn sử dụng thuộc tính `type` nhưng với mục đích hoàn toàn khác. Bây giờ `type` được dùng cho các JavaScript module. Nhưng nó là một chủ đề nâng cao sẽ được nói đến trong một phần khác của loạt bài hướng dẫn này.
-=======
-The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial.
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+: Chuẩn HTML4 cũ yêu cầu mỗi script phải có một `type`. Thường thì đó là `type="text/javascript"`. Hiện nay nó không còn cần thiết nữa. Ngoài ra, chuẩn HTML hiện đại đã thay đổi hoàn toàn ý nghĩa của thuộc tính này. Bây giờ, nó có thể được sử dụng cho các mô-đun JavaScript. Nhưng đó là một chủ đề nâng cao, chúng ta sẽ nói về các mô-đun trong một phần khác của hướng dẫn.
 
 Thuộc tính `language`: <code>&lt;script <u>language</u>=...&gt;</code>
 : Thuộc tính này cho biết script được viết bằng ngôn ngữ nào. Ngày nay JavaScript trở thành ngôn ngữ script mặc định, thuộc tính này không còn cần thiết nữa.
@@ -69,12 +58,11 @@ Các chú thích trước và sau script.
     //--></script>
     ```
 
-    Mẹo này không được sử dụng trong JavaScript hiện đại. Mục đích của chú thích là ẩn đi mã JavaScript trong các trình duyệt cũ không hỗ trợ thẻ `<script>`. Các trình duyệt phát hành trong 15 năm gần đây không gặp phải vấn đề này, kiểu đặt chú thích như thế này chỉ gặp trong nhưng đoạn mã rất cũ.
-
+    Thủ thuật này không được sử dụng trong JavaScript hiện đại. Những chú thích này ẩn mã JavaScript khỏi các trình duyệt cũ không biết cách xử lý thẻ `<script>`. Vì các trình duyệt được phát hành trong 15 năm qua không gặp vấn đề này, nên loại chú thích này có thể giúp bạn xác định mã thực sự cũ.
 
 ## Các script ngoài
 
-Nếu số lượng mã JavaScript rất nhiều, ta có thể đặt chúng trong một tệp riêng.
+Nếu có nhiều mã JavaScript, ta có thể đặt chúng trong một tệp riêng.
 
 Script đặt trong tệp này gọi là script ngoài và có thể đưa vào tài liệu HTML bằng thuộc tính `src`:
 
@@ -82,18 +70,12 @@ Script đặt trong tệp này gọi là script ngoài và có thể đưa vào 
 <script src="/path/to/script.js"></script>
 ```
 
-<<<<<<< HEAD
-Ở đây, `/path/to/script.js` là đường dẫn tuyệt đối tới tệp chứa script (tính từ thư mục gốc của website).
+Ở đây, `/path/to/script.js` là đường dẫn tuyệt đối tới tệp chứa script tính từ thư mục gốc của site. Bạn cũng có thể cung cấp đường dẫn tương đối so với trang web hiện tại. Ví dụ, `src="script.js"` chỉ đến tệp `"script.js"` trong thư mục hiện tại.
 
-Bạn cũng có thể cung cấp đường dẫn tương đối so với trang web hiện tại. Ví dụ, `src="script.js"` chỉ đến tệp `"script.js"` trong thư mục hiện tại.
-=======
-Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
-
-Một địa chỉ URL cũng được cho phép, ví dụ:
+Chúng ta có thể cho một URL đầy đủ. Ví dụ:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
 Để thêm nhiều script, sử dụng nhiều thẻ:
@@ -142,6 +124,5 @@ Ví dụ trên có thể chia thành hai thẻ `<script>` để làm việc:
 - Chúng ta có thể sử dụng thẻ `<script>` để thêm mã JavaScript vào trang web.
 - Thuộc tính `type` và `language` không cần sử dụng.
 - Một script đặt trong tệp ngoài được chèn vào trang web bằng `<script src="path/to/script.js"></script>`.
-
 
 Còn nhiều điều để học về các script trong trình duyệt và cách nó tương tác với trang web. Nhưng hãy nhớ rằng trong phần này ta chỉ học về JavaScript, bạn không nên mất thời gian tìm hiểu cụ thể cách nó chạy trên trình duyệt. Chúng ta chỉ sử dụng trình duyệt như một cách để chạy JavaScript bởi nó rất thuận tiện cho việc học trực tuyến.
