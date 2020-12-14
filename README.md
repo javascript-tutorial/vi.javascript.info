@@ -1,6 +1,10 @@
 # Modern JavaScript Tutorial bằng Tiếng Việt
 
+<<<<<<< HEAD
 Repository này chứa phiên bản tiếng Việt của <https://javascript.info>.
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
+>>>>>>> 23e85b3c33762347e26276ed869e491e959dd557
 
 
 **Bạn có thể đóng góp vào bản dịch này bằng cách:**
@@ -23,7 +27,11 @@ Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành mộ
 
 Tên và phần đóng góp của bạn sẽ xuất hiện trong trang "About project" khi bản dịch được xuất bản.
 
+<<<<<<< HEAD
 P.S. Danh sách đầy đủ các ngôn ngữ có thể thấy tại <https://javascript.info/translate>.
+=======
+**You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+>>>>>>> 23e85b3c33762347e26276ed869e491e959dd557
 
 ## Cấu trúc
 
@@ -37,7 +45,13 @@ Một thư mục có nhiều tệp:
 - `article.md` cho một bài,
 - `task.md` cho một bài tập (+`solution.md` cho lời giải).
 
+<<<<<<< HEAD
 Một tệp bắt đầu bằng `# Title Header`, và sau đó là văn bản viết theo định dạng Markdown, có thể chỉnh sửa bằng một trình soạn thảo đơn giản.
+=======
+  - `index.md` stands for a chapter
+  - `article.md` stands for an article
+  - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
+>>>>>>> 23e85b3c33762347e26276ed869e491e959dd557
 
 Các tài nguyên bổ sung và các ví dụ cho bài học hoặc bài tập cũng nằm trong cùng thư mục.
 
@@ -112,6 +126,7 @@ Một số tệp, thường là các bài tập, có YAML metadata ở đầu, n
 ```md
 importance: 5
 
+<<<<<<< HEAD
 ---
 ...
 ```
@@ -133,3 +148,8 @@ Vui lòng không dịch và không xóa `[#...]`, nó được dùng làm các U
 Bạn có thể chạy phiên bản dịch trên máy chủ để xem nó trông như thế nào.
 
 Hướng dẫn cài đặt và chạy thử có tại <https://github.com/javascript-tutorial/server>. 
+=======
+---  
+♥  
+Ilya Kantor @iliakan
+>>>>>>> 23e85b3c33762347e26276ed869e491e959dd557
