@@ -1,4 +1,4 @@
-# Câu lệnh và chú thích
+# Cấu trúc mã
 
 Đầu tiên chúng ta sẽ học về các thành phần cơ bản nhất của một chương trình JavaScript là câu lệnh và chú thích.
 
@@ -75,7 +75,7 @@ Nhưng mọi thứ sẽ ổn nếu chúng ta thêm dấu chấm phảy sau `aler
 ```js run
 alert("Mọi thứ đã ổn");
 
-[1, 2].forEach(alert)  
+[1, 2].forEach(alert)
 ```
 
 Giờ ta có thông báo "Mọi thứ đã ổn" sau đó là hai thông báo `1` và `2`.
@@ -94,7 +94,7 @@ Cách thấy này hiển nhiên sai vì thực ra đó là hai câu lệnh, đó
 
 Chúng tôi khuyên bạn nên đặt dấu chấm phảy giữa các câu lệnh ngay cả khi mỗi lệnh viết trên một dòng. Quy tắc này được cộng đồng áp dụng rộng rãi. Cùng nhắc lại một lần nữa -- *có thể* bỏ qua dấu chấm phảy trong hầu hết trường hợp. Nhưng để an toàn -- đặc biệt cho những người mới -- hãy luôn sử dụng chúng.
 
-## Các chú thích
+## Các chú thích [#code-comments]
 
 Theo thời gian, chương trình ngày càng phức tạp. Trong chương trình ta cần bổ sung thêm các "chú thích" để diễn giải hoạt động của mã trong chương trình.
 
@@ -132,11 +132,11 @@ Có thể lợi dụng điều này để tạm thời vô hiệu hóa một ph�
 /* "Chú thích hóa" mã để vô hiệu hóa nó
 alert('Chào');
 */
-alert('thế giới!');
+alert('World');
 ```
 
 ```smart header="Dùng phím tắt!"
-Trong hầu hết các trình soạn thảo mã, có thể chú thích hóa một dòng mã bằng tổ hợp phím `key:Ctrl+/`, nhiều dòng mã bằng tổ hợp phím `key:Ctrl+Shift+/`. Trên máy Mac, dùng `key:Cmd` thay cho `key:Ctrl`.
+Trong hầu hết các trình soạn thảo mã, có thể chú thích hóa một dòng mã bằng tổ hợp phím `key:Ctrl+/`, nhiều dòng mã bằng tổ hợp phím `key:Ctrl+Shift+/`. Trên máy Mac, dùng `key:Cmd` thay cho `key:Ctrl` và `key:Option` thay cho `key:Shift`.
 ```
 
 ````warn header="Không được phép đặt một chú thích trong một chú thích khác (nested comment)!"

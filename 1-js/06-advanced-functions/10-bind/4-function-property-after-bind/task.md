@@ -14,7 +14,7 @@ sayHi.test = 5;
 
 *!*
 let bound = sayHi.bind({
-  name: "Hùng"
+  name: "John"
 });
 
 alert( bound.test ); // sẽ hiển thị gì? Tại sao?

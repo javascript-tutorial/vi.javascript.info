@@ -1,16 +1,16 @@
 # F.prototype
 
-Nhớ rằng, các đối tượng có thể tạo bằng hàm tạo (constructor), chẳng hạn như `new F()`.
+Nhớ rằng, các đối tượng mới có thể được tạo bằng hàm tạo (constructor), chẳng hạn như `new F()`.
 
-Nếu `F.prototype` là một đối tượng, thì toán tử `new` dùng nó để đặt cho `[[Prototype]]` của đối tượng mới được tạo ra.
+Nếu `F.prototype` là một đối tượng, thì toán tử `new` dùng nó để đặt cho `[[Prototype]]` của đối tượng mới tạo ra.
 
 ```smart
-Từ thuở ban đầu JavaScript đã có thừa kế nguyên mẫu. Đây là một trong những tính năng cốt lõi của ngôn ngữ này.
+JavaScript đã có kế thừa nguyên mẫu ngay từ đầu. Đây là một trong những tính năng cốt lõi của ngôn ngữ.
 
-Nhưng ngày xưa, không có cách nào để truy cập trực tiếp đến nó. Cách duy nhất có thể dùng để làm việc với thừa kế là sử dụng thuộc tính `"prototype"` của hàm tạo. Vậy nên ngày nay còn nhiều script vẫn sử dụng nó.
+Nhưng thời xưa, không có quyền truy cập trực tiếp vào nó. Điều duy nhất hoạt động đáng tin cậy là thuộc tính `"prototype"` của hàm khởi tạo, được mô tả trong chương này. Vì vậy, có rất nhiều tập lệnh vẫn sử dụng nó.
 ```
 
-Chú ý rằng `F.prototype` chỉ là một thuộc tính thông thường có tên `"prototype"` của `F`. Dù tên nó giống thuật ngữ "prototype", nhưng nó không phải là một thuộc tính đặc biệt.
+Xin lưu ý rằng `F.prototype` ở đây nghĩa là một thuộc tính thông thường có tên là `"prototype"` của `F`. Nghe có vẻ giống với thuật ngữ "prototype", nhưng ở đây chúng ta thực sự muốn nói đến một thuộc tính thông thường với tên này.
 
 Đây là ví dụ:
 
@@ -32,39 +32,39 @@ let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
 alert( rabbit.eats ); // true
 ```
 
-Cài đặt `Rabbit.prototype = animal` có nghĩa là: "Khi một đối tượng tạo bằng`new Rabbit`, đặt thuộc tính `[[Prototype]]` của nó thành `animal`".
+Đặt `Rabbit.prototype = animal` nghĩa là như sau: "Khi một `new Rabbit` được tạo, hãy gán `[[Prototype]]` của nó thành `animal`".
 
 Đây là hình ảnh của kết quả:
 
 ![](proto-constructor-animal-rabbit.svg)
 
-Ở hình trên, `"prototype"` là một mũi tên nằm ngang, mang nghĩa là một thuộc tính thông thường, và `[[Prototype]]` là mũi tên thẳng đứng, mang nghĩa `rabbit` thừa kế từ `animal`.
+Ở hình trên, `"prototype"` là một mũi tên nằm ngang, mang nghĩa là một thuộc tính thông thường, và `[[Prototype]]` là mũi tên thẳng đứng, mang nghĩa là `rabbit` kế thừa từ `animal`.
 
-```smart header="`F.prototype` chỉ được dùng khi gọi `new F()`"
-Thuộc tính `F.prototype` được gán cho `[[Prototype]]` một lần duy nhất khi gọi `new F()`. Sau đó không còn liên hệ giữa `F.prototype` và đối tượng mới này.
+```smart header="`F.prototype` chỉ được dùng khi gọi `new F`"
+Thuộc tính `F.prototype` chỉ được dùng khi `new F` được gọi, nó đặt `[[Prototype]]` của đối tượng mới tạo ra.
 
-Chẳng hạn, sau khi tạo đối tượng, `F.prototype` bị thay đổi (`F.prototype = <một đối tượng khác>`), thì `[[Prototype]]` của đối tượng không bị thay đổi theo. Sự thay đổi của `F.prototype` chỉ ảnh hưởng tới các đối tượng được tạo ra sau này bằng `new F()`.
+Nếu sau khi tạo đối tượng, thuộc tính `F.prototype` bị thay đổi (`F.prototype = <một đối tượng khác>`), thì các đối tượng mới được tạo bởi `new F` sẽ có một đối tượng khác làm `[[Prototype]]`, nhưng các đối tượng hiện có vẫn giữ đối tượng `[[Prototype]]` cũ.
 ```
 
 ## F.prototype mặc định, thuộc tính "constructor"
 
-Mọi hàm đều có sẵn thuộc tính `"prototype"` ngay cả khi ta không tạo.
+Mọi hàm đều có thuộc tính `"prototype"` ngay cả khi chúng ta không cung cấp nó.
 
-Giá trị mặc định của `"prototype"` là một đối tượng chỉ có một thuộc tính duy nhất `constructor` trỏ ngược lại tới hàm.
+`"prototype"` mặc định (của một hàm) là một đối tượng với một thuộc tính duy nhất `constructor` trỏ ngược lại hàm.
 
-Ví dụ minh họa:
+Như thế này:
 
 ```js
 function Rabbit() {}
 
-/* prototype mặc định (default "prototype")
+/* prototype mặc định
 Rabbit.prototype = { constructor: Rabbit };
 */
 ```
 
 ![](function-prototype-constructor.svg)
 
-Chúng ta có thể kiểm tra điều này:
+Chúng ta có thể kiểm tra nó:
 
 ```js run
 function Rabbit() {}
@@ -74,23 +74,23 @@ function Rabbit() {}
 alert( Rabbit.prototype.constructor == Rabbit ); // true
 ```
 
-Một cách tự nhiên, nếu ta không làm gì, thuộc tính `constructor` sẽ có sẵn với mọi đối tượng được tạo từ hàm tạo qua `[[Prototype]]`:
+Dĩ nhiên, nếu chúng ta không làm gì, thuộc tính `constructor` sẽ có sẵn cho mọi đối tượng rabbit thông qua `[[Prototype]]`:
 
 ```js run
 function Rabbit() {}
 // theo mặc định:
 // Rabbit.prototype = { constructor: Rabbit }
 
-let rabbit = new Rabbit(); // thừa kế từ {constructor: Rabbit}
+let rabbit = new Rabbit(); // kế thừa từ {constructor: Rabbit}
 
 alert(rabbit.constructor == Rabbit); // true (lấy từ nguyên mẫu)
 ```
 
 ![](rabbit-prototype-constructor.svg)
 
-Chúng ta có thể sử dụng thuộc tính `constructor` để tạo đối tượng mới từ constructor của một đối tượng đã có:
+Chúng ta có thể sử dụng thuộc tính `constructor` để tạo một đối tượng mới bằng cách sử dụng cùng một constructor của đối tượng hiện có:
 
-Chẳng hạn:
+Giống như ở đây:
 
 ```js run
 function Rabbit(name) {
@@ -105,15 +105,15 @@ let rabbit2 = new rabbit.constructor("Thỏ đen");
 */!*
 ```
 
-Cách này rất tiện nếu chúng ta có một đối tượng, không biết constructor nào đã tạo ra nó (ví dụ đối tượng từ một thư viện ngoài), và muốn tạo một đối tượng khác cùng loại.
+Cách này rất tiện nếu chúng ta có một đối tượng, nhưng không biết constructor nào đã tạo ra nó (ví dụ đối tượng đến từ một thư viện ngoài), và chúng ta muốn tạo một đối tượng khác cùng loại.
 
-Nhưng nên cẩn thận vì...
+Nhưng có lẽ điều quan trọng nhất về `"constructor"` là ...
 
-**...JavaScript không thể đảm bảo giá trị `"constructor"` luôn đúng.**
+**...JavaScript không đảm bảo giá trị `"constructor"` luôn đúng.**
 
-Vâng, thuộc tính `constructor` tồn tại trong `"prototype"` mặc định của mọi hàm, nhưng đó là tất cả những gì JavaScript làm. Chuyện gì xảy ra sau đó hoàn toàn do chúng ta quyết định.
+Đúng vậy, nó tồn tại trong `"prototype"` mặc định của mọi hàm, nhưng đó là tất cả những gì JavaScript làm. Chuyện gì xảy ra sau đó hoàn toàn do chúng ta quyết định.
 
-Cụ thể, nếu ta thay thế `prototype` mặc định bằng một đối tượng khác không có `constructor`, đối tượng tạo ra không còn biết constructor tạo ra nó nữa.
+Cụ thể, nếu chúng ta thay thế toàn bộ `prototype` mặc định, thì sẽ không có `constructor` trong nó nữa.
 
 Ví dụ:
 
@@ -129,18 +129,18 @@ alert(rabbit.constructor === Rabbit); // false
 */!*
 ```
 
-Cho nên, để giữ lại `"constructor"`, chúng ta phải thêm/xóa các thuộc tính khỏi `prototype` mặc định thay vì ghi đè toàn bộ.
+Cho nên, để giữ lại `"constructor"` đúng, chúng ta có thể chọn thêm/xóa các thuộc tính khỏi `prototype` mặc định thay vì ghi đè toàn bộ nó.
 
 ```js
 function Rabbit() {}
 
 // Không ghi đè toàn bộ Rabbit.prototype
-// chỉ bổ sung vào đó
+// chỉ bổ sung cho nó
 Rabbit.prototype.jumps = true
-// Rabbit.prototype.constructor vẫn được giữ
+// Rabbit.prototype.constructor được bảo vệ
 ```
 
-Hoặc tạo lại thuộc tính `constructor`:
+Hoặc theo phương án khác, tạo lại thuộc tính `constructor` một cách thủ công:
 
 ```js
 Rabbit.prototype = {
@@ -150,32 +150,26 @@ Rabbit.prototype = {
 */!*
 };
 
-// giờ constructor vẫn đúng, vì chúng ta đã thêm nó
+// bây giờ constructor vẫn đúng, vì chúng ta đã thêm nó
 ```
-
 
 ## Tóm tắt
 
-Trong bài này chúng ta đã mô tả ngắn gọn cách cài đặt `[[Prototype]]` cho các đối tượng tạo ra bằng hàm tạo. Sau này bạn sẽ thấy nhiều mô hình lập trình dựa vào nó.
+Trong chương này chúng ta đã mô tả ngắn gọn cách  đặt `[[Prototype]]` cho các đối tượng tạo ra bằng hàm tạo. Sau này chúng ta sẽ thấy nhiều mẫu hình lập trình nâng cao hơn dựa vào nó.
 
-Mọi thứ khá đơn giản, chỉ có vài lưu ý sau:
+Mọi thứ khá đơn giản, chỉ có một vài lưu ý để mọi thứ rõ ràng hơn:
 
-<<<<<<< HEAD
-- Thuộc tính `F.prototype` không phải là `[[Prototype]]`. Giá trị của `F.prototype` được gán cho `[[Prototype]]` khi gọi `new F()`, sau đó chúng hoàn toàn độc lập nhau.
-- Giá trị của `F.prototype` có thể là đối tượng hoặc null: mọi giá trị kiểu cơ sở đều không hoạt động.
-- Thuộc tính `"prototype"` chỉ có tác dụng khi cài đặt nó cho một hàm tạo và gọi hàm này bằng `new`.
-=======
-- The `F.prototype` property (don't mess with `[[Prototype]]`) sets `[[Prototype]]` of new objects when `new F()` is called.
-- The value of `F.prototype` should be either an object or `null`: other values won't work.
--  The `"prototype"` property only has such a special effect when set on a constructor function, and invoked with `new`.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+- Thuộc tính `F.prototype` (đừng nhầm lẫn nó với `[[Prototype]]`) thiết lập `[[Prototype]]` của đối tượng mới khi `new F()` được gọi.
+- Giá trị của `F.prototype` cần phải là một đối tượng hoặc `null`: các giá trị khác đều không hoạt động.
+- Thuộc tính `"prototype"` chỉ có tác dụng đặc biệt khi thiết lập nó cho một hàm tạo và gọi hàm này bằng `new`.
 
-Nếu cài đặt `prototype` cho một đối tượng thông thường, nó không còn gì đặc biệt:
+Với các đối tượng thông thường `prototype` không có gì đặc biệt:
+
 ```js
 let user = {
-  name: "Hùng",
+  name: "John",
   prototype: "Bla-bla" // không có gì đặc biệt
 };
 ```
 
-Mặc định tất cả các hàm có `F.prototype = { constructor: F }`, giúp ta có thể lấy được hàm tạo của một đối tượng bằng cách truy cập thuộc tính `constructor` của nó.
+Mặc định tất cả các hàm có `F.prototype = { constructor: F }`, vì vậy chúng ta có thể lấy được hàm tạo của một đối tượng bằng cách truy cập thuộc tính `constructor` của nó.

@@ -1,17 +1,16 @@
-
-# Cú pháp tạo class
+# Cú pháp cơ bản của class
 
 ```quote author="Wikipedia"
-Trong lập trình hướng đối tượng, một *class* là một mã chương trình mở rộng (extensible program-code-template) dùng tạo các đối tượng, khởi tạo các giá trị ban đầu cho trạng thái (các biến thành viên) và thực thi các hành động (hàm thành viên hay phương thức) của đối tượng.
+Trong lập trình hướng đối tượng, một *class* là một khuôn mẫu mã chương trình có thể mở rộng (extensible program-code-template) dùng để tạo các đối tượng, cung cấp các giá trị ban đầu cho trạng thái của đối tượng (các biến thành viên) và các cài đặt cho hành vi của đối tượng (hàm thành viên hay phương thức).
 ```
 
-Trong thực tế, chúng ta thường phải tạo ra hàng loạt các đối tượng cùng kiểu, như các người dùng, các mặt hàng trong một cửa hàng trực tuyến...
+Trong thực tế, chúng ta thường phải tạo ra nhiều đối tượng cùng kiểu, như các người dùng, các mặt hàng hoặc bất kì thứ gì khác.
 
-Như đã biết ở bài <info:constructor-new>, có thể dùng `new Function` đê thực hiện việc này.
+Như chúng ta đã biết ở chương <info:constructor-new>, `new function` có thể giúp thực hiện việc đó.
 
-Nhưng trong JavaScript hiện đại, có thêm một cách tạo các đối tượng khác đó là "class", nó là một cấu trúc cú pháp nâng cao mới được giới thiệu đi cùng với nhiều tính năng tuyệt vời khác, rất hữu ích cho lập trình hướng đối tượng.
+Nhưng trong JavaScript hiện đại, có một cấu trúc cao cấp hơn gọi là "class", nó giới thiệu các tính năng mới tuyệt vời có lợi cho lập trình hướng đối tượng.
 
-## Cú pháp tạo "class"
+## Cú pháp "class"
 
 Cú pháp cơ bản là:
 ```js
@@ -25,13 +24,9 @@ class MyClass {
 }
 ```
 
-<<<<<<< HEAD
-Sau đó gọi `new MyClass()` để tạo đối tượng mới có đầy đủ các phương thức trên.
-=======
-Then use `new MyClass()` to create a new object with all the listed methods.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Sau đó sử dụng `new MyClass()` để tạo một đối tượng mới với tất cả các phương thức kể trên.
 
-Phương thức `constructor()` tự động được gọi bởi `new`, nên nó là nơi được dùng để khởi tạo giá trị các thuộc tính cho đối tượng.
+Phương thức `constructor()` tự động được gọi bởi `new`, nên chúng ta có thể khởi tạo đối tượng ở đó.
 
 Ví dụ:
 
@@ -48,37 +43,33 @@ class User {
 
 }
 
-// Sử dụng:
-let user = new User("Hùng");
+// Cách dùng:
+let user = new User("John");
 user.sayHi();
 ```
 
-Khi gọi `new User("Hùng")`:
-1. Một đối tượng mới được tạo.
-2. Hàm `constructor` chạy với đối số `"Hùng"` và gán cho `this.name`.
+Khi `new User("John")` được gọi:
 
-<<<<<<< HEAD
-...Sau đó chúng ta có thể gọi các phương thức từ đối tượng trên, chẳng hạn như `user.sayHi`.
-=======
-...Then we can call object methods, such as `user.sayHi()`.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+1. Một đối tượng mới được tạo ra.
+2. Phương thức `constructor` chạy với đối số đã cho và gán `this.name` cho nó.
 
+...Sau đó chúng ta có thể gọi các phương thức của đối tượng, chẳng hạn như `user.sayHi`.
 
-```warn header="Không có dấu phảy ngăn cách các phương thức"
-Có một lỗi phổ biến mà những người mới làm quen với JavaScript hay mắc phải là đặt dấu phảy giữa các phương thức của class, điều này dẫn tới lỗi cú pháp.
+```warn header="Không có dấu phảy ngăn cách các phương thức của class"
+Một lỗi phổ biến với những nhà phát triển chưa có kinh nghiệm là đặt dấu phảy giữa các phương thức của class, điều này sẽ gây ra một lỗi cú pháp.
 
-Chúng ta không được nhầm lẫn cách viết "class" và cách việt literal đối tượng. Trong class không cần dấu phảy.
+Chúng ta không được nhầm lẫn cách viết "class" ở đây với các đối tượng trực tiếp. Bên trong class không yêu cầu dấu phảy.
 ```
 
-## Class thực sự là gì?
+## Class là gì?
 
-Vậy thì chính xác `class` là gì? Thường thì người ta nghĩ rằng nó là một cái gì hoàn toàn mới của JavaScript, nhưng thực ra không phải.
+Vậy thì `class` đúng ra là gì? Đó không phải là một thứ hoàn toàn mới ở cấp độ ngôn ngữ, như người ta vẫn nghĩ.
 
-Cùng lột trần để thấy thực sự nó là gì. Điều này giúp ta hiểu được nhiều khía cạnh phức tạp.
+Hãy cùng tiết lộ bất kỳ "phép màu" nào và xem class thực ra là gì. Điều đó sẽ giúp chúng ta hiểu nhiều khía cạnh phức tạp.
 
-Trong JavaScript, class thực ra là một hàm.
+Trong JavaScript, một class hầu như là một hàm.
 
-Đoạn mã sau cho thấy điều này:
+Đây, hãy xem:
 
 ```js run
 class User {
@@ -86,33 +77,24 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// bằng chứng cho việc User là một hàm
+// bằng chứng: User là một hàm
 *!*
 alert(typeof User); // function
 */!*
 ```
 
-<<<<<<< HEAD
-Cấu trúc `class User {...}` thực ra là một khai báo hàm và làm những công việc sau:
-1. Tạo hàm có tên `User`.
-    - Thân hàm lấy từ phương thức `constructor` (nếu không viết `constructor` thì thân hàm trống).
-3. Lưu tất cả các phương thức, chẳng hạn như `sayHi`, trong `User.prototype`.
+Những cái mà cấu trúc `class User {...}` thực sự làm là:
 
-Sau đó khi gọi các phương thức của đối tượng mới, các phương thức này được lấy từ nguyên mẫu, giống như được mô tả trong bài <info:function-prototype>. Vậy nên đối tượng tạo ra từ `new User` có thể truy cập các phương thức của class.
-=======
-What `class User {...}` construct really does is:
+1. Tạo một hàm có tên là `User`, hàm này sẽ trở thành kết quả của khai báo class. Mã hàm được lấy từ phương thức `constructor` (giả sử là rỗng nếu chúng ta không viết phương thức như vậy).
+2. Lưu các phương thức của class, chẳng hạn như `sayHi`, trong `User.prototype`.
 
-1. Creates a function named `User`, that becomes the result of the class declaration. The function code is taken from the `constructor` method (assumed empty if we don't write such method).
-2. Stores class methods, such as `sayHi`, in `User.prototype`.
+Sau khi đối tượng `new User` được tạo, khi chúng ta gọi một phương thức của nó, phương thức đó được lấy từ nguyên mẫu, giống như mô tả trong chương <info:function-prototype>. Vì vậy đối tượng có quyền truy cập đến các phương thức của class.
 
-Afterwards, for `new User` objects, when we call a method, it's taken from the prototype, just as described in the chapter <info:function-prototype>. So the object has access to class methods.
->>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
-
-Chúng ta có thể mô tả khai báo `class User` bằng hình sau:
+Chúng ta có thể minh họa kết quả của khai báo `class User` như sau:
 
 ![](class-user.svg)
 
-Đây là đoạn mã giúp ta quan sát điều này:
+Đây là mã để xem xét nó:
 
 ```js run
 class User {
@@ -126,52 +108,44 @@ alert(typeof User); // function
 // ...hoặc chính xác hơn, là phương thức constructor
 alert(User === User.prototype.constructor); // true
 
-// Các phương thức của class nằm trong User.prototype, ví dụ:
+// Các phương thức nằm trong User.prototype, ví dụ:
 alert(User.prototype.sayHi); // alert(this.name);
 
-// có 2 phương thức trong User.prototype
+// có đúng hai phương thức nằm trong nguyên mẫu
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
-## Class không chỉ là một "syntax sugar"
+## Không chỉ là một cú pháp đặc biệt
 
-<<<<<<< HEAD
-Đôi khi người ta nói rằng `class` là một "syntax sugar" (cú pháp ngắn gọn được thiết kế để thay thế cho một đoạn mã phức tạp thực hiện công việc tương tự) của JavaScript, bởi chúng ta có thể khai báo một hàm constructor, thêm phương thức vào `prototype` của nó mà không cần sử dụng `class`:
-=======
-Sometimes people say that `class` is a "syntax sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
->>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+Đôi khi người ta nói rằng `class` là một cú pháp đặc biệt "syntactic sugar" (cú pháp được thiết kế để làm cho mọi thứ dễ đọc hơn, nhưng không giới thiệu bất kỳ điều gì mới), bởi vì chúng ta thực sự có thể khai báo tương tự mà không cần từ khóa `class` gì hết:
 
 ```js run
-// viết lại class mà mà không dùng cấu trúc "class"
+// viết lại class User trong các hàm thuần túy
 
 // 1. Tạo hàm constructor
 function User(name) {
   this.name = name;
 }
-// mọi hàm đều có `prototype` có sẵn thuộc tính constructor
-// nên không cần phải thêm constructor vào User.prototype
+// một nguyên mẫu hàm có sẵn thuộc tính "constructor" theo mặc định,
+// vì vậy chúng ta không cần tạo nó
 
-// 2. Thêm phương thức vào User.prototype
+// 2. Thêm phương thức vào nguyên mẫu
 User.prototype.sayHi = function() {
   alert(this.name);
 };
 
-// Sử dụng:
+// Cách sử dụng:
 let user = new User("Hùng");
 user.sayHi();
 ```
 
-Kết quả hoàn toàn giống như khi sử dụng "class". Đó là lý do tại sao `class` có thể xem như một syntax sugar để định nghĩa một constructor cùng với các phương thức trong prototype của nó.
+Kết quả của định nghĩa này là giống nhau. Vì vậy, thực sự có những lý do tại sao `class` có thể được coi là một cú pháp đặc biệt để định nghĩa một phương thức constructor cùng với các phương thức nguyên mẫu của nó.
 
-Mặc dù vậy, vẫn có những khác biệt quan trọng.
+Dù vậy, vẫn có những khác biệt quan trọng.
 
-1. Trước tiên, hàm tạo bởi `class` có thêm một thuộc tính đặc biệt `[[FunctionKind]]:"classConstructor"`. Các hàm tạo ra bằng cách thông thường không có thuộc tính này.
+1. Đầu tiên, một hàm tạo bởi `class` được gắn nhãn bởi một thuộc tính nội bộ đặc biệt `[[FunctionKind]]:"classConstructor"`. Vì vậy, nó không hoàn toàn giống với việc tạo theo cách thủ công.
 
-<<<<<<< HEAD
-    Không như hàm thông thường, một "class constructor" (hàm tạo bởi `class`) bắt buộc phải gọi với `new`:
-=======
-    Unlike a regular function, a class constructor must be called with `new`:
->>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+    Ngôn ngữ JavaScript kiểm tra thuộc tính đó ở nhiều nơi. Ví dụ: không giống như một hàm thông thường, nó phải được gọi bằng `new`:
 
     ```js run
     class User {
@@ -179,10 +153,10 @@ Mặc dù vậy, vẫn có những khác biệt quan trọng.
     }
 
     alert(typeof User); // function
-    User(); // Lỗi: "Class constructor" User không thể gọi mà không có 'new'
+    User(); // Lỗi: User không thể gọi mà không có 'new'
     ```
 
-    Cũng như vậy, biểu diễn chuỗi của một class constructor trong hầu hết các JavaScript engine đều bắt đầu với "class..."
+    Hơn nữa, biểu diễn dạng chuỗi của một class constructor trong hầu hết các JavaScript engine đều bắt đầu với "class..."
 
     ```js run
     class User {
@@ -192,24 +166,21 @@ Mặc dù vậy, vẫn có những khác biệt quan trọng.
     alert(User); // class User { ... }
     ```
 
-2. Các phương thức của class đều không thể liệt kê.
-    Định nghĩa một class sẽ cài đặt cờ `enumerable` là `false` cho mọi phương thức trong `"prototype"`.
+    Có những khác biệt nữa, chúng ta sẽ sớm nhìn thấy chúng.
 
-    Điều này tốt, bởi vì nếu chúng ta `for..in` một đối tượng, chúng ta thường không cần đến các phương thức class của nó.
+2. Các phương thức của class là không thể liệt kê.
+    Một định nghĩa class sẽ thiết lập cờ `enumerable` là `false` cho mọi phương thức trong `"prototype"`.
 
-3. Các class luôn mặc định sử dụng `use strict`.
-    Tất cả mã bên trong cấu trúc class tự động sử dụng `use strict`.
+    Điều này là tốt, bởi vì nếu chúng ta dùng `for..in` trên một đối tượng, chúng ta thường không muốn các phương thức class của nó.
 
-<<<<<<< HEAD
+3. Các class luôn sử dụng `use strict`.
+    Tất cả mã bên trong cấu trúc class tự động ở trong chế độ strict.
 
-Ngoài các tính năng cơ bản, cú pháp `class` còn mang đến nhiều tính năng khác mà chúng ta sẽ học trong các bài sau.
-=======
-Besides, `class` syntax brings many other features that we'll explore later.
->>>>>>> 4a8d8987dfc3256045e6b4a3bd8810ad3b25d1b3
+Ngoài ra, cú pháp `class` còn mang đến nhiều tính năng khác mà chúng ta sẽ nghiên cứu sau.
 
 ## Biểu thức class
 
-Giống như hàm, class cũng có thể được khai báo bằng một biểu thức gọi là biểu thức class.
+Cũng giống như các hàm, các class có thể được định nghĩa bên trong một biểu thức khác, được truyền xung quanh, được trả về, được gán v.v.
 
 Đây là ví dụ về một biểu thức class:
 
@@ -221,46 +192,33 @@ let User = class {
 };
 ```
 
-<<<<<<< HEAD
-Tương tự như Biểu thức hàm có tên (NFE), chúng ta cũng có "Biểu thức class có tên" (Named Class Expression).
-=======
-Similar to Named Function Expressions, class expressions may have a name.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Tương tự như Biểu thức hàm có tên (Named Function Expressions), các biểu thức class cũng có thể có tên (Named Class Expression).
 
-Nếu một biểu thức class có tên, tên này chỉ có thể thấy được trong class:
+Nếu một biểu thức class có tên, tên này chỉ có thể thấy được bên trong class:
 
 ```js run
 // "Biểu thức class có tên"
-// (trong đặc tả không có thuật ngữ này, nhưng nó tương tự NFE)
+// (trong đặc tả không có thuật ngữ như thế, nhưng nó tương tự như Named Function Expressions)
 let User = class *!*MyClass*/!* {
   sayHi() {
-<<<<<<< HEAD
-    alert(MyClass); // MyClass chỉ thấy được trong class
-=======
-    alert(MyClass); // MyClass name is visible only inside the class
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+    alert(MyClass); // tên MyClass chỉ thấy được từ bên trong class
   }
 };
 
-new User().sayHi(); // làm việc, hiện thị định nghĩa của MyClass
+new User().sayHi(); // hoạt động tốt, hiển thị định nghĩa của MyClass
 
-<<<<<<< HEAD
-alert(MyClass); // lỗi, MyClass không sử dụng được ngoài class
-=======
-alert(MyClass); // error, MyClass name isn't visible outside of the class
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+alert(MyClass); // lỗi, tên MyClass không thấy được từ bên ngoài class
 ```
 
-
-Chúng ta có thể tạo một class từ một hàm, ví dụ:
+Chúng ta thậm chí có thể tạo động các class "theo yêu cầu", như thế này:
 
 ```js run
 function makeClass(phrase) {
-  // trả về class
+  // khai báo một class và trả nó về
   return class {
     sayHi() {
       alert(phrase);
-    };
+    }
   };
 }
 
@@ -270,12 +228,11 @@ let User = makeClass("Xin chào");
 new User().sayHi(); // Xin chào
 ```
 
+## Các getter/setter
 
-## Getter/setter, và các thuộc tính đặc biệt khác
+Cũng giống như các đối tượng trực tiếp (literal object), các class có thể bao gồm các getter/setter, các thuộc tính được tính toán v.v.
 
-Giống literal đối tượng, các class có thể có getter/setter, các generator, các thuộc tính "computed"...
-
-Đây là ví dụ tạo thuộc tính truy cập `user.name` sử dụng `get/set`:
+Đây là một ví dụ cho thuộc tính `user.name` mà được cài đặt bằng cách sử dụng `get/set`:
 
 ```js run
 class User {
@@ -303,45 +260,25 @@ class User {
 
 }
 
-let user = new User("Hùng");
-alert(user.name); // Hùng
+let user = new User("John");
+alert(user.name); // John
 
 user = new User(""); // Tên quá ngắn.
 ```
 
-Khai báo class tạo các getter và setter trong `User.prototype` như sau:
+Về mặt kỹ thuật, khai báo class như vậy hoạt động bằng cách tạo các getter và setter trong `User.prototype`.
 
-```js
-Object.defineProperties(User.prototype, {
-  name: {
-    get() {
-      return this._name
-    },
-    set(name) {
-      // ...
-    }
-  }
-});
-```
+## Các tên được tính toán [...]
 
-<<<<<<< HEAD
-Đây là ví dụ với các thuộc tính computed:
-=======
-Here's an example with a computed property in brackets `[...]`:
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Đây là một ví dụ với một tên phương thức được tính toán bằng cách sử dụng cặp ngoặc vuông `[...]`:
 
 ```js run
 class User {
-<<<<<<< HEAD
-  [f()]() {
-    alert("Xin chào");
-=======
 
 *!*
   ['say' + 'Hi']() {
 */!*
     alert("Hello");
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
   }
 
 }
@@ -349,52 +286,126 @@ class User {
 new User().sayHi();
 ```
 
-Với phương thức generator, đặt `*` đằng trước. Nhưng chúng ta sẽ học về generator ở một bài học sau.
+Các tính năng như thế rất dễ nhớ, vì chúng giống với các đối tượng trực tiếp.
 
-## Các thuộc tính của class
+## Các trường của class
 
-```warn header="Trên các trình duyệt cũ chúng ta cần polyfill"
-Các thuộc tính của class gần đây mới được thêm vào JavaScript, nên một số trình duyệt cũ có thể chưa hỗ trợ.
+```warn header="Các trình duyệt cũ có thể phải cần polyfill"
+Các trường của class là một bổ sung gần đây cho ngôn ngữ.
 ```
 
-Trong các ví dụ trên, `User` chỉ có các phương thức. Giờ thêm các thuộc tính:
+Trước đó các class của chúng ta chỉ có các phương thức.
+
+"Các trường của class" là một cú pháp cho phép thêm bất kỳ thuộc tính nào.
+
+Ví dụ, hãy thêm thuộc tính `name` vào `class User`:
 
 ```js run
 class User {
-<<<<<<< HEAD
-  name = "Vô danh";
-=======
 *!*
-  name = "Anonymous";
+  name = "John";
 */!*
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
   sayHi() {
     alert(`Xin chào, ${this.name}!`);
   }
 }
 
-new User().sayHi();
+new User().sayHi(); // Xin chào, John!
 ```
 
-<<<<<<< HEAD
-Khác với phương thức các thuộc tính không đặt trong `User.prototype`. Thay vì thế, nó tạo bởi `new`, đặt trong mỗi đối tượng được tạo. Vậy nên, mỗi đối tượng sở hữu các thuộc tính riêng, nhưng dùng chung phương thức từ nguyên mẫu.
+Vì vậy, chúng ta chỉ cần viết "<property name> = <value>" trong khai báo, và thế là xong.
 
-=======
-The property `name` is not placed into `User.prototype`. Instead, it is created by `new` before calling constructor, it's the property of the object itself.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Sự khác biệt quan trọng của các trường của class là chúng được thiết lập trên các đối tượng riêng lẻ, chứ không phải `User.prototype`:
+
+```js run
+class User {
+*!*
+  name = "John";
+*/!*
+}
+
+let user = new User();
+alert(user.name); // John
+alert(User.prototype.name); // undefined
+```
+
+Chúng ta cũng có thể gán các giá trị bằng cách sử dụng các biểu thức phức tạp hơn và các lệnh gọi hàm:
+
+```js run
+class User {
+*!*
+  name = prompt("Vui lòng nhập tên?", "John");
+*/!*
+}
+
+let user = new User();
+alert(user.name); // John
+```
+
+### Tạo các phương thức ràng buộc với các trường của class
+
+Như đã trình bày trong chương <info:bind> các hàm trong JavaScript có `this` động. Nó phụ thuộc vào ngữ cảnh của lời gọi.
+
+Vì vậy, nếu một phương thức của đối tượng được truyền xung quanh và được gọi trong một ngữ cảnh khác, `this` sẽ không còn là một tham chiếu đến đối tượng của nó nữa.
+
+Ví dụ, mã này sẽ hiển thị `undefined`:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+
+  click() {
+    alert(this.value);
+  }
+}
+
+let button = new Button("xin chào");
+
+*!*
+setTimeout(button.click, 1000); // undefined
+*/!*
+```
+
+Sự cố này được gọi là "mất `this`".
+
+Có hai cách tiếp cận để sửa nó, như đã thảo luận trong chương <info:bind>:
+
+1. Truyền một hàm-bao, chẳng hạn như `setTimeout(() => button.click(), 1000)`.
+2. Ràng buộc phương thức với đối tượng, ví dụ trong hàm tạo.
+
+Các trường của class cung cấp một cú pháp khác, khá thanh lịch:
+
+```js run
+class Button {
+  constructor(value) {
+    this.value = value;
+  }
+*!*
+  click = () => {
+    alert(this.value);
+  }
+*/!*
+}
+
+let button = new Button("xin chào");
+
+setTimeout(button.click, 1000); // xin chào
+```
+
+Trường `click = () => {...}` được tạo trên cơ sở từng đối tượng, có một hàm riêng biệt cho mỗi đối tượng `Button`, với `this` bên trong nó tham chiếu đến đối tượng đó. Chúng ta có thể truyền `button.click` đi bất kỳ đâu, và giá trị của `this` sẽ luôn đúng đắn.
+
+Điều đó đặc biệt có ích trong môi trường trình duyệt, cho các event listener.
 
 ## Tóm tắt
 
-Cú pháp cơ bản để tạo class trông như sau:
+Cú pháp class cơ bản trông như sau:
 
 ```js
 class MyClass {
-<<<<<<< HEAD
   prop = value; // thuộc tính (trường)
-=======
-  prop = value; // property
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
   constructor(...) { // constructor
     // ...
@@ -405,15 +416,11 @@ class MyClass {
   get something(...) {} // phương thức getter
   set something(...) {} // phương thức setter
 
-<<<<<<< HEAD
-  [Symbol.iterator]() {} // phương thức computed, phương thức symbol
-=======
-  [Symbol.iterator]() {} // method with computed name (symbol here)
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+  [Symbol.iterator]() {} // phương thức với tên được tính toán (ở đây là symbol)
   // ...
 }
 ```
 
-`MyClass` thực ra là một hàm (được lấy từ `constructor`), trong khi đó các phương thức, getter và setter được ghi vào `MyClass.prototype`.
+`MyClass` về mặt kỹ thuật là một hàm (mà chúng ta cung cấp dưới dạng `constructor`), trong khi các phương thức, getter và setter được ghi vào `MyClass.prototype`.
 
-Trong bài sau, chúng ta sẽ học thêm về class, gồm thừa kế và các tính năng khác.
+Trong các chương sau, chúng ta sẽ học thêm về class, gồm sự kế thừa và các tính năng khác.

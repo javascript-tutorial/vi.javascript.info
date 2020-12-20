@@ -1,44 +1,44 @@
+# Các cờ và bộ mô tả của thuộc tính
 
-# Các cờ và descriptor
+Như chúng ta đã biết, đối tượng có thể lưu các thuộc tính.
 
-Như ta đã biết, đối tượng có thể lưu các thuộc tính.
-
-Đến lúc này, chúng ta chỉ biết chúng là một cặp "key-value" (phương thức là thuộc tính có `value` là hàm). Nhưng thuộc tính và phương thức của đối tượng thực sự linh hoạt và mạnh mẽ hơn nhiều.
+Cho đến nay, một thuộc tính là một cặp "khóa-giá trị" đơn giản đối với chúng ta. Nhưng một thuộc tính của đối tượng thực sự là một thứ linh hoạt và mạnh mẽ hơn.
 
 Trong bài này, chúng ta sẽ học về các cấu hình bổ sung cho thuộc tính, và trong bài tiếp theo là cách để biến chúng thành các hàm getter và setter.
 
 ## Các "cờ" của thuộc tính
 
-Các thuộc tính, ngoài giá trị `value` còn có ba đặc tính đặc biệt khác gọi là ba "cờ" hay "flag", đó là:
+Các thuộc tính của đối tượng, ngoài giá trị **`value`** còn có ba đặc tính đặc biệt khác (còn gọi là "cờ" hay "flag"):
 
-- **`writable`** -- nếu là `true`, thì giá trị chuộc tính có thể thay đổi, nếu không nó chỉ có thể đọc (read-only).
-- **`enumerable`** -- nếu là `true`, thì thuộc tính được liệt kê trong các vòng lặp.
-- **`configurable`** -- nếu là `true`, thì có thể xóa thuộc tính và sửa lại cờ của nó.
+- **`writable`** -- nếu là `true`, giá trị có thể được thay đổi, nếu không thì nó ở chế độ chỉ đọc.
+- **`enumerable`** -- nếu là `true`, thì được liệt kê trong các vòng lặp, nếu không thì không được liệt kê.
+- **`configurable`** -- nếu là `true`, thuộc tính có thể bị xóa và các cờ này có thể được sửa đổi, nếu không thì không.
 
 Chúng ta chưa từng thấy các cờ này, bởi thông thường chúng không hiện ra. Khi chúng ta tạo một thuộc tính theo cách thông thường, tất cả các cờ đều là `true`. Nhưng chúng ta cũng có thể thay đổi chúng bất cứ lúc nào.
 
 Trước tiên, cùng xem cách để lấy các cờ trên:
 
-Phương thức [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor) cho phép lấy *toàn bộ* thông tin của một thuộc tính (gồm các cờ và giá trị).
+Phương thức [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor) cho phép lấy *toàn bộ* thông tin của một thuộc tính.
 
 Cú pháp là:
+
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 ```
 
 `obj`
-: Là đối tượng chứa thuộc tính.
+: Đối tượng để lấy thông tin.
 
 `propertyName`
-: Là tên thuộc tính.
+: Tên thuộc tính.
 
-Giá trị trả về là một đối tượng chứa giá trị và tất cả các cờ của thuộc tính. Đối tượng này còn được gọi là "property desciptor" (bộ mô tả thuộc tính) hay ngắn gọn là **descriptor**.
+Giá trị trả về là một đối tượng gọi là "property desciptor" (bộ mô tả thuộc tính): nó chứa giá trị và tất cả các cờ của thuộc tính.
 
 Ví dụ:
 
 ```js run
 let user = {
-  name: "Hùng"
+  name: "John"
 };
 
 let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
@@ -46,7 +46,7 @@ let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 alert( JSON.stringify(descriptor, null, 2 ) );
 /* property descriptor:
 {
-  "value": "Hùng",
+  "value": "John",
   "writable": true,
   "enumerable": true,
   "configurable": true
@@ -54,7 +54,7 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-Để thay đổi descriptor, chúng ta sử dụng [Object.defineProperty](mdn:js/Object/defineProperty).
+Để thay đổi các cờ, chúng ta có thể sử dụng [Object.defineProperty](mdn:js/Object/defineProperty).
 
 Cú pháp là:
 
@@ -63,25 +63,21 @@ Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 `obj`, `propertyName`
-<<<<<<< HEAD
-: Đối tượng và tên thuộc tính cần thay đổi.
-=======
-: The object and its property to apply the descriptor.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+: Đối tượng và thuộc tính cần áp dụng descriptor.
 
 `descriptor`
-: Đối tượng "descriptor" sử dụng.
+: Đối tượng descriptor dùng để áp dụng.
 
-Nếu thuộc tính đã tồn tại, `defineProperty` cập nhật lại descriptor của nó. Nếu không, thuộc tính được tạo với giá trị và cờ được cung cấp bởi `descriptor`. Khi thuộc tính được tạo theo cách này, các cờ không được cung cấp sẽ nhận giá trị mặc định là `false`.
+Nếu thuộc tính đã tồn tại, `defineProperty` cập nhật lại các cờ của nó. Nếu không, nó tạo thuộc tính với giá trị và cờ được cung cấp bởi `descriptor`; trong tình huống đó, nếu một cờ không được cung cấp, nó được giả định có giá trị là `false`.
 
-Ví dụ, thuộc tính `name` được tạo với tất cả các cờ là `false`:
+Ví dụ, thuộc tính `name` được tạo với tất cả các cờ là sai:
 
 ```js run
 let user = {};
 
 *!*
 Object.defineProperty(user, "name", {
-  value: "Hùng"
+  value: "John"
 });
 */!*
 
@@ -90,7 +86,7 @@ let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 alert( JSON.stringify(descriptor, null, 2 ) );
 /*
 {
-  "value": "Hùng",
+  "value": "John",
 *!*
   "writable": false,
   "enumerable": false,
@@ -100,17 +96,17 @@ alert( JSON.stringify(descriptor, null, 2 ) );
  */
 ```
 
-So sánh nó với cách tạo `user.name` thông thường ở ví dụ trước: tất cả các cờ đều `false`. Nếu muốn các thuộc tính được tạo như bình thường chúng ta nên cài đặt tất cả cờ là `true` trong `descriptor`.
+So sánh nó với `user.name` "được tạo bình thường" ở trên: bây giờ tất cả các cờ đều là sai. Nếu đó không phải là những gì chúng ta muốn thì tốt hơn chúng ta nên đặt chúng thành `true` trong `descriptor`.
 
-Bây giờ, cùng xem các cờ có tác dụng gì bởi các ví dụ.
+Bây giờ, cùng xem các cờ có tác dụng gì qua ví dụ.
 
-## Thuộc tính "chỉ đọc"
+## Không thể ghi
 
-Để tạo thuộc tính chỉ đọc ta đặt cờ `writable` là `false`:
+Hãy làm cho `user.name` không thể ghi (không thể gán lại) bằng cách thay đổi cờ `writable`:
 
 ```js run
 let user = {
-  name: "Hùng"
+  name: "John"
 };
 
 Object.defineProperty(user, "name", {
@@ -120,84 +116,57 @@ Object.defineProperty(user, "name", {
 });
 
 *!*
-<<<<<<< HEAD
-user.name = "Mạnh"; // Lỗi: Không thể gán cho thuộc tính chỉ đọc 'name'...
-=======
-user.name = "Pete"; // Error: Cannot assign to read only property 'name'
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+user.name = "Pete"; // Lỗi: Không thể gán cho thuộc tính chỉ đọc 'name'
 */!*
 ```
 
-Lúc này không thể thay đổi giá trị của thuộc tính nữa trừ khi đặt lại `writable` thành `true` bằng `defineProperty` một lần nữa.
+Giờ đây, không ai có thể thay đổi tên user của chúng ta, trừ khi họ áp dụng `defineProperty` của chính họ để ghi đè lên của chúng ta.
 
-<<<<<<< HEAD
 ```smart header="Lỗi chỉ xuất hiện trong chế độ nghiêm ngặt"
-Nếu không sử dụng chế độ nghiệm ngặt (`"use strict"`) sẽ không có lỗi xảy ra khi thay đổi giá trị của thuộc tính chỉ đọc. Nhưng hành động này vẫn không thể thực hiện thành công.
-=======
-```smart header="Errors appear only in strict mode"
-In the non-strict mode, no errors occur when writing to read-only properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
->>>>>>> be342e50e3a3140014b508437afd940cd0439ab7
+Trong chế độ không nghiêm ngặt, không có lỗi nào xảy ra khi ghi vào các thuộc tính không thể ghi và tương tự. Nhưng thao tác vẫn không thành công. Các hành động vi phạm cờ đơn giản là ngấm ngầm bị bỏ qua trong chế độ không nghiêm ngặt.
 ```
 
-<<<<<<< HEAD
-Cũng như trên, nhưng đây là trường hợp thuộc tính không tồn tại:
-=======
-Here's the same example, but the property is created from scratch:
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Đây là ví dụ tương tự, nhưng thuộc tính được tạo từ đầu:
 
 ```js run
 let user = { };
 
 Object.defineProperty(user, "name", {
 *!*
-<<<<<<< HEAD
-  value: "Hùng",
-  // đặt các cờ khác là true
-=======
   value: "John",
-  // for new properties need to explicitly list what's true
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+  // đối với các thuộc tính mới, chúng ta cần liệt kê rõ ràng những gì là true
   enumerable: true,
   configurable: true
 */!*
 });
 
-<<<<<<< HEAD
-alert(user.name); // Hùng
-user.name = "Ngọc"; // Lỗi
-```
-
-
-## Thuộc tính "không liệt kê"
-=======
 alert(user.name); // John
 user.name = "Pete"; // Error
 ```
 
-## Non-enumerable
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+## Không thể liệt kê
 
-Giờ thay đổi phương thức `toString` trong `user`.
+Bây giờ, hãy thêm một `toString` tùy chỉnh vào `user`.
 
-Bình thường, thuộc tính `toString` có sẵn của các đối tượng là thuộc tính không liệt kê và không xuất hiện trong vòng lặp `for..in`. Nhưng nếu ta tự tạo phương thức `toString`, thì mặc định nó lại xuất hiện trong `for..in` như minh họa sau:
+Thông thường, `toString` có sẵn cho các đối tượng là không thể liệt kê được, nó không hiển thị trong `for..in`. Nhưng nếu chúng ta thêm một `toString` của riêng mình, thì theo mặc định, nó sẽ hiển thị trong `for..in`, như thế này:
 
 ```js run
 let user = {
-  name: "Hùng",
+  name: "John",
   toString() {
     return this.name;
   }
 };
 
-// Mặc định, cả hai thuộc tính đều được liệt kê
+// Mặc định, cả hai thuộc tính của chúng ta đều được liệt kê
 for (let key in user) alert(key); // name, toString
 ```
 
-Nếu không muốn một thuộc tính nào đó được liệt kê, chúng ta đặt cờ `enumerable` là `false`. Sau đó nó không xuất hiện trong vòng lặp `for..in` nữa, giống hệt như phương thức `toString` có sẵn:
+Nếu không thích, chúng ta có thể đặt `enumerable:false`. Sau đó, nó sẽ không xuất hiện trong vòng lặp `for..in`, giống như những thuộc tính có sẵn:
 
 ```js run
 let user = {
-  name: "Hùng",
+  name: "John",
   toString() {
     return this.name;
   }
@@ -210,7 +179,7 @@ Object.defineProperty(user, "toString", {
 });
 
 *!*
-// Giờ toString biến mất
+// Giờ toString của chúng ta biến mất
 */!*
 for (let key in user) alert(key); // name
 ```
@@ -221,13 +190,13 @@ Các thuộc tính không liệt kê cũng bị loại khỏi `Object.keys`:
 alert(Object.keys(user)); // name
 ```
 
-## Thuộc tính "không thể cấu hình"
+## Không thể cấu hình
 
-Cờ không thể cấu hình (`configurable:false`) thường được dùng cho các đối tượng và thuộc tính có sẵn.
+Cờ không thể cấu hình (`configurable:false`) đôi khi được đặt trước cho các đối tượng và thuộc tính có sẵn.
 
-Một thuộc tính *không thể cấu hình* sẽ không thể xóa được và không thể thay đổi cờ được.
+Một thuộc tính không thể cấu hình sẽ không thể bị xóa.
 
-Ví dụ, `Math.PI` là thuộc tính chỉ đọc, không thể cấu hình, không liệt kê:
+Ví dụ, `Math.PI` không thể ghi, không thể liệt kê và không thể cấu hình:
 
 ```js run
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
@@ -242,40 +211,63 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 }
 */
 ```
-Cho nên lập trình viên không thể xóa cũng như thay đổi giá trị `Math.PI`, cũng không có cách nào khiến nó xuất hiện trong vòng lặp:
+
+Cho nên lập trình viên không thể thay đổi giá trị `Math.PI` hoặc ghi đè nó:
 
 ```js run
 Math.PI = 3; // Lỗi
 
-// delete Math.PI cũng không làm việc
+// xóa Math.PI cũng không có kết quả
 ```
 
-Một khi làm cho một thuộc tính thành không thể cấu hình, không có cách nào khôi phục nữa bởi `defineProperty` không làm việc với chúng.
+Làm cho một thuộc tính không thể cấu hình là con đường một chiều. Chúng ta không thể thay đổi nó trở lại với `defineProperty`.
 
- Ví dụ sau, chúng ta khiến cho `user.name` thành một hằng bị "niêm phong vĩnh viễn":
+Nói một cách chính xác, khả năng không thể cấu hình áp đặt một số hạn chế đối với `defineProperty`:
+
+1. Không thể thay đổi cờ `configurable`.
+2. Không thể thay đổi cờ `enumerable`.
+3. Không thể thay đổi `writable: false` thành `true` (the other way round works).
+4. Không thể thay đổi `get/set` cho một thuộc tính truy cập (nhưng có thể gán chúng nếu vắng mặt).
+
+**Ý tưởng của "configurable: false" là để ngăn chặn các thay đổi của các cờ thuộc tính và việc xóa nó, trong khi cho phép thay đổi giá trị của nó.**
+
+Ở đây `user.name` là không thể cấu hình, nhưng chúng ta vẫn có thể thay đổi nó (vì nó có thể ghi):
 
 ```js run
-let user = { };
+let user = {
+  name: "John"
+};
 
 Object.defineProperty(user, "name", {
-  value: "Hùng",
+  configurable: false
+});
+
+user.name = "Pete"; // hoạt động tốt
+delete user.name; // Lỗi
+```
+
+Và ở đây, chúng ta đặt `user.name` thành hằng số "bị niêm phong mãi mãi":
+
+```js run
+let user = {
+  name: "John"
+};
+
+Object.defineProperty(user, "name", {
   writable: false,
   configurable: false
 });
 
-*!*
-// không thể thay đổi user.name và cờ của nó
-// tất cả đều không làm việc:
-//   user.name = "Mạnh"
-//   delete user.name
-//   defineProperty(user, "name", ...)
-Object.defineProperty(user, "name", {writable: true}); // Lỗi
-*/!*
+// không thể thay đổi user.name và các cờ của nó
+// tất cả đều không có kết quả:
+user.name = "Pete";
+delete user.name;
+Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
 ## Object.defineProperties
 
-Phương thức [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) cho phép định nghĩa descriptor cho hàng loạt thuộc tính cùng lúc.
+Phương thức [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) cho phép định nghĩa hàng loạt thuộc tính cùng lúc.
 
 Cú pháp là:
 
@@ -291,25 +283,25 @@ Ví dụ:
 
 ```js
 Object.defineProperties(user, {
-  name: { value: "Hùng", writable: false },
-  surname: { value: "Phùng", writable: false },
+  name: { value: "John", writable: false },
+  surname: { value: "Smith", writable: false },
   // ...
 });
 ```
 
-Nghĩa là ta có thể cài đặt "property descriptor" cho nhiều thuộc tính cùng lúc.
+Vì vậy, chúng ta có thể thiết lập nhiều thuộc tính cùng lúc.
 
 ## Object.getOwnPropertyDescriptors
 
-Phương thức [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors) cho phép lấy tất cả các descriptor của tất cả các thuộc tính.
+Để lấy tất cả các property descriptor cùng lúc, chúng ta có thể sử dụng phương thức [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors).
 
-Kết hợp với `Object.defineProperties` ta có thể nhân bản đối tượng bao gồm cả các cờ:
+Cùng với `Object.defineProperties`, nó có thể được sử dụng như một cách "nhận biết cờ" để nhân bản một đối tượng:
 
 ```js
 let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
 ```
 
-Thường khi nhân bản một đối tượng, chúng ta sử dụng lệnh gán để sao chép các thuộc tính:
+Thường khi nhân bản một đối tượng, chúng ta sử dụng lệnh gán để sao chép các thuộc tính như thế này:
 
 ```js
 for (let key in user) {
@@ -317,33 +309,34 @@ for (let key in user) {
 }
 ```
 
-...Nhưng nó không sao chép được cờ. Vậy nên muốn nhân bản "tốt hơn" thì nên dùng `Object.defineProperties`.
+...Nhưng nó không sao chép được cờ. Vậy nên nếu chúng ta muốn một bản sao "tốt hơn" thì nên dùng `Object.defineProperties`.
 
-Một khác biệt nữa là `for..in` bỏ qua các thuộc tính symbol, nhưng `Object.getOwnPropertyDescriptors` trả về tất cả descriptor của mọi thuộc tính kể cả symbol.
+Một khác biệt nữa là `for..in` bỏ qua các thuộc tính symbol, nhưng `Object.getOwnPropertyDescriptors` trả về *tất cả* descriptor của mọi thuộc tính kể cả symbol.
 
-## Niêm phong đối tượng
+## Niêm phong toàn đối tượng
 
-Sử dụng property descriptors chỉ giúp ta niêm phong từng thuộc tính.
+Sử dụng property descriptors chỉ giúp chúng ta niêm phong từng thuộc tính.
 
-Có một số phương thức giúp ta thực hiện trên toàn đối tượng:
+Có một số phương thức giúp chúng ta thực hiện trên toàn đối tượng:
 
 [Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
 : Cấm thêm các thuộc tính mới cho đối tượng.
 
 [Object.seal(obj)](mdn:js/Object/seal)
-: Cấm thêm/xóa các thuộc tính. Đặt `configurable: false` cho mọi thuộc tính.
+: Cấm thêm/xóa các thuộc tính. Đặt `configurable: false` cho mọi thuộc tính hiện có.
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
-: Cấm thêm/xóa/sửa các thuộc tính. Đặt `configurable: false, writable: false` cho mọi thuộc tính.
-Và cũng có các phương thức kiểm tra:
+: Cấm thêm/xóa/sửa các thuộc tính. Đặt `configurable: false, writable: false` cho mọi thuộc tính hiện có.
+
+Và cũng có các phương thức kiểm tra cho chúng:
 
 [Object.isExtensible(obj)](mdn:js/Object/isExtensible)
-: Trả về `false` nếu không thể thêm thuộc tính cho đối tượng, nếu không trả về `true`.
+: Trả về `false` nếu việc thêm thuộc tính bị cấm, nếu không trả về `true`.
 
 [Object.isSealed(obj)](mdn:js/Object/isSealed)
-: Trả về `true` nếu không thể thêm/xóa thuộc tính, và mọi thuộc tính hiện có đều có cờ `configurable: false`.
+: Trả về `true` nếu việc thêm/xóa thuộc tính bị cấm, và mọi thuộc tính hiện có đều có cờ `configurable: false`.
 
 [Object.isFrozen(obj)](mdn:js/Object/isFrozen)
-: Trả về `true` nếu không thể thêm/xóa/sửa thuộc tính, và tất cả các thuộc tính hiện có đều có cờ `configurable: false, writable: false`.
+: Trả về `true` nếu việc thêm/xóa/sửa thuộc tính bị cấm, và tất cả các thuộc tính hiện có đều có cờ `configurable: false, writable: false`.
 
-Các phương thức này rất ít được sử dụng trong thực tế.
+Các phương thức này hiếm khi được sử dụng trong thực tế.
