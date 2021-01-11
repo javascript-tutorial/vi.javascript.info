@@ -51,7 +51,7 @@ if (true) {
 }
 
 *!*
-alert(test); // Error: test is not defined
+alert(test); // ReferenceError: test is not defined
 */!*
 ```
 
@@ -81,7 +81,7 @@ function sayHi() {
 }
 
 sayHi();
-alert(phrase); // Error: phrase is not defined
+alert(phrase); // ReferenceError: phrase is not defined
 ```
 
 Như ta thấy, `var` "đi xuyên qua" `if`, `for` hay các khối lệnh khác. Đó là bởi vì lúc trước Javascripts chưa tồn tại khái niệm Lexical Environments. Và `var` là kết quả của việc đó .
@@ -230,7 +230,7 @@ Biểu thức Hàm được bao bọc bằng dấu ngoặc đơn `(function {...
 
 ```js run
 // Cố gắng khai báo và gọi ngay một hàm
-function() { // <-- Lỗi: Câu lệnh hàm yêu cầu tên hàm
+function() { // <-- SyntaxError: function statement requires a name
 
   var message = "Xin chào";
 
