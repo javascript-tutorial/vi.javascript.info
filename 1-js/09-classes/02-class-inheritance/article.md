@@ -149,8 +149,13 @@ class Rabbit extends Animal {
 
 let rabbit = new Rabbit("Thỏ trắng");
 
+<<<<<<< HEAD
 rabbit.run(5); // Thỏ trắng chạy với tốc độ 5.
 rabbit.stop(); // Thỏ trắng đứng yên. Thỏ trắng ẩn nấp!
+=======
+rabbit.run(5); // White Rabbit runs with speed 5.
+rabbit.stop(); // White Rabbit stands still. White Rabbit hides!
+>>>>>>> 468e3552884851fcef331fbdfd58096652964b5f
 ```
 
 Giờ `Rabbit` có phương thức `stop` mà gọi `super.stop()` của cha trong quá trình xử lý.

@@ -51,7 +51,7 @@ if (true) {
 }
 
 *!*
-alert(test); // Error: test is not defined
+alert(test); // ReferenceError: test is not defined
 */!*
 ```
 
@@ -81,7 +81,7 @@ function sayHi() {
 }
 
 sayHi();
-alert(phrase); // Error: phrase is not defined
+alert(phrase); // ReferenceError: phrase is not defined
 ```
 
 Như ta thấy, `var` "đi xuyên qua" `if`, `for` hay các khối lệnh khác. Đó là bởi vì lúc trước Javascripts chưa tồn tại khái niệm Lexical Environments. Và `var` là kết quả của việc đó .
@@ -229,8 +229,13 @@ Tại đây, một Biểu thức Hàm được tạo và ngay lập tức đư�
 Biểu thức Hàm được bao bọc bằng dấu ngoặc đơn `(function {...})`, bởi vì khi công cụ JavaScript gặp `"function"` trong mã chính, nó sẽ hiểu nó là phần bắt đầu của một Khai báo Hàm. Nhưng Khai báo Hàm phải có tên, vì vậy loại mã này sẽ gây ra lỗi:
 
 ```js run
+<<<<<<< HEAD
 // Cố gắng khai báo và gọi ngay một hàm
 function() { // <-- Lỗi: Câu lệnh hàm yêu cầu tên hàm
+=======
+// Tries to declare and immediately call a function
+function() { // <-- SyntaxError: Function statements require a function name
+>>>>>>> 468e3552884851fcef331fbdfd58096652964b5f
 
   var message = "Xin chào";
 
