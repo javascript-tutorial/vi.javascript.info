@@ -245,7 +245,11 @@ Lời gọi đến `mul.bind(null, 2)` tạo ra một hàm mới `double` mà ch
 
 Đó được gọi là [ứng dụng hàm một phần] (https://en.wikipedia.org/wiki/Partial_application) - chúng ta tạo một hàm mới bằng cách cố định một số tham số của hàm hiện có.
 
+<<<<<<< HEAD
 Xin lưu ý rằng chúng ta không thực sự sử dụng `this` ở đây. Nhưng `bind` yêu cầu nó, vì vậy chúng ta phải để vào một cái gì đó như `null`.
+=======
+Please note that we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 Hàm `triple` trong đoạn mã dưới đây tăng gấp ba lần giá trị:
 

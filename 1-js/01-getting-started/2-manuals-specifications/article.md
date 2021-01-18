@@ -14,20 +14,32 @@ Một phiên bản đặc tả mới được phát hành hàng năm. Giữa cá
 
 Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các thông số kỹ thuật khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
 
+<<<<<<< HEAD
 ## Cẩm nang
+=======
+Also, if you're in developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 - **Tài liệu tham khảo Javascript MDN (Mozilla)** là một cẩm nang hướng dẫn với các ví dụ và thông tin khác. Nó rất tuyệt để lấy thông tin chuyên sâu về các hàm, phương thức riêng lẻ của ngôn ngữ v.v.
 
+<<<<<<< HEAD
     Bạn có thể tìm thấy nó tại <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
+=======
+- **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
     Mặc dù, tốt nhất bạn nên sử dụng tìm kiếm trên Internet. Chỉ cần sử dụng "MDN [term]" trong truy vấn, ví dụ: <https://google.com/search?q=MDN+parseInt> để tìm kiếm hàm `parseInt`.
 
+<<<<<<< HEAD
 
 - **MSDN** – Cẩm nang của Microsoft với nhiều thông tin, bao gồm Javascript (thường được gọi là JScript). Nếu ai cần gì đó cụ thể cho Internet Explorer, tốt hơn nên đến đó: <http://msdn.microsoft.com/>.
 
     Ngoài ra, chúng ta có thể tìm kiếm trên internet với các cụm từ như "RegExp MSDN" hoặc "RegExp MSDN jscript".
 
 ## Bảng tương thích
+=======
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
+>>>>>>> 3a0b3f4e31d4c4bbe90ed4c9c6e676a888ad8311
 
 JavaScript là một ngôn ngữ đang phát triển, các tính năng mới được bổ sung thường xuyên.
 
