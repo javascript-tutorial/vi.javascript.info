@@ -91,7 +91,7 @@ Có ít nhất *ba* điều tuyệt vời ở Javascript:
 
 Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều trên.
 
-Đó là cách khiến cho Javascript khác biệt. Đó là cách tại sao nó là công cụ phổ biến nhất để tạo giao diện cho trình duyệt.
+Đó là những thứ khiến cho Javascript trở nên độc đáo. Đó là lí do tại sao nó là công cụ phổ biến nhất để tạo giao diện trình duyệt.
 
 Điều đó nói rằng, JavaScript cũng cho phép tạo các ứng dụng di động, máy chủ v.v.
 
@@ -112,6 +112,7 @@ Có thể kể đến một số ngôn ngữ:
 - [Flow](http://flow.org/) cũng thêm một vài cách gõ dữ liệu, nhưng theo một cách khác. Phát triển bởi Facebook.
 - [Dart](https://www.dartlang.org/) là một ngôn ngữ độc lập có engine riêng và có thể chạy trong môi trường khác ngoài trình duyệt, nó cũng có thể được dịch sang Javascript. Phát triển bởi Google.
 - [Brython](https://brython.info/) là một trình chuyển tiếp Python sang JavaScript cho phép viết các ứng dụng bằng Python thuần túy mà không cần JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) là một ngôn ngữ lập trình hiện đại, ngắn gọn và an toàn, mà có thể nhắm đến trình duyệt hoặc Node.
 
 Sẽ có nhiều hơn số kể trên. Dĩ nhiên, ngay cả khi chúng ta sử dụng một trong những ngôn ngữ đó, chúng ta cũng nên biết Javascript để thực sự hiểu chúng ta đang làm gì.
 
