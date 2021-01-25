@@ -52,7 +52,11 @@ rabbit.run(5); // White Rabbit chạy với tốc độ 5.
 rabbit.hide(); // White Rabbit ẩn nấp!
 ```
 
+<<<<<<< HEAD
 Đối tượng của class `Rabbit` có quyền truy cập đến cả các phương thức của `Rabbit` như `rabbit.hide()`, và cả các phương thức của `Animal` như `rabbit.run()`.
+=======
+Object of `Rabbit` class have access both to `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 Ở bên trong, từ khóa `extends` hoạt động bằng cách sử dụng cơ chế nguyên mẫu quen thuộc. Nó đặt `Rabbit.prototype.[[Prototype]]` thành `Animal.prototype`. Vì thế, nếu một phương thức không được tìm thấy trong `Rabbit.prototype`, JavaScript sẽ lấy nó từ `Animal.prototype`.
 

@@ -48,7 +48,13 @@ let user = new User("John");
 user.sayHi();
 ```
 
+<<<<<<< HEAD
 Khi `new User("John")` được gọi:
+=======
+When `new User("John")` is called:
+1. A new object is created.
+2. The `constructor` runs with the given argument and assigns it to `this.name`.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 1. Một đối tượng mới được tạo ra.
 2. Phương thức `constructor` chạy với đối số đã cho và gán `this.name` cho nó.
