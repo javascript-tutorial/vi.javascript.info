@@ -51,7 +51,7 @@ user.sayHi();
 Khi `new User("John")` được gọi:
 
 1. Một đối tượng mới được tạo ra.
-2. Phương thức `constructor` chạy với đối số đã cho và gán `this.name` cho nó.
+2. Phương thức `constructor` chạy với đối số đã cho và gán nó cho `this.name`.
 
 ...Sau đó chúng ta có thể gọi các phương thức của đối tượng, chẳng hạn như `user.sayHi`.
 
