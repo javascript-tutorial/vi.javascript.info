@@ -12,20 +12,16 @@ Một phiên bản đặc tả mới được phát hành hàng năm. Giữa cá
 
 Để đọc về những tính năng mới nhất, bao gồm cả các tính năng gần như tiêu chuẩn (được gọi là "stage-3") xem tại: <https://github.com/tc39/proposals>.
 
-Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các thông số kỹ thuật khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
+Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các đặc tả khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
 
 ## Cẩm nang
 
-- **Tài liệu tham khảo Javascript MDN (Mozilla)** là một cẩm nang hướng dẫn với các ví dụ và thông tin khác. Nó rất tuyệt để lấy thông tin chuyên sâu về các hàm, phương thức riêng lẻ của ngôn ngữ v.v.
+- **Tài liệu tham khảo Javascript MDN (Mozilla)** là cẩm nang hướng dẫn quan trọng nhất với các ví dụ và thông tin khác. Nó rất tuyệt để lấy thông tin chuyên sâu về các hàm, phương thức riêng lẻ của ngôn ngữ v.v.
 
     Bạn có thể tìm thấy nó tại <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
-    Mặc dù, tốt nhất bạn nên sử dụng tìm kiếm trên Internet. Chỉ cần sử dụng "MDN [term]" trong truy vấn, ví dụ: <https://google.com/search?q=MDN+parseInt> để tìm kiếm hàm `parseInt`.
 
-
-- **MSDN** – Cẩm nang của Microsoft với nhiều thông tin, bao gồm Javascript (thường được gọi là JScript). Nếu ai cần gì đó cụ thể cho Internet Explorer, tốt hơn nên đến đó: <http://msdn.microsoft.com/>.
-
-    Ngoài ra, chúng ta có thể tìm kiếm trên internet với các cụm từ như "RegExp MSDN" hoặc "RegExp MSDN jscript".
+Dầu vậy, thông thường tốt nhất là sử dụng tìm kiếm trên Internet. Chỉ cần sử dụng "MDN [term]" trong truy vấn, ví dụ: <https://google.com/search?q=MDN+parseInt> để tìm kiếm hàm `parseInt`.
 
 ## Bảng tương thích
 
