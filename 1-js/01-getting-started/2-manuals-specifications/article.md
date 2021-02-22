@@ -14,7 +14,11 @@ Một phiên bản đặc tả mới được phát hành hàng năm. Giữa cá
 
 Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các đặc tả khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
 
+<<<<<<< HEAD
 ## Cẩm nang
+=======
+Also, if you're developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 - **Tài liệu tham khảo Javascript MDN (Mozilla)** là cẩm nang hướng dẫn quan trọng nhất với các ví dụ và thông tin khác. Nó rất tuyệt để lấy thông tin chuyên sâu về các hàm, phương thức riêng lẻ của ngôn ngữ v.v.
 
