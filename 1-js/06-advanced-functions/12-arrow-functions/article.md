@@ -51,8 +51,13 @@ let group = {
   showList() {
 *!*
     this.students.forEach(function(student) {
+<<<<<<< HEAD
       // Lỗi: Không thể truy cập thuộc tính 'title' của undefined
       alert(this.title + ': ' + student)
+=======
+      // Error: Cannot read property 'title' of undefined
+      alert(this.title + ': ' + student);
+>>>>>>> e01998baf8f85d9d6cef9f1add6c81b901f16d69
     });
 */!*
   }
@@ -87,7 +92,7 @@ Ví dụ: `defer(f, ms)` nhận một hàm và trả về một hàm bao xung qu
 ```js run
 function defer(f, ms) {
   return function() {
-    setTimeout(() => f.apply(this, arguments), ms)
+    setTimeout(() => f.apply(this, arguments), ms);
   };
 }
 

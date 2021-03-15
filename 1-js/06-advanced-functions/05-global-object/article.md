@@ -26,7 +26,11 @@ alert(window.gVar); // 5 (trở thành thuộc tính của đối tượng toàn
 
 Tác dụng tương tự với các khai báo hàm (các câu lệnh có từ khóa `function` trong dòng mã chính, không phải biểu thức hàm).
 
+<<<<<<< HEAD
 Xin đừng dựa vào đó! Hành vi này tồn tại vì lý do tương thích. Các tập lệnh hiện đại sử dụng [JavaScript modules](info:modules) nơi điều đó không xảy ra được.
+=======
+Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such a thing doesn't happen.
+>>>>>>> e01998baf8f85d9d6cef9f1add6c81b901f16d69
 
 Nếu chúng ta đã dùng `let` thay thế, điều đó đã không xảy ra:
 
