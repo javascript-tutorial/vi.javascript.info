@@ -108,8 +108,13 @@ alert(typeof User); // function
 // ...hoặc chính xác hơn, là phương thức constructor
 alert(User === User.prototype.constructor); // true
 
+<<<<<<< HEAD
 // Các phương thức nằm trong User.prototype, ví dụ:
 alert(User.prototype.sayHi); // alert(this.name);
+=======
+// The methods are in User.prototype, e.g:
+alert(User.prototype.sayHi); // the code of the sayHi method
+>>>>>>> 7b76185892aa9798c3f058256aed44a9fb413cc3
 
 // có đúng hai phương thức nằm trong nguyên mẫu
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
