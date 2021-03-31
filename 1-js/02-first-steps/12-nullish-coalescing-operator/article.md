@@ -1,93 +1,96 @@
-# Nullish coalescing operator '??'
+# Toán tử nullish coalescing '??'
 
 [recent browser="new"]
 
-Here, in this article, we'll say that an expression is "defined" when it's neither `null` nor `undefined`.
+Toán tử nullish coalescing được viết dưới dạng hai dấu hỏi `??`.
 
-The nullish coalescing operator is written as two question marks `??`.
+Do toán tử này coi `null` và `undefined` như nhau, chúng ta sẽ dùng một thuật ngữ đặc biệt ở bài này. Chúng ta sẽ nói rằng một biểu thức được coi là "được định nghĩa" khi nó không phải là `null` hoặc `undefined`.
 
-The result of `a ?? b` is:
-- if `a` is defined, then `a`,
-- if `a` isn't defined, then `b`.
+Kết quả của `a ?? b` là:
 
+- Nếu `a` được định nghĩa, trả về `a`,
+- Nếu `a` chưa được định nghĩa, trả về `b`.
 
-In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
+Nói một cách khác, `??` trả về đối số đầu tiên nếu nó không có giá trị `null/undefined`. Nếu không thì trả về đối số thứ hai.
 
-The nullish coalescing operator isn't anything completely new. It's just a nice syntax to get the first "defined" value of the two.
+Toán tử nullish coalescing không phải là hoàn toàn mới. Nó đơn thuần là một cú pháp ngắn gọn để lấy giá trị đầu tiên "được định nghĩa" trong hai giá trị.
 
-We can rewrite `result = a ?? b` using the operators that we already know, like this:
+Chúng ta có viết lại biểu thức `result = a ?? b` sử dụng toán tử khác mà chúng ta đã biết, như sau:
 
 ```js
-result = (a !== null && a !== undefined) ? a : b;
+result = a !== null && a !== undefined ? a : b;
 ```
 
-The common use case for `??` is to provide a default value for a potentially undefined variable.
+Giờ thì chắc bạn đã biết rõ toán tử `??` làm gì. Hãy xem có thể áp dụng toán tử này ở đâu.
 
-For example, here we show `Anonymous` if `user` isn't defined:
+Use case thường gặp để dùng toán tử `??` là để cung cấp một giá trị mặc định cho một biến số có khả năng là undefined.
+
+Ví dụ, ở đây chúng ta sẽ hiển thị `user` nếu như được định nghĩa, nếu không sẽ hiển thị `Ẩn danh`:
 
 ```js run
 let user;
 
-alert(user ?? "Anonymous"); // Anonymous
+alert(user ?? "Ẩn danh"); // Ẩn danh (user chưa được định nghĩa)
 ```
 
-Of course, if `user` had any value except `null/undefined`, then we would see it instead:
+Còn dưới đây là ví dụ với `user` được gán với một cái tên:
 
 ```js run
 let user = "John";
 
-alert(user ?? "Anonymous"); // John
+alert(user ?? "Ẩn danh"); // John (user đã được định nghĩa)
 ```
 
-We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
+Chúng ta cũng có thể dùng nhiều toán tử `??` để chọn giá trị đầu tiên trong một danh sách mà không có giá trị là `null/undefined`.
 
-Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be undefined, if the user decided not to enter a value.
+Ví dụ chúng ta có một dữ liệu của người dùng trong các biến `firstName`, `lastName` hoặc `nickName`. Tất cả đều có thể chưa được định nghĩa, nếu như người dùng quyết định không nhập vào giá trị.
 
-We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are undefined.
+Và chúng ta muốn hiển thị tên người dùng sử dụng một trong các biến này, hoặc hiển thị "Ẩn danh" nếu như tất cả đều chưa được định nghĩa.
 
-Let's use the `??` operator for that:
+Hãy sử dụng toán tử `??` cho trường hợp đó:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first defined value:
+// hiển thị giá trị được định nghĩa đầu tiên:
 *!*
-alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
+alert(firstName ?? lastName ?? nickName ?? "Ẩn danh"); // Supercoder
 */!*
 ```
 
-## Comparison with ||
+## So sánh với toán tử ||
 
-The OR `||` operator can be used in the same way as `??`, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
+Toán tử HOẶC `||` có thể được dùng theo cùng cách với `??`, như cách được mô tả ở [chương trước](info:logical-operators#or-finds-the-first-truthy-value).
 
-For example, in the code above we could replace `??` with `||` and still get the same result:
+Ví dụ, ở đoạn code phía trên chúng ta có thể thay thế `??` với `||` và vẫn đạt được cùng kết quả:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first truthy value:
+// hiển thị giá trị truthy đầu tiên:
 *!*
-alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
+alert(firstName || lastName || nickName || "Ẩn danh"); // Supercoder
 */!*
 ```
 
-The OR `||` operator exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+Về mặt lịch sử, toán tử HOẶC `||` có trước. Nó tồn tại từ khi Javascript được tạo ra, do vậy lập trình viên đã dùng chúng cho những việc trên từ rất lâu.
 
-On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
+Ngược lại, toán tử nullish coalescing `??` mới được thêm vào Javascript gần đây, và lý do là vì mọi người không thực sự hài lòng với toán tử `||`.
 
-The important difference between them is that:
-- `||` returns the first *truthy* value.
-- `??` returns the first *defined* value.
+Điểm khác biệt quan trọng giữa cả hai là:
 
-In other words, `||` doesn't distinguish between `false`, `0`, an empty string `""` and `null/undefined`. They are all the same -- falsy values. If any of these is the first argument of `||`, then we'll get the second argument as the result.
+- `||` trả về giá trị _truthy_ đầu tiên.
+- `??` trả về giá trị _được_ _định_ _nghĩa_ đầu tiên.
 
-In practice though, we may want to use default value only when the variable is `null/undefined`. That is, when the value is really unknown/not set.
+Nói một cách khác, `||` không phân biệt được giữa `false`, `0`, một chuỗi rỗng `""` và `null/undefined`. Chúng đều giống nhau - là các giá trị falsy. Nếu bất cứ giá trị nào trên đây là đối số đầu tiên của toán tử `||`, thì chúng ta sẽ có kết quả là đối số thứ hai.
 
-For example, consider this:
+Tuy nhiên trong thực tiễn, chúng ta thường sẽ chỉ muốn sử dụng giá trị mặc định chỉ khi giá trị là `null/undefined`. Đó là khi giá trị thực sự là không xác định/chưa được set.
+
+Ví dụ, như trường hợp sau:
 
 ```js run
 let height = 0;
@@ -96,71 +99,73 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-- The `height || 100` checks `height` for being a falsy value, and it really is.
-    - so the result is the second argument, `100`.
-- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
-    - so the result is `height` "as is", that is `0`.
+- Biểu thức `height || 100` kiểm tra xem `height` có phải là một giá trị falsy không, và đúng là nó có giá trị falsy.
+  - thế nên kết quả của `||` là đối số thứ hai, `100`.
+- Còn biểu thức `height ?? 100` kiểm tra xem `height` có phải là `null/undefined` hay không, và nó không phải,
+  - thế nên kết quả của biểu thức là `height`, tức là `0`.
 
-If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
+Trong thực tiễn, height là 0 thường là một giá trị hợp lệ và không nên thay thế bằng một giá trị mặc định. Vì thế ở đây sử dụng `??` là chính xác.
 
-## Precedence
+## Thứ tự thực hiện
 
-The precedence of the `??` operator is rather low: `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table). So `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+Thứ tự thực hiện cảu toán tử `??` gần ngang với `||`, chỉ thấp hơn một chút. Nó xếp thứ 5 trong [bảng MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table), trong khi `||` xếp thứ 6.
 
-So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
+Điều đó có nghĩa là, giống như `||`, toán tử nullish coaslescing `??` sẽ được đánh giá trước `=` và `?`, nhưng sau phần lớn các toán tử khác, ví dụ như `+`, `*`.
+
+Thế nên nếu chúng ta muốn sử dụng `??` trong một biểu thức với các toán tử khác, thì việc cho thêm ngoặc đơn nên được cân nhắc:
 
 ```js run
 let height = null;
 let width = null;
 
-// important: use parentheses
+// quan trọng: sử dụng ngoặc đơn
 let area = (height ?? 100) * (width ?? 50);
 
 alert(area); // 5000
 ```
 
-Otherwise, if we omit parentheses, then as `*` has the higher precedence than `??`, it would execute first, leading to incorrect results.
+Nếu không, nếu chúng ta bỏ qua ngoặc đơn ở đây, thì do `*` có thứ tự thực hiện cao hơn `??` nên sẽ được thực thi trước, dẫn đến kết quả không chính xác.
 
 ```js
-// without parentheses
+// khi không có ngoặc đơn
 let area = height ?? 100 * width ?? 50;
 
-// ...works the same as this (probably not what we want):
+// ... hoạt động tương đương như với dòng sau (có lẽ không như chúng ta mong muốn):
 let area = height ?? (100 * width) ?? 50;
 ```
 
-### Using ?? with && or ||
+### Sử dụng ?? với && hay ||
 
-Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||` operators, unless the precedence is explicitly specified with parentheses.
+Vì lý do an toàn, Javascript cấm sử dụng `??` chung với toán tử `&&` và `||`, trừ khi thứ tự thực hiện được chỉ rõ với ngoặc đơn.
 
-The code below triggers a syntax error:
+Dòng code dưới đây gây ra một syntax error (lỗi cú pháp):
 
 ```js run
 let x = 1 && 2 ?? 3; // Syntax error
 ```
 
-The limitation is surely debatable, but it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch to `??` from `||`.
+Hạn chế này có gây tranh cãi, tuy nhiên việc này được thêm vào đặc tả của ngôn ngữ với mong muốn tránh được sai lầm khi lập trình, khi mọi người bắt đầu chuyển từ `||` sang `??`.
 
-Use explicit parentheses to work around it:
+Sử dụng ngoặc đơn để xử lý tạm thời với vấn đề này:
 
 ```js run
 *!*
-let x = (1 && 2) ?? 3; // Works
+let x = (1 && 2) ?? 3; // Hoạt động
 */!*
 
 alert(x); // 2
 ```
 
-## Summary
+## Tổng kết
 
-- The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
+- Toán tử nullish coalescing `??` cung cấp một cách ngắn gọn để chọn giá trị đầu tiên "được định nghĩa" trong một danh sách.
 
-    It's used to assign default values to variables:
+  Nó được dùng để gán giá trị mặc định cho biến:
 
-    ```js
-    // set height=100, if height is null or undefined
-    height = height ?? 100;
-    ```
+  ```js
+  // set height=100, nếu height là null hoặc undefined
+  height = height ?? 100;
+  ```
 
-- The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
-- It's forbidden to use it with `||` or `&&` without explicit parentheses.
+- Toán tử `??` có thứ tự thực hiện rất thấp, chỉ cao hơn `?` và `=` một chút, do đó bạn nên cân nhắc thêm ngoặc đơn khi sử dụng nó trong một biểu thức.
+- Toán tử này không được phép dùng chung với toán tử `||` hoặc `&&` nếu không có ngoặc đơn được chỉ rõ.
