@@ -26,7 +26,7 @@ alert(window.gVar); // 5 (trở thành thuộc tính của đối tượng toàn
 
 Tác dụng tương tự với các khai báo hàm (các câu lệnh có từ khóa `function` trong dòng mã chính, không phải biểu thức hàm).
 
-Xin đừng dựa vào đó! Hành vi này tồn tại vì lý do tương thích. Các tập lệnh hiện đại sử dụng [JavaScript modules](info:modules) nơi điều đó không xảy ra được.
+Xin đừng dựa vào đó! Hành vi này tồn tại vì lý do tương thích. Các tập lệnh hiện đại sử dụng [JavaScript modules](info:modules) khiến điều đó không thể xảy ra.
 
 Nếu chúng ta đã dùng `let` thay thế, điều đó đã không xảy ra:
 

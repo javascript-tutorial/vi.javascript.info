@@ -124,7 +124,7 @@ alert( Article.publisher ); // Ilya Kantor
 Article.publisher = "Ilya Kantor";
 ```
 
-## Sự kế thừa các phương thức và thuộc tính tĩnh
+## Sự kế thừa các phương thức và thuộc tính tĩnh [#statics-and-inheritance]
 
 Các phương thức và thuộc tính tĩnh cũng được kế thừa.
 
