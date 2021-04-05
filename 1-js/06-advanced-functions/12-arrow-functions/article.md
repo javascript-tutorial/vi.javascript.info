@@ -52,7 +52,7 @@ let group = {
 *!*
     this.students.forEach(function(student) {
       // Lỗi: Không thể truy cập thuộc tính 'title' của undefined
-      alert(this.title + ': ' + student)
+      alert(this.title + ': ' + student);
     });
 */!*
   }
@@ -87,7 +87,7 @@ Ví dụ: `defer(f, ms)` nhận một hàm và trả về một hàm bao xung qu
 ```js run
 function defer(f, ms) {
   return function() {
-    setTimeout(() => f.apply(this, arguments), ms)
+    setTimeout(() => f.apply(this, arguments), ms);
   };
 }
 
