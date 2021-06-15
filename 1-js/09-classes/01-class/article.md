@@ -143,7 +143,11 @@ Kết quả của định nghĩa này là giống nhau. Vì vậy, thực sự c
 
 Dù vậy, vẫn có những khác biệt quan trọng.
 
+<<<<<<< HEAD
 1. Đầu tiên, một hàm tạo bởi `class` được gắn nhãn bởi một thuộc tính nội bộ đặc biệt `[[FunctionKind]]:"classConstructor"`. Vì vậy, nó không hoàn toàn giống với việc tạo theo cách thủ công.
+=======
+1. First, a function created by `class` is labelled by a special internal property `[[IsClassConstructor]]: true`. So it's not entirely the same as creating it manually.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     Ngôn ngữ JavaScript kiểm tra thuộc tính đó ở nhiều nơi. Ví dụ: không giống như một hàm thông thường, nó phải được gọi bằng `new`:
 

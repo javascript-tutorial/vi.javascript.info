@@ -64,7 +64,7 @@ Các giá trị số đặc biệt chính thức thuộc về kiểu "number". T
 
 Ta sẽ học được nhiều hơn về các số ở chương <info:number>.
 
-## BigInt
+## BigInt [#bigint-type]
 
 Trong JavaScript, loại "số" không thể biểu diễn cho các giá trị số nguyên lớn hơn <code>(2<sup>53</sup>-1)</code> (đó là 9007199254740991) hoặc nhỏ hơn <code>-(2<sup>53</sup>-1)</code> đối với số âm. Đó là một hạn chế kỹ thuật do sự biểu diễn nội bộ của chúng gây ra.
 

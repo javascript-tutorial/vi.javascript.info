@@ -191,7 +191,11 @@ Gần đây trong tiêu chuẩn, JavaScript đã hộ trợ ở cấp độ ngô
 
 Chúng được bắt đầu bằng `#`. Và chúng chỉ có thể truy cập được từ bên trong lớp.
 
+<<<<<<< HEAD
 Ví dụ, `#waterLimit` là thuộc tính private và `#checkWater` là phương thức private:
+=======
+For instance, here's a private `#waterLimit` property and the water-checking private method `#fixWaterAmount`:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 class CoffeeMachine {
