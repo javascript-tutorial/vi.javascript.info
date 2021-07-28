@@ -194,7 +194,11 @@ alert(Object.keys(user)); // name
 
 Cờ không thể cấu hình (`configurable:false`) đôi khi được đặt trước cho các đối tượng và thuộc tính có sẵn.
 
+<<<<<<< HEAD
 Một thuộc tính không thể cấu hình sẽ không thể bị xóa.
+=======
+A non-configurable property can't be deleted, its attributes can't be modified.
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 Ví dụ, `Math.PI` không thể ghi, không thể liệt kê và không thể cấu hình:
 
@@ -215,11 +219,16 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 Cho nên lập trình viên không thể thay đổi giá trị `Math.PI` hoặc ghi đè nó:
 
 ```js run
+<<<<<<< HEAD
 Math.PI = 3; // Lỗi
+=======
+Math.PI = 3; // Error, because it has writable: false
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 // xóa Math.PI cũng không có kết quả
 ```
 
+<<<<<<< HEAD
 Làm cho một thuộc tính không thể cấu hình là con đường một chiều. Chúng ta không thể thay đổi nó trở lại với `defineProperty`.
 
 Nói một cách chính xác, khả năng không thể cấu hình áp đặt một số hạn chế đối với `defineProperty`:
@@ -230,6 +239,20 @@ Nói một cách chính xác, khả năng không thể cấu hình áp đặt m�
 4. Không thể thay đổi `get/set` cho một thuộc tính truy cập (nhưng có thể gán chúng nếu vắng mặt).
 
 **Ý tưởng của "configurable: false" là để ngăn chặn các thay đổi của các cờ thuộc tính và việc xóa nó, trong khi cho phép thay đổi giá trị của nó.**
+=======
+We also can't change `Math.PI` to be `writable` again:
+
+```js run
+// Error, because of configurable: false
+Object.defineProperty(Math, "PI", { writable: true });
+```
+
+There's absolutely nothing we can do with `Math.PI`.
+
+Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+
+**Please note: `configurable: false` prevents changes of property flags and its deletion, while allowing to change its value.**
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 Ở đây `user.name` là không thể cấu hình, nhưng chúng ta vẫn có thể thay đổi nó (vì nó có thể ghi):
 
@@ -246,7 +269,11 @@ user.name = "Pete"; // hoạt động tốt
 delete user.name; // Lỗi
 ```
 
+<<<<<<< HEAD
 Và ở đây, chúng ta đặt `user.name` thành hằng số "bị niêm phong mãi mãi":
+=======
+And here we make `user.name` a "forever sealed" constant, just like the built-in `Math.PI`:
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 
 ```js run
 let user = {
@@ -265,6 +292,15 @@ delete user.name;
 Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
+<<<<<<< HEAD
+=======
+```smart header="The only attribute change possible: writable true -> false"
+There's a minor exception about changing flags.
+
+We can change `writable: true` to `false` for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+```
+
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 ## Object.defineProperties
 
 Phương thức [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) cho phép định nghĩa hàng loạt thuộc tính cùng lúc.
