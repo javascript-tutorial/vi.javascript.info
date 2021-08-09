@@ -25,7 +25,11 @@ Sau khi tạo, chúng ta có thể lưu thông tin vào biến bằng toán tử
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hello'; // lưu chuỗi
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 */!*
 ```
 
