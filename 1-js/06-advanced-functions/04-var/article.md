@@ -3,7 +3,14 @@
 ```smart header="Bài viết này là để hiểu các tập lệnh cũ"
 Thông tin trong bài viết này rất hữu ích để hiểu các tập lệnh cũ.
 
+<<<<<<< HEAD
 Đó không phải là cách chúng ta viết mã mới.
+=======
+```smart header="This article is for understanding old scripts"
+The information in this article is useful for understanding old scripts.
+
+That's not how we write new code.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 ```
 
 Trong chương đầu tiên về [variables](info:variables), chúng ta đã nói đến ba cách khai báo biến:

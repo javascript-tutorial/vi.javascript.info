@@ -24,11 +24,19 @@ Trình duyệt đã có sẵn một Javascript engine đôi khi được gọi l
 
 Những engine khác nhau thì sẽ có những "tên mã" khác nhau. Chẳng hạn:
 
+<<<<<<< HEAD
 - [V8](https://vi.wikipedia.org/wiki/Chrome_V8) -- trong Chrome và Opera.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- trong Firefox.
 - ...Có một số tên mã khác như "Chakra" cho IE, "ChakraCore" cho Microsoft Edge, "Nitro" và "SquirrelFish" cho Safari v.v.
 
 Nên ghi nhớ các thuật ngữ trên bởi vì chúng được sử dụng khá nhiều trong các bài viết dành cho nhà phát triển (developer) trên Internet, và cả chúng ta. Ví dụ, nếu "tính năng X được hỗ trợ bởi V8", vậy nó có lẽ sẽ hoạt động trên Chrome và Opera.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 ```smart header="Engine hoạt động như thế nào?"
 
