@@ -46,7 +46,11 @@ alert(3 +
 + 2);
 ```
 
+<<<<<<< HEAD
 Đoạn mã trên xuất ra giá trị `6` vì JavaScript không tự động chèn dấu chấm phảy vào vị trí dấu xuống dòng. Nó cho rằng nếu một dòng kết thúc bằng dấu cộng "+", thì nó là một biểu thức chưa hoàn chỉnh, nên không cần dấu chấm phảy đặt vào đó.Trong tình huống này JavaScript đã làm đúng!
+=======
+The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 
 **Nhưng có những tình huống JavaScript làm sai, không đặt dấu chấm phảy vào nơi cần có.**
 
@@ -56,19 +60,31 @@ Các lỗi xảy ra trong trường hợp này khá khó thấy và sửa.
 Nếu bạn tò mò muốn xem một lỗi như vậy, hãy kiểm tra mã này:
 
 ```js run
-[1, 2].forEach(alert)
+alert("Hello");
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 Lúc này, chưa cần biết về ý nghĩa của các dấu ngoặc vuông `[]` và `forEach`. Chúng ta sẽ học chúng sau. Bây giờ chỉ cần nhớ rằng kết quả của nó là hai thông báo liên tiếp `1` và `2`.
 
 Bây giờ, thêm một `alert` trước mã trên và *không* kết thúc nó bằng dấu chấm phảy:
 
 ```js run no-beautify
 alert("Sẽ có một lỗi")
+=======
+No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
 
-[1, 2].forEach(alert)
+Now let's remove the semicolon after the `alert`:
+
+```js run no-beautify
+alert("Hello")
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 Nếu ta chạy mã trên, chỉ `alert` đầu tiên hiển thị thông báo và sau đó có một lỗi!
 
 Nhưng mọi thứ sẽ ổn nếu chúng ta thêm dấu chấm phảy sau `alert`:
@@ -90,6 +106,23 @@ alert("Sẽ có một lỗi")[1, 2].forEach(alert)
 ```
 
 Cách thấy này hiển nhiên sai vì thực ra đó là hai câu lệnh, đó đó gây ra lỗi. Sai sót này cũng có thể xảy ra trong các tình huống khác.
+=======
+The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
+
+If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
+
+That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
+
+Here's how the engine sees it:
+
+```js run no-beautify
+alert("Hello")[1, 2].forEach(alert);
+```
+
+Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
+
+This can happen in other situations also.
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 ````
 
 Chúng tôi khuyên bạn nên đặt dấu chấm phảy giữa các câu lệnh ngay cả khi mỗi lệnh viết trên một dòng. Quy tắc này được cộng đồng áp dụng rộng rãi. Cùng nhắc lại một lần nữa -- *có thể* bỏ qua dấu chấm phảy trong hầu hết trường hợp. Nhưng để an toàn -- đặc biệt cho những người mới -- hãy luôn sử dụng chúng.
