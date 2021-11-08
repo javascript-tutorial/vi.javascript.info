@@ -114,8 +114,13 @@ class CoffeeMachine {
 // tạo máy pha cà phê
 let coffeeMachine = new CoffeeMachine(100);
 
+<<<<<<< HEAD
 // Thêm nước
 coffeeMachine.waterAmount = -10; // Lỗi: Lượng nước âm
+=======
+// add water
+coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 ```
 
 Giờ việc truy cập thuộc tính bị kiểm soát, nên việc thiết lập lượng nước dưới không trở thành không thể.
@@ -191,7 +196,11 @@ Gần đây trong tiêu chuẩn, JavaScript đã hộ trợ ở cấp độ ngô
 
 Chúng được bắt đầu bằng `#`. Và chúng chỉ có thể truy cập được từ bên trong lớp.
 
+<<<<<<< HEAD
 Ví dụ, `#waterLimit` là thuộc tính private và `#checkWater` là phương thức private:
+=======
+For instance, here's a private `#waterLimit` property and the water-checking private method `#fixWaterAmount`:
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 
 ```js run
 class CoffeeMachine {

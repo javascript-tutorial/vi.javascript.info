@@ -70,7 +70,11 @@ Script đặt trong tệp này gọi là script ngoài và có thể đưa vào 
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 Ở đây, `/path/to/script.js` là đường dẫn tuyệt đối tới tệp chứa script tính từ thư mục gốc của site. Bạn cũng có thể cung cấp đường dẫn tương đối so với trang web hiện tại. Ví dụ, `src="script.js"` chỉ đến tệp `"script.js"` trong thư mục hiện tại.
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"`, just like `src="./script.js"`, would mean a file `"script.js"` in the current folder.
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 
 Chúng ta có thể cho một URL đầy đủ. Ví dụ:
 
