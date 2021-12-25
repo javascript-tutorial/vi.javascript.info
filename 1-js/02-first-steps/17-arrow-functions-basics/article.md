@@ -1,16 +1,15 @@
-# Arrow functions, the basics
+# Arrow functions cơ bản
+Có một cách khác sơn đơn giản và cú pháp ngắn gọn để tạo functions, và thường thì tốt hơn Function Expressions.
 
-There's another very simple and concise syntax for creating functions, that's often better than Function Expressions.
-
-It's called "arrow functions", because it looks like this:
+Nó được gọi là "arrow functions", ví nó trông như sau:
 
 ```js
 let func = (arg1, arg2, ..., argN) => expression
 ```
 
-...This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+...Phía trên ta tạo một function `func` với các đối số `arg1..argN`, sau đó đánh giá `expression` phía bên phải với việc sử dụng chúng và trả về kết quả của nó.
 
-In other words, it's the shorter version of:
+Nói cách khác, nó là phiên bản ngắn gọn hơn của:
 
 ```js
 let func = function(arg1, arg2, ..., argN) {
@@ -18,12 +17,12 @@ let func = function(arg1, arg2, ..., argN) {
 };
 ```
 
-Let's see a concrete example:
+Hãy xem ví dụ cụ thể sau đây:
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
+/* arrow function này là một phiên bản gọn hơn của:
 
 let sum = function(a, b) {
   return a + b;
@@ -32,23 +31,22 @@ let sum = function(a, b) {
 
 alert( sum(1, 2) ); // 3
 ```
+Như bạn có thể thấy `(a, b) => a + b` có nghĩa là một function nhận 2 đối số có tên là `a` và `b`. Khi thực thi, nó thực hiện `a + b` và trả về kết quả. 
 
-As you can, see `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+- Nếu chúng ta chỉ có một đối số, thì cặp ngoặc tròn có thể được loại bỏ.
 
-- If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
-
-    For example:
+    Ví dụ:
 
     ```js run
     *!*
     let double = n => n * 2;
-    // roughly the same as: let double = function(n) { return n * 2 }
+    // tương tự với: let double = function(n) { return n * 2 }
     */!*
 
     alert( double(3) ); // 6
     ```
 
-- If there are no arguments, parentheses will be empty (but they should be present):
+- Nếu không có đối số, sẽ không có gì trong ngoặc trong (nhưng chúng vẫn nên được sử dụng):
 
     ```js run
     let sayHi = () => alert("Hello!");
@@ -56,9 +54,9 @@ As you can, see `(a, b) => a + b` means a function that accepts two arguments na
     sayHi();
     ```
 
-Arrow functions can be used in the same way as Function Expressions.
+Arrow functions có thể được sử dụng giống với Function Expressions.
 
-For instance, to dynamically create a function:
+Ví dụ, để tạo một function một cách động:
 
 ```js run
 let age = prompt("What is your age?", 18);
@@ -69,43 +67,42 @@ let welcome = (age < 18) ?
 
 welcome();
 ```
+Arrow functions có thể không quen thuộc và không thực sự dễ đọc lúc ban đầu, nhưng nó sẽ nhanh chóng thay đổi sau khi bạn quen mắt với cấu trúc này.
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+Chúng rất tiên cho các hành động 1 dòng, khi bạn quá lười để viết nhiều từ.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+## Arrow functions nhiều dòng
 
-## Multiline arrow functions
+Ví dụ phía trên nhận các đối số từ bên phải của `=>` và thực thi các expression với chúng.
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+Thỉnh thoảng chúng ta cần một thứ gì đó phức tạp hơn, ví dụ như nhiều expressions hoặc statements. Điều này là có thể nhưng chúng ta nên đóng chúng lại trong ngoặc nhọn. Sau đó sử dụng `return` như bình thường.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
-
-Like this:
+Chẳng hạn như sau:
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // ngoặc nhọn mở ra một function nhiều dòng
   let result = a + b;
 *!*
-  return result; // if we use curly braces, then we need an explicit "return" 
+  return result; // nếu sử dụng ngoặc nhọn thì cần có return
 */!*
 };
 
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all!
+```smart header="Nhiều hơn nữa"
+Ở đây chúng ta đề cao arrow functions cho sự ngắn gọn. Nhưng đó không phải tất cả!
 
-Arrow functions have other interesting features.
+Arrow functions có một số tính năng thú vị khác.
 
-To study them in-depth, we first need to get to know some other aspects of JavaScript, so we'll return to arrow functions later in the chapter <info:arrow-functions>.
+Để học về chúng một cách sâu hơn, trước tiên chúng ta cần phải biết một số khía cạnh khác của JavaScript, cho nên chúng ta sẽ trở lại với arrow function trong chapter sau <info:arrow-functions>.
 
-For now, we can already use arrow functions for one-line actions and callbacks.
+Bây giờ, chúng ta đã có thể sử dụng arrow functions với các hành động 1 dòng và callbacks. 
 ```
 
-## Summary
+## Tổng kết
 
-Arrow functions are handy for one-liners. They come in two flavors:
+Arrow functions tiện lợi cho các hành động 1 dòng. Có thể dùng theo 2 cách sau:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. Không sử dụng ngoặc nhọn: `(...args) => expression` -- phía bên phải là một expression: hàm này sẽ thực thi nó và trả về kết quả.
+2. Sử dụng ngoặc nhọn: `(...args) => { body }` -- cặp ngoặc cho phép chúng ta có thể viết nhiều statements phía trong function, nhưng chúng ta cần `return` để trả về thứ gì đó.
