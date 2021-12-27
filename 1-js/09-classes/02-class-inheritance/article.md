@@ -313,13 +313,21 @@ new Rabbit(); // động vật
 */!*
 ```
 
+<<<<<<< HEAD
 Ở đây class `Rabbit` mở rộng class `Animal` và ghi đè trường `name` với giá trị của riêng nó.
+=======
+Here, class `Rabbit` extends `Animal` and overrides the `name` field with its own value.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 Không có constructor của riêng `Rabbit`, cho nên constructor của `Animal` được gọi.
 
 Điều thú vị là trong cả hai trường hợp: `new Animal()` và `new Rabbit()`, `alert` ở dòng đánh dấu `(*)` đều hiển thị `động vật`.
 
+<<<<<<< HEAD
 **Nói cách khác, constructor cha luôn sử dụng giá trị trường của chính nó, chứ không phải giá trị trường ghi đè.**
+=======
+**In other words, the parent constructor always uses its own field value, not the overridden one.**
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 Có gì kỳ lạ về nó?
 
@@ -356,9 +364,17 @@ Và đó là những gì chúng ta vốn mong đợi. Khi constructor cha đư�
 
 ...Nhưng với các trường của class thì không phải như vậy. Như đã nói, constructor cha luôn sử dụng trường cha.
 
+<<<<<<< HEAD
 Tại sao lại có sự khác biệt này?
 
 Lí do là ở thứ tự khởi tạo trường. Trường của class được khởi tạo:
+=======
+Why is there a difference?
+
+Well, the reason is the field initialization order. The class field is initialized:
+- Before constructor for the base class (that doesn't extend anything),
+- Immediately after `super()` for the derived class.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 - Trước constructor đối với class cơ sở (mà không mở rộng bất kỳ class nào nữa),
 - Ngay sau `super()` đối với class con.

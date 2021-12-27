@@ -3,7 +3,14 @@
 ```smart header="Bài viết này là để hiểu các tập lệnh cũ"
 Thông tin trong bài viết này rất hữu ích để hiểu các tập lệnh cũ.
 
+<<<<<<< HEAD
 Đó không phải là cách chúng ta viết mã mới.
+=======
+```smart header="This article is for understanding old scripts"
+The information in this article is useful for understanding old scripts.
+
+That's not how we write new code.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 ```
 
 Trong chương đầu tiên về [variables](info:variables), chúng ta đã nói đến ba cách khai báo biến:
@@ -255,12 +262,21 @@ Có những cách khác ngoài dấu ngoặc đơn để nói với JavaScript r
 ```js run
 // Các cách tạo IIFE
 
+<<<<<<< HEAD
 (function() {
   alert("Dấu ngoặc đơn xung quanh hàm");
 }*!*)*/!*();
 
 (function() {
   alert("Dấu ngoặc đơn xung quanh toàn bộ");
+=======
+*!*(*/!*function() {
+  alert("Parentheses around the function");
+}*!*)*/!*();
+
+*!*(*/!*function() {
+  alert("Parentheses around the whole thing");
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 }()*!*)*/!*;
 
 *!*!*/!*function() {
