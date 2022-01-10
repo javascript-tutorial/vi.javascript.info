@@ -20,7 +20,11 @@ Trước tiên, cùng xem cách để lấy các cờ trên:
 
 Phương thức [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor) cho phép lấy *toàn bộ* thông tin của một thuộc tính.
 
+<<<<<<< HEAD
 Cú pháp là:
+=======
+The method [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
@@ -54,7 +58,11 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
+<<<<<<< HEAD
 Để thay đổi các cờ, chúng ta có thể sử dụng [Object.defineProperty](mdn:js/Object/defineProperty).
+=======
+To change the flags, we can use [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Cú pháp là:
 
@@ -194,7 +202,11 @@ alert(Object.keys(user)); // name
 
 Cờ không thể cấu hình (`configurable:false`) đôi khi được đặt trước cho các đối tượng và thuộc tính có sẵn.
 
+<<<<<<< HEAD
 Một thuộc tính không thể cấu hình sẽ không thể bị xóa.
+=======
+A non-configurable property can't be deleted, its attributes can't be modified.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Ví dụ, `Math.PI` không thể ghi, không thể liệt kê và không thể cấu hình:
 
@@ -215,11 +227,16 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 Cho nên lập trình viên không thể thay đổi giá trị `Math.PI` hoặc ghi đè nó:
 
 ```js run
+<<<<<<< HEAD
 Math.PI = 3; // Lỗi
+=======
+Math.PI = 3; // Error, because it has writable: false
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 // xóa Math.PI cũng không có kết quả
 ```
 
+<<<<<<< HEAD
 Làm cho một thuộc tính không thể cấu hình là con đường một chiều. Chúng ta không thể thay đổi nó trở lại với `defineProperty`.
 
 Nói một cách chính xác, khả năng không thể cấu hình áp đặt một số hạn chế đối với `defineProperty`:
@@ -230,6 +247,20 @@ Nói một cách chính xác, khả năng không thể cấu hình áp đặt m�
 4. Không thể thay đổi `get/set` cho một thuộc tính truy cập (nhưng có thể gán chúng nếu vắng mặt).
 
 **Ý tưởng của "configurable: false" là để ngăn chặn các thay đổi của các cờ thuộc tính và việc xóa nó, trong khi cho phép thay đổi giá trị của nó.**
+=======
+We also can't change `Math.PI` to be `writable` again:
+
+```js run
+// Error, because of configurable: false
+Object.defineProperty(Math, "PI", { writable: true });
+```
+
+There's absolutely nothing we can do with `Math.PI`.
+
+Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+
+**Please note: `configurable: false` prevents changes of property flags and its deletion, while allowing to change its value.**
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Ở đây `user.name` là không thể cấu hình, nhưng chúng ta vẫn có thể thay đổi nó (vì nó có thể ghi):
 
@@ -246,7 +277,11 @@ user.name = "Pete"; // hoạt động tốt
 delete user.name; // Lỗi
 ```
 
+<<<<<<< HEAD
 Và ở đây, chúng ta đặt `user.name` thành hằng số "bị niêm phong mãi mãi":
+=======
+And here we make `user.name` a "forever sealed" constant, just like the built-in `Math.PI`:
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 ```js run
 let user = {
@@ -265,9 +300,21 @@ delete user.name;
 Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
+<<<<<<< HEAD
 ## Object.defineProperties
 
 Phương thức [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) cho phép định nghĩa hàng loạt thuộc tính cùng lúc.
+=======
+```smart header="The only attribute change possible: writable true -> false"
+There's a minor exception about changing flags.
+
+We can change `writable: true` to `false` for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+```
+
+## Object.defineProperties
+
+There's a method [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) that allows to define many properties at once.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Cú pháp là:
 
@@ -293,7 +340,11 @@ Vì vậy, chúng ta có thể thiết lập nhiều thuộc tính cùng lúc.
 
 ## Object.getOwnPropertyDescriptors
 
+<<<<<<< HEAD
 Để lấy tất cả các property descriptor cùng lúc, chúng ta có thể sử dụng phương thức [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors).
+=======
+To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Cùng với `Object.defineProperties`, nó có thể được sử dụng như một cách "nhận biết cờ" để nhân bản một đối tượng:
 
@@ -319,6 +370,7 @@ Sử dụng property descriptors chỉ giúp chúng ta niêm phong từng thuộ
 
 Có một số phương thức giúp chúng ta thực hiện trên toàn đối tượng:
 
+<<<<<<< HEAD
 [Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
 : Cấm thêm các thuộc tính mới cho đối tượng.
 
@@ -327,9 +379,20 @@ Có một số phương thức giúp chúng ta thực hiện trên toàn đối 
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
 : Cấm thêm/xóa/sửa các thuộc tính. Đặt `configurable: false, writable: false` cho mọi thuộc tính hiện có.
+=======
+[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+: Forbids the addition of new properties to the object.
+
+[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
+: Forbids adding/removing of properties. Sets `configurable: false` for all existing properties.
+
+[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Và cũng có các phương thức kiểm tra cho chúng:
 
+<<<<<<< HEAD
 [Object.isExtensible(obj)](mdn:js/Object/isExtensible)
 : Trả về `false` nếu việc thêm thuộc tính bị cấm, nếu không trả về `true`.
 
@@ -338,5 +401,15 @@ Và cũng có các phương thức kiểm tra cho chúng:
 
 [Object.isFrozen(obj)](mdn:js/Object/isFrozen)
 : Trả về `true` nếu việc thêm/xóa/sửa thuộc tính bị cấm, và tất cả các thuộc tính hiện có đều có cờ `configurable: false, writable: false`.
+=======
+[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
+: Returns `false` if adding properties is forbidden, otherwise `true`.
+
+[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+: Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+
+[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
+: Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Các phương thức này hiếm khi được sử dụng trong thực tế.

@@ -64,7 +64,7 @@ Các giá trị số đặc biệt chính thức thuộc về kiểu "number". T
 
 Ta sẽ học được nhiều hơn về các số ở chương <info:number>.
 
-## BigInt
+## BigInt [#bigint-type]
 
 Trong JavaScript, loại "số" không thể biểu diễn cho các giá trị số nguyên lớn hơn <code>(2<sup>53</sup>-1)</code> (đó là 9007199254740991) hoặc nhỏ hơn <code>-(2<sup>53</sup>-1)</code> đối với số âm. Đó là một hạn chế kỹ thuật do sự biểu diễn nội bộ của chúng gây ra.
 
@@ -212,6 +212,7 @@ Kiểu `symbol` (biểu tượng) được sử dụng để tạo các định 
 
 Toán tử `typeof` trả về kiểu của đối số. Nó hữu dụng khi chúng ta muốn kiểm tra kiểu dữ liệu của một giá trị để thực hiện các công việc khác nhau dựa trên kết quả.
 
+<<<<<<< HEAD
 Nó hỗ trợ hai cú pháp:
 
 1. Như một toán tử: `typeof x`.
@@ -220,6 +221,9 @@ Nó hỗ trợ hai cú pháp:
 Nói cách khác, nó làm việc với cả dạng có dấu ngoặc đơn hoặc không có dấu ngoặc đơn. Kết quả hoàn toàn giống nhau.
 
 Gọi `typeof x` trả về một chuỗi mô tả tên của kiểu dữ liệu:
+=======
+A call to `typeof x` returns a string with the type name:
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 ```js
 typeof undefined // "undefined"
@@ -249,11 +253,29 @@ typeof alert // "function"  (3)
 
 Ba dòng cuối cần phải giải thích thêm:
 
+<<<<<<< HEAD
 1. `Math` là một đối tượng có sẵn cung cấp các phép tính toán học. Chúng ta sẽ tìm hiểu nó trong chương <info:number>. Ở đây, nó chỉ đóng vai trò như một ví dụ về một đối tượng.
 2. Kết quả của `typeof null` là `"object"`. Đó là một lỗi được chính thức công nhận trong hành vi của `typeof`, xuất hiện từ những ngày đầu của JavaScript và được giữ lại để tương thích. Chắc chắn, `null` không phải là một đối tượng. Nó là một giá trị đặc biệt với một kiểu riêng biệt của nó.
 3. Kết quả của `typeof alert` là `"function"`, vì `alert` là một hàm. Chúng ta sẽ nghiên cứu các hàm trong các chương tiếp theo, chúng ta cũng sẽ thấy rằng không có kiểu "function" đặc biệt nào trong JavaScript. Các hàm thuộc về kiểu đối tượng. Nhưng `typeof` xử lý chúng theo cách khác, trả về `"function"`. Điều đó cũng đến từ những ngày đầu của JavaScript. Về mặt kỹ thuật, hành vi như vậy không đúng, nhưng có thể thuận tiện trong thực tế.
 
 ## Tóm tắt
+=======
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+
+```smart header="The `typeof(x)` syntax"
+You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+
+To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+
+Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+
+Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+```
+
+## Summary
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Có 8 kiểu dữ liệu cơ bản trong JavaScript.
 
@@ -268,8 +290,14 @@ Có 8 kiểu dữ liệu cơ bản trong JavaScript.
 
 Toán tử `typeof` cho phép chúng ta xem kiểu nào được lưu trữ trong một biến.
 
+<<<<<<< HEAD
 - Hai dạng: `typeof x` hoặc `typeof(x)`.
 - Trả về một chuỗi với tên của kiểu dữ liêu, ví dụ `"string"`.
 - Với `null` nó trả về `"object"` -- đây là một lỗi còn tồn tại trong ngôn ngữ, nó không thực sự là một đối tượng.
+=======
+- Usually used as `typeof x`, but `typeof(x)` is also possible.
+- Returns a string with the name of the type, like `"string"`.
+- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Trong các chương tiếp theo, chúng ta sẽ tập trung vào các giá trị nguyên thủy và khi chúng ta đã quen thuộc với chúng, chúng ta sẽ chuyển sang các đối tượng.
