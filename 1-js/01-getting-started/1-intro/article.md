@@ -24,11 +24,19 @@ Trình duyệt đã có sẵn một Javascript engine đôi khi được gọi l
 
 Những engine khác nhau thì sẽ có những "tên mã" khác nhau. Chẳng hạn:
 
+<<<<<<< HEAD
 - [V8](https://vi.wikipedia.org/wiki/Chrome_V8) -- trong Chrome và Opera.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- trong Firefox.
 - ...Có một số tên mã khác như "Chakra" cho IE, "ChakraCore" cho Microsoft Edge, "Nitro" và "SquirrelFish" cho Safari v.v.
 
 Nên ghi nhớ các thuật ngữ trên bởi vì chúng được sử dụng khá nhiều trong các bài viết dành cho nhà phát triển (developer) trên Internet, và cả chúng ta. Ví dụ, nếu "tính năng X được hỗ trợ bởi V8", vậy nó có lẽ sẽ hoạt động trên Chrome và Opera.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 ```smart header="Engine hoạt động như thế nào?"
 
@@ -59,7 +67,11 @@ Ví dụ, JavaScript trong trình duyệt có khả năng:
 
 ## JavaScript không thể làm gì trong trình duyệt?
 
+<<<<<<< HEAD
 Nhiều tính năng của Javascript trong trình duyệt bị giới hạn vì lợi ích an toàn của người dùng. Mục đích là để ngăn chặn những trang web độc hại truy cập thông tin cá nhân hoặc gây hại đến dữ liệu của người dùng.
+=======
+JavaScript's abilities in the browser are limited for the sake of a user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 Một số hạn chế có thể kể là:
 
@@ -84,9 +96,15 @@ Những giới hạn trên sẽ không tồn tại nếu như Javascript đượ
 Có ít nhất *ba* điều tuyệt vời ở Javascript:
 
 ```compare
+<<<<<<< HEAD
 + Tích hợp hoàn toàn với HTML/CSS.
 + Những điều đơn giản được thực hiện một cách đơn giản.
 + Được hỗ trợ bởi tất cả các trình duyệt chính và được bật theo mặc định.
+=======
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 ```
 
 Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều trên.
@@ -116,8 +134,14 @@ Có thể kể đến một số ngôn ngữ:
 
 Sẽ có nhiều hơn số kể trên. Dĩ nhiên, ngay cả khi chúng ta sử dụng một trong những ngôn ngữ đó, chúng ta cũng nên biết Javascript để thực sự hiểu chúng ta đang làm gì.
 
+<<<<<<< HEAD
 ## Tóm tắt
 
 - Javascript được tạo ra với mục đích ban đầu chỉ cho trình duyệt, nhưng bây giờ đã được sử dụng rộng rãi trên nhiều môi trường khác.
 - Ngày nay, Javascript có một vị trí khác biệt như là ngôn ngữ trình duyệt được sử dụng rộng rãi nhất với sự tích hợp đầy đủ với HTML/CSS.
 - Có nhiều ngôn ngữ được "dịch" sang JavaScript và cung cấp một số tính năng nhất định. Nên xem qua chúng, ít nhất là một thời gian ngắn sau khi thành thạo JavaScript.
+=======
+- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
+- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad

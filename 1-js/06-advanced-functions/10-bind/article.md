@@ -185,8 +185,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Hello"); // Xin chào, John (đối số "Xin chào" được truyền tới say)
 say("Bye"); // Tạm biệt, John ("Tạm biệt" được truyền tới say)
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 ```
 
 ````smart header="Convenience method: `bindAll`"

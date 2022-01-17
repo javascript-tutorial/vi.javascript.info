@@ -117,7 +117,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 
 ## Không chỉ là một cú pháp đặc biệt
 
+<<<<<<< HEAD
 Đôi khi người ta nói rằng `class` là một cú pháp đặc biệt "syntactic sugar" (cú pháp được thiết kế để làm cho mọi thứ dễ đọc hơn, nhưng không giới thiệu bất kỳ điều gì mới), bởi vì chúng ta thực sự có thể khai báo tương tự mà không cần từ khóa `class` gì hết:
+=======
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same thing without using the `class` keyword at all:
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 ```js run
 // viết lại class User trong các hàm thuần túy
@@ -143,7 +147,11 @@ Kết quả của định nghĩa này là giống nhau. Vì vậy, thực sự c
 
 Dù vậy, vẫn có những khác biệt quan trọng.
 
+<<<<<<< HEAD
 1. Đầu tiên, một hàm tạo bởi `class` được gắn nhãn bởi một thuộc tính nội bộ đặc biệt `[[FunctionKind]]:"classConstructor"`. Vì vậy, nó không hoàn toàn giống với việc tạo theo cách thủ công.
+=======
+1. First, a function created by `class` is labelled by a special internal property `[[IsClassConstructor]]: true`. So it's not entirely the same as creating it manually.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
     Ngôn ngữ JavaScript kiểm tra thuộc tính đó ở nhiều nơi. Ví dụ: không giống như một hàm thông thường, nó phải được gọi bằng `new`:
 
