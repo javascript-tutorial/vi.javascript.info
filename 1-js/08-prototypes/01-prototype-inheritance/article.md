@@ -12,7 +12,11 @@ Trong JavaScript, các đối tượng có một thuộc tính ẩn đặc biệ
 
 ![prototype](object-prototype-empty.svg)
 
+<<<<<<< HEAD
 Khi chúng ta đọc một thuộc tính từ `object` và nó bị thiếu, JavaScript sẽ tự động lấy nó từ nguyên mẫu. Trong lập trình, điều đó được gọi là "kế thừa nguyên mẫu". Và chúng ta sẽ sớm nghiên cứu nhiều ví dụ về sự kế thừa như vậy, cũng như các tính năng ngôn ngữ hay ho hơn được xây dựng dựa trên nó.
+=======
+When we read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, this is called "prototypal inheritance". And soon we'll study many examples of such inheritance, as well as cooler language features built upon it.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 Thuộc tính `[[Prototype]]` là thuộc tính nội bộ và bị ẩn đi, nhưng có nhiều cách để thiết lập nó:
 
@@ -54,7 +58,11 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ```
 
+<<<<<<< HEAD
 Ở đây, dòng `(*)` đặt `animal` làm nguyên mẫu của `rabbit`.
+=======
+Here the line `(*)` sets `animal` to be the prototype of `rabbit`.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 Sau đó, khi `alert` cố đọc thuộc tính `rabbit.eats` `(**)`, nó không có trong `rabbit`, nên JavaScript lần theo tham chiếu `[[Prototype]]` và tìm thấy nó trong `animal` (tìm từ dưới lên trên):
 
@@ -286,7 +294,11 @@ for(let prop in rabbit) alert(prop); // jumps, rồi eats
 */!*
 ```
 
+<<<<<<< HEAD
 Nếu đó không phải là những gì chúng ta muốn, và chúng ta muốn loại trừ các thuộc tính được kế thừa, có một phương thức có sẵn [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): nó trả về `true` nếu `obj` có một thuộc tính riêng (không phải được kế thừa) tên là `key`.
+=======
+If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 Nên chúng ta có thể loại bỏ các thuộc tính được kế thừa (hoặc làm gì đó với chúng):
 
