@@ -1,6 +1,6 @@
-# Modern JavaScript Tutorial bằng Tiếng Việt
+# Hướng dẫn JavaScript hiện đại bằng Tiếng Việt
 
-Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutorial, xuất bản tại [https://javascript.info](https://javascript.info).
+Kho này chứa phiên bản tiếng Việt của Modern JavaScript Tutorial, xuất bản tại [https://javascript.info](https://javascript.info).
 
 **Bạn có thể đóng góp vào bản dịch này bằng cách:**
 
