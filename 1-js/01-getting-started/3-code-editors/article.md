@@ -1,46 +1,46 @@
-# Code editors
+# Trình chỉnh sửa mã
 
-A code editor is the place where programmers spend most of their time.
+Trình chỉnh sửa mã (Code editor) là nơi mà lập trình viên dành hầu hết thời gian của họ ở đó.
 
-There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.
+Có hai loại code editor: IDE và trình chỉnh sửa gọn nhẹ. Phần lớn mọi người dùng 1 trong 2 loại kể trên.
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a "whole project." As the name suggests, it's not just an editor, but a full-scale "development environment."
+Thuật ngữ [IDE](https://vi.wikipedia.org/wiki/M%C3%B4i_tr%C6%B0%E1%BB%9Dng_ph%C3%A1t_tri%E1%BB%83n_t%C3%ADch_h%E1%BB%A3p) (Môi trường phát triển tích hợp) đề cập đến một editor mạnh mẽ với nhiều tính năng thường hoạt động trên "toàn bộ dự án". Như tên của của nó đã cho thấy, nó không chỉ là một trình chỉnh sửa, mà còn là một "môi trường phát triển" toàn diện.
 
-An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like [git](https://git-scm.com/)), a testing environment, and other "project-level" stuff.
+IDE tải một dự án (có thể bao gồm rất nhiều tập tin), cho phép điều hướng giữa các tập tin đó, cung cấp autocompletion (tự động hoàn thành) dựa trên toàn bộ dự án (không chỉ tệp đang mở), và tích hợp với hệ thống quản lí phiên bản (như [git](https://git-scm.com/)), môi trường kiểm thử , và các công cụ "cấp dự án" khác.
 
-If you haven't selected an IDE yet, consider the following options:
+Nếu như bạn chưa chọn được một IDE, hãy thử xem xét các lựa chọn sau:
 
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
-- [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, paid).
+- [Visual Studio Code](https://code.visualstudio.com/) (đa nền tảng, miễn phí).
+- [WebStorm](http://www.jetbrains.com/webstorm/) (đa nền tảng, tốn phí).
 
-For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code". "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. It's also good at JavaScript. There's also a free version [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+Với Windows, còn có "Visual Studio", đừng nhầm lẫn với "Visual Studio Code". "Visual Studio" là một trình chỉnh sửa mạnh mẽ, trả phí và chỉ dành cho Windows, rất phù hợp cho nền tảng .NET. Nó cũng dùng khá tốt với Javascript. Visual Studio có phiên bản miễn phí tại đây: [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
-Many IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+Có khá nhiều IDE phải trả phí, nhưng chúng vẫn cho thời gian dùng thử. Giá của chúng thường không đáng kể khi so sánh với lương của một lập trình viên đủ năng lực, vậy nên hãy chọn những gì tốt nhất cho bạn.
 
-## Lightweight editors
+## Trình chỉnh sửa gọn nhẹ
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+Trình chỉnh sửa gọn nhẹ không mạnh mẽ như IDE, nhưng nó nhanh, đơn giản và nhẹ nhàng.
 
-They are mainly used to open and edit a file instantly.
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+Chúng chủ yếu được dùng cho việc mở và chỉnh sửa một tập tin ngay lập tức.
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
+Điểm khác biệt chính giữa IDE và trình chỉnh sửa gọn nhẹ là IDE làm việc trên cấp độ dự án, nó tải khá nhiều dữ liệu khi khởi động, phân tích cấu trúc dự án nếu cần thiết và cứ như vậy. Một trình chỉnh sửa gọn nhẹ sẽ nhanh hơn khá nhiều nếu chúng ta chỉ cần một tập tin duy nhất.
 
-The following options deserve your attention:
+Trong luyện tập, trình chỉnh sửa gọn nhẹ có thể có hàng tá plugin bao gồm phân tích cú pháp cấp thư mục và tự động hoàn thành code, vì vậy nên không có một ranh giới cứng nhắc nào giữa trình chỉnh sửa gọn nhẹ và IDE cả.
 
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
-- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+Bạn nên để ý đến một số lựa chọn sau:
 
-## Let's not argue
+- [Atom](https://atom.io/) (đa nền tảng, miễn phí).
+- [Sublime Text](http://www.sublimetext.com) (đa nền tảng, phần mềm chia sẻ).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, miễn phí).
+- [Vim](http://www.vim.org/) và [Emacs](https://www.gnu.org/software/emacs/) khá ngầu nếu bạn biết dùng nó
 
-The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.
+## Đừng tranh cãi
 
-There are other great editors in our big world. Please choose the one you like the most.
+Những trình chỉnh sửa trong danh sách phía trên được bản thân tôi hoặc bạn bè của tôi mà tôi cho rằng họ là những lập trình viên giỏi lựa chọn trong một thời gian dài.
 
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+Có rất nhiều trình chỉnh sửa khác trong thế giới rộng lớn của chúng ta. Hãy chọn nếu bạn thích nó.
+
+Sự lựa chọn cho một trình chỉnh sửa, hay bất cứ công cụ nào khác, đều là lựa chọn cá nhân và dựa trên dự án của bạn, thói quen, và sở thích cá nhân.
