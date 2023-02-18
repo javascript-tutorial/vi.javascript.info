@@ -18,7 +18,7 @@ Khi Javascript được tạo ra, ban đầu nó có một cái tên khác: "Liv
 Nhưng với sự phát triển của mình, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập, với những đặc điểm kỹ thuật riêng của mình được gọi là [ECMAScript](https://vi.wikipedia.org/wiki/ECMAScript), và bây giờ nó chẳng liên quan gì đến Java cả.
 ```
 
-Ngày nay, JavaScript không những có thể thực thi trên trình duyệt, mà còn trên cả máy chủ (server), hoặc trên bất cứ nơi nào có chương trình tên là [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+Ngày nay, JavaScript không những có thể thực thi trên trình duyệt, mà còn trên cả máy chủ (server), hoặc trên bất cứ nơi nào có chương trình tên là [JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
 
 Trình duyệt đã có sẵn một Javascript engine đôi khi được gọi là "JavaScript virtual machine".
 
