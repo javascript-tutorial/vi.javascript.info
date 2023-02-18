@@ -1,14 +1,14 @@
-# Cẩm nang và đặc tả
+# Cẩm nang và đặc điểm
 
 Cuốn sách này là một *hướng dẫn*. Nó nhằm mục đích giúp bạn dần dần học ngôn ngữ. Nhưng một khi bạn quen với những thứ căn bản, bạn sẽ cần các nguồn khác.
 
-## Đặc tả
+## Đặc điểm
 
-[Đặc tả ECMA-262](https://www.ecma-international.org/publications/standards/Ecma-262.htm) chứa thông tin chuyên sâu, chi tiết và chính thức nhất về JavaScript. Nó xác định đặc điểm ngôn ngữ.
+[Đặc điểm ECMA-262](https://www.ecma-international.org/publications/standards/Ecma-262.htm) chứa thông tin chuyên sâu, chi tiết và chính thức nhất về JavaScript. Nó xác định đặc điểm ngôn ngữ.
 
-Nhưng với việc được chính thức hóa như vậy, thoạt đầu nó thật khó hiểu. Vì vậy, nếu bạn cần nguồn thông tin đáng tin cậy nhất về chi tiết ngôn ngữ, thì bản đặc tả là nơi phù hợp. Nhưng nó không phải để sử dụng hàng ngày.
+Nhưng với việc được chính thức hóa như vậy, thoạt đầu nó thật khó hiểu. Vì vậy, nếu bạn cần nguồn thông tin đáng tin cậy nhất về chi tiết ngôn ngữ, thì bản đặc điểm là nơi phù hợp. Nhưng nó không phải để sử dụng hàng ngày.
 
-Một phiên bản đặc tả mới được phát hành hàng năm. Giữa các bản phát hành này, bản nháp đặc tả mới nhất có tại <https://tc39.es/ecma262/>.
+Một phiên bản đặc điểm mới được phát hành hàng năm. Giữa các bản phát hành này, bản nháp đặc diểm mới nhất có tại <https://tc39.es/ecma262/>.
 
 Để đọc về những tính năng mới nhất, bao gồm cả các tính năng gần như tiêu chuẩn (được gọi là "stage-3") xem tại: <https://github.com/tc39/proposals>.
 
