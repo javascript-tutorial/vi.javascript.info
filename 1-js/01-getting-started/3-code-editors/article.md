@@ -21,12 +21,12 @@ Có khá nhiều IDE phải trả phí, nhưng chúng vẫn cho thời gian dùn
 
 ## Trình chỉnh sửa gọn nhẹ
 
-Trình chỉnh sửa gọn nhẹ không mạnh mẽ như IDE, nhưng nó nhanh, đơn giản và nhẹ nhàng.
+"Trình chỉnh sửa gọn nhẹ" không mạnh mẽ như IDE, nhưng nó nhanh, đơn giản và nhẹ nhàng.
 
 
 Chúng chủ yếu được dùng cho việc mở và chỉnh sửa một tập tin ngay lập tức.
 
-Điểm khác biệt chính giữa IDE và trình chỉnh sửa gọn nhẹ là IDE làm việc trên cấp độ dự án, nó tải khá nhiều dữ liệu khi khởi động, phân tích cấu trúc dự án nếu cần thiết và cứ như vậy. Một trình chỉnh sửa gọn nhẹ sẽ nhanh hơn khá nhiều nếu chúng ta chỉ cần một tập tin duy nhất.
+Điểm khác biệt chính giữa "IDE" và "trình chỉnh sửa gọn nhẹ" là IDE làm việc trên cấp độ dự án, nó tải khá nhiều dữ liệu khi khởi động, phân tích cấu trúc dự án nếu cần thiết và cứ như vậy. Một trình chỉnh sửa gọn nhẹ sẽ nhanh hơn khá nhiều nếu chúng ta chỉ cần một tập tin duy nhất.
 
 Trong luyện tập, trình chỉnh sửa gọn nhẹ có thể có hàng tá plugin bao gồm phân tích cú pháp cấp thư mục và tự động hoàn thành code, vì vậy nên không có một ranh giới cứng nhắc nào giữa trình chỉnh sửa gọn nhẹ và IDE cả.
 
