@@ -16,7 +16,7 @@ Mở trang [bug.html](bug.html).
 
 Có lỗi trong mã JavaScript trên đó. Nó bị ẩn khỏi mắt khách truy cập thông thường, vì vậy, hãy mở các công cụ dành cho nhà phát triển để xem nó.
 
-Nhấn phím `F12` hoặc, nếu bạn đang sử dụng máy Mac, hãy nhấn tổ hợp phím `Cmd+Opt+J`.
+Nhấn phím `key:F12` hoặc, nếu bạn đang sử dụng máy Mac, hãy nhấn tổ hợp phím `key:Cmd+Opt+J`.
 
 Các công cụ dành cho nhà phát triển sẽ mở trên tab Bảng điều khiển theo mặc định.
 
@@ -36,12 +36,12 @@ Bây giờ chúng ta có thể thấy lỗi và thế là đủ để bắt đ�
 ```smart header="Nhập nhiều dòng"
 Thông thường, khi chúng ta đặt một dòng mã vào bảng điều khiển, rồi nhấn phím `Enter`, nó sẽ thực thi.
 
-Để chèn nhiều dòng, nhấn tổ hợp phím `Shift+Enter`. Bằng cách này, người ta có thể nhập các đoạn mã JavaScript dài.
+Để chèn nhiều dòng, nhấn tổ hợp phím `key:Shift+Enter`. Bằng cách này, người ta có thể nhập các đoạn mã JavaScript dài.
 ```
 
 ## Firefox, Edge và những thứ khác
 
-Hầu hết các trình duyệt khác sử dụng phím `F12` để mở các công cụ dành cho nhà phát triển.
+Hầu hết các trình duyệt khác sử dụng phím `key:F12` để mở các công cụ dành cho nhà phát triển.
 
 Giao diện của chúng khá giống nhau. Khi bạn biết cách sử dụng một trong những công cụ này (bạn có thể bắt đầu với Chrome), bạn có thể dễ dàng chuyển sang một công cụ khác.
 
@@ -53,11 +53,11 @@ Mở Tùy chọn và chuyển đến ngăn "Nâng cao". Có một hộp kiểm �
 
 ![safari](safari.png)
 
-Bây giờ bạn có thể sử dụng tổ hợp phím `Cmd+Opt+C` có thể chuyển đổi bảng điều khiển. Ngoài ra, lưu ý rằng mục menu trên cùng mới có tên "Develop" đã xuất hiện. Nó có nhiều lệnh và tùy chọn.
+Bây giờ bạn có thể sử dụng tổ hợp phím `key:Cmd+Opt+C` có thể chuyển đổi bảng điều khiển. Ngoài ra, lưu ý rằng mục menu trên cùng mới có tên "Develop" đã xuất hiện. Nó có nhiều lệnh và tùy chọn.
 
 ## Tóm tắt
 
 - Các công cụ dành cho nhà phát triển cho phép chúng tôi xem lỗi, chạy lệnh, kiểm tra các biến, v.v.
-- Chúng có thể được mở bằng phím `F12` đối với hầu hết các trình duyệt trên Windows. Chrome dành cho Mac cần tổ hợp phím `Cmd+Opt+J`, Safari: `Cmd+Opt+C` (cần bật trước).
+- Chúng có thể được mở bằng phím `key:F12` đối với hầu hết các trình duyệt trên Windows. Chrome dành cho Mac cần tổ hợp phím `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (cần bật trước).
 
 Bây giờ chúng ta đã có môi trường sẵn sàng. Trong phần tiếp theo, chúng ta sẽ chuyển sang JavaScript.
