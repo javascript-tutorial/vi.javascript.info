@@ -100,7 +100,7 @@ Theo thời gian, chương trình ngày càng phức tạp. Trong chương trìn
 
 Các chú thích (comment) có thể đặt ở bất cứ đâu trong script. Nó không ảnh hưởng đến việc chạy script bởi JavaScript bỏ qua nó khi chạy.
 
-**Chú thích một dòng bắt đầu bằng hai dấu gạch chéo `//`.**
+**Chú thích một dòng bắt đầu bằng hai dấu gạch chéo `key://`.**
 
 Toàn bộ phần còn lại của dòng là chú thích. Chú thích một dòng có thể chiếm cả dòng, hoặc theo sau một câu lệnh.
 
@@ -136,7 +136,7 @@ alert('World');
 ```
 
 ```smart header="Dùng phím tắt!"
-Trong hầu hết các trình soạn thảo mã, có thể chú thích hóa một dòng mã bằng tổ hợp phím `Ctrl+/`, nhiều dòng mã bằng tổ hợp phím `Ctrl+Shift+/`. Trên máy Mac, dùng `Cmd` thay cho `Ctrl` và `Option` thay cho `Shift`.
+Trong hầu hết các trình soạn thảo mã, có thể chú thích hóa một dòng mã bằng tổ hợp phím `key:Ctrl+/`, nhiều dòng mã bằng tổ hợp phím `key:Ctrl+Shift+/`. Trên máy Mac, dùng `key:Cmd` thay cho `key:Ctrl` và `key:Option` thay cho `key:Shift`.
 ```
 
 ````warn header="Không được phép đặt một chú thích trong một chú thích khác (nested comment)!"
@@ -154,6 +154,6 @@ alert( 'thế giới!' );
 
 Đừng do dự hãy chú thích ngay cho mã của bạn.
 
-Chú thích tuy làm tăng kích thước mã, nhưng điều đó không thành vấn đê. Có nhiều công cụ thu nhỏ mã trước khi đưa lên máy chủ. Chúng xóa các chú thích và chú thích không xuất hiện trong mã sản phẩm chính thức. Bởi vậy chú thích không gây ra các ảnh hưởng tiêu cực tới chương trình.
+Chú thích tuy làm tăng kích thước mã, nhưng điều đó không thành vấn đề. Có nhiều công cụ thu nhỏ mã trước khi đưa lên máy chủ. Chúng xóa các chú thích và chú thích không xuất hiện trong mã sản phẩm chính thức. Bởi vậy chú thích không gây ra các ảnh hưởng tiêu cực tới chương trình.
 
 Sau này trong chương <info:code-quality> chúng ta sẽ học cách viết chú thích sao cho hiệu quả.
