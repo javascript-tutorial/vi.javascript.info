@@ -2,7 +2,7 @@
 
 Phần này của hướng dẫn bàn về cốt lõi của JavaScript, về bản thân ngôn ngữ.
 
-Nhưng để chạy được JavaScript chúng ta cần một môi trường (enviroment), và bởi các hướng dẫn này được đưa lên webiste, môi trường trình duyệt (browser) là sự lựa chọn tốt hơn cả. Chúng ta phải sử dụng một số lệnh chỉ có trên môi trường trình duyệt (như `alert`) nhưng chúng không nhiều. Nếu bạn có kế hoạch học JavaScript để làm việc trên môi trường khác (như Node.js) bạn cũng sẽ không mất quá nhiều thời gian để học chúng. Ở [phần sau](/ui) của hướng dẫn này chúng ta sẽ tập trung vào cách sử dụng JavaScript trên trình duyệt.
+Nhưng để chạy được JavaScript chúng ta cần một môi trường (environment), và bởi các hướng dẫn này được đưa lên webiste, môi trường trình duyệt (browser) là sự lựa chọn tốt hơn cả. Chúng ta phải sử dụng một số lệnh chỉ có trên môi trường trình duyệt (như `alert`) nhưng chúng không nhiều. Nếu bạn có kế hoạch học JavaScript để làm việc trên môi trường khác (như Node.js) bạn cũng sẽ không mất quá nhiều thời gian để học chúng. Ở [phần sau](/ui) của hướng dẫn này chúng ta sẽ tập trung vào cách sử dụng JavaScript trên trình duyệt.
 
 Đầu tiên, chúng ta học cách làm sao để đưa một script (một đoạn mã JavaScript) vào một trang web. Trong môi trường máy chủ (như Node.js), bạn có thể đặt script này trong tệp `my.js` và chạy chỉ bằng một câu lệnh `"node my.js"`.
 
