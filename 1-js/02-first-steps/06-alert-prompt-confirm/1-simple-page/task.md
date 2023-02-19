@@ -2,8 +2,8 @@ importance: 4
 
 ---
 
-# A simple page
+# Một trang đơn giản
 
-Create a web-page that asks for a name and outputs it.
+Tạo một trang web với yêu cầu đặt tên và xuất tên đó.
 
 [demo]
