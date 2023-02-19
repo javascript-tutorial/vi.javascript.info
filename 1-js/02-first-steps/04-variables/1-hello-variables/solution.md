@@ -1,4 +1,4 @@
-In the code below, each line corresponds to the item in the task list.
+Trong mã bên dưới, mỗi dòng tương ứng với mục trong danh sách tác vụ.
 
 ```js run
 let admin, name; // có thể khai báo hai biến cùng lúc
