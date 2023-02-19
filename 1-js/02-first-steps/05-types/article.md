@@ -35,7 +35,7 @@ Ngoài các số thông thường, còn có các giá trị số đặc biệt k
     alert( 1 / 0 ); // Infinity
     ```
 
-    Or just reference it directly:
+    Hoặc chỉ cần tham khảo nó trực tiếp:
 
     ```js run
     alert( Infinity ); // Infinity
@@ -85,7 +85,7 @@ Vì các số `BigInt` hiếm khi cần thiết, chúng tôi không trình bày 
 Hiện tại, `BigInt` được hỗ trợ trong Firefox / Chrome / Edge / Safari, nhưng không hỗ trợ trong IE.
 ```
 
-Bạn có thể kiểm tra [*MDN* BigInt compatibility table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) để biết phiên bản trình duyệt nào có hỗ trợ.
+Bạn có thể kiểm tra [*MDN* BigInt bảng tương thích](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) để biết phiên bản trình duyệt nào có hỗ trợ.
 
 ## Kiểu chuỗi
 
@@ -198,7 +198,7 @@ alert(age); // "undefined"
 
 ...Nhưng chúng ta không nên làm điều đó. Thông thường, người ta sử dụng `null` để gán giá trị "trống" hoặc "không xác định" cho một biến, trong khi `undefined` được dành riêng làm giá trị khởi tạo mặc định cho những thứ chưa được gán.
 
-## Objects and Symbols
+## Vật thể và kí tự
 
 Kiểu `object` hay đối tượng là một kiểu đặc biệt.
 
