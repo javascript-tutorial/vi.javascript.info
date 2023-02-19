@@ -9,7 +9,7 @@ Các biến được sử dụng để lưu các thông tin như vậy.
 
 ## Biến
 
-Một [biến (variable)](https://vi.wikipedia.org/wiki/Bi%E1%BA%BFn_(khoa_h%E1%BB%8Dc_m%C3%A1y_t%C3%ADnh)) là một "vùng nhớ được đặt tên" chứa dữ liệu. Chúng ta có thể sử dụng các biến để lưu trữ các hàng hóa, người mua, và các dữ liệu khác...
+Một [biến](https://vi.wikipedia.org/wiki/Bi%E1%BA%BFn_(khoa_h%E1%BB%8Dc_m%C3%A1y_t%C3%ADnh)) là một "vùng nhớ được đặt tên" chứa dữ liệu. Chúng ta có thể sử dụng các biến để lưu trữ các hàng hóa, người mua, và các dữ liệu khác...
 
 Để tạo biến trong JavaScript, sử dụng từ khóa `let`.
 
@@ -71,7 +71,7 @@ let user = 'John',
   message = 'Hello';
 ```
 
-...Hoặc đặt dấu phảy đằng trước:
+...Hoặc đặt dấu phẩy đằng trước:
 
 ```js no-beautify
 let user = 'John'
