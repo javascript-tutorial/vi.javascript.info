@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-Trước tiên, biến cho tên của hành tinh của chúng ta.
-=======
-## The variable for our planet
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+## Biến dành cho hành tinh của chúng ta
 
 Nó khá đơn giản:
 
@@ -10,20 +6,16 @@ Nó khá đơn giản:
 let ourPlanetName = "Earth";
 ```
 
-Chú ý, chúng ta có thể dùng tên ngắn hơn là `planet`, nhưng nó không chỉ rõ đó là hành tinh nào. Tốt hơn mọi thứ nên rõ ràng, cho dù tên biến có hơi dài một chút.
+Lưu ý, chúng ta có thể sử dụng một tên ngắn hơn là `planet`, nhưng có thể không rõ là nó đề cập đến hành tinh nào. Tốt hơn là nó nên dài hơn. Ít nhất là cho đến khi biến trở nên không quá dài dòng
 
-<<<<<<< HEAD
-Thứ hai, tên của người khách hiện tại:
-=======
-## The name of the current visitor
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
+## Tên của người khách hiện tại
 
 ```js
 let currentUserName = "John";
 ```
 
-Một lần nữa, chúng ta có thể dùng tên ngắn hơn là `userName` nếu không biết chắc đó là khách hiện tại.
+Một lần nữa, chúng ta có thể rút gọn nó thành `userName` nếu chúng ta biết chắc đó là khách hiện tại.
 
-Các trình soạn thảo hiện đại có chức năng tự động hoàn thành nên viết những tên biến dài trở nên dễ hơn nhiều. Vậy nên đừng tiết kiệm bằng cách đặt tên quá ngắn. Tên gồm khoảng 3 từ là tốt nhất.
+Các trình soạn thảo hiện đại và tính năng tự động hoàn thành khiến các tên biến dài trở nên dễ viết. Đừng tiết kiệm chúng. Một cái tên có 3 từ trong đó vẫn ổn.
 
-Và nếu trình soạn thảo của bạn không có tính năng này, hãy lấy một [trình soạn thảo mới](/code-editors).
+Và nếu trình soạn thảo của bạn không có tính năng tự động hoàn thành thích hợp, hãy kiếm [một cái mới](/code-editors).

@@ -15,4 +15,3 @@ alert( b++ ); // 1, dạng hậu tố trả về giá trị cũ
 alert( a ); // 2, tăng một lần
 alert( b ); // 2, tăng một lần
 ```
-

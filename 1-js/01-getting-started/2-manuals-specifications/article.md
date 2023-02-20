@@ -1,44 +1,37 @@
-# Hướng dẫn và đặc điểm
+# Cẩm nang và đặc tả
 
-Đây là *tài liệu hướng dẫn*. Mục tiêu là giúp bạn học Javascript dần dần. Nhưng nếu đã làm quen cơ bản với Javascript, bạn nên cần một nguồn khác để học.
-## Đặc điểm
+Cuốn sách này là một *hướng dẫn*. Nó nhằm mục đích giúp bạn dần dần học ngôn ngữ. Nhưng một khi bạn quen với những thứ căn bản, bạn sẽ cần các nguồn khác.
 
-**Những đặc điểm của ECMA-262** chứa những thông tin chuyên sâu, chi tiết và chính thức nhất về Javascript.
- 
-Nhưng với việc được chính thức hóa, ban đầu nó khá là khó hiểu. Vì vậy, nếu bạn cần nguồn thông tin đáng tin cậy nhất về chi tiết của Javascript, đó sẽ là nơi thích hợp. Nhưng không phải để sử dụng hàng ngày.
+## Đặc tả
 
-Dự thảo mới nhất: <https://tc39.es/ecma262/>.
+[Đặc tả ECMA-262](https://www.ecma-international.org/publications/standards/Ecma-262.htm) chứa thông tin chuyên sâu, chi tiết và chính thức nhất về JavaScript. Nó xác định đặc điểm ngôn ngữ.
+
+Nhưng với việc được chính thức hóa như vậy, thoạt đầu nó thật khó hiểu. Vì vậy, nếu bạn cần nguồn thông tin đáng tin cậy nhất về chi tiết ngôn ngữ, thì bản đặc tả là nơi phù hợp. Nhưng nó không phải để sử dụng hàng ngày.
+
+Một phiên bản đặc tả mới được phát hành hàng năm. Giữa các bản phát hành này, bản nháp đặc tả mới nhất có tại <https://tc39.es/ecma262/>.
 
 Để đọc về những tính năng mới nhất, bao gồm cả các tính năng gần như tiêu chuẩn (được gọi là "stage-3") xem tại: <https://github.com/tc39/proposals>.
 
-Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các thông số kỹ thuật khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
+Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các đặc tả khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
 
 ## Cẩm nang
 
-- **Tài liệu tham khảo Javascript MDN (Mozilla)** là một tài liệu hướng dẫn với các ví dụ và thông tin khác gồm những thông tin chuyên sâu khá bổ ích về các hàm, phương thức (methods) etc.
+- **Tài liệu tham khảo Javascript MDN (Mozilla)** là cẩm nang hướng dẫn quan trọng nhất với các ví dụ và thông tin khác. Nó rất tuyệt để lấy thông tin chuyên sâu về các hàm, phương thức riêng lẻ của ngôn ngữ v.v.
 
-    Bạn có thể tìm nó tại <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
-
-    Tuy nhiên, sẽ tốt hơn nếu dùng internet để tìm kiến. Chỉ cần tìm "MDN [chỉ định]" trong câu truy vấn, ví dụ: <https://google.com/search?q=MDN+parseInt> để tìm hàm `parseInt` .
+    Bạn có thể tìm thấy nó tại <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
 
-- **MSDN** – Tài liệu của Microsoft với khá nhiều thông tin, bao gồm Javascript Microsoft manual with a lot of information, including JavaScript (thường gọi là JScript). Nếu như cần tra cứu cụ thể về Internet Explorer, nên truy cập vào link này: <http://msdn.microsoft.com/>.
-
-    Ngoài ra, chúng ta cũng có thể tìm kiếm trên internet bằng những từ khóa như: "RegExp MSDN" hoặc "RegExp MSDN jscript".
+Dầu vậy, thông thường tốt nhất là sử dụng tìm kiếm trên Internet. Chỉ cần sử dụng "MDN [term]" trong truy vấn, ví dụ: <https://google.com/search?q=MDN+parseInt> để tìm kiếm hàm `parseInt`.
 
 ## Bảng tương thích
 
-<<<<<<< HEAD
 JavaScript là một ngôn ngữ đang phát triển, các tính năng mới được bổ sung thường xuyên.
-=======
-- **MSDN** – Microsoft manual with a lot of information, including JavaScript (often referred to as JScript). If one needs something specific to Internet Explorer, better go there: <http://msdn.microsoft.com/>.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
 
-Để xem sự hỗ trợ của nó giữa các trình duyệt và engine khác:
+Để xem sự hỗ trợ chúng giữa các engine dựa trên trình duyệt và các engine khác, hãy xem:
 
-- <http://caniuse.com> - bảng tính năng hỗ trợ, chẳng hạn để xem engine nào hỗ trợ các hàm mã hóa hiện đại: <http://caniuse.com/#feat=cryptography>.
-- <https://kangax.github.io/compat-table> - bảng bao gồm các tính năng và các engine có hoặc không hỗ trợ các tính năng đó.
+- <http://caniuse.com> - các bảng hỗ trợ theo từng tính năng, ví dụ: để xem engine nào hỗ trợ các hàm mã hóa hiện đại: <http://caniuse.com/#feat=cryptography>.
+- <https://kangax.github.io/compat-table> - một bảng với các tính năng và các engine mà có hoặc không hỗ trợ các tính năng đó.
 
-Tất cả những tài nguyên trên đều rất hữu ích trong phát triển thực tế, chúng bao gồm chi tiết về Javascript, các tính năng hỗ trợ,...
+Tất cả các tài nguyên này đều hữu ích cho việc phát triển trong đời thực, vì chúng chứa thông tin có giá trị về các chi tiết ngôn ngữ, sự hỗ trợ chúng v.v.
 
-Nên nhớ tất cả những tài liệu trên (hoặc là trang này) trong trường hợp bạn cần tìm hiểu sâu về các tính năng cụ thể.
+Vui lòng ghi nhớ những tài nguyên trên (hoặc trang này) trong các trường hợp bạn cần thông tin chuyên sâu về một tính năng cụ thể.

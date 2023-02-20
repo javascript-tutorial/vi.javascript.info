@@ -1,3 +1,4 @@
+
 Câu trả lời là:
 
 - `a = 4` (được nhân với 2)

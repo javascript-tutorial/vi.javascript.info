@@ -4,9 +4,9 @@ importance: 5
 
 # Thay đổi "prototype"
 
-Trong mã dưới đây chúng ta định nghĩa một hàm tạo, tạo ra đối tượng và thay đổi prototype mặc định của hàm tạo.
+Trong mã dưới đây chúng ta tạo ra `new Rabbit`, sau đó cố gắng thay đổi prototype của nó.
 
-Ban đầu, chúng ta có mã:
+Ban đầu, chúng ta có mã này:
 
 ```js run
 function Rabbit() {}
@@ -20,7 +20,7 @@ alert( rabbit.eats ); // true
 ```
 
 
-1. Nếu thêm một lệnh nữa (được tô sáng), thì `alert` sẽ hiển thị gì?
+1. Chúng ta đã thêm một chuỗi nữa (được nhấn mạnh). Giờ thì `alert` sẽ hiển thị gì?
 
     ```js
     function Rabbit() {}
@@ -37,7 +37,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-2. ...Và nếu mã trở thành như sau(thay đổi một dòng) thì `alert` sẽ hiển thị gì?
+2. ...Và nếu mã trở thành như sau (đã thay đổi một dòng) thì `alert` sẽ hiển thị gì?
 
     ```js
     function Rabbit() {}
@@ -54,7 +54,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-3. Câu hỏi tương tự nếu mã như sau(thay đổi một dòng)?
+3. Câu hỏi tương tự nếu mã như sau (đã thay đổi một dòng)?
 
     ```js
     function Rabbit() {}

@@ -1,6 +1,7 @@
 # Các biến
 
 Trong hầu hết thời gian, một ứng dụng JavaScript cần phải làm việc với thông tin. Đây là hai ví dụ:
+
 1. Một cửa hàng trực tuyến -- thông tin có thể gồm các mặt hàng được bán và giỏ hàng của người dùng.
 2. Một ứng dụng chat -- thông tin có thể gồm các người dùng, các tin nhắn...
 
@@ -12,7 +13,7 @@ Một [biến (variable)](https://vi.wikipedia.org/wiki/Bi%E1%BA%BFn_(khoa_h%E1%
 
 Để tạo biến trong JavaScript, sử dụng từ khóa `let`.
 
-Câu lệnh dưới đây tạo (còn gọi là *khai báo* hay *định nghĩa*) một biến có tên "message":
+Câu lệnh dưới đây tạo (còn gọi là *khai báo*) một biến có tên "message":
 
 ```js
 let message;
@@ -80,7 +81,6 @@ let user = 'John'
 
 Tất cả các cách trên đều hợp lệ, chọn cách nào là do sở thích của bạn.
 
-
 ````smart header="`var` thay vì `let`"
 Trong các mã chương trình cũ, bạn sẽ bắt gặp từ khóa `var` thay vì `let`:
 
@@ -135,8 +135,22 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+````warn header="Khai báo hai lần sẽ gây ra lỗi"
+Một biến chỉ nên được khai báo một lần.
+
+Sự khai báo lặp lại cùng một biến là một lỗi:
+
+```js run
+let message = "This";
+
+// lặp lại 'let' dẫn đến một lỗi
+let message = "That"; // SyntaxError: 'message' đã được khai báo rồi
+```
+Vì thế, chúng ta nên khai báo mỗi biến một lần và tham chiếu đến nó mà không có `let`.
+````
+
 ```smart header="Ngôn ngữ lập trình hàm"
-Cần chú ý rằng chúng ta cũng có các ngôn ngữ lập trình [hàm](https://en.wikipedia.org/wiki/Functional_programming), như [Scala](http://www.scala-lang.org/) hay [Erlang](http://www.erlang.org/) không cho phép thay đổi giá trị biến.
+Cần chú ý rằng chúng ta cũng có các ngôn ngữ [lập trình hàm](https://vi.wikipedia.org/wiki/L%E1%BA%ADp_tr%C3%ACnh_h%C3%A0m), như [Scala](http://www.scala-lang.org/) hay [Erlang](http://www.erlang.org/) không cho phép thay đổi giá trị biến.
 
 Trong các ngôn ngữ này, một khi giá trị đã nằm trong "hộp", nó ở đó mãi mãi. Nếu cần lưu giá trị khác, chúng ta cần tạo ra "hộp" mới (khai báo một biến mới). Ta không thể tái sử dụng một biến đã có.
 
@@ -237,7 +251,7 @@ num = 5; // lỗi: num chưa định nghĩa
 const myBirthday = '18.04.1982';
 ```
 
-Biến khai báo bằng từ khóa `const` được gọi hà "hằng" (constant). Chúng không thể thay đổi được. Nếu cố tình thay đổi giá trị hằng sẽ dẫn tới một lỗi:
+Biến khai báo bằng từ khóa `const` được gọi hà "hằng" (constant). Chúng không thể bị gán lại. Nếu cố tình làm thế sẽ dẫn tới một lỗi:
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -279,7 +293,7 @@ Một "hằng" có nghĩa là giá trị không bao giờ thay đổi. Nhưng c�
 
 Ví dụ:
 ```js
-const pageLoadTime = /* thời gian tải trang web */;
+const pageLoadTime = /* time taken by a webpage to load */;
 ```
 
 Giá trị của `pageLoadTime` không được biết trước khi chương trình chạy, nên nó đặt tên theo cách bình thường. Nhưng nó vẫn là hẳng vì giá trị của nó không đổi sau đó.
@@ -314,7 +328,7 @@ Kết quả, các biến của họ giống như những chiếc hộp mà mọi
 
 Những lập trình viên này tiết kiệm được chút ít thời gian tạo biến, nhưng mất thời gian gấp 10 lần như vậy để gỡ lỗi.
 
-Tạo ra nhiều biến mở rộng là tốt chứ không xấu.
+Thêm một biến là tốt chứ không xấu.
 
 Bởi các minifier và trình duyệt hiện đại sẽ tối ưu được việc có nhiều biến trong chương trình, và hiệu năng chương trình không bị ảnh hưởng nhiều. Sử dụng các biến khác nhau cho những giá trị khác nhau thậm chí còn giúp JavaScript engine tối ưu mã của bạn.
 ```
@@ -323,14 +337,8 @@ Bởi các minifier và trình duyệt hiện đại sẽ tối ưu được vi�
 
 Chúng ta có thể tạo ra các biến để lưu dữ liệu bằng cách sử dụng các từ khóa `var`, `let`, hoặc `const`.
 
-<<<<<<< HEAD
-- `let` -- là cách khai báo hiện đại. Khi đoạn mã sử dụng chế độ strict thì bắt buộc phải khai báo bằng `let`.
+- `let` -- là cách khai báo hiện đại.
 - `var` -- là cách khai báo cũ. Thường chúng ta không còn dùng nó nữa, nhưng ta cũng sẽ chỉ ra chút khác biệt của nó so với `let` ở bài <info:var>, nếu bạn cần biết.
 - `const` -- giống như `let`, nhưng giá trị của biến không thay đổi được.
-=======
-- `let` -- is a modern variable declaration.
-- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
-- `const` -- is like `let`, but the value of the variable can't be changed.
->>>>>>> 34e9cdca3642882bd36c6733433a503a40c6da74
 
 Các biến nên được đặt tên sao cho dễ hiểu được dữ liệu bên trong nó.

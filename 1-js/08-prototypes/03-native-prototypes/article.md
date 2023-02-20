@@ -1,50 +1,44 @@
 # Các nguyên mẫu có sẵn
 
-Thuộc tính `"prototype"` được dùng rất nhiều bởi chính JavaScript. Tất cả các constructor có sẵn đều sử dụng nó.
+Thuộc tính `"prototype"` được dùng rộng rãi bởi chính JavaScript. Tất cả các hàm constructor có sẵn đều sử dụng nó.
 
-<<<<<<< HEAD
-Trước tiên ta tìm hiểu về hàm tạo ra các đối tượng thuần, sau đó là các đối tượng có sẵn phức tạp hơn.
-=======
-First we'll see at the details, and then how to use it for adding new capabilities to built-in objects.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Đầu tiên chúng ta sẽ xem chi tiết và sau đó là cách sử dụng nó để thêm các khả năng mới cho các đối tượng có sẵn.
 
 ## Object.prototype
 
-Giả sử chúng ta có một đối tượng trống:
+Giả sử chúng ta xuất ra một đối tượng rỗng:
 
 ```js run
 let obj = {};
 alert( obj ); // "[object Object]" ?
 ```
 
-Giá trị xuất ra là chuỗi `"[object Object]"` là do phương thức `toString`, còn thực tế `obj` là rỗng và không hề có `toString`. Vậy `toString` lấy ở đâu?
+Đâu là đoạn mã tạo chuỗi `"[object Object]"`? Đó là một phương thức `toString` có sẵn, nhưng nó ở đâu? Đối tượng `obj` là rỗng mà!
 
-...Thực ra cách viết `obj = {}` hoàn toàn giống `obj = new Object()`, ở đó `Object` là constructor có sẵn, có thuộc tính `prototype` tham chiếu tới một đối tượng khổng lồ chứa rất nhiều phương thức trong đó có `toString`.
+...Nhưng ký pháp ngắn gọn `obj = {}` là giống với `obj = new Object()`, trong đó `Object` là một hàm tạo đối tượng có sẵn, với `prototype` của riêng nó tham chiếu đến một đối tượng lớn với `toString` và các phương thức khác.
 
-Đây là hình ảnh mô tả chuyện gì đã xảy ra:
+Đây là những gì đang xảy ra:
 
 ![](object-prototype.svg)
 
-Khi tạo đối tượng bằng `new Object()` (hoặc bằng `{...}`), `Object.prototype` được gán cho `[[Prototype]]` của đối tượng, đây là quy tắc ta đã học ở bài trước:
+Khi `new Object()` được gọi (hoặc một literal object `{...}` được tạo), `[[Prototype]]` của nó được đặt thành `Object.prototype` theo quy tắc mà chúng ta đã thảo luận trong chương trước:
 
 ![](object-prototype-1.svg)
 
-Cho nên khi gọi `obj.toString()` thì phương thức này được lấy từ `Object.prototype`.
+Cho nên khi `obj.toString()` được gọi thì phương thức này được lấy từ `Object.prototype`.
 
-Ta có thể kiểm tra điều này:
+Chúng ta có thể kiểm tra nó như thế này:
 
 ```js run
 let obj = {};
 
 alert(obj.__proto__ === Object.prototype); // true
-// obj.toString === obj.__proto__.toString == Object.prototype.toString
+
+alert(obj.toString === obj.__proto__.toString); //true
+alert(obj.toString === Object.prototype.toString); //true
 ```
 
-<<<<<<< HEAD
-Chú ý rằng `Object.prototype` không có nguyên mẫu, thuộc tính `[[Prototype]]` của nó là `null`:
-=======
-Please note that there is no more `[[Prototype]]` in the chain above `Object.prototype`:
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Xin lưu ý rằng không còn `[[Prototype]]` trong chuỗi phía trên `Object.prototype`:
 
 ```js run
 alert(Object.prototype.__proto__); // null
@@ -52,78 +46,70 @@ alert(Object.prototype.__proto__); // null
 
 ## Các nguyên mẫu có sẵn khác
 
-Các constructor khác như `Array`, `Date`, `Function` ... cũng có thuộc tính `prototype` nơi giữ các phương thức có sẵn.
+Các đối tượng có sẵn khác như `Array`, `Date`, `Function` và các đối tượng khác cũng giữ các phương thức trong nguyên mẫu.
 
-<<<<<<< HEAD
-Ví dụ, khi tạo tạo mảng `[1, 2, 3]`, JavaScript tự động gọi `new Array()`. Mảng là đối tượng được tạo ra từ `Array`, và do vậy `Array.prototype` trở thành nguyên mẫu của mảng và cung cấp cho mảng nhiều phương thức có sẵn.
+Ví dụ: khi chúng ta tạo một mảng `[1, 2, 3]`, hàm tạo `new Array ()` mặc định được sử dụng. Vì vậy, `Array.prototype` trở thành nguyên mẫu của nó và cung cấp các phương thức. Điều đó rất tiết kiệm bộ nhớ.
 
-Tuy nhiên khác với `Object.prototype` các nguyên mẫu này vẫn có nguyên mẫu. Nguyên mẫu của chúng chính là `Object.prototype`. Do vậy người ta còn nói "mọi thứ đều thừa kế từ `Object.prototype`".
-=======
-For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is used internally. So `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
-
-By specification, all of the built-in prototypes have `Object.prototype` on the top. That's why some people say that "everything inherits from objects".
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Theo đặc tả, tất cả các nguyên mẫu có sẵn đều có `Object.prototype` ở trên cùng. Đó là lý do tại sao một số người nói rằng "mọi thứ kế thừa từ các đối tượng".
 
 Đây là hình ảnh minh họa với 3 nguyên mẫu:
 
 ![](native-prototypes-classes.svg)
 
-Cùng kiểm tra lại:
+Hãy kiểm tra các nguyên mẫu theo cách thủ công:
 
 ```js run
 let arr = [1, 2, 3];
 
-// arr thừa kế từ Array.prototype?
+// nó kế thừa từ Array.prototype?
 alert( arr.__proto__ === Array.prototype ); // true
 
-// Array.prototype thừa kế từ Object.prototype?
+// sau đó từ Object.prototype?
 alert( arr.__proto__.__proto__ === Object.prototype ); // true
 
-// Object.prototype không thừa kế từ ai cả
+// và null ở trên cùng.
 alert( arr.__proto__.__proto__.__proto__ ); // null
 ```
 
-Các phương thức trong các nguyên mẫu có thể "đè" lên nhau, ví dụ, `Array.prototype` có phương thức `toString` giúp liệt kê các phần tử của mảng với dấu phảy ngăn cách:
+Một số phương thức trong nguyên mẫu có thể trùng lặp, ví dụ: `Array.prototype` có `toString` riêng liệt kê các phần tử được phân tách bằng dấu phẩy:
 
 ```js run
 let arr = [1, 2, 3]
 alert(arr); // 1,2,3 <-- là kết quả của Array.prototype.toString
 ```
 
-Nhưng `Object.prototype` cũng có `toString`. Vậy `arr` lấy `toString` từ `Array.prototype` hay từ `Object.prototype`? Câu trả lời rất đơn giản: nó lấy từ nguyên mẫu gần nó nhất tức `Array.prototype`.
-
+Như chúng ta đã thấy trước đây, `Object.prototype` cũng có `toString`, nhưng `Array.prototype` gần hơn trong chuỗi, vì vậy biến thể của mảng được sử dụng.
 
 ![](native-prototypes-array-tostring.svg)
 
-
-Trong Developer console của trình duyệt bạn cũng có thể thấy được chuỗi thừa kế bằng lệnh `console.dir`:
+Các công cụ trong trình duyệt như Developer Console của Chrome cũng hiển thị sự kế thừa (`console.dir` có thể cần được sử dụng cho các đối tượng có sẵn):
 
 ![](console_dir_array.png)
 
-Các đối tượng có sẵn khác cũng làm việc tương tự. Ngay cả các hàm -- là đối tượng tạo ra bởi constructor `Function`, thực ra lấy các phương thức của nó(`call`/`apply` và phương thức khác) từ `Function.prototype`. Các hàm cũng có được phương thức `toString` từ đây.
+Các đối tượng có sẵn khác cũng hoạt động tương tự. Ngay cả các hàm -- chúng là các đối tượng tạo ra bởi hàm tạo `Function` có sẵn, và các phương thức của nó (`call`/`apply` và phương thức khác) là lấy từ `Function.prototype`. Các hàm cũng có thể có phương thức `toString` của riêng chúng.
 
 ```js run
 function f() {}
 
 alert(f.__proto__ == Function.prototype); // true
-alert(f.__proto__.__proto__ == Object.prototype); // true
+alert(f.__proto__.__proto__ == Object.prototype); // true, kết thừa từ các đối tượng
 ```
 
-## Các giá trị kiểu cơ sở
+## Các giá trị cơ bản
 
-Đối với các giá trị kiểu cơ sở như chuỗi, số và giá trị lôgic câu chuyện có phức tạp hơn đôi chút.
+Điều khó hiểu nhất xảy ra với các chuỗi, số và boolean.
 
-Như ta đã biết, chúng không phải là các đối tượng. Nhưng nếu ta cố tình truy cập các thuộc tính hay phương thức của chúng, một đối tượng bao được tạo bằng các constructor `String`, `Number`, `Boolean` sẽ thay thế và cung cấp các thuộc tính và phương thức này. Sau khi sử dụng xong đối tượng bảo bị xóa.
+Như chúng ta vẫn nhớ, chúng không phải là các đối tượng. Nhưng nếu chúng ta cố gắng truy cập các thuộc tính của chúng, các đối tượng bao tạm thời được tạo ra bằng cách sử dụng các hàm tạo có sẵn `String`, `Number` và `Boolean`. Chúng cung cấp các phương thức rồi biến mất.
 
-Các thuộc tính và phương thức của đối tượng thực ra cũng được lấy từ các nguyên mẫu sẵn có đó là `String.prototype`, `Number.prototype` và `Boolean.prototype`.
+Những đối tượng này được tạo ra một cách vô hình đối với chúng ta và hầu hết các engine tối ưu hóa chúng, nhưng đặc tả mô tả chính xác theo cách này. Các phương thức của các đối tượng này cũng nằm trong các nguyên mẫu, có sẵn dưới dạng `String.prototype`, `Number.prototype` và `Boolean.prototype`.
 
-```warn header="Các giá trị `null` and `undefined` không có đối tượng bao"
-Các giá trị `null` và `undefined` khác với tất cả các giá trị cơ sở khác. Chúng không có đối tượng bao, nên cũng không có các thuộc tính và phương thức. Và do đó cũng không có nguyên mẫu.
+```warn header="Các giá trị `null` và `undefined` không có đối tượng bao"
+Các giá trị đặc biệt `null` và `undefined` thì khác biệt. Chúng không có các bao đối tượng, vì vậy không có sẵn các phương thức và thuộc tính cho chúng. Và cũng không có các nguyên mẫu tương ứng.
 ```
 
 ## Thay đổi các nguyên mẫu có sẵn [#native-prototype-change]
 
-Các nguyên mẫu có sẵn có thể thay đổi được. Ví dụ, nếu bạn thêm vào `String.prototype` một phương thức, phương thức này có thể được dùng cho mọi chuỗi:
+Các nguyên mẫu có sẵn có thể thay đổi được. Ví dụ, nếu chúng ta thêm vào `String.prototype` một phương thức, phương thức này trở nên sẵn có cho mọi chuỗi:
 
 ```js run
 String.prototype.show = function() {
@@ -133,23 +119,19 @@ String.prototype.show = function() {
 "BOOM!".show(); // BOOM!
 ```
 
-Trong quá trình phát triển, chúng ta có thể có những ý tưởng về các phương thức mới và muốn thêm nó vào các nguyên mẫu có sẵn. Nhưng đây không phải là cách làm tốt.
+Trong quá trình phát triển, chúng ta có thể có những ý tưởng về các phương thức mới mà chúng ta muốn có, và chúng ta có thể bị cám dỗ để thêm chúng vào các nguyên mẫu có sẵn. Nhưng đó nói chung là một ý kiến tồi.
 
 ```warn
-<<<<<<< HEAD
-Các nguyên mẫu được dùng ở mọi nơi, nên rất dễ xảy ra xung đột. Nếu hai thư viện cùng thêm phương thức `String.prototype.show`, một trong số chúng sẽ ghi đè lên thư viện kia.
-=======
-Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the method of the other.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Các nguyên mẫu là toàn cục, vì vậy rất dễ xảy ra xung đột. Nếu hai thư viện cùng thêm một phương thức `String.prototype.show`, thì một trong số chúng sẽ ghi đè phương thức của cái kia.
 
-Vì thế, nói chung sửa đổi nguyên mẫu có sẵn là một ý tưởng tồi.
+Vì thế, nói chung sửa đổi một nguyên mẫu có sẵn là một ý kiến tồi.
 ```
 
-**Trong lập trình hiện đại, chỉ có một trường hợp duy nhất có thể thay đổi nguyên mẫu có sẵn.Đó là polyfilling.**
+**Trong lập trình hiện đại, chỉ có một trường hợp duy nhất có thể thay đổi các nguyên mẫu có sẵn. Đó là polyfilling.**
 
-Polyfilling là tạo một phương thức thay thế cho một phương thức đã có trong đặc tả nhưng chưa được hỗ trợ bởi JavaScript engine hiện tại.
+Polyfilling là một thuật ngữ cho việc tạo một phương thức thay thế cho một phương thức đã có trong đặc tả nhưng chưa được hỗ trợ bởi một JavaScript engine cụ thể.
 
-Lúc này ta phải tự viết phương thức sao cho nó hoạt động giống như phương thức trong đặc tả, sau đó thêm nó vào nguyên mẫu như trong đặc tả.
+Sau đó, chúng ta có thể cài đặt nó theo cách thủ công và thêm nó vào nguyên mẫu như trong đặc tả.
 
 Ví dụ:
 
@@ -160,15 +142,9 @@ if (!String.prototype.repeat) { // nếu không có phương thức
   String.prototype.repeat = function(n) {
     // lặp lại chuỗi n lần
 
-<<<<<<< HEAD
     // thực tế mã phức tạp hơn một chút
     // (toàn bộ thuật toán có trong đặc tả)
-    // nhưng một phiên bản polyfill chưa hoàn hảo cũng đủ dùng rồi
-=======
-    // actually, the code should be a little bit more complex than that
-    // (the full algorithm is in the specification)
-    // but even an imperfect polyfill is often considered good enough for use
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+    // nhưng ngay cả một polyfill không hoàn hảo cũng thường được coi là đủ tốt
     return new Array(n + 1).join(this);
   };
 }
@@ -176,20 +152,15 @@ if (!String.prototype.repeat) { // nếu không có phương thức
 alert( "La".repeat(3) ); // LaLaLa
 ```
 
-
 ## Mượn phương thức từ các nguyên mẫu
 
-Trong bài <info:call-apply-decorators#method-borrowing> chúng ta đã nói về mượn phương thức.
+Trong chương <info:call-apply-decorators#method-borrowing> chúng ta đã nói về mượn phương thức.
 
-Đó là khi chúng ta lấy phương thức của một đối tượng và dùng cho đối tượng khác.
+Đó là khi chúng ta lấy phương thức của một đối tượng và sao chép nó vào một đối tượng khác.
 
-Một số phương thức của các nguyên mẫu có sẵn cũng có thể mượn được.
+Một số phương thức của các nguyên mẫu có sẵn thường được mượn.
 
-<<<<<<< HEAD
-Ví dụ, nếu chúng ta tạo một mảng giả, chúng ta muốn lấy vài phương thức của mảng thật cho nó.
-=======
-For instance, if we're making an array-like object, we may want to copy some `Array` methods to it.
->>>>>>> fb38a13978f6e8397005243bc13bc1a20a988e6a
+Ví dụ, nếu chúng ta đang tạo một đối tượng tựa như mảng, chúng ta có thể muốn sao chép một số phương thức của `Array` cho nó.
 
 Ví dụ:
 
@@ -207,18 +178,18 @@ obj.join = Array.prototype.join;
 alert( obj.join(',') ); // Chào thế giới!
 ```
 
-Nó làm việc, bởi vì thuật toán bên trong của `join` hoàn toàn áp dụng được cho mảng giả. Còn nhiều phương thức có sẵn khác cũng có thể mượn được như vậy.
+Nó hoạt động tốt vì thuật toán nội bộ của phương thức `join` có sẵn chỉ quan tâm đến các chỉ mục chính xác và thuộc tính `length`. Nó không kiểm tra xem đối tượng có thực sự là một mảng hay không. Nhiều phương thức có sẵn cũng giống như vậy.
 
-Có một cách khác đó là cài đặt `obj.__proto__` thành `Array.prototype`, và `obj` mượn được tất cả các phương thức của mảng.
+Một khả năng khác là kế thừa bằng cách đặt `obj.__proto__` bằng `Array.prototype`, vì thế tất cả các phương thức của `Array` đều tự động có sẵn trong `obj`.
 
-Điều này không thể thực hiện nếu `obj` đã có một nguyên mẫu khác. Nhớ rằng, một đối tượng tại một thời điểm chỉ có một nguyên mẫu.
+Nhưng điều đó là không thể nếu `obj` đã kế thừa từ một đối tượng khác. Hãy nhớ rằng, chúng ta chỉ có thể kế thừa từ một đối tượng tại một thời điểm.
 
-Việc mượn phương thức rất mềm dẻo, nó cho phép phối hợp các tính năng từ nhiều đối tượng để áp dụng cho đối tượng hiện tại.
+Việc mượn phương thức rất linh hoạt, nó cho phép kết hợp các chức năng từ các đối tượng khác nhau nếu cần.
 
 ## Tóm tắt
 
-- Tất cả các đối tượng có sẵn đều tuân theo mô hình:
-    - Các phương thức lưu trong nguyên mẫu (`Array.prototype`, `Object.prototype`, `Date.prototype`...).
-    - Đối tượng chỉ chứa dữ liệu (phần tử mảng, thuộc tính, ngày/tháng...).
-- Các giá trị cơ sở giữ phương thức trong nguyên mẫu của đối tượng bao: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Chỉ `undefined` và `null` không có đối tượng bao.
-- Các nguyên mẫu có sẵn có thể thay đổi được hoặc bổ sung thêm phương thức mới. Nhưng không nên sửa chúng. Chỉ nên sửa nếu ta cần thêm các phương thức mới có trong đặc tả nhưng chưa được JavaScript engine hỗ trợ.
+- Tất cả các đối tượng có sẵn đều tuân theo cùng một khuôn mẫu:
+    - Các phương thức được lưu trong nguyên mẫu (`Array.prototype`, `Object.prototype`, `Date.prototype`...).
+    - Đối tượng chỉ chứa dữ liệu (phần tử mảng, thuộc tính, ngày/tháng).
+- Các giá trị cơ bản cũng lưu các phương thức trong nguyên mẫu của các đối tượng bao: `Number.prototype`, `String.prototype` và `Boolean.prototype`. Chỉ `undefined` và `null` không có các đối tượng bao.
+- Các nguyên mẫu có sẵn có thể được thay đổi hoặc bổ sung thêm các phương thức mới. Nhưng không nên sửa chúng. Trường hợp được phép duy nhất có lẽ là khi chúng ta bổ sung một tiêu chuẩn mới, nhưng nó chưa được hỗ trợ bởi JavaScript engine

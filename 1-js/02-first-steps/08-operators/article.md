@@ -1,6 +1,7 @@
+
 # Các toán tử
 
-Chúng ta đã biết rất nhiều toán tử từ học đường. Chúng là những thứ như cộng `+`, nhân `*`, trừ `-`, và các toán tử khác.
+Chúng ta đã biết rất nhiều toán tử trường học. Chúng là những thứ như cộng `+`, nhân `*`, trừ `-`, và các toán tử khác.
 
 Trong chương này, chúng ta sẽ tập trung vào các khía cạnh của các toán tử không được bao gồm trong môn số học của học đường.
 
@@ -19,22 +20,72 @@ Trước khi tiếp tục, hãy nắm bắt một số thuật ngữ phổ biế
     */!*
     alert( x ); // -1, phủ định đơn nguyên được áp dụng
     ```
-- Một toán tử là *nhị phân* nếu nó có hai toán hạng. Dấu trừ tương tự cũng tồn tại ở dạng nhị phân:
+- Một toán tử là *binary* nếu nó có hai toán hạng. Trừ cũng tồn tại tương tự ở dạng đơn nguyên:
 
     ```js run no-beautify
     let x = 1, y = 3;
-    alert( y - x ); // 2, trừ nhị phân trừ đi các giá trị
+    alert( y - x ); // 2, binary minus subtracts values
     ```
 
-    Chính thức, chúng ta đang nói về hai toán tử khác nhau ở đây: phủ định đơn nguyên (toán hạng đơn: đảo ngược dấu) và phép trừ nhị phân (hai toán hạng: phép trừ).
+    Về hình thức, trong các ví dụ trên, chúng ta có hai toán tử khác nhau có chung ký hiệu: toán tử phủ định, toán tử một ngôi đảo ngược dấu và toán tử trừ, toán tử nhị phân trừ một số khỏi một số khác.
 
-## Nối chuỗi, nhị phân +
+## Toán học
 
-Bây giờ, chúng ta hãy xem các tính năng đặc biệt của các toán tử JavaScript nằm ngoài phạm vi của học đường.
+Các hoạt động toán học sau đây được hỗ trợ:
 
-Thông thường, toán tử cộng `+` dùng để cộng hai số.
+- Cộng `+`,
+- Trừ `-`,
+- Nhân `*`,
+- Chia `/`,
+- Chia lấy dư `%`,
+- Lũy thừa `**`.
 
-Nhưng, nếu trong nhị phân `+` được dùng cho chuỗi, nó nối (tiếp) chúng:
+Bốn cái đầu tiên rất đơn giản, trong khi `%` và `**` cần một vài giải thích về chúng.
+
+### Chia lấy dư %
+
+Toán tử chia lấy dư `%`, mặc dù xuất hiện nhưng không liên quan đến phần trăm.
+
+Kết quả của `a % b` là [phần dư](https://en.wikipedia.org/wiki/Remainder) của phép chia số nguyên của `a` cho `b`.
+
+Ví dụ:
+
+```js run
+alert( 5 % 2 ); // 1, phần dư của 5 chia 2
+alert( 8 % 3 ); // 2, phần dư của 8 chia 3
+```
+
+### Exponentiation **
+
+The exponentiation operator `a ** b` raises `a` to the power of `b`.
+
+In school maths, we write that as a<sup>b</sup>.
+
+For instance:
+
+```js run
+alert( 2 ** 2 ); // 2² = 4  
+alert( 2 ** 3 ); // 2³ = 8 
+alert( 2 ** 4 ); // 2⁴ = 16
+```
+
+Just like in maths, the exponentiation operator is defined for non-integer numbers as well. 
+
+For example, a square root is an exponentiation by ½:
+
+```js run
+alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root)
+alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+```
+
+
+## String concatenation with binary +
+
+Let's meet features of JavaScript operators that are beyond school arithmetics.
+
+Usually, the plus operator `+` sums numbers.
+
+But, if the binary `+` is applied to strings, it merges (concatenates) them:
 
 ```js
 let s = "my" + "string";
@@ -52,8 +103,7 @@ alert( 2 + '1' ); // "21"
 
 Thấy không, nó không quan trọng toán tử đầu tiên hay thứ hai là chuỗi. Luật ở đây rất đơn giản: nếu một trong hai toán tử là chuỗi, toán tử còn lại cũng sẽ được chuyển thành chuỗi.
 
-Tuy nhiên, nhớ rằng các toán tử được đọc từ trái sang phải. Nếu có hai số được theo sau bởi một chuỗi, các số đó sẽ được cộng trước khi được chuyển đổi thành một chuỗi:
-
+Đây là một ví dụ phức tạp hơn:
 
 ```js run
 alert(2 + 2 + '1' ); // "41" chứ không phải "221"
@@ -64,8 +114,24 @@ Nối chuỗi và chuyển đổi chuỗi là một tính năng đặc biệt c�
 Ví dụ, phép trừ và phép chia:
 
 ```js run
-alert( 2 - '1' ); // 1
-alert( '6' / '2' ); // 3
+alert(2 + 2 + '1' ); // "41" and not "221"
+```
+
+Tại đây, các toán tử lần lượt làm việc. `+` đầu tiên tính tổng hai số, do đó, nó trả về `4`, sau đó `+` tiếp theo thêm chuỗi `1` vào nó, do đó, nó giống như `4 + '1' = '41'`.
+
+```js run
+alert('1' + 2 + 2); // "122" không phải "14"
+```
+
+Ở đây, toán hạng đầu tiên là một chuỗi, trình biên dịch cũng coi hai toán hạng còn lại là các chuỗi. `2` được nối với `'1'`, vì vậy nó giống như `'1' + 2 = "12"` và `"12" + 2 = "122"`.
+
+Nhị phân `+` là toán tử duy nhất hỗ trợ các chuỗi theo cách như vậy. Các toán tử số học khác chỉ làm việc với các số và luôn chuyển đổi toán hạng của chúng thành số.
+
+Đây là bản demo cho phép trừ và phép chia:
+
+```js run
+alert( 6 - '2' ); // 4, chuyển '2' thành một số
+alert( '6' / '2' ); // 3, chuyển đổi cả hai toán hạng thành số
 ```
 
 ## Chuyển đổi số, đơn nguyên +
@@ -78,6 +144,7 @@ Ví dụ:
 
 ```js run
 // Không đụng đến số
+
 let x = 1;
 alert( +x ); // 1
 
@@ -119,13 +186,13 @@ alert( +apples + +oranges ); // 5
 // alert( Number(apples) + Number(oranges) ); // 5
 ```
 
-Từ quan điểm của một nhà toán học, sự phong phú của các phép cộng có vẻ lạ. Nhưng theo quan điểm của một lập trình viên, không có gì đặc biệt: các phép cộng đơn được áp dụng trước tiên, họ chuyển đổi chuỗi thành số và sau đó phép cộng nhị phân cộng  chúng lại.
+Từ quan điểm của một nhà toán học, sự phong phú của các phép cộng có vẻ lạ. Nhưng theo quan điểm của một lập trình viên, không có gì đặc biệt: các phép cộng đơn được áp dụng trước tiên, họ chuyển đổi chuỗi thành số và sau đó phép cộng nhị phân cộng chúng lại.
 
 Tại sao các phép cộng đơn nguyên được áp dụng cho các giá trị trước các giá trị nhị phân? Như chúng ta thấy, đó là vì *sự ưu tiên cao hơn* của nó.
 
 ## Toán tử ưu tiên
 
-Nếu một biểu thức có nhiều toán tử, thứ tự thực hiện được xác định bởi *độ ưu tiên* của chúng, hay nói cách khác, thứ tự ưu tiên mặc định của các toán tử.
+Nếu một biểu thức có nhiều hơn một toán tử, thì thứ tự thực thi được xác định theo *độ ưu tiên* của chúng, hay nói cách khác, thứ tự ưu tiên mặc định của các toán tử.
 
 Từ trường học, tất cả chúng ta đều biết rằng phép nhân trong biểu thức `1 + 2 * 2` nên được tính trước khi cộng. Đó chính xác là độ ưu tiên. Phép nhân được cho là có *độ ưu tiên cao hơn* phép cộng.
 
@@ -136,19 +203,20 @@ Có nhiều toán tử trong JavaScript. Mỗi toán tử có một số ưu ti�
 Đây là đoạn trích từ [bảng độ ưu tiên](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) (bạn không cần phải nhớ nó, nhưng nhớ rằng các toán tử đơn nguyên có độ ưu tiên cao hơn các toán tử nhị phân):
 
 | Độ ưu tiên | Tên | Kí hiệu |
-|------------|------|------|
+|------------|-----|---------|
 | ... | ... | ... |
-| 16 | cộng đơn nguyên | `+` |
-| 16 | trừ đơn nguyên | `-` |
-| 14 | nhân | `*` |
-| 14 | chia | `/` |
+| 17 | cộng đơn nguyên | `+` |
+| 17 | trừ đơn nguyên | `-` |
+| 16 | lũy thừa | `**` |
+| 15 | nhân | `*` |
+| 15 | chia | `/` |
 | 13 | cộng | `+` |
 | 13 | trừ | `-` |
 | ... | ... | ... |
 | 3 | gán | `=` |
 | ... | ... | ... |
 
-Như chúng ta thấy, phép "cộng đơn nguyên" có độ ưu tiên là `16` cao hơn `13` của phép "cộng" (cộng nhị phân). Đó là lý do, trong biểu thức `"+apples + +oranges"`, cộng đơn nguyên chạy trước cộng nhị phân.
+Như chúng ta thấy, phép "cộng đơn nguyên" có độ ưu tiên là `17` cao hơn `13` của phép "cộng" (cộng nhị phân). Đó là lý do, trong biểu thức `"+apples + +oranges"`, cộng đơn nguyên chạy trước cộng nhị phân.
 
 ## Phép gán
 
@@ -162,24 +230,11 @@ let x = 2 * 2 + 1;
 alert( x ); // 5
 ```
 
-Có thể xâu chuỗi các phép gán:
+### Phép gán = trả về một giá trị
 
-```js run
-let a, b, c;
+Việc `=` là một toán tử, không phải là một cấu trúc ngôn ngữ "ma thuật" có một hàm ý thú vị.
 
-*!*
-a = b = c = 2 + 2;
-*/!*
-
-alert( a ); // 4
-alert( b ); // 4
-alert( c ); // 4
-```
-
-Chuỗi các phép gán được xác định từ phải sang trái. Đầu tiên, biểu thức ngoài cùng bên phải `2 + 2` được ước tính và sau đó được gán cho các biến ở bên trái:` c`, `b` và` a`. Cuối cùng, tất cả các biến chia sẻ một giá trị duy nhất.
-
-````smart header="Toán tử phép gán `\"=\"` trả về một giá trị"
-Một toán tử luôn luôn trả về một giá trị. Điều đó rõ ràng đối với hầu hết trong số chúng như phép cộng `+` hoặc phép nhân `*`. Nhưng toán tử gán cũng tuân theo quy tắc này.
+Một toán tử trong JavaScript trả về một giá trị. Điều đó rõ ràng đúng với phép cộng `+` hoặc phép trừ `-`, nhưng cũng đúng với `=`.
 
 Gọi `x = value` nghĩa là gán `value` vào `x` *và sau đó trả về nó*.
 
@@ -199,65 +254,92 @@ alert( c ); // 0
 
 Trong ví dụ trên, kết quả của biểu thức `(a = b + 1)` được gán cho `a` (đó là `3`). Sau đó nó được sử dụng tiếp để tính toán.
 
-Lập trình thật hài hước, phải không? Chúng ta nên hiểu cách thức hoạt động của nó, bởi vì đôi khi chúng ta thấy nó trong các thư viện JavaScript, nhưng đừng nên tự viết bất cứ thứ gì như thế. Viết như vậy chắc chắn không làm cho code rõ ràng hơn hay dễ đọc hơn.
+Lập trình thật hài hước, phải không? Chúng ta nên hiểu cách thức hoạt động của nó, bởi vì đôi khi chúng ta thấy nó trong các thư viện JavaScript.
 
-## Phần dư %
+Tuy nhiên, đừng nên viết code như thế. Viết như vậy chắc chắn không làm cho code rõ ràng hay dễ đọc hơn.
 
-Toán tử phần dư `%`, mặt dù sự xuất hiện của nó, không liên quan đến phần trăm.
+## Phép gán chuỗi
 
-Kết quả của `a % b` là phần dư phép chia số nguyên của `a` cho `b`.
+Một tính năng thú vị khác là khả năng gán chuỗi:
+
+```js run
+let a, b, c;
+
+*!*
+a = b = c = 2 + 2;
+*/!*
+
+alert( a ); // 4
+alert( b ); // 4
+alert( c ); // 4
+```
+
+Gán chuỗi đánh giá từ phải sang trái. Đầu tiên, biểu thức ngoài cùng bên phải `2 + 2` được tính rồi gán cho các biến ở bên trái: `c`, `b` và `a`. Cuối cùng, tất cả các biến chia sẻ một giá trị duy nhất.
+
+Một lần nữa, với mục tiêu dễ đọc dễ hiểu, ta nên chia code thành nhiều dòng:
+
+```js
+c = 2 + 2;
+b = c;
+a = c;
+```
+
+Nó khiến code dễ đọc, đặc biệt khi quan sát nhanh code.
+
+## Sửa-trực-tiếp
+
+Chúng ta thường thực hiện phép tính trên một biến và lưu kết quả và chính nó.
 
 Ví dụ:
 
-```js run
-alert( 5 % 2 ); // 1 là phần dư của 5 chia cho 2
-alert( 8 % 3 ); // 2 là phần dư của 8 chia cho 3
-alert( 6 % 3 ); // 0 là phần dư của 6 chia cho 3
+```js
+let n = 2;
+n = n + 5;
+n = n * 2;
 ```
 
-## Lũy thừa **
-
-Toán tử lũy thừa `**` là phần mới được thêm vào ngôn ngữ gần đây.
-
-Cho một số tự nhiên `b`, kết quả của `a ** b` là `a` nhân với chính nó `b` lần.
-
-Ví dụ:
+Điều này có thể làm ngắn hơn bằng cách dùng `+=` và `*=`:
 
 ```js run
-alert( 2 ** 2 ); // 4  (2 * 2)
-alert( 2 ** 3 ); // 8  (2 * 2 * 2)
-alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2)
+let n = 2;
+n += 5; // now n = 7 (same as n = n + 5)
+n *= 2; // now n = 14 (same as n = n * 2)
+
+alert( n ); // 14
 ```
 
-Toán tử này cũng hoạt động với số không phải số nguyên.
+Phép tính ngắn "sửa-và-gán" tồn tại cho tất cả các toán tử số học và bitwise: `/=`, `-=`, vv.
 
-Ví dụ:
+Các toán tử như vậy có cùng mức độ ưu tiên như một phép gán thông thường, vì vậy chúng chạy sau hầu hết các phép tính khác:
 
 ```js run
-alert( 4 ** (1/2) ); // 2 (lũy thừa của 1/2 giống như căn bậc hai, đó là toán học)
-alert( 8 ** (1/3) ); // 2 (lũy thừa 1/3 giống như căn bậc ba)
+let n = 2;
+
+n *= 3 + 5;
+
+alert( n ); // 16  (phần bên phải thực hiện trước, giống như n *= 8)
 ```
 
-## Phép tăng/phép giảm
+## Tăng/giảm
 
-<!-- Can't use -- in title, because built-in parse turns it into – -->
+<!-- Can't use -- in title, because the built-in parser turns it into a 'long dash' – -->
 
-Tăng hoặc giảm một số là một trong những thao tác số phổ biến nhất.
+Tăng hoặc giảm một số là một trong những hoạt động số phổ biến nhất.
 
 Vì vậy, có các toán tử đặc biệt cho nó:
 
-- **Phép tăng** `++` tăng giá trị của biến thêm 1:
+- **Phép tăng** `++` làm tăng giá trị của biến lên 1:
 
     ```js run no-beautify
     let counter = 2;
-    counter++;        // hoạt động như counter = counter + 1, nhưng ngắn hơn
+    counter++;        // hoạt động giống như counter = counter + 1, nhưng ngắn hơn
     alert( counter ); // 3
     ```
 - **Phép giảm** `--` giảm giá trị của biến đi 1:
 
     ```js run no-beautify
     let counter = 2;
-    counter--;        // hoạt động như counter = counter - 1, nhưng ngắn hơn
+    counter--;        // hoạt động giống như counter = counter - 1, nhưng ngắn hơn
     alert( counter ); // 1
     ```
 
@@ -285,7 +367,7 @@ let a = ++counter; // (*)
 alert(a); // *!*2*/!*
 ```
 
-Trong dòng `(*)`, dạng *tiền tố* `++counter` tăng `counter` và trả về giá trị mới, `2`. Vì vậy, hàm `alert` sẽ hiển thị `2`.
+Trong dòng `(*)`, dạng *tiền tố* `++counter` tăng `counter` và trả về giá trị mới là `2`. Vì vậy, hàm `alert` sẽ hiển thị `2`.
 
 Giờ, hãy sử dụng dạng hậu tố:
 
@@ -306,6 +388,7 @@ Tóm tắt:
     let counter = 0;
     counter++;
     ++counter;
+
     alert( counter ); // 2, những dòng phía trên đều giống nhau
     ```
 - Nếu chúng ta muốn tăng giá trị *và* ngay lập tức sử dụng kết quả của toán tử, chúng ta cần dạng tiền tố:
@@ -314,7 +397,8 @@ Tóm tắt:
     let counter = 0;
     alert( ++counter ); // 1
     ```
-- Nếu chúng ta muốn tăng giá trị * và * muốn sử dụng kết quả trước của nó, chúng ta cần dạng hậu tố:
+    
+- Nếu chúng tâ muốn tăng một giá trị nhưng sử dụng giá trị trước đó của nó, thì chúng ta cần dạng hậu tố:
 
     ```js run
     let counter = 0;
@@ -338,7 +422,7 @@ let counter = 1;
 alert( 2 * counter++ ); // 2, vì counter++ trả về giá trị "cũ"
 ```
 
-Mặc dù không sai về mặt kỹ thuật, ký hiệu như vậy thường làm cho code khó đọc hơn. Làm nhiều việc trên một dòng - không tốt.
+Mặc dù không sai về mặt kỹ thuật, ký hiệu như vậy thường làm cho code khó đọc hơn. Làm nhiều việc trên cùng một dòng - không tốt.
 
 Trong lúc đọc code, lướt mắt theo chiều "dọc" nhanh có thể khiến ta bỏ lỡ thứ gì đó như `counter++` và không biết rằng biến đã được tăng lên.
 
@@ -367,49 +451,15 @@ Danh sách các toán tử:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
-Các toán tử này rất hiếm khi được sử dụng. Để hiểu chúng, chúng ta cần đi sâu vào biểu diễn số cấp thấp và không nên làm điều đó ngay bây giờ, đặc biệt vì chúng ta sẽ không cần chúng sớm. Nếu bạn tò mò, bạn có thể đọc [Toán tử Bitwise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) bài viết trên MDN. Sẽ thực tế hơn khi làm điều đó khi có nhu cầu thực sự.
-
-## Sửa đổi tại chỗ
-
-Chúng ta thường cần áp dụng một toán tử cho một biến và lưu trữ kết quả mới trong cùng một biến đó.
-
-Ví dụ:
-
-```js
-let n = 2;
-n = n + 5;
-n = n * 2;
-```
-
-Ký hiệu này có thể được rút ngắn bằng cách sử dụng các toán tử `+=` và `*=`:
-
-```js run
-let n = 2;
-n += 5; // bây giờ n = 7 (giống như n = n + 5)
-n *= 2; // bây giờ n = 14 (giống như n = n * 2)
-
-alert( n ); // 14
-```
-
-Toán tử "sửa và gán" tồn tại cho tất cả các toán tử số học và bitwise: `/=`, `-=`, vâng vâng.
-
-Các toán tử như vậy có cùng mức ưu tiên như một phép gán thông thường, vì vậy chúng chạy sau hầu hết các phép tính khác:
-
-```js run
-let n = 2;
-
-n *= 3 + 5;
-
-alert( n ); // 16  (phần bên phải được chạy đầu tiên, giống như n *= 8)
-```
+Các toán tử này rất hiếm khi được sử dụng, khi chúng ta cần xử lý các số ở mức rất thấp (bitwise). Chúng ta sẽ không cần đến những toán tử này trong thời gian tới, vì việc phát triển web ít sử dụng chúng, nhưng trong một số lĩnh vực đặc biệt, chẳng hạn như mật mã, chúng rất hữu ích. Bạn có thể đọc chương [Toán tử Bitwise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) trên MDN khi có nhu cầu.
 
 ## Dấu phẩy
 
-Toán tử dấu phẩy `,` là một trong những toán tử hiếm nhất và bất thường nhất. Đôi khi, nó được sử dụng để viết code ngắn hơn, vì vậy chúng ta cần biết nó để hiểu những gì đang xảy ra.
+The comma operator `,` is one of the rarest and most unusual operators. Sometimes, it's used to write shorter code, so we need to know it in order to understand what's going on.
 
-Toán tử dấu phẩy cho phép chúng ta chạy một số biểu thức, chia chúng bằng dấu phẩy `,`. Mỗi phần trong số chúng được chạy nhưng chỉ có kết quả của phần cuối cùng được trả về.
+The comma operator allows us to evaluate several expressions, dividing them with a comma `,`. Each of them is evaluated but only the result of the last one is returned.
 
-Ví dụ:
+For example:
 
 ```js run
 *!*
@@ -440,4 +490,4 @@ for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
 }
 ```
 
-Các thủ thuật như vậy được sử dụng trong nhiều JavaScript frameworks. Đó là lý do tại sao chúng tôi đề cập đến chúng. Nhưng thường thì nó không cải thiện khả năng dễ đọc của code vì vậy chúng ta nên suy nghĩ kỹ trước khi sử dụng chúng.
+Các thủ thuật như vậy được sử dụng trong nhiều JavaScript frameworks. Đó là lý do tại sao chúng ta đề cập đến chúng. Nhưng thường thì nó không cải thiện khả năng dễ đọc của code vì vậy chúng ta nên suy nghĩ kỹ trước khi sử dụng chúng.

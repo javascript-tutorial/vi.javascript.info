@@ -20,15 +20,15 @@ Cross-origin requests -- those sent to another domain (even a subdomain) or prot
 
 That policy is called "CORS": Cross-Origin Resource Sharing.
 
-## Why CORS is needed? A brief history
+## Why is CORS needed? A brief history
 
-CORS exists protect the internet from evil hackers.
+CORS exists to protect the internet from evil hackers.
 
 Seriously. Let's make a very brief historical digression.
 
 **For many years a script from one site could not access the content of another site.**
 
-That simple, yet powerful rule was a foundation of the internet security. E.g. an evil script from website `hacker.com` could not access user's mailbox at website `gmail.com`. People felt safe.
+That simple, yet powerful rule was a foundation of the internet security. E.g. an evil script from website `hacker.com` could not access the user's mailbox at website `gmail.com`. People felt safe.
 
 JavaScript also did not have any special methods to perform network requests at that time. It was a toy language to decorate a web page.
 
@@ -95,45 +95,45 @@ That works, and doesn't violate security, because both sides agreed to pass the 
 
 After a while, networking methods appeared in browser JavaScript.
 
-At first, cross-origin requests were forbidden. But as a result of long discussions, cross-origin requests were allowed, but any new capabilities unless require an explicit allowance by the server, expressed in special headers.
+At first, cross-origin requests were forbidden. But as a result of long discussions, cross-origin requests were allowed, but with any new capabilities requiring an explicit allowance by the server, expressed in special headers.
 
-## Simple requests
+## Safe requests
 
 There are two types of cross-origin requests:
 
-1. Simple requests.
+1. Safe requests.
 2. All the others.
 
-Simple Requests are, well, simpler to make, so let's start with them.
+Safe Requests are simpler to make, so let's start with them.
 
-A [simple request](http://www.w3.org/TR/cors/#terminology) is a request that satisfies two conditions:
+A request is safe if it satisfies two conditions:
 
-1. [Simple method](http://www.w3.org/TR/cors/#simple-method): GET, POST or HEAD
-2. [Simple headers](http://www.w3.org/TR/cors/#simple-header) -- the only allowed custom headers are:
+1. [Safe method](https://fetch.spec.whatwg.org/#cors-safelisted-method): GET, POST or HEAD
+2. [Safe headers](https://fetch.spec.whatwg.org/#cors-safelisted-request-header) -- the only allowed custom headers are:
     - `Accept`,
     - `Accept-Language`,
     - `Content-Language`,
     - `Content-Type` with the value `application/x-www-form-urlencoded`, `multipart/form-data` or `text/plain`.
 
-Any other request is considered "non-simple". For instance, a request with `PUT` method or with an `API-Key` HTTP-header does not fit the limitations.
+Any other request is considered "unsafe". For instance, a request with `PUT` method or with an `API-Key` HTTP-header does not fit the limitations.
 
-**The essential difference is that a "simple request" can be made with a `<form>` or a `<script>`, without any special methods.**
+**The essential difference is that a safe request can be made with a `<form>` or a `<script>`, without any special methods.**
 
-So, even a very old server should be ready to accept a simple request.
+So, even a very old server should be ready to accept a safe request.
 
 Contrary to that, requests with non-standard headers or e.g. method `DELETE` can't be created this way. For a long time JavaScript was unable to do such requests. So an old server may assume that such requests come from a privileged source, "because a webpage is unable to send them".
 
-When we try to make a non-simple request, the browser sends a special "preflight" request that asks the server -- does it agree to accept such cross-origin requests, or not?
+When we try to make a unsafe request, the browser sends a special "preflight" request that asks the server -- does it agree to accept such cross-origin requests, or not?
 
-And, unless the server explicitly confirms that with headers, a non-simple request is not sent.
+And, unless the server explicitly confirms that with headers, an unsafe request is not sent.
 
 Now we'll go into details.
 
-## CORS for simple requests
+## CORS for safe requests
 
-If a request is cross-origin, the browser always adds `Origin` header to it.
+If a request is cross-origin, the browser always adds the `Origin` header to it.
 
-For instance, if we request `https://anywhere.com/request` from `https://javascript.info/page`, the headers will be like:
+For instance, if we request `https://anywhere.com/request` from `https://javascript.info/page`, the headers will look like:
 
 ```http
 GET /request
@@ -144,13 +144,13 @@ Origin: https://javascript.info
 ...
 ```
 
-As you can see, `Origin` header contains exactly the origin (domain/protocol/port), without a path.
+As you can see, the `Origin` header contains exactly the origin (domain/protocol/port), without a path.
 
-The server can inspect the `Origin` and, if it agrees to accept such a request, adds a special header `Access-Control-Allow-Origin` to the response. That header should contain the allowed origin (in our case `https://javascript.info`), or a star `*`. Then the response is successful, otherwise an error.
+The server can inspect the `Origin` and, if it agrees to accept such a request, add a special header `Access-Control-Allow-Origin` to the response. That header should contain the allowed origin (in our case `https://javascript.info`), or a star `*`. Then the response is successful, otherwise it's an error.
 
 The browser plays the role of a trusted mediator here:
-1. It ensures that the corrent `Origin` is sent with a cross-origin request.
-2. If checks for permitting `Access-Control-Allow-Origin` in the response, if it exists, then JavaScript is allowed to access the response, otherwise it fails with an error.
+1. It ensures that the correct `Origin` is sent with a cross-origin request.
+2. It checks for permitting `Access-Control-Allow-Origin` in the response, if it exists, then JavaScript is allowed to access the response, otherwise it fails with an error.
 
 ![](xhr-another-domain.svg)
 
@@ -165,7 +165,7 @@ Access-Control-Allow-Origin: https://javascript.info
 
 ## Response headers
 
-For cross-origin request, by default JavaScript may only access so-called "simple" response headers:
+For cross-origin request, by default JavaScript may only access so-called "safe" response headers:
 
 - `Cache-Control`
 - `Content-Language`
@@ -176,13 +176,13 @@ For cross-origin request, by default JavaScript may only access so-called "simpl
 
 Accessing any other response header causes an error.
 
-```smart header="Please note: no `Content-Length`"
-Please note: there's no `Content-Length` header in the list!
+```smart
+There's no `Content-Length` header in the list!
 
 This header contains the full response length. So, if we're downloading something and would like to track the percentage of progress, then an additional permission is required to access that header (see below).
 ```
 
-To grant JavaScript access to any other response header, the server must send  `Access-Control-Expose-Headers` header. It contains a comma-separated list of non-simple header names that should be made accessible.
+To grant JavaScript access to any other response header, the server must send the `Access-Control-Expose-Headers` header. It contains a comma-separated list of unsafe header names that should be made accessible.
 
 For example:
 
@@ -197,49 +197,50 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 */!*
 ```
 
-With such `Access-Control-Expose-Headers` header, the script is allowed to read `Content-Length` and `API-Key` headers of the response.
+With such an `Access-Control-Expose-Headers` header, the script is allowed to read the `Content-Length` and `API-Key` headers of the response.
 
-## "Non-simple" requests
+## "Unsafe" requests
 
 We can use any HTTP-method: not just `GET/POST`, but also `PATCH`, `DELETE` and others.
 
-Some time ago no one could even assume that a webpage is able to do such requests. So there may exist webservices that treat a non-standard method as a signal: "That's not a browser". They can take it into account when checking access rights.
+Some time ago no one could even imagine that a webpage could make such requests. So there may still exist webservices that treat a non-standard method as a signal: "That's not a browser". They can take it into account when checking access rights.
 
-So, to avoid misunderstandings, any "non-simple" request -- that couldn't be done in the old times, the browser does not make such requests right away. Before it sends a preliminary, so-called "preflight" request, asking for permission.
+So, to avoid misunderstandings, any "unsafe" request -- that couldn't be done in the old times, the browser does not make such requests right away. First, it sends a preliminary, so-called "preflight" request, to ask for permission.
 
-A preflight request uses method `OPTIONS`, no body and two headers:
+A preflight request uses the method `OPTIONS`, no body and two headers:
 
-- `Access-Control-Request-Method` header has the method of an the non-simple request.
-- `Access-Control-Request-Headers` header provides a comma-separated list of its non-simple HTTP-headers.
+- `Access-Control-Request-Method` header has the method of the unsafe request.
+- `Access-Control-Request-Headers` header provides a comma-separated list of its unsafe HTTP-headers.
 
 If the server agrees to serve the requests, then it should respond with empty body, status 200 and headers:
 
+- `Access-Control-Allow-Origin` must be either `*` or the requesting origin, such as `https://javascript.info`, to allow it.
 - `Access-Control-Allow-Methods` must have the allowed method.
 - `Access-Control-Allow-Headers` must have a list of allowed headers.
 - Additionally, the header `Access-Control-Max-Age` may specify a number of seconds to cache the permissions. So the browser won't have to send a preflight for subsequent requests that satisfy given permissions.
 
 ![](xhr-preflight.svg)
 
-Let's see how it works step-by-step on example, for a cross-origin `PATCH` request (this method is often used to update data):
+Let's see how it works step-by-step on the example of a cross-origin `PATCH` request (this method is often used to update data):
 
 ```js
 let response = await fetch('https://site.com/service.json', {
   method: 'PATCH',
   headers: {
-    'Content-Type': 'application/json'  
+    'Content-Type': 'application/json',
     'API-Key': 'secret'
   }
 });
 ```
 
-There are three reasons why the request is not simple (one is enough):
+There are three reasons why the request is unsafe (one is enough):
 - Method `PATCH`
 - `Content-Type` is not one of: `application/x-www-form-urlencoded`, `multipart/form-data`, `text/plain`.
-- "Non-simple" `API-Key` header.
+- "Unsafe" `API-Key` header.
 
 ### Step 1 (preflight request)
 
-Prior to sending such request, the browser, on its own, sends a preflight request that looks like this:
+Prior to sending such a request, the browser, on its own, sends a preflight request that looks like this:
 
 ```http
 OPTIONS /service.json
@@ -254,34 +255,38 @@ Access-Control-Request-Headers: Content-Type,API-Key
 - Cross-origin special headers:
     - `Origin` -- the source origin.
     - `Access-Control-Request-Method` -- requested method.
-    - `Access-Control-Request-Headers` -- a comma-separated list of "non-simple" headers.
+    - `Access-Control-Request-Headers` -- a comma-separated list of "unsafe" headers.
 
 ### Step 2 (preflight response)
 
-The server should respond with status 200 and headers:
+The server should respond with status 200 and the headers:
+- `Access-Control-Allow-Origin: https://javascript.info`
 - `Access-Control-Allow-Methods: PATCH`
 - `Access-Control-Allow-Headers: Content-Type,API-Key`.
 
 That allows future communication, otherwise an error is triggered.
 
-If the server expects other methods and headers in the future, it makes sense to allow them in advance by adding to the list:
+If the server expects other methods and headers in the future, it makes sense to allow them in advance by adding them to the list.
+
+For example, this response also allows `PUT`, `DELETE` and additional headers:
 
 ```http
 200 OK
+Access-Control-Allow-Origin: https://javascript.info
 Access-Control-Allow-Methods: PUT,PATCH,DELETE
 Access-Control-Allow-Headers: API-Key,Content-Type,If-Modified-Since,Cache-Control
 Access-Control-Max-Age: 86400
 ```
 
-Now the browser can see that `PATCH` in `Access-Control-Allow-Methods` and `Content-Type,API-Key` are in the list `Access-Control-Allow-Headers`, so it sends out the main request.
+Now the browser can see that `PATCH` is in `Access-Control-Allow-Methods` and `Content-Type,API-Key` are in the list `Access-Control-Allow-Headers`, so it sends out the main request.
 
-Besides, the preflight response is cached for time, specified by `Access-Control-Max-Age` header (86400 seconds, one day), so subsequent requests will not cause a preflight. Assuming that they fit the cached allowances, they will be sent directly.
+If there's the header `Access-Control-Max-Age` with a number of seconds, then the preflight permissions are cached for the given time. The response above will be cached for 86400 seconds (one day). Within this timeframe, subsequent requests will not cause a preflight. Assuming that they fit the cached allowances, they will be sent directly.
 
 ### Step 3 (actual request)
 
-When the preflight is successful, the browser now makes the main request. The algorithm here is the same as for simple requests.
+When the preflight is successful, the browser now makes the main request. The process here is the same as for safe requests.
 
-The main request has `Origin` header (because it's cross-origin):
+The main request has the `Origin` header (because it's cross-origin):
 
 ```http
 PATCH /service.json
@@ -309,15 +314,15 @@ JavaScript only gets the response to the main request or an error if there's no 
 
 ## Credentials
 
-A cross-origin request by default does not bring any credentials (cookies or HTTP authentication).
+A cross-origin request initiated by JavaScript code by default does not bring any credentials (cookies or HTTP authentication).
 
-That's uncommon for HTTP-requests. Usually, a request to `http://site.com` is accompanied by all cookies from that domain. But cross-origin requests made by JavaScript methods are an exception.
+That's uncommon for HTTP-requests. Usually, a request to `http://site.com` is accompanied by all cookies from that domain. Cross-origin requests made by JavaScript methods on the other hand are an exception.
 
 For example, `fetch('http://another.com')` does not send any cookies, even those  (!) that belong to `another.com` domain.
 
 Why?
 
-That's because a request with credentials gives much more powerful than without them. If allowed, it grants JavaScript the full power to act on behalf of the user and access sensitive information using their credentials.
+That's because a request with credentials is much more powerful than without them. If allowed, it grants JavaScript the full power to act on behalf of the user and access sensitive information using their credentials.
 
 Does the server really trust the script that much? Then it must explicitly allow requests with credentials with an additional header.
 
@@ -329,7 +334,7 @@ fetch('http://another.com', {
 });
 ```
 
-Now `fetch` sends cookies originating from `another.com` with out request to that site.
+Now `fetch` sends cookies originating from `another.com` with request to that site.
 
 If the server agrees to accept the request *with credentials*, it should add a header `Access-Control-Allow-Credentials: true` to the response, in addition to `Access-Control-Allow-Origin`.
 
@@ -341,13 +346,13 @@ Access-Control-Allow-Origin: https://javascript.info
 Access-Control-Allow-Credentials: true
 ```
 
-Please note: `Access-Control-Allow-Origin` is prohibited from using a star `*` for requests with credentials. There must be exactly the origin there, like above. That's an additional safety measure, to ensure that the server really knows who it trusts to make such requests.
+Please note: `Access-Control-Allow-Origin` is prohibited from using a star `*` for requests with credentials. Like shown above, it must provide the exact origin there. That's an additional safety measure, to ensure that the server really knows who it trusts to make such requests.
 
 ## Summary
 
-From the browser point of view, there are to kinds of cross-origin requests: "simple" and all the others.
+From the browser point of view, there are two kinds of cross-origin requests: "safe" and all the others.
 
-[Simple requests](http://www.w3.org/TR/cors/#terminology) must satisfy the following conditions:
+"Safe" requests must satisfy the following conditions:
 - Method: GET, POST or HEAD.
 - Headers -- we can set only:
     - `Accept`
@@ -355,14 +360,14 @@ From the browser point of view, there are to kinds of cross-origin requests: "si
     - `Content-Language`
     - `Content-Type` to the value `application/x-www-form-urlencoded`, `multipart/form-data` or `text/plain`.
 
-The essential difference is that simple requests were doable since ancient times using `<form>` or `<script>` tags, while non-simple were impossible for browsers for a long time.
+The essential difference is that safe requests were doable since ancient times using `<form>` or `<script>` tags, while unsafe were impossible for browsers for a long time.
 
-So, the practical difference is that simple requests are sent right away, with `Origin` header, while for the other ones the browser makes a preliminary "preflight" request, asking for permission.
+So, the practical difference is that safe requests are sent right away, with the `Origin` header, while for the other ones the browser makes a preliminary "preflight" request, asking for permission.
 
-**For simple requests:**
+**For safe requests:**
 
-- → The browser sends `Origin` header with the origin.
-- ← For requests without credentials (not sent default), the server should set:
+- → The browser sends the `Origin` header with the origin.
+- ← For requests without credentials (not sent by default), the server should set:
     - `Access-Control-Allow-Origin` to `*` or same value as `Origin`
 - ← For requests with credentials, the server should set:
     - `Access-Control-Allow-Origin` to same value as `Origin`
@@ -370,13 +375,13 @@ So, the practical difference is that simple requests are sent right away, with `
 
 Additionally, to grant JavaScript access to any response headers except `Cache-Control`,  `Content-Language`, `Content-Type`, `Expires`, `Last-Modified` or `Pragma`, the server should list the allowed ones in `Access-Control-Expose-Headers` header.
 
-**For non-simple requests, a preliminary "preflight" request is issued before the requested one:**
+**For unsafe requests, a preliminary "preflight" request is issued before the requested one:**
 
-- → The browser sends `OPTIONS` request to the same url, with headers:
+- → The browser sends an `OPTIONS` request to the same URL, with the headers:
     - `Access-Control-Request-Method` has requested method.
-    - `Access-Control-Request-Headers` lists non-simple requested headers.
-- ← The server should respond with status 200 and headers:
+    - `Access-Control-Request-Headers` lists unsafe requested headers.
+- ← The server should respond with status 200 and the headers:
     - `Access-Control-Allow-Methods` with a list of allowed methods,
     - `Access-Control-Allow-Headers` with a list of allowed headers,
-    - `Access-Control-Max-Age` with a number of seconds to cache permissions.
-- Then the actual request is sent, the previous "simple" scheme is applied.
+    - `Access-Control-Max-Age` with a number of seconds to cache the permissions.
+- Then the actual request is sent, and the previous "safe" scheme is applied.
