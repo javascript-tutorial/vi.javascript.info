@@ -1,5 +1,6 @@
-The answer is:
 
-- `a = 4` (multiplied by 2)
-- `x = 5` (calculated as 1 + 4)
+Câu trả lời là:
+
+- `a = 4` (được nhân với 2)
+- `x = 5` (được tính như 1 + 4)
 

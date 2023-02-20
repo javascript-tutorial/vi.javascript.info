@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Assignment result
+# Kết quả gán
 
-What are the values of `a` and `x` after the code below?
+Giá trị của `a` và `x` ở đoạn code dưới đây là gì?
 
 ```js
 let a = 2;
