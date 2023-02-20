@@ -1,5 +1,5 @@
 
-The answer is:
+Câu trả lời là:
 
 - `a = 2`
 - `b = 2`
@@ -9,10 +9,9 @@ The answer is:
 ```js run no-beautify
 let a = 1, b = 1;
 
-alert( ++a ); // 2, prefix form returns the new value
-alert( b++ ); // 1, postfix form returns the old value
+alert( ++a ); // 2, dạng tiền tố trả về giá trị mới
+alert( b++ ); // 1, dạng hậu tố trả về giá trị cũ
 
-alert( a ); // 2, incremented once
-alert( b ); // 2, incremented once
+alert( a ); // 2, tăng một lần
+alert( b ); // 2, tăng một lần
 ```
-

@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The postfix and prefix forms
+# Dạng tiền tố và hậu tố
 
-What are the final values of all variables `a`, `b`, `c` and `d` after the code below?
+Giá trị cuối cùng của tất cả các biến `a`,` b`, `c` và` d` ở đoạn code dưới đây là gì?
 
 ```js
 let a = 1, b = 1;
