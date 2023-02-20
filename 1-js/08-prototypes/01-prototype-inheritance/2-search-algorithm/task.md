@@ -2,15 +2,11 @@ importance: 5
 
 ---
 
-# Thuật toán tìm thuộc tính
+# Thuật toán tìm kiếm
 
 Bài tập có hai phần.
 
-<<<<<<< HEAD
-Chúng ta có một đối tượng:
-=======
-We have objects:
->>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
+Cho các đối tượng sau:
 
 ```js
 let head = {
@@ -31,5 +27,5 @@ let pockets = {
 };
 ```
 
-1. Sử dụng `__proto__` để tạo chuỗi nguyên mẫu, sao cho bất kỳ thuộc tính nào đều được tìm theo thứ tự: `pockets` -> `bed` -> `table` -> `head`. Ví dụ, `pockets.pen` là `3` (tìm thấy trong `table`), và `bed.glasses` là `1` (tìm thấy trong `head`).
-2. Trả lời câu hỏi: có thể lấy `glasses` bằng `pockets.glasses` hoặc `head.glasses`, cách nào nhanh hơn?
+1. Sử dụng `__proto__` để gán các nguyên mẫu, sao cho bất kỳ thuộc tính nào đều được tìm theo thứ tự: `pockets` -> `bed` -> `table` -> `head`. Ví dụ, `pockets.pen` là `3` (tìm thấy trong `table`), và `bed.glasses` là `1` (tìm thấy trong `head`).
+2. Trả lời câu hỏi: lấy `glasses` bằng `pockets.glasses` hay `head.glasses` thì nhanh hơn? Tiến hành đo lường nếu cần.

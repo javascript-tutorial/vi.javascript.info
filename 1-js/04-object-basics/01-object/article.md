@@ -1,7 +1,7 @@
 
 # Đối tượng
 
-Như chúng ta đã biết ở chương <info:types>, có 6 loại dữ liệu trong JavaScript. Chúng được gọi là "nguyên thủy", bởi vì giá trị của chúng chỉ chứa một thứ duy nhất (đó có thể là một chuỗi hoặc một số hoặc cái gì đó khác).
+Như chúng ta đã biết ở chương <info:types>, có tám loại dữ liệu trong JavaScript. Bảy trong số chúng được gọi là "nguyên thủy", bởi vì giá trị của chúng chỉ chứa một thứ duy nhất (đó có thể là một chuỗi hoặc một số hoặc cái gì đó khác).
 
 Ngược lại, các đối tượng được sử dụng để lưu trữ các bộ sưu tập có khóa của các dữ liệu khác nhau và các thực thể phức tạp hơn. Trong JavaScript, các đối tượng thâm nhập vào hầu hết mọi khía cạnh của ngôn ngữ. Vì vậy, chúng ta phải hiểu chúng trước khi đi sâu vào bất cứ nơi nào khác.
 
@@ -103,7 +103,9 @@ Với thuộc tính nhiều từ, truy cập bằng dấu chấm không hoạt �
 user.likes birds = true
 ```
 
-Đó là vì dấu chấm yêu cầu khóa phải là một biến định danh hợp lệ. Đó là: không chứa khoảng trắng và các giới hạn khác.
+JavaScript không hiểu điều đó. Nó nghĩ rằng chúng ta cần `user.likes`, do đó nó trả ra lỗi cú pháp khi đi qua `birds` không mong muốn.
+
+Dấu chấm yêu cầu khóa phải là một biến định danh hợp lệ. Đó là: không chứa khoảng trắng, không bắt đầu bằng một số và không bao gồm các kí tự đặc biệt (`$` và `_` thì được).
 
 Có một thay thế là "dấu ngoặc vuông" sẽ hoạt động với bất cứ chuỗi nào:
 
@@ -161,7 +163,7 @@ alert( user.key ) // undefined
 
 ### Thuộc tính computed
 
-Chúng ta có thể sử dụng dấu ngoặc vuông trong một đối tượng theo nghĩa đen. Đó gọi là *thuộc tính computed*.
+Chúng ta có thể sử dụng dấu ngoặc vuông trong một object literal, khi tạo một object. Đó gọi là * những thuộc tính computed*.
 
 Ví dụ:
 
@@ -205,44 +207,7 @@ Dấu ngoặc vuông có mạnh hơn dấu chấm. Chúng chấp nhận bất c�
 
 Vì vậy hầu hết thời gian, khi tên thuộc tính được biết và đơn giản, dấu chấm được sử dụng. Và nếu chúng ta cần một cái gì đó phức tạp hơn, thì chúng ta chuyển sang dấu ngoặc vuông.
 
-
-
-````smart header="Reserved words are allowed as property names"
-Một biến không thể có tên bằng một trong những từ dành riêng cho ngôn ngữ như "for", "let", "return", vâng vâng.
-
-Nhưng đối với một thuộc tính đối tượng, không có hạn chế đó. Tên nào cũng được:
-
-```js run
-let obj = {
-  for: 1,
-  let: 2,
-  return: 3
-};
-
-alert( obj.for + obj.let + obj.return );  // 6
-```
-
-Về cơ bản, bất kỳ tên nào cũng được cho phép, nhưng có một tên đặc biệt: `" __proto __ "` được đối xử đặc biệt vì lý do lịch sử. Chẳng hạn, chúng ta không thể đặt nó vào một giá trị phi đối tượng:
-
-```js run
-let obj = {};
-obj.__proto__ = 5;
-alert(obj.__proto__); // [object Object], didn't work as intended
-```
-
-Như chúng ta thấy từ code, việc gán cho một biến nguyên thủy `5` bị bỏ qua.
-
-Điều đó có thể trở thành nguyên nhân gây ra lỗi và thậm chí là lỗ hổng nếu ta dự định lưu trữ các cặp khóa-giá trị tùy ý trong một đối tượng và cho phép người dùng truy cập các khóa cụ thể.
-
-Trong trường hợp đó, người dùng có thể chọn `__proto__` làm khóa và logic gán sẽ bị hủy (như được hiển thị ở trên).
-
-Có một cách để làm cho các đối tượng coi `__proto__` như một thuộc tính thông thường, chúng ta sẽ đề cập sau, nhưng trước tiên chúng ta cần biết thêm về các đối tượng.
-
-Ngoài ra còn có một cấu trúc dữ liệu khác [Map](info:map-set), mà chúng ta sẽ tìm hiểu trong chương <info:map-set>, nó hỗ trợ các khóa tùy ý.
-````
-
-
-## Tốc ký giá trị của thuộc tính
+## Property value shorthand
 
 Trong code chúng ta thường sử dụng các biến sẵn có làm giá trị cho tên của các thuộc tính.
 
@@ -252,7 +217,7 @@ Ví dụ:
 function makeUser(name, age) {
   return {
     name: name,
-    age: age
+    age: age,
     // ...các thuộc tính khác
   };
 }
@@ -270,7 +235,7 @@ function makeUser(name, age) {
 *!*
   return {
     name, // giống như name: name
-    age   // giống như age: age
+    age,  // giống như age: age
     // ...
   };
 */!*
@@ -286,9 +251,56 @@ let user = {
 };
 ```
 
-## Kiểm tra tồn tại
+## Giới hạn của tên thuộc tính
 
-Một tính năng đáng chú ý của đối tượng là có thể truy cập bất kỳ thuộc tính nào. Sẽ không có lỗi nếu thuộc tính không tồn tại! Truy cập một thuộc tính không tồn tại chỉ trả về `undefined`. Nó cung cấp một cách rất phổ biến để kiểm tra xem thuộc tính có tồn tại hay không - lấy nó và so sánh với undefined:
+Như ta đã biết, một biến không thể có tên trùng với những từ dành riêng cho ngôn ngữ lập trình như "for", "let", "return" vâng vâng.
+
+Nhưng thuộc tính của object thì không giới hạn:
+
+```js run
+// những thuộc tính này đều đúng
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+
+Nói tóm lại, không có giới hạn về tên thuộc tính. Chúng có thể là bất kỳ chuỗi hoặc ký hiệu nào (có một loại đặc biệt dành cho nhận dạng, sẽ được đề cập sau).
+
+Các loại khác được tự động chuyển thành chuỗi.
+
+Chẳng hạn, số `0` trở thành một chuỗi `"0"` khi được sử dụng làm khóa thuộc tính:
+
+```js run
+let obj = {
+  0: "test" // giống như "0": "test"
+};
+
+// cả hai alert đều truy cập vào cùng một thuộc tính (số 0 được chuyển đổi thành chuỗi "0")
+alert( obj["0"] ); // test
+alert( obj[0] ); // test (có cùng thuộc tính)
+```
+
+Có một vấn đề nhỏ với thuộc tính đặc biệt có tên `__proto__`. Chúng ta không thể đặt nó thành non-object value:
+
+```js run
+let obj = {};
+obj.__proto__ = 5; // assign a number
+alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+```
+
+Như chúng ta thấy từ code, việc gán cho số `5` bị bỏ qua.
+
+Chúng ta sẽ đề cập đến bản chất đặc biệt của `__proto__` trong [các chương tiếp theo](info:prototype-inheritance) và đề xuất [các cách khắc phục](info:prototype-methods) hành vi như vậy.
+
+## Kiểm tra sự tồn tại của thuộc tính, toán tử "in"
+
+Một tính năng đáng chú ý của các đối tượng trong JavaScript, so với nhiều ngôn ngữ khác, là có thể truy cập bất kỳ thuộc tính nào. Sẽ không có lỗi nếu thuộc tính không tồn tại!
+
+Việc truy cập thuộc tính không tồn tại chỉ trả về `undefined`. Vì vậy, chúng ta có thể dễ dàng kiểm tra xem thuộc tính có tồn tại hay không:
 
 ```js run
 let user = {};
@@ -296,7 +308,7 @@ let user = {};
 alert( user.noSuchProperty === undefined ); // true có nghĩa là "no such property"
 ```
 
-Ngoài ra còn tồn tại một toán tử đặc biệt `"in"` để kiểm tra sự tồn tại của một thuộc tính.
+Ngoài ra còn tồn tại một toán tử đặc biệt `"in"` cho điều đó.
 
 Cú pháp:
 ```js
@@ -320,11 +332,13 @@ Nếu chúng ta bỏ qua dấu ngoặc kép, điều đó có nghĩa là một b
 let user = { age: 30 };
 
 let key = "age";
-alert( *!*key*/!* in user ); // true, lấy tên từ key và kiểm tra thuộc tính đó
+
+alert( *!*key*/!* in user ); // true, thuộc tính "age" tồn tại
 ```
 
-````smart header="Using \"in\" for properties that store `undefined`"
-Thông thường, sự so sánh chặt `"=== undefined"` kiểm tra sự tồn tại của thuộc tính. Có một trường hợp đặc biệt nó sẽ sai, nhưng với `"in"` thì chạy chính xác.
+Tại sao `in` tồn tại? Không phải nó quá đủ để so sánh `undefined` sao?
+
+Vâng, thường thì so sánh với `undefined` là đủ. Nhưng có một trường hợp đặc biệt khi nó lỗi, nhưng `"in"` hoạt động đúng.
 
 Đó là khi một thuộc tính trong đối tượng tồn tại, nhưng lưu trữ là `undefined`:
 
@@ -338,8 +352,7 @@ alert( obj.test ); // thuộc tính không tồn tại, do đó - nó không ph�
 alert( "test" in obj ); // true, thuộc tính tồn tại!
 ```
 
-
-Trong đoạn code trên, thuộc tính `obj.test` về mặt kỹ thuật tồn tại. Vì vậy, toán tử `in` hoạt động đúng.
+Trong đoạn code trên, về mặt kỹ thuật thuộc tính `obj.test` tồn tại. Vì vậy, toán tử `in` hoạt động đúng.
 
 Các tình huống như thế này rất hiếm khi xảy ra, vì `undefined` thường không được chỉ định. Chúng ta chủ yếu sử dụng `null` cho các giá trị "không xác định" hoặc "rỗng". Vì vậy, toán tử `in` là một vị khách kỳ lạ trong code.
 
@@ -377,7 +390,7 @@ Lưu ý rằng tất cả các cấu trúc "for" cho phép chúng ta khai báo b
 Ngoài ra, chúng ta có thể sử dụng một tên biến khác ở đây thay vì `key`. Chẳng hạn, `"for (let prop in obj)"` cũng được sử dụng rộng rãi.
 
 
-### Sắp xếp một đối tượng
+### Sắp xếp như một đối tượng
 
 Đối tượng có được sắp xếp không? Nói cách khác, nếu chúng ta lặp qua một đối tượng, chúng ta có nhận được tất cả các thuộc tính theo cùng thứ tự chúng đã được thêm không? Chúng ta có thể tin vào điều này không?
 
@@ -460,262 +473,6 @@ for (let code in codes) {
 
 Bây giờ nó hoạt động như ý muốn.
 
-## Sao chép bằng tham chiếu
-
-Một trong những khác biệt cơ bản của các đối tượng so với nguyên thủy là chúng được lưu trữ và sao chép "bằng tham chiếu".
-
-Các giá trị nguyên thủy: chuỗi, số, booleans - được gán/sao chép "dưới dạng toàn bộ giá trị".
-
-Ví dụ:
-
-```js
-let message = "Hello!";
-let phrase = message;
-```
-
-Kết quả là chúng ta có hai biến độc lập, mỗi biến được lưu trữ chuỗi `"Hello!"`.
-
-![](variable-copy-value.svg)
-
-Đối tượng không như thế.
-
-**Một biến lưu trữ không phải chính là đối tượng, mà là "địa chỉ trong bộ nhớ", nói cách khác là "một tham chiếu" đến nó.**
-
-Đây là hình ảnh cho đối tượng:
-
-```js
-let user = {
-  name: "John"
-};
-```
-
-![](variable-contains-reference.svg)
-
-Ở đây, đối tượng được lưu trữ ở đâu đó trong bộ nhớ. Và biến `user` có "tham chiếu" đến nó.
-
-**Khi một biến đối tượng được sao chép -- tham chiếu được sao chép, đối tượng không được sao chép.**
-
-Nếu chúng ta tưởng tượng một đối tượng như một cái tủ, thì một biến là một chìa khóa cho nó. Sao chép một biến là sao chép khóa, nhưng không phải chính tủ.
-
-Ví dụ:
-
-```js no-beautify
-let user = { name: "John" };
-
-let admin = user; // sao chép tham chiếu
-```
-
-Bây giờ chúng ta có hai biến, mỗi biến có tham chiếu đến cùng một đối tượng:
-
-![](variable-copy-reference.svg)
-
-Chúng ta có thể sử dụng bất kỳ biến nào để truy cập vào bên trong và sửa đổi nội dung của nó:
-
-```js run
-let user = { name: 'John' };
-
-let admin = user;
-
-*!*
-admin.name = 'Pete'; // thay đổi bởi tham chiếu của "admin"
-*/!*
-
-alert(*!*user.name*/!*); // 'Pete', những thay đổi được nhìn thấy từ tham chiếu của "user"
-```
-
-Ví dụ trên chứng tỏ rằng chỉ có một đối tượng. Như thể chúng ta có một cái tủ có hai chìa khóa và sử dụng một trong số chúng (`admin`) để vào trong đó. Sau đó, nếu sau này chúng ta sử dụng khóa khác (`user`), chúng ta sẽ thấy các thay đổi.
-
-### So sánh bằng tham chiếu
-
-Các toán tử `==` và đẳng thức `===` cho các đối tượng hoạt động giống hệt nhau.
-
-**Hai đối tượng chỉ bằng nhau nếu chúng là cùng một đối tượng.**
-
-Ví dụ, nếu hai biến tham chiếu cùng một đối tượng, chúng bằng nhau:
-
-```js run
-let a = {};
-let b = a; // sao chép tham chiếu
-
-alert( a == b ); // true, hay biến tham chiếu đến cùng một đối tượng
-alert( a === b ); // true
-```
-
-Và ở đây hai đối tượng độc lập không bằng nhau, mặc dù cả hai đều trống:
-
-```js run
-let a = {};
-let b = {}; // hai đối tượng độc lập
-
-alert( a == b ); // false
-```
-
-Để so sánh như `obj1 > obj2` hoặc để so sánh với `obj == 5` nguyên thủy, các đối tượng được chuyển đổi thành nguyên thủy. Chúng ta sẽ nghiên cứu cách chuyển đổi đối tượng hoạt động rất sớm, nhưng để nói sự thật, việc so sánh như vậy là rất cần thiết rất hiếm khi và thường là kết quả của một lỗi mã hóa.
-
-### Đối tượng hằng số
-
-Một đối tượng được khai báo là `const` *có thể* được thay đổi.
-
-Ví dụ:
-
-```js run
-const user = {
-  name: "John"
-};
-
-*!*
-user.age = 25; // (*)
-*/!*
-
-alert(user.age); // 25
-```
-
-Có vẻ như dòng `(*)` sẽ gây ra lỗi, nhưng không, hoàn toàn không có vấn đề gì. Đó là bởi vì `const` chỉ sửa giá trị của chính `user`. Và ở đây `user` lưu trữ tham chiếu mọi lúc đến cùng một đối tượng. Dòng `(*)` vào *bên trong* đối tượng, nó không gán lại cho `user`.
-
-`const` sẽ báo lỗi nếu chúng ta cố gắng gán `user` thành thứ khác, Ví dụ:
-
-```js run
-const user = {
-  name: "John"
-};
-
-*!*
-// Lỗi (không thể gán lại biến user)
-*/!*
-user = {
-  name: "Pete"
-};
-```
-
-...Nhưng nếu chúng ta muốn tạo các thuộc tính đối tượng không đổi thì sao? Vì vậy, `user.age = 25` sẽ báo lỗi. Điều đó cũng có thể. Chúng tôi sẽ đề cập đến nó trong chương <info:property-descriptors>.
-
-## Sao chép và gộp, Object.assign
-
-Vì vậy, sao chép một biến đối tượng sẽ tạo thêm một tham chiếu đến cùng một đối tượng.
-
-Nhưng nếu chúng ta cần sao chép một đối tượng thì sao? Tạo một sao chép độc lập, một bản sao?
-
-Điều đó cũng có thể thực hiện được, nhưng khó khăn hơn một chút, vì không có phương thức tích hợp sẵn cho JavaScript. Trên thực tế, điều đó hiếm khi cần thiết. Sao chép bằng tham chiếu trong nhiều trường hợp là tốt nhất.
-
-Nhưng nếu chúng ta thực sự muốn điều đó, thì chúng ta cần tạo một đối tượng mới và sao chép cấu trúc của đối tượng hiện có bằng cách lặp lại các thuộc tính của nó và sao chép chúng ở cấp độ nguyên thủy.
-
-Như thế này:
-
-```js run
-let user = {
-  name: "John",
-  age: 30
-};
-
-*!*
-let clone = {}; // đối tượng mới rỗng
-
-// hãy sao chép tất cả các thuộc tính của user vào nó
-for (let key in user) {
-  clone[key] = user[key];
-}
-*/!*
-
-// bây giờ bản sao là một bản sao hoàn toàn độc lập
-clone.name = "Pete"; // thay đổi dữ liệu bên trong nó
-
-alert( user.name ); // vẫn còn là John trong đối tượng gốc
-```
-
-Ngoài ra, chúng ta có thể sử dụng phương thức [Object.assign](mdn:js/Object/assign) cho điều đó.
-
-Cú pháp là:
-
-```js
-Object.assign(dest, [src1, src2, src3...])
-```
-
-- Đối số `dest`, và `src1, ..., srcN` (có thể nhiều nhất có thể) là đối tượng.
-- Nó sao chép các thuộc tính của tất cả các đối tượng `src1, ..., srcN` vào `dest`. Nói cách khác, các thuộc tính của tất cả các đối số bắt đầu từ thứ 2 được sao chép vào thứ 1. Sau đó, nó trả về `dest`.
-
-Ví dụ, chúng ta có thể sử dụng nó để hợp nhất một số đối tượng thành một:
-```js
-let user = { name: "John" };
-
-let permissions1 = { canView: true };
-let permissions2 = { canEdit: true };
-
-*!*
-// sao chép tất cả các thuộc tính từ permissions1 và permissions2 vào user
-Object.assign(user, permissions1, permissions2);
-*/!*
-
-// bây giờ user = { name: "John", canView: true, canEdit: true }
-```
-
-Nếu đối tượng nhận (`user`) đã có cùng thuộc tính được đặt tên, nó sẽ bị ghi đè:
-
-```js
-let user = { name: "John" };
-
-// ghi đè name, thêm isAdmin
-Object.assign(user, { name: "Pete", isAdmin: true });
-
-// bây giờ user = { name: "Pete", isAdmin: true }
-```
-
-Chúng ta cũng có thể sử dụng `Object.assign` để thay thế vòng lặp để tạo bản sao đơn giản:
-
-```js
-let user = {
-  name: "John",
-  age: 30
-};
-
-*!*
-let clone = Object.assign({}, user);
-*/!*
-```
-
-Nó sao chép tất cả các thuộc tính của `user` vào đối tượng trống và trả về nó. Trên thực tế, nó giống như vòng lặp, nhưng ngắn hơn.
-
-Cho đến bây giờ chúng ta giả định rằng tất cả các thuộc tính của `user` là nguyên thủy. Nhưng các thuộc tính có thể được tham chiếu đến các đối tượng khác. Làm gì với chúng đây?
-
-Như thế này:
-```js run
-let user = {
-  name: "John",
-  sizes: {
-    height: 182,
-    width: 50
-  }
-};
-
-alert( user.sizes.height ); // 182
-```
-
-Bây giờ nó không đủ để sao chép `clone.sizes = user.sizes`, vì` user.sizes` là một đối tượng, nó sẽ được sao chép bằng tham chiếu. Vì vậy, `clone` và` user` sẽ có cùng kích thước:
-
-Như thế này:
-```js run
-let user = {
-  name: "John",
-  sizes: {
-    height: 182,
-    width: 50
-  }
-};
-
-let clone = Object.assign({}, user);
-
-alert( user.sizes === clone.sizes ); // true, cùng đối tượng
-
-// user và clone chia sẻ chung sizes
-user.sizes.width++;       // thay đổi thuộc tính từ một nơi
-alert(clone.sizes.width); // 51, ta thấy kết quả ở một nơi khác
-```
-
-Để khắc phục điều đó, chúng ta nên sử dụng vòng lặp nhân bản để kiểm tra từng giá trị của `user [key]` và, nếu đó là một đối tượng, thì cũng sao chép cấu trúc của nó. Điều đó được gọi là "nhân bản sâu".
-
-Có một thuật toán tiêu chuẩn để nhân bản sâu xử lý trường hợp trên và các trường hợp phức tạp hơn, được gọi là [Thuật toán nhân bản có cấu trúc](http://w3c.github.io/html/infrastructure.html#safe-passing-of-structured-data). Để không phát minh lại bánh xe, chúng ta có thể sử dụng triển khai thực hiện nó từ thư viện JavaScript [lodash](https://lodash.com), phương thức được gọi là [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
-
-
-
 ## Tổng kết
 
 Đối tượng là mảng kết hợp với một số tính năng đặc biệt.
@@ -732,10 +489,6 @@ Toán tử bổ sung:
 - Để xóa một thuộc tính: `delete obj.prop`.
 - Để kiểm tra xem một thuộc tính có khóa đã cho có tồn tại không: `"key" in obj`.
 - Để lặp qua một đối tượng: `for (let key in obj)`
-
-Các đối tượng được gán và sao chép bằng tham chiếu. Nói cách khác, một biến không lưu trữ "giá trị của đối tượng", mà là "tham chiếu" (địa chỉ trong bộ nhớ) cho giá trị. Vì vậy, sao chép một biến như vậy hoặc chuyển nó dưới dạng đối số hàm sẽ sao chép tham chiếu đó, không phải đối tượng. Tất cả các hoạt động thông qua sao chép tham chiếu (như thêm/xóa thuộc tính) được thực hiện trên cùng một đối tượng.
-
-Để tạo một "sao chép thực" (bản sao) chúng ta có thể sử dụng `Object.assign` hoặc [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 
 Những gì chúng ta đã nghiên cứu trong chương này được gọi là "đối tượng đơn giản", hoặc `Object`.
 

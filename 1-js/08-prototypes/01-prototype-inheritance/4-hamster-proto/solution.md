@@ -1,22 +1,15 @@
 Cùng xem xét cẩn thận chuyện xảy ra khi gọi `speedy.eat("apple")`.
 
-1. Phương thức `speedy.eat` tìm thấy trong nguyên mẫu (`=hamster`), sau đó chạy trong `speedy` (`this=speedy`).
+1. Phương thức `speedy.eat` tìm thấy trong nguyên mẫu (`=hamster`), sau đó thực thi với (`this=speedy`) (đối tượng trước dấu chấm).
+2. Tiếp theo `this.stomach.push()` cần tìm thuộc tính `stomach` và gọi phương thức `push` của nó. Nó tìm kiếm `stomach` trong `this` (`=speedy`), nhưng không thấy.
+3. Rồi nó lần theo chuỗi nguyên mẫu và tìm thấy `stomach` trong `hamster`.
+4. Sau đó nó gọi `push`, thêm thức ăn vào trong *stomach của nguyên mẫu*.
 
-2. Tiếp theo `this.stomach.push()` cần tìm thuộc tính `stomach` và gọi phương thức `push` từ đó. Trước tiên `stomach` được tìm trong `this` (`=speedy`), nhưng không thấy.
+Vì vậy tất cả các hamster đều dùng chung một stomach!
 
-3. Sau đó `stomach` được tìm thấy trong nguyên mẫu `hamster` từ giờ `this.stomach` là `hamster.stomach`.
+Đối với cả `lazy.stomach.push(...)` và `speedy.stomach.push()`, thuộc tính `stomach` được tìm thấy trong nguyên mẫu (vì nó không nằm trong chính đối tượng), sau đó dữ liệu mới được đẩy vào đó.
 
-4. Khi gọi `this.stomach.push` thì `"apple"` được thêm vào `hamster.stomach`.
-
-Vậy nên cả hai con hamsters đều dùng chung `hamster.stomach` - tức có cùng một cái dạ dày! Khi một con no, con kia cũng no là vì thế.
-
-<<<<<<< HEAD
-Mỗi khi `stomach` được lấy từ nguyên mẫu, thì `this.stomach.push` lại làm thay đổi `hamster.stomach`.
-=======
-Both for `lazy.stomach.push(...)` and `speedy.stomach.push()`, the property `stomach` is found in the prototype (as it's not in the object itself), then the new data is pushed into it.
->>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
-
-Chú ý rằng chuyện này không xảy ra nếu ta gán `this.stomach=`:
+Xin lưu ý rằng điều đó không xảy ra trong trường hợp một phép gán đơn giản `this.stomach=`:
 
 ```js run
 let hamster = {
@@ -24,7 +17,7 @@ let hamster = {
 
   eat(food) {
 *!*
-    // gán tới to this.stomach thay vì this.stomach.push
+    // gán cho this.stomach thay vì this.stomach.push
     this.stomach = [food];
 */!*
   }
@@ -38,17 +31,17 @@ let lazy = {
   __proto__: hamster
 };
 
-// Speedy ăn táo
+// Con speedy tìm thấy thức ăn
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// Lazy không được ăn theo
+// Dạ dày của con lazy trống rỗng
 alert( lazy.stomach ); // <không có gì>
 ```
 
-Giờ tất cả làm việc, vì `this.stomach=` là hành động ghi nên không sử dụng thuộc tính `stomach` của nguyên mẫu `hamster`. Giá trị được ghi vào đối tượng `this` (tức đối tượng được thừa kế).
+Bây giờ tất cả đều hoạt động tốt, bởi vì `this.stomach=` không thực hiện tra cứu `stomach`. Giá trị được ghi trực tiếp vào đối tượng `this`.
 
-Ta cũng có thể tránh được vấn đề trên bằng cách tạo riêng cho mỗi con hamster một cái dạ dày:
+Ngoài ra, chúng ta hoàn toàn có thể tránh được vấn đề trên bằng cách đảm bảo rằng mỗi con hamster đều có dạ dày của riêng nó:
 
 ```js run
 let hamster = {
@@ -73,16 +66,12 @@ let lazy = {
 */!*
 };
 
-// Speedy ăn táo
+// Con speedy tìm thấy thức ăn
 speedy.eat("apple");
 alert( speedy.stomach ); // apple
 
-// Dạ dày của Lazy vẫn trống
+// Dạ dày của con lazy trống rỗng
 alert( lazy.stomach ); // <không có gì>
 ```
 
-<<<<<<< HEAD
-Đây là giải pháp tổng quát, các thuộc tính mô tả trạng thái của đối tượng, giống `stomach` ở trên nên được ghi riêng vào đối tượng đó, không nên dùng chung từ một nguyên mẫu. Điều này giúp ta không gặp phải vấn đề trên.
-=======
-As a common solution, all properties that describe the state of a particular object, like `stomach` above, should be written into that object. That prevents such problems.
->>>>>>> 5cb9760abb8499bf1e99042d866c3c1db8cd61ca
+Như một giải pháp phổ biến, tất cả các thuộc tính mô tả trạng thái của một đối tượng cụ thể, như `stomach` ở trên, nên được ghi vào đối tượng đó. Điều đó ngăn chặn những vấn đề như vậy.

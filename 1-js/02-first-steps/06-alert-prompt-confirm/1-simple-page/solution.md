@@ -1,11 +1,11 @@
 JavaScript-code:
 
 ```js demo run
-let name = prompt("Tên bạn là gì?", "");
+let name = prompt("What is your name?", "");
 alert(name);
 ```
 
-Toàn bộ nội dung trang:
+The full page:
 
 ```html
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ Toàn bộ nội dung trang:
   <script>
     'use strict';
 
-    let name = prompt("Tên bạn là gì?", "");
+    let name = prompt("What is your name?", "");
     alert(name);
   </script>
 

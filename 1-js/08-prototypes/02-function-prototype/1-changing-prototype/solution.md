@@ -1,20 +1,19 @@
-
-Answers:
+Trả lời:
 
 1. `true`. 
 
-    Thay đổi `Rabbit.prototype` chỉ ảnh hưởng tới `[[Prototype]]` của đối tượng được tạo ra sau này, không ảnh hưởng đến các đối tượng đã tạo từ trước. 
+    Việc gán cho `Rabbit.prototype` thiết lập `[[Prototype]]` cho các đối tượng mới, nhưng nó không ảnh hưởng đến các đối tượng hiện có.
 
 2. `false`. 
 
-    Đối tượng được gán theo tham chiếu. Đối tượng từ `Rabbit.prototype` không được nhân bản khi gán cho `[[Prototype]]` cho nên `Rabbit.prototype` và `[[Prototype]]` của `rabbit` là hai tham chiếu tới một đối tượng.
+    Các đối tượng được gán bằng tham chiếu. Đối tượng từ `Rabbit.prototype` không bị sao chép, nó vẫn là một đối tượng duy nhất được tham chiếu bởi cả `Rabbit.prototype` và bởi `[[Prototype]]` của `rabbit`.
 
-    Nên khi ta thay đổi đối tượng qua một tham chiếu, sự thay đổi này cũng thấy được từ tham chiếu kia.
+    Vì vậy, khi chúng ta thay đổi nội dung của nó thông qua một tham chiếu, nó sẽ thấy được thông qua tham chiếu khác.
 
 3. `true`.
 
-    Hành động xóa bằng toán tử `delete` không tác động tới nguyên mẫu. Ở đây `delete rabbit.eats` chỉ cố xóa thuộc tính `eats` của `rabbit`, nhưng nó không tồn tại. Nên hành động này không gây ảnh hưởng gì.
+    Tất cả các thao tác `delete` được áp dụng trực tiếp cho đối tượng. Ở đây `delete rabbit.eats` cố gắng xóa thuộc tính `eats` khỏi `rabbit`, nhưng nó không có. Vì vậy, thao tác sẽ không có tác dụng gì.
 
 4. `undefined`.
 
-    Thuộc tính `eats` bị xóa khỏi nguyên mẫu, vậy nên nó không thể tìm thấy nữa.
+    Thuộc tính `eats` bị xóa khỏi nguyên mẫu, nên nó không tồn tại nữa.

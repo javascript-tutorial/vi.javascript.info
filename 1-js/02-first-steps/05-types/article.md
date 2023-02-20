@@ -1,6 +1,10 @@
-# Data types
+# Các kiểu dữ liệu
 
-Một biến trong JavaScript có thể lưu bất cứ kiểu dữ liệu nào. Chẳng hạn một biến lúc này lưu một chuỗi và lúc khác lưu một số.
+Một giá trị trong JavaScript luôn thuộc một loại nhất định. Ví dụ, một chuỗi hoặc một số.
+
+Có tám kiểu dữ liệu cơ bản trong JavaScript. Ở đây, chúng ta sẽ trình bày tổng quát về chúng và trong các chương tiếp theo chúng ta sẽ nói chi tiết về chúng.
+
+Chúng ta có thể đặt bất kỳ kiểu nào trong một biến. Ví dụ, một biến tại một thời điểm có thể là một chuỗi và sau đó lưu trữ một số:
 
 ```js
 // no error
@@ -8,9 +12,7 @@ let message = "hello";
 message = 123456;
 ```
 
-Ngôn ngữ lập trình cho phép điều này gọi là "ngôn ngữ có kiểu động" hay "dynamically typed", nghĩa là vẫn có các kiểu dữ liệu khác nhau, nhưng một biến không bị ràng buộc với một kiểu dữ liệu duy nhất.
-
-Có 7 kiểu dữ liệu "cơ bản" trong JavaScript. Ở bài này ta chỉ giới thiệu qua về chúng và ở những bài sau sẽ tìm hiểu chi tiết từng kiểu dữ liệu.
+Các ngôn ngữ lập trình cho phép điều đó, chẳng hạn như JavaScript, được gọi là "ngôn ngữ có kiểu động" hay "dynamically typed", có nghĩa là có tồn tại các kiểu dữ liệu, nhưng các biến không bị ràng buộc với bất kỳ kiểu nào trong số chúng.
 
 ## Kiểu số
 
@@ -19,13 +21,13 @@ let n = 123;
 n = 12.345;
 ```
 
-Kiểu *số* biểu diễn được cả số nguyên lẫn số thực.
+Kiểu *số* (number) biểu diễn được cả số nguyên lẫn số thực.
 
-Có nhiều toán tử làm việc với các số như: nhân `*`, chia `/`, cộng `+`, trừ `-`, ...
+Có nhiều toán tử làm việc với các số như: nhân `*`, chia `/`, cộng `+`, trừ `-`, v.v.
 
 Ngoài các số thông thường, còn có các giá trị số đặc biệt khác là: `Infinity`, `-Infinity` và `NaN`.
 
-- `Infinity` biểu diễn giá trị [vô cùng](https://en.wikipedia.org/wiki/Infinity) ∞ trong toán học. Nó là một giá trị đặc biệt lớn hơn bất kỳ số nào.
+- `Infinity` biểu diễn giá trị [vô cùng](https://vi.wikipedia.org/wiki/V%C3%B4_t%E1%BA%ADn) ∞ trong toán học. Nó là một giá trị đặc biệt lớn hơn bất kỳ số nào.
 
     Chúng ta có thể thu được giá trị này bằng cách chia một số dương cho không:
 
@@ -33,18 +35,18 @@ Ngoài các số thông thường, còn có các giá trị số đặc biệt k
     alert( 1 / 0 ); // Infinity
     ```
 
-    Hoặc chỉ trực tiếp:
+    Or just reference it directly:
 
     ```js run
     alert( Infinity ); // Infinity
     ```
-- `NaN` biểu diễn một lỗi tính toán. Nó là kết quả của một phép tính sai hoặc không xác định:
+- `NaN` biểu diễn một lỗi tính toán. Nó là kết quả của một phép tính sai hoặc không xác định, ví dụ:
 
     ```js run
-    alert( "not a number" / 2 ); // NaN
+    alert( "not a number" / 2 ); // NaN, phép chia như vậy là sai lầm
     ```
 
-    Khi `NaN` xuất hiện. Bất kỳ phép tính nào sau đó đều trả về `NaN`:
+    `NaN` rất khó chịu. Bất kỳ thao tác nào khác trên `NaN` sẽ trả về` NaN`:
 
     ```js run
     alert( "not a number" / 2 + 5 ); // NaN
@@ -52,19 +54,42 @@ Ngoài các số thông thường, còn có các giá trị số đặc biệt k
 
     Cho nên, nếu `NaN` xuất hiện trong một biểu thức toán học, nó lan truyền tới kết quả của cả biểu thức.
 
-```smart header="Các phép toán luôn an toàn"
+```smart header="Các phép tính toán học luôn an toàn"
 Làm toán trong JavaScript rất "an toàn". Ta có thể làm bất cứ thứ gì: chia cho không, coi một chuỗi như một số, ...
 
-Script sẽ không bao giờ dừng lại. Tệ nhất, chúng ta cũng nhận được giá trị `NaN`.
+Tập lệnh sẽ không bao giờ dừng lại. Tệ nhất, chúng ta cũng nhận được giá trị `NaN`.
 ```
 
-Các giá trị đặc biệt được đặt vào kiểu "số". Tất nhiên chúng không phải số là theo cách hiểu thông thường về số.
+Các giá trị số đặc biệt chính thức thuộc về kiểu "number". Tất nhiên chúng không phải là những con số theo nghĩa thông thường của từ này.
 
-Ta sẽ học được nhiều hơn về các số ở bài <info:number>.
+Ta sẽ học được nhiều hơn về các số ở chương <info:number>.
+
+## BigInt
+
+Trong JavaScript, loại "số" không thể biểu diễn cho các giá trị số nguyên lớn hơn <code>(2<sup>53</sup>-1)</code> (đó là 9007199254740991) hoặc nhỏ hơn <code>-(2<sup>53</sup>-1)</code> đối với số âm. Đó là một hạn chế kỹ thuật do sự biểu diễn nội bộ của chúng gây ra.
+
+Đối với hầu hết các mục đích đó là đủ, nhưng đôi khi chúng ta cần những con số thực sự lớn, ví dụ cho mật mã hoặc thời điểm chính xác đến micro giây.
+
+Kiểu `BigInt` gần đây đã được thêm vào ngôn ngữ để biểu diễn các số nguyên có độ dài tùy ý.
+
+Một giá trị `BigInt` được tạo bằng cách thêm `n` vào cuối một số nguyên:
+
+```js
+// "n" ở cuối nghĩa là nó là một BigInt
+const bigInt = 1234567890123456789012345678901234567890n;
+```
+
+Vì các số `BigInt` hiếm khi cần thiết, chúng tôi không trình bày chúng ở đây mà dành cho chúng một chương riêng <info: bigint>. Hãy đọc nó khi bạn cần những con số lớn như vậy.
+
+```smart header="Vấn đề tương thích"
+Hiện tại, `BigInt` được hỗ trợ trong Firefox / Chrome / Edge / Safari, nhưng không hỗ trợ trong IE.
+```
+
+Bạn có thể kiểm tra [*MDN* BigInt compatibility table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) để biết phiên bản trình duyệt nào có hỗ trợ.
 
 ## Kiểu chuỗi
 
-Một chuỗi trong JavaScript bắt buộc phải nằm giữa các quote.
+Một chuỗi trong JavaScript bắt buộc phải nằm giữa các dấu nháy.
 
 ```js
 let str = "Hello";
@@ -72,15 +97,15 @@ let str2 = 'Single quotes are ok too';
 let phrase = `can embed ${str}`;
 ```
 
-Trong JavaScript, có 3 kiểu quote:
+Trong JavaScript, có 3 kiểu dấu nháy:
 
-1. Double quote: `"Hello"`.
-2. Single quote: `'Hello'`.
-3. Backtick: <code>&#96;Hello&#96;</code>.
+1. Dấu nháy kép: `"Hello"`.
+2. Dấu nháy đơn: `'Hello'`.
+3. Backticks: <code>&#96;Hello&#96;</code>.
 
-Double và single quotes là các quote "đơn giản". Không có sự khác biệt nào giữa chúng trong JavaScript.
+Dấu nháy kép và dấu nháy đơn là những dấu nháy "đơn giản". Thực tế không có sự khác biệt giữa chúng trong JavaScript.
 
-Backtick được xem là quote được mở rộng tính năng. Nó cho phép ta nhúng biến và biểu thức vào chuỗi bằng cách đặt chúng trong `${…}`, ví dụ:
+Backtick là các dấu nháy với tính năng mở rộng. Nó cho phép ta nhúng biến và biểu thức vào chuỗi bằng cách đặt chúng trong `${…}`, ví dụ:
 
 ```js run
 let name = "John";
@@ -94,20 +119,20 @@ alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
 
 Biểu thức trong `${…}` được chạy và kết quả của nó trở thành một phần của chuỗi. Chúng ta có thể đặt bất cứ gì vào đó: một biến như `name` hay một biểu thức số học như `1 + 2` hoặc biểu thức phức tạp hơn.
 
-Chú ý rằng chỉ backtick cho phép tính năng này. Single quote và double quote không hỗ trợ!
+Chú ý rằng chỉ backtick cho phép tính năng này. Dấu nháy đơn và nháy kép không hỗ trợ!
 ```js run
-alert( "the result is ${1 + 2}" ); // the result is ${1 + 2}
+alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (nháy kép không làm gì cả)
 ```
 
-Chúng ta sẽ tìm hiểu về chuỗi kỹ hơn ở bài <info:string>.
+Chúng ta sẽ tìm hiểu về chuỗi kỹ hơn ở chương <info:string>.
 
 ```smart header="Không có kiểu *ký tự*."
-Trong một số ngôn ngữ khác, có một kiểu dữ liệu đặc biệt gọi là kiểu "ký tự" dùng để biểu diễn một kí tự. Ví dụ, trong ngôn ngữ C và trong Java nó là `char`.
+Trong một số ngôn ngữ, có một kiểu "ký tự" đặc biệt cho một ký tự đơn lẻ. Ví dụ, trong ngôn ngữ C và trong Java, nó được gọi là "char".
 
-Trong JavaScript, không có kiểu này. Chỉ có kiểu chuỗi: `string`. Một chuỗi có thể gồm chỉ một kí tự hoặc nhiều kí tự.
+Trong JavaScript, không có kiểu như vậy. Chỉ có một kiểu: `string` (chuỗi). Một chuỗi có thể bao gồm 0 ký tự (rỗng), một ký tự hoặc nhiều ký tự.
 ```
 
-## Kiểu lôgic
+## Boolean (kiểu lôgic)
 
 Kiểu lôgic chỉ có hai giá trị: `true` và `false`.
 
@@ -128,9 +153,9 @@ let isGreater = 4 > 1;
 alert( isGreater ); // true (kết quả so sánh là "đúng")
 ```
 
-Chúng ta sẽ tìm hiểu sâu hơn về kiểu này trong bài <info:logical-operators>.
+Chúng ta sẽ tìm hiểu sâu hơn về kiểu này trong chương <info:logical-operators>.
 
-## giá trị "null"
+## Giá trị "null"
 
 Giá trị đặc biệt `null` không thuộc về bất cứ kiểu nào đã nói ở trên.
 
@@ -144,7 +169,7 @@ Trong JavaScript, `null` không phải là "tham chiếu tới đối tượng k
 
 Nó chỉ là một giá trị đặc biệt biểu diễn sự "trống rỗng" hoặc "không có gì" hoặc một "giá trị không biết".
 
-Đoạn mã trên cho biết rằng `age` không được biết hoặc còn trống vì lý do nào đó.
+Đoạn mã trên cho biết rằng `age` không xác định.
 
 ## Giá trị "undefined"
 
@@ -155,30 +180,33 @@ Giá trị đặc biệt `undefined` cũng đứng một mình. Nó tạo ra m�
 Nếu một biến đã được khai báo, nhưng chưa được gán, giá trị của nó là `undefined`:
 
 ```js run
-let x;
+let age;
 
-alert(x); // hiện "undefined"
+alert(age); // hiện "undefined"
 ```
 
-Nói chính xác, có thể gán giá trị `undefined` cho bất cứ biến nào:
+Về mặt kỹ thuật, có thể gán `undefined` cho một biến một cách tường minh:
 
 ```js run
-let x = 123;
+let age = 100;
 
-x = undefined;
+// đổi giá trị thành undefined
+age = undefined;
 
-alert(x); // "undefined"
+alert(age); // "undefined"
 ```
 
-...Nhưng không nên làm như vậy. Thường, chúng ta sử dụng `null` để gán một giá trị "trống" hoặc "không biết" cho một biến, và sử dụng `undefined` chỉ để kiểm tra một biến đã được gán giá trị hay chưa.
+...Nhưng chúng ta không nên làm điều đó. Thông thường, người ta sử dụng `null` để gán giá trị "trống" hoặc "không xác định" cho một biến, trong khi `undefined` được dành riêng làm giá trị khởi tạo mặc định cho những thứ chưa được gán.
 
-## Kiểu đối tượng (Object) và kiểu Symbol
+## Objects and Symbols
 
-Kiểu đối tượng hay `object` là một kiểu đặc biệt.
+Kiểu `object` hay đối tượng là một kiểu đặc biệt.
 
-Mọi kiểu dữ liệu khác được gọi là kiểu "cơ sở" bởi giá trị của chúng chỉ gồm một thứ (một chuỗi, một số hoặc một cái gì đó). Ngược lại, các đối tượng được dùng để lưu trữ nhiều thứ cùng lúc. Chúng ta sẽ tiếp xúc với chúng trong bài <info:object> sau khi đã học về các kiểu cơ sở.
+Tất cả các kiểu khác được gọi là "primitive" (nguyên thủy) vì giá trị của chúng chỉ có thể chứa một thứ duy nhất (có thể là một chuỗi hoặc một số hoặc bất cứ thứ gì). Ngược lại, các đối tượng được sử dụng để lưu trữ các tập hợp dữ liệu và các thực thể phức tạp hơn.
 
-Kiểu `symbol` được dùng để tạo ra các định danh duy nhất cho các đối tượng. Ta chỉ nói về nó ở đây cho đầy đủ, nhưng tốt hơn nên học nó sau khi đã học về các đối tượng.
+Vì quan trọng như vậy, các đối tượng xứng đáng được đối xử đặc biệt. Chúng ta sẽ bàn về chúng sau trong chương <info:object>, sau khi chúng ta tìm hiểu thêm về các giá trị nguyên thủy.
+
+Kiểu `symbol` (biểu tượng) được sử dụng để tạo các định danh duy nhất cho các đối tượng. Chúng ta buộc phải đề cập đến nó ở đây chỉ để khỏi thiếu sót, nhưng cũng trì hoãn các chi tiết cho đến khi chúng ta biết về các đối tượng.
 
 ## Toán tử typeof [#type-typeof]
 
@@ -197,6 +225,8 @@ Gọi `typeof x` trả về một chuỗi mô tả tên của kiểu dữ liệu
 typeof undefined // "undefined"
 
 typeof 0 // "number"
+
+typeof 10n // "bigint"
 
 typeof true // "boolean"
 
@@ -219,27 +249,27 @@ typeof alert // "function"  (3)
 
 Ba dòng cuối cần phải giải thích thêm:
 
-1. `Math` là một đối tượng có sẵn cung cấp nhiều toán tử toán học. Chúng ta sẽ học về nó ở bài <info:number>. Ở đây, nó chỉ dùng làm ví dụ cho một đối tượng bất kỳ.
-2. Kết quả của `typeof null` là `"object"`. Điều này sai. Nó là một lỗi được chấp nhận của `typeof`, được giữ lại để tương thích với các phiên bản cũ của ngôn ngữ. Tất nhiên, `null` không phải là đối tượng. Nó là một giá trị đặc biệt tạo nên một kiểu riêng. Một lần nữa nhắc lại đây là một lỗi của ngôn ngữ JavaScript.
-3. Kết quả của `typeof alert` là `"function"`, bởi `alert` là một hàm (function). Chúng ta sẽ học về các hàm ở một bài tiếp theo, ở đó ta sẽ thấy rằng không có kiểu nào gọi là "function" trong JavaScript cả. Các hàm (function) cũng là các đối tượng. Nhưng `typeof` coi nó khác đi, trả về `"function"`. Điều này tuy không chính xác, nhưng lại rất tiện lợi khi lập trình.
-
+1. `Math` là một đối tượng có sẵn cung cấp các phép tính toán học. Chúng ta sẽ tìm hiểu nó trong chương <info:number>. Ở đây, nó chỉ đóng vai trò như một ví dụ về một đối tượng.
+2. Kết quả của `typeof null` là `"object"`. Đó là một lỗi được chính thức công nhận trong hành vi của `typeof`, xuất hiện từ những ngày đầu của JavaScript và được giữ lại để tương thích. Chắc chắn, `null` không phải là một đối tượng. Nó là một giá trị đặc biệt với một kiểu riêng biệt của nó.
+3. Kết quả của `typeof alert` là `"function"`, vì `alert` là một hàm. Chúng ta sẽ nghiên cứu các hàm trong các chương tiếp theo, chúng ta cũng sẽ thấy rằng không có kiểu "function" đặc biệt nào trong JavaScript. Các hàm thuộc về kiểu đối tượng. Nhưng `typeof` xử lý chúng theo cách khác, trả về `"function"`. Điều đó cũng đến từ những ngày đầu của JavaScript. Về mặt kỹ thuật, hành vi như vậy không đúng, nhưng có thể thuận tiện trong thực tế.
 
 ## Tóm tắt
 
-Có 7 kiểu dữ liệu cơ bản trong JavaScript.
+Có 8 kiểu dữ liệu cơ bản trong JavaScript.
 
-- `number` biểu diễn số bất kỳ: số nguyên hoặc số thực.
-- `string` biểu diễn chuỗi ký tự. Một chuỗi kí tự gồm một hoặc nhiều kí tự, không có kiểu biểu diễn riêng một kí tự.
-- `boolean` biểu diễn các kết luận đúng/sai.
-- `null` biểu diễn giá trị chưa biết -- kiểu này chỉ gồm một giá trị duy nhất là `null`.
-- `undefined` biểu diễn giá trị chưa gán -- kiểu này chỉ gồm một giá trị duy nhất là `undefined`.
-- `object` biểu diễn các cấu trúc dữ liệu phức tạp, lưu trữ cùng lúc nhiều thứ.
-- `symbol` biểu diễn các định danh duy nhất.
+- `number` dành cho các số thuộc bất kỳ loại nào: số nguyên hoặc dấu phẩy động, số nguyên được giới hạn bởi <code>±(2<sup>53</sup>-1)</code>.
+- `bigint` dành cho các số nguyên có độ dài tùy ý.
+- `string` dành cho các chuỗi. Một chuỗi có thể có không hoặc nhiều ký tự, không có kiểu ký tự đơn riêng biệt.
+- `boolean` dành cho các giá trị `true`/`false`.
+- `null` dành cho các giá trị không xác định -- một kiểu độc lập có một giá trị duy nhất `null`.
+- `undefined` dành cho các giá trị chưa được gán -- một kiểu độc lập có một giá trị duy nhất `undefined`.
+- `object` dành cho các cấu trúc dữ liệu phức tạp hơn.
+- `symbol` dành cho các định danh duy nhất.
 
-Toán tử `typeof` cho phép chúng ta biết kiểu của giá trị lưu trong một biến.
+Toán tử `typeof` cho phép chúng ta xem kiểu nào được lưu trữ trong một biến.
 
 - Hai dạng: `typeof x` hoặc `typeof(x)`.
-- Trả về chuỗi biểu diễn tên của kiểu dữ liêu, ví dụ `"string"`.
+- Trả về một chuỗi với tên của kiểu dữ liêu, ví dụ `"string"`.
 - Với `null` nó trả về `"object"` -- đây là một lỗi còn tồn tại trong ngôn ngữ, nó không thực sự là một đối tượng.
 
-Ở các bài tiếp theo, chúng ta sẽ tập trung vào các kiểu dữ liệu cơ sở và khi đã quen thuộc với chúng, ta sẽ chuyển tới các đối tượng.
+Trong các chương tiếp theo, chúng ta sẽ tập trung vào các giá trị nguyên thủy và khi chúng ta đã quen thuộc với chúng, chúng ta sẽ chuyển sang các đối tượng.
