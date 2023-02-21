@@ -1,196 +1,194 @@
-# Debugging in Chrome
+# Gỡ lỗi trong Chrome
 
-Before writing more complex code, let's talk about debugging.
+Trước khi viết mã phức tạp hơn, hãy nói về gỡ lỗi.
 
-[Debugging](https://en.wikipedia.org/wiki/Debugging) is the process of finding and fixing errors within a script. All modern browsers and most other environments support debugging tools -- a special UI in developer tools that makes debugging much easier. It also allows to trace the code step by step to see what exactly is going on.
+[Gỡ lỗi](https://vi.wikipedia.org/wiki/G%E1%BB%A1_l%E1%BB%97i) là quá trình tìm và sửa lỗi trong một tập lệnh. Tất cả các trình duyệt hiện đại và hầu hết các môi trường khác đều hỗ trợ các công cụ gỡ lỗi -- một giao diện người dùng đặc biệt trong các công cụ dành cho nhà phát triển giúp việc gỡ lỗi dễ dàng hơn nhiều. Nó cũng cho phép theo dõi từng bước mã để xem chính xác điều gì đang diễn ra.
 
-We'll be using Chrome here, because it has enough features, most other browsers have a similar process.
+Chúng ta sẽ sử dụng Chrome ở đây, vì nó có đủ tính năng, hầu hết các trình duyệt khác đều có quy trình tương tự.
 
-## The "Sources" panel
+## Bảng "Nguồn"
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+Phiên bản Chrome của bạn có thể trông hơi khác một chút nhưng vẫn phải rõ ràng có gì ở đó.
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `Sources` panel.
+- Mở [trang ví dụ](debugging/index.html) trong Chrome.
+- Bật công cụ dành cho nhà phát triển bằng `key:F12` (Mac: `key:Cmd+Opt+I`).
+- Chọn bảng `Sources`.
 
-Here's what you should see if you are doing it for the first time:
+Đây là những gì bạn nên xem nếu bạn đang làm điều đó lần đầu tiên:
 
 ![](chrome-open-sources.svg)
+Nút chuyển đổi <span class="devtools" style="background-position:-172px -98px"></span> mở tab có tệp.
 
-The toggler button <span class="devtools" style="background-position:-172px -98px"></span> opens the tab with files.
-
-Let's click it and select `hello.js` in the tree view. Here's what should show up:
+Hãy nhấp vào nó và chọn `hello.js` trong chế độ xem dạng cây. Đây là những gì sẽ hiển thị:
 
 ![](chrome-tabs.svg)
 
-The Sources panel has 3 parts:
+Bảng Nguồn có 3 phần:
 
-1. The **File Navigator** pane lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
-2. The **Code Editor** pane shows the source code.
-3. The **JavaScript Debugging** pane is for debugging, we'll explore it soon.
+1. Ngăn **File Navigator** liệt kê HTML, JavaScript, CSS và các tệp khác, bao gồm cả hình ảnh được đính kèm vào trang. Tiện ích mở rộng của Chrome cũng có thể xuất hiện ở đây.
+2. Khung **Code editor** hiển thị mã nguồn.
+3. Khung **JavaScript Debugging** dùng để gỡ lỗi, chúng ta sẽ sớm khám phá nó.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-172px -122px"></span> again to hide the resources list and give the code some space.
+Giờ đây, bạn có thể nhấp lại vào cùng một công cụ chuyển đổi <span class="devtools" style="background-position:-172px -122px"></span> để ẩn danh sách tài nguyên và tạo khoảng trống cho mã.
 
-## Console
+## Bảng điều khiển
 
-If we press `key:Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+Nếu chúng ta nhấn `key:Esc`, thì bảng điều khiển sẽ mở ra bên dưới. Chúng ta có thể gõ lệnh ở đó và nhấn `key:Enter` để thực thi.
 
-After a statement is executed, its result is shown below.
+Sau khi một câu lệnh được thực thi, kết quả của nó được hiển thị bên dưới.
 
-For example, here `1+2` results in `3`, and `hello("debugger")` returns nothing, so the result is `undefined`:
+Ví dụ: ở đây `1+2` cho kết quả là `3` và `hello("debugger")` không trả về kết quả nào, vì vậy kết quả là `undefined`:
 
 ![](chrome-sources-console.svg)
 
-## Breakpoints
+## Điểm dừng
 
-Let's examine what's going on within the code of the [example page](debugging/index.html). In `hello.js`, click at line number `4`. Yes, right on the `4` digit, not on the code.
+Hãy kiểm tra những gì đang diễn ra trong mã của [trang ví dụ](debugging/index.html). Trong `hello.js`, nhấp vào dòng số `4`. Vâng, ngay trên chữ số `4`, không phải trên mã.
 
-Congratulations! You've set a breakpoint. Please also click on the number for line `8`.
+Chúc mừng! Bạn đã đặt một điểm dừng. Vui lòng nhấp vào số cho dòng `8`.
 
-It should look like this (blue is where you should click):
+Nó sẽ trông như thế này (màu xanh là nơi bạn nên nhấp vào):
 
 ![](chrome-sources-breakpoint.svg)
 
-A *breakpoint* is a point of code where the debugger will automatically pause the JavaScript execution.
+*breakpoint* là một điểm mã nơi trình gỡ lỗi sẽ tự động tạm dừng thực thi JavaScript.
 
-While the code is paused, we can examine current variables, execute commands in the console etc. In other words, we can debug it.
+Trong khi mã bị tạm dừng, chúng ta có thể kiểm tra các biến hiện tại, thực thi các lệnh trong bảng điều khiển, v.v. Nói cách khác, chúng ta có thể gỡ lỗi mã.
 
-We can always find a list of breakpoints in the right panel. That's useful when we have many breakpoints in various files. It allows us to:
-- Quickly jump to the breakpoint in the code (by clicking on it in the right panel).
-- Temporarily disable the breakpoint by unchecking it.
-- Remove the breakpoint by right-clicking and selecting Remove.
-- ...And so on.
+Chúng ta luôn có thể tìm thấy danh sách các điểm ngắt trong bảng bên phải. Điều đó hữu ích khi chúng ta có nhiều điểm ngắt trong các tệp khác nhau. Nó cho phép chúng ta:
+- Nhanh chóng chuyển đến điểm dừng trong mã (bằng cách nhấp vào nó trong bảng bên phải).
+- Tạm thời vô hiệu hóa breakpoint bằng cách bỏ chọn nó.
+- Loại bỏ breakpoint bằng cách click chuột phải chọn Remove.
+- ...Và như thế.
 
-```smart header="Conditional breakpoints"
-*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression is truthy.
+```smart header="Điểm dừng có điều kiện"
+*Nhấp chuột phải* vào số dòng cho phép tạo điểm ngắt *có điều kiện*. Nó chỉ kích hoạt khi biểu thức đã cho là trung thực.
 
-That's handy when we need to stop only for a certain variable value or for certain function parameters.
+Điều đó rất hữu ích khi chúng ta chỉ cần dừng đối với một giá trị biến nhất định hoặc đối với các tham số chức năng nhất định.
 ```
 
-## Debugger command
+## lệnh gỡ lỗi
 
-We can also pause the code by using the `debugger` command in it, like this:
+Chúng ta cũng có thể tạm dừng mã bằng cách sử dụng lệnh `debugger` trong đó, như sau:
 
 ```js
 function hello(name) {
   let phrase = `Hello, ${name}!`;
 
 *!*
-  debugger;  // <-- the debugger stops here
+  debugger;  // <-- trình gỡ lỗi dừng ở đây
 */!*
 
   say(phrase);
 }
 ```
 
-That's very convenient when we are in a code editor and don't want to switch to the browser and look up the script in developer tools to set the breakpoint.
+Điều đó rất thuận tiện khi chúng ta đang ở trong trình chỉnh sửa mã và không muốn chuyển sang trình duyệt và tra cứu tập lệnh trong các công cụ dành cho nhà phát triển để đặt điểm dừng.
 
+## Tạm dừng và nhìn xung quanh
 
-## Pause and look around
+Trong ví dụ của chúng ta, `hello()` được gọi trong khi tải trang, vì vậy cách dễ nhất để kích hoạt trình gỡ lỗi (sau khi chúng ta đã đặt các điểm ngắt) là tải lại trang. Vì vậy, hãy nhấn `key:F5` (Windows, Linux) hoặc `key:Cmd+R` (Mac).
 
-In our example, `hello()` is called during the page load, so the easiest way to activate the debugger (after we've set the breakpoints) is to reload the page. So let's press `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac).
-
-As the breakpoint is set, the execution pauses at the 4th line:
+Khi điểm ngắt được đặt, quá trình thực thi tạm dừng ở dòng thứ 4:
 
 ![](chrome-sources-debugger-pause.svg)
 
-Please open the informational dropdowns to the right (labeled with arrows). They allow you to examine the current code state:
+Vui lòng mở menu thả xuống thông tin ở bên phải (được đánh dấu bằng các mũi tên). Chúng cho phép bạn kiểm tra trạng thái mã hiện tại:
 
-1. **`Watch` -- shows current values for any expressions.**
+1. **`Xem` -- hiển thị các giá trị hiện tại cho bất kỳ biểu thức nào.**
 
-    You can click the plus `+` and input an expression. The debugger will show its value at any moment, automatically recalculating it in the process of execution.
+     Bạn có thể nhấp vào dấu cộng `+` và nhập một biểu thức. Trình gỡ lỗi sẽ hiển thị giá trị của nó bất kỳ lúc nào, tự động tính toán lại giá trị đó trong quá trình thực thi.
 
-2. **`Call Stack` -- shows the nested calls chain.**
+2. **`Ngăn xếp cuộc gọi` -- hiển thị chuỗi cuộc gọi lồng nhau.**
 
-    At the current moment the debugger is inside `hello()` call, called by a script in `index.html` (no function there, so it's called "anonymous").
+     Tại thời điểm hiện tại, trình gỡ lỗi nằm trong lệnh gọi `hello()`, được gọi bởi một tập lệnh trong `index.html` (không có chức năng nào ở đó, vì vậy nó được gọi là "ẩn danh").
 
-    If you click on a stack item (e.g. "anonymous"), the debugger jumps to the corresponding code, and all its variables can be examined as well.
-3. **`Scope` -- current variables.**
+     Nếu bạn nhấp vào một mục trong ngăn xếp (ví dụ: "ẩn danh"), trình gỡ lỗi sẽ chuyển đến mã tương ứng và tất cả các biến của nó cũng có thể được kiểm tra.
+3. **`Phạm vi` -- biến hiện tại.**
 
-    `Local` shows local function variables. You can also see their values highlighted right over the source.
+     `Cục bộ` hiển thị các biến hàm cục bộ. Bạn cũng có thể thấy các giá trị của chúng được đánh dấu ngay trên nguồn.
 
-    `Global` has global variables (out of any functions).
+     `Global` có các biến toàn cục (ngoài bất kỳ hàm nào).
 
-    There's also `this` keyword there that we didn't study yet, but we'll do that soon.
+     Ngoài ra còn có từ khóa `this` mà chúng tôi chưa nghiên cứu, nhưng chúng tôi sẽ làm điều đó sớm thôi.
 
-## Tracing the execution
+## Theo dõi việc thực hiện
 
-Now it's time to *trace* the script.
+Bây giờ là lúc *theo dõi* kịch bản.
 
-There are buttons for it at the top of the right panel. Let's engage them.
+Có các nút cho nó ở trên cùng của bảng điều khiển bên phải. Hãy bấm vào nó.
 <!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
-<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": continue the execution, hotkey `key:F8`.
-: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": tiếp tục thực hiện, phím nóng `key:F8`.
+: Tiếp tục thực thi. Nếu không có điểm dừng bổ sung, thì quá trình thực thi sẽ tiếp tục và trình gỡ lỗi sẽ mất quyền kiểm soát.
 
-    Here's what we can see after a click on it:
+     Đây là những gì chúng ta có thể thấy sau khi nhấp vào nó:
 
     ![](chrome-sources-debugger-trace-1.svg)
 
-    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call Stack" at the right. It has increased by one more call. We're inside `say()` now.
+    Quá trình thực thi đã tiếp tục, đạt đến một điểm ngắt khác bên trong `say()` và tạm dừng ở đó. Hãy xem "Call Stack" ở bên phải. Nó đã tăng thêm một cuộc gọi nữa. Bây giờ chúng ta đang ở trong `say()`.
 
-<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": run the next command, hotkey `key:F9`.
-: Run the next statement. If we click it now, `alert` will be shown.
+<span class="devtools" style="background-position:-200px -190px"></span> -- "Bước": chạy lệnh tiếp theo, phím nóng `key:F9`.
+: Chạy câu lệnh tiếp theo. Nếu chúng ta nhấp vào nó ngay bây giờ, `alert` sẽ được hiển thị.
 
-    Clicking this again and again will step through all script statements one by one.
+     Nhấp đi bấm lại vào đây sẽ lần lượt duyệt qua tất cả các câu lệnh trong tập lệnh.
 
-<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
-: Similar to the previous "Step" command, but behaves differently if the next statement is a function call. That is: not a built-in, like `alert`, but a function of our own.
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Bước qua": chạy lệnh tiếp theo, nhưng *không đi vào hàm*, phím nóng `key :F10`.
+: Tương tự như lệnh "Bước" trước đó, nhưng hoạt động khác nếu câu lệnh tiếp theo là lệnh gọi hàm. Đó là: không phải là chức năng tích hợp sẵn, như `alert`, mà là một chức năng của riêng chúng tôi.
 
-    The "Step" command goes into it and pauses the execution at its first line, while "Step over" executes the nested function call invisibly, skipping the function internals.
+     Lệnh "Bước" đi vào nó và tạm dừng thực thi ở dòng đầu tiên, trong khi "Bước qua" thực hiện lời gọi hàm lồng nhau một cách vô hình, bỏ qua các phần bên trong hàm.
 
-    The execution is then paused immediately after that function.
+     Việc thực thi sau đó bị tạm dừng ngay sau chức năng đó.
 
-    That's good if we're not interested to see what happens inside the function call.
+     Điều đó tốt nếu chúng ta không quan tâm đến việc xem điều gì xảy ra bên trong lời gọi hàm.
 
-<span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
-: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
+<span class="devtools" style="background-position:-4px -194px"></span> -- "Bước vào", phím nóng `key:F11`.
+: Điều đó tương tự như "Bước", nhưng hoạt động khác trong trường hợp gọi hàm không đồng bộ. Nếu bạn chỉ mới bắt đầu học JavaScript, thì bạn có thể bỏ qua sự khác biệt, vì chúng tôi chưa có cuộc gọi không đồng bộ.
 
-    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+     Trong tương lai, chỉ cần lưu ý rằng lệnh "Bước" bỏ qua các hành động không đồng bộ, chẳng hạn như `setTimeout` (gọi hàm theo lịch trình), thực thi sau. "Bước vào" đi vào mã của họ, đợi họ nếu cần. Xem [Hướng dẫn sử dụng DevTools](https://developers.google.com/web/updates/2018/01/devtools#async) để biết thêm chi tiết.
 
-<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
-: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Bước ra": tiếp tục thực thi cho đến khi kết thúc chức năng hiện tại, phím nóng `key:Shift+F11` .
+: Tiếp tục thực thi và dừng nó ở dòng cuối cùng của hàm hiện tại. Điều đó rất hữu ích khi chúng tôi vô tình tham gia một cuộc gọi lồng nhau bằng cách sử dụng <span class="devtools" style="background-position:-200px -190px"></span>, nhưng nó không khiến chúng tôi quan tâm và chúng tôi muốn tiếp tục đến cuối cuộc gọi đó sớm nhất có thể.
 
-<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
-: That button does not move the execution. Just a mass on/off for breakpoints.
+<span class="devtools" style="background-position:-61px -74px"></span> -- bật/tắt tất cả các điểm dừng.
+: Nút đó không di chuyển việc thực hiện. Chỉ cần bật/tắt hàng loạt cho các điểm dừng.
 
-<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
-: When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+<span class="devtools" style="background-position:-90px -146px"></span> -- bật/tắt tự động tạm dừng trong trường hợp có lỗi.
+: Khi được bật và các công cụ dành cho nhà phát triển đang mở, lỗi tập lệnh sẽ tự động tạm dừng quá trình thực thi. Sau đó, chúng ta có thể phân tích các biến để xem điều gì đã xảy ra. Vì vậy, nếu tập lệnh của chúng ta chết do lỗi, chúng ta có thể mở trình gỡ lỗi, bật tùy chọn này và tải lại trang để xem tập lệnh chết ở đâu và bối cảnh tại thời điểm đó là gì.
 
-```smart header="Continue to here"
-Right click on a line of code opens the context menu with a great option called "Continue to here".
+```smart header="Tiếp tục đến đây"
+Nhấp chuột phải vào một dòng mã sẽ mở menu ngữ cảnh với một tùy chọn tuyệt vời có tên "Tiếp tục đến đây".
 
-That's handy when we want to move multiple steps forward to the line, but we're too lazy to set a breakpoint.
+Điều đó rất hữu ích khi chúng tôi muốn di chuyển nhiều bước về phía trước dòng, nhưng chúng tôi quá lười để đặt điểm dừng.
 ```
 
-## Logging
+## Ghi nhật ký
 
-To output something to console from our code, there's `console.log` function.
+Để xuất nội dung nào đó ra bảng điều khiển từ mã của chúng ta, có chức năng `console.log`.
 
-For instance, this outputs values from `0` to `4` to console:
+Chẳng hạn, điều này xuất các giá trị từ `0` đến `4` sang bảng điều khiển:
 
 ```js run
-// open console to see
+// mở console để thấy
 for (let i = 0; i < 5; i++) {
   console.log("value,", i);
 }
 ```
 
-Regular users don't see that output, it is in the console. To see it, either open the Console panel of developer tools or press `key:Esc` while in another panel: that opens the console at the bottom.
+Người dùng thông thường không nhìn thấy đầu ra đó, nó nằm trong bảng điều khiển. Để xem bảng điều khiển, hãy mở bảng điều khiển của công cụ dành cho nhà phát triển hoặc nhấn `key:Esc` khi đang ở bảng điều khiển khác: mở bảng điều khiển ở dưới cùng.
 
-If we have enough logging in our code, then we can see what's going on from the records, without the debugger.
+Nếu chúng tôi có đủ thông tin đăng nhập vào mã của mình thì chúng tôi có thể xem điều gì đang diễn ra từ các bản ghi mà không cần trình gỡ lỗi.
 
-## Summary
+## Bản tóm tắt
 
-As we can see, there are three main ways to pause a script:
-1. A breakpoint.
-2. The `debugger` statements.
-3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-90px -146px"></span> is "on").
+Như chúng ta có thể thấy, có ba cách chính để tạm dừng tập lệnh:
+1. Một điểm dừng.
+2. Các câu lệnh `debugger`.
+3. Lỗi (nếu công cụ dành cho nhà phát triển đang mở và nút <span class="devtools" style="background-position:-90px -146px"></span> đang "bật").
 
-When paused, we can debug - examine variables and trace the code to see where the execution goes wrong.
+Khi tạm dừng, chúng tôi có thể gỡ lỗi - kiểm tra các biến và theo dõi mã để xem nơi thực thi sai.
 
-There are many more options in developer tools than covered here. The full manual is at <https://developers.google.com/web/tools/chrome-devtools>.
+Có nhiều tùy chọn hơn trong các công cụ dành cho nhà phát triển ngoài những gì được đề cập ở đây. Hướng dẫn đầy đủ có tại <https://developers.google.com/web/tools/chrome-devtools>.
 
-The information from this chapter is enough to begin debugging, but later, especially if you do a lot of browser stuff, please go there and look through more advanced capabilities of developer tools.
+Thông tin từ chương này là đủ để bắt đầu gỡ lỗi, nhưng sau này, đặc biệt nếu bạn làm nhiều công việc trên trình duyệt, vui lòng vào đó và xem qua các khả năng nâng cao hơn của các công cụ dành cho nhà phát triển.
 
-Oh, and also you can click at various places of dev tools and just see what's showing up. That's probably the fastest route to learn dev tools. Don't forget about the right click and context menus!
+Ồ, và bạn cũng có thể nhấp vào các vị trí khác nhau của công cụ dành cho nhà phát triển và chỉ cần xem những gì đang hiển thị. Đó có lẽ là con đường nhanh nhất để tìm hiểu các công cụ dành cho nhà phát triển. Đừng quên nhấp chuột phải và menu ngữ cảnh!
