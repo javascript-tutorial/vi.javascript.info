@@ -5,11 +5,11 @@
 Học mà không suy nghĩ thì vô ích; suy nghĩ mà không học thì nguy hiểm.
 ```
 
-Các ninja lập trình viên trong quá khứ đã sử dụng những thủ thuật này để mài giũa tâm trí của những người bảo trì mã.
+Các lập trình viên ninja trong quá khứ đã sử dụng những thủ thuật này để mài giũa tâm trí của những người bảo trì mã.
 
-Các chuyên gia đánh giá mã tìm kiếm chúng trong các nhiệm vụ kiểm thử.
+Các chuyên gia đánh giá mã tìm kiếm chúng trong các nhiệm vụ kiểm tra.
 
-Các nhà phát triển mới làm quen đôi khi sử dụng chúng thậm chí còn tốt hơn cả các ninja lập trình viên.
+Các nhà phát triển mới làm quen đôi khi sử dụng chúng thậm chí còn tốt hơn cả các lập trình viên ninja.
 
 Hãy đọc kỹ chúng và tìm hiểu xem bạn là ai -- một ninja, một người mới hay có thể là một người đánh giá mã?
 
@@ -32,11 +32,11 @@ Chẳng hạn, hãy xem toán tử bậc ba này `'?'`:
 i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 ```
 
-Mát mẻ, phải không? Nếu bạn viết như vậy, một nhà phát triển bắt gặp dòng này và cố gắng hiểu giá trị của `i` là gì sẽ có một khoảng thời gian vui vẻ. Sau đó đến với bạn, tìm kiếm một câu trả lời.
+Ngầu, phải không? Nếu bạn viết như vậy, một nhà phát triển bắt gặp dòng này và cố gắng hiểu giá trị của `i` là gì sẽ có một khoảng thời gian vui vẻ. Sau đó đến với bạn, tìm kiếm một câu trả lời.
 
-Nói với họ rằng ngắn hơn luôn tốt hơn. Bắt đầu họ vào con đường của ninja.
+Nói với họ rằng ngắn hơn luôn tốt hơn. Bắt đầu dẫn họ vào con đường của ninja.
 
-## Biến một chữ cái
+## Biến có một chữ cái
 
 ```quote author="Lão Tử (Đạo đức kinh)"
 Đạo ẩn trong vô ngôn. Chỉ có Đạo là bắt đầu tốt và
@@ -49,7 +49,7 @@ Một biến ngắn biến mất trong mã giống như một ninja thực sự 
 
 ...Nhưng có một ngoại lệ. Một ninja thực thụ sẽ không bao giờ sử dụng `i` làm bộ đếm trong vòng lặp `"for"`. Bất cứ nơi nào, nhưng không phải ở đây. Nhìn xung quanh, có nhiều chữ cái kỳ lạ hơn. Ví dụ: `x` hoặc `y`.
 
-Một biến kỳ lạ làm bộ đếm vòng lặp đặc biệt thú vị nếu thân vòng lặp chiếm 1-2 trang (hãy dài hơn nếu bạn có thể). Sau đó, nếu ai đó nhìn sâu vào bên trong vòng lặp, họ sẽ không thể nhanh chóng nhận ra rằng biến có tên `x` là bộ đếm vòng lặp.
+Một biến kỳ lạ làm bộ đếm vòng lặp đặc biệt ngầu nếu thân vòng lặp chiếm 1-2 trang (hãy dài hơn nếu bạn có thể). Sau đó, nếu ai đó nhìn sâu vào bên trong vòng lặp, họ sẽ không thể nhanh chóng nhận ra rằng biến có tên `x` là bộ đếm vòng lặp.
 
 ## Sử dụng chữ viết tắt
 
@@ -81,13 +81,13 @@ Trong khi chọn tên, hãy cố gắng sử dụng từ trừu tượng nhất.
 
 - **Đặt tên biến theo kiểu: `str`, `num`...**
 
-     Cung cấp cho họ một thử. Một đồng tu trẻ có thể thắc mắc - những cái tên như vậy có thực sự hữu ích cho một ninja không? Thật sự, họ có!
+     Cung cấp cho họ một thử. Một người mới bắt đầu có thể thắc mắc - những cái tên như vậy có thực sự hữu ích cho một ninja không? Thật sự, chúng có!
 
      Chắc chắn, tên biến vẫn có ý nghĩa gì đó. Nó cho biết những gì bên trong biến: một chuỗi, một số hoặc thứ gì đó khác. Nhưng khi một người ngoài cuộc cố gắng hiểu mã, họ sẽ ngạc nhiên khi thấy rằng thực tế không có thông tin gì cả! Và cuối cùng sẽ không thể thay đổi mã được suy nghĩ kỹ lưỡng của bạn.
 
      Loại giá trị rất dễ tìm ra bằng cách gỡ lỗi. Nhưng ý nghĩa của biến là gì? Nó lưu trữ chuỗi/số nào?
 
-     Không có cách nào để tìm ra nếu không có một thiền định tốt!
+     Không có cách nào để tìm ra nếu không có một sự suy ngẫm tốt!
 
 - **...Nhưng nếu không còn những tên như vậy nữa thì sao?** Chỉ cần thêm một số: `data1, item2, elem5`...
 
@@ -167,7 +167,7 @@ Một ninja thông minh đặt dấu gạch dưới tại một điểm của m�
 
 Hãy để mọi người thấy các thực thể của bạn tuyệt vời như thế nào! Những cái tên như `superElement`, `megaFrame` và `niceItem` chắc chắn sẽ khai sáng cho người đọc.
 
-Thật vậy, từ một mặt, một cái gì đó được viết: `siêu..`, `mega..`, `nice..` Nhưng mặt khác -- điều đó không mang lại chi tiết. Người đọc có thể quyết định tìm kiếm ý nghĩa ẩn giấu và suy ngẫm trong một hoặc hai giờ trong thời gian làm việc được trả lương của họ.
+Thật vậy, từ một mặt, một cái gì đó được viết: `super..`, `mega..`, `nice..` Nhưng mặt khác -- điều đó không mang lại chi tiết. Người đọc có thể quyết định tìm kiếm ý nghĩa ẩn giấu và suy ngẫm trong một hoặc hai giờ trong thời gian làm việc được trả lương của họ.
 
 
 ## Chồng chéo các biến bên ngoài
@@ -199,7 +199,7 @@ Sau đó, họ sẽ cố gắng làm việc với `user` với giả định r�
 
 ## Tác dụng phụ ở mọi nơi!
 
-Có những hàm tưởng chừng như không thay đổi gì, như `isReady()`, `checkPermission()`, `findTags()`... Chúng được cho là thực hiện tính toán, tìm kiếm và trả về dữ liệu mà không thay đổi bất cứ thứ gì bên ngoài chúng Nói cách khác, không có "tác dụng phụ".
+Có những hàm tưởng chừng như không thay đổi gì, như `isReady()`, `checkPermission()`, `findTags()`... Chúng được cho là thực hiện tính toán, tìm kiếm và trả về dữ liệu mà không thay đổi bất cứ thứ gì bên ngoài chúng. Nói cách khác, không có "tác dụng phụ".
 
 **Một thủ thuật thực sự hay là thêm một hành động "hữu ích" cho chúng, bên cạnh nhiệm vụ chính.**
 
