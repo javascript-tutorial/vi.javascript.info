@@ -6,7 +6,7 @@ Mã của chúng ta phải rõ ràng và dễ đọc nhất có thể.
 
 ## Cú pháp
 
-Đây là một bảng gian lận với một số quy tắc được đề xuất (xem bên dưới để biết thêm chi tiết):
+Đây là một bảng hỗ trợ với một số quy tắc được đề xuất (xem bên dưới để biết thêm chi tiết):
 
 ![](code-style.svg)
 <!--
@@ -52,7 +52,7 @@ if (condition) {
 }
 ```
 
-Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`, là một trường hợp cạnh quan trọng. Có nên sử dụng dấu ngoặc nhọn không?
+Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`, là một trường hợp rìa quan trọng. Có nên sử dụng dấu ngoặc nhọn không?
     ```js
     if (n < 0) *!*{*/!*alert(`Nguồn ${n} không được hỗ trợ`);*!*}*/!*
     ```
@@ -72,7 +72,7 @@ Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`,
     }
     ```
 
-Đối với một mã rất ngắn gọn, một dòng được cho phép, ví dụ: `if (cond) return null`. Nhưng một khối mã (biến thể cuối cùng) thường dễ đọc hơn.
+Đối với một mã rất ngắn gọn, một dòng được cho phép, ví dụ: `if (cond) return null`. Nhưng một khối mã (biến thểbiến thể cuối cùng) thường dễ đọc hơn.
 
 ### Độ dài dòng
 
@@ -108,9 +108,9 @@ Có hai loại thụt lề:
 
 - **Thụt lề ngang: 2 hoặc 4 dấu cách.**
 
-     Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Chọn cái nào là thánh chiến xưa. Không gian ngày nay phổ biến hơn.
+     Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Chọn cái nào là thánh chiến xưa. Dấu cách ngày nay phổ biến hơn.
 
-     Một lợi thế của khoảng trắng so với tab là khoảng trắng cho phép cấu hình thụt lề linh hoạt hơn so với biểu tượng tab.
+     Một lợi thế của dấu cách so với tab là nó cho phép cấu hình thụt lề linh hoạt hơn so với tab.
 
      Chẳng hạn, chúng ta có thể căn chỉnh các tham số với dấu ngoặc mở, như thế này:
 
@@ -244,7 +244,7 @@ Nếu bạn đang viết một số hàm "trợ giúp" và mã sử dụng chún
     setHandler(elem);
     walkAround();
     ```
-2. Code trước, sau đó chức năng
+2. Code trước, sau đó viết hàm
 
     ```js
     // *!*mã sử dụng các chức năng*/!*
@@ -252,7 +252,7 @@ Nếu bạn đang viết một số hàm "trợ giúp" và mã sử dụng chún
     setHandler(elem);
     walkAround();
 
-    // --- *!*chức năng trợ giúp*/!* ---
+    // --- *!*hàm trợ giúp*/!* ---
     function createElement() {
       ...
     }
@@ -271,7 +271,7 @@ Hầu hết thời gian, biến thể thứ hai được ưa thích hơn.
 
 Đó là bởi vì khi đọc mã, trước tiên chúng tôi muốn biết *nó làm gì*. Nếu mã đi trước, thì nó sẽ rõ ràng ngay từ đầu. Sau đó, có lẽ chúng ta sẽ không cần phải đọc các chức năng, đặc biệt nếu tên của chúng mô tả những gì chúng thực sự làm.
 
-## Hướng dẫn Phong cách
+## Hướng dẫn phong cách
 
 Hướng dẫn phong cách chứa các quy tắc chung về "cách viết" mã, ví dụ: nên sử dụng trích dẫn nào, thụt lề bao nhiêu khoảng trắng, độ dài dòng tối đa, v.v. Rất nhiều điều nhỏ nhặt.
 
@@ -285,15 +285,15 @@ Một số lựa chọn phổ biến:
 - [Hướng dẫn về kiểu JavaScript của Airbnb](https://github.com/airbnb/javascript)
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
 - [StandardJS](https://standardjs.com/)
-- (cộng với nhiều hơn nữa)
+- (còn nhiều hơn nữa)
 
-Nếu bạn là một nhà phát triển mới làm quen, hãy bắt đầu với cheat sheet ở đầu chương này. Sau đó, bạn có thể duyệt qua các hướng dẫn về phong cách khác để chọn thêm ý tưởng và quyết định xem bạn thích ý tưởng nào nhất.
+Nếu bạn là một nhà phát triển mới làm quen, hãy bắt đầu với bảng hỗ trợ ở đầu chương này. Sau đó, bạn có thể duyệt qua các hướng dẫn về phong cách khác để chọn thêm ý tưởng và quyết định xem bạn thích ý tưởng nào nhất.
 
 ## Linters tự động
 
 Linters là công cụ có thể tự động kiểm tra kiểu mã của bạn và đưa ra các đề xuất cải tiến.
 
-Điều tuyệt vời về chúng là kiểm tra kiểu cũng có thể tìm thấy một số lỗi, như lỗi chính tả trong tên biến hoặc hàm. Do tính năng này, nên sử dụng trình nói dối ngay cả khi bạn không muốn dính vào một "kiểu mã" cụ thể.
+Điều tuyệt vời về chúng là kiểm tra kiểu cũng có thể tìm thấy một số lỗi, như lỗi chính tả trong tên biến hoặc hàm. Do tính năng này, nên sử dụng linter ngay cả khi bạn không muốn dính vào một "kiểu mã" cụ thể.
 
 Dưới đây là một số công cụ linting nổi tiếng:
 
@@ -301,9 +301,9 @@ Dưới đây là một số công cụ linting nổi tiếng:
 - [JSHint](http://www.jshint.com/) -- nhiều cài đặt hơn JSLint.
 - [ESLint](http://eslint.org/) -- có lẽ là cái mới nhất.
 
-Tất cả trong số họ có thể làm công việc. Tác giả sử dụng [ESLint](http://eslint.org/).
+Tất cả trong số họ có thể làm công việc. Ở đây, tác giả sử dụng [ESLint](http://eslint.org/).
 
-Hầu hết các linters đều được tích hợp với nhiều trình chỉnh sửa phổ biến: chỉ cần bật plugin trong trình chỉnh sửa và định cấu hình kiểu.
+Hầu hết các linters đều được tích hợp với nhiều trình chỉnh sửa phổ biến: chỉ cần bật plugin trong trình chỉnh sửa và tùy chỉnh kiểu.
 
 Chẳng hạn, đối với ESLint, bạn nên làm như sau:
 
@@ -335,9 +335,9 @@ Cũng có thể tải xuống các bộ quy tắc kiểu từ web và thay vào 
 
 Ngoài ra, một số IDE nhất định có linting tích hợp, thuận tiện nhưng không thể tùy chỉnh như ESLint.
 
-## Bản tóm tắt
+## Tóm tắt
 
-Tất cả các quy tắc cú pháp được mô tả trong chương này (và trong các hướng dẫn về phong cách được tham chiếu) nhằm mục đích tăng khả năng đọc mã của bạn. Tất cả chúng đều có thể tranh luận.
+Tất cả các quy tắc cú pháp được mô tả trong chương này (và trong các hướng dẫn về phong cách được tham chiếu) nhằm mục đích tăng khả năng đọc mã của bạn. Tất cả chúng đều gây tranh cãi.
 
 Khi chúng ta nghĩ về việc viết mã "tốt hơn", các câu hỏi chúng ta nên tự hỏi mình là: "Điều gì làm cho mã dễ đọc hơn và dễ hiểu hơn?" và "Điều gì có thể giúp chúng ta tránh sai sót?" Đây là những điều chính cần lưu ý khi lựa chọn và tranh luận về kiểu mã.
 
