@@ -2,7 +2,7 @@
 
 
 ```quote author="Khổng Tử (Luận ngữ)"
-Học mà không suy nghĩ là mất công; suy nghĩ mà không học là nguy hiểm.
+Học mà không suy nghĩ thì vô ích; suy nghĩ mà không học thì nguy hiểm.
 ```
 
 Các ninja lập trình viên trong quá khứ đã sử dụng những thủ thuật này để mài giũa tâm trí của những người bảo trì mã.
@@ -15,7 +15,7 @@ Hãy đọc kỹ chúng và tìm hiểu xem bạn là ai -- một ninja, một n
 
 
 ```warn header="Phát hiện trớ trêu"
-Nhiều người cố gắng đi theo con đường ninja. Chỉ có số ít thành công.
+Nhiều người cố gắng đi theo con đường ninja. Chỉ có một số ít thành công.
 ```
 
 
@@ -110,17 +110,17 @@ Việc đọc nhanh mã như vậy trở nên không thể. Và khi có một l�
 
 Sử dụng tên *tương tự* cho những thứ *giống nhau* khiến cuộc sống trở nên thú vị hơn và thể hiện sự sáng tạo của bạn với công chúng.
 
-Chẳng hạn, hãy xem xét các tiền tố chức năng. Nếu một chức năng hiển thị thông báo trên màn hình -- hãy bắt đầu chức năng đó bằng `display…`, chẳng hạn như `displayMessage`. Và sau đó, nếu một chức năng khác hiển thị trên màn hình một thứ khác, chẳng hạn như tên người dùng, hãy bắt đầu bằng `show…` (chẳng hạn như `showName`).
+Chẳng hạn, hãy xem xét các tiền tố hàm. Nếu một hàm hiển thị thông báo trên màn hình -- hãy bắt đầu hàm đó bằng `display…`, chẳng hạn như `displayMessage`. Và sau đó, nếu một hàm khác hiển thị trên màn hình một thứ khác, chẳng hạn như tên người dùng, hãy bắt đầu bằng `show…` (chẳng hạn như `showName`).
 
-Nói bóng gió rằng có một sự khác biệt tinh tế giữa các chức năng như vậy, trong khi không có.
+Nói bóng gió rằng có một sự khác biệt tinh tế giữa các hàm như vậy, trong khi không có.
 
-Thỏa thuận với các ninja khác trong nhóm: nếu John bắt đầu "hiển thị" các chức năng với `display...` trong mã của anh ấy, thì Peter có thể sử dụng `render..`, và Ann -- `paint...`. Lưu ý rằng mã đã trở nên thú vị và đa dạng hơn bao nhiêu.
+Thỏa thuận với các ninja khác trong nhóm: nếu John bắt đầu "hiển thị" các hàm với `display...` trong mã của anh ấy, thì Peter có thể sử dụng `render..`, và Ann -- `paint...`. Lưu ý rằng mã đã trở nên thú vị và đa dạng hơn bao nhiêu.
 
 ...Và bây giờ là cú hat-trick!
 
 Đối với hai hàm có sự khác biệt quan trọng -- hãy sử dụng cùng một tiền tố!
 
-Chẳng hạn, chức năng `printPage(page)` sẽ sử dụng một máy in. Và chức năng `printText(text)` sẽ đưa văn bản lên màn hình. Hãy để một độc giả không quen biết suy nghĩ kỹ về chức năng có tên tương tự `printMessage`: "Nó đặt thông báo ở đâu? Đến máy in hay trên màn hình?". Để làm cho nó thực sự tỏa sáng, `printMessage(message)` nên xuất nó trong cửa sổ mới!
+Chẳng hạn, hàm `printPage(page)` sẽ sử dụng một máy in. Và hàm `printText(text)` sẽ đưa văn bản lên màn hình. Hãy để một độc giả không quen biết suy nghĩ kỹ về hàm có tên tương tự `printMessage`: "Nó đặt thông báo ở đâu? Đến máy in hay trên màn hình?". Để làm cho nó thực sự tỏa sáng, `printMessage(message)` nên xuất nó trong cửa sổ mới!
 
 ## Sử dụng lại tên
 
@@ -151,7 +151,7 @@ function ninjaFunction(elem) {
 }
 ```
 
-Một lập trình viên đồng nghiệp muốn làm việc với `elem` trong nửa sau của chức năng sẽ ngạc nhiên... Chỉ trong quá trình gỡ lỗi, sau khi kiểm tra mã, họ mới phát hiện ra rằng mình đang làm việc với một bản sao!
+Một lập trình viên đồng nghiệp muốn làm việc với `elem` trong nửa sau của hàm sẽ ngạc nhiên... Chỉ trong quá trình gỡ lỗi, sau khi kiểm tra mã, họ mới phát hiện ra rằng mình đang làm việc với một bản sao!
 
 Nhìn thấy trong mã thường xuyên. Hiệu quả chết người ngay cả đối với một ninja dày dặn kinh nghiệm.
 
@@ -212,28 +212,27 @@ Thể hiện suy nghĩ ban đầu của bạn! Hãy để lệnh gọi `checkPer
 Những nhà phát triển cố gắng viết `if (checkPermission(..))`, sẽ thắc mắc tại sao nó không hoạt động. Hãy nói với họ: "Hãy đọc tài liệu!". Và đưa ra bài viết này.
 
 
-## Chức năng mạnh mẽ!
+## Hàm mạnh mẽ!
 
 ```quote author="Lão Tử (Đạo đức kinh)"
 Đạo lớn chảy khắp nơi,<br>
 cả bên trái và bên phải.
 ```
 
-Đừng giới hạn chức năng bởi những gì được viết trong tên của nó. Hãy rộng rãi hơn.
+Đừng giới hạn hàm bởi những gì được viết trong tên của nó. Hãy rộng rãi hơn.
 
-Chẳng hạn, một chức năng `validateEmail(email)` có thể (ngoài việc kiểm tra tính chính xác của email) hiển thị thông báo lỗi và yêu cầu nhập lại email.
+Chẳng hạn, một hàm `validateEmail(email)` có thể (ngoài việc kiểm tra tính chính xác của email) hiển thị thông báo lỗi và yêu cầu nhập lại email.
 
 Các hành động bổ sung không nên rõ ràng từ tên hàm. Một lập trình viên ninja thực thụ cũng sẽ khiến chúng không bị lộ ra khỏi mã.
 
 **Kết hợp nhiều hành động thành một để bảo vệ mã của bạn không bị sử dụng lại.**
 
-Hãy tưởng tượng, một nhà phát triển khác chỉ muốn kiểm tra email và không xuất bất kỳ thông báo nào. Chức năng `validateEmail(email)` của bạn thực hiện cả hai sẽ không phù hợp với họ. Vì vậy, họ sẽ không phá vỡ thiền định của bạn bằng cách hỏi bất cứ điều gì về nó.
+Hãy tưởng tượng, một nhà phát triển khác chỉ muốn kiểm tra email và không xuất bất kỳ thông báo nào. Hàm `validateEmail(email)` của bạn thực hiện cả hai sẽ không phù hợp với họ. Vì vậy, họ sẽ không phá vỡ thiền định của bạn bằng cách hỏi bất cứ điều gì về nó.
 
 ## Tóm tắt
 
-Tất cả "mẩu lời khuyên" ở trên là từ mã thực... Đôi khi, được viết bởi các nhà phát triển có kinh nghiệm. Thậm chí có thể nhiều kinh nghiệm hơn bạn;)
+Tất cả "mẩu lời khuyên" ở trên là từ những mã ở thực tế... Đôi khi, được viết bởi các nhà phát triển có kinh nghiệm. Thậm chí có thể nhiều kinh nghiệm hơn bạn;)
 
-- Làm theo một số trong số họ, và mã của bạn sẽ trở nên đầy bất ngờ.
-- Theo dõi nhiều người trong số họ, và mã của bạn sẽ thực sự là của bạn, không ai muốn thay đổi nó.
+- Làm theo một số trong số đó, và mã của bạn sẽ trở nên đầy bất ngờ.
+- Làm theo nhiều trong số đó, và mã của bạn sẽ thực sự là của bạn, không ai muốn thay đổi nó.
 - Hãy làm theo tất cả, và mã của bạn sẽ trở thành bài học quý giá cho các nhà phát triển trẻ đang tìm kiếm sự khai sáng.
-- 
