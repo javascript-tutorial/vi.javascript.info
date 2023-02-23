@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Có gì sai trong bài kiểm tra?
+# What's wrong in the test?
 
-Có gì sai trong bài kiểm tra `pow` bên dưới?
+What's wrong in the test of `pow` below?
 
 ```js
 it("Raises x to the power n", function() {
@@ -21,4 +21,4 @@ it("Raises x to the power n", function() {
 });
 ```
 
-Tái bút. Về mặt cú pháp, bài kiểm tra là chính xác và vượt qua.
+P.S. Syntactically the test is correct and passes.
