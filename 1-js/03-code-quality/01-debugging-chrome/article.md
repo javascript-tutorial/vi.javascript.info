@@ -33,7 +33,7 @@ Giờ đây, bạn có thể nhấp lại vào nút chuyển đổi <span class=
 
 ## Bảng điều khiển
 
-Nếu chúng ta nhấn `key:Esc`, thì bảng điều khiển(console) sẽ mở ra bên dưới. Chúng ta có thể gõ lệnh ở đó và nhấn `key:Enter` để thực thi.
+Nếu chúng ta nhấn `key:Esc`, thì bảng điều khiển (console) sẽ mở ra bên dưới. Chúng ta có thể gõ lệnh ở đó và nhấn `key:Enter` để thực thi.
 
 Sau khi một câu lệnh được thực thi, kết quả của nó được hiển thị bên dưới.
 
@@ -95,22 +95,22 @@ Khi điểm ngắt được đặt, quá trình thực thi tạm dừng ở dòn
 
 Vui lòng mở menu thả xuống thông tin ở bên phải (được đánh dấu bằng các mũi tên). Chúng cho phép bạn kiểm tra trạng thái mã hiện tại:
 
-1. **`Xem` -- hiển thị các giá trị hiện tại cho bất kỳ biểu thức nào.**
+1. **`Watch` -- hiển thị các giá trị hiện tại cho bất kỳ biểu thức nào.**
 
      Bạn có thể nhấp vào dấu cộng `+` và nhập một biểu thức. Trình gỡ lỗi sẽ hiển thị giá trị của nó bất kỳ lúc nào, tự động tính toán lại giá trị đó trong quá trình thực thi.
 
-2. **`Ngăn xếp cuộc gọi` -- hiển thị chuỗi cuộc gọi lồng nhau.**
+2. **`Ngăn xếp cuộc gọi(Call Stack)` -- hiển thị chuỗi cuộc gọi lồng nhau.**
 
-     Tại thời điểm hiện tại, trình gỡ lỗi nằm trong lệnh gọi `hello()`, được gọi bởi một tập lệnh trong `index.html` (không có hàm nào ở đó, vì vậy nó được gọi là "ẩn danh").
+    Tại thời điểm hiện tại, trình gỡ lỗi nằm trong lệnh gọi `hello()`, được gọi bởi một tập lệnh trong `index.html` (không có hàm nào ở đó, vì vậy nó được gọi là "ẩn danh").
 
      Nếu bạn nhấp vào một mục trong ngăn xếp (ví dụ: "ẩn danh"), trình gỡ lỗi sẽ chuyển đến mã tương ứng và tất cả các biến của nó cũng có thể được kiểm tra.
-3. **`Phạm vi` -- biến hiện tại.**
+3. **`Scope` -- biến hiện tại.**
 
-     `Cục bộ` hiển thị các biến hàm cục bộ. Bạn cũng có thể thấy các giá trị của chúng được đánh dấu ngay trên nguồn.
+    `Local` hiển thị các biến hàm cục bộ. Bạn cũng có thể thấy các giá trị của chúng được đánh dấu ngay trên nguồn.
 
-     `Global` có các biến toàn cục (ngoài bất kỳ hàm nào).
+    `Global` có các biến toàn cục (ngoài bất kỳ hàm nào).
 
-     Ngoài ra còn có từ khóa `this` mà chúng ta chưa nghiên cứu, nhưng chúng ta sẽ làm điều đó sớm thôi.
+    Ngoài ra còn có từ khóa `this` mà chúng ta chưa nghiên cứu, nhưng chúng ta sẽ làm điều đó sớm thôi.
 
 ## Theo dõi việc thực hiện
 
@@ -121,7 +121,7 @@ Có các nút cho nó ở trên cùng của bảng điều khiển bên phải. 
 <span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": tiếp tục thực hiện, phím nóng `key:F8`.
 : Tiếp tục thực thi. Nếu không có điểm dừng bổ sung, thì quá trình thực thi sẽ tiếp tục và trình gỡ lỗi sẽ mất quyền kiểm soát.
 
-     Đây là những gì chúng ta có thể thấy sau khi nhấp vào nó:
+    Đây là những gì chúng ta có thể thấy sau khi nhấp vào nó:
 
     ![](chrome-sources-debugger-trace-1.svg)
 
@@ -130,23 +130,23 @@ Có các nút cho nó ở trên cùng của bảng điều khiển bên phải. 
 <span class="devtools" style="background-position:-200px -190px"></span> -- "Step": chạy lệnh tiếp theo, phím nóng `key:F9`.
 : Chạy câu lệnh tiếp theo. Nếu chúng ta nhấp vào nó ngay bây giờ, `alert` sẽ được hiển thị.
 
-     Nhấp đi bấm lại vào đây sẽ lần lượt duyệt qua tất cả các câu lệnh trong tập lệnh.
+    Nhấp đi bấm lại vào đây sẽ lần lượt duyệt qua tất cả các câu lệnh trong tập lệnh.
 
 <span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": chạy lệnh tiếp theo, nhưng *không đi vào hàm*, phím nóng `key :F10`.
 : Tương tự như lệnh "Step" trước đó, nhưng hoạt động khác nếu câu lệnh tiếp theo là lệnh gọi hàm. Đó là: không phải là hàm tích hợp sẵn, như `alert`, mà là một hàm của riêng chúng ta.
 
-     Lệnh "Step" đi vào nó và tạm dừng thực thi ở dòng đầu tiên, trong khi "Step over" thực hiện lời gọi hàm lồng nhau một cách vô hình, bỏ qua các phần bên trong hàm.
+    Lệnh "Step" đi vào nó và tạm dừng thực thi ở dòng đầu tiên, trong khi "Step over" thực hiện lời gọi hàm lồng nhau một cách vô hình, bỏ qua các phần bên trong hàm.
 
-     Việc thực thi sau đó bị tạm dừng ngay sau hàm đó.
+    Việc thực thi sau đó bị tạm dừng ngay sau hàm đó.
 
-     Điều đó tốt nếu chúng ta không quan tâm đến việc xem điều gì xảy ra bên trong lời gọi hàm.
+    Điều đó tốt nếu chúng ta không quan tâm đến việc xem điều gì xảy ra bên trong lời gọi hàm.
 
 <span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", phím nóng `key:F11`.
 : Điều đó tương tự như "Step", nhưng hoạt động khác trong trường hợp gọi hàm không đồng bộ. Nếu bạn chỉ mới bắt đầu học JavaScript, thì bạn có thể bỏ qua sự khác biệt, vì chúng ta chưa có cuộc gọi không đồng bộ.
 
-     Trong tương lai, chỉ cần lưu ý rằng lệnh "Step" bỏ qua các hành động không đồng bộ, chẳng hạn như `setTimeout` (gọi hàm theo lịch trình), thực thi sau. "Bước vào" đi vào mã của hàm, đợi hàm nếu cần. Xem [Hướng dẫn sử dụng DevTools](https://developers.google.com/web/updates/2018/01/devtools#async) để biết thêm chi tiết.
+    Trong tương lai, chỉ cần lưu ý rằng lệnh "Step" bỏ qua các hành động không đồng bộ, chẳng hạn như `setTimeout` (gọi hàm theo lịch trình), thực thi sau. "Bước vào" đi vào mã của hàm, đợi hàm nếu cần. Xem [Hướng dẫn sử dụng DevTools](https://developers.google.com/web/updates/2018/01/devtools#async) để biết thêm chi tiết.
 
-<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": tiếp tục thực thi cho đến khi kết thúc hàm hiện tại, phím nóng `key:Shift+F11` .
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": tiếp tục thực thi cho đến khi kết thúc hàm hiện tại, phím nóng `key:Shift+F11`.
 : Tiếp tục thực thi và dừng nó ở dòng cuối cùng của hàm hiện tại. Điều đó rất hữu ích khi chúng ta vô tình tham gia một cuộc gọi lồng nhau bằng cách sử dụng <span class="devtools" style="background-position:-200px -190px"></span>, nhưng nó không khiến chúng ta quan tâm và chúng ta muốn tiếp tục đến cuối cuộc gọi đó sớm nhất có thể.
 
 <span class="devtools" style="background-position:-61px -74px"></span> -- bật/tắt tất cả các điểm dừng.
@@ -155,17 +155,17 @@ Có các nút cho nó ở trên cùng của bảng điều khiển bên phải. 
 <span class="devtools" style="background-position:-90px -146px"></span> -- bật/tắt tự động tạm dừng trong trường hợp có lỗi.
 : Khi được bật và các công cụ dành cho nhà phát triển đang mở, lỗi tập lệnh sẽ tự động tạm dừng quá trình thực thi. Sau đó, chúng ta có thể phân tích các biến để xem điều gì đã xảy ra. Vì vậy, nếu tập lệnh của chúng ta chết do lỗi, chúng ta có thể mở trình gỡ lỗi, bật tùy chọn này và tải lại trang để xem tập lệnh chết ở đâu và bối cảnh tại thời điểm đó là gì.
 
-```smart header="Cntinue to here"
-Nhấp chuột phải vào một dòng mã sẽ mở menu ngữ cảnh với một tùy chọn tuyệt vời có tên "Tiếp tục đến đây".
+```smart header="Continue to here"
+Nhấp chuột phải vào một dòng mã sẽ mở menu ngữ cảnh với một tùy chọn tuyệt vời có tên "Continue to here".
 
 Điều đó rất hữu ích khi chúng ta muốn di chuyển nhiều bước về phía trước dòng, nhưng chúng ta quá lười để đặt điểm dừng.
 ```
 
 ## Ghi nhật ký
 
-Để xuất nội dung nào đó ra bảng điều khiển từ mã của chúng ta, có chức năng `console.log`.
+Để xuất nội dung nào đó ra bảng điều khiển từ mã của chúng ta, có một hàm là `console.log`.
 
-Chẳng hạn, điều này xuất các giá trị từ `0` đến `4` sang bảng điều khiển:
+Chẳng hạn, mã sau đây xuất các giá trị từ `0` đến `4` sang bảng điều khiển:
 
 ```js run
 // mở console để thấy
