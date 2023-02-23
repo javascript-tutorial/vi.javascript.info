@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- thêm mocha css, để hiển thị kết quả -->
+  <!-- add mocha css, to show results -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
-  <!-- thêm mã mocha framework -->
+  <!-- add mocha framework code -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
   <script>
-    mocha.setup('bdd'); // thiết lập tối thiểu
+    mocha.setup('bdd'); // minimal setup
   </script>
-  <!-- thêm chai -->
+  <!-- add chai -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
   <script>
-    // chai có rất nhiều thứ, hãy khẳng định chung
+    // chai has a lot of stuff, let's make assert global
     let assert = chai.assert;
   </script>
 </head>
@@ -20,17 +20,17 @@
 
   <script>
     function pow(x, n) {
-      /* mã chức năng sẽ được viết, bây giờ trống */
+      /* function code is to be written, empty now */
     }
   </script>
 
-  <!-- kịch bản với các bài kiểm tra (describe, it...) -->
+  <!-- the script with tests (describe, it...) -->
   <script src="test.js"></script>
 
-  <!-- phần tử có id="mocha" sẽ chứa kết quả kiểm tra -->
+  <!-- the element with id="mocha" will contain test results -->
   <div id="mocha"></div>
 
-  <!-- chạy các bài kiểm tra! -->
+  <!-- run tests! -->
   <script>
     mocha.run();
   </script>
