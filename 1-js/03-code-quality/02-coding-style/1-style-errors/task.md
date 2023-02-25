@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Phong cách tệ
+# Bad style
 
-Có gì sai với phong cách mã dưới đây?
+Có gì sai với cách viết code này?
 
 ```js no-beautify
 function pow(x,n)
