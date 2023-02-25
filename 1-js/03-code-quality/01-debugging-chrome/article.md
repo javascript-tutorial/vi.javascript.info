@@ -99,11 +99,11 @@ Vui lòng mở menu thả xuống thông tin ở bên phải (được đánh d�
 
      Bạn có thể nhấp vào dấu cộng `+` và nhập một biểu thức. Trình gỡ lỗi sẽ hiển thị giá trị của nó bất kỳ lúc nào, tự động tính toán lại giá trị đó trong quá trình thực thi.
 
-2. **`Ngăn xếp cuộc gọi(Call Stack)` -- hiển thị chuỗi cuộc gọi lồng nhau.**
+2. **`Ngăn xếp cuộc gọi (Call Stack)` -- hiển thị chuỗi cuộc gọi lồng nhau.**
 
     Tại thời điểm hiện tại, trình gỡ lỗi nằm trong lệnh gọi `hello()`, được gọi bởi một tập lệnh trong `index.html` (không có hàm nào ở đó, vì vậy nó được gọi là "ẩn danh").
 
-     Nếu bạn nhấp vào một mục trong ngăn xếp (ví dụ: "ẩn danh"), trình gỡ lỗi sẽ chuyển đến mã tương ứng và tất cả các biến của nó cũng có thể được kiểm tra.
+    Nếu bạn nhấp vào một mục trong ngăn xếp (ví dụ: "ẩn danh"), trình gỡ lỗi sẽ chuyển đến mã tương ứng và tất cả các biến của nó cũng có thể được kiểm tra.
 3. **`Scope` -- biến hiện tại.**
 
     `Local` hiển thị các biến hàm cục bộ. Bạn cũng có thể thấy các giá trị của chúng được đánh dấu ngay trên nguồn.
