@@ -2,7 +2,7 @@
 
 Mã của chúng ta phải rõ ràng và dễ đọc nhất có thể.
 
-Đó thực sự là nghệ thuật lập trình -- nhận một tác vụ phức tạp và mã hóa nó theo cách vừa chính xác vừa có thể đọc được. Một kiểu mã tốt hỗ trợ rất nhiều trong việc đó.
+Đó thực sự là nghệ thuật lập trình -- nhận một nhiệm vụ phức tạp và code nó theo cách vừa chính xác vừa có thể đọc được. Một cách viết code tốt hỗ trợ rất nhiều trong việc đó.
 
 ## Cú pháp
 
@@ -47,13 +47,15 @@ Trong hầu hết các dự án JavaScript, dấu ngoặc nhọn được viết
 ```js
 if (condition) {
   // làm cái này
-   // ...và đó
-   // ...và đó
+   // ...và cái kia
+   // ...và cái kia
 }
 ```
 
 Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`, là một trường hợp rìa quan trọng. Có nên sử dụng dấu ngoặc nhọn không?
-    ```js
+    
+1. 😠 Người mới bắt đầu đôi khi làm điều đó. Tệ! Không cần dấu ngoặc nhọn: 
+   ```js
     if (n < 0) *!*{*/!*alert(`Nguồn ${n} không được hỗ trợ`);*!*}*/!*
     ```
 2. 😠 Tách sang dòng riêng không dấu ngoặc. Đừng bao giờ làm vậy, dễ bị lỗi khi thêm dòng mới:
@@ -72,15 +74,15 @@ Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`,
     }
     ```
 
-Đối với một mã rất ngắn gọn, một dòng được cho phép, ví dụ: `if (cond) return null`. Nhưng một khối mã (biến thểbiến thể cuối cùng) thường dễ đọc hơn.
+Đối với một code rất ngắn gọn, một dòng được cho phép, ví dụ: `if (cond) return null`. Nhưng một code block (biến thể cuối cùng) thường dễ đọc hơn.
 
-### Độ dài dòng
+### Độ dài của dòng
 
 Không ai thích đọc một dòng mã dài. Cách tốt nhất là tách chúng ra.
 
 Ví dụ:
 ```js
-// dấu ngoặc kép ` cho phép chia chuỗi thành nhiều dòng
+// backtick quotes ` cho phép chia chuỗi thành nhiều dòng
 let str = `
   TC39 của ECMA International là một nhóm các nhà phát triển JavaScript,
    người thực hiện, học giả, v.v., hợp tác với cộng đồng
@@ -100,7 +102,7 @@ if (
 }
 ```
 
-Độ dài dòng tối đa phải được thống nhất ở cấp độ nhóm. Nó thường là 80 hoặc 120 ký tự.
+Độ dài tối đa của dòng phải được thống nhất ở cấp độ nhóm. Nó thường là 80 hoặc 120 ký tự.
 
 ### Thụt lề
 
@@ -108,7 +110,7 @@ Có hai loại thụt lề:
 
 - **Thụt lề ngang: 2 hoặc 4 dấu cách.**
 
-     Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Chọn cái nào là thánh chiến xưa. Dấu cách ngày nay phổ biến hơn.
+     Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Lựa chọn việc nên dùng cách nào đã gây nên một cuộc xung đột từ xưa đến nay. Ngày nay thì sử dụng dấu cách dường như đã phổ biến hơn.
 
      Một lợi thế của dấu cách so với tab là nó cho phép cấu hình thụt lề linh hoạt hơn so với tab.
 
@@ -117,9 +119,9 @@ Có hai loại thụt lề:
     ```js no-beautify
     show(parameters,
          aligned, // 5 dấu cách đệm ở bên trái
-          một,
-          sau đó,
-          khác
+          one,
+          after,
+          another
       ) {
       // ...
     }
@@ -180,7 +182,7 @@ for (let i = 0; i < 10; i++) {
 
 Ví dụ, hai cấu trúc bên dưới giống hệt nhau.
 
-Lựa chọn 1:
+Trường hợp 1:
 
 ```js
 function pow(x, n) {
@@ -198,7 +200,7 @@ function pow(x, n) {
 }
 ```
 
-Lựa chọn 2:
+Trường hợp 2:
 
 ```js
 function pow(x, n) {
@@ -221,7 +223,7 @@ Cái thứ hai dễ đọc hơn vì "trường hợp đặc biệt" của `n < 0
 
 ## Vị trí chức năng
 
-Nếu bạn đang viết một số hàm "trợ giúp" và mã sử dụng chúng, có ba cách để tổ chức các hàm.
+Nếu bạn đang viết một số hàm "helper" và mã sử dụng chúng, có ba cách để tổ chức các hàm.
 
 1. Khai báo các hàm *ở trên* mã sử dụng chúng:
 
@@ -282,7 +284,7 @@ Tất nhiên, một nhóm luôn có thể viết hướng dẫn phong cách củ
 Một số lựa chọn phổ biến:
 
 - [Hướng dẫn về phong cách JavaScript của Google](https://google.github.io/styleguide/jsguide.html)
-- [Hướng dẫn về kiểu JavaScript của Airbnb](https://github.com/airbnb/javascript)
+- [Hướng dẫn về phong cách JavaScript của Airbnb](https://github.com/airbnb/javascript)
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
 - [StandardJS](https://standardjs.com/)
 - (còn nhiều hơn nữa)
@@ -301,16 +303,16 @@ Dưới đây là một số công cụ linting nổi tiếng:
 - [JSHint](http://www.jshint.com/) -- nhiều cài đặt hơn JSLint.
 - [ESLint](http://eslint.org/) -- có lẽ là cái mới nhất.
 
-Tất cả trong số họ có thể làm công việc. Ở đây, tác giả sử dụng [ESLint](http://eslint.org/).
+Tất cả chúng đều có thể sử dụng. Ở đây, tác giả sử dụng [ESLint](http://eslint.org/).
 
-Hầu hết các linters đều được tích hợp với nhiều trình chỉnh sửa phổ biến: chỉ cần bật plugin trong trình chỉnh sửa và tùy chỉnh kiểu.
+Hầu hết các linters đều được tích hợp với nhiều editor phổ biến: chỉ cần bật plugin trong trình chỉnh sửa và tùy chỉnh kiểu.
 
 Chẳng hạn, đối với ESLint, bạn nên làm như sau:
 
 1. Cài đặt [Node.js](https://nodejs.org/).
 2. Cài đặt ESLint bằng lệnh `npm install -g eslint` (npm là trình cài đặt gói JavaScript).
 3. Tạo một tệp cấu hình có tên `.eslintrc` trong thư mục gốc của dự án JavaScript của bạn (trong thư mục chứa tất cả các tệp của bạn).
-4. Cài đặt/bật plugin cho trình chỉnh sửa tích hợp với ESLint của bạn. Phần lớn các biên tập viên có một.
+4. Cài đặt/bật plugin cho trình chỉnh sửa tích hợp với ESLint của bạn. Đa số các editor đều có.
 
 Đây là một ví dụ về tệp `.eslintrc`:
 
@@ -329,9 +331,9 @@ Chẳng hạn, đối với ESLint, bạn nên làm như sau:
 }
 ```
 
-Ở đây, lệnh `"extends"` biểu thị rằng cấu hình dựa trên "eslint:recommended" bộ cài đặt. Sau đó, chúng ta xác định riêng của ta.
+Ở đây, lệnh `"extends"` có nghĩa là cấu hình này dựa trên "eslint:recommended" bộ cài đặt. Sau đó, chúng ta có thể thay đổi theo cách của mình.
 
-Cũng có thể tải xuống các bộ quy tắc kiểu từ web và thay vào đó mở rộng chúng. Xem <http://eslint.org/docs/user-guide/getting-started> để biết thêm chi tiết về cài đặt.
+Cũng có thể tải xuống các bộ quy tắc kiểu từ web và và thay đổi chúng. Xem <http://eslint.org/docs/user-guide/getting-started> để biết thêm chi tiết về cài đặt.
 
 Ngoài ra, một số IDE nhất định có linting tích hợp, thuận tiện nhưng không thể tùy chỉnh như ESLint.
 
