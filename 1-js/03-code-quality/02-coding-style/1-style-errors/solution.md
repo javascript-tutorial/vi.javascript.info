@@ -23,7 +23,7 @@ else // <- có thể viết nó trên một dòng như "} else {"
 }
 ```
 
-Biến thể dược sửa:
+Biến thể cố định:
 
 ```js
 function pow(x, n) {
