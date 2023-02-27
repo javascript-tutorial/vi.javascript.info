@@ -185,7 +185,7 @@ Như chúng ta có thể thấy, có ba cách chính để tạm dừng tập l�
 2. Các câu lệnh `debugger`.
 3. Lỗi (nếu công cụ dành cho nhà phát triển đang mở và nút <span class="devtools" style="background-position:-90px -146px"></span> đang "bật").
 
-Khi tạm dừng, chúng tôi có thể gỡ lỗi - kiểm tra các biến và theo dõi mã để xem nơi thực thi sai.
+Khi tạm dừng, chúng ta có thể gỡ lỗi - kiểm tra các biến và theo dõi mã để xem nơi thực thi sai.
 
 Có nhiều tùy chọn hơn trong các công cụ dành cho nhà phát triển ngoài những gì được đề cập ở đây. Hướng dẫn đầy đủ có tại <https://developers.google.com/web/tools/chrome-devtools>.
 
