@@ -7,9 +7,9 @@ Học mà không suy nghĩ thì vô ích; suy nghĩ mà không học thì nguy h
 
 Các lập trình viên ninja trong quá khứ đã sử dụng những thủ thuật này để mài giũa tâm trí của những người bảo trì mã.
 
-Các chuyên gia đánh giá mã tìm kiếm chúng trong các nhiệm vụ kiểm tra.
+Các chuyên gia đánh giá mã tìm kiếm chúng trong các tác vụ kiểm thử.
 
-Các nhà phát triển mới làm quen đôi khi sử dụng chúng thậm chí còn tốt hơn cả các lập trình viên ninja.
+Các nhà lập trình viên ít kinh nghiệm đôi khi sử dụng chúng thậm chí còn tốt hơn cả các lập trình viên ninja.
 
 Hãy đọc kỹ chúng và tìm hiểu xem bạn là ai -- một ninja, một người mới hay có thể là một người đánh giá mã?
 
@@ -77,17 +77,17 @@ Trong khi chọn tên, hãy cố gắng sử dụng từ trừu tượng nhất.
 
 - **Tên lý tưởng cho một biến là `data`.** Sử dụng nó ở mọi nơi bạn có thể. Thật vậy, mọi biến đều chứa *dữ liệu*, phải không?
 
-     ...Nhưng phải làm gì nếu `data` đã được sử dụng? Hãy thử `value`, nó cũng phổ biến. Xét cho cùng, một biến cuối cùng sẽ nhận được *giá trị*.
+    ...Nhưng phải làm gì nếu `data` đã được sử dụng? Hãy thử `value`, nó cũng phổ biến. Xét cho cùng, một biến cuối cùng sẽ nhận được *giá trị*.
 
 - **Đặt tên biến theo kiểu: `str`, `num`...**
 
-     Cung cấp cho họ một thử. Một người mới bắt đầu có thể thắc mắc - những cái tên như vậy có thực sự hữu ích cho một ninja không? Thật sự, chúng có!
+    Hãy thử chúng. Một người mới bắt đầu có thể thắc mắc - những cái tên như vậy có thực sự hữu ích cho một ninja không? Thật sự, chúng có!
 
-     Chắc chắn, tên biến vẫn có ý nghĩa gì đó. Nó cho biết những gì bên trong biến: một chuỗi, một số hoặc thứ gì đó khác. Nhưng khi một người ngoài cuộc cố gắng hiểu mã, họ sẽ ngạc nhiên khi thấy rằng thực tế không có thông tin gì cả! Và cuối cùng sẽ không thể thay đổi mã được suy nghĩ kỹ lưỡng của bạn.
+    Chắc chắn, tên biến vẫn có ý nghĩa gì đó. Nó cho biết những gì bên trong biến: một chuỗi, một số hoặc thứ gì đó khác. Nhưng khi một người ngoài cuộc cố gắng hiểu mã, họ sẽ ngạc nhiên khi thấy rằng thực tế không có thông tin gì cả! Và cuối cùng họ sẽ thất bại trong việc thay đổi đoạn code mà bạn đã suy nghĩ kỹ lưỡng để viết ra
 
-     Loại giá trị rất dễ tìm ra bằng cách gỡ lỗi. Nhưng ý nghĩa của biến là gì? Nó lưu trữ chuỗi/số nào?
+    Kiểu giá trị rất dễ tìm ra bằng cách gỡ lỗi. Nhưng ý nghĩa của biến là gì? Nó lưu trữ chuỗi/số nào?
 
-     Không có cách nào để tìm ra nếu không có một sự suy ngẫm tốt!
+    Không có cách nào để tìm ra nếu không có một sự suy ngẫm tốt!
 
 - **...Nhưng nếu không còn những tên như vậy nữa thì sao?** Chỉ cần thêm một số: `data1, item2, elem5`...
 
@@ -141,6 +141,8 @@ Trong một hàm, hãy cố gắng chỉ sử dụng các biến được truy�
 
 **Một biến thể nâng cao của phương pháp này là ngầm (!) thay thế giá trị bằng giá trị tương tự ở giữa vòng lặp hoặc hàm.**
 
+Ví dụ:
+
 ```js
 function ninjaFunction(elem) {
   // 20 dòng code làm việc với elem
@@ -192,7 +194,7 @@ function render() {
 }
 ```
 
-Một lập trình viên nhảy vào bên trong `render` có thể sẽ không nhận thấy rằng có một `người dùng` cục bộ che khuất cái bên ngoài.
+Một lập trình viên nhảy vào bên trong `render` có thể sẽ không nhận thấy rằng có một `user` cục bộ che khuất cái bên ngoài.
 
 Sau đó, họ sẽ cố gắng làm việc với `user` với giả định rằng đó là biến bên ngoài, kết quả của `authenticateUser()`... Cái bẫy đã bung ra! Xin chào, trình gỡ lỗi...
 
@@ -227,7 +229,7 @@ Các hành động bổ sung không nên rõ ràng từ tên hàm. Một lập t
 
 **Kết hợp nhiều hành động thành một để bảo vệ mã của bạn không bị sử dụng lại.**
 
-Hãy tưởng tượng, một nhà phát triển khác chỉ muốn kiểm tra email và không xuất bất kỳ thông báo nào. Hàm `validateEmail(email)` của bạn thực hiện cả hai sẽ không phù hợp với họ. Vì vậy, họ sẽ không phá vỡ thiền định của bạn bằng cách hỏi bất cứ điều gì về nó.
+Hãy tưởng tượng, một nhà phát triển khác chỉ muốn kiểm tra email và không xuất bất kỳ thông báo nào. Hàm `validateEmail(email)` của bạn thực hiện cả hai sẽ không phù hợp với họ. Vì vậy, họ sẽ không phá vỡ tâm trí của bạn bằng cách hỏi bất cứ điều gì về nó.
 
 ## Tóm tắt
 
