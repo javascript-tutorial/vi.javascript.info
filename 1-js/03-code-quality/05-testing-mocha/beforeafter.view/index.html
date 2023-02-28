@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- add mocha css, to show results -->
+  <!-- thêm mocha css, để hiển thị kết quả -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
-  <!-- add mocha framework code -->
+  <!-- thêm mã mocha framework -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
   <script>
-    // enable bdd-style testing
+    // bật thử nghiệm kiểu bdd
     mocha.setup('bdd');
   </script>
-  <!-- add chai -->
+  <!-- thêm chai -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
   <script>
-    // chai has a lot of stuff, let's make assert global
+    // chai có rất nhiều thứ, hãy xác nhận chung
     let assert = chai.assert;
   </script>
 </head>
 
 <body>
 
-  <!-- the script with tests (describe, it...) -->
+  <!-- kịch bản với các bài kiểm tra (describe, it...) -->
   <script src="test.js"></script>
 
-  <!-- the element with id="mocha" will contain test results -->
+  <!-- phần tử có id="mocha" sẽ chứa kết quả kiểm tra -->
   <div id="mocha"></div>
 
-  <!-- run tests! -->
+  <!-- chạy các bài kiểm tra! -->
   <script>
     mocha.run();
   </script>
