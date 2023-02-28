@@ -1,14 +1,14 @@
-The test demonstrates one of the temptations a developer meets when writing tests.
+Bài kiểm tra thể hiện một trong những cám dỗ mà nhà phát triển gặp phải khi viết bài kiểm tra.
 
-What we have here is actually 3 tests, but layed out as a single function with 3 asserts.
+Những gì chúng ta có ở đây thực sự là 3 bài kiểm tra, nhưng được bố trí dưới dạng một chức năng duy nhất với 3 lần xác nhận.
 
-Sometimes it's easier to write this way, but if an error occurs, it's much less obvious what went wrong.
+Đôi khi viết theo cách này dễ dàng hơn, nhưng nếu có lỗi xảy ra, thì sẽ khó nhận ra điều gì đã xảy ra.
 
-If an error happens in the middle of a complex execution flow, then we'll have to figure out the data at that point. We'll actually have to *debug the test*.
+Nếu xảy ra lỗi ở giữa quy trình thực thi phức tạp, thì chúng ta sẽ phải tìm ra dữ liệu tại thời điểm đó. Chúng ta thực sự sẽ phải *gỡ lỗi cho bài thử nghiệm*.
 
-It would be much better to break the test into multiple `it` blocks with clearly written inputs and outputs.
+Sẽ tốt hơn nhiều nếu chia bài kiểm tra thành nhiều khối `it` với đầu vào và đầu ra được viết rõ ràng.
 
-Like this:
+Như thế này:
 ```js
 describe("Raises x to power n", function() {
   it("5 in the power of 1 equals 5", function() {
@@ -25,9 +25,9 @@ describe("Raises x to power n", function() {
 });
 ```
 
-We replaced the single `it` with `describe` and a group of `it` blocks. Now if something fails we would see clearly what the data was.
+Chúng ta đã thay thế một khối `it` bằng `describe` và một nhóm các khối `it`. Bây giờ nếu có gì đó không thành công, chúng ta sẽ thấy rõ ràng dữ liệu là gì.
 
-Also we can isolate a single test and run it in standalone mode by writing `it.only` instead of `it`:
+Ngoài ra, chúng ta có thể tách riêng một bài kiểm tra và chạy nó ở chế độ độc lập bằng cách viết `it.only` thay vì `it`:
 
 
 ```js
@@ -37,7 +37,7 @@ describe("Raises x to power n", function() {
   });
 
 *!*
-  // Mocha will run only this block
+  // Mocha sẽ chỉ chạy block này
   it.only("5 in the power of 2 equals 25", function() {
     assert.equal(pow(5, 2), 25);
   });
