@@ -1,16 +1,16 @@
 describe("test", function() {
   
-   // Mocha usually waits for the tests for 2 seconds before considering them wrong
+   // Mocha thường đợi các bài kiểm tra trong 2 giây trước khi coi chúng sai
   
-  this.timeout(200000); // With this code we increase this - in this case to 200,000 milliseconds
+  this.timeout(200000); // Với mã này, chúng ta tăng mã này - trong trường hợp này là 200.000 mili giây
 
-  // This is because of the "alert" function, because if you delay pressing the "OK" button the tests will not pass!
+  // Điều này là do chức năng "cảnh báo", bởi vì nếu bạn trì hoãn nhấn nút "OK" thì các bài kiểm tra sẽ không vượt qua!
   
-  before(() => alert("Testing started – before all tests"));
-  after(() => alert("Testing finished – after all tests"));
+  before(() => alert("Bài kiểm tra bắt đầu – trước tất cả các bài kiểm tra"));
+  after(() => alert("Bài kiểm tra kết thúc – sau tất cả các bài kiểm tra"));
 
-  beforeEach(() => alert("Before a test – enter a test"));
-  afterEach(() => alert("After a test – exit a test"));
+  beforeEach(() => alert("Trước một bài kiểm tra – nhập một bài kiểm tra"));
+  afterEach(() => alert("Trước một bài kiểm tra – nhập một bài kiểm tra"));
 
   it('test 1', () => alert(1));
   it('test 2', () => alert(2));
