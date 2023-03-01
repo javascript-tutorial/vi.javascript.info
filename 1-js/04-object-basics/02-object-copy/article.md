@@ -1,29 +1,29 @@
-# Object references and copying
+# Tham chiếu và sao chép đối tượng
 
-One of the fundamental differences of objects versus primitives is that objects are stored and copied "by reference", whereas primitive values: strings, numbers, booleans, etc -- are always copied "as a whole value".
+Một trong những điểm khác biệt cơ bản của đối tượng so với đối tượng nguyên thủy là đối tượng được lưu trữ và sao chép "theo tham chiếu", trong khi các giá trị nguyên thủy: chuỗi, số, booleans, v.v. -- luôn được sao chép "dưới dạng toàn bộ giá trị".
 
-That's easy to understand if we look a bit under the hood of what happens when we copy a value.
+Điều đó dễ hiểu nếu chúng ta xem xét một chút về những gì xảy ra khi chúng ta sao chép một giá trị.
 
-Let's start with a primitive, such as a string.
+Hãy bắt đầu với một nguyên hàm, chẳng hạn như một chuỗi.
 
-Here we put a copy of `message` into `phrase`:
+Ở đây chúng ta đặt một bản sao của `message` vào `phrase`:
 
 ```js
-let message = "Hello!";
+let message = "Xin chào!";
 let phrase = message;
 ```
 
-As a result we have two independent variables, each one storing the string `"Hello!"`.
+Kết quả là chúng ta có hai biến độc lập, mỗi biến lưu trữ chuỗi `"Xin chào!"`.
 
 ![](variable-copy-value.svg)
 
-Quite an obvious result, right?
+Một kết quả khá rõ ràng, phải không?
 
-Objects are not like that.
+Đối tượng không phải như vậy.
 
-**A variable assigned to an object stores not the object itself, but its "address in memory" -- in other words "a reference" to it.**
+**Một biến được gán cho một đối tượng không lưu trữ chính đối tượng đó, mà lưu trữ "địa chỉ trong bộ nhớ" của đối tượng -- nói cách khác là "tham chiếu" tới đối tượng đó.**
 
-Let's look at an example of such a variable:
+Hãy xem một ví dụ về một biến như vậy:
 
 ```js
 let user = {
@@ -31,35 +31,35 @@ let user = {
 };
 ```
 
-And here's how it's actually stored in memory:
+Và đây là cách nó thực sự được lưu trữ trong bộ nhớ:
 
 ![](variable-contains-reference.svg)
 
-The object is stored somewhere in memory (at the right of the picture), while the `user` variable (at the left) has a "reference" to it.
+Đối tượng được lưu trữ ở đâu đó trong bộ nhớ (ở bên phải của hình ảnh), trong khi biến `user` (ở bên trái) có "tham chiếu" đến nó.
 
-We may think of an object variable, such as `user`, as like a sheet of paper with the address of the object on it.
+Chúng ta có thể nghĩ về một biến đối tượng, chẳng hạn như `người dùng`, giống như một tờ giấy có địa chỉ của đối tượng trên đó.
 
-When we perform actions with the object, e.g. take a property `user.name`, the JavaScript engine looks at what's at that address and performs the operation on the actual object.
+Khi chúng ta thực hiện các hành động với đối tượng, v.d. lấy một thuộc tính `user.name`, JavaScript engine sẽ xem xét địa chỉ đó có gì và thực hiện thao tác trên đối tượng thực tế.
 
-Now here's why it's important.
+Bây giờ đây là lý do tại sao nó quan trọng.
 
-**When an object variable is copied, the reference is copied, but the object itself is not duplicated.**
+**Khi một biến đối tượng được sao chép, tham chiếu được sao chép nhưng bản thân đối tượng không được sao chép.**
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let user = { name: "John" };
 
-let admin = user; // copy the reference
+let admin = user; // sao chép tham chiếu
 ```
 
-Now we have two variables, each storing a reference to the same object:
+Bây giờ chúng ta có hai biến, mỗi biến lưu trữ một tham chiếu đến cùng một đối tượng:
 
 ![](variable-copy-reference.svg)
 
-As you can see, there's still one object, but now with two variables that reference it.
+Như bạn có thể thấy, vẫn còn một đối tượng, nhưng bây giờ có hai biến tham chiếu đến nó.
 
-We can use either variable to access the object and modify its contents:
+Chúng ta có thể sử dụng một trong hai biến để truy cập đối tượng và sửa đổi nội dung của nó:
 
 ```js run
 let user = { name: 'John' };
@@ -67,50 +67,50 @@ let user = { name: 'John' };
 let admin = user;
 
 *!*
-admin.name = 'Pete'; // changed by the "admin" reference
+admin.name = 'Pete'; // được thay đổi bởi tham chiếu "admin"
 */!*
 
-alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
+alert(*!*user.name*/!*); // 'Pete', những thay đổi được nhìn thấy từ tham chiếu "user"
 ```
 
-It's as if we had a cabinet with two keys and used one of them (`admin`) to get into it and make changes. Then, if we later use another key (`user`), we are still opening the same cabinet and can access the changed contents.
+Giống như thể chúng ta có một chiếc tủ có hai chìa khóa và sử dụng một trong số chúng (`admin`) để mở và thực hiện các thay đổi. Sau đó, nếu sau này chúng ta sử dụng một khóa khác (`user`), thì chúng ta vẫn đang mở cùng một ngăn tủ và có thể truy cập vào nội dung đã thay đổi.
 
-## Comparison by reference
+## So sánh theo tham chiếu
 
-Two objects are equal only if they are the same object.
+Hai đối tượng chỉ bằng nhau nếu chúng là cùng một đối tượng.
 
-For instance, here `a` and `b` reference the same object, thus they are equal:
+Chẳng hạn, ở đây `a` và `b` tham chiếu cùng một đối tượng, do đó chúng bằng nhau:
 
 ```js run
 let a = {};
-let b = a; // copy the reference
+let b = a; // sao chép tham chiếu
 
-alert( a == b ); // true, both variables reference the same object
+alert( a == b ); // true, cả hai biến tham chiếu cùng một đối tượng
 alert( a === b ); // true
 ```
 
-And here two independent objects are not equal, even though they look alike (both are empty):
+Và ở đây, hai đối tượng độc lập không bằng nhau, mặc dù chúng trông giống nhau (cả hai đều trống):
 
 ```js run
 let a = {};
-let b = {}; // two independent objects
+let b = {}; // hai đối tượng độc lập
 
 alert( a == b ); // false
 ```
 
-For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are needed very rarely -- usually they appear as a result of a programming mistake.
+Đối với các so sánh như `obj1 > obj2` hoặc để so sánh với một đối tượng nguyên thủy `obj == 5`, các đối tượng được chuyển đổi thành đối tượng nguyên thủy. Chúng ta sẽ sớm nghiên cứu cách hoạt động của chuyển đổi đối tượng, nhưng nói thật, những phép so sánh như vậy rất hiếm khi cần thiết -- chúng thường xuất hiện do lỗi lập trình.
 
-## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
+## Nhân bản và hợp nhất, Object.assign [#cloning-and-merging-object-assign]
 
-So, copying an object variable creates one more reference to the same object.
+Vì vậy, sao chép một biến đối tượng sẽ tạo thêm một tham chiếu đến cùng một đối tượng.
 
-But what if we need to duplicate an object? Create an independent copy, a clone?
+Nhưng nếu chúng ta cần sao chép một đối tượng thì sao? Tạo một bản sao độc lập, một bản sao?
 
-That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. But there is rarely a need -- copying by reference is good most of the time.
+Điều đó cũng có thể thực hiện được, nhưng hơi khó hơn một chút vì không có phương thức tích hợp sẵn nào cho điều đó trong JavaScript. Nhưng hiếm khi có nhu cầu - hầu hết thời gian sao chép theo tham chiếu là tốt.
 
-But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+Nhưng nếu chúng ta thực sự muốn điều đó, thì chúng ta cần tạo một đối tượng mới và sao chép cấu trúc của đối tượng hiện có bằng cách lặp lại các thuộc tính của nó và sao chép chúng ở cấp độ nguyên thủy.
 
-Like this:
+Như thế này:
 
 ```js run
 let user = {
@@ -119,34 +119,34 @@ let user = {
 };
 
 *!*
-let clone = {}; // the new empty object
+let clone = {}; // đối tượng trống mới
 
-// let's copy all user properties into it
+// hãy sao chép tất cả các thuộc tính người dùng vào đó
 for (let key in user) {
   clone[key] = user[key];
 }
 */!*
 
-// now clone is a fully independent object with the same content
-clone.name = "Pete"; // changed the data in it
+// bây giờ bản sao là một đối tượng hoàn toàn độc lập với cùng một nội dung
+clone.name = "Pete"; // đã thay đổi dữ liệu trong đó
 
-alert( user.name ); // still John in the original object
+alert( user.name ); // vẫn còn John trong đối tượng ban đầu
 ```
 
-Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
+Ngoài ra, chúng ta có thể sử dụng phương thức [Object.assign](mdn:js/Object/assign) cho việc đó.
 
-The syntax is:
+Cú pháp là:
 
 ```js
 Object.assign(dest, [src1, src2, src3...])
 ```
 
-- The first argument `dest` is a target object.
-- Further arguments `src1, ..., srcN` (can be as many as needed) are source objects.
-- It copies the properties of all source objects `src1, ..., srcN` into the target `dest`. In other words, properties of all arguments starting from the second are copied into the first object.
-- The call returns `dest`.
+- Đối số đầu tiên `dest` là một đối tượng đích.
+- Các đối số khác `src1, ..., srcN` (có thể bao nhiêu tùy ý) là các đối tượng nguồn.
+- Nó sao chép các thuộc tính của tất cả các đối tượng nguồn `src1, ..., srcN` vào đích `dest`. Nói cách khác, các thuộc tính của tất cả các đối số bắt đầu từ đối số thứ hai được sao chép vào đối tượng đầu tiên.
+- Cuộc gọi trả về `dest`.
 
-For instance, we can use it to merge several objects into one:
+Chẳng hạn, chúng ta có thể sử dụng nó để hợp nhất nhiều đối tượng thành một:
 ```js
 let user = { name: "John" };
 
@@ -154,14 +154,14 @@ let permissions1 = { canView: true };
 let permissions2 = { canEdit: true };
 
 *!*
-// copies all properties from permissions1 and permissions2 into user
+// sao chép tất cả các thuộc tính từ permissions1 và permission2 vào user
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// now user = { name: "John", canView: true, canEdit: true }
+// bây giờ người dùng = { name: "John", canView: true, canEdit: true }
 ```
 
-If the copied property name already exists, it gets overwritten:
+Nếu tên thuộc tính được sao chép đã tồn tại, nó sẽ bị ghi đè:
 
 ```js run
 let user = { name: "John" };
@@ -171,7 +171,7 @@ Object.assign(user, { name: "Pete" });
 alert(user.name); // now user = { name: "Pete" }
 ```
 
-We also can use `Object.assign` to replace `for..in` loop for simple cloning:
+Chúng ta cũng có thể sử dụng `Object.assign` để thay thế vòng lặp `for..in` để sao chép đơn giản:
 
 ```js
 let user = {
@@ -184,15 +184,16 @@ let clone = Object.assign({}, user);
 */!*
 ```
 
-It copies all properties of `user` into the empty object and returns it.
+Nó sao chép tất cả các thuộc tính của `user` vào đối tượng trống và trả về nó.
 
-There are also other methods of cloning an object, e.g. using the [spread syntax](info:rest-parameters-spread) `clone = {...user}`, covered later in the tutorial.
+Ngoài ra còn có các phương pháp nhân bản đối tượng khác, ví dụ: sử dụng [cú pháp trải rộng](info:rest-parameters-spread) `clone = {...user}`, sẽ được trình bày sau trong hướng dẫn.
 
-## Nested cloning
+## Nhân bản lồng nhau
 
-Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
+Cho đến bây giờ, chúng ta giả định rằng tất cả các thuộc tính của `người dùng` là nguyên thủy. Nhưng các thuộc tính có thể là tham chiếu đến các 
+đối tượng khác. Làm gì với chúng đây?
 
-Like this:
+Như thế này:
 ```js run
 let user = {
   name: "John",
@@ -205,9 +206,9 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
+Bây giờ sao chép `clone.sizes = user.sizes` là không đủ, vì `user.sizes` là một đối tượng, nó sẽ được sao chép theo tham chiếu. Vì vậy, `clone` và `user` sẽ có cùng kích thước:
 
-Like this:
+Như thế này:
 
 ```js run
 let user = {
@@ -220,21 +221,21 @@ let user = {
 
 let clone = Object.assign({}, user);
 
-alert( user.sizes === clone.sizes ); // true, same object
+alert( user.sizes === clone.sizes ); // true, cùng một đối tượng
 
-// user and clone share sizes
-user.sizes.width++;       // change a property from one place
-alert(clone.sizes.width); // 51, see the result from the other one
+// người dùng và bản sao chia sẻ kích thước
+user.sizes.width++;       // thay đổi một thuộc tính từ một nơi
+alert(clone.sizes.width); // 51, xem kết quả từ một cái khác
 ```
 
-To fix that, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
+Để khắc phục điều đó, chúng ta nên sử dụng một vòng lặp nhân bản để kiểm tra từng giá trị của `user[key]` và nếu đó là một đối tượng thì cũng sao chép cấu trúc của nó. Đó được gọi là "nhân bản sâu".
 
-We can use recursion to implement it. Or, to not reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
+Chúng ta có thể sử dụng đệ quy để thực hiện nó. Hoặc, để không phát minh lại bánh xe, hãy thực hiện triển khai hiện có, chẳng hạn như [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) từ thư viện JavaScript [lodash](https://lodash. com).
 
-````smart header="Const objects can be modified"
-An important side effect of storing objects as references is that an object declared as `const` *can* be modified.
+````smart header="Các đối tượng const có thể được sửa đổi"
+Một tác dụng phụ quan trọng của việc lưu trữ các đối tượng dưới dạng tham chiếu là một đối tượng được khai báo là `const` *có thể* được sửa đổi.
 
-For instance:
+Ví dụ:
 
 ```js run
 const user = {
@@ -248,17 +249,17 @@ user.name = "Pete"; // (*)
 alert(user.name); // Pete
 ```
 
-It might seem that the line `(*)` would cause an error, but it does not. The value of `user` is constant, it must always reference the same object, but properties of that object are free to change.
+Có vẻ như dòng `(*)` sẽ gây ra lỗi, nhưng không phải vậy. Giá trị của `user` là hằng số, nó phải luôn tham chiếu cùng một đối tượng, nhưng các thuộc tính của đối tượng đó có thể tự do thay đổi.
 
-In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+Nói cách khác, `const user` chỉ báo lỗi nếu chúng ta cố gắng đặt toàn bộ `user=...`.
 
-That said, if we really need to make constant object properties, it's also possible, but using totally different methods. We'll mention that in the chapter <info:property-descriptors>.
+Điều đó nói rằng, nếu chúng ta thực sự cần tạo các thuộc tính đối tượng không đổi, thì cũng có thể, nhưng sử dụng các phương thức hoàn toàn khác. Chúng tôi sẽ đề cập đến điều đó trong chương <info:property-descriptors>.
 ````
 
-## Summary
+## Tóm tắt
 
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object itself.
+Các đối tượng được gán và sao chép theo tham chiếu. Nói cách khác, một biến không lưu trữ "giá trị đối tượng", mà là "tham chiếu" (địa chỉ trong bộ nhớ) cho giá trị. Vì vậy, sao chép một biến như vậy hoặc chuyển nó dưới dạng đối số hàm sao chép tham chiếu đó chứ không phải bản thân đối tượng.
 
-All operations via copied references (like adding/removing properties) are performed on the same single object.
+Tất cả các hoạt động thông qua các tham chiếu được sao chép (như thêm/xóa thuộc tính) được thực hiện trên cùng một đối tượng.
 
-To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+Để tạo một "bản sao thực" (bản sao), chúng ta có thể sử dụng `Object.assign` cho cái gọi là "bản sao nông" (các đối tượng lồng nhau được sao chép theo tham chiếu) hoặc chức năng "nhân bản sâu", chẳng hạn như [_.cloneDeep (obj)](https://lodash.com/docs#cloneDeep).
