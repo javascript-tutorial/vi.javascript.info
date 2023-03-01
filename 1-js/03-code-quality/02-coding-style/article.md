@@ -53,6 +53,8 @@ if (condition) {
 ```
 
 Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`, là một trường hợp rìa quan trọng. Có nên sử dụng dấu ngoặc nhọn không?
+
+Dưới đây là các biến thể được chú thích để bạn có thể tự đánh giá khả năng đọc được của chúng:
     
 1. 😠 Người mới bắt đầu đôi khi làm điều đó. Tệ! Không cần dấu ngoặc nhọn: 
    ```js
