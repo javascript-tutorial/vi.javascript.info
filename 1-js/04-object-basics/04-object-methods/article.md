@@ -25,7 +25,7 @@ let user = {
 
 *!*
 user.sayHi = function() {
-    alert("Xin chào!");
+   alert("Xin chào!");
 };
 */!*
 
@@ -53,7 +53,7 @@ function sayHi() {
   alert("Xin chào!");
 };
 
-// sau đó thêm như một phương pháp
+// sau đó thêm như một phương thức
 user.sayHi = sayHi;
 */!*
 
@@ -181,7 +181,7 @@ function sayHi() {
 
 Giá trị của `this` được đánh giá trong thời gian chạy, tùy thuộc vào ngữ cảnh.
 
-Chẳng hạn, ở đây, cùng một chức năng được gán cho hai đối tượng khác nhau và có "cái này" khác nhau trong các lệnh gọi:
+Chẳng hạn, ở đây, cùng một chức năng được gán cho hai đối tượng khác nhau và có "this" khác nhau trong các lệnh gọi:
 
 ```js run
 let user = { name: "John" };
@@ -197,7 +197,7 @@ user.f = sayHi;
 admin.f = sayHi;
 */!*
 
-// những cuộc gọi này có sự khác biệt này
+// những lần gọi này có this khác nhau
 // "this" bên trong hàm là đối tượng "trước dấu chấm"
 user.f(); // John  (this == user)
 admin.f(); // Admin  (this == admin)
@@ -218,7 +218,7 @@ function sayHi() {
 sayHi(); // undefined
 ```
 
-Trong trường hợp này, `this` là `undefined` ở chế độ nghiêm ngặt. Nếu chúng tôi cố gắng truy cập `this.name`, sẽ có lỗi.
+Trong trường hợp này, `this` là `undefined` ở chế độ nghiêm ngặt. Nếu chúng ta cố gắng truy cập `this.name`, sẽ có lỗi.
 
 Ở chế độ không nghiêm ngặt, giá trị của `this` trong trường hợp này sẽ là *đối tượng toàn cục* (`cửa sổ` trong trình duyệt, chúng ta sẽ tìm hiểu về nó sau trong chương [](info:global-object)). Đây là một hành vi lịch sử mà `"sử dụng nghiêm ngặt"` sửa chữa.
 
@@ -230,12 +230,12 @@ Nếu bạn đến từ một ngôn ngữ lập trình khác, thì có lẽ bạ
 
 Trong JavaScript `this` là "tự do", giá trị của nó được đánh giá tại thời điểm gọi và không phụ thuộc vào vị trí khai báo phương thức, mà phụ thuộc vào đối tượng nào "trước dấu chấm".
 
-Khái niệm về thời gian chạy được đánh giá `điều này` có cả ưu điểm và nhược điểm. Một mặt, một chức năng có thể được sử dụng lại cho các đối tượng khác nhau. Mặt khác, tính linh hoạt cao hơn tạo ra nhiều khả năng mắc sai lầm hơn.
+Khái niệm về thời gian chạy được đánh giá `this` có cả ưu điểm và nhược điểm. Một mặt, một chức năng có thể được sử dụng lại cho các đối tượng khác nhau. Mặt khác, tính linh hoạt cao hơn tạo ra nhiều khả năng mắc sai lầm hơn.
 
 Ở đây, vị trí của chúng ta không phải là đánh giá liệu quyết định thiết kế ngôn ngữ này là tốt hay xấu. Chúng ta sẽ hiểu làm thế nào để làm việc với nó, làm thế nào để nhận được lợi ích và tránh các vấn đề.
 ```
 
-## Các chức năng mũi tên không có "this"
+## Các arrow function không có "this"
 
 Các hàm mũi tên rất đặc biệt: chúng không có `this` "của riêng chúng". Nếu chúng ta tham chiếu `this` từ một hàm như vậy, thì nó được lấy từ hàm "bình thường" bên ngoài.
 
@@ -260,7 +260,7 @@ user.sayHi(); // Ilya
 
 - Các hàm được lưu trữ trong các thuộc tính đối tượng được gọi là "phương thức".
 - Các phương thức cho phép các đối tượng "hành động" như `object.doSomething()`.
-- Các phương thức có thể tham chiếu đối tượng là `this`.
+- Các phương thức có thể tham chiếu đối tượng như `this`.
 
 Giá trị của `this` được xác định trong thời gian chạy.
 - Khi một hàm được khai báo, nó có thể sử dụng `this`, nhưng `this` đó không có giá trị cho đến khi hàm được gọi.
