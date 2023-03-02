@@ -1,4 +1,4 @@
-The solution is to return the object itself from every call.
+Giải pháp là trả lại chính đối tượng đó từ mọi cuộc gọi.
 
 ```js run demo
 let ladder = {
@@ -26,7 +26,7 @@ let ladder = {
 ladder.up().up().down().up().down().showStep(); // 1
 ```
 
-We also can write a single call per line. For long chains it's more readable:
+Chúng tôi cũng có thể viết một cuộc gọi trên mỗi dòng. Đối với chuỗi dài, nó dễ đọc hơn:
 
 ```js
 ladder
