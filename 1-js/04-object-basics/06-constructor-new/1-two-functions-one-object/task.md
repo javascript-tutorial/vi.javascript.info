@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Two functions – one object
+# Hai hàm – một đối tượng
 
-Is it possible to create functions `A` and `B` such as `new A()==new B()`?
+Có thể tạo các hàm `A` và `B` chẳng hạn như `new A()==new B()` không?
 
 ```js no-beautify
 function A() { ... }
@@ -16,4 +16,4 @@ let b = new B;
 alert( a == b ); // true
 ```
 
-If it is, then provide an example of their code.
+Nếu có, thì hãy cung cấp một ví dụ về mã của chúng.
