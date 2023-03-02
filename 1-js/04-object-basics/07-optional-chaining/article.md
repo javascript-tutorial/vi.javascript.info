@@ -105,72 +105,72 @@ Hãy lưu ý: cú pháp `?.` tạo giá trị tùy chọn trước nó, nhưng k
 
 Ví dụ. trong `user?.address.street.name`, `?.` cho phép `user` trở thành `null/undefined` một cách an toàn (và trả về `undefined` trong trường hợp đó), nhưng điều đó chỉ dành cho `user`. Các thuộc tính khác được truy cập một cách thường xuyên. Nếu chúng ta muốn một số trong số chúng là tùy chọn, thì chúng ta sẽ cần thay thế thêm `.` bằng `?.`.
 
-```warn header="Don't overuse the optional chaining"
-We should use `?.` only where it's ok that something doesn't exist.
+```warn header="Đừng lạm dụng chuỗi tùy chọn"
+Chúng ta chỉ nên sử dụng `?.` khi không có gì tồn tại.
 
-For example, if according to our coding logic `user` object must exist, but `address` is optional, then we should write `user.address?.street`, but not `user?.address?.street`.
+Ví dụ: nếu theo logic mã hóa của chúng ta, đối tượng `user` phải tồn tại, nhưng `address` là tùy chọn, thì chúng ta nên viết `user.address?.street`, chứ không phải `user?.address?.street`.
 
-So, if `user` happens to be undefined due to a mistake, we'll see a programming error about it and fix it. Otherwise, coding errors can be silenced where not appropriate, and become more difficult to debug.
+Vì vậy, nếu `user` không được xác định do nhầm lẫn, chúng ta sẽ thấy lỗi lập trình về lỗi đó và sửa lỗi đó. Mặt khác, các lỗi mã hóa có thể bị tắt khi không thích hợp và trở nên khó gỡ lỗi hơn.
 ```
 
-````warn header="The variable before `?.` must be declared"
-If there's no variable `user` at all, then `user?.anything` triggers an error:
+````warn header="Biến trước `?.` phải được khai báo"
+Nếu hoàn toàn không có biến `user`, thì `user?.anything` sẽ gây ra lỗi:
 
 ```js run
-// ReferenceError: user is not defined
+// ReferenceError: người dùng không được xác định
 user?.address;
 ```
-The variable must be declared (e.g. `let/const/var user` or as a function parameter). The optional chaining works only for declared variables.
+Biến phải được khai báo (ví dụ: `let/const/var user` hoặc dưới dạng tham số hàm). Chuỗi tùy chọn chỉ hoạt động đối với các biến đã khai báo.
 ````
 
-## Short-circuiting
+## Ngắn mạch
 
-As it was said before, the `?.` immediately stops ("short-circuits") the evaluation if the left part doesn't exist.
+Như đã nói trước đó, `?.` ngay lập tức dừng ("ngắn mạch") đánh giá nếu phần bên trái không tồn tại.
 
-So, if there are any further function calls or side effects, they don't occur.
+Vì vậy, nếu có thêm bất kỳ lệnh gọi chức năng hoặc tác dụng phụ nào, chúng sẽ không xảy ra.
 
-For instance:
+Ví dụ:
 
 ```js run
 let user = null;
 let x = 0;
 
-user?.sayHi(x++); // no "sayHi", so the execution doesn't reach x++
+user?.sayHi(x++); // không có "sayHi", vì vậy việc thực thi không đạt được x++
 
-alert(x); // 0, value not incremented
+alert(x); // 0, giá trị không tăng
 ```
 
-## Other variants: ?.(), ?.[]
+## Các biến thể khác: ?.(), ?.[]
 
-The optional chaining `?.` is not an operator, but a special syntax construct, that also works with functions and square brackets.
+Chuỗi tùy chọn `?.` không phải là một toán tử, mà là một cấu trúc cú pháp đặc biệt, cũng hoạt động với các hàm và dấu ngoặc vuông.
 
-For example, `?.()` is used to call a function that may not exist.
+Ví dụ: `?.()` được sử dụng để gọi một hàm có thể không tồn tại.
 
-In the code below, some of our users have `admin` method, and some don't:
+Trong mã bên dưới, một số người dùng của chúng ta có phương thức `admin` và một số thì không:
 
 ```js run
 let userAdmin = {
   admin() {
-    alert("I am admin");
+    alert("Tôi là admin");
   }
 };
 
 let userGuest = {};
 
 *!*
-userAdmin.admin?.(); // I am admin
+userAdmin.admin?.(); // Tôi là admin
 */!*
 
 *!*
-userGuest.admin?.(); // nothing (no such method)
+userGuest.admin?.(); // không có gì (không có phương pháp như vậy)
 */!*
 ```
 
-Here, in both lines we first use the dot (`userAdmin.admin`) to get `admin` property, because we assume that the user object exists, so it's safe read from it.
+Ở đây, trong cả hai dòng, trước tiên chúng ta sử dụng dấu chấm (`userAdmin.admin`) để nhận thuộc tính `admin`, bởi vì chúng ta cho rằng đối tượng người dùng tồn tại, vì vậy có thể đọc từ đối tượng đó một cách an toàn.
 
-Then `?.()` checks the left part: if the admin function exists, then it runs (that's so for `userAdmin`). Otherwise (for `userGuest`) the evaluation stops without errors.
+Sau đó, `?.()` kiểm tra phần bên trái: nếu chức năng quản trị tồn tại, thì nó sẽ chạy (đối với `userAdmin` thì như vậy). Nếu không (đối với `userGuest`), quá trình đánh giá sẽ dừng mà không có lỗi.
 
-The `?.[]` syntax also works, if we'd like to use brackets `[]` to access properties instead of dot `.`. Similar to previous cases, it allows to safely read a property from an object that may not exist.
+Cú pháp `?.[]` cũng hoạt động, nếu chúng ta muốn sử dụng dấu ngoặc `[]` để truy cập các thuộc tính thay vì dấu chấm `.`. Tương tự như các trường hợp trước, nó cho phép đọc một thuộc tính từ một đối tượng có thể không tồn tại một cách an toàn.
 
 ```js run
 let key = "firstName";
@@ -185,36 +185,36 @@ alert( user1?.[key] ); // John
 alert( user2?.[key] ); // undefined
 ```
 
-Also we can use `?.` with `delete`:
+Ngoài ra, chúng ta có thể sử dụng `?.` với `delete`:
 
 ```js run
-delete user?.name; // delete user.name if user exists
+delete user?.name; // xóa user.name nếu người dùng tồn tại
 ```
 
-````warn header="We can use `?.` for safe reading and deleting, but not writing"
-The optional chaining `?.` has no use at the left side of an assignment.
+````warn header="Chúng tôi có thể sử dụng `?.` để đọc và xóa an toàn, nhưng không viết"
+Chuỗi tùy chọn `?.` không có tác dụng ở phía bên trái của bài tập.
 
-For example:
+Ví dụ:
 ```js run
 let user = null;
 
-user?.name = "John"; // Error, doesn't work
-// because it evaluates to undefined = "John"
+user?.name = "John"; // Lỗi, không hoạt động
+// bởi vì nó đánh giá là không xác định = "John
 ```
 
-It's just not that smart.
+Nó chỉ là không thông minh.
 ````
 
-## Summary
+## Tóm tắt
 
-The optional chaining `?.` syntax has three forms:
+Cú pháp chuỗi tùy chọn `?.` có ba dạng:
 
-1. `obj?.prop` -- returns `obj.prop` if `obj` exists, otherwise `undefined`.
-2. `obj?.[prop]` -- returns `obj[prop]` if `obj` exists, otherwise `undefined`.
-3. `obj.method?.()` -- calls `obj.method()` if `obj.method` exists, otherwise returns `undefined`.
+1. `obj?.prop` -- trả về `obj.prop` nếu `obj` tồn tại, nếu không thì `undefined`.
+2. `obj?.[prop]` -- trả về `obj[prop]` nếu `obj` tồn tại, nếu không thì `undefined`.
+3. `obj.method?.()` -- gọi `obj.method()` nếu `obj.method` tồn tại, nếu không thì trả về `undefined`.
 
-As we can see, all of them are straightforward and simple to use. The `?.` checks the left part for `null/undefined` and allows the evaluation to proceed if it's not so.
+Như chúng ta có thể thấy, tất cả chúng đều đơn giản và dễ sử dụng. `?.` kiểm tra phần bên trái để tìm `null/undefined` và cho phép tiếp tục đánh giá nếu không.
 
-A chain of `?.` allows to safely access nested properties.
+Chuỗi `?.` cho phép truy cập các thuộc tính lồng nhau một cách an toàn.
 
-Still, we should apply `?.` carefully, only where it's acceptable that the left part doesn't exist. So that it won't hide programming errors from us, if they occur.
+Tuy nhiên, chúng ta nên áp dụng `?.` một cách cẩn thận, chỉ khi phần bên trái không tồn tại được chấp nhận. Vì vậy, nó sẽ không che giấu các lỗi lập trình với chúng ta, nếu chúng xảy ra.
