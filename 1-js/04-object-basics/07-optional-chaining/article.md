@@ -1,42 +1,42 @@
 
-# Optional chaining '?.'
+# Chuỗi tùy chọn '?.'
 
 [recent browser="new"]
 
-The optional chaining `?.` is a safe way to access nested object properties, even if an intermediate property doesn't exist.
+Chuỗi tùy chọn `?.` là một cách an toàn để truy cập các thuộc tính đối tượng lồng nhau, ngay cả khi thuộc tính trung gian không tồn tại.
 
-## The "non-existing property" problem
+## Vấn đề "thuộc tính không tồn tại"
 
-If you've just started to read the tutorial and learn JavaScript, maybe the problem hasn't touched you yet, but it's quite common.
+Nếu bạn mới bắt đầu đọc hướng dẫn và học JavaScript, có thể vấn đề chưa khiến bạn lo lắng, nhưng nó khá phổ biến.
 
-As an example, let's say we have `user` objects that hold the information about our users.
+Ví dụ: Giả sử chúng ta có các đối tượng `user` chứa thông tin về người dùng của chúng ta.
 
-Most of our users have addresses in `user.address` property, with the street `user.address.street`, but some did not provide them.
+Hầu hết người dùng của chúng ta có địa chỉ trong thuộc tính `user.address`, với đường phố `user.address.street`, nhưng một số người không cung cấp chúng.
 
-In such case, when we attempt to get `user.address.street`, and the user happens to be without an address, we get an error:
-
-```js run
-let user = {}; // a user without "address" property
-
-alert(user.address.street); // Error!
-```
-
-That's the expected result. JavaScript works like this. As `user.address` is `undefined`, an attempt to get `user.address.street` fails with an error.
-
-In many practical cases we'd prefer to get `undefined` instead of an error here (meaning "no street").
-
-...And another example. In the web development, we can get an object that corresponds to a web page element using a special method call, such as `document.querySelector('.elem')`, and it returns `null` when there's no such element.
+Trong trường hợp như vậy, khi chúng ta cố gắng lấy `user.address.street` và người dùng không có địa chỉ, chúng tôi sẽ gặp lỗi:
 
 ```js run
-// document.querySelector('.elem') is null if there's no element
-let html = document.querySelector('.elem').innerHTML; // error if it's null
+let user = {}; // người dùng không có thuộc tính "địa chỉ"
+
+alert(user.address.street); // Lỗi!
 ```
 
-Once again, if the element doesn't exist, we'll get an error accessing `.innerHTML` of `null`. And in some cases, when the absence of the element is normal, we'd like to avoid the error and just accept `html = null` as the result.
+Đó là kết quả mong đợi. JavaScript hoạt động như thế này. Vì `user.address` là `không xác định`, nỗ lực lấy `user.address.street` không thành công và xảy ra lỗi.
 
-How can we do this?
+Trong nhiều trường hợp thực tế, chúng ta muốn nhận được `không xác định` thay vì lỗi ở đây (có nghĩa là "không có đường phố").
 
-The obvious solution would be to check the value using `if` or the conditional operator `?`, before accessing its property, like this:
+...Và một ví dụ khác. Trong quá trình phát triển web, chúng ta có thể lấy một đối tượng tương ứng với một phần tử trang web bằng cách sử dụng lệnh gọi phương thức đặc biệt, chẳng hạn như `document.querySelector('.elem')` và nó trả về `null` khi không có phần tử nào như vậy.
+
+```js run
+// document.querySelector('.elem') là null nếu không có phần tử
+let html = document.querySelector('.elem').innerHTML; // lỗi nếu nó là null
+```
+
+Một lần nữa, nếu phần tử không tồn tại, chúng ta sẽ gặp lỗi khi truy cập `.innerHTML` của `null`. Và trong một số trường hợp, khi việc thiếu phần tử là bình thường, chúng ta muốn tránh lỗi và chỉ chấp nhận kết quả là `html = null`.
+
+Làm thế nào chúng ta có thể làm điều này?
+
+Giải pháp rõ ràng là kiểm tra giá trị bằng cách sử dụng `if` hoặc toán tử điều kiện `?`, trước khi truy cập thuộc tính của nó, như sau:
 
 ```js
 let user = {};
@@ -44,45 +44,45 @@ let user = {};
 alert(user.address ? user.address.street : undefined);
 ```
 
-It works, there's no error... But it's quite inelegant. As you can see, the `"user.address"` appears twice in the code. For more deeply nested properties, that becomes a problem as more repetitions are required.
+Nó hoạt động, không có lỗi... Nhưng nó khá kém trang nhã. Như bạn có thể thấy, `"user.address"` xuất hiện hai lần trong mã. Đối với các thuộc tính được lồng sâu hơn, điều đó trở thành một vấn đề khi cần nhiều lần lặp lại hơn.
 
-E.g. let's try getting `user.address.street.name`.
+Ví dụ. hãy thử lấy `user.address.street.name`.
 
-We need to check both `user.address` and `user.address.street`:
+Chúng ta cần kiểm tra cả `user.address` và `user.address.street`:
 
 ```js
-let user = {}; // user has no address
+let user = {}; // người dùng không có địa chỉ
 
 alert(user.address ? user.address.street ? user.address.street.name : null : null);
 ```
 
-That's just awful, one may even have problems understanding such code.
+Điều đó thật tồi tệ, một người thậm chí có thể gặp khó khăn khi hiểu mã như vậy.
 
-Don't even care to, as there's a better way to write it, using the `&&` operator:
+Đừng quan tâm, vì có một cách tốt hơn để viết nó, sử dụng toán tử `&&`:
 
 ```js run
-let user = {}; // user has no address
+let user = {}; // người dùng không có địa chỉ
 
-alert( user.address && user.address.street && user.address.street.name ); // undefined (no error)
+alert( user.address && user.address.street && user.address.street.name ); // undefined (không có lỗi)
 ```
 
-AND'ing the whole path to the property ensures that all components exist (if not, the evaluation stops), but also isn't ideal.
+AND'ing toàn bộ đường dẫn đến thuộc tính đảm bảo rằng tất cả các thành phần đều tồn tại (nếu không, quá trình đánh giá sẽ dừng), nhưng cũng không phải là lý tưởng.
 
-As you can see, property names are still duplicated in the code. E.g. in the code above, `user.address` appears three times.
+Như bạn có thể thấy, tên thuộc tính vẫn bị trùng lặp trong mã. Ví dụ. trong đoạn mã trên, `user.address` xuất hiện ba lần.
 
-That's why the optional chaining `?.` was added to the language. To solve this problem once and for all!
+Đó là lý do tại sao chuỗi tùy chọn `?.` đã được thêm vào ngôn ngữ. Để giải quyết vấn đề này một lần và mãi mãi!
 
-## Optional chaining
+## Chuỗi tùy chọn
 
-The optional chaining `?.` stops the evaluation if the value before `?.` is `undefined` or `null` and returns `undefined`.
+Chuỗi tùy chọn `?.` dừng đánh giá nếu giá trị trước `?.` là `không xác định` hoặc `null` và trả về `không xác định`.
 
-**Further in this article, for brevity, we'll be saying that something "exists" if it's not `null` and not `undefined`.**
+**Trong bài viết này, để cho ngắn gọn, chúng ta sẽ nói rằng một thứ gì đó "tồn tại" nếu nó không phải là `null` và không phải là `undefined`.**
 
-In other words, `value?.prop`:
-- works as `value.prop`, if `value` exists,
-- otherwise (when `value` is `undefined/null`) it returns `undefined`.
+Nói cách khác, `value?.prop`:
+- hoạt động như `value.prop`, nếu `value` tồn tại,
+- ngược lại (khi `giá trị` là `không xác định/null`), nó trả về `undefined`.
 
-Here's the safe way to access `user.address.street` using `?.`:
+Đây là cách an toàn để truy cập `user.address.street` bằng cách sử dụng `?.`:
 
 ```js run
 let user = {}; // user has no address
@@ -90,9 +90,9 @@ let user = {}; // user has no address
 alert( user?.address?.street ); // undefined (no error)
 ```
 
-The code is short and clean, there's no duplication at all.
+Mã ngắn và rõ ràng, không có sự trùng lặp nào cả.
 
-Reading the address with `user?.address` works even if `user` object doesn't exist:
+Đọc địa chỉ với `user?.address` hoạt động ngay cả khi đối tượng `user` không tồn tại:
 
 ```js run
 let user = null;
@@ -101,9 +101,9 @@ alert( user?.address ); // undefined
 alert( user?.address.street ); // undefined
 ```
 
-Please note: the `?.` syntax makes optional the value before it, but not any further.
+Hãy lưu ý: cú pháp `?.` tạo giá trị tùy chọn trước nó, nhưng không thêm nữa.
 
-E.g. in `user?.address.street.name` the `?.` allows `user` to safely be `null/undefined` (and returns `undefined` in that case), but that's only for `user`. Further properties are accessed in a regular way. If we want some of them to be optional, then we'll need to replace more `.` with `?.`.
+Ví dụ. trong `user?.address.street.name`, `?.` cho phép `user` trở thành `null/undefined` một cách an toàn (và trả về `undefined` trong trường hợp đó), nhưng điều đó chỉ dành cho `user`. Các thuộc tính khác được truy cập một cách thường xuyên. Nếu chúng ta muốn một số trong số chúng là tùy chọn, thì chúng ta sẽ cần thay thế thêm `.` bằng `?.`.
 
 ```warn header="Don't overuse the optional chaining"
 We should use `?.` only where it's ok that something doesn't exist.
