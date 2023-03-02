@@ -2,26 +2,26 @@ importance: 5
 
 ---
 
-# Create new Accumulator
+# Tạo bộ tích lũy mới
 
-Create a constructor function `Accumulator(startingValue)`.
+Tạo một hàm tạo `Accumulator(startingValue)`.
 
-Object that it creates should:
+Đối tượng mà nó tạo nên:
 
-- Store the "current value" in the property `value`. The starting value is set to the argument of the constructor `startingValue`.
-- The `read()` method should use `prompt` to read a new number and add it to `value`.
+- Lưu trữ "giá trị hiện tại" trong thuộc tính `value`. Giá trị bắt đầu được đặt thành đối số của hàm tạo `startingValue`.
+- Phương thức `read()` nên sử dụng `prompt` để đọc một số mới và thêm nó vào `giá trị`.
 
-In other words, the `value` property is the sum of all user-entered values with the initial value  `startingValue`.
+Nói cách khác, thuộc tính `value` là tổng của tất cả các giá trị do người dùng nhập với giá trị ban đầu là `startingValue`.
 
-Here's the demo of the code:
+Đây là bản demo của mã:
 
 ```js
-let accumulator = new Accumulator(1); // initial value 1
+let accumulator = new Accumulator(1); // giá trị ban đầu 1
 
 accumulator.read(); // adds the user-entered value
-accumulator.read(); // adds the user-entered value
+accumulator.read(); // thêm giá trị do người dùng nhập
 
-alert(accumulator.value); // shows the sum of these values
+alert(accumulator.value); // hiển thị tổng của các giá trị này
 ```
 
 [demo]
