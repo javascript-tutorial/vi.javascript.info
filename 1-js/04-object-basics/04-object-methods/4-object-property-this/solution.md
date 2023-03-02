@@ -14,11 +14,11 @@ let user = makeUser();
 alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 ```
 
-Đó là bởi vì các quy tắc đặt `this` không nhìn vào định nghĩa đối tượng. Chỉ có thời điểm của cuộc gọi quan trọng.
+Đó là bởi vì các quy tắc đặt `this` không nhìn vào định nghĩa đối tượng. Chỉ có thời điểm sử dụng mới là quan trọng.
 
 Ở đây, giá trị của `this` bên trong `makeUser()` là `undefined`, bởi vì nó được gọi dưới dạng một hàm, không phải dưới dạng một phương thức có cú pháp "dấu chấm".
 
-Giá trị của `this` là một cho toàn bộ hàm, các khối mã và ký tự đối tượng không ảnh hưởng đến giá trị đó.
+Giá trị của `this` là một cho toàn bộ hàm, các khối mã và các object literal không ảnh hưởng đến giá trị đó.
 
 Vì vậy, `ref: this` thực sự lấy `this` hiện tại của hàm.
 
