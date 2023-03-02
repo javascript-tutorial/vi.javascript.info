@@ -22,7 +22,7 @@ Chẳng hạn, chúng ta đang tạo một hàm `f`. Đã viết một số mã,
 
 ## Behavior Driven Development (BDD)
 
-Hãy bắt đầu với một kỹ thuật có tên [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) or, in short, BDD.
+Hãy bắt đầu với một kỹ thuật có tên [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) hoặc, ngắn gọn, BDD.
 
 ****BDD là ba thứ trong một: thử nghiệm VÀ tài liệu VÀ ví dụ.**
 
