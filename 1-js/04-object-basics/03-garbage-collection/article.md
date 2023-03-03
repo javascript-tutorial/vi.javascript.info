@@ -15,11 +15,11 @@ Nói một cách đơn giản, các giá trị "có thể tiếp cận" là nh�
      Ví dụ:
 
      - Hàm hiện đang thực thi, các biến cục bộ và tham số của nó.
-     - Các chức năng khác trên chuỗi lệnh gọi lồng nhau hiện tại, các biến cục bộ và tham số của chúng.
+     - Các hàm khác trên chuỗi lệnh gọi lồng nhau hiện tại, các biến cục bộ và tham số của chúng.
      - Biến toàn cục.
      - (có một số khác, nội bộ là tốt)
 
-     Những giá trị này được gọi là *root*.
+     Những giá trị này được gọi là *gốc*.
 
 2. Bất kỳ giá trị nào khác được coi là có thể truy cập được nếu giá trị đó có thể truy cập được từ gốc bằng tham chiếu hoặc chuỗi tham chiếu.
 
@@ -52,7 +52,7 @@ user = null;
 
 Bây giờ John trở nên không thể truy cập được. Không có cách nào để truy cập nó, không có tham chiếu đến nó. Trình thu gom rác sẽ loại bỏ dữ liệu và giải phóng bộ nhớ.
 
-## Hai tài liệu tham khảo
+## Hai tham chiếu
 
 Bây giờ, hãy tưởng tượng chúng ta đã sao chép tham chiếu từ `user` sang `admin`:
 
@@ -117,7 +117,7 @@ delete family.mother.husband;
 
 Chỉ xóa một trong hai tham chiếu này là không đủ, bởi vì tất cả các đối tượng vẫn có thể truy cập được.
 
-Nhưng nếu chúng ta xóa cả hai, thì chúng ta có thể thấy rằng John không còn tài liệu tham khảo nào nữa:
+Nhưng nếu chúng ta xóa cả hai, thì chúng ta có thể thấy rằng John không còn tham chiếu nào nữa:
 
 ![](family-no-father.svg)
 
@@ -145,7 +145,7 @@ Ví dụ này cho thấy tầm quan trọng của khái niệm khả năng tiế
 
 Rõ ràng là John và Ann vẫn được liên kết với nhau, cả hai đều có tham chiếu sắp tới. Nhưng điều đó là không đủ.
 
-Đối tượng `"gia đình"` trước đây đã bị hủy liên kết khỏi thư mục gốc, không còn tham chiếu đến nó nữa, vì vậy toàn bộ hòn đảo trở nên không thể truy cập được và sẽ bị xóa.
+Đối tượng `"gia đình"` trước đây đã bị hủy liên kết khỏi thư mục gốc, không còn tham chiếu đến nó nữa, vì vậy toàn bộ đối tượng trở nên không thể truy cập được và sẽ bị xóa.
 
 ## Thuật toán nội bộ
 
@@ -154,7 +154,7 @@ Thuật toán thu gom rác cơ bản được gọi là "đánh dấu và quét"
 Các bước "thu gom rác" sau đây được thực hiện thường xuyên:
 
 - Bộ gom rác lấy gốc và "đánh dấu" (ghi nhớ) chúng.
-- Sau đó, nó truy cập và "đánh dấu" tất cả các tham chiếu từ họ.
+- Sau đó, nó truy cập và "đánh dấu" tất cả các tham chiếu từ chúng.
 - Sau đó, nó truy cập các đối tượng được đánh dấu và đánh dấu các tham chiếu *của chúng*. Tất cả các đối tượng đã truy cập đều được ghi nhớ để không truy cập cùng một đối tượng hai lần trong tương lai.
 - ...Và cứ như vậy cho đến khi mọi tham chiếu có thể truy cập (từ gốc) đều được truy cập.
 - Tất cả các đối tượng trừ những đối tượng được đánh dấu đều bị xóa.
@@ -191,7 +191,7 @@ Một số tối ưu hóa:
 - **Tập hợp gia tăng** -- nếu có nhiều đối tượng và chúng ta cố gắng đi bộ và đánh dấu toàn bộ tập hợp đối tượng cùng một lúc, có thể mất một chút thời gian và gây ra sự chậm trễ có thể nhìn thấy được trong quá trình thực thi. Vì vậy, engine cố gắng chia bộ sưu tập rác thành nhiều phần. Sau đó, các mảnh được thực hiện từng cái một, riêng biệt. Điều đó đòi hỏi một số kế toán bổ sung giữa chúng để theo dõi các thay đổi, nhưng chúng ta có nhiều sự chậm trễ nhỏ thay vì một sự chậm trễ lớn.
 - **Thu gom vào thời gian nhàn rỗi** -- bộ thu gom rác cố gắng chỉ chạy khi CPU không hoạt động, để giảm tác động có thể có đối với quá trình thực thi.
 
-Có tồn tại các tối ưu hóa và hương vị khác của thuật toán thu gom rác. Tôi muốn mô tả chúng ở đây nhiều như thế nào nhưng tôi phải dừng lại, bởi vì các công cụ khác nhau thực hiện các chỉnh sửa và kỹ thuật khác nhau. Và, điều quan trọng hơn nữa, mọi thứ thay đổi khi động cơ phát triển, vì vậy việc nghiên cứu sâu hơn "trước", nếu không có nhu cầu thực sự có lẽ không đáng. Tất nhiên, trừ khi đó là vấn đề hoàn toàn vì lợi ích, khi đó sẽ có một số liên kết dành cho bạn bên dưới.
+Có tồn tại các tối ưu hóa và hương vị khác của thuật toán thu gom rác. Tôi muốn mô tả chúng ở đây nhiều như thế nào nhưng tôi phải dừng lại, bởi vì các công cụ khác nhau thực hiện các chỉnh sửa và kỹ thuật khác nhau. Và, điều quan trọng hơn nữa, mọi thứ thay đổi khi engine phát triển, vì vậy việc nghiên cứu sâu hơn "trước", nếu không có nhu cầu thực sự có lẽ không đáng. Tất nhiên, trừ khi đó là vấn đề hoàn toàn vì lợi ích, khi đó sẽ có một số liên kết dành cho bạn bên dưới.
 
 ## Tóm tắt
 
