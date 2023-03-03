@@ -36,7 +36,7 @@ Tác vụ đó chỉ là một ví dụ: có toán tử `**` trong JavaScript c�
 
 Trước khi tạo mã của `pow`, chúng ta có thể hình dung chức năng này sẽ làm gì và mô tả nó.
 
-Mô tả như vậy được gọi là *thông số kỹ thuật* hay nói ngắn gọn là thông số và chứa mô tả về các trường hợp sử dụng cùng với các thử nghiệm dành cho chúng, như sau:
+Mô tả như vậy được gọi là *thông số kỹ thuật* hay nói ngắn gọn là thông số và chứa mô tả về các trường hợp sử dụng cùng với các bài kiểm tra dành cho chúng, như sau:
 
 ```js
 describe("pow", function() {
@@ -70,12 +70,12 @@ Dòng phát triển thường trông như thế này:
 1. Thông số kỹ thuật ban đầu được viết, với các bài kiểm tra chức năng cơ bản nhất.
 2. Triển khai ban đầu được tạo.
 3. Để kiểm tra xem nó có hoạt động hay không, chúng ta chạy framework thử nghiệm [Mocha](http://mochajs.org/) (sẽ sớm có thêm thông tin chi tiết) để chạy thông số kỹ thuật đó. Trong khi chức năng không hoàn thành, lỗi được hiển thị. Chúng ta thực hiện chỉnh sửa cho đến khi mọi thứ hoạt động.
-4. Bây giờ chúng ta có một thực hiện ban đầu đang hoạt động với kiểm tra.
+4. Bây giờ chúng ta có một thực hiện ban đầu đang hoạt động với bài kiểm tra.
 5. Chúng ta thêm nhiều trường hợp sử dụng hơn vào thông số kỹ thuật, có thể chưa được triển khai hỗ trợ. Các thử nghiệm bắt đầu thất bại.
 6. Đến bước 3, cập nhật việc triển khai cho đến khi kiểm tra không có lỗi.
 7. Lặp lại các bước 3-6 cho đến khi chức năng sẵn sàng.
 
-Vì vậy, sự phát triển là * lặp đi lặp lại *. Chúng ta viết thông số kỹ thuật, triển khai nó, đảm bảo vượt qua các bài kiểm tra, sau đó viết thêm các bài kiểm tra khác, đảm bảo chúng hoạt động, v.v. Cuối cùng, chúng ta có cả một triển khai hoạt động và các bài kiểm tra cho nó.
+Vì vậy, sự phát triển là * lặp đi lặp lại *. Chúng ta viết thông số kỹ thuật, triển khai nó, đảm bảo nó vượt qua các bài kiểm tra, sau đó viết thêm các bài kiểm tra khác, đảm bảo chúng hoạt động, v.v. Cuối cùng, chúng ta vừa có một triển khai hoạt động và các bài kiểm tra cho nó.
 
 Hãy xem dòng phát triển này trong trường hợp thực tế của chúng ta.
 
@@ -89,7 +89,7 @@ Bước đầu tiên đã hoàn tất: chúng ta có thông số kỹ thuật ba
 - [Chai](http://chaijs.com) -- thư viện có nhiều xác nhận. Nó cho phép sử dụng rất nhiều xác nhận khác nhau, bây giờ chúng ta chỉ cần `assert.equal`.
 - [Sinon](http://sinonjs.org/) -- một thư viện để theo dõi các chức năng, mô phỏng các chức năng tích hợp sẵn và hơn thế nữa, chúng ta sẽ cần đến nó sau này.
 
-Các thư viện này phù hợp cho cả thử nghiệm trên trình duyệt và phía máy chủ. Ở đây chúng tôi sẽ xem xét biến thể trình duyệt.
+Các thư viện này phù hợp cho cả kiểm tra trên trình duyệt và phía máy chủ. Ở đây chúng ta sẽ xem xét biến thể trình duyệt.
 
 Trang HTML đầy đủ với các khung này và thông số kỹ thuật `pow`:
 
@@ -99,7 +99,7 @@ Trang HTML đầy đủ với các khung này và thông số kỹ thuật `pow`
 Trang này có thể được chia thành năm phần:
 
 1. `<head>` -- thêm các thư viện và kiểu của bên thứ ba cho các bài kiểm tra.
-2. `<script>` có chức năng kiểm tra, trong trường hợp của chúng ta -- có mã cho `pow`.
+2. `<script>` có hàm kiểm tra, trong trường hợp của chúng ta -- có mã cho `pow`.
 3. Các thử nghiệm -- trong trường hợp của chúng ta là một tập lệnh bên ngoài `test.js` có `describe("pow", ...)` ở phía trên.
 4. Phần tử HTML `<div id="mocha">` sẽ được Mocha sử dụng để xuất kết quả.
 5. Các bài kiểm tra được bắt đầu bằng lệnh `mocha.run()`.
@@ -108,9 +108,9 @@ Kết quả:
 
 [iframe height=250 src="pow-1" border=1 edit]
 
-Hiện tại, thử nghiệm không thành công, có lỗi. Điều đó hợp lý: chúng ta có một mã chức năng trống trong `pow`, vì vậy `pow(2,3)` trả về `undefined` thay vì `8`.
+Hiện tại, thử nghiệm không thành công, có lỗi. Điều đó hợp lý: chúng ta có một mã hàm trống trong `pow`, vì vậy `pow(2,3)` trả về `undefined` thay vì `8`.
 
-Trong tương lai, hãy lưu ý rằng có nhiều trình chạy thử nghiệm cấp cao hơn, như [karma](https://karma-runner.github.io/) và những trình chạy thử nghiệm khác, giúp dễ dàng tự động chạy nhiều thử nghiệm khác nhau.
+Trong tương lai, hãy lưu ý rằng có nhiều trình chạy thử nghiệm cấp cao hơn, như [karma](https://karma-runner.github.io/) và những trình chạy thử nghiệm khác, giúp dễ dàng tự động chạy nhiều bài kiểm tra khác nhau.
 
 ## Thực hiện ban đầu
 
@@ -128,15 +128,15 @@ Chà, bây giờ nó hoạt động!
 
 ## Cải thiện thông số kỹ thuật
 
-Những gì chúng ta đã làm chắc chắn là gian lận. Chức năng này không hoạt động: một nỗ lực tính toán `pow(3,4)` sẽ cho kết quả không chính xác, nhưng các phép kiểm tra đã vượt qua.
+Những gì chúng ta đã làm chắc chắn là gian lận. Hàm này không hoạt động: một nỗ lực tính toán `pow(3,4)` sẽ cho kết quả không chính xác, nhưng các phép kiểm tra đã vượt qua.
 
-...Nhưng tình huống khá điển hình, nó xảy ra trong thực tế. Các bài kiểm tra vượt qua, nhưng chức năng hoạt động sai. Thông số kỹ thuật của chúng ta là không hoàn hảo. Chúng ta cần thêm nhiều trường hợp sử dụng hơn cho nó.
+...Nhưng tình huống khá điển hình, nó xảy ra trong thực tế. Nó vượt qua các bài kiểm tra, nhưng hàm hoạt động sai. Thông số kỹ thuật của chúng ta là không hoàn hảo. Chúng ta cần thêm nhiều trường hợp sử dụng hơn cho nó.
 
 Hãy thêm một phép thử nữa để kiểm tra xem `pow(3, 4) = 81`.
 
 Chúng ta có thể lựa chọn một trong hai cách tổ chức kiểm tra tại đây:
 
-1. Biến thể đầu tiên -- thêm một `khẳng định` nữa vào cùng `nó`:
+1. Biến thể đầu tiên -- thêm một `assert` nữa vào cùng `it`:
 
     ```js
     describe("pow", function() {
@@ -166,9 +166,9 @@ Chúng ta có thể lựa chọn một trong hai cách tổ chức kiểm tra t�
     });
     ```
 
-Sự khác biệt chính là khi `assert` gây ra lỗi, khối `it` sẽ ngay lập tức chấm dứt. Vì vậy, trong biến thể đầu tiên nếu `khẳng định` đầu tiên không thành công, thì chúng ta sẽ không bao giờ thấy kết quả của `khẳng định` thứ hai.
+Sự khác biệt chính là khi `assert` gây ra lỗi, khối `it` sẽ ngay lập tức chấm dứt. Vì vậy, trong biến thể đầu tiên nếu `assert` đầu tiên không thành công, thì chúng ta sẽ không bao giờ thấy kết quả của `assert` thứ hai.
 
-Thực hiện các thử nghiệm riêng biệt rất hữu ích để có thêm thông tin về những gì đang diễn ra, vì vậy biến thể thứ hai sẽ tốt hơn.
+Thực hiện các bài kiểm tra riêng biệt rất hữu ích để có thêm thông tin về những gì đang diễn ra, vì vậy biến thể thứ hai sẽ tốt hơn.
 
 Và bên cạnh đó, có một quy tắc nữa rất tốt để tuân theo.
 
@@ -182,7 +182,7 @@ Kết quả:
 
 [iframe height=250 src="pow-2" edit border="1"]
 
-Như chúng ta có thể mong đợi, thử nghiệm thứ hai đã thất bại. Chắc chắn rồi, hàm của chúng ta luôn trả về `8`, trong khi `assert` mong đợi `81`.
+Như chúng ta có thể mong đợi, bài kiểm tra thứ hai đã thất bại. Chắc chắn rồi, hàm của chúng ta luôn trả về `8`, trong khi `assert` mong đợi `81`.
 
 ## Cải thiện việc thực hiện
 
@@ -200,7 +200,7 @@ function pow(x, n) {
 }
 ```
 
-Để chắc chắn rằng chức năng hoạt động tốt, hãy kiểm tra nó để biết thêm giá trị. Thay vì viết các khối `it` theo cách thủ công, chúng ta có thể tạo chúng trong `for`:
+Để chắc chắn rằng hàm hoạt động tốt, hãy kiểm tra nó để biết thêm giá trị. Thay vì viết các khối `it` theo cách thủ công, chúng ta có thể tạo chúng trong `for`:
 
 ```js
 describe("pow", function() {
@@ -225,9 +225,9 @@ Kết quả:
 
 ## Mô tả lồng nhau
 
-Chúng tôi sẽ thêm nhiều bài kiểm tra hơn nữa. Nhưng trước đó, hãy lưu ý rằng hàm trợ giúp `makeTest` và `for` nên được nhóm lại với nhau. Chúng tôi sẽ không cần `makeTest` trong các thử nghiệm khác, nó chỉ cần trong `for`: nhiệm vụ chung của chúng là kiểm tra xem `pow` tăng lên như thế nào với công suất nhất định.
+Chúng ta sẽ thêm nhiều bài kiểm tra hơn nữa. Nhưng trước đó, hãy lưu ý rằng hàm trợ giúp `makeTest` và `for` nên được nhóm lại với nhau. Chúng ta sẽ không cần `makeTest` trong các bài kiểm tra khác, nó chỉ cần trong `for`: nhiệm vụ chung của chúng là kiểm tra xem `pow` tăng lên như thế nào với công suất nhất định.
 
-Nhóm được thực hiện với một `describe` lồng nhau:
+Việc nhóm lại được thực hiện với một `describe` lồng nhau:
 
 ```js
 describe("pow", function() {
@@ -251,7 +251,7 @@ describe("pow", function() {
   });
 */!*
 
-  // ... nhiều bài kiểm tra để theo dõi ở đây, cả mô tả và nó có thể được thêm vào
+  // ... nhiều bài kiểm tra để tiếp theo ở đây, cả describe và it có thể được thêm vào
 });
 ```
 
@@ -262,15 +262,15 @@ describe("pow", function() {
 Trong tương lai, chúng ta có thể thêm nhiều `it` và `describe` ở cấp cao nhất với các hàm trợ giúp của riêng chúng, chúng sẽ không thấy `makeTest`.
 
 ````smart header="`before/after` và `beforeEach/afterEach`"
-Chúng ta có thể thiết lập các hàm `before/after` để thực thi trước/sau khi chạy thử nghiệm, cũng như các hàm `beforeEach/afterEach` để thực thi trước/sau *mọi* `it`.
+Chúng ta có thể thiết lập các hàm `before/after` để thực thi trước/sau khi chạy các bài kiểm tra, cũng như các hàm `beforeEach/afterEach` để thực thi trước/sau *mọi* `it`.
 
 Ví dụ:
 
 ```js no-beautify
 describe("test", function() {
 
-  before(() => alert("Thử nghiệm bắt đầu – trước tất cả các thử nghiệm"));
-  after(() => alert("Thử nghiệm kết thúc – sau tất cả các thử nghiệm"));
+  before(() => alert("Bài kiểm tra bắt đầu – trước tất cả các bài kiểm tra"));
+  after(() => alert("Bài kiểm tra kết thúc – sau tất cả các bài kiểm tra"));
 
   beforeEach(() => alert("Trước khi kiểm tra – nhập một bài kiểm tra"));
   afterEach(() => alert("Sau khi kiểm tra – xóa một bài kiểm tra"));
@@ -284,14 +284,14 @@ describe("test", function() {
 Trình tự chạy sẽ là:
 
 ```
-Thử nghiệm đã bắt đầu – trước tất cả các thử nghiệm (before)
+Bài kiểm tra đã bắt đầu – trước tất cả các bài kiểm tra (before)
 Trước khi kiểm tra – nhập một bài kiểm tra (beforeEach)
 1
 Sau khi kiểm tra – thoát khỏi kiểm tra (afterEach)
 Trước khi kiểm tra – nhập một bài kiểm tra (beforeEach)
 2
 Sau khi kiểm tra – thoát khỏi kiểm tra (afterEach)
-Thử nghiệm kết thúc – sau tất cả các thử nghiệm (after)
+Bài kiểm tra kết thúc – sau tất cả các bài kiểm tra (after)
 ```
 
 [edit src="beforeafter" title="Open the example in the sandbox."]
@@ -301,7 +301,7 @@ Thông thường, `beforeEach/afterEach` và `before/after` được sử dụn
 
 ## Mở rộng thông số kỹ thuật
 
-Chức năng cơ bản của `pow` đã hoàn tất. Lặp lại đầu tiên của sự phát triển được thực hiện. Khi chúng ta đã ăn mừng và uống rượu sâm banh xong -- hãy tiếp tục và cải thiện nó.
+Chức năng cơ bản của `pow` đã hoàn tất. Sự lặp lại đầu tiên của sự phát triển được thực hiện. Khi chúng ta đã ăn mừng và uống rượu sâm panh xong -- hãy tiếp tục và cải thiện nó.
 
 Như đã nói, hàm `pow(x, n)` có nghĩa là hoạt động với các giá trị nguyên dương `n`.
 
@@ -329,11 +329,11 @@ describe("pow", function() {
 });
 ```
 
-Kết quả với các thử nghiệm mới:
+Kết quả với các bài kiểm tra mới:
 
 [iframe height=530 src="pow-nan" edit border="1"]
 
-Các thử nghiệm mới được thêm vào không thành công vì quá trình triển khai của chúng ta không hỗ trợ chúng. Đó là cách BDD được thực hiện: đầu tiên chúng ta viết các bài kiểm tra không thành công, sau đó thực hiện triển khai cho chúng.
+Các bài kiểm tra mới được thêm vào không thành công vì quá trình triển khai của chúng ta không hỗ trợ chúng. Đó là cách BDD được thực hiện: đầu tiên chúng ta viết các bài kiểm tra không thành công, sau đó thực hiện triển khai cho chúng.
 
 ```smart header="Các khẳng định khác"
 Vui lòng lưu ý xác nhận `assert.isNaN`: nó kiểm tra `NaN`.
@@ -373,14 +373,14 @@ Bây giờ nó hoạt động, đều vượt qua tất cả các bài kiểm tr
 
 [edit src="pow-full" title="Mở toàn bộ ví dụ cuối cùng trong sandbox."]
 
-## Bản tóm tắt
+## Tóm tắt
 
-Trong BDD, thông số kỹ thuật đi trước, tiếp theo là triển khai. Cuối cùng, chúng ta có cả thông số kỹ thuật và mã.
+Trong BDD, thông số kỹ thuật đi trước, tiếp theo là triển khai. Cuối cùng, chúng ta vừa có thông số kỹ thuật và mã.
 
 Thông số kỹ thuật có thể được sử dụng theo ba cách:
 
-1. Như **Thử nghiệm** - họ đảm bảo rằng mã hoạt động chính xác.
-2. Như **Docs** -- tiêu đề của `describe` và `it` cho biết hàm này làm gì.
+1. Như **Bài kiểm tra** - họ đảm bảo rằng mã hoạt động chính xác.
+2. Như **Tài liệu** -- tiêu đề của `describe` và `it` cho biết hàm này làm gì.
 3. Như **Ví dụ** -- các bài kiểm tra thực sự là các ví dụ hoạt động cho thấy cách sử dụng một hàm.
 
 Với thông số kỹ thuật, chúng ta có thể cải thiện, thay đổi, thậm chí viết lại hàm từ đầu một cách an toàn và đảm bảo rằng nó vẫn hoạt động bình thường.
@@ -394,13 +394,13 @@ Nếu không có bài kiểm tra, mọi người có hai cách:
 
 **Kiểm tra tự động giúp tránh những vấn đề này!**
 
-Nếu dự án được bao phủ bởi các bài kiểm tra, thì sẽ không có vấn đề như vậy. Sau bất kỳ thay đổi nào, chúng ta có thể chạy thử nghiệm và thấy rất nhiều kiểm tra được thực hiện chỉ trong vài giây.
+Nếu dự án được bao phủ bởi các bài kiểm tra, thì sẽ không có vấn đề như vậy. Sau bất kỳ thay đổi nào, chúng ta có thể chạy bài kiểm tra và thấy rất nhiều kiểm tra được thực hiện chỉ trong vài giây.
 
-**Bên cạnh đó, mã được thử nghiệm tốt sẽ có kiến trúc tốt hơn.**
+**Bên cạnh đó, mã được kiểm tra tốt sẽ có kiến trúc tốt hơn.**
 
 Đương nhiên, đó là vì mã được kiểm tra tự động dễ sửa đổi và cải thiện hơn. Nhưng cũng có một lý do khác.
 
-Để viết các bài kiểm tra, mã phải được tổ chức theo cách sao cho mọi chức năng đều có nhiệm vụ được mô tả rõ ràng, đầu vào và đầu ra được xác định rõ ràng. Điều đó có nghĩa là một kiến trúc tốt ngay từ đầu.
+Để viết các bài kiểm tra, mã phải được tổ chức theo cách sao cho mọi hàm đều có nhiệm vụ được mô tả rõ ràng, đầu vào và đầu ra được xác định rõ ràng. Điều đó có nghĩa là một kiến trúc tốt ngay từ đầu.
 
 Trong cuộc sống thực đôi khi không dễ dàng như vậy. Đôi khi rất khó để viết một thông số kỹ thuật trước mã thực tế, vì vẫn chưa rõ nó sẽ hoạt động như thế nào. Nhưng nói chung, các bài kiểm tra viết giúp phát triển nhanh hơn và ổn định hơn.
 
