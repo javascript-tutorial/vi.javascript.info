@@ -1,5 +1,5 @@
 
-# Symbol type
+# Kiểu ký tự
 
 By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
 
