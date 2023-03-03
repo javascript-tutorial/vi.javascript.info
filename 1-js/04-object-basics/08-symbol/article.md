@@ -191,87 +191,87 @@ Cuộc gọi đó sẽ kiểm tra sổ đăng ký chung và nếu có một ký 
 Ví dụ:
 
 ```js run
-// read from the global registry
-let id = Symbol.for("id"); // if the symbol did not exist, it is created
+// đọc từ sổ đăng ký chung
+let id = Symbol.for("id"); // nếu biểu tượng không tồn tại, nó sẽ được tạo ra
 
-// read it again (maybe from another part of the code)
+// đọc lại (có thể từ một phần khác của mã)
 let idAgain = Symbol.for("id");
 
-// the same symbol
+// cùng một ký tự
 alert( id === idAgain ); // true
 ```
 
-Symbols inside the registry are called *global symbols*. If we want an application-wide symbol, accessible everywhere in the code -- that's what they are for.
+Các ký tự bên trong sổ đăng ký được gọi là *ký hiệu chung*. Nếu chúng ta muốn một ký tự toàn ứng dụng, có thể truy cập được ở mọi nơi trong mã -- đó là mục đích của chúng.
 
-```smart header="That sounds like Ruby"
-In some programming languages, like Ruby, there's a single symbol per name.
+```smart header="Nghe giống như Ruby"
+Trong một số ngôn ngữ lập trình, như Ruby, có một ký tự duy nhất cho mỗi tên.
 
-In JavaScript, as we can see, that's right for global symbols.
+Trong JavaScript, như chúng ta có thể thấy, điều đó phù hợp với các ký tự chung.
 ```
 
 ### Symbol.keyFor
 
-For global symbols, not only `Symbol.for(key)` returns a symbol by name, but there's a reverse call: `Symbol.keyFor(sym)`, that does the reverse: returns a name by a global symbol.
+Đối với các ký tự chung, không chỉ `Symbol.for(key)` trả về một ký tự theo tên, mà còn có một cách gọi ngược lại: `Symbol.keyFor(sym)`, có tác dụng ngược lại: trả về một tên theo một ký tự chung.
 
-For instance:
+Ví dụ:
 
 ```js run
-// get symbol by name
+// lấy ký tự theo tên
 let sym = Symbol.for("name");
 let sym2 = Symbol.for("id");
 
-// get name by symbol
-alert( Symbol.keyFor(sym) ); // name
+// lấy tên theo ký tự
+alert( Symbol.keyFor(sym) ); // tên
 alert( Symbol.keyFor(sym2) ); // id
 ```
 
-The `Symbol.keyFor` internally uses the global symbol registry to look up the key for the symbol. So it doesn't work for non-global symbols. If the symbol is not global, it won't be able to find it and returns `undefined`.
+`Symbol.keyFor` sử dụng nội bộ sổ đăng ký ký tự chung để tra cứu khóa cho ký tự. Vì vậy, nó không hoạt động đối với các ký tự không chung. Nếu ký tự không phải là chung, nó sẽ không thể tìm thấy nó và trả về `undefined`.
 
-That said, any symbols have `description` property.
+Điều đó nói rằng, bất kỳ ký tự nào cũng có thuộc tính `mô tả`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let globalSymbol = Symbol.for("name");
 let localSymbol = Symbol("name");
 
-alert( Symbol.keyFor(globalSymbol) ); // name, global symbol
-alert( Symbol.keyFor(localSymbol) ); // undefined, not global
+alert( Symbol.keyFor(globalSymbol) ); // tên, ký tự chung
+alert( Symbol.keyFor(localSymbol) ); // undefined, không chung
 
-alert( localSymbol.description ); // name
+alert( localSymbol.description ); // tên
 ```
 
-## System symbols
+## Ký tự hệ thống
 
-There exist many "system" symbols that JavaScript uses internally, and we can use them to fine-tune various aspects of our objects.
+Có nhiều ký tự "hệ thống" mà JavaScript sử dụng nội bộ và chúng ta có thể sử dụng chúng để tinh chỉnh các khía cạnh khác nhau của đối tượng.
 
-They are listed in the specification in the [Well-known symbols](https://tc39.github.io/ecma262/#sec-well-known-symbols) table:
+Chúng được liệt kê trong thông số kỹ thuật trong bảng [Ký tự nổi tiếng](https://tc39.github.io/ecma262/#sec-well-known-symbols):
 
 - `Symbol.hasInstance`
 - `Symbol.isConcatSpreadable`
 - `Symbol.iterator`
 - `Symbol.toPrimitive`
-- ...and so on.
+- ...v.v.
 
-For instance, `Symbol.toPrimitive` allows us to describe object to primitive conversion. We'll see its use very soon.
+Chẳng hạn, `Symbol.toPrimitive` cho phép chúng ta mô tả đối tượng thành chuyển đổi nguyên thủy. Chúng ta sẽ thấy việc sử dụng nó rất sớm.
 
-Other symbols will also become familiar when we study the corresponding language features.
+Các ký tự khác cũng sẽ trở nên quen thuộc khi chúng ta nghiên cứu các đặc điểm ngôn ngữ tương ứng.
 
-## Summary
+## Tóm tắt
 
-`Symbol` is a primitive type for unique identifiers.
+`Symbol` là một loại nguyên thủy cho các mã định danh duy nhất.
 
-Symbols are created with `Symbol()` call with an optional description (name).
+Các ký tự được tạo bằng lệnh gọi `Symbol()` với một mô tả (tên) tùy chọn.
 
-Symbols are always different values, even if they have the same name. If we want same-named symbols to be equal, then we should use the global registry: `Symbol.for(key)` returns (creates if needed) a global symbol with `key` as the name. Multiple calls of `Symbol.for` with the same `key` return exactly the same symbol.
+Các ký tự luôn có các giá trị khác nhau, ngay cả khi chúng có cùng tên. Nếu chúng ta muốn các ký tự cùng tên bằng nhau, thì chúng ta nên sử dụng sổ đăng ký chung: `Symbol.for(key)` trả về (tạo nếu cần) một ký tự chung có tên `key`. Nhiều lệnh gọi `Symbol.for` với cùng một `key` trả về chính xác cùng một ký tự.
 
-Symbols have two main use cases:
+Các ký tự có hai trường hợp sử dụng chính:
 
-1. "Hidden" object properties.
-    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
+1. Thuộc tính đối tượng "ẩn".
+     Nếu chúng ta muốn thêm một thuộc tính vào một đối tượng "thuộc về" một tập lệnh hoặc thư viện khác, chúng ta có thể tạo một ký tự và sử dụng nó làm khóa thuộc tính. Thuộc tính tượng trưng không xuất hiện trong `for..in`, vì vậy thuộc tính này sẽ không được xử lý ngẫu nhiên cùng với các thuộc tính khác. Ngoài ra, nó sẽ không được truy cập trực tiếp vì một tập lệnh khác không có ký tự của chúng ta. Vì vậy, thuộc tính sẽ được bảo vệ khỏi việc sử dụng ngẫu nhiên hoặc ghi đè lên.
 
-    So we can "covertly" hide something into objects that we need, but others should not see, using symbolic properties.
+     Vì vậy, chúng ta có thể "ẩn" một thứ gì đó vào những đối tượng mà chúng ta cần, nhưng những người khác không nên nhìn thấy, bằng cách sử dụng các thuộc tính tượng trưng.
 
-2. There are many system symbols used by JavaScript which are accessible as `Symbol.*`. We can use them to alter some built-in behaviors. For instance, later in the tutorial we'll use `Symbol.iterator` for [iterables](info:iterable), `Symbol.toPrimitive` to setup [object-to-primitive conversion](info:object-toprimitive) and so on.
+2. Có nhiều ký tự hệ thống được JavaScript sử dụng có thể truy cập dưới dạng `Symbol.*`. Chúng ta có thể sử dụng chúng để thay đổi một số hành vi tích hợp. Chẳng hạn, ở phần sau của hướng dẫn, chúng ta sẽ sử dụng `Symbol.iterator` cho [iterables](info:iterable), `Symbol.toPrimitive` để thiết lập [chuyển đổi đối tượng thành nguyên thủy](info:object-toprimitive), v.v. TRÊN.
 
-Technically, symbols are not 100% hidden. There is a built-in method [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) that allows us to get all symbols. Also there is a method named [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys of an object including symbolic ones. So they are not really hidden. But most libraries, built-in functions and syntax constructs don't use these methods.
+Về mặt kỹ thuật, các ký tự không bị ẩn 100%. Có một phương thức tích hợp [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) cho phép chúng ta lấy tất cả các ký tự. Ngoài ra, có một phương thức có tên [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) trả về các khóa *tất cả* của một đối tượng bao gồm các khóa tượng trưng. Vì vậy, chúng không thực sự ẩn. Nhưng hầu hết các thư viện, hàm dựng sẵn và cấu trúc cú pháp không sử dụng các phương thức này.
