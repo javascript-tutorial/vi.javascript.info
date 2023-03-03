@@ -1,31 +1,31 @@
 
 # Kiểu ký tự
 
-By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
+Theo thông số kỹ thuật, các khóa thuộc tính đối tượng có thể thuộc loại chuỗi hoặc loại ký hiệu. Không phải số, không phải booleans, chỉ có chuỗi hoặc ký hiệu, hai loại này.
 
-Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+Cho đến bây giờ chúng ta chỉ sử dụng các chuỗi. Bây giờ hãy xem những lợi ích mà các ký tự có thể mang lại cho chúng ta.
 
-## Symbols
+## Ký tự
 
-A "symbol" represents a unique identifier.
+Một "ký tự" đại diện cho một mã định danh duy nhất.
 
-A value of this type can be created using `Symbol()`:
+Giá trị của loại này có thể được tạo bằng cách sử dụng `Symbol()`:
 
 ```js
 // id is a new symbol
 let id = Symbol();
 ```
 
-Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+Khi tạo, chúng ta có thể cung cấp cho ký tự một mô tả (còn được gọi là tên ký tự), chủ yếu hữu ích cho mục đích gỡ lỗi:
 
 ```js
-// id is a symbol with the description "id"
+// id là một ký tự với mô tả "id"
 let id = Symbol("id");
 ```
 
-Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn't affect anything.
+Các ký tự được đảm bảo là duy nhất. Ngay cả khi chúng ta tạo nhiều ký tự có cùng mô tả, chúng vẫn có giá trị khác nhau. Mô tả chỉ là một nhãn không ảnh hưởng gì.
 
-For instance, here are two symbols with the same description -- they are not equal:
+Chẳng hạn, đây là hai ký tự có cùng mô tả -- chúng không bằng nhau:
 
 ```js run
 let id1 = Symbol("id");
@@ -36,12 +36,12 @@ alert(id1 == id2); // false
 */!*
 ```
 
-If you are familiar with Ruby or another language that also has some sort of "symbols" -- please don't be misguided. JavaScript symbols are different.
+Nếu bạn đã quen thuộc với Ruby hoặc một ngôn ngữ khác cũng có một số loại "ký tự" -- đừng hiểu lầm. Các ký tự JavaScript là khác nhau.
 
-````warn header="Symbols don't auto-convert to a string"
-Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+````warn header="Các ký tự không tự động chuyển đổi thành chuỗi"
+Hầu hết các giá trị trong JavaScript đều hỗ trợ chuyển đổi ngầm định thành chuỗi. Chẳng hạn, chúng ta có thể `alert` gần như bất kỳ giá trị nào và nó sẽ hoạt động. Ký tự là đặc biệt. Họ không tự động chuyển đổi.
 
-For instance, this `alert` will show an error:
+Chẳng hạn, `alert` này sẽ hiển thị lỗi:
 
 ```js run
 let id = Symbol("id");
@@ -50,17 +50,17 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+Đó là "bảo vệ ngôn ngữ" chống lại sự lộn xộn, bởi vì các chuỗi và ký tự về cơ bản là khác nhau và không nên vô tình chuyển đổi cái này thành cái khác.
 
-If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+Nếu chúng ta thực sự muốn hiển thị một ký tự, chúng ta cần gọi `.toString()` một cách rõ ràng trên đó, như sau:
 ```js run
 let id = Symbol("id");
 *!*
-alert(id.toString()); // Symbol(id), now it works
+alert(id.toString()); // Symbol(id), bây giờ nó hoạt động
 */!*
 ```
 
-Or get `symbol.description` property to show the description only:
+Hoặc nhận thuộc tính `symbol.description` để chỉ hiển thị mô tả:
 ```js run
 let id = Symbol("id");
 *!*
@@ -70,16 +70,16 @@ alert(id.description); // id
 
 ````
 
-## "Hidden" properties
+## "Thuộc tính ẩn"
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+Các ký tự cho phép chúng ta tạo các thuộc tính "ẩn" của một đối tượng, mà không phần mã nào khác có thể vô tình truy cập hoặc ghi đè lên.
 
-For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+Chẳng hạn, nếu chúng ta đang làm việc với các đối tượng `user`, thuộc về mã của bên thứ ba. Chúng ta muốn thêm số nhận dạng cho chúng.
 
-Let's use a symbol key for it:
+Hãy sử dụng một phím ký tự cho nó:
 
 ```js run
-let user = { // belongs to another code
+let user = { // thuộc một mã khác
   name: "John"
 };
 
@@ -87,16 +87,16 @@ let id = Symbol("id");
 
 user[id] = 1;
 
-alert( user[id] ); // we can access the data using the symbol as the key
+alert( user[id] ); // chúng ta có thể truy cập dữ liệu bằng cách lấy ký tự làm khóa
 ```
 
-What's the benefit of using `Symbol("id")` over a string `"id"`?
+Lợi ích của việc sử dụng `Symbol("id")` trên chuỗi `"id"` là gì?
 
-As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
+Vì các đối tượng `user` thuộc về một mã khác và mã đó cũng hoạt động với chúng, nên chúng ta không nên chỉ thêm bất kỳ trường nào vào đó. Điều đó không an toàn. Nhưng một ký tự không thể vô tình được truy cập, mã của bên thứ ba thậm chí có thể sẽ không nhìn thấy nó, vì vậy có thể làm như vậy là ổn.
 
-Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
+Ngoài ra, hãy tưởng tượng rằng một tập lệnh khác muốn có mã định danh riêng bên trong `user`, cho các mục đích riêng của nó. Đó có thể là một thư viện JavaScript khác, do đó các tập lệnh hoàn toàn không biết về nhau.
 
-Then that script can create its own `Symbol("id")`, like this:
+Sau đó, tập lệnh đó có thể tạo `Symbol("id")` của riêng nó, như sau:
 
 ```js
 // ...
@@ -105,27 +105,27 @@ let id = Symbol("id");
 user[id] = "Their id value";
 ```
 
-There will be no conflict between our and their identifiers, because symbols are always different, even if they have the same name.
+Sẽ không có xung đột giữa số nhận dạng của chúng ta và của họ, bởi vì các ký tự luôn khác nhau, ngay cả khi chúng có cùng tên.
 
-...But if we used a string `"id"` instead of a symbol for the same purpose, then there *would* be a conflict:
+...Nhưng nếu chúng ta sử dụng một chuỗi `"id"` thay vì một ký tự cho cùng một mục đích, thì *sẽ* xảy ra xung đột:
 
 ```js
 let user = { name: "John" };
 
-// Our script uses "id" property
+// Tập lệnh của chúng ta sử dụng thuộc tính "id"
 user.id = "Our id value";
 
-// ...Another script also wants "id" for its purposes...
+// ...Một tập lệnh khác cũng muốn "id" cho mục đích của nó...
 
 user.id = "Their id value"
-// Boom! overwritten by another script!
+// Bùm! ghi đè bởi một tập lệnh khác!
 ```
 
-### Symbols in an object literal
+### Các ký hiệu trong một object literal
 
-If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
+Nếu chúng ta muốn sử dụng một ký tự trong một object literal `{...}`, thì chúng ta cần có dấu ngoặc vuông xung quanh ký tự đó.
 
-Like this:
+Như thế này:
 
 ```js
 let id = Symbol("id");
@@ -133,17 +133,17 @@ let id = Symbol("id");
 let user = {
   name: "John",
 *!*
-  [id]: 123 // not "id": 123
+  [id]: 123 // không có "id": 123
 */!*
 };
 ```
-That's because we need the value from the variable `id` as the key, not the string "id".
+Đó là bởi vì chúng ta cần giá trị từ biến `id` làm khóa chứ không phải chuỗi "id".
 
-### Symbols are skipped by for..in
+### Các ký tự bị for..in bỏ qua
 
-Symbolic properties do not participate in `for..in` loop.
+Các thuộc tính tượng trưng không tham gia vào vòng lặp `for..in`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let id = Symbol("id");
@@ -154,16 +154,16 @@ let user = {
 };
 
 *!*
-for (let key in user) alert(key); // name, age (no symbols)
+for (let key in user) alert(key); // tên, tuổi (không có ký hiệu)
 */!*
 
-// the direct access by the symbol works
+// truy cập trực tiếp bằng ký tự hoạt động
 alert( "Direct: " + user[id] );
 ```
 
-`Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+`Object.keys(user)` cũng bỏ qua chúng. Đó là một phần của nguyên tắc "ẩn các thuộc tính tượng trưng" chung. Nếu một tập lệnh hoặc thư viện khác lặp lại đối tượng của chúng ta, nó sẽ không truy cập bất ngờ vào thuộc tính tượng trưng.
 
-In contrast, [Object.assign](mdn:js/Object/assign) copies both string and symbol properties:
+Ngược lại, [Object.assign](mdn:js/Object/assign) sao chép cả thuộc tính chuỗi và ký tự:
 
 ```js run
 let id = Symbol("id");
@@ -176,19 +176,19 @@ let clone = Object.assign({}, user);
 alert( clone[id] ); // 123
 ```
 
-There's no paradox here. That's by design. The idea is that when we clone an object or merge objects, we usually want *all* properties to be copied (including symbols like `id`).
+Không có nghịch lý ở đây. Đó là do thiết kế. Ý tưởng là khi chúng ta sao chép một đối tượng hoặc hợp nhất các đối tượng, chúng ta thường muốn sao chép *tất cả* các thuộc tính (bao gồm các ký hiệu như `id`).
 
-## Global symbols
+## Ký tự chung
 
-As we've seen, usually all symbols are different, even if they have the same name. But sometimes we want same-named symbols to be same entities. For instance, different parts of our application want to access symbol `"id"` meaning exactly the same property.
+Như chúng ta đã thấy, thông thường tất cả các ký tự đều khác nhau, ngay cả khi chúng có cùng tên. Nhưng đôi khi chúng ta muốn các ký tự cùng tên là cùng một thực thể. Chẳng hạn, các phần khác nhau trong ứng dụng của chúng tôi muốn truy cập ký tự `"id"` có nghĩa chính xác là cùng một thuộc tính.
 
-To achieve that, there exists a *global symbol registry*. We can create symbols in it and access them later, and it guarantees that repeated accesses by the same name return exactly the same symbol.
+Để đạt được điều đó, tồn tại *cơ quan đăng ký ký tự chung*. Chúng ta có thể tạo các ký tự trong đó và truy cập chúng sau này, đồng thời đảm bảo rằng các lần truy cập lặp lại cùng tên sẽ trả về chính xác cùng một ký tự.
 
-In order to read (create if absent) a symbol from the registry, use `Symbol.for(key)`.
+Để đọc (tạo nếu không có) một ký tự từ sổ đăng ký, hãy sử dụng `Symbol.for(key)`.
 
-That call checks the global registry, and if there's a symbol described as `key`, then returns it, otherwise creates a new symbol `Symbol(key)` and stores it in the registry by the given `key`.
+Cuộc gọi đó sẽ kiểm tra sổ đăng ký chung và nếu có một ký tự được mô tả là `key` thì trả về ký tự đó, nếu không thì tạo một ký tự mới `Symbol(key)` và lưu trữ nó trong sổ đăng ký theo `key` đã cho.
 
-For instance:
+Ví dụ:
 
 ```js run
 // read from the global registry
