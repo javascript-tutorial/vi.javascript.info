@@ -36,7 +36,7 @@ Tác vụ đó chỉ là một ví dụ: có toán tử `**` trong JavaScript c�
 
 Trước khi tạo mã của `pow`, chúng ta có thể hình dung chức năng này sẽ làm gì và mô tả nó.
 
-Mô tả như vậy được gọi là *đặc điểm kỹ thuật* hay nói ngắn gọn là thông số kỹ thuật và chứa mô tả về các trường hợp sử dụng cùng với các thử nghiệm dành cho chúng, như sau:
+Mô tả như vậy được gọi là *thông số kỹ thuật* hay nói ngắn gọn là thông số và chứa mô tả về các trường hợp sử dụng cùng với các thử nghiệm dành cho chúng, như sau:
 
 ```js
 describe("pow", function() {
