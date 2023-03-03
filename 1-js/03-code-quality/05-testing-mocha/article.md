@@ -2,7 +2,7 @@
 
 Kiểm tra tự động sẽ được sử dụng trong các tác vụ tiếp theo và nó cũng được sử dụng rộng rãi trong các dự án thực tế.
 
-## Tại sao chúng ta cần thuwr nghiệm?
+## Tại sao chúng ta cần thử nghiệm?
 
 Khi chúng ta viết một hàm, chúng ta thường có thể hình dung nó sẽ làm gì: tham số nào cho kết quả nào.
 
@@ -14,7 +14,7 @@ Nhưng "chạy lại" thủ công như vậy là không hoàn hảo.
 
 **Khi kiểm tra mã bằng cách chạy lại thủ công, rất dễ bỏ sót điều gì đó.**
 
-Chẳng hạn, chúng ta đang tạo một hàm `f`. Đã viết một số mã, thử nghiệm: `f(1)` hoạt động, nhưng `f(2)` không hoạt động. Chúng ta sửa mã và bây giờ `f(2)` hoạt động. Có vẻ hoàn chỉnh? Nhưng chúng ta đã quên kiểm tra lại `f(1)`. Điều đó có thể dẫn đến một lỗi.
+Chẳng hạn, chúng ta đang tạo một hàm `f`. Ta đã viết một số mã, thử nghiệm: `f(1)` hoạt động, nhưng `f(2)` không hoạt động. Chúng ta sửa mã và bây giờ `f(2)` hoạt động. Có vẻ hoàn chỉnh? Nhưng chúng ta đã quên kiểm tra lại `f(1)`. Điều đó có thể dẫn đến một lỗi.
 
 Điều đó rất điển hình. Khi chúng ta phát triển một thứ gì đó, chúng ta ghi nhớ rất nhiều trường hợp sử dụng có thể xảy ra. Nhưng thật khó để mong đợi một lập trình viên kiểm tra tất cả chúng một cách thủ công sau mỗi lần thay đổi. Vì vậy, nó trở nên dễ dàng để sửa chữa một thứ và phá vỡ một thứ khác.
 
