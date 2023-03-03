@@ -18,7 +18,7 @@ Chẳng hạn, chúng ta đang tạo một hàm `f`. Ta đã viết một số m
 
 Điều đó rất điển hình. Khi chúng ta phát triển một thứ gì đó, chúng ta ghi nhớ rất nhiều trường hợp sử dụng có thể xảy ra. Nhưng thật khó để mong đợi một lập trình viên kiểm tra tất cả chúng một cách thủ công sau mỗi lần thay đổi. Vì vậy, nó trở nên dễ dàng để sửa chữa một thứ và phá vỡ một thứ khác.
 
-**Kiểm tra tự động có nghĩa là các kiểm tra được viết riêng, bên cạnh mã. Chúng chạy các chức năng của chúng tôi theo nhiều cách khác nhau và so sánh kết quả với kết quả mong đợi.**
+**Kiểm tra tự động có nghĩa là các kiểm tra được viết riêng, bên cạnh mã. Chúng chạy các hàm của chúng ta theo nhiều cách khác nhau và so sánh kết quả với kết quả mong đợi.**
 
 ## Behavior Driven Development (BDD)
 
