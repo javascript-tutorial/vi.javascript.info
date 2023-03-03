@@ -64,7 +64,7 @@ Bây giờ nếu chúng ta muốn tạo những người dùng khác, chúng ta 
 
 Đó là mục đích chính của hàm tạo -- để triển khai mã tạo đối tượng có thể tái sử dụng.
 
-Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào cũng có thể được sử dụng làm hàm tạo. Đó là: bất kỳ chức năng nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một chức năng sẽ được chạy với `new`.
+Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào cũng có thể được sử dụng làm hàm tạo. Đó là: bất kỳ chức năng nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
 
 ````smart header="new function() { ... }"
 Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong hàm tạo, như sau:
@@ -111,7 +111,7 @@ new User(); // hàm User { ... }
 
 Điều đó có thể được sử dụng bên trong hàm để biết liệu nó được gọi với `new`, "ở chế độ hàm tạo" hay không có nó, "ở chế độ thông thường".
 
-Chúng tôi cũng có thể thực hiện cả lệnh gọi `new` và thông thường để làm như vậy, như sau:
+Chúng ta cũng có thể thực hiện cả lệnh gọi `new` và thông thường để làm như vậy, như sau:
 
 ```js run
 function User(name) {
@@ -214,7 +214,7 @@ john = {
 
 Để tạo các đối tượng phức tạp, có một cú pháp nâng cao hơn, [classes](info:classes), chúng ta sẽ đề cập sau.
 
-## Bản tóm tắt
+## Tóm tắt
 
 - Các hàm khởi tạo hay ngắn gọn, hàm tạo là các hàm thông thường, nhưng có một thỏa thuận chung là đặt tên chúng bằng chữ in hoa trước.
 - Hàm tạo chỉ nên được gọi bằng cách sử dụng `new`. Một cuộc gọi như vậy ngụ ý việc tạo ra `this` trống ở đầu và trả về cái được điền ở cuối.
