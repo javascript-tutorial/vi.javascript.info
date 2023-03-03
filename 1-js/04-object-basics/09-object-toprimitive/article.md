@@ -191,37 +191,37 @@ Không có quyền kiểm soát liệu `toString` có trả về chính xác m�
 
 Điều bắt buộc duy nhất: các phương thức này phải trả về một đối tượng nguyên thủy, không phải đối tượng.
 
-```smart header="Historical notes"
-For historical reasons, if `toString` or `valueOf` returns an object, there's no error, but such value is ignored (like if the method didn't exist). That's because in ancient times there was no good "error" concept in JavaScript.
+```smart header="Ghi chú lịch sử"
+Vì các lý do lịch sử, nếu `toString` hoặc `valueOf` trả về một đối tượng, thì không có lỗi, nhưng giá trị đó bị bỏ qua (chẳng hạn như nếu phương thức không tồn tại). Đó là bởi vì trong thời cổ đại không có khái niệm "lỗi" tốt trong JavaScript.
 
-In contrast, `Symbol.toPrimitive` *must* return a primitive, otherwise there will be an error.
+Ngược lại, `Symbol.toPrimitive` *phải* trả về một giá trị gốc, nếu không sẽ có lỗi.
 ```
 
-## Further conversions
+## chuyển đổi hơn nữa
 
-As we know already, many operators and functions perform type conversions, e.g. multiplication `*` converts operands to numbers.
+Như chúng ta đã biết, nhiều toán tử và hàm thực hiện chuyển đổi kiểu, ví dụ: phép nhân `*` chuyển đổi toán hạng thành số.
 
-If we pass an object as an argument, then there are two stages:
-1. The object is converted to a primitive (using the rules described above).
-2. If the resulting primitive isn't of the right type, it's converted.
+Nếu chúng ta chuyển một đối tượng làm đối số, thì có hai giai đoạn:
+1. Đối tượng được chuyển đổi thành nguyên thủy (sử dụng các quy tắc được mô tả ở trên).
+2. Nếu nguyên mẫu kết quả không đúng loại, nó sẽ được chuyển đổi.
 
-For instance:
+Ví dụ:
 
 ```js run
 let obj = {
-  // toString handles all conversions in the absence of other methods
+  // toString xử lý tất cả các chuyển đổi khi không có các phương pháp khác
   toString() {
     return "2";
   }
 };
 
-alert(obj * 2); // 4, object converted to primitive "2", then multiplication made it a number
+alert(obj * 2); // 4, đối tượng được chuyển đổi thành "2" nguyên thủy, sau đó phép nhân biến nó thành một số
 ```
 
-1. The multiplication `obj * 2` first converts the object to primitive (that's a string `"2"`).
-2. Then `"2" * 2` becomes `2 * 2` (the string is converted to number).
+1. Phép nhân `obj * 2` đầu tiên chuyển đổi đối tượng thành nguyên thủy (đó là một chuỗi `"2"`).
+2. Sau đó, `"2" * 2` trở thành `2 * 2` (chuỗi được chuyển thành số).
 
-Binary plus will concatenate strings in the same situation, as it gladly accepts a string:
+Phép cộng nhị phân sẽ nối các chuỗi trong tình huống tương tự, vì nó sẵn sàng chấp nhận một chuỗi:
 
 ```js run
 let obj = {
@@ -230,26 +230,26 @@ let obj = {
   }
 };
 
-alert(obj + 2); // 22 ("2" + 2), conversion to primitive returned a string => concatenation
+alert(obj + 2); // 22 ("2" + 2), chuyển đổi thành nguyên thủy trả về một chuỗi => nối
 ```
 
-## Summary
+## Bản tóm tắt
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+Quá trình chuyển đổi từ đối tượng sang nguyên thủy được gọi tự động bởi nhiều hàm và toán tử tích hợp sẵn mong đợi nguyên thủy làm giá trị.
 
-There are 3 types (hints) of it:
-- `"string"` (for `alert` and other operations that need a string)
-- `"number"` (for maths)
-- `"default"` (few operators)
+Có 3 loại (gợi ý) của nó:
+- `"string"` (dành cho `alert` và các thao tác khác cần chuỗi)
+- `"number"` (dành cho toán học)
+- `"default"` (một vài toán tử)
 
-The specification describes explicitly which operator uses which hint. There are very few operators that "don't know what to expect" and use the `"default"` hint. Usually for built-in objects `"default"` hint is handled the same way as `"number"`, so in practice the last two are often merged together.
+Các thông số kỹ thuật mô tả rõ ràng toán tử nào sử dụng gợi ý nào. Có rất ít toán tử "không biết điều gì sẽ xảy ra" và sử dụng gợi ý `"default"`. Thông thường đối với các đối tượng tích hợp, gợi ý `"default"` được xử lý theo cách giống như `"number"`, do đó, trong thực tế, hai gợi ý cuối cùng thường được hợp nhất với nhau.
 
-The conversion algorithm is:
+Thuật toán chuyển đổi là:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. Gọi `obj[Symbol.toPrimitive](hint)` nếu phương thức tồn tại,
+2. Ngược lại nếu gợi ý là `"string"`
+     - thử `obj.toString()` và `obj.valueOf()`, bất cứ thứ gì tồn tại.
+3. Ngược lại nếu gợi ý là `"number"` hoặc `"default"`
+     - thử `obj.valueOf()` và `obj.toString()`, bất cứ thứ gì tồn tại.
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.  
+Trong thực tế, thường chỉ cần triển khai `obj.toString()` như một phương thức "bắt tất cả" cho tất cả các chuyển đổi trả về một biểu diễn đối tượng "con người có thể đọc được" cho mục đích ghi nhật ký hoặc gỡ lỗi.
