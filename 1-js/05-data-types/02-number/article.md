@@ -1,98 +1,96 @@
-# Numbers
+# Số
 
-In modern JavaScript, there are two types of numbers:
+Trong JavaScript hiện đại, có hai loại số:
 
-1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
+1. Các số thông thường trong JavaScript được lưu trữ ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), còn được gọi là "số dấu phẩy động có độ chính xác kép". Đây là những con số mà chúng tA sử dụng hầu hết thời gian và chúng ta sẽ nói về chúng trong chương này.
 
-2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+2. Số BigInt, để biểu diễn số nguyên có độ dài tùy ý. Đôi khi chúng cần thiết vì một số thông thường không được vượt quá <code>2<sup>53</sup></code> hoặc nhỏ hơn <code>-2<sup>53</sup></code> . Vì bigint được sử dụng trong một vài lĩnh vực đặc biệt nên chúng ta dành cho chúng một chương đặc biệt <info:bigint>.
 
-So here we'll talk about regular numbers. Let's expand our knowledge of them.
+Vì vậy, ở đây chúng ta sẽ nói về các số thông thường. Hãy mở rộng kiến thức của chúng ta về chúng.
 
-## More ways to write a number
-
-Imagine we need to write 1 billion. The obvious way is:
+## Nhiều cách khác để viết một số
 
 ```js
 let billion = 1000000000;
 ```
 
-We also can use underscore `_` as the separator:
+Chúng ta cũng có thể sử dụng dấu gạch dưới `_` làm dấu phân cách:
 
 ```js
 let billion = 1_000_000_000;
 ```
 
-Here the underscore `_` plays the role of the "syntactic sugar", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
+Ở đây, dấu gạch dưới `_` đóng vai trò "đường cú pháp", nó làm cho số dễ đọc hơn. JavaScript engine chỉ cần bỏ qua `_` giữa các chữ số, do đó, nó chính xác là một tỷ như trên.
 
-In real life though, we try to avoid writing long sequences of zeroes. We're too lazy for that. We'll try to write something like `"1bn"` for a billion or `"7.3bn"` for 7 billion 300 million. The same is true for most large numbers.
+Tuy nhiên, trong cuộc sống thực, chúng ta cố gắng tránh viết các chuỗi số 0 dài. Chúng ta quá lười biếng cho việc đó. Chúng ta sẽ cố gắng viết thứ gì đó như `"1 tỷ"` cho một tỷ hoặc `"7,3 tỷ"` cho 7 tỷ 300 triệu. Điều này cũng đúng với hầu hết các số lớn.
 
-In JavaScript, we can shorten a number by appending the letter `"e"` to it and specifying the zeroes count:
+Trong JavaScript, chúng ta có thể rút ngắn một số bằng cách thêm chữ cái `"e"` vào nó và chỉ định số lượng số 0:
 
 ```js run
-let billion = 1e9;  // 1 billion, literally: 1 and 9 zeroes
+let billion = 1e9;  // 1 tỷ, nghĩa đen: 1 và 9 số 0
 
-alert( 7.3e9 );  // 7.3 billions (same as 7300000000 or 7_300_000_000)
+alert( 7.3e9 );  // 7,3 tỷ (giống như 7300000000 hoặc 7_300_000_000)
 ```
 
-In other words, `e` multiplies the number by `1` with the given zeroes count.
+Nói cách khác, `e` nhân số với `1` với số lượng các số 0 đã cho.
 
 ```js
-1e3 = 1 * 1000 // e3 means *1000
-1.23e6 = 1.23 * 1000000 // e6 means *1000000
+1e3 = 1 * 1000 // e3 nghĩa là *1000
+1.23e6 = 1.23 * 1000000 // e6 nghĩa là *1000000
 ```
 
-Now let's write something very small. Say, 1 microsecond (one millionth of a second):
+Bây giờ chúng ta hãy viết một cái gì đó rất nhỏ. Giả sử, 1 micro giây (một phần triệu giây):
 
 ```js
 let ms = 0.000001;
 ```
 
-Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could say the same as:
+Giống như trước đây, việc sử dụng `"e"` có thể hữu ích. Nếu chúng ta muốn tránh viết các số 0 một cách rõ ràng, chúng ta có thể nói tương tự như:
 
 ```js
-let ms = 1e-6; // six zeroes to the left from 1
+let ms = 1e-6; // sáu số không ở bên trái từ 1
 ```
 
-If we count the zeroes in `0.000001`, there are 6 of them. So naturally it's `1e-6`.  
+Nếu chúng ta đếm các số 0 trong `0,000001`, thì có 6 số trong số đó. Vì vậy, tự nhiên đó là `1e-6`.
 
-In other words, a negative number after `"e"` means a division by 1 with the given number of zeroes:
+Nói cách khác, một số âm sau `"e"` có nghĩa là phép chia cho 1 với số lượng các số 0 đã cho:
 
 ```js
-// -3 divides by 1 with 3 zeroes
+// -3 chia cho 1 với 3 số 0
 1e-3 = 1 / 1000 (=0.001)
 
-// -6 divides by 1 with 6 zeroes
+// -6 chia hết cho 1 với 6 chữ số 0
 1.23e-6 = 1.23 / 1000000 (=0.00000123)
 ```
 
-### Hex, binary and octal numbers
+### Số hex, nhị phân và bát phân
 
-[Hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal) numbers are widely used in JavaScript to represent colors, encode characters, and for many other things. So naturally, there exists a shorter way to write them: `0x` and then the number.
+[Hệ thập lục phân](https://en.wikipedia.org/wiki/Hệ thập lục phân) được sử dụng rộng rãi trong JavaScript để thể hiện màu sắc, ký tự mã hóa và cho nhiều thứ khác. Vì vậy, một cách tự nhiên, tồn tại một cách viết ngắn hơn: `0x` và sau đó là số.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( 0xff ); // 255
-alert( 0xFF ); // 255 (the same, case doesn't matter)
+alert( 0xFF ); // 255 (giống nhau, tviết hoa không quan trọng)
 ```
 
-Binary and octal numeral systems are rarely used, but also supported using the `0b` and `0o` prefixes:
+Các hệ thống số nhị phân và bát phân hiếm khi được sử dụng, nhưng cũng được hỗ trợ bằng cách sử dụng tiền tố `0b` và `0o`:
 
 
 ```js run
-let a = 0b11111111; // binary form of 255
-let b = 0o377; // octal form of 255
+let a = 0b11111111; // dạng nhị phân của 255
+let b = 0o377; // dạng bát phân của 255
 
-alert( a == b ); // true, the same number 255 at both sides
+alert( a == b ); // true, cùng một số 255 ở cả hai bên
 ```
 
-There are only 3 numeral systems with such support. For other numeral systems, we should use the function `parseInt` (which we will see later in this chapter).
+Chỉ có 3 hệ thống số với sự hỗ trợ như vậy. Đối với các hệ thống số khác, chúng ta nên sử dụng hàm `parseInt` (mà chúng ta sẽ thấy ở phần sau của chương này).
 
 ## toString(base)
 
-The method `num.toString(base)` returns a string representation of `num` in the numeral system with the given `base`.
+Phương thức `num.toString(base)` trả về một chuỗi đại diện cho `num` trong hệ thống số với `base` đã cho.
 
-For example:
+Ví dụ:
 ```js run
 let num = 255;
 
@@ -100,100 +98,100 @@ alert( num.toString(16) );  // ff
 alert( num.toString(2) );   // 11111111
 ```
 
-The `base` can vary from `2` to `36`. By default it's `10`.
+`base` có thể thay đổi từ `2` đến `36`. Theo mặc định, đó là `10`.
 
-Common use cases for this are:
+Các trường hợp sử dụng phổ biến cho việc này là:
 
-- **base=16** is used for hex colors, character encodings etc, digits can be `0..9` or `A..F`.
-- **base=2** is mostly for debugging bitwise operations, digits can be `0` or `1`.
-- **base=36** is the maximum, digits can be `0..9` or `A..Z`. The whole latin alphabet is used to represent a number. A funny, but useful case for `36` is when we need to turn a long numeric identifier into something shorter, for example to make a short url. Can simply represent it in the numeral system with base `36`:
+- **base=16** được sử dụng cho màu hex, mã hóa ký tự, v.v., các chữ số có thể là `0..9` hoặc `A..F`.
+- **base=2** chủ yếu dùng để gỡ lỗi các hoạt động theo bit, các chữ số có thể là `0` hoặc `1`.
+- **base=36** là giá trị lớn nhất, các chữ số có thể là `0..9` hoặc `A..Z`. Toàn bộ bảng chữ cái Latinh được sử dụng để đại diện cho một số. Một trường hợp buồn cười nhưng hữu ích cho `36` là khi chúng ta cần biến một mã định danh số dài thành một số khác ngắn hơn, chẳng hạn như để tạo một url ngắn. Có thể đơn giản biểu diễn nó trong hệ thống số với cơ số `36`:
 
     ```js run
     alert( 123456..toString(36) ); // 2n9c
     ```
 
-```warn header="Two dots to call a method"
-Please note that two dots in `123456..toString(36)` is not a typo. If we want to call a method directly on a number, like `toString` in the example above, then we need to place two dots `..` after it.
+```warn header="Hai dấu chấm để gọi một phương thức"
+Hãy lưu ý rằng hai dấu chấm trong `123456..toString(36)` không phải là lỗi đánh máy. Nếu chúng ta muốn gọi một phương thức trực tiếp trên một số, như `toString` trong ví dụ trên, thì chúng ta cần đặt hai dấu chấm `..` sau nó.
 
-If we placed a single dot: `123456.toString(36)`, then there would be an error, because JavaScript syntax implies the decimal part after the first dot. And if we place one more dot, then JavaScript knows that the decimal part is empty and now goes the method.
+Nếu chúng ta đặt một dấu chấm đơn: `123456.toString(36)`, thì sẽ xảy ra lỗi, vì cú pháp JavaScript ngụ ý phần thập phân sau dấu chấm đầu tiên. Và nếu chúng ta đặt thêm một dấu chấm, thì JavaScript sẽ biết rằng phần thập phân trống và bây giờ sẽ thực hiện phương thức.
 
-Also could write `(123456).toString(36)`.
+Cũng có thể viết `(123456).toString(36)`.
 ```
 
-## Rounding
+## Làm tròn
 
-One of the most used operations when working with numbers is rounding.
+Một trong những thao tác được sử dụng nhiều nhất khi làm việc với số là làm tròn số.
 
-There are several built-in functions for rounding:
+Có một số chức năng tích hợp để làm tròn:
 
 `Math.floor`
-: Rounds down: `3.1` becomes `3`, and `-1.1` becomes `-2`.
+: Làm tròn xuống: `3.1` trở thành `3` và `-1.1` trở thành `-2`.
 
 `Math.ceil`
-: Rounds up: `3.1` becomes `4`, and `-1.1` becomes `-1`.
+: Làm tròn lên: `3.1` trở thành `4` và `-1.1` trở thành `-1`.
 
 `Math.round`
-: Rounds to the nearest integer: `3.1` becomes `3`, `3.6` becomes `4`, the middle case: `3.5` rounds up to `4` too.
+: Làm tròn đến số nguyên gần nhất: `3.1` trở thành `3`, `3.6` trở thành `4`, trường hợp ở giữa: `3.5` cũng làm tròn lên `4`.
 
-`Math.trunc` (not supported by Internet Explorer)
-: Removes anything after the decimal point without rounding: `3.1` becomes `3`, `-1.1` becomes `-1`.
+`Math.trunc` (không được Internet Explorer hỗ trợ)
+: Xóa mọi thứ sau dấu thập phân mà không làm tròn: `3.1` trở thành `3`, `-1.1` trở thành `-1`.
 
-Here's the table to summarize the differences between them:
+Đây là bảng để tóm tắt sự khác biệt giữa chúng:
 
-|   | `Math.floor` | `Math.ceil` | `Math.round` | `Math.trunc` |
+| | `Math.floor` | `Math.ceil` | `Math.round` | `Math.trunc` |
 |---|---------|--------|---------|---------|
-|`3.1`|  `3`    |   `4`  |    `3`  |   `3`   |
-|`3.6`|  `3`    |   `4`  |    `4`  |   `3`   |
-|`-1.1`|  `-2`    |   `-1`  |    `-1`  |   `-1`   |
-|`-1.6`|  `-2`    |   `-1`  |    `-2`  |   `-1`   |
+|`3.1`| `3` | `4` | `3` | `3` |
+|`3.6`| `3` | `4` | `4` | `3` |
+|`-1.1`| `-2` | `-1` | `-1` | `-1` |
+|`-1.6`| `-2` | `-1` | `-2` | `-1` |
 
 
-These functions cover all of the possible ways to deal with the decimal part of a number. But what if we'd like to round the number to `n-th` digit after the decimal?
+Các chức năng này bao gồm tất cả các cách có thể để xử lý phần thập phân của một số. Nhưng nếu chúng ta muốn làm tròn số đến chữ số `thứ n` sau dấu thập phân thì sao?
 
-For instance, we have `1.2345` and want to round it to 2 digits, getting only `1.23`.
+Chẳng hạn, chúng ta có `1.2345` và muốn làm tròn nó thành 2 chữ số, chỉ nhận được `1.23`.
 
-There are two ways to do so:
+Có hai cách để làm như vậy:
 
-1. Multiply-and-divide.
+1. Nhân chia.
 
-    For example, to round the number to the 2nd digit after the decimal, we can multiply the number by `100` (or a bigger power of 10), call the rounding function and then divide it back.
+     Ví dụ: để làm tròn số đến chữ số thứ 2 sau dấu thập phân, chúng ta có thể nhân số đó với `100` (hoặc lũy thừa lớn hơn của 10), gọi hàm làm tròn rồi chia lại.
     ```js run
     let num = 1.23456;
 
     alert( Math.round(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
     ```
 
-2. The method [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) rounds the number to `n` digits after the point and returns a string representation of the result.
+2. Phương thức [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) làm tròn số thành `n` chữ số sau dấu chấm và trả về một chuỗi đại diện của kết quả.
 
     ```js run
     let num = 12.34;
     alert( num.toFixed(1) ); // "12.3"
     ```
 
-    This rounds up or down to the nearest value, similar to `Math.round`:
+    Điều này làm tròn lên hoặc xuống đến giá trị gần nhất, tương tự như `Math.round`:
 
     ```js run
     let num = 12.36;
     alert( num.toFixed(1) ); // "12.4"
     ```
 
-    Please note that result of `toFixed` is a string. If the decimal part is shorter than required, zeroes are appended to the end:
+    Hãy lưu ý rằng kết quả của `toFixed` là một chuỗi. Nếu phần thập phân ngắn hơn yêu cầu, các số 0 sẽ được thêm vào cuối:
 
     ```js run
     let num = 12.34;
-    alert( num.toFixed(5) ); // "12.34000", added zeroes to make exactly 5 digits
+    alert( num.toFixed(5) ); // "12.34000", thêm số 0 để tạo thành chính xác 5 chữ số
     ```
 
-    We can convert it to a number using the unary plus or a `Number()` call: `+num.toFixed(5)`.
+    Chúng ta có thể chuyển đổi nó thành một số bằng cách sử dụng phép cộng đơn nguyên hoặc lệnh gọi `Number()`: `+num.toFixed(5)`.
 
-## Imprecise calculations
+## Tính toán không chính xác
 
-Internally, a number is represented in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), so there are exactly 64 bits to store a number: 52 of them are used to store the digits, 11 of them store the position of the decimal point (they are zero for integer numbers), and 1 bit is for the sign.
+Bên trong, một số được thể hiện ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), do đó, có chính xác 64 bit để lưu trữ một số: 52 bit trong số đó được sử dụng để lưu trữ các chữ số, 11 trong số chúng lưu trữ vị trí của dấu thập phân (chúng bằng 0 đối với số nguyên) và 1 bit dành cho dấu.
 
-If a number is too big, it would overflow the 64-bit storage, potentially giving an infinity:
+Nếu một số quá lớn, nó sẽ tràn bộ nhớ 64-bit, có khả năng tạo ra vô số:
 
 ```js run
-alert( 1e500 ); // Infinity
+alert( 1e500 ); // Vô hạn
 ```
 
 What may be a little less obvious, but happens quite often, is the loss of precision.
