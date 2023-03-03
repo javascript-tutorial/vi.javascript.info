@@ -1,7 +1,7 @@
 
 # Polyfill và bộ dịch mã
 
-Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [đặc điểm kỹ thuật](http:// www.ecma-international.org/publications/standards/Ecma-262.htm).
+Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [thông số kỹ thuật](http:// www.ecma-international.org/publications/standards/Ecma-262.htm).
 
 Các nhóm đằng sau JavaScript engine có ý tưởng riêng của họ về những gì cần triển khai trước tiên. Họ có thể quyết định thực hiện các đề xuất trong bản nháp và hoãn lại những thứ đã có trong thông số kỹ thuật, bởi vì chúng kém thú vị hơn hoặc khó thực hiện hơn.
 
@@ -40,9 +40,9 @@ Bây giờ mã được viết lại phù hợp với các JavaScript engine cũ
 
 Thông thường, nhà phát triển chạy bộ dịch mã trên máy tính của chính họ, sau đó triển khai mã đã dịch tới máy chủ.
 
-Nhắc đến tên, [Babel](https://babeljs.io) là một trong những trình dịch mã nổi bật nhất hiện có.
+Nhắc đến tên, [Babel](https://babeljs.io) là một trong những bộ dịch mã nổi bật nhất hiện có.
 
-Các hệ thống xây dựng dự án hiện đại, chẳng hạn như [webpack](http://webpack.github.io/), cung cấp phương tiện để chạy trình dịch mã tự động trên mỗi thay đổi mã, vì vậy rất dễ tích hợp vào quá trình phát triển.
+Các hệ thống xây dựng dự án hiện đại, chẳng hạn như [webpack](http://webpack.github.io/), cung cấp phương tiện để chạy bộ dịch mã tự động trên mỗi thay đổi mã, vì vậy rất dễ tích hợp vào quá trình phát triển.
 
 ## Polyfill
 
@@ -52,9 +52,9 @@ Ví dụ: `Math.trunc(n)` là hàm "cắt bỏ" phần thập phân của một 
 
 Trong một số JavaScript engine (rất lỗi thời), không có `Math.trunc`, vì vậy mã như vậy sẽ bị lỗi.
 
-Vì chúng ta đang nói về các chức năng mới, không phải thay đổi cú pháp, nên không cần phải dịch mã bất kỳ thứ gì ở đây. Chúng ta chỉ cần khai báo hàm còn thiếu.
+Vì chúng ta đang nói về các hàm mới, không phải thay đổi cú pháp, nên không cần phải dịch mã bất kỳ thứ gì ở đây. Chúng ta chỉ cần khai báo hàm còn thiếu.
 
-Tập lệnh cập nhật/thêm chức năng mới được gọi là "polyfill". Nó "lấp đầy" khoảng trống và bổ sung các triển khai còn thiếu.
+Tập lệnh cập nhật/thêm hàm mới được gọi là "polyfill". Nó "lấp đầy" khoảng trống và bổ sung các triển khai còn thiếu.
 
 Đối với trường hợp cụ thể này, polyfill cho `Math.trunc` là một tập lệnh triển khai nó, như sau:
 
@@ -69,24 +69,24 @@ if (!Math.trunc) { // nếu không có hàm như vậy
 }
 ```
 
-JavaScript là một ngôn ngữ rất năng động, các tập lệnh có thể thêm/sửa đổi bất kỳ chức năng nào, kể cả những chức năng được tích hợp sẵn.
+JavaScript là một ngôn ngữ rất năng động, các tập lệnh có thể thêm/sửa đổi bất kỳ hàm nào, kể cả những hàm được tích hợp sẵn.
 
 Hai thư viện polyfill thú vị là:
 - [Core js](https://github.com/zloirock/core-js) hỗ trợ nhiều, chỉ cho phép đưa vào những tính năng cần thiết.
 - Dịch vụ [polyfill.io](http://polyfill.io) cung cấp tập lệnh có polyfill, tùy thuộc vào tính năng và trình duyệt của người dùng.
 
 
-## Bản tóm tắt
+## Tóm tắt
 
 Trong chương này, chúng tôi muốn khuyến khích bạn nghiên cứu các tính năng ngôn ngữ hiện đại và thậm chí là "tiên tiến", ngay cả khi chúng chưa được các JavaScript engine hỗ trợ tốt.
 
-Chỉ cần đừng quên sử dụng bộ dịch mã (nếu sử dụng cú pháp hoặc toán tử hiện đại) và polyfill (để thêm các chức năng có thể bị thiếu). Và chúng sẽ đảm bảo rằng mã hoạt động.
+Chỉ cần đừng quên sử dụng bộ dịch mã (nếu sử dụng cú pháp hoặc toán tử hiện đại) và polyfill (để thêm các hàm có thể bị thiếu). Và chúng sẽ đảm bảo rằng mã hoạt động.
 
 Ví dụ: sau này khi bạn đã quen với JavaScript, bạn có thể thiết lập hệ thống xây dựng mã dựa trên [webpack](http://webpack.github.io/) với [babel-loader](https://github.com /babel/babel-loader).
 
 Các tài nguyên tốt hiển thị trạng thái hỗ trợ hiện tại cho các tính năng khác nhau:
 - <https://kangax.github.io/compat-table/es6/> - dành cho JavaScript thuần túy.
-- <https://caniuse.com/> - cho các chức năng liên quan đến trình duyệt.
+- <https://caniuse.com/> - cho các hàm liên quan đến trình duyệt.
 
 Tái bút: Google Chrome thường là phiên bản cập nhật nhất với các tính năng ngôn ngữ, hãy dùng thử nếu bản giới thiệu hướng dẫn không thành công. Tuy nhiên, hầu hết các bản giới thiệu hướng dẫn đều hoạt động với bất kỳ trình duyệt hiện đại nào.
 
