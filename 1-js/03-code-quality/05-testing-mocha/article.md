@@ -2,7 +2,7 @@
 
 Kiểm tra tự động sẽ được sử dụng trong các tác vụ tiếp theo và nó cũng được sử dụng rộng rãi trong các dự án thực tế.
 
-## Tại sao chúng ta cần thử nghiệm?
+## Tại sao chúng ta cần kiểm tra?
 
 Khi chúng ta viết một hàm, chúng ta thường có thể hình dung nó sẽ làm gì: tham số nào cho kết quả nào.
 
