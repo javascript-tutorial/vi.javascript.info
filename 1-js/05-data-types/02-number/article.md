@@ -210,105 +210,105 @@ Strange! What is it then if not `0.3`?
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
-Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+Ôi! Có nhiều hậu quả hơn so với một so sánh không chính xác ở đây. Hãy tưởng tượng bạn đang tạo một trang web mua sắm điện tử và khách truy cập đặt hàng hóa `$0,1` và `$0,2` vào giỏ hàng của họ. Tổng đơn đặt hàng sẽ là `$0,30000000000000004`. Điều đó sẽ làm bất cứ ai ngạc nhiên.
 
-But why does this happen?
+Nhưng tại sao điều này lại xảy ra?
 
-A number is stored in memory in its binary form, a sequence of bits - ones and zeroes. But fractions like `0.1`, `0.2` that look simple in the decimal numeric system are actually unending fractions in their binary form.
+Một số được lưu trữ trong bộ nhớ ở dạng nhị phân, một chuỗi các bit - số một và số không. Nhưng các phân số như `0,1`, `0,2` trông có vẻ đơn giản trong hệ thống số thập phân thực ra là các phân số vô tận ở dạng nhị phân của chúng.
 
-In other words, what is `0.1`? It is one divided by ten `1/10`, one-tenth. In decimal numeral system such numbers are easily representable. Compare it to one-third: `1/3`. It becomes an endless fraction `0.33333(3)`.
+Nói cách khác, `0,1` là gì? Nó là một chia cho mười `1/10`, một phần mười. Trong hệ thống số thập phân, những số như vậy có thể biểu diễn dễ dàng. So sánh nó với một phần ba: `1/3`. Nó trở thành phân số vô tận `0,33333(3)`.
 
-So, division by powers `10` is guaranteed to work well in the decimal system, but division by `3` is not. For the same reason, in the binary numeral system, the division by powers of `2` is guaranteed to work, but `1/10` becomes an endless binary fraction.
+Vì vậy, phép chia cho lũy thừa `10` được đảm bảo hoạt động tốt trong hệ thập phân, nhưng phép chia cho `3` thì không. Vì lý do tương tự, trong hệ thống số nhị phân, phép chia cho lũy thừa của `2` được đảm bảo hoạt động, nhưng `1/10` trở thành một phân số nhị phân vô tận.
 
-There's just no way to store *exactly 0.1* or *exactly 0.2* using the binary system, just like there is no way to store one-third as a decimal fraction.
+Không có cách nào để lưu trữ *chính xác 0,1* hoặc *chính xác 0,2* bằng hệ thống nhị phân, giống như không có cách nào lưu trữ một phần ba dưới dạng phân số thập phân.
 
-The numeric format IEEE-754 solves this by rounding to the nearest possible number. These rounding rules normally don't allow us to see that "tiny precision loss", but it exists.
+Định dạng số IEEE-754 giải quyết vấn đề này bằng cách làm tròn đến số gần nhất có thể. Các quy tắc làm tròn này thường không cho phép chúng ta thấy "sai số nhỏ" đó, nhưng nó tồn tại.
 
-We can see this in action:
+Chúng ta có thể thấy điều này trong hành động:
 ```js run
 alert( 0.1.toFixed(20) ); // 0.10000000000000000555
 ```
 
-And when we sum two numbers, their "precision losses" add up.
+Và khi chúng ta tính tổng hai số, "sai số chính xác" của chúng sẽ cộng lại.
 
-That's why `0.1 + 0.2` is not exactly `0.3`.
+Đó là lý do tại sao `0,1 + 0,2` không chính xác là `0,3`.
 
-```smart header="Not only JavaScript"
-The same issue exists in many other programming languages.
+```smart header="Không chỉ JavaScript"
+Vấn đề tương tự tồn tại trong nhiều ngôn ngữ lập trình khác.
 
-PHP, Java, C, Perl, Ruby give exactly the same result, because they are based on the same numeric format.
+PHP, Java, C, Perl, Ruby cho kết quả chính xác như nhau, bởi vì chúng dựa trên cùng một định dạng số.
 ```
 
-Can we work around the problem? Sure, the most reliable method is to round the result with the help of a method [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed):
+Chúng ta có thể giải quyết vấn đề không? Chắc chắn rồi, phương pháp đáng tin cậy nhất là làm tròn kết quả với sự trợ giúp của một phương thức [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed):
 
 ```js run
 let sum = 0.1 + 0.2;
 alert( sum.toFixed(2) ); // 0.30
 ```
 
-Please note that `toFixed` always returns a string. It ensures that it has 2 digits after the decimal point. That's actually convenient if we have an e-shopping and need to show `$0.30`. For other cases, we can use the unary plus to coerce it into a number:
+Hãy lưu ý rằng `toFixed` luôn trả về một chuỗi. Nó đảm bảo rằng nó có 2 chữ số sau dấu thập phân. Điều đó thực sự tiện lợi nếu chúng tôi có một trang mua sắm điện tử và cần hiển thị `$0,3`. Đối với các trường hợp khác, chúng ta có thể sử dụng dấu cộng đơn nguyên để biến nó thành một số:
 
 ```js run
 let sum = 0.1 + 0.2;
 alert( +sum.toFixed(2) ); // 0.3
 ```
 
-We also can temporarily multiply the numbers by 100 (or a bigger number) to turn them into integers, do the maths, and then divide back. Then, as we're doing maths with integers, the error somewhat decreases, but we still get it on division:
+Chúng ta cũng có thể tạm thời nhân các số với 100 (hoặc một số lớn hơn) để biến chúng thành số nguyên, làm phép tính rồi chia lại. Sau đó, khi chúng ta làm toán với các số nguyên, sai số giảm đi phần nào, nhưng chúng ta vẫn nhận được nó khi chia:
 
 ```js run
 alert( (0.1 * 10 + 0.2 * 10) / 10 ); // 0.3
 alert( (0.28 * 100 + 0.14 * 100) / 100); // 0.4200000000000001
 ```
 
-So, multiply/divide approach reduces the error, but doesn't remove it totally.
+Vì vậy, phương pháp nhân/chia giúp giảm lỗi, nhưng không loại bỏ hoàn toàn.
 
-Sometimes we could try to evade fractions at all. Like if we're dealing with a shop, then we can store prices in cents instead of dollars. But what if we apply a discount of 30%? In practice, totally evading fractions is rarely possible. Just round them to cut "tails" when needed.
+Đôi khi chúng ta có thể cố gắng trốn tránh các phân số. Giống như nếu chúng ta đang giao dịch với một cửa hàng, thì chúng ta có thể lưu trữ giá bằng xu thay vì đô la. Nhưng nếu chúng ta áp dụng giảm giá 30% thì sao? Trong thực tế, hiếm khi có thể trốn tránh hoàn toàn các phân số. Chỉ cần làm tròn chúng để cắt "đuôi" khi cần thiết.
 
-````smart header="The funny thing"
-Try running this:
+````smart header="TĐiều buồn cười"
+Hãy thử chạy cái này:
 
 ```js run
-// Hello! I'm a self-increasing number!
+// Xin chào! Tôi là một con số tự tăng lên!
 alert( 9999999999999999 ); // shows 10000000000000000
 ```
 
-This suffers from the same issue: a loss of precision. There are 64 bits for the number, 52 of them can be used to store digits, but that's not enough. So the least significant digits disappear.
+Điều này bị cùng một vấn đề: mất độ chính xác. Có 64 bit cho số, 52 trong số đó có thể được sử dụng để lưu trữ các chữ số, nhưng điều đó là không đủ. Vì vậy, các chữ số ít quan trọng nhất biến mất.
 
-JavaScript doesn't trigger an error in such events. It does its best to fit the number into the desired format, but unfortunately, this format is not big enough.
+JavaScript không gây ra lỗi trong các sự kiện như vậy. Nó cố gắng hết sức để khớp số vào định dạng mong muốn, nhưng thật không may, định dạng này không đủ lớn.
 ````
 
-```smart header="Two zeroes"
-Another funny consequence of the internal representation of numbers is the existence of two zeroes: `0` and `-0`.
+```smart header="Hai con số 0"
+Một hệ quả buồn cười khác của biểu diễn bên trong các số là sự tồn tại của hai số 0: `0` và `-0`.
 
-That's because a sign is represented by a single bit, so it can be set or not set for any number including a zero.
+Đó là bởi vì một dấu hiệu được biểu thị bằng một bit duy nhất, vì vậy nó có thể được đặt hoặc không được đặt cho bất kỳ số nào kể cả số không.
 
-In most cases the distinction is unnoticeable, because operators are suited to treat them as the same.
+Trong hầu hết các trường hợp, sự khác biệt là không đáng chú ý, bởi vì các toán tử phù hợp để coi chúng như nhau.
 ```
 
-## Tests: isFinite and isNaN
+## Các bài kiểm tra: isFinite and isNaN
 
-Remember these two special numeric values?
+Nhớ hai giá trị số đặc biệt này không?
 
-- `Infinity` (and `-Infinity`) is a special numeric value that is greater (less) than anything.
-- `NaN` represents an error.
+- `Infinity` (và `-Infinity`) là một giá trị số đặc biệt lớn hơn (nhỏ hơn) bất kỳ giá trị nào.
+- `NaN` biểu thị lỗi.
 
-They belong to the type `number`, but are not "normal" numbers, so there are special functions to check for them:
+Chúng thuộc loại `số`, nhưng không phải là số "bình thường", vì vậy có các chức năng đặc biệt để kiểm tra chúng:
 
 
-- `isNaN(value)` converts its argument to a number and then tests it for being `NaN`:
+- `isNaN(value)` chuyển đổi đối số của nó thành một số và sau đó kiểm tra xem nó có phải là `NaN`:
 
     ```js run
     alert( isNaN(NaN) ); // true
     alert( isNaN("str") ); // true
     ```
 
-    But do we need this function? Can't we just use the comparison `=== NaN`? Sorry, but the answer is no. The value `NaN` is unique in that it does not equal anything, including itself:
+    Nhưng chúng ta có cần chức năng này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Xin lỗi, nhưng câu trả lời là không. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất kỳ giá trị nào, kể cả chính nó:
 
     ```js run
     alert( NaN === NaN ); // false
     ```
 
-- `isFinite(value)` converts its argument to a number and returns `true` if it's a regular number, not `NaN/Infinity/-Infinity`:
+- `isFinite(value)` chuyển đổi đối số của nó thành một số và trả về `true` nếu đó là một số thông thường, không phải `NaN/Infinity/-Infinity`:
 
     ```js run
     alert( isFinite("15") ); // true
