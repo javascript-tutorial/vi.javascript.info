@@ -1,4 +1,4 @@
-Chúng ta cần "vẽ bản đồ" tất cả các giá trị từ khoảng 0..1 thành các giá trị từ `min` đến `max`.
+Chúng ta cần "sắp xếp" tất cả các giá trị từ khoảng 0..1 thành các giá trị từ `min` đến `max`.
 
 Điều đó có thể được thực hiện trong hai giai đoạn:
 
