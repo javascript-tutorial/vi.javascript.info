@@ -249,7 +249,7 @@ let str = 'Tiện ích với id';
 alert( str.indexOf('id', 2) ) // 12
 ```
 
-Nếu chúng tôi quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau vị trí trước đó:
+Nếu chúng tôi quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau sự trùng hợp trước đó:
 
 ```js run
 let str = 'Tinh ranh như một con cáo, mạnh mẽ như một con bò';
@@ -310,34 +310,34 @@ if (str.indexOf("Tiện ích") != -1) {
 }
 ```
 
-#### The bitwise NOT trick
+#### Thủ thuật KHÔNG theo bit
 
-One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+Một trong những thủ thuật cũ được sử dụng ở đây là toán tử [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~`. Nó chuyển đổi số thành số nguyên 32 bit (loại bỏ phần thập phân nếu có) và sau đó đảo ngược tất cả các bit trong biểu diễn nhị phân của nó.
 
-In practice, that means a simple thing: for 32-bit integers `~n` equals `-(n+1)`.
+Trong thực tế, điều đó có nghĩa là một điều đơn giản: đối với số nguyên 32 bit `~n` bằng `-(n+1)`.
 
-For instance:
+Ví dụ:
 
 ```js run
-alert( ~2 ); // -3, the same as -(2+1)
-alert( ~1 ); // -2, the same as -(1+1)
-alert( ~0 ); // -1, the same as -(0+1)
+alert( ~2 ); // -3, giống như -(2+1)
+alert( ~1 ); // -2, giống như -(1+1)
+alert( ~0 ); // -1, giống như -(0+1)
 *!*
-alert( ~-1 ); // 0, the same as -(-1+1)
+alert( ~-1 ); // 0, giống như -(-1+1)
 */!*
 ```
 
-As we can see, `~n` is zero only if `n == -1` (that's for any 32-bit signed integer `n`).
+Như chúng ta có thể thấy, `~n` chỉ bằng 0 nếu `n == -1` (đó là đối với bất kỳ số nguyên có dấu 32 bit nào `n`).
 
-So, the test `if ( ~str.indexOf("...") )` is truthy only if the result of `indexOf` is not `-1`. In other words, when there is a match.
+Vì vậy, phép thử `if ( ~str.indexOf("...") )` chỉ đúng nếu kết quả của `indexOf` không phải là `-1`. Nói cách khác, khi có một sự trùng hợp.
 
-People use it to shorten `indexOf` checks:
+Mọi người sử dụng nó để rút ngắn kiểm tra `indexOf`:
 
 ```js run
-let str = "Widget";
+let str = "Tiện ích";
 
-if (~str.indexOf("Widget")) {
-  alert( 'Found it!' ); // works
+if (~str.indexOf("Tiện ích")) {
+  alert( 'Đã tìm thấy nó·!' ); // hoạt động
 }
 ```
 
