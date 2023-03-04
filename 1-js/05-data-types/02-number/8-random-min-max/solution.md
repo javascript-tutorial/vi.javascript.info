@@ -1,11 +1,11 @@
-We need to "map" all values from the interval 0..1 into values from `min` to `max`.
+Chúng ta cần "vẽ bản đồ" tất cả các giá trị từ khoảng 0..1 thành các giá trị từ `min` đến `max`.
 
-That can be done in two stages:
+Điều đó có thể được thực hiện trong hai giai đoạn:
 
-1. If we multiply a random number from 0..1 by `max-min`, then the interval of possible values increases `0..1` to `0..max-min`.
-2. Now if we add `min`, the possible interval becomes from `min` to `max`.
+1. Nếu chúng ta nhân một số ngẫu nhiên từ 0..1 với `max-min`, thì khoảng các giá trị có thể tăng `0..1` thành `0..max-min`.
+2. Bây giờ nếu chúng ta thêm `min`, thì khoảng thời gian có thể sẽ trở thành từ `min` đến `max`.
 
-The function:
+Hàm:
 
 ```js run
 function random(min, max) {
