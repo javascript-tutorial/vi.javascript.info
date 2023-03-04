@@ -9,4 +9,4 @@ alert( a + b );
 
 Lưu ý dấu cộng đơn nguyên `+` trước `prompt`. Nó ngay lập tức chuyển đổi giá trị thành một số.
 
-Mặt khác, `a` và `b` sẽ là chuỗi, tổng của chúng sẽ là phần nối của chúng, nghĩa là: `"1" + "2" = "12"`.
+Nếu không, `a` và `b` sẽ là chuỗi, tổng của chúng sẽ là phần nối của chúng, nghĩa là: `"1" + "2" = "12"`.
