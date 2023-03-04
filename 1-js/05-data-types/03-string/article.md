@@ -1,23 +1,23 @@
-# Strings
+# Chuỗi
 
-In JavaScript, the textual data is stored as strings. There is no separate type for a single character.
+Trong JavaScript, dữ liệu văn bản được lưu trữ dưới dạng chuỗi. Không có loại riêng cho một ký tự.
 
-The internal format for strings is always [UTF-16](https://en.wikipedia.org/wiki/UTF-16), it is not tied to the page encoding.
+Định dạng bên trong của chuỗi luôn là [UTF-16](https://en.wikipedia.org/wiki/UTF-16), định dạng này không bị ràng buộc với mã hóa trang.
 
-## Quotes
+## Dấu ngoặc kép
 
-Let's recall the kinds of quotes.
+Hãy nhớ lại các loại dấu ngoặc kép.
 
-Strings can be enclosed within either single quotes, double quotes or backticks:
+Các chuỗi có thể được đặt trong dấu ngoặc đơn, dấu ngoặc kép hoặc dấu backticks:
 
 ```js
-let single = 'single-quoted';
-let double = "double-quoted";
+let single = 'dấu ngoặc đơn';
+let double = "dấu ngoặc kép";
 
-let backticks = `backticks`;
+let backticks = `dấu backticks`;
 ```
 
-Single and double quotes are essentially the same. Backticks, however, allow us to embed any expression into the string, by wrapping it in `${…}`:
+Dấu ngoặc đơn và dấu ngoặc kép về cơ bản là giống nhau. Tuy nhiên, Backticks cho phép chúng ta nhúng bất kỳ biểu thức nào vào chuỗi, bằng cách gói nó trong `${…}`:
 
 ```js run
 function sum(a, b) {
@@ -27,7 +27,7 @@ function sum(a, b) {
 alert(`1 + 2 = ${sum(1, 2)}.`); // 1 + 2 = 3.
 ```
 
-Another advantage of using backticks is that they allow a string to span multiple lines:
+Một ưu điểm khác của việc sử dụng backticks là chúng cho phép một chuỗi trải dài trên nhiều dòng:
 
 ```js run
 let guestList = `Guests:
@@ -36,120 +36,120 @@ let guestList = `Guests:
  * Mary
 `;
 
-alert(guestList); // a list of guests, multiple lines
+alert(guestList); // một danh sách khách, nhiều dòng
 ```
 
-Looks natural, right? But single or double quotes do not work this way.
+Trông tự nhiên nhỉ? Nhưng dấu ngoặc đơn hoặc dấu ngoặc kép không hoạt động theo cách này.
 
-If we use them and try to use multiple lines, there'll be an error:
+Nếu chúng ta sử dụng chúng và cố gắng sử dụng nhiều dòng, sẽ có lỗi:
 
 ```js run
 let guestList = "Guests: // Error: Unexpected token ILLEGAL
   * John";
 ```
 
-Single and double quotes come from ancient times of language creation when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
+Dấu ngoặc đơn và dấu ngoặc kép xuất hiện từ thời cổ đại khi tạo ngôn ngữ khi nhu cầu về chuỗi nhiều dòng không được tính đến. Backticks xuất hiện muộn hơn nhiều và do đó linh hoạt hơn.
 
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This is called "tagged templates". This feature makes it easier to implement custom templating, but is rarely used in practice. You can read more about it in the [manual](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
+Backticks cũng cho phép chúng ta chỉ định một "hàm mẫu" trước backtick đầu tiên. Cú pháp là: <code>func&#96;string&#96;</code>. Hàm `func` được gọi tự động, nhận chuỗi và các biểu thức được nhúng và có thể xử lý chúng. Đây được gọi là "mẫu được gắn thẻ". Tính năng này giúp triển khai tạo khuôn mẫu tùy chỉnh dễ dàng hơn nhưng hiếm khi được sử dụng trong thực tế. Bạn có thể đọc thêm về nó trong [hướng dẫn sử dụng](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
 
-## Special characters
+## Ký tự đặc biệt
 
-It is still possible to create multiline strings with single and double quotes by using a so-called "newline character", written as `\n`, which denotes a line break:
+Vẫn có thể tạo chuỗi nhiều dòng với dấu nháy đơn và kép bằng cách sử dụng cái gọi là "ký tự dòng mới", được viết là `\n`, biểu thị ngắt dòng:
 
 ```js run
 let guestList = "Guests:\n * John\n * Pete\n * Mary";
 
-alert(guestList); // a multiline list of guests
+alert(guestList); // một danh sách khách nhiều dòng
 ```
 
-For example, these two lines are equal, just written differently:
+Ví dụ, hai dòng này bằng nhau, nhưng viết khác nhau:
 
 ```js run
-let str1 = "Hello\nWorld"; // two lines using a "newline symbol"
+let str1 = "Hello\nWorld"; // hai dòng sử dụng một "ký tự dòng mới"
 
-// two lines using a normal newline and backticks
+// hai dòng sử dụng một dòng mới bình thường và backticks
 let str2 = `Hello
 World`;
 
 alert(str1 == str2); // true
 ```
 
-There are other, less common "special" characters.
+Có những ký tự "đặc biệt" khác, ít phổ biến hơn.
 
-Here's the full list:
+Đây là danh sách đầy đủ:
 
-| Character | Description |
-|-----------|-------------|
-|`\n`|New line|
-|`\r`|Carriage return: not used alone. Windows text files use a combination of two characters `\r\n` to represent a line break. |
-|`\'`, `\"`|Quotes|
-|`\\`|Backslash|
+| Nhân vật | Mô tả |
+|--------|-------------|
+|`\n`|Dòng mới|
+|`\r`|Trở về đầu hàng: không được sử dụng một mình. Các tệp văn bản Windows sử dụng kết hợp hai ký tự `\r\n` để biểu thị ngắt dòng. |
+|`\'`, `\"`|Trích dẫn|
+|`\\`|Dấu gạch chéo ngược|
 |`\t`|Tab|
-|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- kept for compatibility, not used nowadays. |
-|`\xXX`|Unicode character with the given hexadecimal Unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
-|`\uXXXX`|A Unicode symbol with the hex code `XXXX` in UTF-16 encoding, for instance `\u00A9` -- is a Unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
-|`\u{X…XXXXXX}` (1 to 6 hex characters)|A Unicode symbol with the given UTF-32 encoding. Some rare characters are encoded with two Unicode symbols, taking 4 bytes. This way we can insert long codes. |
+|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- được giữ lại để tương thích, không được sử dụng hiện nay. |
+|`\xXX`|Ký tự Unicode với Unicode thập lục phân đã cho `XX`, ví dụ: `'\x7A'` giống như `'z'`.|
+|`\uXXXX`|Một ký hiệu Unicode có mã hex `XXXX` trong mã hóa UTF-16, ví dụ `\u00A9` -- là một ký hiệu Unicode cho ký hiệu bản quyền `©`. Nó phải có chính xác 4 chữ số hex. |
+|`\u{X…XXXXXX}` (1 đến 6 ký tự hex)|Ký hiệu Unicode với mã hóa UTF-32 nhất định. Một số ký tự hiếm được mã hóa bằng hai ký hiệu Unicode, chiếm 4 byte. Bằng cách này, chúng ta có thể chèn mã dài. |
 
-Examples with Unicode:
+Ví dụ với Unicode:
 
 ```js run
 alert( "\u00A9" ); // ©
-alert( "\u{20331}" ); // 佫, a rare Chinese hieroglyph (long Unicode)
-alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long Unicode)
+alert( "\u{20331}" ); // 佫, một chữ tượng hình hiếm của Trung Quốc (mã Unicode dài)
+alert( "\u{1F60D}" ); // 😍, một biểu tượng khuôn mặt tươi cười (một mã Unicode dài khác)
 ```
 
-All special characters start with a backslash character `\`. It is also called an "escape character".
+Tất cả các ký tự đặc biệt đều bắt đầu bằng ký tự gạch chéo ngược `\`. Nó còn được gọi là "ký tự thoát".
 
-We might also use it if we wanted to insert a quote into the string.
+Chúng ta cũng có thể sử dụng nó nếu chúng ta muốn chèn một trích dẫn vào chuỗi.
 
-For instance:
+Ví dụ:
 
 ```js run
-alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
+alert( 'Tôi*!*\*/!*là con hải mã!' ); // *!*Tôi*/!*là con hải mã!
 ```
 
-As you can see, we have to prepend the inner quote by the backslash `\'`, because otherwise it would indicate the string end.
+Như bạn có thể thấy, chúng ta phải thêm vào trước trích dẫn bên trong bằng dấu gạch chéo ngược `\'`, vì nếu không nó sẽ cho biết kết thúc chuỗi.
 
-Of course, only the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+Tất nhiên, chỉ những trích dẫn giống với những trích dẫn kèm theo mới cần được thoát. Vì vậy, như một giải pháp tao nhã hơn, thay vào đó, chúng ta có thể chuyển sang dấu ngoặc kép hoặc dấu nháy ngược:
 
 ```js run
-alert( `I'm the Walrus!` ); // I'm the Walrus!
+alert( `Tôi là con hải mã!` ); // Tôi là con hải mã!
 ```
 
-Note that the backslash `\` serves for the correct reading of the string by JavaScript, then disappears. The in-memory string has no `\`. You can clearly see that in `alert` from the examples above.
+Lưu ý rằng dấu gạch chéo ngược `\` phục vụ cho việc đọc chính xác chuỗi bằng JavaScript, sau đó biến mất. Chuỗi trong bộ nhớ không có `\`. Bạn có thể thấy rõ điều đó trong `alert` từ các ví dụ ở trên.
 
-But what if we need to show an actual backslash `\` within the string?
+Nhưng nếu chúng ta cần hiển thị dấu gạch chéo ngược `\` trong chuỗi thì sao?
 
-That's possible, but we need to double it like `\\`:
+Điều đó là có thể, nhưng chúng ta cần nhân đôi nó như `\\`:
 
 ```js run
-alert( `The backslash: \\` ); // The backslash: \
+alert( `The backslash: \\` ); // Dấu gạch chéo ngược: \
 ```
 
-## String length
+## Chiều dài chuỗi
 
-The `length` property has the string length:
+Thuộc tính `length` có độ dài chuỗi:
 
 ```js run
 alert( `My\n`.length ); // 3
 ```
 
-Note that `\n` is a single "special" character, so the length is indeed `3`.
+Lưu ý rằng `\n` là một ký tự "đặc biệt", vì vậy độ dài thực sự là `3`.
 
-```warn header="`length` is a property"
-People with a background in some other languages sometimes mistype by calling `str.length()` instead of just `str.length`. That doesn't work.
+```warn header="`length` là thuộc tính"
+Những người có kiến thức cơ bản về một số ngôn ngữ khác đôi khi gõ nhầm bằng cách gọi `str.length()` thay vì chỉ `str.length`. Điều đó không hiệu quả.
 
-Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it.
+Hãy lưu ý rằng `str.length` là thuộc tính số, không phải hàm. Không cần thêm dấu ngoặc đơn sau nó.
 ```
 
-## Accessing characters
+## Truy cập ký tự
 
-To get a character at position `pos`, use square brackets `[pos]` or call the method [str.charAt(pos)](mdn:js/String/charAt). The first character starts from the zero position:
+Để lấy một ký tự ở vị trí `pos`, hãy sử dụng dấu ngoặc vuông `[pos]` hoặc gọi phương thức [str.charAt(pos)](mdn:js/String/charAt). Ký tự đầu tiên bắt đầu từ vị trí số 0:
 
 ```js run
 let str = `Hello`;
 
-// the first character
+// ký tự đầu tiên
 alert( str[0] ); // H
 alert( str.charAt(0) ); // H
 
@@ -157,104 +157,104 @@ alert( str.charAt(0) ); // H
 alert( str[str.length - 1] ); // o
 ```
 
-The square brackets are a modern way of getting a character, while `charAt` exists mostly for historical reasons.
+Dấu ngoặc vuông là một cách hiện đại để lấy một ký tự, trong khi `charAt` chủ yếu tồn tại vì lý do lịch sử.
 
-The only difference between them is that if no character is found, `[]` returns `undefined`, and `charAt` returns an empty string:
+Sự khác biệt duy nhất giữa chúng là nếu không tìm thấy ký tự nào, `[]` trả về `undefined`, và `charAt` trả về một chuỗi rỗng:
 
 ```js run
-let str = `Hello`;
+let str = `Xin chào`;
 
 alert( str[1000] ); // undefined
-alert( str.charAt(1000) ); // '' (an empty string)
+alert( str.charAt(1000) ); // '' (một chuỗi rỗng)
 ```
 
-We can also iterate over characters using `for..of`:
+Chúng ta cũng có thể lặp lại các ký tự bằng cách sử dụng `for..of`:
 
 ```js run
-for (let char of "Hello") {
-  alert(char); // H,e,l,l,o (char becomes "H", then "e", then "l" etc)
+for (let char of "Xin chào") {
+  alert(char); // X,i,n, ,c,h,à,o (char trở thành "X", rồi "i", rồi "n", v.v.)
 }
 ```
 
-## Strings are immutable
+## Chuỗi là bất biến
 
-Strings can't be changed in JavaScript. It is impossible to change a character.
+Không thể thay đổi chuỗi trong JavaScript. Không thể thay đổi một nhân vật.
 
-Let's try it to show that it doesn't work:
-
-```js run
-let str = 'Hi';
-
-str[0] = 'h'; // error
-alert( str[0] ); // doesn't work
-```
-
-The usual workaround is to create a whole new string and assign it to `str` instead of the old one.
-
-For instance:
+Hãy thử để chứng minh rằng nó không hoạt động:
 
 ```js run
-let str = 'Hi';
+let str = 'Chào';
 
-str = 'h' + str[1]; // replace the string
-
-alert( str ); // hi
+str[0] = 'h'; // lỗi
+alert( str[0] ); // không hoạt động
 ```
 
-In the following sections we'll see more examples of this.
+Cách giải quyết thông thường là tạo một chuỗi hoàn toàn mới và gán nó cho `str` thay vì chuỗi cũ.
 
-## Changing the case
-
-Methods [toLowerCase()](mdn:js/String/toLowerCase) and [toUpperCase()](mdn:js/String/toUpperCase) change the case:
+Ví dụ:
 
 ```js run
-alert( 'Interface'.toUpperCase() ); // INTERFACE
-alert( 'Interface'.toLowerCase() ); // interface
+let str = 'Chào';
+
+str = 'h' + str[1]; // thay thế chuỗi
+
+alert( str ); // chào
 ```
 
-Or, if we want a single character lowercased:
+Trong các phần sau chúng ta sẽ thấy nhiều ví dụ hơn về điều này.
+
+## Thay đổi kiểu chữ
+
+Các phương thức [toLowerCase()](mdn:js/String/toLowerCase) và [toUpperCase()](mdn:js/String/toUpperCase) thay đổi kiểu chữ:
+
+```js run
+alert( 'Giao diện'.toUpperCase() ); // GIAO DIỆN
+alert( 'Giao diện'.toLowerCase() ); // giao diện
+```
+
+Hoặc, nếu chúng ta muốn một ký tự được viết thường:
 
 ```js
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
-## Searching for a substring
+## Tìm kiếm một chuỗi con
 
-There are multiple ways to look for a substring within a string.
+Có nhiều cách để tìm kiếm một chuỗi con trong một chuỗi.
 
 ### str.indexOf
 
-The first method is [str.indexOf(substr, pos)](mdn:js/String/indexOf).
+Phương thức đầu tiên là [str.indexOf(substr, pos)](mdn:js/String/indexOf).
 
-It looks for the `substr` in `str`, starting from the given position `pos`, and returns the position where the match was found or `-1` if nothing can be found.
+Nó tìm kiếm `substr` trong `str`, bắt đầu từ vị trí đã cho `pos` và trả về vị trí tìm thấy kết quả khớp hoặc `-1` nếu không tìm thấy gì.
 
-For instance:
+Ví dụ:
 
 ```js run
-let str = 'Widget with id';
+let str = 'Tiện ích với id';
 
-alert( str.indexOf('Widget') ); // 0, because 'Widget' is found at the beginning
-alert( str.indexOf('widget') ); // -1, not found, the search is case-sensitive
+alert( str.indexOf('Tiện ích') ); // 0, bởi vì 'Tiện ích' được tìm thấy ngay từ đầu
+alert( str.indexOf('tiện ích') ); // -1, không tìm thấy, tìm kiếm phân biệt chữ hoa chữ thường
 
-alert( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
+alert( str.indexOf("id") ); // 1, "id" được tìm thấy ở vị trí 1 (Tiện ích với id)
 ```
 
-The optional second parameter allows us to start searching from a given position.
+Tham số thứ hai tùy chọn cho phép chúng ta bắt đầu tìm kiếm từ một vị trí nhất định.
 
-For instance, the first occurrence of `"id"` is at position `1`. To look for the next occurrence, let's start the search from position `2`:
+Chẳng hạn, lần xuất hiện đầu tiên của `"id"` là ở vị trí `1`. Để tìm kiếm lần xuất hiện tiếp theo, hãy bắt đầu tìm kiếm từ vị trí `2`:
 
 ```js run
-let str = 'Widget with id';
+let str = 'Tiện ích với id';
 
 alert( str.indexOf('id', 2) ) // 12
 ```
 
-If we're interested in all occurrences, we can run `indexOf` in a loop. Every new call is made with the position after the previous match:
+Nếu chúng tôi quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau vị trí trước đó:
 
 ```js run
-let str = 'As sly as a fox, as strong as an ox';
+let str = 'Tinh ranh như một con cáo, mạnh mẽ như một con bò';
 
-let target = 'as'; // let's look for it
+let target = 'như'; // hãy tìm kiếm nó
 
 let pos = 0;
 while (true) {
@@ -262,15 +262,15 @@ while (true) {
   if (foundPos == -1) break;
 
   alert( `Found at ${foundPos}` );
-  pos = foundPos + 1; // continue the search from the next position
+  pos = foundPos + 1; // tiếp tục tìm kiếm từ vị trí tiếp theo
 }
 ```
 
-The same algorithm can be layed out shorter:
+Thuật toán tương tự có thể được trình bày ngắn hơn:
 
 ```js run
-let str = "As sly as a fox, as strong as an ox";
-let target = "as";
+let str = "Tinh ranh như một con cáo, mạnh mẽ như một con bò";
+let target = "như";
 
 *!*
 let pos = -1;
@@ -281,32 +281,32 @@ while ((pos = str.indexOf(target, pos + 1)) != -1) {
 ```
 
 ```smart header="`str.lastIndexOf(substr, position)`"
-There is also a similar method [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf) that searches from the end of a string to its beginning.
+Ngoài ra còn có một phương thức tương tự [str.lastIndexOf(substr, position)](mdn:js/String/lastIndexOf) tìm kiếm từ cuối chuỗi đến đầu chuỗi.
 
-It would list the occurrences in the reverse order.
+Nó sẽ liệt kê các lần xuất hiện theo thứ tự ngược lại.
 ```
 
-There is a slight inconvenience with `indexOf` in the `if` test. We can't put it in the `if` like this:
+Có một chút bất tiện với `indexOf` trong bài kiểm tra `if`. Chúng ta không thể đặt nó trong `if` như thế này:
 
 ```js run
-let str = "Widget with id";
+let str = "Tiện ích với id";
 
-if (str.indexOf("Widget")) {
-    alert("We found it"); // doesn't work!
+if (str.indexOf("Tiện ích")) {
+    alert("Chúng ta đã tìm thấy nó"); // không hoạt động!
 }
 ```
 
-The `alert` in the example above doesn't show because `str.indexOf("Widget")` returns `0` (meaning that it found the match at the starting position). Right, but `if` considers `0` to be `false`.
+`alert` trong ví dụ trên không hiển thị vì `str.indexOf("Widget")` trả về `0` (có nghĩa là nó tìm thấy kết quả khớp ở vị trí bắt đầu). Đúng, nhưng `if` coi `0` là `false`.
 
-So, we should actually check for `-1`, like this:
+Vì vậy, chúng ta thực sự nên kiểm tra `-1`, như sau:
 
 ```js run
-let str = "Widget with id";
+let str = "Tiện ích với id";
 
 *!*
-if (str.indexOf("Widget") != -1) {
+if (str.indexOf("Tiện ích") != -1) {
 */!*
-    alert("We found it"); // works now!
+    alert("Chúng ta đã tìm thấy nó"); // bây giờ hoạt động!
 }
 ```
 
