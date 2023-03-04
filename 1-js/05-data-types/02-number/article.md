@@ -194,17 +194,17 @@ Nếu một số quá lớn, nó sẽ tràn bộ nhớ 64-bit, có khả năng t
 alert( 1e500 ); // Vô hạn
 ```
 
-What may be a little less obvious, but happens quite often, is the loss of precision.
+Điều có thể ít rõ ràng hơn một chút, nhưng lại xảy ra khá thường xuyên, đó là sự mất đi độ chính xác.
 
-Consider this (falsy!) test:
+Xem xét bài kiểm tra (sai!) này:
 
 ```js run
 alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
 ```
 
-That's right, if we check whether the sum of `0.1` and `0.2` is `0.3`, we get `false`.
+Đúng vậy, nếu chúng ta kiểm tra xem tổng của `0,1` và `0,2` có phải là `0,3` hay không, chúng ta sẽ nhận được `false`.
 
-Strange! What is it then if not `0.3`?
+Lạ lùng! Vậy thì đó là gì nếu không phải là `0,3`?
 
 ```js run
 alert( 0.1 + 0.2 ); // 0.30000000000000004
@@ -312,93 +312,93 @@ Chúng thuộc loại `số`, nhưng không phải là số "bình thường", v
 
     ```js run
     alert( isFinite("15") ); // true
-    alert( isFinite("str") ); // false, because a special value: NaN
-    alert( isFinite(Infinity) ); // false, because a special value: Infinity
+    alert( isFinite("str") ); // false, bởi vì một giá trị đặc biệt: NaN
+    alert( isFinite(Infinity) ); // false, bởi vì một giá trị đặc biệt: Infinity
     ```
 
-Sometimes `isFinite` is used to validate whether a string value is a regular number:
+Đôi khi `isFinite` được sử dụng để xác thực xem giá trị chuỗi có phải là số thông thường hay không:
 
 
 ```js run
-let num = +prompt("Enter a number", '');
+let num = +prompt("Nhập một số", '');
 
-// will be true unless you enter Infinity, -Infinity or not a number
+// sẽ đúng trừ khi bạn nhập Infinity, -Infinity hoặc không phải là số
 alert( isFinite(num) );
 ```
 
-Please note that an empty or a space-only string is treated as `0` in all numeric functions including `isFinite`.  
+Xin lưu ý rằng một chuỗi trống hoặc chỉ có khoảng trắng được coi là `0` trong tất cả các hàm số bao gồm `isFinite`.
 
-```smart header="Compare with `Object.is`"
+```smart header="so sánh với `Object.is`"
 
-There is a special built-in method [`Object.is`](mdn:js/Object/is) that compares values like `===`, but is more reliable for two edge cases:
+Có một phương thức tích hợp đặc biệt [`Object.is`](mdn:js/Object/is) so sánh các giá trị như `===`, nhưng đáng tin cậy hơn cho hai trường hợp cạnh:
 
-1. It works with `NaN`: `Object.is(NaN, NaN) === true`, that's a good thing.
-2. Values `0` and `-0` are different: `Object.is(0, -0) === false`, technically that's true, because internally the number has a sign bit that may be different even if all other bits are zeroes.
+1. Nó hoạt động với `NaN`: `Object.is(NaN, NaN) === true`, đó là một điều tốt.
+2. Các giá trị `0` và `-0` là khác nhau: `Object.is(0, -0) === false`, về mặt kỹ thuật, điều đó đúng, bởi vì bên trong số có một bit dấu có thể khác ngay cả khi tất cả các giá trị khác bit là số không.
 
-In all other cases, `Object.is(a, b)` is the same as `a === b`.
+Trong tất cả các trường hợp khác, `Object.is(a, b)` giống như `a === b`.
 
-This way of comparison is often used in JavaScript specification. When an internal algorithm needs to compare two values for being exactly the same, it uses `Object.is` (internally called [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
+Cách so sánh này thường được sử dụng trong thông số kỹ thuật của JavaScript. Khi thuật toán nội bộ cần so sánh hai giá trị có giống nhau hoàn toàn không, thuật toán đó sẽ sử dụng `Object.is` (được gọi nội bộ là [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
 ```
 
 
-## parseInt and parseFloat
+## parseInt và parseFloat
 
-Numeric conversion using a plus `+` or `Number()` is strict. If a value is not exactly a number, it fails:
+Chuyển đổi số bằng cách sử dụng dấu cộng `+` hoặc `Number()` là nghiêm ngặt. Nếu một giá trị không chính xác là một số, nó sẽ thất bại:
 
 ```js run
 alert( +"100px" ); // NaN
 ```
 
-The sole exception is spaces at the beginning or at the end of the string, as they are ignored.
+Ngoại lệ duy nhất là khoảng trắng ở đầu hoặc cuối chuỗi, vì chúng bị bỏ qua.
 
-But in real life we often have values in units, like `"100px"` or `"12pt"` in CSS. Also in many countries the currency symbol goes after the amount, so we have `"19€"` and would like to extract a numeric value out of that.
+Nhưng trong cuộc sống thực, chúng ta thường có các giá trị theo đơn vị, như `"100px"` hoặc `"12pt"` trong CSS. Ngoài ra, ở nhiều quốc gia, ký hiệu tiền tệ đi sau số tiền, vì vậy chúng ta có `"19€"` và muốn trích xuất một giá trị số từ đó.
 
-That's what `parseInt` and `parseFloat` are for.
+Đó là mục đích của `parseInt` và `parseFloat`.
 
-They "read" a number from a string until they can't. In case of an error, the gathered number is returned. The function `parseInt` returns an integer, whilst `parseFloat` will return a floating-point number:
+Chúng "đọc" một số từ một chuỗi cho đến khi họ không thể. Trong trường hợp có lỗi, số đã thu thập được trả về. Hàm `parseInt` trả về một số nguyên, trong khi `parseFloat` sẽ trả về một số dấu phẩy động:
 
 ```js run
 alert( parseInt('100px') ); // 100
 alert( parseFloat('12.5em') ); // 12.5
 
-alert( parseInt('12.3') ); // 12, only the integer part is returned
-alert( parseFloat('12.3.4') ); // 12.3, the second point stops the reading
+alert( parseInt('12.3') ); // 12, chỉ có phần nguyên được trả về
+alert( parseFloat('12.3.4') ); // 12.3, điểm thứ hai dừng việc đọc
 ```
 
-There are situations when `parseInt/parseFloat` will return `NaN`. It happens when no digits could be read:
+Có những trường hợp khi `parseInt/parseFloat` sẽ trả về `NaN`. Nó xảy ra khi không có chữ số nào có thể đọc được:
 
 ```js run
-alert( parseInt('a123') ); // NaN, the first symbol stops the process
+alert( parseInt('a123') ); // NaN, ký tự đầu tiên dừng quá trình
 ```
 
-````smart header="The second argument of `parseInt(str, radix)`"
-The `parseInt()` function has an optional second parameter. It specifies the base of the numeral system, so `parseInt` can also parse strings of hex numbers, binary numbers and so on:
+````smart header="Đối số thứ hai của `parseInt(str, radix)`"
+Hàm `parseInt()` có tham số thứ hai tùy chọn. Nó chỉ định cơ sở của hệ thống số, vì vậy `parseInt` cũng có thể phân tích cú pháp các chuỗi số hex, số nhị phân, v.v.:
 
 ```js run
 alert( parseInt('0xff', 16) ); // 255
-alert( parseInt('ff', 16) ); // 255, without 0x also works
+alert( parseInt('ff', 16) ); // 255, không có 0x cũng hoạt động
 
 alert( parseInt('2n9c', 36) ); // 123456
 ```
 ````
 
-## Other math functions
+## Các hàm toán học khác
 
-JavaScript has a built-in [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object which contains a small library of mathematical functions and constants.
+JavaScript có đối tượng [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) tích hợp sẵn chứa một thư viện nhỏ chứa các hằng số và hàm toán học.
 
-A few examples:
+Một vài ví dụ:
 
 `Math.random()`
-: Returns a random number from 0 to 1 (not including 1).
+: Trả về một số ngẫu nhiên từ 0 đến 1 (không bao gồm 1).
 
     ```js run
     alert( Math.random() ); // 0.1234567894322
     alert( Math.random() ); // 0.5435252343232
-    alert( Math.random() ); // ... (any random numbers)
+    alert( Math.random() ); // ... (bất kỳ số ngẫu nhiên nào)
     ```
 
 `Math.max(a, b, c...)` / `Math.min(a, b, c...)`
-: Returns the greatest/smallest from the arbitrary number of arguments.
+: Trả về giá trị lớn nhất/nhỏ nhất từ số lượng đối số tùy ý.
 
     ```js run
     alert( Math.max(3, 5, -10, 0, 1) ); // 5
@@ -406,36 +406,36 @@ A few examples:
     ```
 
 `Math.pow(n, power)`
-: Returns `n` raised to the given power.
+: Trả về `n` được nâng lên lũy thừa đã cho.
 
     ```js run
-    alert( Math.pow(2, 10) ); // 2 in power 10 = 1024
+    alert( Math.pow(2, 10) ); // 2 lũy thừa 10 = 1024
     ```
 
-There are more functions and constants in `Math` object, including trigonometry, which you can find in the [docs for the Math object](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math).
+Có nhiều hàm và hằng số hơn trong đối tượng `Math`, bao gồm lượng giác, mà bạn có thể tìm thấy trong [tài liệu cho đối tượng Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math).
 
-## Summary
+## Tóm tắt
 
-To write numbers with many zeroes:
+Để viết các số có nhiều số 0:
 
-- Append `"e"` with the zeroes count to the number. Like: `123e6` is the same as `123` with 6 zeroes `123000000`.
-- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. E.g. `123e-6` means `0.000123` (`123` millionths).
+- Nối `"e"` với các số 0 được tính vào số. Chẳng hạn như: `123e6` giống như `123` với 6 số 0 `123000000`.
+- Một số âm sau `"e"` làm cho số đó bị chia cho 1 với các số 0 đã cho. Ví dụ. `123e-6` có nghĩa là `0,000123` (`123` phần triệu).
 
-For different numeral systems:
+Đối với các hệ thống số khác nhau:
 
-- Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems.
-- `parseInt(str, base)` parses the string `str` into an integer in numeral system with given `base`, `2 ≤ base ≤ 36`.
-- `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
+- Có thể viết số trực tiếp trong hệ thống hex (`0x`), bát phân (`0o`) và nhị phân (`0b`).
+- `parseInt(str, base)` phân tích chuỗi `str` thành một số nguyên trong hệ thống số với `base`, `2 ≤ base ≤ 36` đã cho.
+- `num.toString(base)` chuyển đổi một số thành một chuỗi trong hệ thống số với `base` đã cho.
 
-For converting values like `12pt` and `100px` to a number:
+Để chuyển đổi các giá trị như `12pt` và `100px` thành một số:
 
-- Use `parseInt/parseFloat` for the "soft" conversion, which reads a number from a string and then returns the value they could read before the error.
+- Sử dụng `parseInt/parseFloat` cho chuyển đổi "mềm", đọc một số từ một chuỗi và sau đó trả về giá trị mà chúng có thể đọc được trước khi xảy ra lỗi.
 
-For fractions:
+Đối với phân số:
 
-- Round using `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` or `num.toFixed(precision)`.
-- Make sure to remember there's a loss of precision when working with fractions.
+- Làm tròn bằng cách sử dụng `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` hoặc `num.toFixed(precision)`.
+- Hãy nhớ rằng có sự mất độ chính xác khi làm việc với phân số.
 
-More mathematical functions:
+Các hàm toán học khác:
 
-- See the [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object when you need them. The library is very small, but can cover basic needs.
+- Xem đối tượng [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) khi bạn cần. Thư viện rất nhỏ, nhưng có thể đáp ứng nhu cầu cơ bản.
