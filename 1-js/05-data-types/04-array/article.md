@@ -1,189 +1,189 @@
 # Arrays
 
-Objects allow you to store keyed collections of values. That's fine.
+Các đối tượng cho phép bạn lưu trữ các bộ sưu tập giá trị có khóa. Tốt rồi.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc.
+Nhưng khá thường xuyên, chúng ta thấy rằng chúng ta cần một *bộ sưu tập được sắp xếp theo thứ tự*, trong đó chúng ta có phần tử thứ nhất, thứ hai, thứ ba, v.v. Ví dụ: chúng ta cần điều đó để lưu trữ danh sách thứ gì đó: người dùng, hàng hóa, phần tử HTML, v.v.
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+Sẽ không thuận tiện khi sử dụng một đối tượng ở đây vì nó không cung cấp phương thức nào để quản lý thứ tự của các phần tử. Chúng ta không thể chèn một thuộc tính mới “giữa” những thuộc tính hiện có. Các đối tượng không có nghĩa là để sử dụng như vậy.
 
-There exists a special data structure named `Array`, to store ordered collections.
+Tồn tại một cấu trúc dữ liệu đặc biệt có tên `Arrays`, để lưu trữ các bộ sưu tập có thứ tự.
 
-## Declaration
+## Tuyên bố
 
-There are two syntaxes for creating an empty array:
+Có hai cú pháp để tạo một array trống:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+Hầu như mọi lúc, cú pháp thứ hai được sử dụng. Chúng ta có thể cung cấp các yếu tố ban đầu trong ngoặc đơn:
 
 ```js
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Táo", "Cam", "Mận"];
 ```
 
-Array elements are numbered, starting with zero.
+Các phần tử của array được đánh số, bắt đầu bằng số không.
 
-We can get an element by its number in square brackets:
+Chúng ta có thể lấy một phần tử theo số của nó trong ngoặc vuông:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Táo", "Cam", "Mận"];
 
-alert( fruits[0] ); // Apple
-alert( fruits[1] ); // Orange
-alert( fruits[2] ); // Plum
+alert( fruits[0] ); // Táo
+alert( fruits[1] ); // Cam
+alert( fruits[2] ); // Mận
 ```
 
-We can replace an element:
+Chúng ta có thể thay thế một phần tử:
 
 ```js
-fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
+fruits[2] = 'Lê'; // bây giờ là ["Táo", "Cam", "Lê"]
 ```
 
-...Or add a new one to the array:
+...Hoặc thêm một cái mới vào array:
 
 ```js
-fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
+fruits[3] = 'Chanh'; // bây giờ là ["Táo", "Cam", "Lê", "Chanh"]
 ```
 
-The total count of the elements in the array is its `length`:
+Tổng số phần tử trong array là `length` của nó:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Táo", "Cam", "Mận"];
 
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+Chúng ta cũng có thể sử dụng `alert` để hiển thị toàn bộ array.
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Táo", "Cam", "Mận"];
 
-alert( fruits ); // Apple,Orange,Plum
+alert( fruits ); // Táo,Cam,Mận
 ```
 
-An array can store elements of any type.
+Một array có thể lưu trữ các phần tử thuộc bất kỳ kiểu nào.
 
-For instance:
+Ví dụ:
 
 ```js run no-beautify
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+// hỗn hợp các giá trị
+let arr = [ 'Táo', { tên: 'John' }, true, function() { alert('xin chào'); } ];
 
-// get the object at index 1 and then show its name
+// lấy đối tượng ở chỉ mục 1 và sau đó hiển thị tên của nó
 alert( arr[1].name ); // John
 
-// get the function at index 3 and run it
-arr[3](); // hello
+// lấy hàm ở chỉ mục 3 và chạy nó
+arr[3](); // xin chào
 ```
 
 
-````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+````smart header="Dấu phẩy cuối"
+Một array, giống như một đối tượng, có thể kết thúc bằng dấu phẩy:
 ```js
 let fruits = [
-  "Apple",
-  "Orange",
-  "Plum"*!*,*/!*
+  "Táo",
+  "Cam",
+  "Mận"*!*,*/!*
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+Kiểu "dấu phẩy ở cuối" giúp chèn/xóa các mục dễ dàng hơn vì tất cả các dòng đều giống nhau.
 ````
 
 
-## Methods pop/push, shift/unshift
+## Các phương thức pop/push, shift/unshift
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of the most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+[Hàng đợi](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) là một trong những cách sử dụng array phổ biến nhất. Trong khoa học máy tính, điều này có nghĩa là một tập hợp các phần tử được sắp xếp theo thứ tự hỗ trợ hai thao tác:
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` nối một phần tử vào cuối.
+- `shift` lấy phần tử từ đầu, tăng hàng đợi, sao cho phần tử thứ 2 trở thành phần tử thứ nhất.
 
 ![](queue.svg)
 
-Arrays support both operations.
+Array hỗ trợ cả hai hoạt động.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+Trong thực tế, chúng ta cần nó rất thường xuyên. Ví dụ: một hàng thư cần được hiển thị trên màn hình.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
+Có một trường hợp sử dụng khác cho array -- cấu trúc dữ liệu có tên [ngăn xếp](https://vi.wikipedia.org/wiki/Ng%C4%83n_x%E1%BA%BFp).
 
-It supports two operations:
+Nó hỗ trợ hai hoạt động:
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` thêm một phần tử vào cuối.
+- `pop` lấy một phần tử từ cuối.
 
-So new elements are added or taken always from the "end".
+Vì vậy, các yếu tố mới được thêm vào hoặc lấy luôn từ "cuối".
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+Một ngăn xếp thường được minh họa dưới dạng một bộ bài: các quân bài mới được thêm vào trên cùng hoặc lấy ra từ trên cùng:
 
 ![](stack.svg)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+Đối với ngăn xếp, mục được đẩy mới nhất sẽ được nhận trước, đó còn được gọi là nguyên tắc LIFO (Last-In-First-Out). Đối với hàng đợi, chúng ta có FIFO (First-In-First-Out).
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end.
+Array trong JavaScript có thể hoạt động như một hàng đợi và ngăn xếp. Chúng cho phép bạn thêm/xóa các phần tử ở đầu hoặc cuối.
 
-In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này được gọi là [deque](https://vi.wikipedia.org/wiki/H%C3%A0ng_%C4%91%E1%BB%A3i).
 
-**Methods that work with the end of the array:**
+**Các phương thức hoạt động với phần cuối của array:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: Trích xuất phần tử cuối cùng của array và trả về:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Táo", "Cam", "Lê"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // loại bỏ "Pear" và alert nó
 
-    alert( fruits ); // Apple, Orange
+    alert( fruits ); // Táo, Cam
     ```
 
 `push`
-: Append the element to the end of the array:
+: Nối phần tử vào cuối array:
 
     ```js run
-    let fruits = ["Apple", "Orange"];
+    let fruits = ["Táo", "Cam"];
 
-    fruits.push("Pear");
+    fruits.push("Lê");
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Táo, Cam, Lê
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    Cuộc gọi `fruits.push(...)` bằng `fruits[fruits.length] = ...`.
 
-**Methods that work with the beginning of the array:**
+**Các phương thức hoạt động với sự khởi đầu của array:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: Trích xuất phần tử đầu tiên của array và trả về nó:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+      let fruits = ["Táo", "Cam", "Lê"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // xóa Apple và alert nó
 
-    alert( fruits ); // Orange, Pear
+    alert( fruits ); // Táo, Lê
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: Thêm phần tử vào đầu array:
 
     ```js run
-    let fruits = ["Orange", "Pear"];
+    let fruits = ["Cam", "Lê"];
 
-    fruits.unshift('Apple');
+    fruits.unshift('Táo');
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Táo, Cam, Lê
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+Các phương thức `push` và `unshift` có thể thêm nhiều phần tử cùng một lúc:
 
 ```js run
-let fruits = ["Apple"];
+let fruits = ["Táo"];
 
-fruits.push("Orange", "Peach");
-fruits.unshift("Pineapple", "Lemon");
+fruits.push("Cam", "Lê");
+fruits.unshift("Dứa", "Chanh");
 
-// ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
+// ["Dứa", "Chanh", "Táo", "Cam", "Lê"]
 alert( fruits );
 ```
 
