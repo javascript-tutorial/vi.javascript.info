@@ -105,7 +105,7 @@ Chúng ta cũng có thể sử dụng nó nếu chúng ta muốn chèn một tr�
 Ví dụ:
 
 ```js run
-alert( 'Tôi*!*\*/!*là con hải mã!' ); // *!*Tôi*/!*là con hải mã!
+alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 ```
 
 Như bạn có thể thấy, chúng ta phải thêm vào trước trích dẫn bên trong bằng dấu gạch chéo ngược `\'`, vì nếu không nó sẽ cho biết kết thúc chuỗi.
@@ -113,7 +113,7 @@ Như bạn có thể thấy, chúng ta phải thêm vào trước trích dẫn b
 Tất nhiên, chỉ những trích dẫn giống với những trích dẫn kèm theo mới cần được thoát. Vì vậy, như một giải pháp tao nhã hơn, thay vào đó, chúng ta có thể chuyển sang dấu ngoặc kép hoặc dấu nháy ngược:
 
 ```js run
-alert( `Tôi là con hải mã!` ); // Tôi là con hải mã!
+alert( `I'm the Walrus!` ); // I'm the Walrus!
 ```
 
 Lưu ý rằng dấu gạch chéo ngược `\` phục vụ cho việc đọc chính xác chuỗi bằng JavaScript, sau đó biến mất. Chuỗi trong bộ nhớ không có `\`. Bạn có thể thấy rõ điều đó trong `alert` từ các ví dụ ở trên.
@@ -171,8 +171,8 @@ alert( str.charAt(1000) ); // '' (một chuỗi rỗng)
 Chúng ta cũng có thể lặp lại các ký tự bằng cách sử dụng `for..of`:
 
 ```js run
-for (let char of "Xin chào") {
-  alert(char); // X,i,n, ,c,h,à,o (char trở thành "X", rồi "i", rồi "n", v.v.)
+for (let char of "Hello") {
+  alert(char); // H,e,l,l,o (char trở thành "H", rồi "e", rồi "l", v.v.)
 }
 ```
 
@@ -183,7 +183,7 @@ Không thể thay đổi chuỗi trong JavaScript. Không thể thay đổi mộ
 Hãy thử để chứng minh rằng nó không hoạt động:
 
 ```js run
-let str = 'Chào';
+let str = 'Hi';
 
 str[0] = 'h'; // lỗi
 alert( str[0] ); // không hoạt động
@@ -194,11 +194,11 @@ Cách giải quyết thông thường là tạo một chuỗi hoàn toàn mới 
 Ví dụ:
 
 ```js run
-let str = 'Chào';
+let str = 'Hi';
 
 str = 'h' + str[1]; // thay thế chuỗi
 
-alert( str ); // chào
+alert( str ); // hi
 ```
 
 Trong các phần sau chúng ta sẽ thấy nhiều ví dụ hơn về điều này.
@@ -208,8 +208,8 @@ Trong các phần sau chúng ta sẽ thấy nhiều ví dụ hơn về điều n
 Các phương thức [toLowerCase()](mdn:js/String/toLowerCase) và [toUpperCase()](mdn:js/String/toUpperCase) thay đổi kiểu chữ:
 
 ```js run
-alert( 'Giao diện'.toUpperCase() ); // GIAO DIỆN
-alert( 'Giao diện'.toLowerCase() ); // giao diện
+  alert( 'Interface'.toUpperCase() ); // INTERFACE
+alert( 'Interface'.toLowerCase() ); // Interface
 ```
 
 Hoặc, nếu chúng ta muốn một ký tự được viết thường:
@@ -231,12 +231,12 @@ Nó tìm kiếm `substr` trong `str`, bắt đầu từ vị trí đã cho `pos`
 Ví dụ:
 
 ```js run
-let str = 'Tiện ích với id';
+let str = 'Widget with id';
 
-alert( str.indexOf('Tiện ích') ); // 0, bởi vì 'Tiện ích' được tìm thấy ngay từ đầu
-alert( str.indexOf('tiện ích') ); // -1, không tìm thấy, tìm kiếm phân biệt chữ hoa chữ thường
+alert( str.indexOf('Widget') ); // 0, bởi vì 'Widget' được tìm thấy ngay từ đầu
+alert( str.indexOf('widget') ); // -1, không tìm thấy, tìm kiếm phân biệt chữ hoa chữ thường
 
-alert( str.indexOf("id") ); // 1, "id" được tìm thấy ở vị trí 1 (Tiện ích với id)
+alert( str.indexOf("id") ); // 1, "id" được tìm thấy ở vị trí 1 (..idget với id)
 ```
 
 Tham số thứ hai tùy chọn cho phép chúng ta bắt đầu tìm kiếm từ một vị trí nhất định.
@@ -244,24 +244,24 @@ Tham số thứ hai tùy chọn cho phép chúng ta bắt đầu tìm kiếm t�
 Chẳng hạn, lần xuất hiện đầu tiên của `"id"` là ở vị trí `1`. Để tìm kiếm lần xuất hiện tiếp theo, hãy bắt đầu tìm kiếm từ vị trí `2`:
 
 ```js run
-let str = 'Tiện ích với id';
+let str = 'Widget with id';
 
 alert( str.indexOf('id', 2) ) // 12
 ```
 
-Nếu chúng tôi quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau sự trùng khớp trước đó:
+Nếu chúng ta quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau sự trùng khớp trước đó:
 
 ```js run
-let str = 'Tinh ranh như một con cáo, mạnh mẽ như một con bò';
+let str = 'As sly as a fox, as strong as an ox';
 
-let target = 'như'; // hãy tìm kiếm nó
+let target = 'as'; // hãy tìm kiếm nó
 
 let pos = 0;
 while (true) {
   let foundPos = str.indexOf(target, pos);
   if (foundPos == -1) break;
 
-  alert( `Found at ${foundPos}` );
+  alert( `Đã tìm thấy tại ${foundPos}` );
   pos = foundPos + 1; // tiếp tục tìm kiếm từ vị trí tiếp theo
 }
 ```
@@ -269,8 +269,8 @@ while (true) {
 Thuật toán tương tự có thể được trình bày ngắn hơn:
 
 ```js run
-let str = "Tinh ranh như một con cáo, mạnh mẽ như một con bò";
-let target = "như";
+let str = "As sly as a fox, as strong as an ox";
+let target = "as";
 
 *!*
 let pos = -1;
@@ -289,9 +289,9 @@ Nó sẽ liệt kê các lần xuất hiện theo thứ tự ngược lại.
 Có một chút bất tiện với `indexOf` trong bài kiểm tra `if`. Chúng ta không thể đặt nó trong `if` như thế này:
 
 ```js run
-let str = "Tiện ích với id";
+let str = "Widget with id";
 
-if (str.indexOf("Tiện ích")) {
+if (str.indexOf("Widget")) {
     alert("Chúng ta đã tìm thấy nó"); // không hoạt động!
 }
 ```
@@ -301,10 +301,10 @@ if (str.indexOf("Tiện ích")) {
 Vì vậy, chúng ta thực sự nên kiểm tra `-1`, như sau:
 
 ```js run
-let str = "Tiện ích với id";
+let str = "Widget with id";
 
 *!*
-if (str.indexOf("Tiện ích") != -1) {
+if (str.indexOf("Widget") != -1) {
 */!*
     alert("Chúng ta đã tìm thấy nó"); // bây giờ hoạt động!
 }
@@ -334,9 +334,9 @@ Vì vậy, phép thử `if ( ~str.indexOf("...") )` chỉ đúng nếu kết qu�
 Mọi người sử dụng nó để rút ngắn kiểm tra `indexOf`:
 
 ```js run
-let str = "Tiện ích";
+let str = "Widget";
 
-if (~str.indexOf("Tiện ích")) {
+if (~str.indexOf("Widget")) {
   alert( 'Đã tìm thấy nó·!' ); // hoạt động
 }
 ```
@@ -371,8 +371,8 @@ alert( "Widget".includes("id", 3) ); // false, từ vị trí 3 không có "id"
 Các phương thức [str.startsWith](mdn:js/String/startsWith) và [str.endsWith](mdn:js/String/endsWith) thực hiện chính xác những gì chúng nói:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true, "Tiện ích" bắt đầu bằng "Tiện"
-alert( "Widget".endsWith("get") ); // true, "Tiện ích" kết thúc bằng "ích"
+alert( "Widget".startsWith("Wid") ); // true, "Widget" bắt đầu bằng "Wid"
+alert( "Widget".endsWith("get") ); // true, "Widget" kết thúc bằng "get"
 ```
 
 ## Lấy một chuỗi con
@@ -386,127 +386,127 @@ Có 3 phương thức trong JavaScript để lấy chuỗi con: `substring`, `su
 
     ```js run
     let str = "stringify";
-    alert( str.slice(0, 5) ); // 'strin', the substring from 0 to 5 (not including 5)
-    alert( str.slice(0, 1) ); // 's', from 0 to 1, but not including 1, so only character at 0
+    alert( str.slice(0, 5) ); // 'strin', chuỗi con từ 0 đến 5 (không bao gồm 5)
+    alert( str.slice(0, 1) ); // 's', từ 0 đến 1, nhưng không bao gồm 1, vì vậy chỉ ký tự ở 0
     ```
 
-    If there is no second argument, then `slice` goes till the end of the string:
+    Nếu không có đối số thứ hai, thì `slice` sẽ đi đến cuối chuỗi:
 
     ```js run
     let str = "st*!*ringify*/!*";
-    alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
+    alert( str.slice(2) ); // 'ringify', từ vị trí thứ 2 đến cuối
     ```
 
-    Negative values for `start/end` are also possible. They mean the position is counted from the string end:
+   Cũng có thể có các giá trị âm cho `start/end`. Chúng có nghĩa là vị trí được tính từ cuối chuỗi:
 
     ```js run
     let str = "strin*!*gif*/!*y";
 
-    // start at the 4th position from the right, end at the 1st from the right
+    // bắt đầu ở vị trí thứ 4 từ bên phải, kết thúc ở vị trí thứ 1 từ bên phải
     alert( str.slice(-4, -1) ); // 'gif'
     ```
 
 `str.substring(start [, end])`
-: Returns the part of the string *between* `start` and `end`.
+: Trả về một phần của chuỗi *giữa* `start` và `end`.
 
-    This is almost the same as `slice`, but it allows `start` to be greater than `end`.
+    Điều này gần giống với `slice`, nhưng nó cho phép `start` lớn hơn `end`.
 
-    For instance:
+     Ví dụ:
 
     ```js run
     let str = "st*!*ring*/!*ify";
 
-    // these are same for substring
+    // những cái này giống nhau đối với chuỗi con
     alert( str.substring(2, 6) ); // "ring"
     alert( str.substring(6, 2) ); // "ring"
 
-    // ...but not for slice:
-    alert( str.slice(2, 6) ); // "ring" (the same)
-    alert( str.slice(6, 2) ); // "" (an empty string)
+    // ...nhưng không phải cho lát cắt:
+    alert( str.slice(2, 6) ); // "ring" (giống nhau)
+    alert( str.slice(6, 2) ); // "" (một chuỗi rỗng)
 
     ```
 
-    Negative arguments are (unlike slice) not supported, they are treated as `0`.
+    Các đối số phủ định (không giống như lát cắt) không được hỗ trợ, chúng được coi là `0`.
 
 `str.substr(start [, length])`
-: Returns the part of the string from `start`, with the given `length`.
+: Trả về một phần của chuỗi từ `bắt đầu`, với `độ dài` đã cho.
 
-    In contrast with the previous methods, this one allows us to specify the `length` instead of the ending position:
+     Ngược lại với các phương pháp trước, phương pháp này cho phép chúng ta chỉ định `độ dài` thay vì vị trí kết thúc:
 
     ```js run
     let str = "st*!*ring*/!*ify";
-    alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+    alert( str.substr(2, 4) ); // 'ring', từ vị trí thứ 2 nhận được 4 ký tự
     ```
 
-    The first argument may be negative, to count from the end:
+    Đối số đầu tiên có thể là số âm, được tính từ cuối:
 
     ```js run
     let str = "strin*!*gi*/!*fy";
-    alert( str.substr(-4, 2) ); // 'gi', from the 4th position get 2 characters
+    alert( str.substr(-4, 2) ); // 'gi', từ vị trí thứ 4 lấy 2 ký tự
     ```
 
-Let's recap these methods to avoid any confusion:
+Hãy tóm tắt lại các phương pháp này để tránh nhầm lẫn:
 
-| method | selects... | negatives |
-|--------|-----------|-----------|
-| `slice(start, end)` | from `start` to `end` (not including `end`) | allows negatives |
-| `substring(start, end)` | between `start` and `end` | negative values mean `0` |
-| `substr(start, length)` | from `start` get `length` characters | allows negative `start` |
+| phương pháp | chọn... | âm bản |
+|---|------------|--------|
+| `slice(start, end)` | từ `start` đến `end` (không bao gồm `end`) | cho phép số âm |
+| `substring(start, end)` | giữa `start` và `end` | giá trị âm có nghĩa là `0` |
+| `substr(start, length)` | từ `start` lấy các ký tự `length` | cho phép `start` âm |
 
-```smart header="Which one to choose?"
-All of them can do the job. Formally, `substr` has a minor drawback: it is described not in the core JavaScript specification, but in Annex B, which covers browser-only features that exist mainly for historical reasons. So, non-browser environments may fail to support it. But in practice it works everywhere.
+```smart header="Chọn cái nào?"
+Tất cả chúng có thể làm công việc. Về mặt hình thức, `substr` có một nhược điểm nhỏ: nó không được mô tả trong thông số kỹ thuật JavaScript cốt lõi mà trong Phụ lục B, bao gồm các tính năng chỉ dành cho trình duyệt tồn tại chủ yếu vì lý do lịch sử. Vì vậy, các môi trường không có trình duyệt có thể không hỗ trợ nó. Nhưng trong thực tế, nó hoạt động ở mọi nơi.
 
-Of the other two variants, `slice` is a little bit more flexible, it allows negative arguments and shorter to write. So, it's enough to remember solely `slice` of these three methods.
+Trong số hai biến thể còn lại, `slice` linh hoạt hơn một chút, nó cho phép đối số âm và viết ngắn hơn. Vì vậy, chỉ cần nhớ `slice` của ba phương pháp này là đủ.
 ```
 
-## Comparing strings
+## So sánh chuỗi
 
-As we know from the chapter <info:comparison>, strings are compared character-by-character in alphabetical order.
+Như chúng ta đã biết từ chương <info:comparison>, các chuỗi được so sánh theo từng ký tự theo thứ tự bảng chữ cái.
 
-Although, there are some oddities.
+Mặc dù, có một số điều kỳ lạ.
 
-1. A lowercase letter is always greater than the uppercase:
+1. Chữ thường luôn lớn hơn chữ hoa:
 
     ```js run
     alert( 'a' > 'Z' ); // true
     ```
 
-2. Letters with diacritical marks are "out of order":
+2. Các chữ cái có dấu phụ là "không theo thứ tự":
 
     ```js run
     alert( 'Österreich' > 'Zealand' ); // true
     ```
 
-    This may lead to strange results if we sort these country names. Usually people would expect `Zealand` to come after `Österreich` in the list.
+    Điều này có thể dẫn đến kết quả lạ nếu chúng ta sắp xếp các tên quốc gia này. Thông thường mọi người sẽ mong đợi `Zealand` sẽ đứng sau `Österreich` trong danh sách.
 
-To understand what happens, let's review the internal representation of strings in JavaScript.
+Để hiểu điều gì xảy ra, hãy xem lại biểu diễn bên trong của chuỗi trong JavaScript.
 
-All strings are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code. There are special methods that allow to get the character for the code and back.
+Tất cả các chuỗi được mã hóa bằng [UTF-16](https://en.wikipedia.org/wiki/UTF-16). Đó là: mỗi ký tự có một mã số tương ứng. Có những phương pháp đặc biệt cho phép lấy ký tự cho mã và ngược lại.
 
 `str.codePointAt(pos)`
-: Returns the code for the character at position `pos`:
+: Trả về mã cho ký tự tại vị trí `pos`:
 
     ```js run
-    // different case letters have different codes
+    // các chữ cái viết hoa và viết thường có mã khác nhau
     alert( "z".codePointAt(0) ); // 122
     alert( "Z".codePointAt(0) ); // 90
     ```
 
 `String.fromCodePoint(code)`
-: Creates a character by its numeric `code`
+: Tạo một ký tự bằng số `code` của nó
 
     ```js run
     alert( String.fromCodePoint(90) ); // Z
     ```
 
-    We can also add Unicode characters by their codes using `\u` followed by the hex code:
+   Chúng ta cũng có thể thêm các ký tự Unicode theo mã của chúng bằng cách sử dụng `\u` theo sau là mã hex:
 
     ```js run
-    // 90 is 5a in hexadecimal system
+    // 90 là 5a trong hệ thập lục phân
     alert( '\u005a' ); // Z
     ```
 
-Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+Bây giờ, hãy xem các ký tự có mã `65..220` (bảng chữ cái Latinh và thêm một chút) bằng cách tạo một chuỗi gồm chúng:
 
 ```js run
 let str = '';
@@ -515,139 +515,137 @@ for (let i = 65; i <= 220; i++) {
   str += String.fromCodePoint(i);
 }
 alert( str );
-// ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
-// ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
+// ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}
+// ¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
 
-See? Capital characters go first, then a few special ones, then lowercase characters, and `Ö` near the end of the output.
+Thấy chưa? Các ký tự viết hoa xuất hiện trước, sau đó là một vài ký tự đặc biệt, sau đó là các ký tự viết thường và `Ö` ở gần cuối đầu ra.
 
-Now it becomes obvious why `a > Z`.
+Bây giờ thì rõ ràng là tại sao `a > Z`.
 
-The characters are compared by their numeric code. The greater code means that the character is greater. The code for `a` (97) is greater than the code for `Z` (90).
+Các ký tự được so sánh bằng mã số của chúng. Mã lớn hơn có nghĩa là ký tự lớn hơn. Mã của `a` (97) lớn hơn mã của `Z` (90).
 
-- All lowercase letters go after uppercase letters because their codes are greater.
-- Some letters like `Ö` stand apart from the main alphabet. Here, it's code is greater than anything from `a` to `z`.
+- Tất cả các chữ thường đi sau các chữ in hoa vì mã của chúng lớn hơn.
+- Một số chữ cái như `Ö` đứng ngoài bảng chữ cái chính. Ở đây, mã của nó lớn hơn bất kỳ thứ gì từ `a` đến `z`.
 
-### Correct comparisons [#correct-comparisons]
+### So sánh đúng [#true-comparisons]
 
-The "right" algorithm to do string comparisons is more complex than it may seem, because alphabets are different for different languages.
+Thuật toán "đúng" để thực hiện so sánh chuỗi phức tạp hơn vẻ ngoài của nó, bởi vì các bảng chữ cái khác nhau đối với các ngôn ngữ khác nhau.
 
-So, the browser needs to know the language to compare.
+Vì vậy, trình duyệt cần biết ngôn ngữ để so sánh.
 
-Luckily, all modern browsers (IE10- requires the additional library [Intl.js](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+May mắn thay, tất cả các trình duyệt hiện đại (IE10- yêu cầu thư viện bổ sung [Intl.js](https://github.com/andyearnshaw/Intl.js/)) đều hỗ trợ tiêu chuẩn quốc tế hóa [ECMA-402](http://www. ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
 
-It provides a special method to compare strings in different languages, following their rules.
+Nó cung cấp một phương pháp đặc biệt để so sánh các chuỗi trong các ngôn ngữ khác nhau, tuân theo các quy tắc của chúng.
 
-The call [str.localeCompare(str2)](mdn:js/String/localeCompare) returns an integer indicating whether `str` is less, equal or greater than `str2` according to the language rules:
+Lệnh gọi [str.localeCompare(str2)](mdn:js/String/localeCompare) trả về một số nguyên cho biết `str` nhỏ hơn, bằng hay lớn hơn `str2` theo quy tắc ngôn ngữ:
 
-- Returns a negative number if `str` is less than `str2`.
-- Returns a positive number if `str` is greater than `str2`.
-- Returns `0` if they are equivalent.
+- Trả về số âm nếu `str` nhỏ hơn `str2`.
+- Trả về một số dương nếu `str` lớn hơn `str2`.
+- Trả về `0` nếu chúng bằng nhau.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( 'Österreich'.localeCompare('Zealand') ); // -1
 ```
 
-This method actually has two additional arguments specified in [the documentation](mdn:js/String/localeCompare), which allows it to specify the language (by default taken from the environment, letter order depends on the language) and setup additional rules like case sensitivity or should `"a"` and `"á"` be treated as the same etc.
+Phương thức này thực sự có hai đối số bổ sung được chỉ định trong [tài liệu](mdn:js/String/localeCompare), cho phép phương thức này chỉ định ngôn ngữ (theo mặc định được lấy từ môi trường, thứ tự chữ cái phụ thuộc vào ngôn ngữ) và thiết lập các quy tắc bổ sung như phân biệt chữ hoa chữ thường hoặc nên coi `"a"` và `"á"` như nhau, v.v.
 
-## Internals, Unicode
+## Kiến thức nâng cao"
+Phần này đi sâu hơn vào bên trong chuỗi. Kiến thức này sẽ hữu ích cho bạn nếu bạn định xử lý biểu tượng cảm xúc, ký tự toán học hoặc chữ tượng hình hiếm hoặc các ký hiệu hiếm khác.
 
-```warn header="Advanced knowledge"
-The section goes deeper into string internals. This knowledge will be useful for you if you plan to deal with emoji, rare mathematical or hieroglyphic characters or other rare symbols.
-
-You can skip the section if you don't plan to support them.
+Bạn có thể bỏ qua phần này nếu bạn không có kế hoạch hỗ trợ chúng.
 ```
 
-### Surrogate pairs
+### Cặp thay thế
 
-All frequently used characters have 2-byte codes. Letters in most european languages, numbers, and even most hieroglyphs, have a 2-byte representation.
+Tất cả các ký tự được sử dụng thường xuyên đều có mã 2 byte. Các chữ cái trong hầu hết các ngôn ngữ châu Âu, số và thậm chí hầu hết các chữ tượng hình đều có biểu diễn 2 byte.
 
-But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol. So rare symbols are encoded with a pair of 2-byte characters called "a surrogate pair".
+Nhưng 2 byte chỉ cho phép 65536 kết hợp và điều đó là không đủ cho mọi biểu tượng có thể. Vì vậy, các ký hiệu hiếm được mã hóa bằng một cặp ký tự 2 byte được gọi là "cặp thay thế".
 
-The length of such symbols is `2`:
+Độ dài của các ký hiệu như vậy là `2`:
 
 ```js run
-alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
-alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare Chinese hieroglyph
+alert( '𝒳'.length ); // 2, CHỮ VIẾT HOA TOÁN HỌC X
+alert( '😂'.length ); // 2, MẶT VỚI GIỌT NƯỚC MẮT VUI
+alert( '𩷶'.length ); // 2, một chữ tượng hình hiếm của Trung Quốc
 ```
 
-Note that surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
+Lưu ý rằng các cặp thay thế không tồn tại vào thời điểm JavaScript được tạo và do đó không được ngôn ngữ xử lý chính xác!
 
-We actually have a single symbol in each of the strings above, but the `length` shows a length of `2`.
+Chúng ta thực sự có một ký hiệu duy nhất trong mỗi chuỗi ở trên, nhưng `độ dài` hiển thị độ dài `2`.
 
-`String.fromCodePoint` and `str.codePointAt` are few rare methods that deal with surrogate pairs right. They recently appeared in the language. Before them, there were only [String.fromCharCode](mdn:js/String/fromCharCode) and [str.charCodeAt](mdn:js/String/charCodeAt). These methods are actually the same as `fromCodePoint/codePointAt`, but don't work with surrogate pairs.
+`String.fromCodePoint` và `str.codePointAt` là một vài phương pháp hiếm hoi đối phó với các cặp thay thế đúng. Gần đây chúng đã xuất hiện trong ngôn ngữ. Trước chúng, đã chỉ có [String.fromCharCode](mdn:js/String/fromCharCode) và [str.charCodeAt](mdn:js/String/charCodeAt). Những phương pháp này thực sự giống như `fromCodePoint/codePointAt`, nhưng không hoạt động với các cặp thay thế.
 
-Getting a symbol can be tricky, because surrogate pairs are treated as two characters:
+Lấy một biểu tượng có thể khó khăn, bởi vì các cặp thay thế được coi là hai ký tự:
 
 ```js run
-alert( '𝒳'[0] ); // strange symbols...
-alert( '𝒳'[1] ); // ...pieces of the surrogate pair
+alert( '𝒳'[0] ); // ký tự lạ...
+alert( '𝒳'[1] ); // ...các mảnh của cặp thay thế
 ```
 
-Note that pieces of the surrogate pair have no meaning without each other. So the alerts in the example above actually display garbage.
+Lưu ý rằng các phần của cặp thay thế không có ý nghĩa gì nếu không có nhau. Vì vậy, các cảnh báo trong ví dụ trên thực sự hiển thị rác.
 
-Technically, surrogate pairs are also detectable by their codes: if a character has the code in the interval of `0xd800..0xdbff`, then it is the first part of the surrogate pair. The next character (second part) must have the code in interval `0xdc00..0xdfff`. These intervals are reserved exclusively for surrogate pairs by the standard.
+Về mặt kỹ thuật, các cặp thay thế cũng có thể được phát hiện bằng mã của chúng: nếu một ký tự có mã trong khoảng `0xd800..0xdbff`, thì đó là phần đầu tiên của cặp thay thế. Ký tự tiếp theo (phần thứ hai) phải có mã trong khoảng `0xdc00..0xdfff`. Các khoảng thời gian này được dành riêng cho các cặp thay thế theo tiêu chuẩn.
 
-In the case above:
+Trong trường hợp trên:
 
 ```js run
-// charCodeAt is not surrogate-pair aware, so it gives codes for parts
+// charCodeAt không nhận biết cặp thay thế, vì vậy nó cung cấp mã cho các bộ phận
 
-alert( '𝒳'.charCodeAt(0).toString(16) ); // d835, between 0xd800 and 0xdbff
-alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3, between 0xdc00 and 0xdfff
+alert( '𝒳'.charCodeAt(0).toString(16) ); // d835, giữa 0xd800 và 0xdbff
+alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3, giữa 0xdc00 và 0xdfff
 ```
 
-You will find more ways to deal with surrogate pairs later in the chapter <info:iterable>. There are probably special libraries for that too, but nothing famous enough to suggest here.
+Bạn sẽ tìm thấy nhiều cách hơn để xử lý các cặp thay thế ở phần sau của chương <info:iterable>. Có thể có những thư viện đặc biệt cho điều đó, nhưng không có gì đủ nổi tiếng để đề xuất ở đây.
 
-### Diacritical marks and normalization
+### Dấu phụ và chuẩn hóa
 
-In many languages there are symbols that are composed of the base character with a mark above/under it.
+Trong nhiều ngôn ngữ, có những ký hiệu bao gồm ký tự cơ sở có dấu ở trên/dưới ký tự đó.
 
-For instance, the letter `a` can be the base character for: `àáâäãåā`. Most common "composite" character have their own code in the UTF-16 table. But not all of them, because there are too many possible combinations.
+Chẳng hạn, chữ `a` có thể là ký tự cơ sở cho: `àáâäãåā`. Hầu hết các ký tự "tổng hợp" phổ biến đều có mã riêng trong bảng UTF-16. Nhưng không phải tất cả chúng, bởi vì có quá nhiều kết hợp có thể.
 
-To support arbitrary compositions, UTF-16 allows us to use several Unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
+Để hỗ trợ các thành phần tùy ý, UTF-16 cho phép chúng tôi sử dụng một số ký tự Unicode: ký tự cơ sở theo sau là một hoặc nhiều ký tự "đánh dấu" "trang trí" cho nó.
 
-For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
+Ví dụ: nếu chúng ta có `S` theo sau là ký tự "dấu chấm phía trên" đặc biệt (mã `\u0307`), thì nó được hiển thị là Ṡ.
 
 ```js run
 alert( 'S\u0307' ); // Ṡ
 ```
 
-If we need an additional mark above the letter (or below it) -- no problem, just add the necessary mark character.
+Nếu chúng ta cần một dấu bổ sung phía trên chữ cái (hoặc bên dưới nó) -- không vấn đề gì, chỉ cần thêm ký tự dấu cần thiết.
 
-For instance, if we append a character "dot below" (code `\u0323`), then we'll have "S with dots above and below": `Ṩ`.
+Ví dụ: nếu chúng ta thêm một ký tự "dấu chấm bên dưới" (mã `\u0323`), thì chúng ta sẽ có "S có dấu chấm bên trên và bên dưới": `Ṩ`.
 
-For example:
+Ví dụ:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different Unicode compositions.
+Điều này mang lại sự linh hoạt tuyệt vời, nhưng cũng là một vấn đề thú vị: hai ký tự có thể trông giống nhau về mặt trực quan, nhưng được thể hiện bằng các thành phần Unicode khác nhau.
 
-For instance:
+Ví dụ:
 
 ```js run
-let s1 = 'S\u0307\u0323'; // Ṩ, S + dot above + dot below
-let s2 = 'S\u0323\u0307'; // Ṩ, S + dot below + dot above
+let s1 = 'S\u0307\u0323'; // Ṩ, S + chấm trên + chấm dưới
+let s2 = 'S\u0323\u0307'; // Ṩ, S + chấm trên + chấm dưới
 
 alert( `s1: ${s1}, s2: ${s2}` );
 
-alert( s1 == s2 ); // false though the characters look identical (?!)
+alert( s1 == s2 ); // false mặc dù các ký tự trông giống hệt nhau (?!)
 ```
 
-To solve this, there exists a "Unicode normalization" algorithm that brings each string to the single "normal" form.
+Để giải quyết vấn đề này, tồn tại thuật toán "Chuẩn hóa Unicode" đưa mỗi chuỗi về dạng "bình thường" duy nhất.
 
-It is implemented by [str.normalize()](mdn:js/String/normalize).
+Nó được triển khai bởi [str.normalize()](mdn:js/String/normalize).
 
 ```js run
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-It's funny that in our situation `normalize()` actually brings together a sequence of 3 characters to one: `\u1e68` (S with two dots).
+Thật buồn cười là trong tình huống của chúng ta, `normalize()` thực sự tập hợp một chuỗi gồm 3 ký tự thành một: `\u1e68` (S có hai dấu chấm).
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1
@@ -655,25 +653,25 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason being that the symbol `Ṩ` is "common enough", so UTF-16 creators included it in the main table and gave it the code.
+Trong thực tế, điều này không phải lúc nào cũng đúng. Lý do là ký hiệu `Ṩ` là "đủ phổ biến", vì vậy những người tạo UTF-16 đã đưa nó vào bảng chính và đặt mã cho nó.
 
-If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
+Nếu bạn muốn tìm hiểu thêm về các biến thể và quy tắc chuẩn hóa -- chúng được mô tả trong phần phụ lục của tiêu chuẩn Unicode: [Biểu mẫu chuẩn hóa Unicode](http://www.unicode.org/reports/tr15/), nhưng đối với hầu hết các trường hợp thực tế mục đích thông tin từ phần này là đủ.
 
-## Summary
+## Tóm tắt
 
-- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions `${…}`.
-- Strings in JavaScript are encoded using UTF-16.
-- We can use special characters like `\n` and insert letters by their Unicode using `\u...`.
-- To get a character, use: `[]`.
-- To get a substring, use: `slice` or `substring`.
-- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
-- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
-- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+- Có 3 loại trích dẫn. Backticks cho phép một chuỗi mở rộng trên nhiều dòng và nhúng các biểu thức `${…}`.
+- Các chuỗi trong JavaScript được mã hóa bằng UTF-16.
+- Chúng ta có thể sử dụng các ký tự đặc biệt như `\n` và chèn các chữ cái theo Unicode của chúng bằng cách sử dụng `\u...`.
+- Để lấy một ký tự, sử dụng: `[]`.
+- Để lấy chuỗi con, dùng: `slice` hoặc `substring`.
+- Để viết thường/viết hoa một chuỗi, sử dụng: `toLowerCase/toUpperCase`.
+- Để tìm một chuỗi con, hãy sử dụng: `indexOf`, hoặc `includes/startsWith/endsWith` để kiểm tra đơn giản.
+- Để so sánh các chuỗi theo ngôn ngữ, hãy sử dụng: `localeCompare`, nếu không thì chúng được so sánh bằng mã ký tự.
 
-There are several other helpful methods in strings:
+Có một số phương pháp hữu ích khác trong chuỗi:
 
-- `str.trim()` -- removes ("trims") spaces from the beginning and end of the string.
-- `str.repeat(n)` -- repeats the string `n` times.
-- ...and more to be found in the [manual](mdn:js/String).
+- `str.trim()` -- xóa khoảng trắng ("trims") khỏi đầu và cuối chuỗi.
+- `str.repeat(n)` -- lặp lại chuỗi `n` lần.
+- ...và nhiều hơn nữa được tìm thấy trong [hướng dẫn sử dụng](mdn:js/String).
 
-Strings also have methods for doing search/replace with regular expressions. But that's big topic, so it's explained in a separate tutorial section <info:regular-expressions>.
+Các chuỗi cũng có các phương thức để thực hiện tìm kiếm/thay thế bằng các biểu thức thông thường. Nhưng đó là chủ đề lớn nên nó được giải thích trong phần hướng dẫn riêng biệt <info:regular-expressions>.
