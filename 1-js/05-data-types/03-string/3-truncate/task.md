@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Truncate the text
+# Cắt bớt văn bản
 
-Create a function `truncate(str, maxlength)` that checks the length of the `str` and, if it exceeds `maxlength` -- replaces the end of `str` with the ellipsis character `"…"`, to make its length equal to `maxlength`.
+Tạo một hàm `truncate(str, maxlength)` để kiểm tra độ dài của `str` và, nếu nó vượt quá `maxlength` -- thay thế phần cuối của `str` bằng ký tự dấu chấm lửng `"…"`, để tạo chiều dài bằng `maxlength`.
 
-The result of the function should be the truncated (if needed) string.
+Kết quả của hàm phải là chuỗi bị cắt ngắn (nếu cần).
 
-For instance:
+Ví dụ:
 
 ```js
 truncate("What I'd like to tell on this topic is:", 20) = "What I'd like to te…"
