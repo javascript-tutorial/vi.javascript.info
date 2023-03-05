@@ -249,7 +249,7 @@ let str = 'Tiện ích với id';
 alert( str.indexOf('id', 2) ) // 12
 ```
 
-Nếu chúng tôi quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau sự trùng hợp trước đó:
+Nếu chúng tôi quan tâm đến tất cả các lần xuất hiện, chúng tôi có thể chạy `indexOf` trong một vòng lặp. Mỗi cuộc gọi mới được thực hiện với vị trí sau sự trùng khớp trước đó:
 
 ```js run
 let str = 'Tinh ranh như một con cáo, mạnh mẽ như một con bò';
@@ -329,7 +329,7 @@ alert( ~-1 ); // 0, giống như -(-1+1)
 
 Như chúng ta có thể thấy, `~n` chỉ bằng 0 nếu `n == -1` (đó là đối với bất kỳ số nguyên có dấu 32 bit nào `n`).
 
-Vì vậy, phép thử `if ( ~str.indexOf("...") )` chỉ đúng nếu kết quả của `indexOf` không phải là `-1`. Nói cách khác, khi có một sự trùng hợp.
+Vì vậy, phép thử `if ( ~str.indexOf("...") )` chỉ đúng nếu kết quả của `indexOf` không phải là `-1`. Nói cách khác, khi có một sự trùng khớp.
 
 Mọi người sử dụng nó để rút ngắn kiểm tra `indexOf`:
 
@@ -341,19 +341,19 @@ if (~str.indexOf("Tiện ích")) {
 }
 ```
 
-It is usually not recommended to use language features in a non-obvious way, but this particular trick is widely used in old code, so we should understand it.
+Thông thường không nên sử dụng các tính năng ngôn ngữ theo cách không rõ ràng, nhưng thủ thuật cụ thể này được sử dụng rộng rãi trong mã cũ, vì vậy chúng ta nên hiểu nó.
 
-Just remember: `if (~str.indexOf(...))` reads as "if found".
+Chỉ cần nhớ: `if (~str.indexOf(...))` đọc là "nếu tìm thấy".
 
-To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check correct only if a string is not that long.
+Tuy nhiên, nói một cách chính xác, vì các số lớn bị cắt bớt thành 32 bit bởi toán tử `~`, nên tồn tại các số khác cho `0`, số nhỏ nhất là `~4294967295=0`. Điều đó làm cho kiểm tra như vậy chỉ chính xác nếu một chuỗi không dài.
 
-Right now we can see this trick only in the old code, as modern JavaScript provides `.includes` method (see below).
+Hiện tại, chúng ta chỉ có thể thấy thủ thuật này trong mã cũ, vì JavaScript hiện đại cung cấp phương thức `.includes` (xem bên dưới).
 
 ### includes, startsWith, endsWith
 
-The more modern method [str.includes(substr, pos)](mdn:js/String/includes) returns `true/false` depending on whether `str` contains `substr` within.
+Phương thức hiện đại hơn [str.includes(substr, pos)](mdn:js/String/includes) trả về `true/false` tùy thuộc vào việc `str` có chứa `substr` bên trong hay không.
 
-It's the right choice if we need to test for the match, but don't need its position:
+Đó là lựa chọn phù hợp nếu chúng ta cần kiểm tra sự trùng khớp, nhưng không cần vị trí của nó:
 
 ```js run
 alert( "Widget with id".includes("Widget") ); // true
@@ -361,28 +361,28 @@ alert( "Widget with id".includes("Widget") ); // true
 alert( "Hello".includes("Bye") ); // false
 ```
 
-The optional second argument of `str.includes` is the position to start searching from:
+Đối số thứ hai tùy chọn của `str.includes` là vị trí để bắt đầu tìm kiếm từ:
 
 ```js run
 alert( "Widget".includes("id") ); // true
-alert( "Widget".includes("id", 3) ); // false, from position 3 there is no "id"
+alert( "Widget".includes("id", 3) ); // false, từ vị trí 3 không có "id"
 ```
 
-The methods [str.startsWith](mdn:js/String/startsWith) and [str.endsWith](mdn:js/String/endsWith) do exactly what they say:
+Các phương thức [str.startsWith](mdn:js/String/startsWith) và [str.endsWith](mdn:js/String/endsWith) thực hiện chính xác những gì chúng nói:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
-alert( "Widget".endsWith("get") ); // true, "Widget" ends with "get"
+alert( "Widget".startsWith("Wid") ); // true, "Tiện ích" bắt đầu bằng "Tiện"
+alert( "Widget".endsWith("get") ); // true, "Tiện ích" kết thúc bằng "ích"
 ```
 
-## Getting a substring
+## Lấy một chuỗi con
 
-There are 3 methods in JavaScript to get a substring: `substring`, `substr` and `slice`.
+Có 3 phương thức trong JavaScript để lấy chuỗi con: `substring`, `substr` và `slice`.
 
 `str.slice(start [, end])`
-: Returns the part of the string from `start` to (but not including) `end`.
+: Trả về một phần của chuỗi từ `start` đến (nhưng không bao gồm) `end`.
 
-    For instance:
+    Ví dụ:
 
     ```js run
     let str = "stringify";
