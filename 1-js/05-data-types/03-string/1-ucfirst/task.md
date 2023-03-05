@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Uppercase the first character
+# Chữ hoa ký tự đầu tiên
 
-Write a function `ucFirst(str)` that returns the string `str` with the uppercased first character, for instance:
+Ví dụ, viết hàm `ucFirst(str)` trả về chuỗi `str` với ký tự đầu tiên được viết hoa:
 
 ```js
 ucFirst("john") == "John";
