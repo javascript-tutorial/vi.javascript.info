@@ -1,6 +1,6 @@
-Let's walk the array items:
-- For each item we'll check if the resulting array already has that item.
-- If it is so, then ignore, otherwise add to results.
+Hãy đi qua các item array:
+- Đối với mỗi item, chúng ta sẽ kiểm tra xem kết quả array đã có item đó chưa.
+- Nếu đúng thì bỏ qua, nếu không thì cộng vào kết quả.
 
 ```js run demo
 function unique(arr) {
@@ -22,18 +22,18 @@ let strings = ["Hare", "Krishna", "Hare", "Krishna",
 alert( unique(strings) ); // Hare, Krishna, :-O
 ```
 
-The code works, but there's a potential performance problem in it.
+Mã này hoạt động, nhưng có một vấn đề tiềm ẩn về hiệu suất trong đó.
 
-The method `result.includes(str)` internally walks the array `result` and compares each element against `str` to find the match.
+Phương thức `result.includes(str)` đi bên trong array `result` và so sánh từng phần tử với `str` để tìm kết quả khớp.
 
-So if there are `100` elements in `result` and no one matches `str`, then it will walk the whole `result` and do exactly `100` comparisons. And if `result` is large, like `10000`, then there would be `10000` comparisons.
+Vì vậy, nếu có `100` phần tử trong `result` và không có phần tử nào khớp với `str`, thì nó sẽ duyệt toàn bộ `result` và thực hiện so sánh chính xác `100`. Và nếu `result` lớn, chẳng hạn như `10000`, thì sẽ có các phép so sánh `10000`.
 
-That's not a problem by itself, because JavaScript engines are very fast, so walk `10000` array is a matter of microseconds.
+Bản thân nó không phải là vấn đề, bởi vì các JavaScript engine rất nhanh, do đó, array `10000` walk chỉ là một phần triệu giây.
 
-But we do such test for each element of `arr`, in the `for` loop.
+Nhưng chúng ta thực hiện kiểm tra như vậy cho từng phần tử của `arr`, trong vòng lặp `for`.
 
-So if `arr.length` is `10000` we'll have something like `10000*10000` = 100 millions of comparisons. That's a lot.
+Vì vậy, nếu `arr.length` là `10000` thì chúng ta sẽ có thứ gì đó như `10000*10000` = 100 triệu phép so sánh. Đó là rất nhiều.
 
-So the solution is only good for small arrays.
+Vì vậy, giải pháp chỉ tốt cho các array nhỏ.
 
-Further in the chapter <info:map-set> we'll see how to optimize it.
+Hơn nữa trong chương <info:map-set> chúng ta sẽ xem cách tối ưu hóa nó.
