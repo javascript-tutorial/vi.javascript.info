@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Map to names
+# Bản đồ đến tên
 
-You have an array of `user` objects, each one has `user.name`. Write the code that converts it into an array of names.
+Bạn có một array các đối tượng `user`, mỗi đối tượng có `user.name`. Viết mã chuyển đổi nó thành một array tên.
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };
@@ -15,7 +15,7 @@ let mary = { name: "Mary", age: 28 };
 
 let users = [ john, pete, mary ];
 
-let names = /* ... your code */
+let names = /* ... mã của bạn */
 
 alert( names ); // John, Pete, Mary
 ```
