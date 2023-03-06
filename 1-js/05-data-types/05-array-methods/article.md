@@ -51,43 +51,43 @@ Phương pháp này rất dễ nắm bắt bằng các ví dụ.
 Hãy bắt đầu với việc xóa:
 
 ```js run
-let arr = ["I", "study", "JavaScript"];
+let arr = ["Tôi", "học", "JavaScript"];
 
 *!*
-arr.splice(1, 1); // from index 1 remove 1 element
+arr.splice(1, 1); // từ chỉ mục 1 loại bỏ 1 phần tử
 */!*
 
-alert( arr ); // ["I", "JavaScript"]
+alert( arr ); // ["Tôi", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+Dễ, phải không? Bắt đầu từ chỉ mục `1` nó đã loại bỏ phần tử `1`.
 
-In the next example we remove 3 elements and replace them with the other two:
+Trong ví dụ tiếp theo, chúng ta loại bỏ 3 phần tử và thay thế chúng bằng hai phần tử còn lại:
 
 ```js run
-let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
+let arr = [*!*"Tôi", "học", "JavaScript",*/!* "ngay", "bây giờ"];
 
-// remove 3 first elements and replace them with another
-arr.splice(0, 3, "Let's", "dance");
+// xóa 3 phần tử đầu tiên và thay thế chúng bằng phần tử khác
+arr.splice(0, 3, "Hãy", "nhảy");
 
-alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
+alert( arr ) // now [*!*"Hãy", "nhảy"*/!*, "ngay", "bây giờ"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+Ở đây chúng ta có thể thấy rằng `splice` trả về array các phần tử đã loại bỏ:
 
 ```js run
-let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
+let arr = [*!*"Tôi", "học",*/!* "JavaScript", "ngay", "bây giờ"];
 
-// remove 2 first elements
+// loại bỏ 2 phần tử đầu tiên
 let removed = arr.splice(0, 2);
 
-alert( removed ); // "I", "study" <-- array of removed elements
+alert( removed ); // "Tôi", "học" <-- array of của các phần tử bị loại bỏ
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+Phương thức `splice` cũng có thể chèn các phần tử mà không cần xóa. Để làm được điều đó, chúng ta cần đặt `deleteCount` thành `0`:
 
 ```js run
-let arr = ["I", "study", "JavaScript"];
+let arr = ["Tôi", "học", "JavaScript"];
 
 // from index 2
 // delete 0
