@@ -1,54 +1,54 @@
-# Array methods
+# Phương thức array
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+Array cung cấp rất nhiều phương thức. Để làm cho mọi thứ dễ dàng hơn, trong chương này chúng được chia thành các nhóm.
 
-## Add/remove items
+## Thêm/xóa mục
 
-We already know methods that add and remove items from the beginning or the end:
+Chúng ta đã biết các phương thức thêm và xóa các mục từ đầu hoặc cuối:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- thêm các mục vào cuối,
+- `arr.pop()` -- trích xuất một mục từ cuối,
+- `arr.shift()` -- trích xuất một mục từ đầu,
+- `arr.unshift(...items)` -- thêm các mục vào đầu.
 
-Here are a few others.
+Dưới đây là một số khác.
 
 ### splice
 
-How to delete an element from the array?
+Làm cách nào để xóa một phần tử khỏi array?
 
-The arrays are objects, so we can try to use `delete`:
+Các array là các đối tượng, vì vậy chúng ta có thể thử sử dụng `delete`:
 
 ```js run
-let arr = ["I", "go", "home"];
+let arr = ["Tôi", "về", "nhà"];
 
-delete arr[1]; // remove "go"
+delete arr[1]; // loại bỏ "về"
 
 alert( arr[1] ); // undefined
 
-// now arr = ["I",  , "home"];
+// bây giờ arr = ["Tôi",  , "nhà"];
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+Phần tử đã bị xóa, nhưng array vẫn còn 3 phần tử, chúng ta có thể thấy rằng `arr.length == 3`.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+Điều đó là bình thường, bởi vì `delete obj.key` sẽ xóa một giá trị bằng `key`. Đó là tất cả những gì nó làm. Phạt đối với các đối tượng. Nhưng đối với array, chúng ta thường muốn các phần tử còn lại dịch chuyển và chiếm vị trí được giải phóng. Chúng ta hy vọng sẽ có một array ngắn hơn bây giờ.
 
-So, special methods should be used.
+Vì vậy, các phương thức đặc biệt nên được sử dụng.
 
-The [arr.splice](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+Phương thức [arr.splice](mdn:js/Array/splice) là một con dao quân đội Thụy Sĩ dành cho array. Nó có thể làm mọi thứ: chèn, xóa và thay thế các phần tử.
 
-The syntax is:
+Cú pháp là:
 
 ```js
 arr.splice(start[, deleteCount, elem1, ..., elemN])
 ```
 
-It modifies `arr` starting from the index `start`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+Nó sửa đổi `arr` bắt đầu từ chỉ mục `start`: loại bỏ các phần tử `deleteCount` và sau đó chèn `elem1, ..., elemN` vào vị trí của chúng. Trả về array các phần tử đã loại bỏ.
 
-This method is easy to grasp by examples.
+Phương pháp này rất dễ nắm bắt bằng các ví dụ.
 
-Let's start with the deletion:
+Hãy bắt đầu với việc xóa:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
