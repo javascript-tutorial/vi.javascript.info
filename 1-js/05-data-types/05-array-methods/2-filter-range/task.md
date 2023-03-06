@@ -2,21 +2,21 @@ importance: 4
 
 ---
 
-# Filter range
+# Phạm vi bộ lọc
 
-Write a function `filterRange(arr, a, b)` that gets an array `arr`, looks for elements with values higher or equal to `a` and lower or equal to `b` and return a result as an array.
+Viết một hàm `filterRange(arr, a, b)` nhận một array `arr`, tìm kiếm các phần tử có giá trị cao hơn hoặc bằng `a` và thấp hơn hoặc bằng `b` và trả về kết quả dưới dạng một array.
 
-The function should not modify the array. It should return the new array.
+Hàm không nên sửa đổi array. Nó sẽ trả về array mới.
 
-For instance:
+Ví dụ:
 
 ```js
 let arr = [5, 3, 8, 1];
 
 let filtered = filterRange(arr, 1, 4); 
 
-alert( filtered ); // 3,1 (matching values)
+alert( filtered ); // 3,1 (giá trị trùng khớp)
 
-alert( arr ); // 5,3,8,1 (not modified)
+alert( arr ); // 5,3,8,1 (không bị sửa đổi)
 ```
 
