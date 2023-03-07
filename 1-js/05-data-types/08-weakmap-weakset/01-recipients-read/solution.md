@@ -16,7 +16,7 @@ readMessages.add(messages[1]);
 
 // ...hãy đọc lại tin nhắn đầu tiên!
 readMessages.add(messages[0]);
-// readMessages still has 2 unique elements
+// readMessages vẫn có 2 yếu tố duy nhất
 
 // trả lời: messages[0] đã được đọc chưa?
 alert("Read message 0: " + readMessages.has(messages[0])); // true
@@ -40,4 +40,4 @@ messages[0][isRead] = true;
 
 Bây giờ mã của bên thứ ba có thể sẽ không thấy thuộc tính bổ sung của chúng ta.
 
-Although symbols allow to lower the probability of problems, using `WeakSet` is better from the architectural point of view.
+Mặc dù các biểu tượng cho phép giảm xác suất xảy ra sự cố, nhưng sử dụng `WeakSet` sẽ tốt hơn từ quan điểm kiến kiến trúc.
