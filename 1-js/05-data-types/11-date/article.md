@@ -87,55 +87,55 @@ Có các phương thức để truy cập năm, tháng, v.v. từ đối tượn
 : Lấy tháng, **từ 0 đến 11**.
 
 [getDate()](mdn:js/Date/getDate)
-: Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
+: Lấy ngày trong tháng, từ 1 đến 31, tên của phương thức trông hơi lạ.
 
 [getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
-: Get the corresponding time components.
+: Lấy các thành phần thời gian tương ứng.
 
-```warn header="Not `getYear()`, but `getFullYear()`"
-Many JavaScript engines implement a non-standard method `getYear()`. This method is deprecated. It returns 2-digit year sometimes. Please never use it. There is `getFullYear()` for the year.
+```warn header="Không phải `getYear()`, mà là `getFullYear()`"
+Nhiều JavaScript engine triển khai một phương thức không chuẩn `getYear()`. Phương pháp này không được chấp nhận. Đôi khi nó trả về năm có 2 chữ số. Xin vui lòng không bao giờ sử dụng nó. Có `getFullYear()` cho năm.
 ```
 
-Additionally, we can get a day of week:
+Ngoài ra, chúng ta có thể nhận được một ngày trong tuần:
 
 [getDay()](mdn:js/Date/getDay)
-: Get the day of week, from `0` (Sunday) to `6` (Saturday). The first day is always Sunday, in some countries that's not so, but can't be changed.
+: Lấy ngày trong tuần, từ `0` (Chủ Nhật) đến `6` (Thứ Bảy). Ngày đầu tiên luôn là Chủ nhật, ở một số quốc gia thì không như vậy nhưng không thể thay đổi.
 
-**All the methods above return the components relative to the local time zone.**
+**Tất cả các phương pháp trên trả về các thành phần liên quan đến múi giờ địa phương.**
 
-There are also their UTC-counterparts, that return day, month, year and so on for the time zone UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Just insert the `"UTC"` right after `"get"`.
+Ngoài ra còn có các đối tác UTC của chúng, trả về ngày, tháng, năm, v.v. cho múi giờ UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js /Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Chỉ cần chèn `"UTC"` ngay sau `"get"`.
 
-If your local time zone is shifted relative to UTC, then the code below shows different hours:
+Nếu múi giờ địa phương của bạn bị thay đổi so với UTC, thì mã bên dưới sẽ hiển thị các giờ khác nhau:
 
 ```js run
-// current date
+// ngày hiện tại
 let date = new Date();
 
-// the hour in your current time zone
+// giờ trong múi giờ hiện tại của bạn
 alert( date.getHours() );
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// giờ theo múi giờ UTC+0 (giờ Luân Đôn không tiết kiệm ánh sáng ban ngày)
 alert( date.getUTCHours() );
 ```
 
-Besides the given methods, there are two special ones that do not have a UTC-variant:
+Bên cạnh các phương thức đã cho, có hai phương thức đặc biệt không có biến thể UTC:
 
 [getTime()](mdn:js/Date/getTime)
-: Returns the timestamp for the date -- a number of milliseconds passed from the January 1st of 1970 UTC+0.
+: Trả về dấu thời gian cho ngày -- một số mili giây được truyền từ ngày 1 tháng 1 năm 1970 UTC+0.
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-: Returns the difference between UTC and the local time zone, in minutes:
+: Trả về sự khác biệt giữa UTC và múi giờ địa phương, tính bằng phút:
 
     ```js run
-    // if you are in timezone UTC-1, outputs 60
-    // if you are in timezone UTC+3, outputs -180
+    // nếu bạn đang ở múi giờ UTC-1, kết quả là 60
+    // nếu bạn đang ở múi giờ UTC+3, kết quả là -180
     alert( new Date().getTimezoneOffset() );
 
     ```
 
-## Setting date components
+## Đặt thành phần ngày
 
-The following methods allow to set date/time components:
+Các phương pháp sau đây cho phép thiết lập các thành phần ngày/giờ:
 
 - [`setFullYear(year, [month], [date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month, [date])`](mdn:js/Date/setMonth)
@@ -144,38 +144,38 @@ The following methods allow to set date/time components:
 - [`setMinutes(min, [sec], [ms])`](mdn:js/Date/setMinutes)
 - [`setSeconds(sec, [ms])`](mdn:js/Date/setSeconds)
 - [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
-- [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
+- [`setTime(milliseconds)`](mdn:js/Date/setTime) (đặt toàn bộ ngày theo mili giây kể từ 01.01.1970 UTC)
 
-Every one of them except `setTime()` has a UTC-variant, for instance: `setUTCHours()`.
+Mỗi một trong số chúng ngoại trừ `setTime()` đều có một biến thể UTC, ví dụ: `setUTCHours()`.
 
-As we can see, some methods can set multiple components at once, for example `setHours`. The components that are not mentioned are not modified.
+Như chúng ta có thể thấy, một số phương thức có thể thiết lập nhiều thành phần cùng một lúc, ví dụ `setHours`. Các thành phần không được đề cập không được sửa đổi.
 
-For instance:
+Ví dụ:
 
 ```js run
 let today = new Date();
 
 today.setHours(0);
-alert(today); // still today, but the hour is changed to 0
+alert(today); // vẫn là hôm nay, nhưng giờ được đổi thành 0
 
 today.setHours(0, 0, 0, 0);
-alert(today); // still today, now 00:00:00 sharp.
+alert(today); // vẫn là hôm nay, bây giờ 00:00:00 đúng.
 ```
 
-## Autocorrection
+## Tự động sửa lỗi
 
-The *autocorrection* is a very handy feature of `Date` objects. We can set out-of-range values, and it will auto-adjust itself.
+*Tự động sửa lỗi* là một tính năng rất tiện dụng của các đối tượng `Date`. Chúng ta có thể đặt các giá trị nằm ngoài phạm vi và nó sẽ tự động điều chỉnh.
 
-For instance:
+Ví dụ:
 
 ```js run
-let date = new Date(2013, 0, *!*32*/!*); // 32 Jan 2013 ?!?
-alert(date); // ...is 1st Feb 2013!
+let date = new Date(2013, 0, *!*32*/!*); // 32 tháng 1 năm 2013 ?!?
+alert(date); // ...là ngày 1 tháng 2 năm 2013!
 ```
 
-Out-of-range date components are distributed automatically.
+Các thành phần ngày nằm ngoài phạm vi được phân phối tự động.
 
-Let's say we need to increase the date "28 Feb 2016" by 2 days. It may be "2 Mar" or "1 Mar" in case of a leap-year. We don't need to think about it. Just add 2 days. The `Date` object will do the rest:
+Giả sử chúng ta cần tăng ngày "28 Feb 2016" thêm 2 ngày. Nó có thể là "2 tháng 3" hoặc "1 tháng 3" trong trường hợp năm nhuận. Chúng ta không cần phải suy nghĩ về nó. Chỉ cần thêm 2 ngày. Đối tượng `Date` sẽ làm phần còn lại:
 
 ```js run
 let date = new Date(2016, 1, 28);
@@ -183,40 +183,40 @@ let date = new Date(2016, 1, 28);
 date.setDate(date.getDate() + 2);
 */!*
 
-alert( date ); // 1 Mar 2016
+alert( date ); // 1 Tháng 3 năm 2016
 ```
 
-That feature is often used to get the date after the given period of time. For instance, let's get the date for "70 seconds after now":
+Tính năng đó thường được sử dụng để lấy ngày sau một khoảng thời gian nhất định. Chẳng hạn, hãy lấy ngày cho "70 giây sau bây giờ":
 
 ```js run
 let date = new Date();
 date.setSeconds(date.getSeconds() + 70);
 
-alert( date ); // shows the correct date
+alert( date ); // hiển thị ngày chính xác
 ```
 
-We can also set zero or even negative values. For example:
+Chúng ta cũng có thể đặt giá trị bằng 0 hoặc thậm chí âm. Ví dụ:
 
 ```js run
-let date = new Date(2016, 0, 2); // 2 Jan 2016
+let date = new Date(2016, 0, 2); // 2 tháng 1 năm 2016
 
-date.setDate(1); // set day 1 of month
+date.setDate(1); // đặt ngày 1 của tháng
 alert( date );
 
-date.setDate(0); // min day is 1, so the last day of the previous month is assumed
-alert( date ); // 31 Dec 2015
+date.setDate(0); // ngày tối thiểu là 1, vì vậy ngày cuối cùng của tháng trước được giả định
+alert( date ); // 31 tháng 12 năm 2015
 ```
 
-## Date to number, date diff
+## Ngày thành số, ngày khác
 
-When a `Date` object is converted to number, it becomes the timestamp same as `date.getTime()`:
+Khi một đối tượng `Date` được chuyển đổi thành số, nó sẽ trở thành dấu thời gian giống như `date.getTime()`:
 
 ```js run
 let date = new Date();
-alert(+date); // the number of milliseconds, same as date.getTime()
+alert(+date); // số mili giây, giống như date.getTime()
 ```
 
-The important side effect: dates can be subtracted, the result is their difference in ms.
+Tác dụng phụ quan trọng: ngày có thể được trừ đi, kết quả là sự khác biệt của chúng tính bằng ms.
 
 That can be used for time measurements:
 
