@@ -1,43 +1,43 @@
-Let's store read messages in `WeakSet`:
+Hãy lưu trữ tin nhắn đã đọc trong `WeakSet`:
 
 ```js run
 let messages = [
-  {text: "Hello", from: "John"},
-  {text: "How goes?", from: "John"},
-  {text: "See you soon", from: "Alice"}
+  {text: "Xin chào", from: "John"},
+  {text: "Tiến triển thế nào rồi?", from: "John"},
+  {text: "Hẹn sớm gặp lại", from: "Alice"}
 ];
 
 let readMessages = new WeakSet();
 
-// two messages have been read
+// hai tin nhắn đã được đọc
 readMessages.add(messages[0]);
 readMessages.add(messages[1]);
 // readMessages has 2 elements
 
-// ...let's read the first message again!
+// ...hãy đọc lại tin nhắn đầu tiên!
 readMessages.add(messages[0]);
 // readMessages still has 2 unique elements
 
-// answer: was the message[0] read?
+// trả lời: messages[0] đã được đọc chưa?
 alert("Read message 0: " + readMessages.has(messages[0])); // true
 
 messages.shift();
-// now readMessages has 1 element (technically memory may be cleaned later)
+// bây giờ readMessages có 1 phần tử (về mặt kỹ thuật, bộ nhớ có thể được xóa sau)
 ```
 
-The `WeakSet` allows to store a set of messages and easily check for the existence of a message in it.
+`WeakSet` cho phép lưu trữ một tập hợp các thông báo và dễ dàng kiểm tra sự tồn tại của một thông báo trong đó.
 
-It cleans up itself automatically. The tradeoff is that we can't iterate over it,  can't get "all read messages" from it directly. But we can do it by iterating over all messages and filtering those that are in the set.
+Nó tự động dọn dẹp. Sự đánh đổi là chúng ta không thể lặp lại nó, không thể nhận trực tiếp "tất cả các tin nhắn đã đọc" từ nó. Nhưng chúng ta có thể làm điều đó bằng cách lặp lại tất cả các tin nhắn và lọc những tin nhắn có trong tập hợp.
 
-Another, different solution could be to add a property like `message.isRead=true` to a message after it's read. As messages objects are managed by another code, that's generally discouraged, but we can use a symbolic property to avoid conflicts.
+Một giải pháp khác, khác có thể là thêm thuộc tính như `message.isRead=true` vào thư sau khi thư được đọc. Vì các đối tượng thông báo được quản lý bởi một mã khác, điều đó thường không được khuyến khích, nhưng chúng ta có thể sử dụng một thuộc tính tượng trưng để tránh xung đột.
 
-Like this:
+Như thế này:
 ```js
-// the symbolic property is only known to our code
+// thuộc tính tượng trưng chỉ được biết đến với mã của chúng ta
 let isRead = Symbol("isRead");
 messages[0][isRead] = true;
 ```
 
-Now third-party code probably won't see our extra property.
+Bây giờ mã của bên thứ ba có thể sẽ không thấy thuộc tính bổ sung của chúng ta.
 
 Although symbols allow to lower the probability of problems, using `WeakSet` is better from the architectural point of view.
