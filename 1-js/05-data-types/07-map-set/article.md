@@ -106,7 +106,7 @@ map.set('1', 'str1')
 Để lặp qua `map`, có 3 phương thức:
 
 - `map.keys()` -- trả về một iterable cho các khóa,
-- `map.values()` -- trả về một giá trị iterable,
+- `map.values()` -- trả về một giá trị có thể lặp lại,
 - `map.entries()` -- trả về một iterable cho các mục nhập `[key, value]`, nó được sử dụng theo mặc định trong `for..of`.
 
 Ví dụ:
@@ -149,7 +149,7 @@ recipeMap.forEach( (value, key, map) => {
 
 ## Object.entries: Map từ Đối tượng
 
-Khi một `Map` được tạo, chúng ta có thể truyền một array (hoặc một array khác iterable) với các cặp khóa/giá trị để khởi tạo, như sau:
+Khi một `Map` được tạo, chúng ta có thể truyền một array (hoặc một array khác có thể lặp lại) với các cặp khóa/giá trị để khởi tạo, như sau:
 
 ```js run
 // array của các cặp [key, value]
@@ -222,14 +222,14 @@ let obj = Object.fromEntries(map.entries()); // tạo một đối tượng đơ
 alert(obj.orange); // 2
 ```
 
-Lệnh gọi `map.entries()` trả về một cặp khóa/giá trị iterable, chính xác ở định dạng phù hợp cho `Object.fromEntries`.
+Lệnh gọi `map.entries()` trả về một cặp khóa/giá trị có thể lặp lại, chính xác ở định dạng phù hợp cho `Object.fromEntries`.
 
 Chúng ta cũng có thể làm cho dòng `(*)` ngắn hơn:
 ```js
 let obj = Object.fromEntries(map); // omit .entries()
 ```
 
-Điều đó cũng tương tự, bởi vì `Object.fromEntries` mong đợi một đối tượng iterable làm đối số. Không nhất thiết phải là một array. Và phép lặp tiêu chuẩn cho `map` trả về các cặp khóa/giá trị giống như `map.entries()`. Vì vậy, chúng ta nhận được một đối tượng đơn giản có cùng khóa/giá trị với `map`.
+Điều đó cũng tương tự, bởi vì `Object.fromEntries` mong đợi một đối tượng có thể lặp lại làm đối số. Không nhất thiết phải là một array. Và phép lặp tiêu chuẩn cho `map` trả về các cặp khóa/giá trị giống như `map.entries()`. Vì vậy, chúng ta nhận được một đối tượng đơn giản có cùng khóa/giá trị với `map`.
 
 ## Set
 
@@ -237,7 +237,7 @@ let obj = Object.fromEntries(map); // omit .entries()
 
 Các phương pháp chính của nó là:
 
-- `new Set(iterable)` -- tạo tập hợp và nếu một đối tượng `iterable` được cung cấp (thường là một array), sao chép các giá trị từ đối tượng đó vào tập hợp.
+- `new Set(iterable)` -- tạo tập hợp và nếu một đối tượng `có thể lặp lại` được cung cấp (thường là một array), sao chép các giá trị từ đối tượng đó vào tập hợp.
 - `set.add(value)` -- thêm một giá trị, trả về chính tập hợp đó.
 - `set.delete(value)` -- xóa giá trị, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
 - `set.has(value)` -- trả về `true` nếu giá trị tồn tại trong tập hợp, nếu không thì `false`.
@@ -295,9 +295,9 @@ Lưu ý điều buồn cười này. Hàm gọi lại được truyền trong `f
 
 Các phương thức tương tự mà `Map` dành cho các iterator cũng được hỗ trợ:
 
-- `set.keys()` -- trả về một đối tượng iterable cho các giá trị,
+- `set.keys()` -- trả về một đối tượng có thể lặp lại cho các giá trị,
 - `set.values()` -- giống như `set.keys()`, để tương thích với `Map`,
-- `set.entries()` -- trả về một đối tượng iterable cho các mục nhập `[giá trị, giá trị]`, tồn tại để tương thích với `Map`.
+- `set.entries()` -- trả về một đối tượng có thể lặp lại cho các mục nhập `[giá trị, giá trị]`, tồn tại để tương thích với `Map`.
 
 ## Tóm tắt
 
