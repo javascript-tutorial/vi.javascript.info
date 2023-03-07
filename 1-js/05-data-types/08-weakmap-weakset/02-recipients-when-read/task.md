@@ -2,20 +2,20 @@ importance: 5
 
 ---
 
-# Store read dates
+# Lưu trữ ngày đọc
 
-There's an array of messages as in the [previous task](info:task/recipients-read). The situation is similar.
+Có một array tin nhắn như trong [nhiệm vụ trước đó](info:task/recipients-read). Tình hình cũng tương tự.
 
 ```js
 let messages = [
-  {text: "Hello", from: "John"},
-  {text: "How goes?", from: "John"},
-  {text: "See you soon", from: "Alice"}
+  {text: "Xin chào", from: "John"},
+  {text: "Tiến triển thế nào rồi?", from: "John"},
+  {text: "Hẹn sớm gặp lại", from: "Alice"}
 ];
 ```
 
-The question now is: which data structure you'd suggest to store the information: "when the message was read?".
+Câu hỏi bây giờ là: bạn muốn đề xuất cấu trúc dữ liệu nào để lưu trữ thông tin: "khi tin nhắn được đọc?".
 
-In the previous task we only needed to store the "yes/no" fact. Now we need to store the date, and it should only remain in memory until the message is garbage collected.
+Trong tác vụ trước, chúng ta chỉ cần lưu trữ dữ kiện "có/không". Bây giờ chúng ta cần lưu trữ ngày tháng và nó chỉ nên lưu lại trong bộ nhớ cho đến khi thư được thu gom rác.
 
-P.S. Dates can be stored as objects of built-in `Date` class, that we'll cover later.
+Tái bút: Ngày tháng có thể được lưu trữ dưới dạng đối tượng của lớp `Date` tích hợp sẵn, mà chúng ta sẽ đề cập sau.
