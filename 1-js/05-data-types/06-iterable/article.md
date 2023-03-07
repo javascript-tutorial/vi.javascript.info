@@ -1,20 +1,20 @@
 
-# Iterables
+# Sự lặp lại
 
-*Iterable* objects are a generalization of arrays. That's a concept that allows us to make any object useable in a `for..of` loop.
+Các đối tượng *lặp lại* là sự tổng quát hóa của các array. Đó là một khái niệm cho phép chúng ta làm cho bất kỳ đối tượng nào có thể sử dụng được trong vòng lặp `for..of`.
 
-Of course, Arrays are iterable. But there are many other built-in objects, that are iterable as well. For instance, strings are also iterable.
+Tất nhiên, array có thể lặp lại. Nhưng có nhiều đối tượng tích hợp khác cũng có thể lặp lại. Chẳng hạn, các chuỗi cũng có thể lặp lại.
 
-If an object isn't technically an array, but represents a collection (list, set) of something, then `for..of` is a great syntax to loop over it, so let's see how to make it work.
+Nếu một đối tượng về mặt kỹ thuật không phải là một array, nhưng đại diện cho một tập hợp (danh sách, bộ) của một thứ gì đó, thì `for..of` là một cú pháp tuyệt vời để lặp qua nó, vì vậy hãy xem cách làm cho nó hoạt động.
 
 
 ## Symbol.iterator
 
-We can easily grasp the concept of iterables by making one of our own.
+Chúng ta có thể dễ dàng nắm bắt khái niệm lặp lại bằng cách tạo một cái của riêng mình.
 
-For instance, we have an object that is not an array, but looks suitable for `for..of`.
+Chẳng hạn, chúng ta có một đối tượng không phải là một array, nhưng có vẻ phù hợp với `for..of`.
 
-Like a `range` object that represents an interval of numbers:
+Giống như một đối tượng `phạm vi` đại diện cho một khoảng số:
 
 ```js
 let range = {
@@ -22,7 +22,7 @@ let range = {
   to: 5
 };
 
-// We want the for..of to work:
+// Chúng ta muốn for..of hoạt động:
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
