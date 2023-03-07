@@ -1,61 +1,61 @@
-# Date and time
+# Ngày và giờ
 
-Let's meet a new built-in object: [Date](mdn:js/Date). It stores the date, time and provides methods for date/time management.
+Hãy làm quen với một đối tượng được tích hợp mới: [Date](mdn:js/Date). Nó lưu trữ ngày, giờ và cung cấp các phương thức để quản lý ngày/giờ.
 
-For instance, we can use it to store creation/modification times, to measure time, or just to print out the current date.
+Chẳng hạn, chúng ta có thể sử dụng nó để lưu trữ, tạo/sửa đổi thời gian, để đo thời gian hoặc chỉ để in ra ngày hiện tại.
 
-## Creation
+## Tạo
 
-To create a new `Date` object call `new Date()` with one of the following arguments:
+Để tạo một đối tượng `Date` mới, hãy gọi `new Date()` với một trong các đối số sau:
 
 `new Date()`
-: Without arguments -- create a `Date` object for the current date and time:
+: Không có đối số -- tạo đối tượng `Date` cho ngày và giờ hiện tại:
 
     ```js run
     let now = new Date();
-    alert( now ); // shows current date/time
+    alert( now ); // hiển thị ngày/giờ hiện tại
     ```
 
 `new Date(milliseconds)`
-: Create a `Date` object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+: Tạo đối tượng `Date` với thời gian bằng số mili giây (1/1000 giây) được chuyển sau ngày 1 tháng 1 năm 1970 UTC+0.
 
     ```js run
-    // 0 means 01.01.1970 UTC+0
+    // 0 nghĩa là 01.01.1970 UTC+0
     let Jan01_1970 = new Date(0);
     alert( Jan01_1970 );
 
-    // now add 24 hours, get 02.01.1970 UTC+0
+    // bây giờ thêm 24 giờ, nhận được 02.01.1970 UTC+0
     let Jan02_1970 = new Date(24 * 3600 * 1000);
     alert( Jan02_1970 );
     ```
 
-    An integer number representing the number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
+    Một số nguyên đại diện cho số mili giây đã trôi qua kể từ đầu năm 1970 được gọi là *dấu thời gian*.
 
-    It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
+    Đó là một đại diện số nhẹ của một ngày. Chúng ta luôn có thể tạo ngày từ dấu thời gian bằng cách sử dụng `new Date(timestamp)` và chuyển đổi đối tượng `Date` hiện có thành dấu thời gian bằng cách sử dụng phương thức `date.getTime()` (xem bên dưới).
 
-    Dates before 01.01.1970 have negative timestamps, e.g.:
+    Ngày trước 01.01.1970 có dấu thời gian âm, ví dụ:
     ```js run
-    // 31 Dec 1969
+    // 31 tháng 12 năm 1969
     let Dec31_1969 = new Date(-24 * 3600 * 1000);
     alert( Dec31_1969 );
     ```
 
 `new Date(datestring)`
-: If there is a single argument, and it's a string, then it is parsed automatically. The algorithm is the same as `Date.parse` uses, we'll cover it later.
+: Nếu có một đối số duy nhất và đó là một chuỗi thì nó sẽ được phân tích cú pháp tự động. Thuật toán giống như cách sử dụng `Date.parse`, chúng ta sẽ đề cập đến nó sau.
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // The time is not set, so it's assumed to be midnight GMT and
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
-    // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
-    // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
+    // Thời gian không được đặt, do đó, nó được coi là nửa đêm theo giờ GMT và
+    // được điều chỉnh theo múi giờ mà mã được chạy
+    // Vì vậy, kết quả có thể là
+    // Thứ Năm, ngày 26 tháng 1 năm 2017 11:00:00 GMT+1100 (Giờ ban ngày miền Đông nước Úc)
+    // hoặc
+    // Thứ tư ngày 25 tháng 1 năm 2017 16:00:00 GMT-0800 (Giờ chuẩn Thái Bình Dương)
     ```
 
 `new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+: Tạo ngày với các thành phần đã cho theo múi giờ địa phương. Chỉ có hai đối số đầu tiên là bắt buộc.
 
     - The `year` must have 4 digits: `2013` is okay, `98` is not.
     - The `month` count starts with `0` (Jan), up to `11` (Dec).
