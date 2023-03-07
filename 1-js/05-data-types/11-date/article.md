@@ -57,34 +57,34 @@ Chẳng hạn, chúng ta có thể sử dụng nó để lưu trữ, tạo/sửa
 `new Date(year, month, date, hours, minutes, seconds, ms)`
 : Tạo ngày với các thành phần đã cho theo múi giờ địa phương. Chỉ có hai đối số đầu tiên là bắt buộc.
 
-    - The `year` must have 4 digits: `2013` is okay, `98` is not.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+    - `year` phải có 4 chữ số: `2013` được, `98` thì không.
+    - Số lượng `month` bắt đầu bằng `0` (tháng 1), cho đến `11` (tháng 12).
+    - Tham số `date` thực sự là ngày trong tháng, nếu không có thì `1` được giả định.
+    - Nếu `hours/minute/seconds/ms` không có, chúng được coi là bằng `0`.
 
-    For instance:
+    Ví dụ:
 
     ```js
-    new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    new Date(2011, 0, 1, 0, 0, 0, 0); // Ngày 1 tháng 1 năm 2011, 00:00:00
+    new Date(2011, 0, 1); // giống nhau, giờ vv là 0 theo mặc định
     ```
 
-    The maximal precision is 1 ms (1/1000 sec):
+    Độ chính xác tối đa là 1 ms (1/1000 giây):
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
     alert( date ); // 1.01.2011, 02:03:04.567
     ```
 
-## Access date components
+## Truy cập thành phần ngày
 
-There are methods to access the year, month and so on from the `Date` object:
+Có các phương thức để truy cập năm, tháng, v.v. từ đối tượng `Date`:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Get the year (4 digits)
+: Lấy năm (4 chữ số)
 
 [getMonth()](mdn:js/Date/getMonth)
-: Get the month, **from 0 to 11**.
+: Lấy tháng, **từ 0 đến 11**.
 
 [getDate()](mdn:js/Date/getDate)
 : Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
