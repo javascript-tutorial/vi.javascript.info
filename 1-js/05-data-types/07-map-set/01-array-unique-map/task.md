@@ -2,7 +2,7 @@ importance: 5
 
 ---
 
-# Lọc các thành viên array duy nhất
+# Lọc các phần tử array duy nhất
 
 Đặt `arr` là một array.
 
