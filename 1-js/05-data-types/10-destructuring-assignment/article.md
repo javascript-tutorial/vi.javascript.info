@@ -76,14 +76,14 @@ Trong đoạn mã trên, phần tử thứ hai của array bị bỏ qua, phần
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-That works, because internally a destructuring assignment works by iterating over the right value. It's kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
+Nó hoạt động, bởi vì bên trong một nhiệm vụ phá hủy hoạt động bằng cách lặp lại giá trị phù hợp. Đó là loại đường cú pháp để gọi `for..of` trên giá trị ở bên phải của `=` và gán các giá trị.
 ````
 
 
-````smart header="Assign to anything at the left-side"
-We can use any "assignables" at the left side.
+````smart header="Gán cho bất cứ thứ gì ở phía bên trái"
+Chúng ta có thể sử dụng bất kỳ "vật chuyển nhượng" nào ở phía bên trái.
 
-For instance, an object property:
+Chẳng hạn, một thuộc tính đối tượng:
 ```js run
 let user = {};
 [user.name, user.surname] = "John Smith".split(' ');
@@ -94,10 +94,10 @@ alert(user.surname); // Smith
 
 ````
 
-````smart header="Looping with .entries()"
-In the previous chapter we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+````smart header="Vòng lặp với .entries()"
+Trong chương trước, chúng ta đã thấy phương thức [Object.entries(obj)](mdn:js/Object/entries).
 
-We can use it with destructuring to loop over keys-and-values of an object:
+Chúng ta có thể sử dụng nó với tính năng hủy để lặp lại các khóa và giá trị của một đối tượng:
 
 ```js run
 let user = {
@@ -105,15 +105,15 @@ let user = {
   age: 30
 };
 
-// loop over keys-and-values
+// lặp lại khóa-và-giá trị
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
-  alert(`${key}:${value}`); // name:John, then age:30
+  alert(`${key}:${value}`); // tên: John, sau đó tuổi: 30
 }
 ```
 
-The similar code for a `Map` is simpler, as it's iterable:
+Mã tương tự cho `Map` đơn giản hơn vì nó có thể lặp lại:
 
 ```js run
 let user = new Map();
