@@ -1,6 +1,6 @@
-To find all anagrams, let's split every word to letters and sort them. When letter-sorted, all anagrams are same.
+Để tìm tất cả các đảo chữ cái, hãy tách từng từ thành các chữ cái và sắp xếp chúng. Khi sắp xếp theo chữ cái, tất cả các đảo ngữ đều giống nhau.
 
-For instance:
+Ví dụ:
 
 ```
 nap, pan -> anp
@@ -9,14 +9,14 @@ cheaters, hectares, teachers -> aceehrst
 ...
 ```
 
-We'll use the letter-sorted variants as map keys to store only one value per each key:
+Chúng ta sẽ sử dụng các biến thể được sắp xếp theo chữ cái làm khóa map để chỉ lưu trữ một giá trị cho mỗi khóa:
 
 ```js run
 function aclean(arr) {
   let map = new Map();
 
   for (let word of arr) {
-    // split the word by letters, sort them and join back
+    // tách từ bằng các chữ cái, sắp xếp chúng và nối lại
 *!*
     let sorted = word.toLowerCase().split('').sort().join(''); // (*)
 */!*
@@ -31,9 +31,9 @@ let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 alert( aclean(arr) );
 ```
 
-Letter-sorting is done by the chain of calls in the line `(*)`.
+Việc phân loại chữ cái được thực hiện bởi chuỗi các cuộc gọi trong dòng `(*)`.
 
-For convenience let's split it into multiple lines:
+Để thuận tiện, hãy chia nó thành nhiều dòng:
 
 ```js
 let sorted = word // PAN
@@ -43,21 +43,21 @@ let sorted = word // PAN
   .join(''); // anp
 ```
 
-Two different words `'PAN'` and `'nap'` receive the same letter-sorted form `'anp'`.
+Hai từ khác nhau `'PAN'` và `'nap'` có cùng dạng sắp xếp theo chữ cái `'anp'`.
 
-The next line put the word into the map:
+Dòng tiếp theo đưa từ vào map:
 
 ```js
 map.set(sorted, word);
 ```
 
-If we ever meet a word the same letter-sorted form again, then it would overwrite the previous value with the same key in the map. So we'll always have at maximum one word per letter-form.
+Nếu chúng ta gặp lại một từ có cùng dạng sắp xếp theo chữ cái, thì từ đó sẽ ghi đè lên giá trị trước đó bằng cùng một khóa trong bản đồ. Vì vậy, chúng tôi sẽ luôn có tối đa một từ cho mỗi mẫu dạng ký tự.
 
-At the end `Array.from(map.values())` takes an iterable over map values (we don't need keys in the result) and returns an array of them.
+Cuối cùng, `Array.from(map.values())` có thể lặp lại các giá trị map (chúng ta không cần khóa trong kết quả) và trả về một array của chúng.
 
-Here we could also use a plain object instead of the `Map`, because keys are strings.
+Ở đây chúng ta cũng có thể sử dụng một đối tượng đơn giản thay vì `Map`, vì các khóa là các chuỗi.
 
-That's how the solution can look:
+Đó là cách giải pháp có thể giống:
 
 ```js run demo
 function aclean(arr) {
