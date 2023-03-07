@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Destructuring assignment
+# Nhiệm vụ phá hủy
 
-We have an object:
+Chúng ta có một đối tượng:
 
 ```js
 let user = {
@@ -13,18 +13,18 @@ let user = {
 };
 ```
 
-Write the destructuring assignment that reads:
+Viết bài tập phá hủy có nội dung:
 
-- `name` property into the variable `name`.
-- `years` property into the variable `age`.
-- `isAdmin` property into the variable `isAdmin` (false, if no such property)
+- `name` thuộc tính vào biến `name`.
+- `years` thuộc tính vào biến `age`.
+- `isAdmin` thuộc tính vào biến `isAdmin` (sai, nếu không có thuộc tính như vậy)
 
-Here's an example of the values after your assignment:
+Đây là một ví dụ về các giá trị sau bài tập của bạn:
 
 ```js
 let user = { name: "John", years: 30 };
 
-// your code to the left side:
+// mã của bạn ở phía bên trái:
 // ... = user
 
 alert( name ); // John
