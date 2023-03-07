@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sort users by age
+# Sắp xếp người dùng theo độ tuổi
 
-Write the function `sortByAge(users)` that gets an array of objects with the `age` property and sorts them by `age`.
+Viết hàm `sortByAge(users)` để lấy một array các đối tượng có thuộc tính `age` và sắp xếp chúng theo `age`.
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };
