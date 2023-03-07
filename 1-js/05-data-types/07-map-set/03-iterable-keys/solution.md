@@ -1,5 +1,5 @@
 
-Đó là bởi vì `map.keys()` trả về một giá trị iterable, nhưng không phải là một array.
+Đó là bởi vì `map.keys()` trả về một giá trị có thể lặp lại, nhưng không phải là một array.
 
 Chúng ta có thể chuyển đổi nó thành một array bằng cách sử dụng `Array.from`:
 
