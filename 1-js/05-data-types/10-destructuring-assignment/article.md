@@ -1,28 +1,28 @@
-# Destructuring assignment
+# Nhiệm vụ phá hủy
 
-The two most used data structures in JavaScript are `Object` and `Array`.
+Hai cấu trúc dữ liệu được sử dụng nhiều nhất trong JavaScript là `Object` và `Array`.
 
-- Objects allow us to create a single entity that stores data items by key. 
-- Arrays allow us to gather data items into an ordered list.
+- Các đối tượng cho phép chúng ta tạo một thực thể duy nhất lưu trữ các mục dữ liệu theo khóa.
+- Mảng cho phép chúng ta tập hợp các mục dữ liệu thành một danh sách có thứ tự.
 
-Although, when we pass those to a function, it may need not an object/array as a whole. It may need individual pieces.
+Mặc dù, khi chúng ta chuyển chúng cho một hàm, nó có thể không cần toàn bộ đối tượng/array. Nó có thể cần các mảnh riêng lẻ.
 
-*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient. 
+*Phân công hủy cấu trúc* là một cú pháp đặc biệt cho phép chúng ta "giải nén" các array hoặc đối tượng thành một loạt các biến, vì đôi khi điều đó thuận tiện hơn.
 
-Destructuring also works great with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+Việc hủy cấu trúc cũng hoạt động hiệu quả với các hàm phức tạp có nhiều tham số, giá trị mặc định, v.v. Chúng ta sẽ sớm thấy điều đó.
 
-## Array destructuring
+## Phá hủy array
 
-Here's an example of how an array is destructured into variables:
+Đây là một ví dụ về cách một array bị hủy cấu trúc thành các biến:
 
 ```js
-// we have an array with the name and surname
+// chúng ta có một array với tên và họ
 let arr = ["John", "Smith"]
 
 *!*
-// destructuring assignment
-// sets firstName = arr[0]
-// and surname = arr[1]
+// nhiệm vụ phá hủy
+// đặt firstName = arr[0]
+// và surname = arr[1]
 let [firstName, surname] = arr;
 */!*
 
@@ -30,9 +30,9 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
-Now we can work with variables instead of array members.
+Bây giờ chúng ta có thể làm việc với các biến thay vì các phần tử của array.
 
-It looks great when combined with `split` or other array-returning methods:
+Nó trông tuyệt vời khi được kết hợp với `split` hoặc các phương thức trả về array khác:
 
 ```js run
 let [firstName, surname] = "John Smith".split(' ');
@@ -40,12 +40,12 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
-As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples, to better understand it.
+Như bạn có thể thấy, cú pháp rất đơn giản. Có một số chi tiết đặc biệt mặc dù. Hãy xem thêm các ví dụ, để hiểu rõ hơn về nó.
 
-````smart header="\"Destructuring\" does not mean \"destructive\"."
-It's called "destructuring assignment," because it "destructurizes" by copying items into variables. But the array itself is not modified.
+````smart header="\"Phá hủy\" does not mean \"phá hoại\"."
+Nó được gọi là "phân công phá hủy" bởi vì nó "phá hủy" bằng cách sao chép các mục vào các biến. Nhưng bản thân array không được sửa đổi.
 
-It's just a shorter way to write:
+Nó chỉ là một cách ngắn hơn để viết:
 ```js
 // let [firstName, surname] = arr;
 let firstName = arr[0];
@@ -53,24 +53,24 @@ let surname = arr[1];
 ```
 ````
 
-````smart header="Ignore elements using commas"
-Unwanted elements of the array can also be thrown away via an extra comma:
+````smart header="Bỏ qua các phần tử bằng dấu phẩy"
+Các phần tử không mong muốn của array cũng có thể bị loại bỏ thông qua dấu phẩy thêm:
 
 ```js run
 *!*
-// second element is not needed
-let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// phần tử thứ hai là không cần thiết
+let [firstName, , title] = ["Julius", "Caesar", "Lãnh đạo", "của Cộng hòa La Mã"];
 */!*
 
 alert( title ); // Consul
 ```
 
-In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items is also skipped (as there are no variables for them).
+Trong đoạn mã trên, phần tử thứ hai của array bị bỏ qua, phần tử thứ ba được gán cho `title` và phần còn lại của các mục array cũng bị bỏ qua (vì không có biến nào cho chúng).
 ````
 
-````smart header="Works with any iterable on the right-side"
+````smart header="Hoạt động với bất kỳ iterable nào ở phía bên phải"
 
-...Actually, we can use it with any iterable, not only arrays:
+...Trên thực tế, chúng ta có thể sử dụng nó với bất kỳ iterable nào, không chỉ array:
 
 ```js
 let [a, b, c] = "abc"; // ["a", "b", "c"]
