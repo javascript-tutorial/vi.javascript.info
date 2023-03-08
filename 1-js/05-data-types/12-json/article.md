@@ -13,7 +13,7 @@ let user = {
 
 *!*
   toString() {
-    return `{name: "${this.name}", age: ${this.age}}`;
+    return `{tên: "${this.name}", tuổi: ${this.age}}`;
   }
 */!*
 };
