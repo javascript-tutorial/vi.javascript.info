@@ -1,4 +1,4 @@
-The idea is simple: to substract given number of days from `date`:
+Ý tưởng rất đơn giản: trừ số ngày đã cho từ `date`:
 
 ```js
 function getDateAgo(date, days) {
@@ -7,9 +7,9 @@ function getDateAgo(date, days) {
 }
 ```
 
-...But the function should not change `date`. That's an important thing, because the outer code which gives us the date does not expect it to change.
+...Nhưng chức năng không nên thay đổi `date`. Đó là một điều quan trọng, bởi vì mã bên ngoài cung cấp cho chúng ta ngày không mong đợi nó thay đổi.
 
-To implement it let's clone the date, like this:
+Để thực hiện nó, hãy sao chép ngày, như thế này:
 
 ```js run demo
 function getDateAgo(date, days) {
@@ -21,7 +21,7 @@ function getDateAgo(date, days) {
 
 let date = new Date(2015, 0, 2);
 
-alert( getDateAgo(date, 1) ); // 1, (1 Jan 2015)
-alert( getDateAgo(date, 2) ); // 31, (31 Dec 2014)
-alert( getDateAgo(date, 365) ); // 2, (2 Jan 2014)
+alert( getDateAgo(date, 1) ); // 1, (1 Thg 1 2015)
+alert( getDateAgo(date, 2) ); // 31, (31 Thg 12 2014)
+alert( getDateAgo(date, 365) ); // 2, (2 Thg 1 2014)
 ```
