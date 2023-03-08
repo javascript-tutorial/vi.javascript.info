@@ -1,10 +1,10 @@
-# JSON methods, toJSON
+# Các phương thức JSON, toJSON
 
-Let's say we have a complex object, and we'd like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+Giả sử chúng ta có một đối tượng phức tạp và chúng ta muốn chuyển đổi nó thành một chuỗi, để gửi nó qua mạng hoặc chỉ xuất nó cho mục đích ghi nhật ký.
 
-Naturally, such a string should include all important properties.
+Đương nhiên, một chuỗi như vậy phải bao gồm tất cả các thuộc tính quan trọng.
 
-We could implement the conversion like this:
+Chúng tôi có thể thực hiện chuyển đổi như thế này:
 
 ```js run
 let user = {
@@ -18,23 +18,23 @@ let user = {
 */!*
 };
 
-alert(user); // {name: "John", age: 30}
+alert(user); // {tên: "John", tuổi: 30}
 ```
 
-...But in the process of development, new properties are added, old properties are renamed and removed. Updating such `toString` every time can become a pain. We could try to loop over properties in it, but what if the object is complex and has nested objects in properties? We'd need to implement their conversion as well.
+...Nhưng trong quá trình phát triển, các thuộc tính mới được thêm vào, các thuộc tính cũ được đổi tên và xóa. Việc cập nhật `toString` như vậy mỗi lần có thể trở thành một vấn đề khó khăn. Chúng ta có thể thử lặp qua các thuộc tính trong đó, nhưng nếu đối tượng phức tạp và có các đối tượng lồng nhau trong các thuộc tính thì sao? Chúng ta cũng cần thực hiện chuyển đổi của chúng.
 
-Luckily, there's no need to write the code to handle all this. The task has been solved already.
+May mắn thay, không cần phải viết mã để xử lý tất cả điều này. Nhiệm vụ đã được giải quyết rồi.
 
 ## JSON.stringify
 
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+[JSON](http://vi.wikipedia.org/wiki/JSON) (Ký hiệu đối tượng JavaScript) là một định dạng chung để biểu thị các giá trị và đối tượng. Nó được mô tả như trong tiêu chuẩn [RFC 4627](http://tools.ietf.org/html/rfc4627). Ban đầu, nó được tạo cho JavaScript, nhưng nhiều ngôn ngữ khác cũng có thư viện để xử lý nó. Vì vậy, thật dễ dàng để sử dụng JSON để trao đổi dữ liệu khi máy khách sử dụng JavaScript và máy chủ được viết trên Ruby/PHP/Java/Sao cũng được.
 
-JavaScript provides methods:
+JavaScript cung cấp các phương thức:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` để chuyển đổi các đối tượng thành JSON.
+- `JSON.parse` để chuyển đổi JSON trở lại thành một đối tượng.
 
-For instance, here we `JSON.stringify` a student:
+Chẳng hạn, ở đây chúng ta `JSON.stringify` một sinh viên:
 ```js run
 let student = {
   name: 'John',
@@ -48,11 +48,11 @@ let student = {
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // chúng ta đã có một chuỗi!
 
 alert(json);
 *!*
-/* JSON-encoded object:
+/* Đối tượng được mã hóa JSON:
 {
   "name": "John",
   "age": 30,
@@ -64,35 +64,35 @@ alert(json);
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+Phương thức `JSON.stringify(student)` lấy đối tượng và chuyển đổi nó thành một chuỗi.
 
-The resulting `json` string is called a *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+Chuỗi `json` kết quả được gọi là đối tượng *được mã hóa JSON* hoặc *nối tiếp* hoặc *xâu chuỗi* hoặc *thống nhất*. Chúng ta đã sẵn sàng để gửi nó qua dây hoặc đưa vào kho lưu trữ dữ liệu đơn giản.
 
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+Hãy lưu ý rằng một đối tượng được mã hóa JSON có một số điểm khác biệt quan trọng so với đối tượng theo nghĩa đen:
 
-- Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
-- Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
+- Chuỗi sử dụng dấu ngoặc kép. Không có dấu nháy đơn hoặc dấu ngược trong JSON. Vì vậy, `'John'` trở thành `"John"`.
+- Tên thuộc tính đối tượng cũng được trích dẫn kép. Đó là bắt buộc. Vì vậy, `tuổi:30` trở thành `"tuổi":30`.
 
-`JSON.stringify` can be applied to primitives as well.
+`JSON.stringify` cũng có thể được áp dụng cho nguyên thủy.
 
-JSON supports following data types:
+JSON hỗ trợ các kiểu dữ liệu sau:
 
-- Objects `{ ... }`
-- Arrays `[ ... ]`
-- Primitives:
-    - strings,
-    - numbers,
-    - boolean values `true/false`,
-    - `null`.
+- Đối tượng `{ ... }`
+- Mảng `[ ... ]`
+- Nguyên thủy:
+     - chuỗi,
+     - số,
+     - giá trị boolean `true/false`,
+     - `không`.
 
-For instance:
+Ví dụ:
 
 ```js run
-// a number in JSON is just a number
+// một số trong JSON chỉ là một số
 alert( JSON.stringify(1) ) // 1
 
-// a string in JSON is still a string, but double-quoted
+// một chuỗi trong JSON vẫn là một chuỗi, nhưng có dấu ngoặc kép
 alert( JSON.stringify('test') ) // "test"
 
 alert( JSON.stringify(true) ); // true
@@ -100,7 +100,7 @@ alert( JSON.stringify(true) ); // true
 alert( JSON.stringify([1, 2, 3]) ); // [1,2,3]
 ```
 
-JSON is data-only language-independent specification, so some JavaScript-specific object properties are skipped by `JSON.stringify`.
+JSON là thông số kỹ thuật ngôn ngữ độc lập với dữ liệu, do đó, một số thuộc tính đối tượng dành riêng cho JavaScript bị `JSON.stringify` bỏ qua.
 
 Namely:
 
