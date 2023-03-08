@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# How many seconds have passed today?
+# Hôm nay đã trôi qua bao nhiêu giây?
 
-Write a function `getSecondsToday()` that returns the number of seconds from the beginning of today.
+Viết một hàm `getSecondsToday()` để trả về số giây tính từ đầu ngày hôm nay.
 
-For instance, if now were `10:00 am`, and there was no daylight savings shift, then:
+Ví dụ: nếu bây giờ là `10:00 sáng` và không có ca làm tiết kiệm ánh sáng ban ngày, thì:
 
 ```js
 getSecondsToday() == 36000 // (3600 * 10)
 ```
 
-The function should work in any day. That is, it should not have a hard-coded value of "today".
+Chức năng sẽ hoạt động trong bất kỳ ngày nào. Nghĩa là, nó không nên có giá trị mã hóa cứng là "hôm nay".
