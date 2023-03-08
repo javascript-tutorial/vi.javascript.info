@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Create a date
+# Tạo một ngày
 
-Create a `Date` object for the date: Feb 20, 2012, 3:12am. The time zone is local.
+Tạo đối tượng `Date` cho ngày: 20 tháng 2 năm 2012, 3:12 sáng. Múi giờ là địa phương.
 
-Show it using `alert`.
+Hiển thị nó bằng cách sử dụng `alert`.
