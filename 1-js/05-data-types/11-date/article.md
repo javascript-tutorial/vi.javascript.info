@@ -218,77 +218,77 @@ alert(+date); // số mili giây, giống như date.getTime()
 
 Tác dụng phụ quan trọng: ngày có thể được trừ đi, kết quả là sự khác biệt của chúng tính bằng ms.
 
-That can be used for time measurements:
+Điều đó có thể được sử dụng để đo thời gian:
 
 ```js run
-let start = new Date(); // start measuring time
+let start = new Date(); // bắt đầu đo thời gian
 
-// do the job
+// thực hiện công việc
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-let end = new Date(); // end measuring time
+let end = new Date(); // kết thúc thời gian đo
 
 alert( `The loop took ${end - start} ms` );
 ```
 
 ## Date.now()
 
-If we only want to measure time, we don't need the `Date` object.
+Nếu chúng ta chỉ muốn đo thời gian, chúng ta không cần đối tượng `Date`.
 
-There's a special method `Date.now()` that returns the current timestamp.
+Có một phương thức đặc biệt `Date.now()` trả về dấu thời gian hiện tại.
 
-It is semantically equivalent to `new Date().getTime()`, but it doesn't create an intermediate `Date` object. So it's faster and doesn't put pressure on garbage collection.
+Về mặt ngữ nghĩa, nó tương đương với `new Date().getTime()`, nhưng nó không tạo đối tượng `Date` trung gian. Vì vậy, nó nhanh hơn và không gây áp lực cho việc thu gom rác.
 
-It is used mostly for convenience or when performance matters, like in games in JavaScript or other specialized applications.
+Nó được sử dụng chủ yếu để thuận tiện hoặc khi hiệu suất quan trọng, chẳng hạn như trong các trò chơi bằng JavaScript hoặc các ứng dụng chuyên dụng khác.
 
-So this is probably better:
+Vì vậy, điều này có lẽ là tốt hơn:
 
 ```js run
 *!*
-let start = Date.now(); // milliseconds count from 1 Jan 1970
+let start = Date.now(); // mili giây tính từ ngày 1 tháng 1 năm 1970
 */!*
 
-// do the job
+// thực hiện công việc
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
 *!*
-let end = Date.now(); // done
+let end = Date.now(); // xong
 */!*
 
-alert( `The loop took ${end - start} ms` ); // subtract numbers, not dates
+alert( `The loop took ${end - start} ms` ); // trừ số, không phải ngày
 ```
 
-## Benchmarking
+## Chấm điểm
 
-If we want a reliable benchmark of CPU-hungry function, we should be careful.
+Nếu chúng ta muốn có một điểm chuẩn đáng tin cậy của hàm ngốn CPU, chúng ta nên cẩn thận.
 
-For instance, let's measure two functions that calculate the difference between two dates: which one is faster?
+Chẳng hạn, hãy đo lường hai hàm tính toán sự khác biệt giữa hai ngày: hàm nào nhanh hơn?
 
-Such performance measurements are often called "benchmarks".
+Các phép đo hiệu suất như vậy thường được gọi là "chấm điểm".
 
 ```js
-// we have date1 and date2, which function faster returns their difference in ms?
+// chúng ta có date1 và date2, hàm nào trả về chênh lệch đơn vị ms nhanh hơn?
 function diffSubtract(date1, date2) {
   return date2 - date1;
 }
 
-// or
+// hoặc
 function diffGetTime(date1, date2) {
   return date2.getTime() - date1.getTime();
 }
 ```
 
-These two do exactly the same thing, but one of them uses an explicit `date.getTime()` to get the date in ms, and the other one relies on a date-to-number transform. Their result is always the same.
+Hai cái này thực hiện chính xác cùng một việc, nhưng một trong số chúng sử dụng `date.getTime()` rõ ràng để lấy ngày tính bằng ms và cái còn lại dựa vào phép biến đổi ngày thành số. Kết quả của chúng luôn giống nhau.
 
-So, which one is faster?
+Vậy, cái nào nhanh hơn?
 
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
+Ý tưởng đầu tiên có thể là chạy chúng nhiều lần liên tiếp và đo chênh lệch thời gian. Đối với trường hợp của chúng ta, các hàm rất đơn giản, vì vậy chúng ta phải thực hiện ít nhất 100000 lần.
 
-Let's measure:
+Hãy đo:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -312,19 +312,19 @@ alert( 'Time of diffSubtract: ' + bench(diffSubtract) + 'ms' );
 alert( 'Time of diffGetTime: ' + bench(diffGetTime) + 'ms' );
 ```
 
-Wow! Using `getTime()` is so much faster! That's because there's no type conversion, it is much easier for engines to optimize.
+Ồ! Sử dụng `getTime()` nhanh hơn rất nhiều! Đó là bởi vì không có chuyển đổi loại, các engine sẽ tối ưu hóa dễ dàng hơn nhiều.
 
-Okay, we have something. But that's not a good benchmark yet.
+Được rồi, chúng ta có một cái gì đó. Nhưng đó vẫn chưa phải là một điểm chuẩn tốt.
 
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
+Hãy tưởng tượng rằng tại thời điểm chạy `bench(diffSubtract)` CPU đang làm một việc gì đó song song và nó đang lấy tài nguyên. Và vào thời điểm chạy `bench(diffGetTime)` thì công việc đó đã hoàn thành.
 
-A pretty real scenario for a modern multi-process OS.
+Một kịch bản khá thực tế cho một hệ điều hành đa tiến trình hiện đại.
 
-As a result, the first benchmark will have less CPU resources than the second. That may lead to wrong results.
+Do đó, điểm chuẩn đầu tiên sẽ có ít tài nguyên CPU hơn điểm chuẩn thứ hai. Điều đó có thể dẫn đến kết quả sai.
 
-**For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.**
+**Để đo điểm chuẩn đáng tin cậy hơn, toàn bộ màn chấm điểm phải được chạy lại nhiều lần.**
 
-For example, like this:
+Ví dụ, như thế này:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -348,7 +348,7 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
+// chạy màn chấm điểm (diffSubtract) và màn chấm điểm (diffGetTime) mỗi lần 10 lần xen kẽ
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -359,50 +359,50 @@ alert( 'Total time for diffSubtract: ' + time1 );
 alert( 'Total time for diffGetTime: ' + time2 );
 ```
 
-Modern JavaScript engines start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+Các JavaScript engine hiện đại chỉ bắt đầu áp dụng tối ưu hóa nâng cao cho "mã nóng" thực thi nhiều lần (không cần tối ưu hóa những thứ hiếm khi được thực thi). Vì vậy, trong ví dụ trên, lần thực thi đầu tiên không được tối ưu hóa tốt. Chúng ta có thể muốn thêm một lần khởi động:
 
 ```js
-// added for "heating up" prior to the main loop
+// được thêm vào để "làm nóng" trước vòng lặp chính
 bench(diffSubtract);
 bench(diffGetTime);
 
-// now benchmark
+// bây giờ chấm điểm
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
 }
 ```
 
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+```warn header="Hãy cẩn thận khi thực hiện chấm điểm rất nhỏ"
+Các JavaScript engine hiện đại thực hiện nhiều tối ưu hóa. Họ có thể điều chỉnh kết quả của "các bài kiểm tra nhân tạo" so với "việc sử dụng thông thường", đặc biệt là khi chúng ta đánh giá một thứ gì đó rất nhỏ, chẳng hạn như cách thức hoạt động của một toán tử hoặc một hàm tích hợp sẵn. Vì vậy, nếu bạn thực sự muốn hiểu hiệu suất, thì hãy nghiên cứu cách thức hoạt động của công cụ JavaScript. Và sau đó, bạn có thể sẽ không cần chấm điểm rất nhỏ nữa.
 
-The great pack of articles about V8 can be found at <http://mrale.ph>.
+Bạn có thể tìm thấy những bài viết tuyệt vời về V8 tại <http://mrale.ph>.
 ```
 
-## Date.parse from a string
+## Date.parse từ một chuỗi
 
-The method [Date.parse(str)](mdn:js/Date/parse) can read a date from a string.
+Phương thức [Date.parse(str)](mdn:js/Date/parse) có thể đọc ngày từ một chuỗi.
 
-The string format should be: `YYYY-MM-DDTHH:mm:ss.sssZ`, where:
+Định dạng chuỗi nên là: `YYYY-MM-DDTHH:mm:ss.sssZ`, trong đó:
 
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+- `YYYY-MM-DD` -- là ngày: năm-tháng-ngày.
+- Ký tự `"T"` được sử dụng làm dấu phân cách.
+- `HH:mm:ss.sss` -- là thời gian: giờ, phút, giây và mili giây.
+- Phần `'Z'` tùy chọn biểu thị múi giờ ở định dạng `+-hh:mm`. Một chữ cái `Z` có nghĩa là UTC+0.
 
-Shorter variants are also possible, like `YYYY-MM-DD` or `YYYY-MM` or even `YYYY`.
+Cũng có thể có các biến thể ngắn hơn, chẳng hạn như `YYYY-MM-DD` hoặc `YYYY-MM` hoặc thậm chí `YYYY`.
 
-The call to `Date.parse(str)` parses the string in the given format and returns the timestamp (number of milliseconds from 1 Jan 1970 UTC+0). If the format is invalid, returns `NaN`.
+Lệnh gọi `Date.parse(str)` phân tích cú pháp chuỗi ở định dạng đã cho và trả về dấu thời gian (số mili giây từ ngày 1 tháng 1 năm 1970 UTC+0). Nếu định dạng không hợp lệ, trả về `NaN`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 
-alert(ms); // 1327611110417  (timestamp)
+alert(ms); // 1327611110417  (dấu thời gian)
 ```
 
-We can instantly create a `new Date` object from the timestamp:
+Chúng ta có thể tạo ngay một đối tượng `new Date` từ dấu thời gian:
 
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
@@ -410,24 +410,24 @@ let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 alert(date);  
 ```
 
-## Summary
+## Tóm tắt
 
-- Date and time in JavaScript are represented with the [Date](mdn:js/Date) object. We can't create "only date" or "only time": `Date` objects always carry both.
-- Months are counted from zero (yes, January is a zero month).
-- Days of week in `getDay()` are also counted from zero (that's Sunday).
-- `Date` auto-corrects itself when out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Dates can be subtracted, giving their difference in milliseconds. That's because a `Date` becomes the timestamp when converted to a number.
-- Use `Date.now()` to get the current timestamp fast.
+- Ngày và giờ trong JavaScript được biểu thị bằng đối tượng [Date](mdn:js/Date). Chúng ta không thể tạo "chỉ ngày" hoặc "chỉ thời gian": Các đối tượng `Date` luôn mang cả hai.
+- Các tháng được tính từ 0 (đúng, tháng 1 là tháng 0).
+- Các ngày trong tuần trong `getDay()` cũng được tính từ 0 (đó là Chủ Nhật).
+- `Ngày` tự động sửa khi các thành phần nằm ngoài phạm vi được đặt. Tốt cho việc cộng/trừ ngày/tháng/giờ.
+- Ngày có thể được trừ đi, đưa ra sự khác biệt của chúng tính bằng mili giây. Đó là vì `Ngày` trở thành dấu thời gian khi được chuyển đổi thành số.
+- Sử dụng `Date.now()` để lấy nhanh dấu thời gian hiện tại.
 
-Note that unlike many other systems, timestamps in JavaScript are in milliseconds, not in seconds.
+Lưu ý rằng không giống như nhiều hệ thống khác, dấu thời gian trong JavaScript tính bằng mili giây chứ không phải giây.
 
-Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+Đôi khi chúng ta cần các phép đo thời gian chính xác hơn. Bản thân JavaScript không có cách đo thời gian tính bằng micro giây (1 phần triệu giây), nhưng hầu hết các môi trường đều cung cấp tính năng này. Chẳng hạn, trình duyệt có [performance.now()](mdn:api/Performance/now) cung cấp số mili giây kể từ khi bắt đầu tải trang với độ chính xác micro giây (3 chữ số sau dấu chấm):
 
 ```js run
-alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+alert(`Bắt đầu tải ${performance.now()}ms trước`);
+// Cái gì đó như: "Bắt đầu tải 34731.26000000001ms trước"
+// .26 là micro giây (260 micro giây)
+// hơn 3 chữ số sau dấu thập phân là lỗi chính xác, chỉ 3 chữ số đầu tiên là đúng
 ```
 
-Node.js has `microtime` module and other ways. Technically, almost any device and environment allows to get more precision, it's just not in `Date`.
+Node.js có mô-đun `microtime` và các cách khác. Về mặt kỹ thuật, hầu hết mọi thiết bị và môi trường đều cho phép đạt được độ chính xác cao hơn, chỉ là không ở `Date`.
