@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Last day of month?
+# Ngày cuối cùng của tháng?
 
-Write a function `getLastDayOfMonth(year, month)` that returns the last day of month. Sometimes it is 30th, 31st or even 28/29th for Feb.
+Viết hàm `getLastDayOfMonth(năm, tháng)` trả về ngày cuối cùng của tháng. Đôi khi đó là ngày 30, 31 hoặc thậm chí là 28/29 cho tháng Hai.
 
-Parameters:
+Thông số:
 
-- `year` -- four-digits year, for instance 2012.
-- `month` -- month, from 0 to 11.
+- `year` -- năm có bốn chữ số, ví dụ 2012.
+- `month` -- tháng, từ 0 đến 11.
 
-For instance, `getLastDayOfMonth(2012, 1) = 29` (leap year, Feb).
+Ví dụ: `getLastDayOfMonth(2012, 1) = 29` (năm nhuận, tháng 2).
