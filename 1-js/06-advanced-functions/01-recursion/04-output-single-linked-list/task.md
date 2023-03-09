@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Output a single-linked list
+# Xuất danh sách liên kết đơn
 
-Let's say we have a single-linked list (as described in the chapter <info:recursion>):
+Giả sử chúng ta có một danh sách liên kết đơn (như được mô tả trong chương <info:recursion>):
 
 ```js
 let list = {
@@ -22,8 +22,8 @@ let list = {
 };
 ```
 
-Write a function `printList(list)` that outputs list items one-by-one.
+Viết một hàm `printList(list)` để xuất từng mục một trong danh sách.
 
-Make two variants of the solution: using a loop and using recursion.
+Thực hiện hai biến thể của giải pháp: sử dụng vòng lặp và sử dụng đệ quy.
 
-What's better: with recursion or without it?
+Điều gì tốt hơn: đệ quy hay không đệ quy?
