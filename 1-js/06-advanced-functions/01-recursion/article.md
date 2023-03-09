@@ -1,18 +1,18 @@
-# Recursion and stack
+# Đệ quy và ngăn xếp
 
-Let's return to functions and study them more in-depth.
+Hãy quay lại các hàm và nghiên cứu chúng sâu hơn.
 
-Our first topic will be *recursion*.
+Chủ đề đầu tiên của chúng ta sẽ là *đệ quy*.
 
-If you are not new to programming, then it is probably familiar and you could skip this chapter.
+Nếu bạn không phải là người mới lập trình, thì nó có thể đã quen thuộc và bạn có thể bỏ qua chương này.
 
-Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we'll see soon, to deal with certain data structures.
+Đệ quy là một mẫu lập trình hữu ích trong các tình huống khi một tác vụ có thể được chia thành nhiều tác vụ cùng loại nhưng đơn giản hơn. Hoặc khi một nhiệm vụ có thể được đơn giản hóa thành một hành động dễ dàng cộng với một biến thể đơn giản hơn của cùng một nhiệm vụ. Hoặc, như chúng ta sẽ sớm thấy, để xử lý các cấu trúc dữ liệu nhất định.
 
-When a function solves a task, in the process it can call many other functions. A partial case of this is when a function calls *itself*. That's called *recursion*.
+Khi một hàm giải quyết một nhiệm vụ, trong quá trình đó, nó có thể gọi nhiều hàm khác. Một phần trường hợp này là khi một hàm gọi *chính nó*. Cái đó được gọi là *đệ quy*.
 
-## Two ways of thinking
+## Hai cách suy nghĩ
 
-For something simple to start with -- let's write a function `pow(x, n)` that raises `x` to a natural power of `n`. In other words, multiplies `x` by itself `n` times.
+Để bắt đầu một cái gì đó đơn giản -- hãy viết một hàm `pow(x, n)` để nâng `x` lên lũy thừa tự nhiên của `n`. Nói cách khác, nhân `x` với chính nó `n` lần.
 
 ```js
 pow(2, 2) = 4
@@ -20,15 +20,15 @@ pow(2, 3) = 8
 pow(2, 4) = 16
 ```
 
-There are two ways to implement it.
+Có hai cách để thực hiện nó.
 
-1. Iterative thinking: the `for` loop:
+1. Tư duy lặp: vòng lặp `for`:
 
     ```js run
     function pow(x, n) {
       let result = 1;
 
-      // multiply result by x n times in the loop
+      // nhân kết quả với x n lần trong vòng lặp
       for (let i = 0; i < n; i++) {
         result *= x;
       }
@@ -39,7 +39,7 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-2. Recursive thinking: simplify the task and call self:
+2. Tư duy đệ quy: đơn giản hóa nhiệm vụ và tự gọi:
 
     ```js run
     function pow(x, n) {
@@ -53,9 +53,9 @@ There are two ways to implement it.
     alert( pow(2, 3) ); // 8
     ```
 
-Please note how the recursive variant is fundamentally different.
+Hãy lưu ý cách biến thể đệ quy khác nhau về cơ bản.
 
-When `pow(x, n)` is called, the execution splits into two branches:
+Khi `pow(x, n)` được gọi, quá trình thực thi sẽ chia thành hai nhánh:
 
 ```js
               if n==1  = x
