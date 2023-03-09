@@ -26,7 +26,7 @@ Thực hiện 3 biến thể giải pháp:
 Một ví dụ về kết quả:
 
 ```js
-function sumTo(n) { /*... your code ... */ }
+function sumTo(n) { /*... mã của bạn ... */ }
 
 alert( sumTo(100) ); // 5050
 ```
