@@ -448,11 +448,11 @@ let list = {
 };
 ```
 
-Graphical representation of the list:
+Biểu diễn đồ họa của danh sách:
 
 ![linked list](linked-list.svg)
 
-An alternative code for creation:
+Một mã thay thế để tạo:
 
 ```js no-beautify
 let list = { value: 1 };
@@ -462,9 +462,9 @@ list.next.next.next = { value: 4 };
 list.next.next.next.next = null;
 ```
 
-Here we can even more clearly see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
+Ở đây, chúng ta thậm chí có thể thấy rõ hơn rằng có nhiều đối tượng, mỗi đối tượng có `value` và `next` trỏ đến hàng xóm. Biến `list` là đối tượng đầu tiên trong chuỗi, do đó, theo các con trỏ `next` từ nó, chúng ta có thể tiếp cận bất kỳ phần tử nào.
 
-The list can be easily split into multiple parts and later joined back:
+Danh sách có thể dễ dàng chia thành nhiều phần và sau đó nối lại:
 
 ```js
 let secondList = list.next.next;
@@ -473,15 +473,15 @@ list.next.next = null;
 
 ![linked list split](linked-list-split.svg)
 
-To join:
+Để nối:
 
 ```js
 list.next.next = secondList;
 ```
 
-And surely we can insert or remove items in any place.
+Và chắc chắn chúng ta có thể chèn hoặc xóa các mục ở bất kỳ đâu.
 
-For instance, to prepend a new value, we need to update the head of the list:
+Chẳng hạn, để thêm vào trước một giá trị mới, chúng ta cần cập nhật phần đầu của danh sách:
 
 ```js
 let list = { value: 1 };
@@ -497,7 +497,7 @@ list = { value: "new item", next: list };
 
 ![linked list](linked-list-0.svg)
 
-To remove a value from the middle, change `next` of the previous one:
+Để xóa một giá trị ở giữa, hãy thay đổi `next` của giá trị trước đó:
 
 ```js
 list.next = list.next.next;
@@ -505,38 +505,38 @@ list.next = list.next.next;
 
 ![linked list](linked-list-remove-1.svg)
 
-We made `list.next` jump over `1` to value `2`. The value `1` is now excluded from the chain. If it's not stored anywhere else, it will be automatically removed from the memory.
+Chúng ta đã thực hiện chuyển `list.next` từ `1` sang giá trị `2`. Giá trị `1` hiện đã bị loại trừ khỏi chuỗi. Nếu nó không được lưu trữ ở bất kỳ nơi nào khác, nó sẽ tự động bị xóa khỏi bộ nhớ.
 
-Unlike arrays, there's no mass-renumbering, we can easily rearrange elements.
+Không giống như array, không cần đánh số lại hàng loạt, chúng ta có thể dễ dàng sắp xếp lại các phần tử.
 
-Naturally, lists are not always better than arrays. Otherwise everyone would use only lists.
+Đương nhiên, danh sách không phải lúc nào cũng tốt hơn array. Nếu không, mọi người sẽ chỉ sử dụng danh sách.
 
-The main drawback is that we can't easily access an element by its number. In an array that's easy: `arr[n]` is a direct reference. But in the list we need to start from the first item and go `next` `N` times to get the Nth element.
+Hạn chế chính là chúng ta không thể dễ dàng truy cập một phần tử bằng số của nó. Trong một array thì dễ: `arr[n]` là một tham chiếu trực tiếp. Nhưng trong danh sách, chúng ta cần bắt đầu từ mục đầu tiên và đi `next` `N` lần để lấy phần tử thứ N.
 
-...But we don't always need such operations. For instance, when we need a queue or even a [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- the ordered structure that must allow very fast adding/removing elements from both ends, but access to its middle is not needed.
+...Nhưng không phải lúc nào chúng ta cũng cần những thao tác như vậy. Chẳng hạn, khi chúng ta cần một hàng đợi hoặc thậm chí một [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- cấu trúc được sắp xếp phải cho phép thêm/xóa các phần tử ở cả hai đầu rất nhanh, nhưng truy cập vào giữa của nó là không cần thiết.
 
-Lists can be enhanced:
-- We can add property `prev` in addition to `next` to reference the previous element, to move back easily.
-- We can also add a variable named `tail` referencing the last element of the list (and update it when adding/removing elements from the end).
-- ...The data structure may vary according to our needs.
+Danh sách có thể được nâng cao:
+- Chúng ta có thể thêm thuộc tính `prev` ngoài `next` để tham chiếu phần tử trước đó, để di chuyển trở lại dễ dàng.
+- Chúng ta cũng có thể thêm một biến có tên `tail` tham chiếu đến phần tử cuối cùng của danh sách (và cập nhật nó khi thêm/bớt các phần tử ở cuối danh sách).
+- ...Cấu trúc dữ liệu có thể thay đổi tùy theo nhu cầu của chúng ta.
 
-## Summary
+## Tóm tắt
 
-Terms:
-- *Recursion*  is a programming term that means calling a function from itself. Recursive functions can be used to solve tasks in elegant ways.
+Thuật ngữ:
+- *Đệ quy* là một thuật ngữ lập trình có nghĩa là gọi một hàm từ chính nó. Các hàm đệ quy có thể được sử dụng để giải quyết các tác vụ theo những cách tao nhã.
 
-    When a function calls itself, that's called a *recursion step*. The *basis* of recursion is function arguments that make the task so simple that the function does not make further calls.
+     Khi một hàm gọi chính nó, đó được gọi là *bước đệ quy*. *Cơ sở* của đệ quy là các đối số hàm làm cho tác vụ trở nên đơn giản đến mức hàm không thực hiện thêm lệnh gọi nào nữa.
 
-- A [recursively-defined](https://en.wikipedia.org/wiki/Recursive_data_type) data structure is a data structure that can be defined using itself.
+- Cấu trúc dữ liệu [được xác định đệ quy](https://en.wikipedia.org/wiki/Recursive_data_type) là cấu trúc dữ liệu có thể được xác định bằng chính nó.
 
-    For instance, the linked list can be defined as a data structure consisting of an object referencing a list (or null).
+     Chẳng hạn, danh sách được liên kết có thể được định nghĩa là cấu trúc dữ liệu bao gồm một đối tượng tham chiếu đến một danh sách (hoặc null).
 
     ```js
     list = { value, next -> list }
     ```
 
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they branch and every branch can have other branches.
+    Các cây như cây phần tử HTML hoặc cây bộ phận trong chương này cũng có tính đệ quy tự nhiên: chúng phân nhánh và mỗi nhánh có thể có các nhánh khác.
 
-    Recursive functions can be used to walk them as we've seen in the `sumSalary` example.
+    Các hàm đệ quy có thể được sử dụng để điều khiển chúng như chúng ta đã thấy trong ví dụ `sumSalary`.
 
-Any recursive function can be rewritten into an iterative one. And that's sometimes required to optimize stuff. But for many tasks a recursive solution is fast enough and easier to write and support.
+Bất kỳ hàm đệ quy nào cũng có thể được viết lại thành một hàm lặp. Và điều đó đôi khi cần thiết để tối ưu hóa nội dung. Nhưng đối với nhiều tác vụ, một giải pháp đệ quy đủ nhanh và dễ dàng hơn để viết và hỗ trợ.
