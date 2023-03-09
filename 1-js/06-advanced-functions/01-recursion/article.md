@@ -65,27 +65,27 @@ pow(x, n) =
               else     = x * pow(x, n - 1)
 ```
 
-1. If `n == 1`, then everything is trivial. It is called *the base* of recursion, because it immediately produces the obvious result: `pow(x, 1)` equals `x`.
-2. Otherwise, we can represent `pow(x, n)` as `x * pow(x, n - 1)`. In maths, one would write <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. This is called *a recursive step*: we transform the task into a simpler action (multiplication by `x`) and a simpler call of the same task (`pow` with lower `n`). Next steps simplify it further and further until `n` reaches `1`.
+1. Nếu `n == 1`, thì mọi thứ đều tầm thường. Nó được gọi là *cơ sở* của đệ quy, bởi vì nó ngay lập tức tạo ra kết quả hiển nhiên: `pow(x, 1)` bằng `x`.
+2. Mặt khác, chúng ta có thể biểu diễn `pow(x, n)` dưới dạng `x * pow(x, n - 1)`. Trong toán học, người ta sẽ viết <code>x<sup>n</sup> = x * x<sup>n-1</sup></code>. Đây được gọi là *bước đệ quy*: chúng ta chuyển đổi tác vụ thành một tác vụ đơn giản hơn (nhân với `x`) và một lệnh gọi đơn giản hơn cho cùng một tác vụ (`pow` với `n` thấp hơn). Các bước tiếp theo sẽ ngày càng đơn giản hóa nó cho đến khi `n` đạt đến `1`.
 
-We can also say that `pow` *recursively calls itself* till `n == 1`.
+Chúng ta cũng có thể nói rằng `pow` *gọi chính nó một cách đệ quy* cho đến khi `n == 1`.
 
 ![recursive diagram of pow](recursion-pow.svg)
 
 
-For example, to calculate `pow(2, 4)` the recursive variant does these steps:
+Ví dụ: để tính `pow(2, 4)` biến thể đệ quy thực hiện các bước sau:
 
 1. `pow(2, 4) = 2 * pow(2, 3)`
 2. `pow(2, 3) = 2 * pow(2, 2)`
 3. `pow(2, 2) = 2 * pow(2, 1)`
 4. `pow(2, 1) = 2`
 
-So, the recursion reduces a function call to a simpler one, and then -- to even more simpler, and so on, until the result becomes obvious.
+Vì vậy, đệ quy rút gọn lời gọi hàm thành một lời gọi hàm đơn giản hơn, và sau đó -- đơn giản hơn nữa, v.v., cho đến khi kết quả trở nên rõ ràng.
 
-````smart header="Recursion is usually shorter"
-A recursive solution is usually shorter than an iterative one.
+````smart header="Đệ quy thường ngắn hơn"
+Giải pháp đệ quy thường ngắn hơn giải pháp lặp lại.
 
-Here we can rewrite the same using the conditional operator `?` instead of `if` to make `pow(x, n)` more terse and still very readable:
+Ở đây chúng ta có thể viết lại tương tự bằng cách sử dụng toán tử điều kiện `?` thay vì `if` để làm cho `pow(x, n)` ngắn gọn hơn và vẫn rất dễ đọc:
 
 ```js run
 function pow(x, n) {
@@ -94,45 +94,45 @@ function pow(x, n) {
 ```
 ````
 
-The maximal number of nested calls (including the first one) is called *recursion depth*. In our case, it will be exactly `n`.
+Số lượng cuộc gọi lồng nhau tối đa (bao gồm cả cuộc gọi đầu tiên) được gọi là *độ sâu đệ quy*. Trong trường hợp của chúng ta, nó sẽ chính xác là `n`.
 
-The maximal recursion depth is limited by JavaScript engine. We can rely on it being 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
+Độ sâu đệ quy tối đa bị giới hạn bởi JavaScript engine. Chúng ta có thể dựa vào nó là 10000, một số engine cho phép nhiều hơn, nhưng 100000 có thể vượt quá giới hạn đối với phần lớn trong số chúng. Có các tối ưu hóa tự động giúp giảm bớt điều này ("tối ưu hóa cuộc gọi đuôi"), nhưng chúng chưa được hỗ trợ ở mọi nơi và chỉ hoạt động trong các trường hợp đơn giản.
 
-That limits the application of recursion, but it still remains very wide. There are many tasks where recursive way of thinking gives simpler code, easier to maintain.
+Điều đó hạn chế việc áp dụng đệ quy, nhưng nó vẫn còn rất rộng. Có nhiều tác vụ mà cách suy nghĩ đệ quy cho mã đơn giản hơn, dễ bảo trì hơn.
 
-## The execution context and stack
+## Bối cảnh thực thi và ngăn xếp
 
-Now let's examine how recursive calls work. For that we'll look under the hood of functions.
+Bây giờ hãy kiểm tra xem các cuộc gọi đệ quy hoạt động như thế nào. Đối với điều đó, chúng ta sẽ xem xét các hàm.
 
-The information about the process of execution of a running function is stored in its *execution context*.
+Thông tin về quá trình thực hiện một hàm đang chạy được lưu trữ trong *bối cảnh thực thi* của nó.
 
-The [execution context](https://tc39.github.io/ecma262/#sec-execution-contexts) is an internal data structure that contains details about the execution of a function: where the control flow is now, the current variables, the value of `this` (we don't use it here) and few other internal details.
+[Bối cảnh thực thi](https://tc39.github.io/ecma262/#sec-execution-contexts) là một cấu trúc dữ liệu nội bộ chứa thông tin chi tiết về việc thực thi một hàm: vị trí hiện tại của luồng điều khiển, các biến hiện tại , giá trị của `this` (chúng ta không sử dụng nó ở đây) và một số chi tiết nội bộ khác.
 
-One function call has exactly one execution context associated with it.
+Một lệnh gọi hàm có chính xác một ngữ cảnh thực thi được liên kết với nó.
 
-When a function makes a nested call, the following happens:
+Khi một hàm thực hiện một cuộc gọi lồng nhau, điều sau đây sẽ xảy ra:
 
-- The current function is paused.
-- The execution context associated with it is remembered in a special data structure called *execution context stack*.
-- The nested call executes.
-- After it ends, the old execution context is retrieved from the stack, and the outer function is resumed from where it stopped.
+- Hàm hiện tại đang tạm dừng.
+- Bối cảnh thực thi được liên kết với nó được ghi nhớ trong một cấu trúc dữ liệu đặc biệt được gọi là *ngăn xếp ngữ cảnh thực thi*.
+- Cuộc gọi lồng nhau thực hiện.
+- Sau khi nó kết thúc, bối cảnh thực thi cũ được lấy ra từ ngăn xếp và hàm bên ngoài được tiếp tục từ nơi nó dừng lại.
 
-Let's see what happens during the `pow(2, 3)` call.
+Hãy xem điều gì xảy ra trong lệnh gọi `pow(2, 3)`.
 
 ### pow(2, 3)
 
-In the beginning of the call `pow(2, 3)` the execution context will store variables: `x = 2, n = 3`, the execution flow is at line `1` of the function.
+Khi bắt đầu gọi `pow(2, 3)` ngữ cảnh thực thi sẽ lưu các biến: `x = 2, n = 3`, luồng thực thi nằm ở dòng `1` của hàm.
 
-We can sketch it as:
+Chúng ta có thể phác họa nó như sau:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 1 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 3, ở dòng 1 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-That's when the function starts to execute. The condition `n == 1` is falsy, so the flow continues into the second branch of `if`:
+Đó là khi hàm bắt đầu thực thi. Điều kiện `n == 1` là sai, vì vậy luồng tiếp tục vào nhánh thứ hai của `if`:
 
 ```js run
 function pow(x, n) {
@@ -149,76 +149,76 @@ alert( pow(2, 3) );
 ```
 
 
-The variables are same, but the line changes, so the context is now:
+Các biến giống nhau, nhưng dòng thay đổi, vì vậy ngữ cảnh bây giờ là:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 3, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-To calculate `x * pow(x, n - 1)`, we need to make a subcall of `pow` with new arguments `pow(2, 2)`.
+Để tính `x * pow(x, n - 1)`, chúng ta cần thực hiện lệnh gọi con của `pow` với các đối số mới `pow(2, 2)`.
 
 ### pow(2, 2)
 
-To do a nested call, JavaScript remembers the current execution context in the *execution context stack*.
+Để thực hiện lệnh gọi lồng nhau, JavaScript ghi nhớ ngữ cảnh thực thi hiện tại trong *ngăn xếp ngữ cảnh thực thi*.
 
-Here we call the same function `pow`, but it absolutely doesn't matter. The process is the same for all functions:
+Ở đây chúng ta gọi hàm tương tự là `pow`, nhưng nó hoàn toàn không thành vấn đề. Quá trình này giống nhau đối với tất cả các hàm:
 
-1. The current context is "remembered" on top of the stack.
-2. The new context is created for the subcall.
-3. When the subcall is finished -- the previous context is popped from the stack, and its execution continues.
+1. Bối cảnh hiện tại được "ghi nhớ" trên đầu ngăn xếp.
+2. Bối cảnh mới được tạo cho cuộc gọi phụ.
+3. Khi cuộc gọi con kết thúc -- bối cảnh trước đó được bật ra khỏi ngăn xếp và quá trình thực thi của nó tiếp tục.
 
-Here's the context stack when we entered the subcall `pow(2, 2)`:
+Đây là ngăn xếp ngữ cảnh khi chúng ta nhập lệnh gọi phụ `pow(2, 2)`:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 1 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 2, ở dòng 1 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 3, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-The new current execution context is on top (and bold), and previous remembered contexts are below.
+Bối cảnh thực thi hiện tại mới ở trên cùng (và được in đậm) và các bối cảnh được ghi nhớ trước đó ở bên dưới.
 
-When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
+Khi chúng ta kết thúc cuộc gọi phụ -- thật dễ dàng để tiếp tục ngữ cảnh trước đó, bởi vì nó giữ cả hai biến và vị trí chính xác của mã nơi nó dừng lại.
 
 ```smart
-Here in the picture we use the word "line", as in our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+Ở đây trong hình, chúng ta sử dụng từ "dòng", vì trong ví dụ của chúng ta chỉ có một lệnh gọi phụ trong dòng, nhưng nói chung một dòng mã có thể chứa nhiều lệnh gọi phụ, như `pow(…) + pow(…) + somethingElse(… )`.
 
-So it would be more precise to say that the execution resumes "immediately after the subcall".
+Vì vậy, sẽ chính xác hơn khi nói rằng quá trình thực thi sẽ tiếp tục "ngay sau cuộc gọi phụ".
 ```
 
 ### pow(2, 1)
 
-The process repeats: a new subcall is made at line `5`, now with arguments `x=2`, `n=1`.
+Quá trình lặp lại: một cuộc gọi phụ mới được thực hiện tại dòng `5`, bây giờ với các đối số `x=2`, `n=1`.
 
-A new execution context is created, the previous one is pushed on top of the stack:
+Một bối cảnh thực thi mới được tạo, bối cảnh trước đó được đẩy lên trên cùng của ngăn xếp:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 1, at line 1 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 1, ở dòng 1 }</span>
     <span class="function-execution-context-call">pow(2, 1)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 2, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 3, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-There are 2 old contexts now and 1 currently running for `pow(2, 1)`.
+Hiện có 2 ngữ cảnh cũ và 1 ngữ cảnh hiện đang chạy cho `pow(2, 1)`.
 
-### The exit
+### Lối thoát
 
-During the execution of `pow(2, 1)`, unlike before, the condition `n == 1` is truthy, so the first branch of `if` works:
+Trong quá trình thực thi `pow(2, 1)`, không giống như trước đây, điều kiện `n == 1` là đúng, vì vậy nhánh đầu tiên của `if` hoạt động:
 
 ```js
 function pow(x, n) {
@@ -232,42 +232,42 @@ function pow(x, n) {
 }
 ```
 
-There are no more nested calls, so the function finishes, returning `2`.
+Không còn lệnh gọi lồng nhau nào nữa, vì vậy hàm kết thúc, trả về `2`.
 
-As the function finishes, its execution context is not needed anymore, so it's removed from the memory. The previous one is restored off the top of the stack:
+Khi hàm kết thúc, bối cảnh thực thi của nó không còn cần thiết nữa, do đó, nó bị xóa khỏi bộ nhớ. Cái trước đó được khôi phục khỏi đầu ngăn xếp:
 
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 2, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 2)</span>
   </li>
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 3, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-The execution of `pow(2, 2)` is resumed. It has the result of the subcall `pow(2, 1)`, so it also can finish the evaluation of `x * pow(x, n - 1)`, returning `4`.
+Quá trình thực thi `pow(2, 2)` được tiếp tục. Nó có kết quả của lệnh gọi phụ `pow(2, 1)`, vì vậy nó cũng có thể kết thúc việc đánh giá `x * pow(x, n - 1)`, trả về `4`.
 
-Then the previous context is restored:
+Sau đó, bối cảnh trước đó được khôi phục:
 
 <ul class="function-execution-context-list">
   <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
+    <span class="function-execution-context">Ngữ cảnh: { x: 2, n: 3, ở dòng 5 }</span>
     <span class="function-execution-context-call">pow(2, 3)</span>
   </li>
 </ul>
 
-When it finishes, we have a result of `pow(2, 3) = 8`.
+Khi nó kết thúc, chúng ta có kết quả là `pow(2, 3) = 8`.
 
-The recursion depth in this case was: **3**.
+Độ sâu đệ quy trong trường hợp này là: **3**.
 
-As we can see from the illustrations above, recursion depth equals the maximal number of context in the stack.
+Như chúng ta có thể thấy từ các hình minh họa ở trên, độ sâu đệ quy bằng với số lượng ngữ cảnh tối đa trong ngăn xếp.
 
-Note the memory requirements. Contexts take memory. In our case, raising to the power of `n` actually requires the memory for `n` contexts, for all lower values of `n`.
+Lưu ý các yêu cầu bộ nhớ. Bối cảnh chiếm bộ nhớ. Trong trường hợp của chúng ta, việc nâng lên lũy thừa của `n` thực sự yêu cầu bộ nhớ cho ngữ cảnh `n`, cho tất cả các giá trị thấp hơn của `n`.
 
-A loop-based algorithm is more memory-saving:
+Thuật toán dựa trên vòng lặp tiết kiệm bộ nhớ hơn:
 
 ```js
 function pow(x, n) {
@@ -281,19 +281,19 @@ function pow(x, n) {
 }
 ```
 
-The iterative `pow` uses a single context changing `i` and `result` in the process. Its memory requirements are small, fixed and do not depend on `n`.
+`pow` lặp lại sử dụng một ngữ cảnh duy nhất thay đổi `i` và `kết quả` trong quy trình. Yêu cầu bộ nhớ của nó nhỏ, cố định và không phụ thuộc vào `n`.
 
-**Any recursion can be rewritten as a loop. The loop variant usually can be made more effective.**
+**Bất kỳ đệ quy nào cũng có thể được viết lại dưới dạng vòng lặp. Biến thể vòng lặp thường có thể được thực hiện hiệu quả hơn.**
 
-...But sometimes the rewrite is non-trivial, especially when function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+...Nhưng đôi khi việc viết lại không hề nhỏ, đặc biệt là khi hàm sử dụng các cuộc gọi con đệ quy khác nhau tùy thuộc vào điều kiện và hợp nhất kết quả của chúng hoặc khi việc phân nhánh phức tạp hơn. Và việc tối ưu hóa có thể không cần thiết và hoàn toàn không xứng đáng với những nỗ lực.
 
-Recursion can give a shorter code, easier to understand and support. Optimizations are not required in every place, mostly we need a good code, that's why it's used.
+Đệ quy có thể đưa ra đoạn mã ngắn hơn, dễ hiểu và dễ hỗ trợ hơn. Tối ưu hóa không phải bắt buộc ở mọi nơi, chủ yếu là chúng ta cần một mã tốt, đó là lý do tại sao nó được sử dụng.
 
-## Recursive traversals
+## Truyền tải đệ quy
 
-Another great application of the recursion is a recursive traversal.
+Một ứng dụng tuyệt vời khác của đệ quy là truyền tải đệ quy.
 
-Imagine, we have a company. The staff structure can be presented as an object:
+Hãy tưởng tượng, chúng ta có một công ty. Cấu trúc nhân viên có thể được trình bày dưới dạng một đối tượng:
 
 ```js
 let company = {
@@ -322,34 +322,34 @@ let company = {
 };
 ```
 
-In other words, a company has departments.
+Nói cách khác, một công ty có các phòng ban.
 
-- A department may have an array of staff. For instance, `sales` department has 2 employees: John and Alice.
-- Or a department may split into subdepartments, like `development` has two branches: `sites` and `internals`. Each of them has their own staff.
-- It is also possible that when a subdepartment grows, it divides into subsubdepartments (or teams).
+- Một bộ phận có thể có một array nhân viên. Chẳng hạn, bộ phận `sales` có 2 nhân viên: John và Alice.
+- Hoặc một bộ phận có thể chia thành các bộ phận nhỏ, như `development` có hai nhánh: `sites` và `internal`. Mỗi người trong số họ có nhân viên riêng của họ.
+- Cũng có thể khi một chi cục lớn lên thì chia thành các chi cục (hoặc tổ).
 
-    For instance, the `sites` department in the future may be split into teams for `siteA` and `siteB`. And they, potentially, can split even more. That's not on the picture, just something to have in mind.
+     Chẳng hạn, bộ phận `sites` trong tương lai có thể được chia thành các nhóm cho `siteA` và `siteB`. Và họ, có khả năng, có thể chia nhiều hơn nữa. Đó không phải là hình ảnh, chỉ là một cái gì đó để có trong tâm trí.
 
-Now let's say we want a function to get the sum of all salaries. How can we do that?
+Bây giờ, giả sử chúng ta muốn một hàm lấy tổng của tất cả các mức lương. Làm thế nào chúng ta có thể làm điều đó?
 
-An iterative approach is not easy, because the structure is not simple. The first idea may be to make a `for` loop over `company` with nested subloop over 1st level departments. But then we need more nested subloops to iterate over the staff in 2nd level departments like `sites`... And then another subloop inside those for 3rd level departments that might appear in the future? If we put 3-4 nested subloops in the code to traverse a single object, it becomes rather ugly.
+Một cách tiếp cận lặp đi lặp lại là không dễ dàng, bởi vì cấu trúc không đơn giản. Ý tưởng đầu tiên có thể là tạo vòng lặp `for` trên `company` với vòng lặp con lồng nhau trên các phòng ban cấp 1. Nhưng sau đó, chúng ta cần nhiều vòng lặp con lồng nhau hơn để lặp lại nhân viên ở các phòng ban cấp 2 như `sites`... Và sau đó, một vòng lặp con khác bên trong các vòng lặp con đó dành cho các phòng ban cấp 3 có thể xuất hiện trong tương lai? Nếu chúng ta đặt 3-4 vòng lặp con lồng nhau trong mã để duyệt qua một đối tượng, nó sẽ trở nên khá xấu.
 
-Let's try recursion.
+Hãy thử đệ quy.
 
-As we can see, when our function gets a department to sum, there are two possible cases:
+Như chúng ta có thể thấy, khi hàm của chúng ta tính tổng một bộ phận, có hai trường hợp có thể xảy ra:
 
-1. Either it's a "simple" department with an *array* of people -- then we can sum the salaries in a simple loop.
-2. Or it's *an object* with `N` subdepartments -- then we can make `N` recursive calls to get the sum for each of the subdeps and combine the results.
+1. Hoặc đó là một bộ phận "đơn giản" với *array* người -- thì chúng ta có thể tính tổng tiền lương trong một vòng lặp đơn giản.
+2. Hoặc đó là *một đối tượng* có `N` bộ phận con -- khi đó chúng ta có thể thực hiện lệnh gọi đệ quy `N` để lấy tổng cho từng bộ phận con và kết hợp các kết quả.
 
-The 1st case is the base of recursion, the trivial case, when we get an array.
+Trường hợp đầu tiên là cơ sở của đệ quy, trường hợp tầm thường, khi chúng ta nhận được một array.
 
-The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
+Trường hợp thứ 2 khi chúng ta lấy một đối tượng là bước đệ quy. Một nhiệm vụ phức tạp được chia thành các nhiệm vụ con cho các bộ phận nhỏ hơn. Họ có thể lần lượt chia tách một lần nữa, nhưng sớm hay muộn sự phân chia sẽ kết thúc ở (1).
 
-The algorithm is probably even easier to read from the code:
+Thuật toán có lẽ còn dễ đọc hơn từ mã:
 
 
 ```js run
-let company = { // the same object, compressed for brevity
+let company = { // cùng một đối tượng, được nén cho ngắn gọn
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
@@ -357,15 +357,15 @@ let company = { // the same object, compressed for brevity
   }
 };
 
-// The function to do the job
+// Hàm thực hiện công việc
 *!*
 function sumSalaries(department) {
-  if (Array.isArray(department)) { // case (1)
-    return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
+  if (Array.isArray(department)) { // trường hợp (1)
+    return department.reduce((prev, current) => prev + current.salary, 0); // tính tổng array
   } else { // case (2)
     let sum = 0;
     for (let subdep of Object.values(department)) {
-      sum += sumSalaries(subdep); // recursively call for subdepartments, sum the results
+      sum += sumSalaries(subdep); // gọi đệ quy các phân khu, tính tổng kết quả
     }
     return sum;
   }
@@ -375,62 +375,62 @@ function sumSalaries(department) {
 alert(sumSalaries(company)); // 7700
 ```
 
-The code is short and easy to understand (hopefully?). That's the power of recursion. It also works for any level of subdepartment nesting.
+Mã ngắn và dễ hiểu (mong rằng?). Đó là sức mạnh của đệ quy. Nó cũng hoạt động đối với bất kỳ cấp độ nào của việc lồng ghép các bộ phận phụ.
 
-Here's the diagram of calls:
+Đây là sơ đồ của các cuộc gọi:
 
 ![recursive salaries](recursive-salaries.svg)
 
-We can easily see the principle: for an object `{...}` subcalls are made, while arrays `[...]` are the "leaves" of the recursion tree, they give immediate result.
+Ta có thể dễ dàng nhận thấy nguyên tắc: đối với một đối tượng `{...}` thì thực hiện gọi con, còn mảng `[...]` là các "lá" của cây đệ quy thì cho kết quả ngay.
 
-Note that the code uses smart features that we've covered before:
+Lưu ý rằng mã này sử dụng các tính năng thông minh mà chúng ta đã đề cập trước đây:
 
-- Method `arr.reduce` explained in the chapter <info:array-methods> to get the sum of the array.
-- Loop `for(val of Object.values(obj))` to iterate over object values: `Object.values` returns an array of them.
+- Phương thức `arr.reduce` được giải thích trong chương <info:array-methods> để lấy tổng của array.
+- Vòng lặp `for(val of Object.values(obj))` để lặp qua các giá trị đối tượng: `Object.values` trả về một array của chúng.
 
 
-## Recursive structures
+## Cấu trúc đệ quy
 
-A recursive (recursively-defined) data structure is a structure that replicates itself in parts.
+Cấu trúc dữ liệu đệ quy (được xác định đệ quy) là cấu trúc sao chép chính nó thành từng phần.
 
-We've just seen it in the example of a company structure above.
+Chúng ta vừa thấy nó trong ví dụ về cấu trúc công ty ở trên.
 
-A company *department* is:
-- Either an array of people.
-- Or an object with *departments*.
+Một *bộ phận* của công ty là:
+- Hoặc là một array người.
+- Hoặc một đối tượng có *các phòng ban*.
 
-For web-developers there are much better-known examples: HTML and XML documents.
+Đối với các nhà phát triển web, có nhiều ví dụ nổi tiếng hơn: tài liệu HTML và XML.
 
-In the HTML document, an *HTML-tag* may contain a list of:
-- Text pieces.
-- HTML-comments.
-- Other *HTML-tags* (that in turn may contain text pieces/comments or other tags etc).
+Trong tài liệu HTML, một *HTML-tag* có thể chứa danh sách:
+- Đoạn văn bản.
+- Nhận xét HTML.
+- *Thẻ HTML* khác (có thể chứa các đoạn văn bản/nhận xét hoặc các thẻ khác, v.v.).
 
-That's once again a recursive definition.
+Đó là một lần nữa một định nghĩa đệ quy.
 
-For better understanding, we'll cover one more recursive structure named "Linked list" that might be a better alternative for arrays in some cases.
+Để hiểu rõ hơn, chúng ta sẽ đề cập đến một cấu trúc đệ quy khác có tên là "Danh sách được liên kết" có thể là một giải pháp thay thế tốt hơn cho array trong một số trường hợp.
 
-### Linked list
+### Danh sách liên kết
 
-Imagine, we want to store an ordered list of objects.
+Hãy tưởng tượng, chúng ta muốn lưu trữ một danh sách các đối tượng được sắp xếp theo thứ tự.
 
-The natural choice would be an array:
+Sự lựa chọn tự nhiên sẽ là một array:
 
 ```js
 let arr = [obj1, obj2, obj3];
 ```
 
-...But there's a problem with arrays. The "delete element" and "insert element" operations are expensive. For instance, `arr.unshift(obj)` operation has to renumber all elements to make room for a new `obj`, and if the array is big, it takes time. Same with `arr.shift()`.
+...Nhưng có một vấn đề với array. Thao tác "xóa phần tử" và "chèn phần tử" rất tốn kém. Chẳng hạn, thao tác `arr.unshift(obj)` phải đánh số lại tất cả các phần tử để nhường chỗ cho một `obj` mới và nếu array lớn thì sẽ mất thời gian. Tương tự với `arr.shift()`.
 
-The only structural modifications that do not require mass-renumbering are those that operate with the end of array: `arr.push/pop`. So an array can be quite slow for big queues, when we have to work with the beginning.
+Các sửa đổi cấu trúc duy nhất không yêu cầu đánh số lại hàng loạt là những sửa đổi hoạt động với phần cuối của array: `arr.push/pop`. Vì vậy, một array có thể khá chậm đối với các hàng đợi lớn, khi chúng ta phải làm việc từ đầu.
 
-Alternatively, if we really need fast insertion/deletion, we can choose another data structure called a [linked list](https://en.wikipedia.org/wiki/Linked_list).
+Ngoài ra, nếu chúng ta thực sự cần chèn/xóa nhanh, chúng ta có thể chọn một cấu trúc dữ liệu khác được gọi là [danh sách được liên kết](https://en.wikipedia.org/wiki/Linked_list).
 
-The *linked list element* is recursively defined as an object with:
-- `value`.
-- `next` property referencing the next *linked list element* or `null` if that's the end.
+*Phần tử danh sách được liên kết* được định nghĩa đệ quy là một đối tượng có:
+- `giá trị`.
+- Thuộc tính `next` tham chiếu đến *phần tử danh sách được liên kết* tiếp theo hoặc `null` nếu đó là phần cuối.
 
-For instance:
+Ví dụ:
 
 ```js
 let list = {
