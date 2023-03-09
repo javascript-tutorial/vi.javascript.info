@@ -1,20 +1,20 @@
-# Rest parameters and spread syntax
+# Tham số còn lại và cú pháp lan ra
 
-Many JavaScript built-in functions support an arbitrary number of arguments.
+Nhiều hàm dựng sẵn trong JavaScript hỗ trợ số lượng đối số tùy ý.
 
-For instance:
+Ví dụ:
 
-- `Math.max(arg1, arg2, ..., argN)` -- returns the greatest of the arguments.
-- `Object.assign(dest, src1, ..., srcN)` -- copies properties from `src1..N` into `dest`.
-- ...and so on.
+- `Math.max(arg1, arg2, ..., argN)` -- trả về giá trị lớn nhất của các đối số.
+- `Object.assign(dest, src1, ..., srcN)` -- sao chép các thuộc tính từ `src1..N` vào `dest`.
+- ...v.v.
 
-In this chapter we'll learn how to do the same. And also, how to pass arrays to such functions as parameters.
+Trong chương này chúng ta sẽ học cách làm điều tương tự. Và cách truyền array cho các hàm như tham số.
 
-## Rest parameters `...`
+## Thông số còn lại `...`
 
-A function can be called with any number of arguments, no matter how it is defined.
+Một hàm có thể được gọi với bất kỳ số lượng đối số nào, bất kể nó được định nghĩa như thế nào.
 
-Like here:
+Như ở đây:
 ```js run
 function sum(a, b) {
   return a + b;
