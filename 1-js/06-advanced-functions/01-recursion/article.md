@@ -424,7 +424,7 @@ let arr = [obj1, obj2, obj3];
 
 Các sửa đổi cấu trúc duy nhất không yêu cầu đánh số lại hàng loạt là những sửa đổi hoạt động với phần cuối của array: `arr.push/pop`. Vì vậy, một array có thể khá chậm đối với các hàng đợi lớn, khi chúng ta phải làm việc từ đầu.
 
-Ngoài ra, nếu chúng ta thực sự cần chèn/xóa nhanh, chúng ta có thể chọn một cấu trúc dữ liệu khác được gọi là [danh sách được liên kết](https://en.wikipedia.org/wiki/Linked_list).
+Ngoài ra, nếu chúng ta thực sự cần chèn/xóa nhanh, chúng ta có thể chọn một cấu trúc dữ liệu khác được gọi là [danh sách liên kết](https://vi.wikipedia.org/wiki/Danh_s%C3%A1ch_li%C3%AAn_k%E1%BA%BFt).
 
 *Phần tử danh sách được liên kết* được định nghĩa đệ quy là một đối tượng có:
 - `giá trị`.
