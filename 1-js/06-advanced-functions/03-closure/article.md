@@ -1,75 +1,75 @@
 
-# Variable scope, closure
+# Phạm vi biến, đóng kín
 
-JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created at any moment, passed as an argument to another function, and then called from a totally different place of code later.
+JavaScript là một ngôn ngữ rất hướng hàm. Nó cho chúng ta rất nhiều tự do. Một hàm có thể được tạo bất cứ lúc nào, được chuyển dưới dạng đối số cho một hàm khác và sau đó được gọi từ một vị trí mã hoàn toàn khác sau đó.
 
-We already know that a function can access variables outside of it ("outer" variables).
+Chúng ta đã biết rằng một hàm có thể truy cập các biến bên ngoài nó (các biến "bên ngoài").
 
-But what happens if outer variables change since a function is created? Will the function get newer values or the old ones?
+Nhưng điều gì sẽ xảy ra nếu các biến bên ngoài thay đổi kể từ khi một hàm được tạo? Hàm sẽ nhận giá trị mới hơn hay giá trị cũ?
 
-And what if a function is passed along as a parameter and called from another place of code, will it get access to outer variables at the new place?
+Và điều gì sẽ xảy ra nếu một hàm được truyền dưới dạng tham số và được gọi từ một vị trí khác của mã, liệu nó có được truy cập vào các biến bên ngoài ở vị trí mới không?
 
-Let's expand our knowledge to understand these scenarios and more complex ones.
+Hãy mở rộng kiến thức của chúng ta để hiểu những tình huống này và những tình huống phức tạp hơn.
 
-```smart header="We'll talk about `let/const` variables here"
-In JavaScript, there are 3 ways to declare a variable: `let`, `const` (the modern ones), and `var` (the remnant of the past).
+```smart header="Chúng ta sẽ nói về các biến `let/const` ở đây"
+Trong JavaScript, có 3 cách để khai báo một biến: `let`, `const` (cách hiện đại) và `var` (phần còn lại của quá khứ).
 
-- In this article we'll use `let` variables in examples.
-- Variables, declared with `const`, behave the same, so this article is about `const` too.
-- The old `var` has some notable differences, they will be covered in the article <info:var>.
+- Trong bài viết này, chúng ta sẽ sử dụng các biến `let` trong các ví dụ.
+- Các biến, được khai báo bằng `const`, hoạt động giống nhau, vì vậy bài viết này cũng nói về `const`.
+- `var` cũ có một số điểm khác biệt đáng chú ý, chúng sẽ được đề cập trong bài viết <info:var>.
 ```
 
-## Code blocks
+## Khói mã
 
-If a variable is declared inside a code block `{...}`, it's only visible inside that block.
+Nếu một biến được khai báo bên trong khối mã `{...}`, thì nó chỉ hiển thị bên trong khối đó.
 
-For example:
+Ví dụ:
 
 ```js run
 {
-  // do some job with local variables that should not be seen outside
+  // thực hiện một số công việc với các biến cục bộ không nên nhìn thấy bên ngoài
 
-  let message = "Hello"; // only visible in this block
+  let message = "Xin chào"; // chỉ hiển thị trong khối này
 
-  alert(message); // Hello
+  alert(message); // Xin chào
 }
 
-alert(message); // Error: message is not defined
+alert(message); // Lỗi: tin nhắn không xác định
 ```
 
-We can use this to isolate a piece of code that does its own task, with variables that only belong to it:
+Chúng ta có thể sử dụng điều này để cô lập một đoạn mã thực hiện nhiệm vụ riêng của nó, với các biến chỉ thuộc về nó:
 
 ```js run
 {
-  // show message
-  let message = "Hello";
+  // hiển thị tin nhắn
+  let message = "Xin chào";
   alert(message);
 }
 
 {
-  // show another message
-  let message = "Goodbye";
+  // hiển thị một tin nhắn khác
+  let message = "Tạm biệt";
   alert(message);
 }
 ```
 
-````smart header="There'd be an error without blocks"
-Please note, without separate blocks there would be an error, if we use `let` with the existing variable name:
+````smart header="Sẽ có lỗi nếu không có khối"
+Hãy lưu ý, nếu không có các khối riêng biệt sẽ xảy ra lỗi, nếu chúng ta sử dụng `let` với tên biến hiện có:
 
 ```js run
-// show message
-let message = "Hello";
+// hiển thị tin nhắn
+let message = "Xin chào";
 alert(message);
 
-// show another message
+// hiển thị một tin nhắn khác
 *!*
-let message = "Goodbye"; // Error: variable already declared
+let message = "Tạm biệt"; // Lỗi: biến đã được khai báo
 */!*
 alert(message);
 ```
 ````
 
-For `if`, `for`, `while` and so on, variables declared in `{...}` are also only visible inside:
+Đối với `if`, `for`, `while`, v.v., các biến được khai báo trong `{...}` cũng chỉ hiển thị bên trong:
 
 ```js run
 if (true) {
