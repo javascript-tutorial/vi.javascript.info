@@ -19,7 +19,7 @@ Trong JavaScript, có 3 cách để khai báo một biến: `let`, `const` (các
 - `var` cũ có một số điểm khác biệt đáng chú ý, chúng sẽ được đề cập trong bài viết <info:var>.
 ```
 
-## Khói mã
+## Khối mã
 
 Nếu một biến được khai báo bên trong khối mã `{...}`, thì nó chỉ hiển thị bên trong khối đó.
 
@@ -162,103 +162,103 @@ Theo như tôi muốn tránh các chi tiết ngôn ngữ cấp thấp, mọi hi�
 
 Trong JavaScript, mọi chức năng đang chạy, khối mã `{...}` và toàn bộ tập lệnh đều có một đối tượng liên quan (ẩn) bên trong được gọi là *Môi trường từ vựng*.
 
-Đối tượng Môi trường từ vựng bao gồm hai phần:
+Đối tượng Môi trường Từ vựng bao gồm hai phần:
 
 1. *Bản ghi Môi trường* -- một đối tượng lưu trữ tất cả các biến cục bộ làm thuộc tính của nó (và một số thông tin khác như giá trị của `this`).
-2. Tham chiếu đến *Môi trường từ vựng bên ngoài*, môi trường được liên kết với mã bên ngoài.
+2. Tham chiếu đến *Môi trường Từ vựng bên ngoài*, môi trường được liên kết với mã bên ngoài.
 
 **"Biến" chỉ là thuộc tính của đối tượng bên trong đặc biệt, `Bản ghi Môi trường`. "Nhận hoặc thay đổi một biến" có nghĩa là "lấy hoặc thay đổi một thuộc tính của đối tượng đó".**
 
-Trong mã đơn giản không có hàm này, chỉ có một Môi trường từ vựng:
+Trong mã đơn giản không có hàm này, chỉ có một Môi trường Từ vựng:
 
 ![lexical environment](lexical-environment-global.svg)
 
-This is the so-called *global* Lexical Environment, associated with the whole script.
+Đây được gọi là Môi trường Từ vựng *chung*, được liên kết với toàn bộ tập lệnh.
 
-On the picture above, the rectangle means Environment Record (variable store) and the arrow means the outer reference. The global Lexical Environment has no outer reference, that's why the arrow points to `null`.
+Trong hình trên, hình chữ nhật có nghĩa là Bản ghi Môi trường (lưu trữ biến) và mũi tên có nghĩa là tham chiếu bên ngoài. Môi trường Từ điển chung không có tham chiếu bên ngoài, đó là lý do tại sao mũi tên trỏ đến `null`.
 
-As the code starts executing and goes on, the Lexical Environment changes.
+Khi mã bắt đầu thực thi và tiếp tục, Môi trường Từ vựng sẽ thay đổi.
 
-Here's a little bit longer code:
+Đây là mã dài hơn một chút:
 
 ![lexical environment](closure-variable-phrase.svg)
 
-Rectangles on the right-hand side demonstrate how the global Lexical Environment changes during the execution:
+Các hình chữ nhật ở phía bên tay phải thể hiện cách Môi trường Từ vựng chung thay đổi trong quá trình thực thi:
 
-1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
-    - Initially, they are in the "Uninitialized" state. That's a special internal state, it means that the engine knows about the variable, but it cannot be referenced until it has been declared with `let`. It's almost the same as if the variable didn't exist.
-2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable from this point forward.
-3. `phrase` is assigned a value.
-4. `phrase` changes the value.
+1. Khi tập lệnh bắt đầu, Môi trường Từ vựng được điền trước với tất cả các biến đã khai báo.
+     - Ban đầu, chúng ở trạng thái "Uninitialized". Đó là một trạng thái bên trong đặc biệt, nó có nghĩa là engine biết về biến, nhưng nó không thể được tham chiếu cho đến khi nó được khai báo với `let`. Nó gần giống như thể biến không tồn tại.
+2. Sau đó, định nghĩa `let phrase` xuất hiện. Chưa có nhiệm vụ nào, vì vậy giá trị của nó là `undefined`. Chúng ta có thể sử dụng biến từ thời điểm này trở đi.
+3. `phrase` được gán một giá trị.
+4. `phrase` thay đổi giá trị.
 
-Everything looks simple for now, right?
+Mọi thứ có vẻ đơn giản cho bây giờ, phải không?
 
-- A variable is a property of a special internal object, associated with the currently executing block/function/script.
-- Working with variables is actually working with the properties of that object.
+- Biến là thuộc tính của một đối tượng bên trong đặc biệt, được liên kết với khối/hàm/tập lệnh hiện đang thực thi.
+- Làm việc với biến thực chất là làm việc với thuộc tính của đối tượng đó.
 
-```smart header="Lexical Environment is a specification object"
-"Lexical Environment" is a specification object: it only exists "theoretically" in the [language specification](https://tc39.es/ecma262/#sec-lexical-environments) to describe how things work. We can't get this object in our code and manipulate it directly.
+```smart header="Môi trường Từ vựng là một đối tượng thông số"
+"Môi trường Từ vựng" là một đối tượng thông số: nó chỉ tồn tại "về mặt lý thuyết" trong [thông số kỹ thuật ngôn ngữ](https://tc39.es/ecma262/#sec-lexical-environments) để mô tả cách mọi thứ hoạt động. Chúng ta không thể lấy đối tượng này trong mã của mình và thao tác trực tiếp với nó.
 
-JavaScript engines also may optimize it, discard variables that are unused to save memory and perform other internal tricks, as long as the visible behavior remains as described.
+Các JavaScript engine cũng có thể tối ưu hóa nó, loại bỏ các biến không được sử dụng để tiết kiệm bộ nhớ và thực hiện các thủ thuật nội bộ khác, miễn là hành vi hiển thị vẫn như mô tả.
 ```
 
-### Step 2. Function Declarations
+### Bước 2. Khai báo hàm
 
-A function is also a value, like a variable.
+Một hàm cũng là một giá trị, giống như một biến.
 
-**The difference is that a Function Declaration is instantly fully initialized.**
+**Sự khác biệt là một Khai báo hàm được khởi tạo đầy đủ ngay lập tức.**
 
-When a Lexical Environment is created, a Function Declaration immediately becomes a ready-to-use function (unlike `let`, that is unusable till the declaration).
+Khi một Môi trường Từ vựng được tạo, một Khai báo hàm ngay lập tức trở thành một hàm sẵn sàng sử dụng (không giống như `let`, không thể sử dụng được cho đến khi khai báo).
 
-That's why we can use a function, declared as Function Declaration, even before the declaration itself.
+Đó là lý do tại sao chúng ta có thể sử dụng một hàm, được khai báo là Khai báo hàm, ngay cả trước khi chính khai báo đó.
 
-For example, here's the initial state of the global Lexical Environment when we add a function:
+Ví dụ: đây là trạng thái ban đầu của Môi trường Từ vựng chung khi chúng ta thêm một hàm:
 
 ![](closure-function-declaration.svg)
 
-Naturally, this behavior only applies to Function Declarations, not Function Expressions where we assign a function to a variable, such as `let say = function(name)...`.
+Đương nhiên, hành vi này chỉ áp dụng cho Khai báo hàm, không áp dụng cho Biểu thức hàm trong đó chúng ta gán một hàm cho một biến, chẳng hạn như `hãy nói = hàm(tên)...`.
 
-### Step 3. Inner and outer Lexical Environment
+### Bước 3. Môi trường Từ vựng bên trong và bên ngoài
 
-When a function runs, at the beginning of the call, a new Lexical Environment is created automatically to store local variables and parameters of the call.
+Khi một hàm chạy, khi bắt đầu cuộc gọi, một Môi trường Từ vựng mới được tạo tự động để lưu trữ các biến cục bộ và tham số của cuộc gọi.
 
-For instance, for `say("John")`, it looks like this (the execution is at the line, labelled with an arrow):
+Chẳng hạn, đối với `say("John")`, nó trông như thế này (việc thực thi nằm ở dòng, được đánh dấu bằng một mũi tên):
 
 <!--
     ```js
-    let phrase = "Hello";
+    let phrase = "Xin chào";
 
     function say(name) {
      alert( `${phrase}, ${name}` );
     }
 
-    say("John"); // Hello, John
+    say("John"); // Xin chào, John
     ```-->
 
 ![](lexical-environment-simple.svg)
 
-During the function call we have two Lexical Environments: the inner one (for the function call) and the outer one (global):
+Trong khi gọi hàm, chúng ta có hai Môi trường Từ vựng: môi trường bên trong (đối với lệnh gọi hàm) và môi trường bên ngoài (chung):
 
-- The inner Lexical Environment corresponds to the current execution of `say`. It has a single property: `name`, the function argument. We called `say("John")`, so the value of the `name` is `"John"`.
-- The outer Lexical Environment is the global Lexical Environment. It has the `phrase` variable and the function itself.
+- Môi trường Từ vựng bên trong tương ứng với việc thực thi `say` hiện tại. Nó có một thuộc tính duy nhất: `name`, đối số của hàm. Chúng ta đã gọi `say("John")`, vì vậy giá trị của `name` là `"John"`.
+- Môi trường Từ vựng bên ngoài là Môi trường Từ vựng chung. Nó có biến `phrase` và chính hàm đó.
 
-The inner Lexical Environment has a reference to the `outer` one.
+Môi trường Từ vựng bên trong có tham chiếu đến môi trường `bên ngoài`.
 
-**When the code wants to access a variable -- the inner Lexical Environment is searched first, then the outer one, then the more outer one and so on until the global one.**
+**Khi mã muốn truy cập một biến -- Môi trường Từ vựng bên trong được tìm kiếm trước, sau đó đến môi trường bên ngoài, rồi đến môi trường bên ngoài hơn, v.v. cho đến môi trường chung.**
 
-If a variable is not found anywhere, that's an error in strict mode (without `use strict`, an assignment to a non-existing variable creates a new global variable, for compatibility with old code).
+Nếu không tìm thấy biến ở bất kỳ đâu, thì đó là lỗi trong chế độ nghiêm ngặt (không có `usestrict`, việc gán cho một biến không tồn tại sẽ tạo ra một biến chung mới, để tương thích với mã cũ).
 
-In this example the search proceeds as follows:
+Trong ví dụ này, quá trình tìm kiếm diễn ra như sau:
 
-- For the `name` variable, the `alert` inside `say` finds it immediately in the inner Lexical Environment.
-- When it wants to access `phrase`, then there is no `phrase` locally, so it follows the reference to the outer Lexical Environment and finds it there.
+- Đối với biến `name`, `alert` bên trong `say` tìm thấy nó ngay lập tức trong Môi trường Từ vựng bên trong.
+- Khi nó muốn truy cập `phrase`, thì không có `phrase` cục bộ, vì vậy nó sẽ theo tham chiếu đến Môi trường Từ vựng bên ngoài và tìm thấy nó ở đó.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
 
-### Step 4. Returning a function
+### Bước 4. Trả về một chức năng
 
-Let's return to the `makeCounter` example.
+Hãy quay lại ví dụ `makeCounter`.
 
 ```js
 function makeCounter() {
