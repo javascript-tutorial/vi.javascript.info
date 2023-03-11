@@ -73,58 +73,58 @@ alert(message);
 
 ```js run
 if (true) {
-  let phrase = "Hello!";
+  let phrase = "Xin chào!";
 
-  alert(phrase); // Hello!
+  alert(phrase); // Xin chào!
 }
 
-alert(phrase); // Error, no such variable!
+alert(phrase); // Lỗi, không có biến như vậy!
 ```
 
-Here, after `if` finishes, the `alert` below won't see the `phrase`, hence the error.
+Ở đây, sau khi `if` kết thúc, `alert` bên dưới sẽ không thấy `phrase`, do đó xảy ra lỗi.
 
-That's great, as it allows us to create block-local variables, specific to an `if` branch.
+Điều đó thật tuyệt, vì nó cho phép chúng ta tạo các biến cục bộ khối, dành riêng cho một nhánh `if`.
 
-The similar thing holds true for `for` and `while` loops:
+Điều tương tự cũng đúng với các vòng lặp `for` và `while`:
 
 ```js run
 for (let i = 0; i < 3; i++) {
-  // the variable i is only visible inside this for
+  // biến i chỉ hiển thị bên trong cái này cho
   alert(i); // 0, then 1, then 2
 }
 
-alert(i); // Error, no such variable
+alert(i); // Lỗi, không có biến như vậy
 ```
 
-Visually, `let i` is outside of `{...}`. But the `for` construct is special here: the variable, declared inside it, is considered a part of the block.
+Về mặt trực quan, `let i` nằm ngoài `{...}`. Nhưng cấu trúc `for` ở đây đặc biệt: biến, được khai báo bên trong nó, được coi là một phần của khối.
 
-## Nested functions
+## Các hàm lồng nhau
 
-A function is called "nested" when it is created inside another function.
+Một hàm được gọi là "lồng nhau" khi nó được tạo bên trong một hàm khác.
 
-It is easily possible to do this with JavaScript.
+Có thể dễ dàng làm điều này với JavaScript.
 
-We can use it to organize our code, like this:
+Chúng ta có thể sử dụng nó để sắp xếp mã của ta, như thế này:
 
 ```js
 function sayHiBye(firstName, lastName) {
 
-  // helper nested function to use below
+  // hàm lồng nhau của người trợ giúp để sử dụng bên dưới
   function getFullName() {
     return firstName + " " + lastName;
   }
 
-  alert( "Hello, " + getFullName() );
-  alert( "Bye, " + getFullName() );
+  alert( "Xin chào, " + getFullName() );
+  alert( "Tạm biệt, " + getFullName() );
 
 }
 ```
 
-Here the *nested* function `getFullName()` is made for convenience. It can access the outer variables and so can return the full name. Nested functions are quite common in JavaScript.
+Ở đây, hàm *lồng nhau* `getFullName()` được tạo ra để thuận tiện. Nó có thể truy cập các biến bên ngoài và do đó có thể trả về tên đầy đủ. Các hàm lồng nhau khá phổ biến trong JavaScript.
 
-What's much more interesting, a nested function can be returned: either as a property of a new object or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
+Điều thú vị hơn nhiều, một hàm lồng nhau có thể được trả về: dưới dạng thuộc tính của một đối tượng mới hoặc là kết quả của chính nó. Sau đó nó có thể được sử dụng ở một nơi khác. Bất kể ở đâu, nó vẫn có quyền truy cập vào các biến bên ngoài giống nhau.
 
-Below, `makeCounter` creates the "counter" function that returns the next number on each invocation:
+Bên dưới, `makeCounter` tạo hàm "bộ đếm" trả về số tiếp theo trên mỗi lệnh gọi:
 
 ```js run
 function makeCounter() {
@@ -142,34 +142,34 @@ alert( counter() ); // 1
 alert( counter() ); // 2
 ```
 
-Despite being simple, slightly modified variants of that code have practical uses, for instance, as a [random number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) to generate random values for automated tests.
+Mặc dù đơn giản, các biến thể được sửa đổi một chút của mã đó có những ứng dụng thực tế, chẳng hạn như [trình tạo số ngẫu nhiên](https://vi.wikipedia.org/wiki/B%E1%BB%99_sinh_s%E1%BB%91_gi%E1%BA%A3_ng%E1%BA%ABu_nhi%C3%AAn) để tạo các giá trị ngẫu nhiên cho các bài kiểm tra tự động.
 
-How does this work? If we create multiple counters, will they be independent? What's going on with the variables here?
+Cái này hoạt động ra sao? Nếu chúng ta tạo nhiều bộ đếm, chúng có độc lập không? Điều gì đang xảy ra với các biến ở đây?
 
-Understanding such things is great for the overall knowledge of JavaScript and beneficial for more complex scenarios. So let's go a bit in-depth.
+Hiểu những điều như vậy là rất tốt cho kiến thức tổng thể về JavaScript và có lợi cho các tình huống phức tạp hơn. Vì vậy, chúng ta hãy đi sâu hơn một chút.
 
-## Lexical Environment
+## Môi trường từ vựng
 
-```warn header="Here be dragons!"
-The in-depth technical explanation lies ahead.
+```warn header="Đây là những con rồng!"
+Phần giải thích kỹ thuật chuyên sâu nằm ở phía trước.
 
-As far as I'd like to avoid low-level language details, any understanding without them would be lacking and incomplete, so get ready.
+Theo như tôi muốn tránh các chi tiết ngôn ngữ cấp thấp, mọi hiểu biết nếu không có chúng sẽ thiếu sót và không đầy đủ, vì vậy hãy sẵn sàng.
 ```
 
-For clarity, the explanation is split into multiple steps.
+Để rõ ràng, giải thích được chia thành nhiều bước.
 
-### Step 1. Variables
+### Bước 1. Biến
 
-In JavaScript, every running function, code block `{...}`, and the script as a whole have an internal (hidden) associated object known as the *Lexical Environment*.
+Trong JavaScript, mọi chức năng đang chạy, khối mã `{...}` và toàn bộ tập lệnh đều có một đối tượng liên quan (ẩn) bên trong được gọi là *Môi trường từ vựng*.
 
-The Lexical Environment object consists of two parts:
+Đối tượng Môi trường từ vựng bao gồm hai phần:
 
-1. *Environment Record* -- an object that stores all local variables as its properties (and some other information like the value of `this`).
-2. A reference to the *outer lexical environment*, the one associated with the outer code.
+1. *Bản ghi Môi trường* -- một đối tượng lưu trữ tất cả các biến cục bộ làm thuộc tính của nó (và một số thông tin khác như giá trị của `this`).
+2. Tham chiếu đến *Môi trường từ vựng bên ngoài*, môi trường được liên kết với mã bên ngoài.
 
-**A "variable" is just a property of the special internal object, `Environment Record`. "To get or change a variable" means "to get or change a property of that object".**
+**"Biến" chỉ là thuộc tính của đối tượng bên trong đặc biệt, `Bản ghi Môi trường`. "Nhận hoặc thay đổi một biến" có nghĩa là "lấy hoặc thay đổi một thuộc tính của đối tượng đó".**
 
-In this simple code without functions, there is only one Lexical Environment:
+Trong mã đơn giản không có hàm này, chỉ có một Môi trường từ vựng:
 
 ![lexical environment](lexical-environment-global.svg)
 
