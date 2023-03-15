@@ -1,5 +1,5 @@
 
-# Phạm vi biến, đóng kín
+# Phạm vi biến, bao đóng
 
 JavaScript là một ngôn ngữ rất hướng hàm. Nó cho chúng ta rất nhiều tự do. Một hàm có thể được tạo bất cứ lúc nào, được chuyển dưới dạng đối số cho một hàm khác và sau đó được gọi từ một vị trí mã hoàn toàn khác sau đó.
 
@@ -148,7 +148,7 @@ Cái này hoạt động ra sao? Nếu chúng ta tạo nhiều bộ đếm, chú
 
 Hiểu những điều như vậy là rất tốt cho kiến thức tổng thể về JavaScript và có lợi cho các tình huống phức tạp hơn. Vì vậy, chúng ta hãy đi sâu hơn một chút.
 
-## Môi trường từ vựng
+## Môi trường Từ vựng
 
 ```warn header="Đây là những con rồng!"
 Phần giải thích kỹ thuật chuyên sâu nằm ở phía trước.
@@ -175,7 +175,7 @@ Trong mã đơn giản không có hàm này, chỉ có một Môi trường Từ
 
 Đây được gọi là Môi trường Từ vựng *chung*, được liên kết với toàn bộ tập lệnh.
 
-Trong hình trên, hình chữ nhật có nghĩa là Bản ghi Môi trường (lưu trữ biến) và mũi tên có nghĩa là tham chiếu bên ngoài. Môi trường Từ điển chung không có tham chiếu bên ngoài, đó là lý do tại sao mũi tên trỏ đến `null`.
+Trong hình trên, hình chữ nhật có nghĩa là Bản ghi Môi trường (lưu trữ biến) và mũi tên có nghĩa là tham chiếu bên ngoài. Môi trường Từ vựng chung không có tham chiếu bên ngoài, đó là lý do tại sao mũi tên trỏ đến `null`.
 
 Khi mã bắt đầu thực thi và tiếp tục, Môi trường Từ vựng sẽ thay đổi.
 
@@ -286,7 +286,7 @@ Tất cả các hàm ghi nhớ Môi trường Từ vựng mà chúng được t�
 
 Vì vậy, `counter.[[Environment]]` có tham chiếu đến `{count: 0}` Môi trường Từ vựng. Đó là cách hàm ghi nhớ nơi nó được tạo, bất kể nó được gọi ở đâu. Tham chiếu `[[Môi trường]]` được đặt một lần và mãi mãi tại thời điểm tạo hàm.
 
-Sau đó, khi `counter()` được gọi, một Môi trường Từ vựng mới được tạo cho lệnh gọi và tham chiếu Môi trường từ vựng bên ngoài của nó được lấy từ `bộ đếm.[[Môi trường]]`:
+Sau đó, khi `counter()` được gọi, một Môi trường Từ vựng mới được tạo cho lệnh gọi và tham chiếu Môi trường từ vựng bên ngoài của nó được lấy từ `bộ đếm.[[Environment]]`:
 
 ![](closure-makecounter-nested-call.svg)
 
@@ -310,15 +310,15 @@ Có một thuật ngữ lập trình chung là "bao đóng" mà các nhà phát 
 Khi tham gia một cuộc phỏng vấn, một nhà phát triển giao diện người dùng nhận được câu hỏi về "bao đóng là gì?", một câu trả lời hợp lệ sẽ là định nghĩa về bao đóng và giải thích rằng tất cả các hàm trong JavaScript đều là đóng và có thể thêm một vài từ về chi tiết kỹ thuật: thuộc tính `[[Môi trường]]` và cách thức hoạt động của Môi trường Từ vựng.
 ```
 
-## Garbage collection
+## Thu gom rác
 
-Usually, a Lexical Environment is removed from memory with all the variables after the function call finishes. That's because there are no references to it. As any JavaScript object, it's only kept in memory while it's reachable.
+Thông thường, một Môi trường Từ vựng sẽ bị xóa khỏi bộ nhớ cùng với tất cả các biến sau khi lệnh gọi hàm kết thúc. Đó là bởi vì không có tham chiếu cho nó. Giống như bất kỳ đối tượng JavaScript nào, nó chỉ được lưu trong bộ nhớ khi có thể truy cập được.
 
-However, if there's a nested function that is still reachable after the end of a function, then it has `[[Environment]]` property that references the lexical environment.
+Tuy nhiên, nếu có một hàm lồng nhau vẫn có thể truy cập được sau khi kết thúc hàm, thì hàm đó có thuộc tính `[[Environment]]` tham chiếu Môi trường Từ vựng.
 
-In that case the Lexical Environment is still reachable even after the completion of the function, so it stays alive.
+Trong trường hợp đó, Môi trường Từ vựng vẫn có thể truy cập được ngay cả sau khi hoàn thành hàm, vì vậy nó vẫn tồn tại.
 
-For example:
+Ví dụ:
 
 ```js
 function f() {
@@ -329,11 +329,11 @@ function f() {
   }
 }
 
-let g = f(); // g.[[Environment]] stores a reference to the Lexical Environment
-// of the corresponding f() call
+let g = f(); // g.[[Environment]] lưu trữ một tham chiếu đến Môi trường Từ vựng
+// của f() call tương ứng
 ```
 
-Please note that if `f()` is called many times, and resulting functions are saved, then all corresponding Lexical Environment objects will also be retained in memory. In the code below, all 3 of them:
+Hãy lưu ý rằng nếu `f()` được gọi nhiều lần và các hàm kết quả được lưu, thì tất cả các đối tượng Môi trường Từ vựng tương ứng cũng sẽ được giữ lại trong bộ nhớ. Trong đoạn mã dưới đây, cả 3 cái trong số chúng:
 
 ```js
 function f() {
@@ -342,14 +342,14 @@ function f() {
   return function() { alert(value); };
 }
 
-// 3 functions in array, every one of them links to Lexical Environment
-// from the corresponding f() run
+// 3 hàm trong array, mỗi hàm đều liên kết với Môi trường Từ vựng
+// từ f() run tương ứng
 let arr = [f(), f(), f()];
 ```
 
-A Lexical Environment object dies when it becomes unreachable (just like any other object). In other words, it exists only while there's at least one nested function referencing it.
+Một đối tượng Môi trường Từ vựng sẽ chết khi không thể truy cập được (giống như bất kỳ đối tượng nào khác). Nói cách khác, nó chỉ tồn tại khi có ít nhất một hàm lồng nhau tham chiếu đến nó.
 
-In the code below, after the nested function is removed, its enclosing Lexical Environment (and hence the `value`) is cleaned from memory:
+Trong mã bên dưới, sau khi hàm lồng nhau bị xóa, Môi trường Từ vựng kèm theo của nó (và do đó, `value`) sẽ bị xóa khỏi bộ nhớ:
 
 ```js
 function f() {
@@ -360,29 +360,29 @@ function f() {
   }
 }
 
-let g = f(); // while g function exists, the value stays in memory
+let g = f(); // trong khi hàm g tồn tại, giá trị vẫn nằm trong bộ nhớ
 
-g = null; // ...and now the memory is cleaned up
+g = null; // ...và bây giờ bộ nhớ đã được dọn sạch
 ```
 
-### Real-life optimizations
+### Tối ưu hóa thực tế
 
-As we've seen, in theory while a function is alive, all outer variables are also retained.
+Như chúng ta đã thấy, theo lý thuyết, khi một hàm còn hoạt động, tất cả các biến bên ngoài cũng được giữ lại.
 
-But in practice, JavaScript engines try to optimize that. They analyze variable usage and if it's obvious from the code that an outer variable is not used -- it is removed.
+Nhưng trên thực tế, các JavaScript engine cố gắng tối ưu hóa điều đó. Họ phân tích việc sử dụng biến và nếu mã cho thấy rõ ràng rằng biến bên ngoài không được sử dụng -- biến đó sẽ bị xóa.
 
-**An important side effect in V8 (Chrome, Edge, Opera) is that such variable will become unavailable in debugging.**
+**Một tác dụng phụ quan trọng trong V8 (Chrome, Edge, Opera) là biến đó sẽ không khả dụng trong quá trình gỡ lỗi.**
 
-Try running the example below in Chrome with the Developer Tools open.
+Hãy thử chạy ví dụ bên dưới trong Chrome khi mở Công cụ dành cho nhà phát triển (console).
 
-When it pauses, in the console type `alert(value)`.
+Khi nó tạm dừng, trong bảng điều khiển hãy nhập `alert(value)`.
 
 ```js run
 function f() {
   let value = Math.random();
 
   function g() {
-    debugger; // in console: type alert(value); No such variable!
+    debugger; // trong bảng điều khiển: nhập alert (value); Không có biến như vậy!
   }
 
   return g;
@@ -392,18 +392,18 @@ let g = f();
 g();
 ```
 
-As you could see -- there is no such variable! In theory, it should be accessible, but the engine optimized it out.
+Như bạn có thể thấy -- không có biến như vậy! Về lý thuyết, nó có thể truy cập được, nhưng engine đã tối ưu hóa nó.
 
-That may lead to funny (if not such time-consuming) debugging issues. One of them -- we can see a same-named outer variable instead of the expected one:
+Điều đó có thể dẫn đến các vấn đề gỡ lỗi buồn cười (nếu không muốn nói là tốn thời gian). Một trong số chúng -- chúng ta có thể thấy một biến ngoài cùng tên thay vì biến như mong đợi:
 
 ```js run global
-let value = "Surprise!";
+let value = "Bất ngờ chưa!";
 
 function f() {
-  let value = "the closest value";
+  let value = "giá trị gần nhất";
 
   function g() {
-    debugger; // in console: type alert(value); Surprise!
+    debugger; // trong bảng điều khiển: nhập alert (value); Bất ngờ chưa!
   }
 
   return g;
@@ -413,6 +413,6 @@ let g = f();
 g();
 ```
 
-This feature of V8 is good to know. If you are debugging with Chrome/Edge/Opera, sooner or later you will meet it.
+Tính năng này của V8 là tốt để biết. Nếu bạn đang gỡ lỗi bằng Chrome/Edge/Opera, sớm muộn gì bạn cũng sẽ gặp nó.
 
-That is not a bug in the debugger, but rather a special feature of V8. Perhaps it will be changed sometime. You can always check for it by running the examples on this page.
+Đó không phải là một lỗi trong trình gỡ lỗi, mà là một tính năng đặc biệt của V8. Có lẽ nó sẽ được thay đổi đôi khi. Bạn luôn có thể kiểm tra nó bằng cách chạy các ví dụ trên trang này.
