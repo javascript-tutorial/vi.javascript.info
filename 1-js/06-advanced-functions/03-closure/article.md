@@ -160,7 +160,7 @@ Theo như tôi muốn tránh các chi tiết ngôn ngữ cấp thấp, mọi hi�
 
 ### Bước 1. Biến
 
-Trong JavaScript, mọi chức năng đang chạy, khối mã `{...}` và toàn bộ tập lệnh đều có một đối tượng liên quan (ẩn) bên trong được gọi là *Môi trường từ vựng*.
+Trong JavaScript, mọi hàm đang chạy, khối mã `{...}` và toàn bộ tập lệnh đều có một đối tượng liên quan (ẩn) bên trong được gọi là *Môi trường Từ vựng*.
 
 Đối tượng Môi trường Từ vựng bao gồm hai phần:
 
@@ -186,7 +186,7 @@ Khi mã bắt đầu thực thi và tiếp tục, Môi trường Từ vựng s�
 Các hình chữ nhật ở phía bên tay phải thể hiện cách Môi trường Từ vựng chung thay đổi trong quá trình thực thi:
 
 1. Khi tập lệnh bắt đầu, Môi trường Từ vựng được điền trước với tất cả các biến đã khai báo.
-     - Ban đầu, chúng ở trạng thái "Uninitialized". Đó là một trạng thái bên trong đặc biệt, nó có nghĩa là engine biết về biến, nhưng nó không thể được tham chiếu cho đến khi nó được khai báo với `let`. Nó gần giống như thể biến không tồn tại.
+     - Ban đầu, chúng ở trạng thái "Chưa khởi tạo". Đó là một trạng thái bên trong đặc biệt, nó có nghĩa là engine biết về biến, nhưng nó không thể được tham chiếu cho đến khi nó được khai báo với `let`. Nó gần giống như thể biến không tồn tại.
 2. Sau đó, định nghĩa `let phrase` xuất hiện. Chưa có nhiệm vụ nào, vì vậy giá trị của nó là `undefined`. Chúng ta có thể sử dụng biến từ thời điểm này trở đi.
 3. `phrase` được gán một giá trị.
 4. `phrase` thay đổi giá trị.
@@ -256,7 +256,7 @@ Trong ví dụ này, quá trình tìm kiếm diễn ra như sau:
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
 
-### Bước 4. Trả về một chức năng
+### Bước 4. Trả về một hàm
 
 Hãy quay lại ví dụ `makeCounter`.
 
@@ -272,42 +272,42 @@ function makeCounter() {
 let counter = makeCounter();
 ```
 
-At the beginning of each `makeCounter()` call, a new Lexical Environment object is created, to store variables for this `makeCounter` run.
+Khi bắt đầu mỗi lệnh gọi `makeCounter()`, một đối tượng Môi trường Từ vựng mới được tạo để lưu trữ các biến cho lần chạy `makeCounter` này.
 
-So we have two nested Lexical Environments, just like in the example above:
+Vì vậy, chúng ta có hai Môi trường Từ vựng lồng nhau, giống như trong ví dụ trên:
 
 ![](closure-makecounter.svg)
 
-What's different is that, during the execution of `makeCounter()`, a tiny nested function is created of only one line: `return count++`. We don't run it yet, only create.
+Điều khác biệt là, trong quá trình thực thi `makeCounter()`, một hàm nhỏ lồng nhau được tạo chỉ từ một dòng: `return count++`. Chúng ta chưa chạy nó, chỉ tạo.
 
-All functions remember the Lexical Environment in which they were made. Technically, there's no magic here: all functions have the hidden property named `[[Environment]]`, that keeps the reference to the Lexical Environment where the function was created:
+Tất cả các hàm ghi nhớ Môi trường Từ vựng mà chúng được tạo ra. Về mặt kỹ thuật, không có phép thuật nào ở đây: tất cả các hàm đều có thuộc tính ẩn có tên `[[Môi trường]]`, giữ tham chiếu đến Môi trường Từ vựng nơi hàm được tạo:
 
 ![](closure-makecounter-environment.svg)
 
-So, `counter.[[Environment]]` has the reference to `{count: 0}` Lexical Environment. That's how the function remembers where it was created, no matter where it's called. The `[[Environment]]` reference is set once and forever at function creation time.
+Vì vậy, `counter.[[Environment]]` có tham chiếu đến `{count: 0}` Môi trường Từ vựng. Đó là cách hàm ghi nhớ nơi nó được tạo, bất kể nó được gọi ở đâu. Tham chiếu `[[Môi trường]]` được đặt một lần và mãi mãi tại thời điểm tạo hàm.
 
-Later, when `counter()` is called, a new Lexical Environment is created for the call, and its outer Lexical Environment reference is taken from `counter.[[Environment]]`:
+Sau đó, khi `counter()` được gọi, một Môi trường Từ vựng mới được tạo cho lệnh gọi và tham chiếu Môi trường từ vựng bên ngoài của nó được lấy từ `bộ đếm.[[Môi trường]]`:
 
 ![](closure-makecounter-nested-call.svg)
 
-Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
+Bây giờ, khi mã bên trong `counter()` tìm kiếm biến `count`, trước tiên, nó tìm kiếm Môi trường Từ vựng của chính nó (trống, vì không có biến cục bộ nào ở đó), sau đó là Môi trường Từ vựng của lệnh gọi `makeCounter()` bên ngoài, nơi nó tìm thấy và thay đổi nó.
 
-**A variable is updated in the Lexical Environment where it lives.**
+**Một biến được cập nhật trong Môi trường Từ vựng nơi nó tồn tại.**
 
-Here's the state after the execution:
+Đây là trạng thái sau khi thực hiện:
 
 ![](closure-makecounter-nested-call-2.svg)
 
-If we call `counter()` multiple times, the `count` variable will be increased to `2`, `3` and so on, at the same place.
+Nếu chúng ta gọi `counter()` nhiều lần, biến `count` sẽ được tăng lên thành `2`, `3`, v.v., tại cùng một vị trí.
 
-```smart header="Closure"
-There is a general programming term "closure", that developers generally should know.
+```smart header="Bao đóng"
+Có một thuật ngữ lập trình chung là "bao đóng" mà các nhà phát triển thường nên biết.
 
-A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exception, to be covered in <info:new-function>).
+[Bao đóng](https://vi.wikipedia.org/wiki/Bao_%C4%91%C3%B3ng_(l%E1%BA%ADp_tr%C3%ACnh_m%C3%A1y_t%C3%ADnh)) là một hàm ghi nhớ các biến bên ngoài của nó và có thể truy cập chúng. Trong một số ngôn ngữ, điều đó là không thể, hoặc một hàm phải được viết theo một cách đặc biệt để làm cho nó xảy ra. Nhưng như đã giải thích ở trên, trong JavaScript, tất cả các hàm đều là các hàm đóng một cách tự nhiên (chỉ có một ngoại lệ, được đề cập trong <info:new-function>).
 
-That is: they automatically remember where they were created using a hidden `[[Environment]]` property, and then their code can access outer variables.
+Đó là: chúng tự động ghi nhớ nơi chúng được tạo bằng thuộc tính `[[Môi trường]]` ẩn, và sau đó mã của chúng có thể truy cập các biến bên ngoài.
 
-When on an interview, a frontend developer gets a question about "what's a closure?", a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe a few more words about technical details: the `[[Environment]]` property and how Lexical Environments work.
+Khi tham gia một cuộc phỏng vấn, một nhà phát triển giao diện người dùng nhận được câu hỏi về "bao đóng là gì?", một câu trả lời hợp lệ sẽ là định nghĩa về bao đóng và giải thích rằng tất cả các hàm trong JavaScript đều là đóng và có thể thêm một vài từ về chi tiết kỹ thuật: thuộc tính `[[Môi trường]]` và cách thức hoạt động của Môi trường Từ vựng.
 ```
 
 ## Garbage collection
