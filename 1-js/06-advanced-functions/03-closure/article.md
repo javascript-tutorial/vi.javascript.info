@@ -29,9 +29,9 @@ Ví dụ:
 {
   // thực hiện một số công việc với các biến cục bộ không nên nhìn thấy bên ngoài
 
-  let message = "Xin chào"; // chỉ hiển thị trong khối này
+  let message = "Hello"; // chỉ hiển thị trong khối này
 
-  alert(message); // Xin chào
+  alert(message); // Hello
 }
 
 alert(message); // Lỗi: tin nhắn không xác định
@@ -42,13 +42,13 @@ Chúng ta có thể sử dụng điều này để cô lập một đoạn mã t
 ```js run
 {
   // hiển thị tin nhắn
-  let message = "Xin chào";
+  let message = "Hello";
   alert(message);
 }
 
 {
   // hiển thị một tin nhắn khác
-  let message = "Tạm biệt";
+  let message = "Bye";
   alert(message);
 }
 ```
@@ -58,12 +58,12 @@ Hãy lưu ý, nếu không có các khối riêng biệt sẽ xảy ra lỗi, n�
 
 ```js run
 // hiển thị tin nhắn
-let message = "Xin chào";
+let message = "Hello";
 alert(message);
 
 // hiển thị một tin nhắn khác
 *!*
-let message = "Tạm biệt"; // Lỗi: biến đã được khai báo
+let message = "Bye"; // Lỗi: biến đã được khai báo
 */!*
 alert(message);
 ```
@@ -73,9 +73,9 @@ alert(message);
 
 ```js run
 if (true) {
-  let phrase = "Xin chào!";
+  let phrase = "Hello!";
 
-  alert(phrase); // Xin chào!
+  alert(phrase); // Hello!
 }
 
 alert(phrase); // Lỗi, không có biến như vậy!
