@@ -148,7 +148,7 @@ Cái này hoạt động ra sao? Nếu chúng ta tạo nhiều bộ đếm, chú
 
 Hiểu những điều như vậy là rất tốt cho kiến thức tổng thể về JavaScript và có lợi cho các tình huống phức tạp hơn. Vì vậy, chúng ta hãy đi sâu hơn một chút.
 
-## Môi trường Từ vựng
+## Lexical Environment
 
 ```warn header="Đây là những con rồng!"
 Phần giải thích kỹ thuật chuyên sâu nằm ở phía trước.
@@ -162,20 +162,20 @@ Theo như tôi muốn tránh các chi tiết ngôn ngữ cấp thấp, mọi hi�
 
 Trong JavaScript, mọi hàm đang chạy, khối mã `{...}` và toàn bộ tập lệnh đều có một đối tượng liên quan (ẩn) bên trong được gọi là *Môi trường Từ vựng*.
 
-Đối tượng Môi trường Từ vựng bao gồm hai phần:
+Đối tượng Lexical Environment bao gồm hai phần:
 
-1. *Bản ghi Môi trường* -- một đối tượng lưu trữ tất cả các biến cục bộ làm thuộc tính của nó (và một số thông tin khác như giá trị của `this`).
-2. Tham chiếu đến *Môi trường Từ vựng bên ngoài*, môi trường được liên kết với mã bên ngoài.
+1. *Environment Record* -- một đối tượng lưu trữ tất cả các biến cục bộ làm thuộc tính của nó (và một số thông tin khác như giá trị của `this`).
+2. Tham chiếu đến *Lexical Environment bên ngoài*, environment được liên kết với mã bên ngoài.
 
-**"Biến" chỉ là thuộc tính của đối tượng bên trong đặc biệt, `Bản ghi Môi trường`. "Nhận hoặc thay đổi một biến" có nghĩa là "lấy hoặc thay đổi một thuộc tính của đối tượng đó".**
+**"Biến" chỉ là thuộc tính của đối tượng bên trong đặc biệt, `Environment Record`. "Nhận hoặc thay đổi một biến" có nghĩa là "lấy hoặc thay đổi một thuộc tính của đối tượng đó".**
 
-Trong mã đơn giản không có hàm này, chỉ có một Môi trường Từ vựng:
+Trong mã đơn giản không có hàm này, chỉ có một Lexical Environment:
 
 ![lexical environment](lexical-environment-global.svg)
 
-Đây được gọi là Môi trường Từ vựng *chung*, được liên kết với toàn bộ tập lệnh.
+Đây được gọi là Lexical Environment *chung*, được liên kết với toàn bộ tập lệnh.
 
-Trong hình trên, hình chữ nhật có nghĩa là Bản ghi Môi trường (lưu trữ biến) và mũi tên có nghĩa là tham chiếu bên ngoài. Môi trường Từ vựng chung không có tham chiếu bên ngoài, đó là lý do tại sao mũi tên trỏ đến `null`.
+Trong hình trên, hình chữ nhật có nghĩa là Environment Recordg (lưu trữ biến) và mũi tên có nghĩa là tham chiếu bên ngoài. Lexical Environment chung không có tham chiếu bên ngoài, đó là lý do tại sao mũi tên trỏ đến `null`.
 
 Khi mã bắt đầu thực thi và tiếp tục, Môi trường Từ vựng sẽ thay đổi.
 
@@ -185,7 +185,7 @@ Khi mã bắt đầu thực thi và tiếp tục, Môi trường Từ vựng s�
 
 Các hình chữ nhật ở phía bên tay phải thể hiện cách Môi trường Từ vựng chung thay đổi trong quá trình thực thi:
 
-1. Khi tập lệnh bắt đầu, Môi trường Từ vựng được điền trước với tất cả các biến đã khai báo.
+1. Khi tập lệnh bắt đầu, Lexical Environment được điền trước với tất cả các biến đã khai báo.
      - Ban đầu, chúng ở trạng thái "Chưa khởi tạo". Đó là một trạng thái bên trong đặc biệt, nó có nghĩa là engine biết về biến, nhưng nó không thể được tham chiếu cho đến khi nó được khai báo với `let`. Nó gần giống như thể biến không tồn tại.
 2. Sau đó, định nghĩa `let phrase` xuất hiện. Chưa có nhiệm vụ nào, vì vậy giá trị của nó là `undefined`. Chúng ta có thể sử dụng biến từ thời điểm này trở đi.
 3. `phrase` được gán một giá trị.
@@ -196,8 +196,8 @@ Mọi thứ có vẻ đơn giản cho bây giờ, phải không?
 - Biến là thuộc tính của một đối tượng bên trong đặc biệt, được liên kết với khối/hàm/tập lệnh hiện đang thực thi.
 - Làm việc với biến thực chất là làm việc với thuộc tính của đối tượng đó.
 
-```smart header="Môi trường Từ vựng là một đối tượng thông số"
-"Môi trường Từ vựng" là một đối tượng thông số: nó chỉ tồn tại "về mặt lý thuyết" trong [thông số kỹ thuật ngôn ngữ](https://tc39.es/ecma262/#sec-lexical-environments) để mô tả cách mọi thứ hoạt động. Chúng ta không thể lấy đối tượng này trong mã của mình và thao tác trực tiếp với nó.
+```smart header="Lexical Environment là một đối tượng thông số"
+"Lexical Environment" là một đối tượng thông số: nó chỉ tồn tại "về mặt lý thuyết" trong [thông số kỹ thuật ngôn ngữ](https://tc39.es/ecma262/#sec-lexical-environments) để mô tả cách mọi thứ hoạt động. Chúng ta không thể lấy đối tượng này trong mã của mình và thao tác trực tiếp với nó.
 
 Các JavaScript engine cũng có thể tối ưu hóa nó, loại bỏ các biến không được sử dụng để tiết kiệm bộ nhớ và thực hiện các thủ thuật nội bộ khác, miễn là hành vi hiển thị vẫn như mô tả.
 ```
@@ -208,19 +208,19 @@ Một hàm cũng là một giá trị, giống như một biến.
 
 **Sự khác biệt là một Khai báo hàm được khởi tạo đầy đủ ngay lập tức.**
 
-Khi một Môi trường Từ vựng được tạo, một Khai báo hàm ngay lập tức trở thành một hàm sẵn sàng sử dụng (không giống như `let`, không thể sử dụng được cho đến khi khai báo).
+Khi một Lexical Environment được tạo, một Khai báo hàm ngay lập tức trở thành một hàm sẵn sàng sử dụng (không giống như `let`, không thể sử dụng được cho đến khi khai báo).
 
 Đó là lý do tại sao chúng ta có thể sử dụng một hàm, được khai báo là Khai báo hàm, ngay cả trước khi chính khai báo đó.
 
-Ví dụ: đây là trạng thái ban đầu của Môi trường Từ vựng chung khi chúng ta thêm một hàm:
+Ví dụ: đây là trạng thái ban đầu của Lexical Environment chung khi chúng ta thêm một hàm:
 
 ![](closure-function-declaration.svg)
 
 Đương nhiên, hành vi này chỉ áp dụng cho Khai báo hàm, không áp dụng cho Biểu thức hàm trong đó chúng ta gán một hàm cho một biến, chẳng hạn như `hãy nói = hàm(tên)...`.
 
-### Bước 3. Môi trường Từ vựng bên trong và bên ngoài
+### Bước 3. Lexical Environment bên trong và bên ngoài
 
-Khi một hàm chạy, khi bắt đầu cuộc gọi, một Môi trường Từ vựng mới được tạo tự động để lưu trữ các biến cục bộ và tham số của cuộc gọi.
+Khi một hàm chạy, khi bắt đầu cuộc gọi, một Lexical Environment mới được tạo tự động để lưu trữ các biến cục bộ và tham số của cuộc gọi.
 
 Chẳng hạn, đối với `say("John")`, nó trông như thế này (việc thực thi nằm ở dòng, được đánh dấu bằng một mũi tên):
 
@@ -237,21 +237,21 @@ Chẳng hạn, đối với `say("John")`, nó trông như thế này (việc th
 
 ![](lexical-environment-simple.svg)
 
-Trong khi gọi hàm, chúng ta có hai Môi trường Từ vựng: môi trường bên trong (đối với lệnh gọi hàm) và môi trường bên ngoài (chung):
+Trong khi gọi hàm, chúng ta có hai Lexical Environment: environment bên trong (đối với lệnh gọi hàm) và environment bên ngoài (chung):
 
-- Môi trường Từ vựng bên trong tương ứng với việc thực thi `say` hiện tại. Nó có một thuộc tính duy nhất: `name`, đối số của hàm. Chúng ta đã gọi `say("John")`, vì vậy giá trị của `name` là `"John"`.
-- Môi trường Từ vựng bên ngoài là Môi trường Từ vựng chung. Nó có biến `phrase` và chính hàm đó.
+- Lexical Environment bên trong tương ứng với việc thực thi `say` hiện tại. Nó có một thuộc tính duy nhất: `name`, đối số của hàm. Chúng ta đã gọi `say("John")`, vì vậy giá trị của `name` là `"John"`.
+- Lexical Environment bên ngoài là Môi trường Từ vựng chung. Nó có biến `phrase` và chính hàm đó.
 
-Môi trường Từ vựng bên trong có tham chiếu đến môi trường `bên ngoài`.
+Lexical Environment bên trong có tham chiếu đến môi trường `bên ngoài`.
 
-**Khi mã muốn truy cập một biến -- Môi trường Từ vựng bên trong được tìm kiếm trước, sau đó đến môi trường bên ngoài, rồi đến môi trường bên ngoài hơn, v.v. cho đến môi trường chung.**
+**Khi mã muốn truy cập một biến -- Lexical Environment bên trong được tìm kiếm trước, sau đó đến environment bên ngoài, rồi đến environment bên ngoài hơn, v.v. cho đến môi trường chung.**
 
 Nếu không tìm thấy biến ở bất kỳ đâu, thì đó là lỗi trong chế độ nghiêm ngặt (không có `usestrict`, việc gán cho một biến không tồn tại sẽ tạo ra một biến chung mới, để tương thích với mã cũ).
 
 Trong ví dụ này, quá trình tìm kiếm diễn ra như sau:
 
-- Đối với biến `name`, `alert` bên trong `say` tìm thấy nó ngay lập tức trong Môi trường Từ vựng bên trong.
-- Khi nó muốn truy cập `phrase`, thì không có `phrase` cục bộ, vì vậy nó sẽ theo tham chiếu đến Môi trường Từ vựng bên ngoài và tìm thấy nó ở đó.
+- Đối với biến `name`, `alert` bên trong `say` tìm thấy nó ngay lập tức trong Lexical Environment bên trong.
+- Khi nó muốn truy cập `phrase`, thì không có `phrase` cục bộ, vì vậy nó sẽ theo tham chiếu đến Lexical Environment bên ngoài và tìm thấy nó ở đó.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
@@ -272,27 +272,27 @@ function makeCounter() {
 let counter = makeCounter();
 ```
 
-Khi bắt đầu mỗi lệnh gọi `makeCounter()`, một đối tượng Môi trường Từ vựng mới được tạo để lưu trữ các biến cho lần chạy `makeCounter` này.
+Khi bắt đầu mỗi lệnh gọi `makeCounter()`, một đối tượng Lexical Environment mới được tạo để lưu trữ các biến cho lần chạy `makeCounter` này.
 
-Vì vậy, chúng ta có hai Môi trường Từ vựng lồng nhau, giống như trong ví dụ trên:
+Vì vậy, chúng ta có hai Lexical Environment lồng nhau, giống như trong ví dụ trên:
 
 ![](closure-makecounter.svg)
 
 Điều khác biệt là, trong quá trình thực thi `makeCounter()`, một hàm nhỏ lồng nhau được tạo chỉ từ một dòng: `return count++`. Chúng ta chưa chạy nó, chỉ tạo.
 
-Tất cả các hàm ghi nhớ Môi trường Từ vựng mà chúng được tạo ra. Về mặt kỹ thuật, không có phép thuật nào ở đây: tất cả các hàm đều có thuộc tính ẩn có tên `[[Môi trường]]`, giữ tham chiếu đến Môi trường Từ vựng nơi hàm được tạo:
+Tất cả các hàm ghi nhớ Lexical Environment mà chúng được tạo ra. Về mặt kỹ thuật, không có phép thuật nào ở đây: tất cả các hàm đều có thuộc tính ẩn có tên `[[Môi trường]]`, giữ tham chiếu đến Lexical Environment nơi hàm được tạo:
 
 ![](closure-makecounter-environment.svg)
 
-Vì vậy, `counter.[[Environment]]` có tham chiếu đến `{count: 0}` Môi trường Từ vựng. Đó là cách hàm ghi nhớ nơi nó được tạo, bất kể nó được gọi ở đâu. Tham chiếu `[[Môi trường]]` được đặt một lần và mãi mãi tại thời điểm tạo hàm.
+Vì vậy, `counter.[[Environment]]` có tham chiếu đến `{count: 0}` Lexical Environment. Đó là cách hàm ghi nhớ nơi nó được tạo, bất kể nó được gọi ở đâu. Tham chiếu `[[Môi trường]]` được đặt một lần và mãi mãi tại thời điểm tạo hàm.
 
-Sau đó, khi `counter()` được gọi, một Môi trường Từ vựng mới được tạo cho lệnh gọi và tham chiếu Môi trường từ vựng bên ngoài của nó được lấy từ `bộ đếm.[[Environment]]`:
+Sau đó, khi `counter()` được gọi, một Lexical Environment mới được tạo cho lệnh gọi và tham chiếu Lexical Environment bên ngoài của nó được lấy từ `bộ đếm.[[Environment]]`:
 
 ![](closure-makecounter-nested-call.svg)
 
-Bây giờ, khi mã bên trong `counter()` tìm kiếm biến `count`, trước tiên, nó tìm kiếm Môi trường Từ vựng của chính nó (trống, vì không có biến cục bộ nào ở đó), sau đó là Môi trường Từ vựng của lệnh gọi `makeCounter()` bên ngoài, nơi nó tìm thấy và thay đổi nó.
+Bây giờ, khi mã bên trong `counter()` tìm kiếm biến `count`, trước tiên, nó tìm kiếm Lexical Environment của chính nó (trống, vì không có biến cục bộ nào ở đó), sau đó là Lexical Environment của lệnh gọi `makeCounter()` bên ngoài, nơi nó tìm thấy và thay đổi nó.
 
-**Một biến được cập nhật trong Môi trường Từ vựng nơi nó tồn tại.**
+**Một biến được cập nhật trong Lexical Environment nơi nó tồn tại.**
 
 Đây là trạng thái sau khi thực hiện:
 
@@ -312,11 +312,11 @@ Khi tham gia một cuộc phỏng vấn, một nhà phát triển giao diện ng
 
 ## Thu gom rác
 
-Thông thường, một Môi trường Từ vựng sẽ bị xóa khỏi bộ nhớ cùng với tất cả các biến sau khi lệnh gọi hàm kết thúc. Đó là bởi vì không có tham chiếu cho nó. Giống như bất kỳ đối tượng JavaScript nào, nó chỉ được lưu trong bộ nhớ khi có thể truy cập được.
+Thông thường, một Lexical Environmentg sẽ bị xóa khỏi bộ nhớ cùng với tất cả các biến sau khi lệnh gọi hàm kết thúc. Đó là bởi vì không có tham chiếu cho nó. Giống như bất kỳ đối tượng JavaScript nào, nó chỉ được lưu trong bộ nhớ khi có thể truy cập được.
 
-Tuy nhiên, nếu có một hàm lồng nhau vẫn có thể truy cập được sau khi kết thúc hàm, thì hàm đó có thuộc tính `[[Environment]]` tham chiếu Môi trường Từ vựng.
+Tuy nhiên, nếu có một hàm lồng nhau vẫn có thể truy cập được sau khi kết thúc hàm, thì hàm đó có thuộc tính `[[Environment]]` tham chiếu Lexical Environment.
 
-Trong trường hợp đó, Môi trường Từ vựng vẫn có thể truy cập được ngay cả sau khi hoàn thành hàm, vì vậy nó vẫn tồn tại.
+Trong trường hợp đó, Lexical Environment vẫn có thể truy cập được ngay cả sau khi hoàn thành hàm, vì vậy nó vẫn tồn tại.
 
 Ví dụ:
 
@@ -329,11 +329,11 @@ function f() {
   }
 }
 
-let g = f(); // g.[[Environment]] lưu trữ một tham chiếu đến Môi trường Từ vựng
+let g = f(); // g.[[Environment]] lưu trữ một tham chiếu đến Lexical Environment
 // của f() call tương ứng
 ```
 
-Hãy lưu ý rằng nếu `f()` được gọi nhiều lần và các hàm kết quả được lưu, thì tất cả các đối tượng Môi trường Từ vựng tương ứng cũng sẽ được giữ lại trong bộ nhớ. Trong đoạn mã dưới đây, cả 3 cái trong số chúng:
+Hãy lưu ý rằng nếu `f()` được gọi nhiều lần và các hàm kết quả được lưu, thì tất cả các đối tượng Lexical Environment tương ứng cũng sẽ được giữ lại trong bộ nhớ. Trong đoạn mã dưới đây, cả 3 cái trong số chúng:
 
 ```js
 function f() {
@@ -347,9 +347,9 @@ function f() {
 let arr = [f(), f(), f()];
 ```
 
-Một đối tượng Môi trường Từ vựng sẽ chết khi không thể truy cập được (giống như bất kỳ đối tượng nào khác). Nói cách khác, nó chỉ tồn tại khi có ít nhất một hàm lồng nhau tham chiếu đến nó.
+Một đối tượng Lexical Environment sẽ chết khi không thể truy cập được (giống như bất kỳ đối tượng nào khác). Nói cách khác, nó chỉ tồn tại khi có ít nhất một hàm lồng nhau tham chiếu đến nó.
 
-Trong mã bên dưới, sau khi hàm lồng nhau bị xóa, Môi trường Từ vựng kèm theo của nó (và do đó, `value`) sẽ bị xóa khỏi bộ nhớ:
+Trong mã bên dưới, sau khi hàm lồng nhau bị xóa, Lexical Environment kèm theo của nó (và do đó, `value`) sẽ bị xóa khỏi bộ nhớ:
 
 ```js
 function f() {
