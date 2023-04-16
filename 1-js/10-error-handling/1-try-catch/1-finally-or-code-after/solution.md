@@ -1,47 +1,47 @@
-The difference becomes obvious when we look at the code inside a function.
+Sự khác biệt trở nên rõ ràng khi chúng ta xem xét code bên trong một hàm.
 
-The behavior is different if there's a "jump out" of `try...catch`.
+Cách phản ứng sẽ khác nhau nếu có hành vi "nhảy ra" của `try...catch`.
 
-For instance, when there's a `return` inside `try...catch`. The `finally` clause works in case of *any* exit from `try...catch`, even via the `return` statement: right after `try...catch` is done, but before the calling code gets the control.
+Ví dụ, khi có một `return` bên trong `try...catch`. Mệnh đề  `finally` hoạt động trên *bất kỳ* lối thoát nào khỏi `try...catch`, ngay cả khi thoát qua câu lệnh `return`: ngay sau khi `try...catch` kết thúc thực thi, nhưng trước khi gọi code giành quyền kiểm soát.
 
 ```js run
 function f() {
   try {
-    alert('start');
+    alert('bắt đâù');
 *!*
-    return "result";
+    return "kết quả";
 */!*
   } catch (err) {
     /// ...
   } finally {
-    alert('cleanup!');
+    alert('dọn dẹp!');
   }
 }
 
-f(); // cleanup!
+f(); // dọn dẹp!
 ```
 
-...Or when there's a `throw`, like here:
+...Hoặc khi có một `throw`, như thế này:
 
 ```js run
 function f() {
   try {
-    alert('start');
-    throw new Error("an error");
+    alert('bắt đầu');
+    throw new Error("một lỗi");
   } catch (err) {
     // ...
-    if("can't handle the error") {
+    if("không thể xử lý lỗi") {
 *!*
       throw err;
 */!*
     }
 
   } finally {
-    alert('cleanup!')
+    alert('dọn dẹp!')
   }
 }
 
-f(); // cleanup!
+f(); // dọn dẹp!
 ```
 
-It's `finally` that guarantees the cleanup here. If we just put the code at the end of `f`, it wouldn't run in these situations.
+`finally` ở đây đảm bảo việc dọn dẹp. Nếu chúng ta chỉ đặt code ở cuối hàm `f`, thì nó sẽ không chạy trong những tình huống này.
