@@ -86,7 +86,7 @@ document.querySelector('.xinchào').innerHTML = text;
 
 ### Các liên kết ngoài
 
-Nếu là một liên kết tới Wikipedia, ví dụ `https://en.wikipedia.org/wiki/JavaScript`, và có một phiên bản viết bằng ngôn ngữ của bạn, hay chuyển sang phiên bản này.
+Nếu là một liên kết tới Wikipedia, ví dụ `https://en.wikipedia.org/wiki/JavaScript`, và có một phiên bản viết bằng tiếng Việt, hay chuyển sang phiên bản này.
 
 Ví dụ
 
@@ -100,9 +100,9 @@ Ví dụ
 [JavaScript](https://vi.wikipedia.org/wiki/JavaScript) là một ngôn ngữ lập trình.
 ```
 
-Nếu là liên kết tới MDN, cố gắng đưa tới phiên bản có dịch một phần sang ngôn ngữ của bạn.
+Nếu là liên kết tới MDN, cố gắng đưa tới phiên bản có dịch một phần sang tiếng Việt.
 
-Nếu liên kết tới nội dung không có bằng ngôn ngữ của bạn, hãy để nguyên.
+Nếu liên kết tới nội dung không có tiếng Việt, hãy để nguyên.
 
 ### Metadata
 
