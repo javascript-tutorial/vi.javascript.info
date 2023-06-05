@@ -2,7 +2,7 @@ importance: 4
 
 ---
 
-# Tổng với bao đóng
+# Tổng có bao đóng
 
 Viết hàm `sum` hoạt động như sau: `sum(a)(b) = a+b`.
 
