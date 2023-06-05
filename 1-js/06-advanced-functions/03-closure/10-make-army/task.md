@@ -28,7 +28,7 @@ function makeArmy() {
 let army = makeArmy();
 
 *!*
-// tất cả các shooter hiển thị 10 thay vì số của nchung1 0, 1, 2, 3...
+// tất cả các shooter hiển thị 10 thay vì số của chúng 0, 1, 2, 3...
 army[0](); // 10 từ shooter số 0
 army[1](); // 10 từ shooter số 1
 army[2](); // 10 ... vân vân.
