@@ -7,29 +7,29 @@ Có hai phương pháp cho nó:
 - `setTimeout` cho phép chúng ta chạy một hàm một lần sau khoảng thời gian.
 - `setInterval` cho phép chúng ta chạy lặp đi lặp lại một hàm, bắt đầu sau khoảng thời gian, sau đó lặp lại liên tục ở khoảng thời gian đó.
 
-These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.js.
+Các phương pháp này không phải là một phần của thông số kỹ thuật JavaScript. Nhưng hầu hết các môi trường đều có bộ lên lịch nội bộ và cung cấp các phương thức này. Đặc biệt, chúng được hỗ trợ trên tất cả các trình duyệt và Node.js.
 
 ## setTimeout
 
-The syntax:
+Cú pháp:
 
 ```js
 let timerId = setTimeout(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-Parameters:
+Tham số:
 
 `func|code`
-: Function or a string of code to execute.
-Usually, that's a function. For historical reasons, a string of code can be passed, but that's not recommended.
+: Hàm hoặc một chuỗi mã để thực thi.
+Thông thường, đó là một hàm. Vì lý do lịch sử, một chuỗi mã có thể được chuyển, nhưng điều đó không được khuyến khích.
 
 `delay`
-: The delay before run, in milliseconds (1000 ms = 1 second), by default 0.
+: Độ trễ trước khi chạy, tính bằng mili giây (1000 ms = 1 giây), theo mặc định là 0.
 
 `arg1`, `arg2`...
-: Arguments for the function (not supported in IE9-)
+: Đối số cho hàm (không được hỗ trợ trong IE9-)
 
-For instance, this code calls `sayHi()` after one second:
+Chẳng hạn, mã này gọi `sayHi()` sau một giây:
 
 ```js run
 function sayHi() {
@@ -41,7 +41,7 @@ setTimeout(sayHi, 1000);
 */!*
 ```
 
-With arguments:
+Với đối số:
 
 ```js run
 function sayHi(phrase, who) {
@@ -49,97 +49,97 @@ function sayHi(phrase, who) {
 }
 
 *!*
-setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
+setTimeout(sayHi, 1000, "Xin chào", "John"); // Xin chào, John
 */!*
 ```
 
-If the first argument is a string, then JavaScript creates a function from it.
+Nếu đối số đầu tiên là một chuỗi, thì JavaScript sẽ tạo một hàm từ nó.
 
-So, this will also work:
+Vì vậy, cái này cũng sẽ hoạt động:
 
 ```js run no-beautify
-setTimeout("alert('Hello')", 1000);
+setTimeout("alert('Xin chào')", 1000);
 ```
 
-But using strings is not recommended, use arrow functions instead of them, like this:
+Nhưng việc sử dụng các chuỗi không được khuyến nghị, hãy sử dụng các arrow function thay vì chúng, như sau:
 
 ```js run no-beautify
 setTimeout(() => alert('Hello'), 1000);
 ```
 
-````smart header="Pass a function, but don't run it"
-Novice developers sometimes make a mistake by adding brackets `()` after the function:
+````smart header="Vượt qua một hàm, nhưng không chạy nó"
+Các nhà phát triển mới làm quen đôi khi mắc lỗi khi thêm dấu ngoặc `()` sau hàm:
 
 ```js
-// wrong!
+// sai!
 setTimeout(sayHi(), 1000);
 ```
-That doesn't work, because `setTimeout` expects a reference to a function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
+Điều đó không hoạt động, bởi vì `setTimeout` mong đợi một tham chiếu đến một hàm. Và ở đây `sayHi()` chạy hàm này và *kết quả thực thi của nó* được chuyển đến `setTimeout`. Trong trường hợp của chúng ta, kết quả của `sayHi()` là `undefined` (hàm không trả về gì cả), vì vậy không có gì được lên lịch.
 ````
 
-### Canceling with clearTimeout
+### Hủy với ClearTimeout
 
-A call to `setTimeout` returns a "timer identifier" `timerId` that we can use to cancel the execution.
+Một cuộc gọi đến `setTimeout` trả về một "số nhận dạng hẹn giờ" `timerId` mà chúng ta có thể sử dụng để hủy thực thi.
 
-The syntax to cancel:
+Cú pháp hủy:
 
 ```js
 let timerId = setTimeout(...);
 clearTimeout(timerId);
 ```
 
-In the code below, we schedule the function and then cancel it (changed our mind). As a result, nothing happens:
+Trong mã bên dưới, chúng ta lên lịch cho hàm và sau đó hủy bỏ hàm đó (đã thay đổi ý định). Kết quả là, không có gì xảy ra:
 
 ```js run no-beautify
-let timerId = setTimeout(() => alert("never happens"), 1000);
-alert(timerId); // timer identifier
+let timerId = setTimeout(() => alert("không bao giờ xảy ra"), 1000);
+alert(timerId); // mã định danh hẹn giờ
 
 clearTimeout(timerId);
-alert(timerId); // same identifier (doesn't become null after canceling)
+alert(timerId); // cùng một mã định danh (không trở thành null sau khi hủy)
 ```
 
-As we can see from `alert` output, in a browser the timer identifier is a number. In other environments, this can be something else. For instance, Node.js returns a timer object with additional methods.
+Như chúng ta có thể thấy từ đầu ra `alert`, trong trình duyệt, mã định danh hẹn giờ là một số. Trong các môi trường khác, đây có thể là một cái gì đó khác. Chẳng hạn, Node.js trả về một đối tượng hẹn giờ với các phương thức bổ sung.
 
-Again, there is no universal specification for these methods, so that's fine.
+Một lần nữa, không có thông số kỹ thuật chung cho các phương pháp này, vì vậy điều đó không sao cả.
 
-For browsers, timers are described in the [timers section](https://www.w3.org/TR/html5/webappapis.html#timers) of HTML5 standard.
+Đối với trình duyệt, bộ hẹn giờ được mô tả trong phần [bộ hẹn giờ](https://www.w3.org/TR/html5/webappapis.html#timers) của chuẩn HTML5.
 
 ## setInterval
 
-The `setInterval` method has the same syntax as `setTimeout`:
+Phương thức `setInterval` có cùng cú pháp với `setTimeout`:
 
 ```js
 let timerId = setInterval(func|code, [delay], [arg1], [arg2], ...)
 ```
 
-All arguments have the same meaning. But unlike `setTimeout` it runs the function not only once, but regularly after the given interval of time.
+Tất cả các đối số có cùng một ý nghĩa. Nhưng không giống như `setTimeout`, hàm này không chỉ chạy một lần mà thường xuyên sau một khoảng thời gian nhất định.
 
-To stop further calls, we should call `clearInterval(timerId)`.
+Để dừng các cuộc gọi tiếp theo, chúng ta nên gọi `clearInterval(timerId)`.
 
-The following example will show the message every 2 seconds. After 5 seconds, the output is stopped:
+Ví dụ sau sẽ hiển thị thông báo cứ sau 2 giây. Sau 5 giây, đầu ra bị dừng:
 
 ```js run
-// repeat with the interval of 2 seconds
+// lặp lại với khoảng thời gian 2 giây
 let timerId = setInterval(() => alert('tick'), 2000);
 
-// after 5 seconds stop
+// sau 5 giây dừng lại
 setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```
 
-```smart header="Time goes on while `alert` is shown"
-In most browsers, including Chrome and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`.
+```smart header="Thời gian tiếp tục trong khi `alert` được hiển thị"
+Trong hầu hết các trình duyệt, kể cả Chrome và Firefox, bộ đếm thời gian bên trong tiếp tục "tích tắc" trong khi hiển thị `alert/confirm/prompt`.
 
-So if you run the code above and don't dismiss the `alert` window for some time, then the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 2 seconds.
+Vì vậy, nếu bạn chạy mã ở trên và không đóng cửa sổ `alert` trong một thời gian, thì `cảnh báo` tiếp theo sẽ được hiển thị ngay lập tức khi bạn thực hiện. Khoảng thời gian thực tế giữa các cảnh báo sẽ ngắn hơn 2 giây.
 ```
 
-## Nested setTimeout
+## setTimeout lồng nhau
 
-There are two ways of running something regularly.
+Có hai cách để chạy một cái gì đó thường xuyên.
 
-One is `setInterval`. The other one is a nested `setTimeout`, like this:
+Một là `setInterval`. Cái còn lại là `setTimeout` lồng nhau, như thế này:
 
 ```js
-/** instead of:
+/** thay vì:
 let timerId = setInterval(() => alert('tick'), 2000);
 */
 
@@ -151,44 +151,44 @@ let timerId = setTimeout(function tick() {
 }, 2000);
 ```
 
-The `setTimeout` above schedules the next call right at the end of the current one `(*)`.
+`setTimeout` ở trên lên lịch cuộc gọi tiếp theo ngay khi kết thúc cuộc gọi hiện tại `(*)`.
 
-The nested `setTimeout` is a more flexible method than `setInterval`. This way the next call may be scheduled differently, depending on the results of the current one.
+`setTimeout` lồng nhau là một phương thức linh hoạt hơn `setInterval`. Bằng cách này, cuộc gọi tiếp theo có thể được lên lịch khác nhau, tùy thuộc vào kết quả của cuộc gọi hiện tại.
 
-For instance, we need to write a service that sends a request to the server every 5 seconds asking for data, but in case the server is overloaded, it should increase the interval to 10, 20, 40 seconds...
+Ví dụ chúng ta cần viết một dịch vụ cứ 5 giây lại gửi một yêu cầu đến server yêu cầu dữ liệu, nhưng trong trường hợp server bị quá tải thì nên tăng khoảng thời gian lên 10, 20, 40 giây...
 
-Here's the pseudocode:
+Đây là mã giả:
 ```js
 let delay = 5000;
 
-let timerId = setTimeout(function request() {
-  ...send request...
+let timerId = setTimeout(yêu cầu hàm() {
+  ...gửi yêu cầu...
 
-  if (request failed due to server overload) {
-    // increase the interval to the next run
+  if (yêu cầu không thành công do quá tải máy chủ) {
+    // tăng khoảng thời gian cho lần chạy tiếp theo
     delay *= 2;
   }
 
-  timerId = setTimeout(request, delay);
+  timerId = setTimeout(yêu cầu, delay);
 
 }, delay);
 ```
 
 
-And if the functions that we're scheduling are CPU-hungry, then we can measure the time taken by the execution and plan the next call sooner or later.
+Và nếu các hàm mà chúng ta đang lập lịch sử dụng nhiều CPU, thì chúng ta có thể đo thời gian thực hiện và lập kế hoạch cho cuộc gọi tiếp theo sớm hay muộn.
 
-**Nested `setTimeout` allows to set the delay between the executions more precisely than `setInterval`.**
+**`setTimeout` lồng nhau cho phép đặt độ trễ giữa các lần thực thi chính xác hơn `setInterval`.**
 
-Let's compare two code fragments. The first one uses `setInterval`:
+Hãy so sánh hai đoạn mã. Cái đầu tiên sử dụng `setInterval`:
 
 ```js
 let i = 1;
-setInterval(function() {
+setInterval(hàm() {
   func(i++);
 }, 100);
 ```
 
-The second one uses nested `setTimeout`:
+Cái thứ hai sử dụng `setTimeout` lồng nhau:
 
 ```js
 let i = 1;
@@ -198,41 +198,41 @@ setTimeout(function run() {
 }, 100);
 ```
 
-For `setInterval` the internal scheduler will run `func(i++)` every 100ms:
+Đối với `setInterval`, bộ lên lịch nội bộ sẽ chạy `func(i++)` cứ sau 100 mili giây:
 
 ![](setinterval-interval.svg)
 
-Did you notice?
+Bạn có để ý không?
 
-**The real delay between `func` calls for `setInterval` is less than in the code!**
+**Độ trễ thực sự giữa các lệnh gọi `func` cho `setInterval` nhỏ hơn trong mã!**
 
-That's normal, because the time taken by `func`'s execution "consumes" a part of the interval.
+Điều đó là bình thường, bởi vì thời gian thực thi của `func` "tiêu tốn" một phần của khoảng thời gian.
 
-It is possible that `func`'s execution turns out to be longer than we expected and takes more than 100ms.
+Có thể quá trình thực thi của `func` kéo dài hơn chúng ta mong đợi và mất hơn 100 mili giây.
 
-In this case the engine waits for `func` to complete, then checks the scheduler and if the time is up, runs it again *immediately*.
+Trong trường hợp này, engine đợi `func` hoàn thành, sau đó kiểm tra bộ lên lịch và nếu hết thời gian, hãy chạy lại *ngay lập tức*.
 
-In the edge case, if the function always executes longer than `delay` ms, then the calls will happen without a pause at all.
+Trong trường hợp cạnh, nếu hàm luôn thực thi lâu hơn `delay` ms, thì các cuộc gọi sẽ diễn ra mà không có khoảng dừng nào cả.
 
-And here is the picture for the nested `setTimeout`:
+Và đây là hình ảnh cho `setTimeout` lồng nhau:
 
 ![](settimeout-interval.svg)
 
-**The nested `setTimeout` guarantees the fixed delay (here 100ms).**
+**`setTimeout` lồng nhau đảm bảo độ trễ cố định (ở đây là 100 mili giây).**
 
-That's because a new call is planned at the end of the previous one.
+Đó là bởi vì một cuộc gọi mới được lên kế hoạch vào cuối cuộc gọi trước đó.
 
-````smart header="Garbage collection and setInterval/setTimeout callback"
-When a function is passed in `setInterval/setTimeout`, an internal reference is created to it and saved in the scheduler. It prevents the function from being garbage collected, even if there are no other references to it.
+````smart header="Thu gom rác và gọi lại setInterval/setTimeout"
+Khi một chức năng được chuyển vào `setInterval/setTimeout`, một tham chiếu nội bộ được tạo cho nó và được lưu trong bộ lên lịch. Nó ngăn hàm bị thu gom rác, ngay cả khi không có tham chiếu nào khác đến nó.
 
 ```js
-// the function stays in memory until the scheduler calls it
+// hàm vẫn còn trong bộ nhớ cho đến khi bộ lên lịch gọi nó
 setTimeout(function() {...}, 100);
 ```
 
-For `setInterval` the function stays in memory until `clearInterval` is called.
+Đối với `setInterval`, hàm này sẽ nằm trong bộ nhớ cho đến khi `clearInterval` được gọi.
 
-There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+Có một tác dụng phụ. Một hàm tham chiếu đến lexical environment bên ngoài, vì vậy, trong khi nó hoạt động, các biến bên ngoài cũng hoạt động. Chúng có thể chiếm nhiều bộ nhớ hơn chính hàm đó. Vì vậy, khi chúng ta không cần đến hàm đã lên lịch nữa, tốt hơn hết là hủy bỏ nó, ngay cả khi nó rất nhỏ.
 ````
 
 ## Zero delay setTimeout
