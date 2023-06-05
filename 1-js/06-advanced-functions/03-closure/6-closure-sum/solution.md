@@ -1,12 +1,12 @@
-For the second parentheses to work, the first ones must return a function.
+Để các dấu ngoặc đơn thứ hai hoạt động, các dấu ngoặc đơn đầu tiên phải trả về một hàm.
 
-Like this:
+Như thế này:
 
 ```js run
 function sum(a) {
 
   return function(b) {
-    return a + b; // takes "a" from the outer lexical environment
+    return a + b; // lấy "a" từ lexical environment bên ngoài
   };
 
 }
