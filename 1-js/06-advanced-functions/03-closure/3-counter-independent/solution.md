@@ -1,5 +1,5 @@
-The answer: **0,1.**
+Đáp án: **0,1.**
 
-Functions `counter` and `counter2` are created by different invocations of `makeCounter`.
+Các hàm `counter` và `counter2` được tạo bởi các lệnh gọi khác nhau của `makeCounter`.
 
-So they have independent outer Lexical Environments, each one has its own `count`.
+Vì vậy, chúng có các Lexical Environment bên ngoài độc lập, mỗi môi trường có `count` riêng.
