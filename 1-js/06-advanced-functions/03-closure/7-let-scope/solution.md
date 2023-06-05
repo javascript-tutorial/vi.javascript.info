@@ -17,7 +17,7 @@ func();
 
 Trong ví dụ này, chúng ta có thể quan sát sự khác biệt đặc biệt giữa biến "không tồn tại" và "chưa được khởi tạo".
 
-Như bạn có thể đã đọc trong bài viết [](info: closure), một biến bắt đầu ở trạng thái "chưa được khởi tạo" kể từ thời điểm khi quá trình thực thi đi vào một khối mã (hoặc một hàm). Và nó vẫn chưa được khởi tạo cho đến câu lệnh `let` tương ứng.
+Như bạn có thể đã đọc trong [bài viết](info: closure), một biến bắt đầu ở trạng thái "chưa được khởi tạo" kể từ thời điểm khi quá trình thực thi đi vào một khối mã (hoặc một hàm). Và nó vẫn chưa được khởi tạo cho đến câu lệnh `let` tương ứng.
 
 Nói cách khác, một biến tồn tại về mặt kỹ thuật, nhưng không thể được sử dụng trước `let`.
 
