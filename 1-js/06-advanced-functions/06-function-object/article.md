@@ -225,7 +225,7 @@ let sayHi = function *!*func*/!*(who) {
 };
 ```
 
-Chúng tôi đã đạt được bất cứ điều gì ở đây? Mục đích của tên `"func"` bổ sung đó là gì?
+Chúng ta đã đạt được bất cứ điều gì ở đây? Mục đích của tên `"func"` bổ sung đó là gì?
 
 Trước tiên, hãy lưu ý rằng chúng ta vẫn có một Function Expression. Việc thêm tên `"func"` sau `function` không làm cho nó trở thành một Function Declaration, bởi vì nó vẫn được tạo như một phần của biểu thức gán.
 
@@ -265,32 +265,32 @@ sayHi(); // Xin chào,Khách
 func(); // Error, func is not defined (không hiển thị bên ngoài hàm)
 ```
 
-Why do we use `func`? Maybe just use `sayHi` for the nested call?
+Tại sao chúng ta sử dụng `func`? Có lẽ chỉ cần sử dụng `sayHi` cho cuộc gọi lồng nhau?
 
 
-Actually, in most cases we can:
+Trên thực tế, trong hầu hết các trường hợp, chúng ta có thể:
 
 ```js
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Xin chào, ${who}`);
   } else {
 *!*
-    sayHi("Guest");
+    sayHi("Khách");
 */!*
   }
 };
 ```
 
-The problem with that code is that `sayHi` may change in the outer code. If the function gets assigned to another variable instead, the code will start to give errors:
+Vấn đề với mã đó là `sayHi` có thể thay đổi ở mã bên ngoài. Nếu hàm được gán cho một biến khác, mã sẽ bắt đầu báo lỗi:
 
 ```js run
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Xin chào, ${who}`);
   } else {
 *!*
-    sayHi("Guest"); // Error: sayHi is not a function
+    sayHi("Khách"); // Error: sayHi is not a function
 */!*
   }
 };
@@ -301,19 +301,19 @@ sayHi = null;
 welcome(); // Error, the nested sayHi call doesn't work any more!
 ```
 
-That happens because the function takes `sayHi` from its outer lexical environment. There's no local `sayHi`, so the outer variable is used. And at the moment of the call that outer `sayHi` is `null`.
+Điều đó xảy ra bởi vì hàm lấy `sayHi` từ lexical environment bên ngoài của nó. Không có `sayHi` cục bộ, vì vậy biến bên ngoài được sử dụng. Và tại thời điểm gọi, `sayHi` bên ngoài là `null`.
 
-The optional name which we can put into the Function Expression is meant to solve exactly these kinds of problems.
+Tên tùy chọn mà chúng ta có thể đặt vào Function Expression nhằm giải quyết chính xác các loại vấn đề này.
 
-Let's use it to fix our code:
+Hãy sử dụng nó để sửa mã của chúng ta:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Xin chào, ${who}`);
   } else {
 *!*
-    func("Guest"); // Now all fine
+    func("Khách"); // Bây giờ tất cả đều ổn
 */!*
   }
 };
@@ -321,33 +321,33 @@ let sayHi = function *!*func*/!*(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Hello, Guest (nested call works)
+welcome(); // Xin chào, Khách (cuộc gọi lồng nhau hoạt động)
 ```
 
-Now it works, because the name `"func"` is function-local. It is not taken from outside (and not visible there). The specification guarantees that it will always reference the current function.
+Bây giờ nó hoạt động, bởi vì tên `"func"` là chức năng cục bộ. Nó không được lấy từ bên ngoài (và không nhìn thấy ở đó). Thông số kỹ thuật đảm bảo rằng nó sẽ luôn tham chiếu đến hàm hiện tại.
 
-The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", how the function can call itself internally.
+Mã bên ngoài vẫn có biến `sayHi` hoặc `welcome` của nó. Và `func` là một "tên hàm nội bộ", làm thế nào hàm có thể gọi chính nó trong nội bộ.
 
-```smart header="There's no such thing for Function Declaration"
-The "internal name" feature described here is only available for Function Expressions, not for Function Declarations. For Function Declarations, there is no syntax for adding an "internal" name.
+```smart header="Không có điều đó cho Function Declaration"
+Tính năng "tên nội bộ" được mô tả ở đây chỉ khả dụng cho Function Expression, không dành cho Function Declaration. Đối với Function Declaration, không có cú pháp nào để thêm tên "nội bộ".
 
-Sometimes, when we need a reliable internal name, it's the reason to rewrite a Function Declaration to Named Function Expression form.
+Đôi khi, khi chúng ta cần một tên nội bộ đáng tin cậy, đó là lý do để viết lại một Function Declaration thành kiểu Named Function Expression.
 ```
 
-## Summary
+## Tóm tắt
 
-Functions are objects.
+Hàm là đối tượng.
 
-Here we covered their properties:
+Ở đây chúng ta đã đề cập đến các thuộc tính của chúng:
 
-- `name` -- the function name. Usually taken from the function definition, but if there's none, JavaScript tries to guess it from the context (e.g. an assignment).
-- `length` -- the number of arguments in the function definition. Rest parameters are not counted.
+- `name` -- tên chức năng. Thường được lấy từ định nghĩa hàm, nhưng nếu không có, JavaScript sẽ cố gắng đoán nó từ ngữ cảnh (ví dụ: một nhiệm vụ).
+- `length` -- số lượng đối số trong định nghĩa hàm. Các thông số còn lại không được tính.
 
-If the function is declared as a Function Expression (not in the main code flow), and it carries the name, then it is called a Named Function Expression. The name can be used inside to reference itself, for recursive calls or such.
+Nếu hàm được khai báo là Function Expression (không có trong luồng mã chính) và hàm mang tên, thì nó được gọi là Named Function Expression. Tên có thể được sử dụng bên trong để tham chiếu chính nó, cho các cuộc gọi đệ quy hoặc tương tự.
 
-Also, functions may carry additional properties. Many well-known JavaScript libraries make great use of this feature.
+Ngoài ra, các hàm có thể mang các thuộc tính bổ sung. Nhiều thư viện JavaScript nổi tiếng sử dụng rất tốt tính năng này.
 
-They create a "main" function and attach many other "helper" functions to it. For instance, the [jQuery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`, and then adds `_.clone`, `_.keyBy` and other properties to it (see the [docs](https://lodash.com/docs) when you want to learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
+Họ tạo một chức năng "chính" và đính kèm nhiều chức năng "trợ giúp" khác cho nó. Chẳng hạn, thư viện [jQuery](https://jquery.com) tạo một hàm có tên `$`. Thư viện [lodash](https://lodash.com) tạo một hàm `_`, sau đó thêm `_.clone`, `_.keyBy` và các thuộc tính khác vào hàm đó (xem [tài liệu](https:/ /lodash.com/docs) khi bạn muốn tìm hiểu thêm về chúng). Trên thực tế, họ làm điều đó để giảm bớt ô nhiễm không gian chung, do đó, một thư viện duy nhất chỉ cung cấp một biến chung. Điều đó làm giảm khả năng đặt tên xung đột.
 
 
-So, a function can do a useful job by itself and also carry a bunch of other functionality in properties.
+Vì vậy, một chức năng có thể tự thực hiện một công việc hữu ích và cũng mang theo một loạt các hàm khác trong các thuộc tính.
