@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Are counters independent?
+# Bộ đếm có độc lập không?
 
-Here we make two counters: `counter` and `counter2` using the same `makeCounter` function.
+Ở đây chúng ta tạo hai bộ đếm: `counter` và `counter2` bằng cách sử dụng cùng hàm `makeCounter`.
 
-Are they independent? What is the second counter going to show? `0,1` or `2,3` or something else?
+Chúng có độc lập không? Bộ đếm thứ hai sẽ hiển thị là gì? `0,1` hay `2,3` hay cái gì khác?
 
 ```js
 function makeCounter() {
