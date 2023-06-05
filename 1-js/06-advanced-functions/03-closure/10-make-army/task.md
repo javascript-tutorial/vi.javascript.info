@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Army of functions
+# Đội quân hàm
 
-The following code creates an array of `shooters`.
+Đoạn mã sau tạo ra một array của `shooters`.
 
-Every function is meant to output its number. But something is wrong...
+Mọi chức năng đều xuất ra số của nó. Nhưng có gì đó không ổn ...
 
 ```js run
 function makeArmy() {
@@ -14,28 +14,28 @@ function makeArmy() {
 
   let i = 0;
   while (i < 10) {
-    let shooter = function() { // create a shooter function,
-      alert( i ); // that should show its number
+    let shooter = function() { // tạo một hàm shooter,
+      alert( i ); // điều đó nên hiển thị số của nó
     };
-    shooters.push(shooter); // and add it to the array
+    shooters.push(shooter); // và thêm nó vào array
     i++;
   }
 
-  // ...and return the array of shooters
+  // ....và trả lại array shooter
   return shooters;
 }
 
 let army = makeArmy();
 
 *!*
-// all shooters show 10 instead of their numbers 0, 1, 2, 3...
-army[0](); // 10 from the shooter number 0
-army[1](); // 10 from the shooter number 1
-army[2](); // 10 ...and so on.
+// tất cả các shooter hiển thị 10 thay vì số của nchung1 0, 1, 2, 3...
+army[0](); // 10 từ shooter số 0
+army[1](); // 10 từ shooter số 1
+army[2](); // 10 ... vân vân.
 */!*
 ```
 
-Why do all of the shooters show the same value? 
+Tại sao tất cả các shooter hiển thị cùng một giá trị?
 
-Fix the code so that they work as intended.
+Sửa mã để chúng hoạt động như dự định.
 
