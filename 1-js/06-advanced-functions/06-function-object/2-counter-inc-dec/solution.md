@@ -1,2 +1,2 @@
 
-The solution uses `count` in the local variable, but addition methods are written right into the `counter`. They share the same outer lexical environment and also can access the current `count`.
+Giải pháp sử dụng `count` trong biến cục bộ, nhưng các phương thức bổ sung được viết ngay vào `counter`. Chúng chia sẻ cùng một lexical environment bên ngoài và cũng có thể truy cập `count` hiện tại.
