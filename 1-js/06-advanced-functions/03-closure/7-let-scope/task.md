@@ -2,7 +2,7 @@ importance: 4
 
 ---
 
-# Biến có thể nhìn thấy không?
+# Có thể nhìn thấy biến này không?
 
 Cái gì sẽ là kết quả của mã này?
 
