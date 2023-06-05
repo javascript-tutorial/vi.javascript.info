@@ -235,7 +235,7 @@ setTimeout(function() {...}, 100);
 Có một tác dụng phụ. Một hàm tham chiếu đến lexical environment bên ngoài, vì vậy, trong khi nó hoạt động, các biến bên ngoài cũng hoạt động. Chúng có thể chiếm nhiều bộ nhớ hơn chính hàm đó. Vì vậy, khi chúng ta không cần đến hàm đã lên lịch nữa, tốt hơn hết là hủy bỏ nó, ngay cả khi nó rất nhỏ.
 ````
 
-## Zero delay setTimeout
+## setTimeout không delay
 
 There's a special use case: `setTimeout(func, 0)`, or just `setTimeout(func)`.
 
