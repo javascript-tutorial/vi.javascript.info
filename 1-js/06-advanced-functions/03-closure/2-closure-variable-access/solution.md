@@ -6,4 +6,4 @@ Hàm `work()` trong đoạn mã bên dưới lấy `name` từ nơi xuất phát
 
 Vì vậy, kết quả là `"Pete"` ở đây.
 
-Nhưng nếu không có `let name` trong `makeWorker()`, thì tìm kiếm sẽ ra bên ngoài và lấy biến chung như chúng ta có thể thấy từ chuỗi bên trên. Trong trường hợp đó, kết quả sẽ là `"John"`.
+Nhưng nếu không có `let name` trong `makeWorker()`, thì tìm kiếm sẽ ra bên ngoài và lấy biến cục bộ như chúng ta có thể thấy từ chuỗi bên trên. Trong trường hợp đó, kết quả sẽ là `"John"`.
