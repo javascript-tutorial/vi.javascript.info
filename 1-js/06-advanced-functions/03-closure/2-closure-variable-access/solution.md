@@ -1,9 +1,9 @@
-The answer is: **Pete**.
+Đáp án là: **Pete**.
 
-The `work()` function in the code below gets `name` from the place of its origin through the outer lexical environment reference:
+Hàm `work()` trong đoạn mã bên dưới lấy `name` từ nơi xuất phát của nó thông qua tham chiếu lexical environment bên ngoài:
 
 ![](lexenv-nested-work.svg)
 
-So, the result is `"Pete"` here.
+Vì vậy, kết quả là `"Pete"` ở đây.
 
-But if there were no `let name` in `makeWorker()`, then the search would go outside and take the global variable as we can see from the chain above. In that case the result would be `"John"`.
+Nhưng nếu không có `let name` trong `makeWorker()`, thì tìm kiếm sẽ ra bên ngoài và lấy biến chung như chúng ta có thể thấy từ chuỗi bên trên. Trong trường hợp đó, kết quả sẽ là `"John"`.
