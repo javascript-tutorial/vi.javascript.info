@@ -1,11 +1,11 @@
-# Scheduling: setTimeout and setInterval
+# Lên lịch: setTimeout và setInterval
 
-We may decide to execute a function not right now, but at a certain time later. That's called "scheduling a call".
+Chúng ta có thể quyết định thực hiện một hàm không phải ngay bây giờ mà vào một thời điểm nhất định sau đó. Đó gọi là "lên lịch cuộc gọi".
 
-There are two methods for it:
+Có hai phương pháp cho nó:
 
-- `setTimeout` allows us to run a function once after the interval of time.
-- `setInterval` allows us to run a function repeatedly, starting after the interval of time, then repeating continuously at that interval.
+- `setTimeout` cho phép chúng ta chạy một hàm một lần sau khoảng thời gian.
+- `setInterval` cho phép chúng ta chạy lặp đi lặp lại một hàm, bắt đầu sau khoảng thời gian, sau đó lặp lại liên tục ở khoảng thời gian đó.
 
 These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.js.
 
