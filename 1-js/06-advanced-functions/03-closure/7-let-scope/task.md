@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Is variable visible?
+# Biến có thể nhìn thấy không?
 
-What will be the result of this code?
+Cái gì sẽ là kết quả của mã này?
 
 ```js
 let x = 1;
@@ -18,4 +18,4 @@ function func() {
 func();
 ```
 
-P.S. There's a pitfall in this task. The solution is not obvious.
+Tái bút: Có một cạm bẫy trong nhiệm vụ này. Lời giải không rõ ràng.
