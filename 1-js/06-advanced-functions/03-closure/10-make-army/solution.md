@@ -1,14 +1,14 @@
 
-Let's examine what exactly happens inside `makeArmy`, and the solution will become obvious.
+Hãy xem xét chính xác điều gì xảy ra bên trong `makeArmy` và giải pháp sẽ trở nên rõ ràng.
 
-1. It creates an empty array `shooters`:
+1. Nó tạo ra một array `shooters` trống:
 
     ```js
     let shooters = [];
     ```
-2. Fills it with functions via `shooters.push(function)` in the loop.
+2. Điền vào nó các hàm thông qua `shooters.push(function)` trong vòng lặp.
 
-    Every element is a function, so the resulting array looks like this:
+    Mỗi phần tử là một hàm, vì vậy array kết quả trông như thế này:
 
     ```js no-beautify
     shooters = [
@@ -25,40 +25,40 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     ];
     ```
 
-3. The array is returned from the function.
+3. Array được trả về từ hàm.
     
-    Then, later, the call to any member, e.g. `army[5]()` will get the element `army[5]` from the array (which is a function) and calls it.
+    Sau đó, sau đó, cuộc gọi đến bất kỳ thành viên nào, ví dụ:. `army[5]()` sẽ lấy phần tử `army[5]` từ array (là một hàm) và gọi nó.
     
-    Now why do all such functions show the same value, `10`?
+    Bây giờ tại sao tất cả các chức năng như vậy hiển thị cùng một giá trị, `10`?
     
-    That's because there's no local variable `i` inside `shooter` functions. When such a function is called, it takes `i` from its outer lexical environment.
+    Đó là bởi vì không có biến cục bộ `i` bên trong các hàm `shooter`. Khi một hàm như vậy được gọi, nó sẽ lấy `i` từ lexical environment bên ngoài của nó.
     
-    Then, what will be the value of `i`?
+    Khi đó, giá trị của `i` sẽ là bao nhiêu?
     
-    If we look at the source:
+    Nếu chúng ta nhìn vào nguồn:
     
     ```js
     function makeArmy() {
       ...
       let i = 0;
       while (i < 10) {
-        let shooter = function() { // shooter function
-          alert( i ); // should show its number
+        let shooter = function() { // hàm shooter
+          alert( i ); // nên hiển thị số của nó
         };
-        shooters.push(shooter); // add function to the array
+        shooters.push(shooter); // thêm hàm vào array
         i++;
       }
       ...
     }
     ```
     
-    We can see that all `shooter` functions are created in the lexical environment of `makeArmy()` function. But when `army[5]()` is called, `makeArmy` has already finished its job, and the final value of `i` is `10` (`while` stops at `i=10`).
+    Chúng ta có thể thấy rằng tất cả các hàm `shooter` đều được tạo trong lexical environment của hàm `makeArmy()`. Nhưng khi `army[5]()` được gọi, `makeArmy` đã hoàn thành công việc của nó và giá trị cuối cùng của `i` là `10` (`while` dừng ở `i=10`).
     
-    As the result, all `shooter` functions get the same value from the outer lexical environment and that is, the last value, `i=10`.
+    Kết quả là, tất cả các hàm `shooter` nhận cùng một giá trị từ lexical environment bên ngoài và đó là giá trị cuối cùng, `i=10`.
     
     ![](lexenv-makearmy-empty.svg)
     
-    As you can see above, on each iteration of a `while {...}` block, a new lexical environment is created. So, to fix this, we can copy the value of `i` into a variable within the `while {...}` block, like this:
+    Như bạn có thể thấy ở trên, trên mỗi lần lặp của khối `while {...}`, một lexical environment mới được tạo. Vì vậy, để khắc phục điều này, chúng ta có thể sao chép giá trị của `i` vào một biến trong khối `while {...}`, như sau:
     
     ```js run
     function makeArmy() {
@@ -69,8 +69,8 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
         *!*
           let j = i;
         */!*
-          let shooter = function() { // shooter function
-            alert( *!*j*/!* ); // should show its number
+          let shooter = function() { // hàm shooter
+            alert( *!*j*/!* ); // nên hiển thị số của nó
           };
         shooters.push(shooter);
         i++;
@@ -81,18 +81,18 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     
     let army = makeArmy();
     
-    // Now the code works correctly
+    // Bây giờ mã hoạt động đúng
     army[0](); // 0
     army[5](); // 5
     ```
     
-    Here `let j = i` declares an "iteration-local" variable `j` and copies `i` into it. Primitives are copied "by value", so we actually get an independent copy of `i`, belonging to the current loop iteration.
+    Ở đây `let j = i` khai báo một biến "lặp cục bộ" `j` và sao chép `i` vào đó. Các bản gốc được sao chép "theo giá trị", vì vậy chúng ta thực sự nhận được một bản sao độc lập của `i`, thuộc về phép lặp vòng lặp hiện tại.
     
     The shooters work correctly, because the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds to the current loop iteration:
     
     ![](lexenv-makearmy-while-fixed.svg)
     
-    Such a problem could also be avoided if we used `for` in the beginning, like this:
+    Vấn đề như vậy cũng có thể tránh được nếu chúng ta sử dụng `for` ngay từ đầu, như sau:
     
     ```js run demo
     function makeArmy() {
@@ -102,8 +102,8 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     *!*
       for(let i = 0; i < 10; i++) {
     */!*
-        let shooter = function() { // shooter function
-          alert( i ); // should show its number
+        let shooter = function() { // hàm shooter
+          alert( i ); // nên hiển thị số của nó
         };
         shooters.push(shooter);
       }
@@ -117,13 +117,13 @@ Let's examine what exactly happens inside `makeArmy`, and the solution will beco
     army[5](); // 5
     ```
     
-    That's essentially the same, because `for` on each iteration generates a new lexical environment, with its own variable `i`. So `shooter` generated in every iteration references its own `i`, from that very iteration.
+    Điều đó về cơ bản là giống nhau, bởi vì `for` trên mỗi lần lặp tạo ra một lexical environment mới, với biến riêng `i`. Vì vậy, `shooter` được tạo trong mỗi lần lặp tham chiếu `i` của chính nó, từ chính lần lặp đó.
     
     ![](lexenv-makearmy-for-fixed.svg)
 
-Now, as you've put so much effort into reading this, and the final recipe is so simple - just use `for`, you may wonder -- was it worth that?
+Bây giờ, vì bạn đã bỏ ra rất nhiều công sức để đọc nó, và công thức cuối cùng rất đơn giản - chỉ cần sử dụng `for`, bạn có thể tự hỏi -- nó có đáng không?
 
-Well, if you could easily answer the question, you wouldn't read the solution. So, hopefully this task must have helped you to understand things a bit better. 
+Chà, nếu bạn có thể dễ dàng trả lời câu hỏi, bạn sẽ không đọc lời giải. Vì vậy, hy vọng nhiệm vụ này đã giúp bạn hiểu mọi thứ tốt hơn một chút.
 
-Besides, there are indeed cases when one prefers `while` to `for`, and other scenarios, where such problems are real.
+Bên cạnh đó, thực sự có những trường hợp khi một người thích `while` hơn là `for`, và các tình huống khác, trong đó các vấn đề như vậy là có thật.
 
