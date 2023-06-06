@@ -20,7 +20,7 @@ let i = 0;
 
 setTimeout(() => alert(i), 100); // ?
 
-// giả sử rằng thời gian để thực hiện hàm này là >100 mili giây
+// giả sử rằng thời gian để chạy hàm này là >100 mili giây
 for(let j = 0; j < 100000000; j++) {
   i++; 
 }
