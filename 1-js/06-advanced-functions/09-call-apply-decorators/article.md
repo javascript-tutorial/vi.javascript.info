@@ -421,6 +421,6 @@ let wrapper = function() {
 };
 ```
 
-Chúng ta cũng đã thấy một ví dụ về *mượn phương thức* khi chúng ta lấy một phương thức từ một đối tượng và `gọi` nó trong ngữ cảnh của một đối tượng khác. Việc sử dụng các phương thức array và áp dụng chúng cho `đối số` là khá phổ biến. Cách khác là sử dụng đối tượng tham số còn lại là một array thực.
+Chúng ta cũng đã thấy một ví dụ về *mượn phương thức* khi chúng ta lấy một phương thức từ một đối tượng và `gọi` nó trong ngữ cảnh của một đối tượng khác. Việc sử dụng các phương thức array và áp dụng chúng cho `arguments` là khá phổ biến. Cách khác là sử dụng đối tượng tham số còn lại là một array thực.
 
 Có rất nhiều decorator trong tự nhiên. Kiểm tra xem bạn đã hiểu chúng tốt như thế nào bằng cách giải quyết các nhiệm vụ của chương này.
