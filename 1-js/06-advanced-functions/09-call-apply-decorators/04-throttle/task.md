@@ -47,7 +47,7 @@ f1000(2); // (điều tiết, 1000ms chưa hết)
 f1000(3); // (điều tiết, 1000ms chưa hết)
 
 // khi hết thời gian 1000 ms ...
-// ...outputs 3, intermediate value 2 was ignored
+// ...đầu ra 3, giá trị trung gian 2 bị bỏ qua
 ```
 
-P.S. Arguments and the context `this` passed to `f1000` should be passed to the original `f`.
+Tái bút: Các đối số và ngữ cảnh `this` được truyền cho `f1000` phải được truyền cho `f` ban đầu.
