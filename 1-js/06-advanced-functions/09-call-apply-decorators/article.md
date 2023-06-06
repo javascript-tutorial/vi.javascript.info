@@ -1,21 +1,21 @@
-# Decorators and forwarding, call/apply
+# Decorator và chuyển tiếp, gọi/áp dụng
 
-JavaScript gives exceptional flexibility when dealing with functions. They can be passed around, used as objects, and now we'll see how to *forward* calls between them and *decorate* them.
+JavaScript mang đến sự linh hoạt đặc biệt khi xử lý các hàm. Chúng có thể được truyền đi khắp nơi, được sử dụng làm đối tượng và bây giờ chúng ta sẽ xem cách *chuyển tiếp* lệnh gọi giữa chúng và *trang trí* chúng.
 
-## Transparent caching
+## Bộ nhớ đệm trong suốt
 
-Let's say we have a function `slow(x)` which is CPU-heavy, but its results are stable. In other words, for the same `x` it always returns the same result.
+Giả sử chúng ta có một hàm `slow(x)` nặng về CPU, nhưng kết quả của nó ổn định. Nói cách khác, với cùng một `x`, nó luôn trả về cùng một kết quả.
 
-If the function is called often, we may want to cache (remember) the results to avoid spending extra-time on recalculations.
+Nếu hàm được gọi thường xuyên, chúng ta có thể muốn lưu trữ (ghi nhớ) các kết quả để tránh tốn thêm thời gian cho việc tính toán lại.
 
-But instead of adding that functionality into `slow()` we'll create a wrapper function, that adds caching. As we'll see, there are many benefits of doing so.
+Nhưng thay vì thêm hàm đó vào `slow()`, chúng ta sẽ tạo một hàm bao bọc, có thêm bộ nhớ đệm. Như chúng ta sẽ thấy, có rất nhiều lợi ích khi làm như vậy.
 
-Here's the code, and explanations follow:
+Đây là mã và giải thích như sau:
 
 ```js run
 function slow(x) {
-  // there can be a heavy CPU-intensive job here
-  alert(`Called with ${x}`);
+  // có thể có một công việc sử dụng nhiều CPU ở đây
+  alert(`Gọi với ${x}`);
   return x;
 }
 
@@ -23,65 +23,65 @@ function cachingDecorator(func) {
   let cache = new Map();
 
   return function(x) {
-    if (cache.has(x)) {    // if there's such key in cache
-      return cache.get(x); // read the result from it
+    if (cache.has(x)) {    // nếu có khóa như vậy trong bộ đệm
+      return cache.get(x); // đọc kết quả từ nó
     }
 
-    let result = func(x);  // otherwise call func
+    let result = func(x);  // nếu không thì gọi func
 
-    cache.set(x, result);  // and cache (remember) the result
+    cache.set(x, result);  // và cache (ghi nhớ) kết quả
     return result;
   };
 }
 
 slow = cachingDecorator(slow);
 
-alert( slow(1) ); // slow(1) is cached and the result returned
-alert( "Again: " + slow(1) ); // slow(1) result returned from cache
+alert( slow(1) ); // slow(1) được lưu trữ và kết quả trả về
+alert( "Lại: " + slow(1) ); // kết quả slow(1) được trả về từ bộ nhớ đệm
 
-alert( slow(2) ); // slow(2) is cached and the result returned
-alert( "Again: " + slow(2) ); // slow(2) result returned from cache
+alert( slow(2) ); // slow(2) được lưu trữ và kết quả trả về
+alert( "Lại: " + slow(2) ); // kết quả slow(2) được trả về từ bộ đệm
 ```
 
-In the code above `cachingDecorator` is a *decorator*: a special function that takes another function and alters its behavior.
+Trong đoạn mã trên `cachingDecorator` là một *decorator*: một hàm đặc biệt nhận một hàm khác và thay đổi hành vi của nó.
 
-The idea is that we can call `cachingDecorator` for any function, and it will return the caching wrapper. That's great, because we can have many functions that could use such a feature, and all we need to do is to apply `cachingDecorator` to them.
+Ý tưởng là chúng ta có thể gọi `cachingDecorator` cho bất kỳ hàm nào và nó sẽ trả về trình bao bọc bộ nhớ đệm. Điều đó thật tuyệt, bởi vì chúng ta có thể có nhiều hàm có thể sử dụng một tính năng như vậy và tất cả những gì chúng ta cần làm là áp dụng `cachingDecorator` cho chúng.
 
-By separating caching from the main function code we also keep the main code simpler.
+Bằng cách tách bộ nhớ đệm khỏi mã hàm chính, chúng ta cũng giữ cho mã chính đơn giản hơn.
 
-The result of `cachingDecorator(func)` is a "wrapper": `function(x)` that "wraps" the call of `func(x)` into caching logic:
+Kết quả của `cachingDecorator(func)` là một "trình bao bọc": `function(x)` "bao bọc" cuộc gọi của `func(x)` vào logic bộ nhớ đệm:
 
 ![](decorator-makecaching-wrapper.svg)
 
-From an outside code, the wrapped `slow` function still does the same. It just got a caching aspect added to its behavior.
+Từ một mã bên ngoài, hàm `slow` được bao bọc vẫn hoạt động như vậy. Nó chỉ có một khía cạnh lưu trữ được thêm vào hành vi của nó
 
-To summarize, there are several benefits of using a separate `cachingDecorator` instead of altering the code of `slow` itself:
+Tóm lại, có một số lợi ích khi sử dụng `cachingDecorator` riêng biệt thay vì thay đổi mã của chính `slow`:
 
-- The `cachingDecorator` is reusable. We can apply it to another function.
-- The caching logic is separate, it did not increase the complexity of `slow` itself (if there was any).
-- We can combine multiple decorators if needed (other decorators will follow).
+- `cachingDecorator` có thể tái sử dụng. Chúng ta có thể áp dụng nó cho một hàm khác.
+- Logic bộ nhớ đệm là riêng biệt, nó không làm tăng độ phức tạp của bản thân `slow` (nếu có).
+- Chúng ta có thể kết hợp nhiều decorator nếu cần (các decorator khác sẽ làm theo).
 
-## Using "func.call" for the context
+## Sử dụng "func.call" cho ngữ cảnh
 
-The caching decorator mentioned above is not suited to work with object methods.
+Decorator bộ đệm được đề cập ở trên không phù hợp để hoạt động với các phương thức đối tượng.
 
-For instance, in the code below `worker.slow()` stops working after the decoration:
+Chẳng hạn, trong mã bên dưới `worker.slow()` ngừng hoạt động sau khi trang trí:
 
 ```js run
-// we'll make worker.slow caching
+// chúng ta sẽ tạo bộ nhớ đệm worker.slow
 let worker = {
   someMethod() {
     return 1;
   },
 
   slow(x) {
-    // scary CPU-heavy task here  
-    alert("Called with " + x);
+    // nhiệm vụ nặng về CPU đáng sợ ở đây
+    alert("Gọi với " + x);
     return x * this.someMethod(); // (*)
   }
 };
 
-// same code as before
+// mã giống như trước đây
 function cachingDecorator(func) {
   let cache = new Map();
   return function(x) {
@@ -96,12 +96,12 @@ function cachingDecorator(func) {
   };
 }
 
-alert( worker.slow(1) ); // the original method works
+alert( worker.slow(1) ); // phương thức ban đầu hoạt động
 
-worker.slow = cachingDecorator(worker.slow); // now make it caching
+worker.slow = cachingDecorator(worker.slow); // bây giờ làm cho nó lưu vào bộ nhớ đệm
 
 *!*
-alert( worker.slow(2) ); // Whoops! Error: Cannot read property 'someMethod' of undefined
+alert( worker.slow(2) ); // Rất tiếc! Error: Cannot read property 'someMethod' of undefined
 */!*
 ```
 
