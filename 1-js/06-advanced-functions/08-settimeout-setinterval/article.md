@@ -64,7 +64,7 @@ setTimeout("alert('Xin chào')", 1000);
 Nhưng việc sử dụng các chuỗi không được khuyến nghị, hãy sử dụng các arrow function thay vì chúng, như sau:
 
 ```js run no-beautify
-setTimeout(() => alert('Hello'), 1000);
+setTimeout(() => alert('Xin chào'), 1000);
 ```
 
 ````smart header="Vượt qua một hàm, nhưng không chạy nó"
@@ -102,7 +102,7 @@ Như chúng ta có thể thấy từ đầu ra `alert`, trong trình duyệt, m�
 
 Một lần nữa, không có thông số kỹ thuật chung cho các phương pháp này, vì vậy điều đó không sao cả.
 
-Đối với trình duyệt, bộ hẹn giờ được mô tả trong phần [bộ hẹn giờ](https://www.w3.org/TR/html5/webappapis.html#timers) của chuẩn HTML5.
+Đối với trình duyệt, bộ đếm giờ được mô tả trong phần [bộ đếm giờ](https://www.w3.org/TR/html5/webappapis.html#timers) của chuẩn HTML5.
 
 ## setInterval
 
@@ -123,7 +123,7 @@ Ví dụ sau sẽ hiển thị thông báo cứ sau 2 giây. Sau 5 giây, đầu
 let timerId = setInterval(() => alert('tick'), 2000);
 
 // sau 5 giây dừng lại
-setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
+setTimeout(() => { clearInterval(timerId); alert('dừng lại'); }, 5000);
 ```
 
 ```smart header="Thời gian tiếp tục trong khi `alert` được hiển thị"
@@ -161,7 +161,7 @@ Ví dụ chúng ta cần viết một dịch vụ cứ 5 giây lại gửi một
 ```js
 let delay = 5000;
 
-let timerId = setTimeout(yêu cầu hàm() {
+let timerId = setTimeout(function request() {
   ...gửi yêu cầu...
 
   if (yêu cầu không thành công do quá tải máy chủ) {
@@ -169,7 +169,7 @@ let timerId = setTimeout(yêu cầu hàm() {
     delay *= 2;
   }
 
-  timerId = setTimeout(yêu cầu, delay);
+  timerId = setTimeout(request, delay);
 
 }, delay);
 ```
@@ -183,7 +183,7 @@ Hãy so sánh hai đoạn mã. Cái đầu tiên sử dụng `setInterval`:
 
 ```js
 let i = 1;
-setInterval(hàm() {
+setInterval(function() {
   func(i++);
 }, 100);
 ```
@@ -237,66 +237,66 @@ Có một tác dụng phụ. Một hàm tham chiếu đến lexical environment 
 
 ## setTimeout không độ trễ
 
-There's a special use case: `setTimeout(func, 0)`, or just `setTimeout(func)`.
+Có một trường hợp sử dụng đặc biệt: `setTimeout(func, 0)` hay chỉ `setTimeout(func)`.
 
-This schedules the execution of `func` as soon as possible. But the scheduler will invoke it only after the currently executing script is complete.
+Điều này lên lịch thực hiện `func` càng sớm càng tốt. Nhưng bộ lên lịch sẽ gọi nó chỉ sau khi tập lệnh hiện đang thực thi hoàn tất.
 
-So the function is scheduled to run "right after" the current script.
+Vì vậy, hàm được lên lịch để chạy "ngay sau" tập lệnh hiện tại.
 
-For instance, this outputs "Hello", then immediately "World":
+Chẳng hạn, kết quả này xuất ra "Xin chào", sau đó ngay lập tức là "Thế giới":
 
 ```js run
-setTimeout(() => alert("World"));
+setTimeout(() => alert("Thế giới"));
 
-alert("Hello");
+alert("Xin chào");
 ```
 
-The first line "puts the call into calendar after 0ms". But the scheduler will only "check the calendar" after the current script is complete, so `"Hello"` is first, and `"World"` -- after it.
+Dòng đầu tiên "đặt cuộc gọi vào lịch sau 0ms". Nhưng bộ lên lịch sẽ chỉ "kiểm tra lịch" sau khi tập lệnh hiện tại hoàn tất, vì vậy `"Xin chào"` sẽ ở vị trí đầu tiên và `"Thế giới"` -- sau tập lệnh đó.
 
-There are also advanced browser-related use cases of zero-delay timeout, that we'll discuss in the chapter <info:event-loop>.
+Ngoài ra còn có các trường hợp sử dụng thời gian chờ không chậm trễ liên quan đến trình duyệt nâng cao mà chúng ta sẽ thảo luận trong chương <info:event-loop>.
 
-````smart header="Zero delay is in fact not zero (in a browser)"
-In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+````smart header="Độ trễ bằng không trên thực tế không phải bằng không (trong trình duyệt)"
+Trong trình duyệt, có giới hạn về tần suất chạy các bộ đếm giờ lồng nhau. [Chuẩn HTML5](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) nói: "sau năm bộ đếm giờ lồng nhau, khoảng thời gian buộc phải ít nhất là 4 mili giây.".
 
-Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself with zero delay. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+Hãy chứng minh ý nghĩa của nó với ví dụ dưới đây. Cuộc gọi `setTimeout` trong đó sẽ tự lên lịch lại mà không có độ trễ bằng không. Mỗi cuộc gọi ghi nhớ thời gian thực từ cuộc gọi trước đó trong array `times`. Sự chậm trễ thực sự trông như thế nào? Hãy xem nào:
 
 ```js run
 let start = Date.now();
 let times = [];
 
 setTimeout(function run() {
-  times.push(Date.now() - start); // remember delay from the previous call
+  times.push(Date.now() - start); // ghi nhớ độ trễ từ cuộc gọi trước
 
-  if (start + 100 < Date.now()) alert(times); // show the delays after 100ms
-  else setTimeout(run); // else re-schedule
+  if (start + 100 < Date.now()) alert(times); // hiển thị độ trễ sau 100ms
+  else setTimeout(run); // lên lại lịch khác
 });
 
-// an example of the output:
+// một ví dụ về đầu ra:
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
 ```
 
-First timers run immediately (just as written in the spec), and then we see `9, 15, 20, 24...`. The 4+ ms obligatory delay between invocations comes into play.
+Bộ hẹn giờ đầu tiên chạy ngay lập tức (giống như được viết trong thông số kỹ thuật), và sau đó chúng ta thấy `9, 15, 20, 24...`. Độ trễ bắt buộc hơn 4 ms giữa các lần gọi bắt đầu phát huy tác dụng.
 
-The similar thing happens if we use `setInterval` instead of `setTimeout`: `setInterval(f)` runs `f` few times with zero-delay, and afterwards with 4+ ms delay.
+Điều tương tự cũng xảy ra nếu chúng ta sử dụng `setInterval` thay vì `setTimeout`: `setInterval(f)` chạy `f` vài lần với độ trễ bằng 0 và sau đó với độ trễ hơn 4 ms.
 
-That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
+Hạn chế đó có từ trước và nhiều tập lễnh dựa vào đó mà tồn tại vì những lý do lịch sử.
 
-For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) for Node.js. So this note is browser-specific.
+Đối với JavaScript phía máy chủ, giới hạn đó không tồn tại và tồn tại các cách khác để lên lịch cho một công việc không đồng bộ ngay lập tức, chẳng hạn như [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) cho Node.js. Vì vậy, ghi chú này là dành riêng cho trình duyệt.
 ````
 
-## Summary
+## Tóm tắt
 
-- Methods `setTimeout(func, delay, ...args)` and `setInterval(func, delay, ...args)` allow us to run the `func` once/regularly after `delay` milliseconds.
-- To cancel the execution, we should call `clearTimeout/clearInterval` with the value returned by `setTimeout/setInterval`.
-- Nested `setTimeout` calls are a more flexible alternative to `setInterval`, allowing us to set the time *between* executions more precisely.
-- Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current script is complete".
-- The browser limits the minimal delay for five or more nested calls of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
+- Các phương thức `setTimeout(func, delay, ...args)` và `setInterval(func, delay, ...args)` cho phép chúng ta chạy `func` một lần/thường xuyên sau `delay` mili giây.
+- Để hủy thực thi, chúng ta nên gọi `clearTimeout/clearInterval` với giá trị được trả về bởi `setTimeout/setInterval`.
+- Các lệnh gọi `setTimeout` lồng nhau là một giải pháp thay thế linh hoạt hơn cho `setInterval`, cho phép chúng ta đặt thời gian *giữa* các lần thực thi chính xác hơn.
+- Lên lịch không độ trễ với `setTimeout(func, 0)` (giống như `setTimeout(func)`) được sử dụng để lên lịch cuộc gọi "càng sớm càng tốt, nhưng sau khi tập lệnh hiện tại hoàn tất".
+- Trình duyệt giới hạn độ trễ tối thiểu cho năm lệnh gọi lồng nhau trở lên của `setTimeout` hoặc cho `setInterval` (sau lệnh gọi thứ 5) là 4 mili giây. Đó là vì lý do lịch sử.
 
-Please note that all scheduling methods do not *guarantee* the exact delay.
+Hãy lưu ý rằng tất cả các phương pháp lên lịch không *đảm bảo* độ trễ chính xác.
 
-For example, the in-browser timer may slow down for a lot of reasons:
-- The CPU is overloaded.
-- The browser tab is in the background mode.
-- The laptop is on battery.
+Ví dụ: bộ đếm giờ trong trình duyệt có thể chậm lại vì nhiều lý do:
+- CPU bị quá tải.
+- Tab trình duyệt đang ở chế độ nền.
+- Laptop đang hết pin.
 
-All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.
+Tất cả những điều đó có thể làm tăng độ phân giải bộ đếm giờ tối thiểu (độ trễ tối thiểu) lên 300 mili giây hoặc thậm chí 1000 mili giây tùy thuộc vào cài đặt hiệu suất ở cấp hệ điều hành và trình duyệt.
