@@ -2,51 +2,51 @@ importance: 5
 
 ---
 
-# Throttle decorator
+# Decorator điều tiết
 
-Create a "throttling" decorator `throttle(f, ms)` -- that returns a wrapper.
+Tạo một decorator "điều tiết" `throttle(f, ms)` -- trả về một wrapper.
 
-When it's called multiple times, it passes the call to `f` at maximum once per `ms` milliseconds.
+Khi được gọi nhiều lần, nó sẽ chuyển lệnh gọi tới `f` tối đa một lần trong mỗi mili giây `ms`.
 
-The difference with debounce is that it's completely different decorator:
-- `debounce` runs the function once after the "cooldown" period. Good for processing the final result.
-- `throttle` runs it not more often than given `ms` time. Good for regular updates that shouldn't be very often.
+Sự khác biệt với debounce là nó là decorator hoàn toàn khác:
+- `debounce` chạy hàm một lần sau khoảng thời gian "hồi". Tốt để xử lý kết quả cuối cùng.
+- `throttle` chạy nó không thường xuyên hơn thời gian `ms` đã cho. Tốt cho các cập nhật thường xuyên mà không nên không thường xuyên.
 
-In other words, `throttle` is like a secretary that accepts phone calls, but bothers the boss (calls the actual `f`) not more often than once per `ms` milliseconds.
+Nói cách khác, `throttle` giống như một thư ký chấp nhận các cuộc gọi điện thoại, nhưng làm phiền sếp (gọi thực tế là `f`) không quá một lần mỗi `ms` mili giây.
 
-Let's check the real-life application to better understand that requirement and to see where it comes from.
+Hãy kiểm tra ứng dụng thực tế để hiểu rõ hơn về yêu cầu đó và xem nó đến từ đâu.
 
-**For instance, we want to track mouse movements.**
+**Chẳng hạn, chúng ta muốn theo dõi chuyển động của chuột.**
 
-In a browser we can setup a function to run at every mouse movement and get the pointer location as it moves. During an active mouse usage, this function usually runs very frequently, can be something like 100 times per second (every 10 ms).
-**We'd like to update some information on the web-page when the pointer moves.**
+Trong trình duyệt, chúng ta có thể thiết lập một hàm để chạy ở mọi chuyển động của chuột và nhận vị trí con trỏ khi nó di chuyển. Trong quá trình sử dụng chuột hoạt động, hàm này thường chạy rất thường xuyên, có thể khoảng 100 lần mỗi giây (cứ sau 10 ms).
+**Chúng ta muốn cập nhật một số thông tin trên trang web khi con trỏ di chuyển.**
 
-...But updating function `update()` is too heavy to do it on every micro-movement. There is also no sense in updating more often than once per 100ms.
+...Nhưng cập nhật hàm `update()` quá nặng để thực hiện trên mọi chuyển động vi mô. Cũng không có ý nghĩa gì khi cập nhật thường xuyên hơn một lần trong 100 ms.
 
-So we'll wrap it into the decorator: use `throttle(update, 100)` as the function to run on each mouse move instead of the original `update()`. The decorator will be called often, but forward the call to `update()` at maximum once per 100ms.
+Vì vậy, chúng ta sẽ đưa nó vào decorator: sử dụng `throttle(update, 100)` làm hàm chạy trên mỗi lần di chuyển chuột thay vì `update()` ban đầu. Decorator sẽ được gọi thường xuyên, nhưng chuyển tiếp lệnh gọi tới `update()` tối đa một lần trong 100 ms.
 
-Visually, it will look like this:
+Cách trực quan, nó sẽ trông như thế này
 
-1. For the first mouse movement the decorated variant immediately passes the call to `update`. That's important, the user sees our reaction to their move immediately.
-2. Then as the mouse moves on, until `100ms` nothing happens. The decorated variant ignores calls.
-3. At the end of `100ms` -- one more `update` happens with the last coordinates.
-4. Then, finally, the mouse stops somewhere. The decorated variant waits until `100ms` expire and then runs `update` with last coordinates. So, quite important, the final mouse coordinates are processed.
+1. Đối với chuyển động chuột đầu tiên, biến thể được trang trí ngay lập tức chuyển lệnh gọi tới `update`. Điều đó quan trọng, người dùng sẽ thấy phản ứng của chúng ta đối với động thái của họ ngay lập tức.
+2. Sau đó, khi chuột di chuyển, cho đến `100ms` thì không có gì xảy ra. Biến thể được trang trí bỏ qua các cuộc gọi.
+3. Vào cuối `100ms` -- một `update` nữa xảy ra với tọa độ cuối cùng.
+4. Sau đó, cuối cùng, con chuột dừng lại ở đâu đó. Biến thể được trang trí đợi cho đến khi hết hạn `100ms` rồi chạy `update` với tọa độ cuối cùng. Vì vậy, khá quan trọng, tọa độ chuột cuối cùng được xử lý.
 
-A code example:
+Một ví dụ mã:
 
 ```js
 function f(a) {
   console.log(a);
 }
 
-// f1000 passes calls to f at maximum once per 1000 ms
+// f1000 chuyển cuộc gọi tới f tối đa một lần trong 1000 ms
 let f1000 = throttle(f, 1000);
 
-f1000(1); // shows 1
-f1000(2); // (throttling, 1000ms not out yet)
-f1000(3); // (throttling, 1000ms not out yet)
+f1000(1); // hiện 1
+f1000(2); // (điều tiết, 1000ms chưa hết)
+f1000(3); // (điều tiết, 1000ms chưa hết)
 
-// when 1000 ms time out...
+// khi hết thời gian 1000 ms ...
 // ...outputs 3, intermediate value 2 was ignored
 ```
 
