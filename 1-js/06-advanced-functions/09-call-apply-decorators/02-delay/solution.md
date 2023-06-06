@@ -1,4 +1,4 @@
-The solution:
+Lời giải:
 
 ```js run demo
 function delay(f, ms) {
@@ -11,22 +11,22 @@ function delay(f, ms) {
 
 let f1000 = delay(alert, 1000);
 
-f1000("test"); // shows "test" after 1000ms
+f1000("kiểm tra"); // hiển thị "kiểm tra" sau 1000ms
 ```
 
-Please note how an arrow function is used here. As we know, arrow functions do not have own `this` and `arguments`, so `f.apply(this, arguments)` takes `this` and `arguments` from the wrapper.
+Hãy lưu ý cách sử dụng arrow function ở đây. Như chúng ta đã biết, các arrow function không có `this` và `arguments` riêng, vì vậy `f.apply(this, arguments)` lấy `this` và `arguments` từ wrapper.
 
-If we pass a regular function, `setTimeout` would call it without arguments and `this=window` (assuming we're in the browser).
+Nếu chúng ta chuyển một hàm thông thường, `setTimeout` sẽ gọi nó mà không có đối số và `this=window` (giả sử chúng ta đang ở trong trình duyệt).
 
-We still can pass the right `this` by using an intermediate variable, but that's a little bit more cumbersome:
+Chúng ta vẫn có thể chuyển `this` bên phải bằng cách sử dụng một biến trung gian, nhưng điều đó hơi rườm rà hơn một chút:
 
 ```js
 function delay(f, ms) {
 
   return function(...args) {
-    let savedThis = this; // store this into an intermediate variable
+    let savedThis = this; // lưu cái này vào một biến trung gian
     setTimeout(function() {
-      f.apply(savedThis, args); // use it here
+      f.apply(savedThis, args); // sử dụng nó ở đây
     }, ms);
   };
 
