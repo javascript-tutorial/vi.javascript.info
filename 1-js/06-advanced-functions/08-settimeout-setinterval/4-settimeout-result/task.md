@@ -2,25 +2,25 @@ importance: 5
 
 ---
 
-# What will setTimeout show?
+# setTimeout sẽ hiển thị cái gì?
 
-In the code below there's a `setTimeout` call scheduled, then a heavy calculation is run, that takes more than 100ms to finish.
+Trong mã bên dưới có một cuộc gọi `setTimeout` được lên lịch, sau đó một phép tính nặng được chạy, mất hơn 100 mili giây để hoàn thành.
 
-When will the scheduled function run?
+Khi nào hàm được lên lịch sẽ chạy?
 
-1. After the loop.
-2. Before the loop.
-3. In the beginning of the loop.
+1. Sau vòng lặp.
+2. Trước vòng lặp.
+3. Ở đầu vòng lặp.
 
 
-What is `alert` going to show?
+`alert` sẽ hiển thị cái gì?
 
 ```js
 let i = 0;
 
 setTimeout(() => alert(i), 100); // ?
 
-// assume that the time to execute this function is >100ms
+// giả sử rằng thời gian để thực hiện hàm này là >100 mili giây
 for(let j = 0; j < 100000000; j++) {
   i++; 
 }
