@@ -10,8 +10,8 @@ Có thể tạo các hàm `A` và `B` sao cho `new A() == new B()` không?
 function A() { ... }
 function B() { ... }
 
-let a = new A;
-let b = new B;
+let a = new A();
+let b = new B();
 
 alert( a == b ); // true
 ```
