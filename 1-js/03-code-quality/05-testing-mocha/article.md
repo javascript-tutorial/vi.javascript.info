@@ -51,7 +51,7 @@ describe("pow", function() {
 Một thông số kỹ thuật có ba khối xây dựng chính mà bạn có thể thấy ở trên:
 
 `describe("title", function() { ... })`
-: Chúng ta đang mô tả chức năng gì. Trong trường hợp của chúng ta, chúng ta đang mô tả hàm `pow`. Được sử dụng để nhóm "công nhân" -- các khối `it`.
+: Chúng ta đang mô tả hàm gì. Trong trường hợp của chúng ta, chúng ta đang mô tả hàm `pow`. Được sử dụng để nhóm "công nhân" -- các khối `it`.
 
 `it("use case description", function() { ... })`
 : Trong tiêu đề của `it`, chúng ta *theo cách mà con người có thể đọc được* mô tả trường hợp sử dụng cụ thể và đối số thứ hai là một hàm kiểm tra trường hợp đó.
@@ -61,7 +61,7 @@ Một thông số kỹ thuật có ba khối xây dựng chính mà bạn có th
 
     Hàm `assert.*` được sử dụng để kiểm tra xem `pow` có hoạt động như mong đợi hay không. Ngay tại đây, chúng ta đang sử dụng một trong số chúng -- `assert.equal`, nó so sánh các đối số và đưa ra lỗi nếu chúng không bằng nhau. Tại đây, nó kiểm tra xem kết quả của `pow(2, 3)` có bằng `8` hay không. Có nhiều loại so sánh và kiểm tra khác mà chúng ta sẽ bổ sung sau.
 
-Thông số kỹ thuật có thể được thực thi và nó sẽ chạy thử nghiệm được chỉ định trong khối `it`. Chúng ta sẽ thấy điều đó sau.
+Thông số kỹ thuật có thể được thực thi và nó sẽ chạy bài kiểm tra được chỉ định trong khối `it`. Chúng ta sẽ thấy điều đó sau.
 
 ## Dòng chảy phát triển
 
