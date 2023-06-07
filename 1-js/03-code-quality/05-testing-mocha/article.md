@@ -69,7 +69,7 @@ Dòng phát triển thường trông như thế này:
 
 1. Thông số kỹ thuật ban đầu được viết, với các bài kiểm tra hàm cơ bản nhất.
 2. Triển khai ban đầu được tạo.
-3. Để kiểm tra xem nó có hoạt động hay không, chúng ta chạy framework kiểm tra [Mocha](http://mochajs.org/) (sẽ sớm có thêm thông tin chi tiết) để chạy thông số kỹ thuật đó. Trong khi hàm không hoàn thành, lỗi được hiển thị. Chúng ta thực hiện chỉnh sửa cho đến khi mọi thứ hoạt động.
+3. Để kiểm tra xem nó có hoạt động hay không, chúng ta chạy framework kiểm tra [Mocha](https://mochajs.org/) (sẽ sớm có thêm thông tin chi tiết) để chạy thông số kỹ thuật đó. Trong khi hàm không hoàn thành, lỗi được hiển thị. Chúng ta thực hiện chỉnh sửa cho đến khi mọi thứ hoạt động.
 4. Bây giờ chúng ta có một thực hiện ban đầu đang hoạt động với bài kiểm tra.
 5. Chúng ta thêm nhiều trường hợp sử dụng hơn vào thông số kỹ thuật, có thể chưa được triển khai hỗ trợ. Các thử nghiệm bắt đầu thất bại.
 6. Đến bước 3, cập nhật việc triển khai cho đến khi kiểm tra không có lỗi.
