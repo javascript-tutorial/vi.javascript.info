@@ -1,13 +1,13 @@
 
 # Kiểu ký hiệu
 
-Theo thông số kỹ thuật, các khóa thuộc tính đối tượng có thể thuộc loại chuỗi hoặc loại ký hiệu. Không phải số, không phải booleans, chỉ có chuỗi hoặc ký hiệu, hai loại này.
+Theo thông số kỹ thuật, các khóa thuộc tính đối tượng có thể thuộc loại chuỗi hoặc loại ký hiệu. Không phải số, không phải boolean, chỉ có chuỗi hoặc ký hiệu, hai loại này.
 
 Cho đến bây giờ chúng ta chỉ sử dụng các chuỗi. Bây giờ hãy xem những lợi ích mà các ký hiệu có thể mang lại cho chúng ta.
 
 ## Ký hiệu
 
-Một "ký hiệu" đại diện cho một mã định danh duy nhất.
+Một "ký hiệu" đại diện cho một định danh duy nhất.
 
 Giá trị của loại này có thể được tạo bằng cách sử dụng `Symbol()`:
 
@@ -39,14 +39,14 @@ alert(id1 == id2); // false
 Nếu bạn đã quen thuộc với Ruby hoặc một ngôn ngữ khác cũng có một số loại "ký hiệu" -- đừng hiểu lầm. Các ký hiệu JavaScript là khác nhau.
 
 ````warn header="Các ký hiệu không tự động chuyển đổi thành chuỗi"
-Hầu hết các giá trị trong JavaScript đều hỗ trợ chuyển đổi ngầm định thành chuỗi. Chẳng hạn, chúng ta có thể `alert` gần như bất kỳ giá trị nào và nó sẽ hoạt động. Ký hiệu là đặc biệt. Họ không tự động chuyển đổi.
+Hầu hết các giá trị trong JavaScript đều hỗ trợ chuyển đổi ngầm định thành chuỗi. Chẳng hạn, chúng ta có thể `alert` gần như bất kỳ giá trị nào và nó sẽ hoạt động. Ký hiệu là đặc biệt. Chúng không tự động chuyển đổi.
 
 Chẳng hạn, `alert` này sẽ hiển thị lỗi:
 
 ```js run
 let id = Symbol("id");
 *!*
-alert(id); // TypeError: Không thể chuyển đổi giá trị Ký hiệu thành chuỗi
+alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
@@ -74,9 +74,9 @@ alert(id.description); // id
 
 Các ký hiệu cho phép chúng ta tạo các thuộc tính "ẩn" của một đối tượng, mà không phần mã nào khác có thể vô tình truy cập hoặc ghi đè lên.
 
-Chẳng hạn, nếu chúng ta đang làm việc với các đối tượng `user`, thuộc về mã của bên thứ ba. Chúng ta muốn thêm số nhận dạng cho chúng.
+Chẳng hạn, nếu chúng ta đang làm việc với các đối tượng `user`, thuộc về mã của bên thứ ba. Chúng ta muốn thêm định danh cho chúng.
 
-Hãy sử dụng một phím ký hiệu cho nó:
+Hãy sử dụng một khoá ký hiệu cho nó:
 
 ```js run
 let user = { // thuộc một mã khác
@@ -92,9 +92,9 @@ alert( user[id] ); // chúng ta có thể truy cập dữ liệu bằng cách l�
 
 Lợi ích của việc sử dụng `Symbol("id")` trên chuỗi `"id"` là gì?
 
-Vì các đối tượng `user` thuộc về một mã khác và mã đó cũng hoạt động với chúng, nên chúng ta không nên chỉ thêm bất kỳ trường nào vào đó. Điều đó không an toàn. Nhưng một ký hiệu không thể vô tình được truy cập, mã của bên thứ ba thậm chí có thể sẽ không nhìn thấy nó, vì vậy có thể làm như vậy là ổn.
+Vì các đối tượng `user` thuộc về một mã khác và mã đó cũng hoạt động với chúng, nên chúng ta không nên chỉ thêm bất kỳ lĩnh vực nào vào đó. Điều đó không an toàn. Nhưng một ký hiệu không thể vô tình được truy cập, mã của bên thứ ba thậm chí có thể sẽ không nhìn thấy nó, vì vậy có thể làm như vậy là ổn.
 
-Ngoài ra, hãy tưởng tượng rằng một tập lệnh khác muốn có mã định danh riêng bên trong `user`, cho các mục đích riêng của nó. Đó có thể là một thư viện JavaScript khác, do đó các tập lệnh hoàn toàn không biết về nhau.
+Ngoài ra, hãy tưởng tượng rằng một tập lệnh khác muốn có định danh riêng bên trong `user`, cho các mục đích riêng của nó. Đó có thể là một thư viện JavaScript khác, do đó các tập lệnh hoàn toàn không biết về nhau.
 
 Sau đó, tập lệnh đó có thể tạo `Symbol("id")` của riêng nó, như sau:
 
@@ -102,10 +102,10 @@ Sau đó, tập lệnh đó có thể tạo `Symbol("id")` của riêng nó, nh�
 // ...
 let id = Symbol("id");
 
-user[id] = "Giá trị id của họ";
+user[id] = "Giá trị id của chúng";
 ```
 
-Sẽ không có xung đột giữa số nhận dạng của chúng ta và của họ, bởi vì các ký hiệu luôn khác nhau, ngay cả khi chúng có cùng tên.
+Sẽ không có xung đột giữa định danh của chúng ta và của họ, bởi vì các ký hiệu luôn khác nhau, ngay cả khi chúng có cùng tên.
 
 ...Nhưng nếu chúng ta sử dụng một chuỗi `"id"` thay vì một ký hiệu cho cùng một mục đích, thì *sẽ* xảy ra xung đột:
 
@@ -182,7 +182,7 @@ Không có nghịch lý ở đây. Đó là do thiết kế. Ý tưởng là khi
 
 Như chúng ta đã thấy, thông thường tất cả các ký hiệu đều khác nhau, ngay cả khi chúng có cùng tên. Nhưng đôi khi chúng ta muốn các ký hiệu cùng tên là cùng một thực thể. Chẳng hạn, các phần khác nhau trong ứng dụng của chúng ta muốn truy cập ký hiệu `"id"` có nghĩa chính xác là cùng một thuộc tính.
 
-Để đạt được điều đó, tồn tại *cơ quan đăng ký ký hiệu chung*. Chúng ta có thể tạo các ký hiệu trong đó và truy cập chúng sau này, đồng thời đảm bảo rằng các lần truy cập lặp lại cùng tên sẽ trả về chính xác cùng một ký hiệu.
+Để đạt được điều đó, tồn tại *sổ đăng ký ký hiệu chung*. Chúng ta có thể tạo các ký hiệu trong đó và truy cập chúng sau này, đồng thời đảm bảo rằng các lần truy cập lặp lại cùng tên sẽ trả về chính xác cùng một ký hiệu.
 
 Để đọc (tạo nếu không có) một ký hiệu từ sổ đăng ký, hãy sử dụng `Symbol.for(key)`.
 
@@ -227,7 +227,7 @@ alert( Symbol.keyFor(sym2) ); // id
 
 `Symbol.keyFor` sử dụng nội bộ sổ đăng ký ký hiệu chung để tra cứu khóa cho ký hiệu. Vì vậy, nó không hoạt động đối với các ký hiệu không chung. Nếu ký hiệu không phải là chung, nó sẽ không thể tìm thấy nó và trả về `undefined`.
 
-Điều đó nói rằng, bất kỳ ký hiệu nào cũng có thuộc tính `mô tả`.
+Điều đó nói rằng, bất kỳ ký hiệu nào cũng có thuộc tính `description`.
 
 Ví dụ:
 
@@ -253,13 +253,13 @@ Chúng được liệt kê trong thông số kỹ thuật trong bảng [Ký hi�
 - `Symbol.toPrimitive`
 - ...v.v.
 
-Chẳng hạn, `Symbol.toPrimitive` cho phép chúng ta mô tả đối tượng thành chuyển đổi nguyên thủy. Chúng ta sẽ thấy việc sử dụng nó rất sớm.
+Chẳng hạn, `Symbol.toPrimitive` cho phép chúng ta mô tả đối tượng thành chuyển đổi nguyên hàm. Chúng ta sẽ thấy việc sử dụng nó rất sớm.
 
 Các ký hiệu khác cũng sẽ trở nên quen thuộc khi chúng ta nghiên cứu các đặc điểm ngôn ngữ tương ứng.
 
 ## Tóm tắt
 
-`Symbol` là một loại nguyên thủy cho các mã định danh duy nhất.
+`Symbol` là một loại nguyên hàm cho các định danh duy nhất.
 
 Các ký hiệu được tạo bằng lệnh gọi `Symbol()` với một mô tả (tên) tùy chọn.
 
@@ -272,6 +272,6 @@ Các ký hiệu có hai trường hợp sử dụng chính:
 
      Vì vậy, chúng ta có thể "ẩn" một thứ gì đó vào những đối tượng mà chúng ta cần, nhưng những người khác không nên nhìn thấy, bằng cách sử dụng các thuộc tính tượng trưng.
 
-2. Có nhiều ký hiệu hệ thống được JavaScript sử dụng có thể truy cập dưới dạng `Symbol.*`. Chúng ta có thể sử dụng chúng để thay đổi một số hành vi tích hợp. Chẳng hạn, ở phần sau của hướng dẫn, chúng ta sẽ sử dụng `Symbol.iterator` cho [iterables](info:iterable), `Symbol.toPrimitive` để thiết lập [chuyển đổi đối tượng thành nguyên thủy](info:object-toprimitive), v.v.
+2. Có nhiều ký hiệu hệ thống được JavaScript sử dụng có thể truy cập dưới dạng `Symbol.*`. Chúng ta có thể sử dụng chúng để thay đổi một số hành vi tích hợp. Chẳng hạn, ở phần sau của hướng dẫn, chúng ta sẽ sử dụng `Symbol.iterator` cho [các iterable](info:iterable), `Symbol.toPrimitive` để thiết lập [chuyển đổi đối tượng thành nguyên thủy](info:object-toprimitive), v.v.
 
-Về mặt kỹ thuật, các ký hiệu không bị ẩn 100%. Có một phương thức tích hợp [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) cho phép chúng ta lấy tất cả các ký hiệu. Ngoài ra, có một phương thức có tên [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) trả về các khóa *tất cả* của một đối tượng bao gồm các khóa tượng trưng. Vì vậy, chúng không thực sự bị ẩn. Nhưng hầu hết các thư viện, hàm dựng sẵn và cấu trúc cú pháp không sử dụng các phương thức này.
+Về mặt kỹ thuật, các ký hiệu không bị ẩn 100%. Có một phương thức tích hợp [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) cho phép chúng ta lấy tất cả các ký hiệu. Ngoài ra, có một phương thức có tên [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) trả về *tất cả* các khóa của một đối tượng bao gồm cả khóa tượng trưng. Vì vậy, chúng không thực sự bị ẩn. Nhưng hầu hết các thư viện, hàm dựng sẵn và cấu trúc cú pháp không sử dụng các phương thức này.
