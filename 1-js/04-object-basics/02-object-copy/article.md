@@ -104,11 +104,9 @@ alert( a == b ); // false
 
 Vì vậy, sao chép một biến đối tượng sẽ tạo thêm một tham chiếu đến cùng một đối tượng.
 
-Nhưng nếu chúng ta cần sao chép một đối tượng thì sao? Tạo một bản sao độc lập, một bản sao?
+Nhưng nếu chúng ta cần sao chép một đối tượng thì sao?
 
-Điều đó cũng có thể thực hiện được, nhưng hơi khó hơn một chút vì không có phương thức tích hợp sẵn nào cho điều đó trong JavaScript. Nhưng hiếm khi có nhu cầu - hầu hết thời gian sao chép theo tham chiếu là tốt.
-
-Nhưng nếu chúng ta thực sự muốn điều đó, thì chúng ta cần tạo một đối tượng mới và sao chép cấu trúc của đối tượng hiện có bằng cách lặp lại các thuộc tính của nó và sao chép chúng ở cấp độ nguyên thủy.
+Chúng ta có thể tạo một đối tượng mới và sao chép cấu trúc của đối tượng hiện có, bằng cách lặp lại các thuộc tính của nó và sao chép chúng ở cấp độ nguyên thủy.
 
 Như thế này:
 
@@ -127,13 +125,13 @@ for (let key in user) {
 }
 */!*
 
-// bây giờ bản sao là một đối tượng hoàn toàn độc lập với cùng một nội dung
+// bây giờ clone là một đối tượng hoàn toàn độc lập với cùng một nội dung
 clone.name = "Pete"; // đã thay đổi dữ liệu trong đó
 
 alert( user.name ); // vẫn còn John trong đối tượng ban đầu
 ```
 
-Ngoài ra, chúng ta có thể sử dụng phương thức [Object.assign](mdn:js/Object/assign) cho việc đó.
+Chúng ta cũng có thể sử dụng phương thức [Object.assign](mdn:js/Object/assign).
 
 Cú pháp là:
 
@@ -159,7 +157,7 @@ let permissions2 = { canEdit: true };
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// bây giờ người dùng = { name: "John", canView: true, canEdit: true }
+// bây giờ user = { name: "John", canView: true, canEdit: true }
 alert(user.name); // John
 alert(user.canView); // true
 alert(user.canEdit); // true
@@ -172,7 +170,7 @@ let user = { name: "John" };
 
 Object.assign(user, { name: "Pete" });
 
-alert(user.name); // now user = { name: "Pete" }
+alert(user.name); // bây giờ user = { name: "Pete" }
 ```
 
 Chúng ta cũng có thể sử dụng `Object.assign` để thực hiện nhân bản một đối tượng đơn giản:
@@ -186,16 +184,19 @@ let user = {
 *!*
 let clone = Object.assign({}, user);
 */!*
+
+alert(clone.name); // John
+alert(clone.age); // 30
 ```
 
-Nó sao chép tất cả các thuộc tính của `user` vào đối tượng trống và trả về nó.
+Ở đây, nó sao chép tất cả các thuộc tính của `user` vào đối tượng trống và trả về nó.
 
 Ngoài ra còn có các phương pháp nhân bản đối tượng khác, ví dụ: sử dụng [cú pháp trải rộng](info:rest-parameters-spread) `clone = {...user}`, sẽ được trình bày sau trong hướng dẫn.
 
 ## Nhân bản lồng nhau
 
 Cho đến bây giờ, chúng ta giả định rằng tất cả các thuộc tính của `user` là nguyên hàm. Nhưng các thuộc tính có thể là tham chiếu đến các 
-đối tượng khác. Làm gì với chúng đây?
+đối tượng khác.
 
 Như thế này:
 ```js run
@@ -210,9 +211,7 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-Bây giờ sao chép `clone.sizes = user.sizes` là không đủ, vì `user.sizes` là một đối tượng, nó sẽ được sao chép theo tham chiếu. Vì vậy, `clone` và `user` sẽ có cùng kích thước:
-
-Như thế này:
+Bây giờ không đủ để sao chép `clone.sizes = user.sizes`, bởi vì `user.sizes` là một đối tượng và sẽ được sao chép theo tham chiếu, vì vậy `clone` và `user` sẽ có cùng kích thước:
 
 ```js run
 let user = {
@@ -227,12 +226,12 @@ let clone = Object.assign({}, user);
 
 alert( user.sizes === clone.sizes ); // true, cùng một đối tượng
 
-// người dùng và bản sao chia sẻ kích thước
+// user và clone chia sẻ kích thước
 user.sizes.width++;       // thay đổi một thuộc tính từ một nơi
-alert(clone.sizes.width); // 51, xem kết quả từ một cái khác
+alert(clone.sizes.width); // 51, lấy kết quả từ một cái khác
 ```
 
-Để khắc phục điều đó, chúng ta nên sử dụng một vòng lặp nhân bản để kiểm tra từng giá trị của `user[key]` và nếu đó là một đối tượng thì cũng sao chép cấu trúc của nó. Đó được gọi là "nhân bản sâu".
+Để khắc phục điều đó và làm cho các đối tượng `user` và `clone` thực sự tách biệt, chúng ta nên sử dụng vòng lặp nhân bản để kiểm tra từng giá trị của `user[key]` và nếu đó là một đối tượng thì cũng sao chép cấu trúc của nó. Đó được gọi là "nhân bản sâu".
 
 Chúng ta có thể sử dụng đệ quy để thực hiện nó. Hoặc, để không phát minh lại bánh xe, hãy thực hiện triển khai hiện có, chẳng hạn như [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) từ thư viện JavaScript [lodash](https://lodash. com).
 
