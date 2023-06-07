@@ -81,7 +81,7 @@ user = {
 // phương pháp tốc ký có vẻ tốt hơn, phải không?
 user = {
 *!*
-  sayHi() { // giống như "sayHi: function()"
+  sayHi() { // giống như "sayHi: function(){...}"
 */!*
     alert("Xin chào");
   }
