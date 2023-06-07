@@ -6,7 +6,7 @@ Kiểm tra tự động sẽ được sử dụng trong các tác vụ tiếp th
 
 Khi chúng ta viết một hàm, chúng ta thường có thể hình dung nó sẽ làm gì: tham số nào cho kết quả nào.
 
-Trong quá trình phát triển, chúng ta có thể kiểm tra chức năng bằng cách chạy nó và so sánh kết quả với kết quả mong đợi. Chẳng hạn, chúng ta có thể làm điều đó trong bảng điều khiển.
+Trong quá trình phát triển, chúng ta có thể kiểm tra hàm bằng cách chạy nó và so sánh kết quả với kết quả mong đợi. Chẳng hạn, chúng ta có thể làm điều đó trong bảng điều khiển.
 
 Nếu có điều gì sai -- thì ta sửa mã, chạy lại, kiểm tra kết quả -- và cứ thế cho đến khi nó hoạt động.
 
