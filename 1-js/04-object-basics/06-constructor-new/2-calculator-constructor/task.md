@@ -14,8 +14,8 @@ Tạo hàm khởi tạo `Máy tính` để tạo đối tượng với 3 phươn
 let calculator = new Calculator();
 calculator.read();
 
-alert( "Sum=" + calculator.sum() );
-alert( "Mul=" + calculator.mul() );
+alert( "Tổng=" + calculator.sum() );
+alert( "Tích=" + calculator.mul() );
 ```
 
 [demo]
