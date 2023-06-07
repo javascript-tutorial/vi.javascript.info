@@ -51,7 +51,7 @@ let user = {
 // đầu tiên, khai báo
 function sayHi() {
   alert("Xin chào!");
-};
+}
 
 // sau đó thêm như một phương thức
 user.sayHi = sayHi;
