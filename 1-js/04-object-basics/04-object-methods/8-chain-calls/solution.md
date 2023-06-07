@@ -23,7 +23,7 @@ let ladder = {
   }
 };
 
-ladder.up().up().down().up().down().showStep(); // 1
+ladder.up().up().down().showStep().down().showStep(); // hiện 1 rồi 0
 ```
 
 Chúng ta cũng có thể viết một cuộc gọi trên mỗi dòng. Đối với chuỗi dài, nó dễ đọc hơn:
