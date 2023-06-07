@@ -190,7 +190,7 @@ Ngoài ra còn có các phương pháp nhân bản đối tượng khác, ví d�
 
 ## Nhân bản lồng nhau
 
-Cho đến bây giờ, chúng ta giả định rằng tất cả các thuộc tính của `người dùng` là nguyên thủy. Nhưng các thuộc tính có thể là tham chiếu đến các 
+Cho đến bây giờ, chúng ta giả định rằng tất cả các thuộc tính của `user` là nguyên thủy. Nhưng các thuộc tính có thể là tham chiếu đến các 
 đối tượng khác. Làm gì với chúng đây?
 
 Như thế này:
@@ -253,7 +253,7 @@ Có vẻ như dòng `(*)` sẽ gây ra lỗi, nhưng không phải vậy. Giá t
 
 Nói cách khác, `const user` chỉ báo lỗi nếu chúng ta cố gắng đặt toàn bộ `user=...`.
 
-Điều đó nói rằng, nếu chúng ta thực sự cần tạo các thuộc tính đối tượng không đổi, thì cũng có thể, nhưng sử dụng các phương thức hoàn toàn khác. Chúng tôi sẽ đề cập đến điều đó trong chương <info:property-descriptors>.
+Điều đó nói rằng, nếu chúng ta thực sự cần tạo các thuộc tính đối tượng không đổi, thì cũng có thể, nhưng sử dụng các phương thức hoàn toàn khác. Chúng ta sẽ đề cập đến điều đó trong chương <info:property-descriptors>.
 ````
 
 ## Tóm tắt
