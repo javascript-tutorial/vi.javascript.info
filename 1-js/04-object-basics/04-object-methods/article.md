@@ -61,7 +61,7 @@ user.sayHi(); // Xin chào!
 ```
 
 ```smart header="Lập trình hướng đối tượng"
-Khi chúng ta viết mã bằng cách sử dụng các đối tượng để biểu diễn các thực thể, điều đó được gọi là [lập trình hướng đối tượng](https://vi.wikipedia.org/wiki/L%E1%BA%ADp_tr%C3%ACnh_h%C6%B0%E1%BB%9Bng_%C4%91%E1%BB%91i_t%C6%B0%E1%BB%A3ng), nói ngắn gọn trong tiếng Anh: "OOP".
+Khi chúng ta viết mã bằng cách sử dụng các đối tượng để biểu diễn các thực thể, điều đó được gọi là [lập trình hướng đối tượng](https://vi.wikipedia.org/wiki/Lập_trình_hướng_đối_tượng), nói ngắn gọn trong tiếng Anh: "OOP".
 
 OOP là một vấn đề lớn, một môn khoa học thú vị của riêng nó. Làm thế nào để chọn đúng thực thể? Làm thế nào để tổ chức sự tương tác giữa chúng? Đó là kiến trúc, và có những cuốn sách hay về chủ đề đó, như "Design Patterns: Elements of Reusable Object-Oriented Software" của E. Gamma, R. Helm, R. Johnson, J. Vissides hoặc "Object-Oriented Analysis and Design with Applications" của G. Booch, và còn nhiều hơn thế nữa.
 ```
@@ -237,7 +237,7 @@ Khái niệm về thời gian chạy được đánh giá `this` có cả ưu đ
 
 ## Các arrow function không có "this"
 
-Các hàm mũi tên rất đặc biệt: chúng không có `this` "của riêng chúng". Nếu chúng ta tham chiếu `this` từ một hàm như vậy, thì nó được lấy từ hàm "bình thường" bên ngoài.
+Các arrow function rất đặc biệt: chúng không có `this` "của riêng chúng". Nếu chúng ta tham chiếu `this` từ một hàm như vậy, thì nó được lấy từ hàm "bình thường" bên ngoài.
 
 Chẳng hạn, ở đây `arrow()` sử dụng `this` từ phương thức `user.sayHi()` bên ngoài:
 
@@ -253,7 +253,7 @@ let user = {
 user.sayHi(); // Ilya
 ```
 
-Đó là một tính năng đặc biệt của hàm mũi tên, nó rất hữu ích khi chúng ta thực sự không muốn có một `this` riêng biệt, mà muốn lấy nó từ ngữ cảnh bên ngoài. Ở phần sau của chương <info:arrow-functions> chúng ta sẽ đi sâu hơn vào các hàm mũi tên.
+Đó là một tính năng đặc biệt của arrow function, nó rất hữu ích khi chúng ta thực sự không muốn có một `this` riêng biệt, mà muốn lấy nó từ ngữ cảnh bên ngoài. Ở phần sau của chương <info:arrow-functions> chúng ta sẽ đi sâu hơn vào các arrow function.
 
 
 ## Tóm tắt
@@ -267,4 +267,4 @@ Giá trị của `this` được xác định trong thời gian chạy.
 - Một hàm có thể được sao chép giữa các đối tượng.
 - Khi một hàm được gọi theo cú pháp "phương thức": `object.method()`, giá trị của `this` trong khi gọi là `object`.
 
-Hãy lưu ý rằng các chức năng mũi tên là đặc biệt: chúng không có `this`. Khi `this` được truy cập bên trong một hàm mũi tên, nó được lấy từ bên ngoài.
+Hãy lưu ý rằng các arrow function là đặc biệt: chúng không có `this`. Khi `this` được truy cập bên trong một arrow function, nó được lấy từ bên ngoài.
