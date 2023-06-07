@@ -13,7 +13,7 @@ Và, trong thế giới thực, người dùng có thể *hành động*: chọn
 
 Các hành động được thể hiện trong JavaScript bằng các hàm trong thuộc tính.
 
-## Các ví dụ về phương pháp
+## Các ví dụ về phương thức
 
 Để bắt đầu, hãy dạy `user` nói xin chào:
 
@@ -32,7 +32,7 @@ user.sayHi = function() {
 user.sayHi(); // Xin chào!
 ```
 
-Ở đây chúng ta vừa sử dụng một Biểu thức Hàm để tạo một hàm và gán nó cho thuộc tính `user.sayHi` của đối tượng.
+Ở đây chúng ta vừa sử dụng một Function Expression để tạo một hàm và gán nó cho thuộc tính `user.sayHi` của đối tượng.
 
 Sau đó, chúng ta có thể gọi nó là `user.sayHi()`. Người dùng bây giờ có thể nói!
 
@@ -48,7 +48,7 @@ let user = {
 };
 
 *!*
-// first, declare
+// đầu tiên, khai báo
 function sayHi() {
   alert("Xin chào!");
 };
@@ -181,7 +181,7 @@ function sayHi() {
 
 Giá trị của `this` được đánh giá trong thời gian chạy, tùy thuộc vào ngữ cảnh.
 
-Chẳng hạn, ở đây, cùng một chức năng được gán cho hai đối tượng khác nhau và có "this" khác nhau trong các lệnh gọi:
+Chẳng hạn, ở đây, cùng một hàm được gán cho hai đối tượng khác nhau và có "this" khác nhau trong các lệnh gọi:
 
 ```js run
 let user = { name: "John" };
@@ -220,7 +220,7 @@ sayHi(); // undefined
 
 Trong trường hợp này, `this` là `undefined` ở chế độ nghiêm ngặt. Nếu chúng ta cố gắng truy cập `this.name`, sẽ có lỗi.
 
-Ở chế độ không nghiêm ngặt, giá trị của `this` trong trường hợp này sẽ là *đối tượng toàn cục* (`cửa sổ` trong trình duyệt, chúng ta sẽ tìm hiểu về nó sau trong chương [](info:global-object)). Đây là một hành vi lịch sử mà `"sử dụng nghiêm ngặt"` sửa chữa.
+Ở chế độ không nghiêm ngặt, giá trị của `this` trong trường hợp này sẽ là *đối tượng chung* (`window` trong trình duyệt, chúng ta sẽ tìm hiểu về nó sau trong chương [](info:global-object)). Đây là một hành vi lịch sử mà `"use strict"` sửa chữa.
 
 Thông thường cuộc gọi như vậy là một lỗi lập trình. Nếu có `this` bên trong một hàm, thì hàm này sẽ được gọi trong ngữ cảnh đối tượng.
 ````
@@ -228,9 +228,9 @@ Thông thường cuộc gọi như vậy là một lỗi lập trình. Nếu có
 ```smart header="Hậu quả của `this`" không liên kết
 Nếu bạn đến từ một ngôn ngữ lập trình khác, thì có lẽ bạn đã quen với ý tưởng về một "`this` bị ràng buộc", trong đó các phương thức được định nghĩa trong một đối tượng luôn có `this` tham chiếu đến đối tượng đó.
 
-Trong JavaScript `this` là "tự do", giá trị của nó được đánh giá tại thời điểm gọi và không phụ thuộc vào vị trí khai báo phương thức, mà phụ thuộc vào đối tượng nào "trước dấu chấm".
+Trong JavaScript `this` "tự do", giá trị của nó được đánh giá tại thời điểm gọi và không phụ thuộc vào vị trí khai báo phương thức, mà phụ thuộc vào đối tượng nào "trước dấu chấm".
 
-Khái niệm về thời gian chạy được đánh giá `this` có cả ưu điểm và nhược điểm. Một mặt, một chức năng có thể được sử dụng lại cho các đối tượng khác nhau. Mặt khác, tính linh hoạt cao hơn tạo ra nhiều khả năng mắc sai lầm hơn.
+Khái niệm về thời gian chạy được đánh giá `this` có cả ưu điểm và nhược điểm. Một mặt, một hàm có thể được sử dụng lại cho các đối tượng khác nhau. Mặt khác, tính linh hoạt cao hơn tạo ra nhiều khả năng mắc sai lầm hơn.
 
 Ở đây, vị trí của chúng ta không phải là đánh giá liệu quyết định thiết kế ngôn ngữ này là tốt hay xấu. Chúng ta sẽ hiểu làm thế nào để làm việc với nó, làm thế nào để nhận được lợi ích và tránh các vấn đề.
 ```
