@@ -74,7 +74,7 @@ Bây giờ nếu chúng ta làm như vậy:
 user = null;
 ```
 
-...Sau đó, đối tượng vẫn có thể truy cập được thông qua biến chung `admin`, do đó, đối tượng nằm trong bộ nhớ. Nếu chúng ta ghi đè lên `admin`, thì nó có thể bị xóa.
+...Sau đó, đối tượng vẫn có thể truy cập được thông qua biến chung `admin`, vì vậy nó phải ở trong bộ nhớ. Nếu chúng ta ghi đè lên `admin`, thì nó có thể bị xóa.
 
 ## Các đối tượng liên kết với nhau
 
@@ -169,11 +169,11 @@ Bước đầu tiên đánh dấu gốc:
 
 ![](garbage-collection-2.svg)
 
-Sau đó, tham chiếu của chúng được đánh dấu:
+Sau đó, chúng ta theo dõi các tham chiếu của chúng và đánh dấu các đối tượng được tham chiếu:
 
 ![](garbage-collection-3.svg)
 
-...Và tham chiếu của chúng, trong khi có thể:
+...Và tiếp tục đi theo các tham chiếu khác, nếu có thể:
 
 ![](garbage-collection-4.svg)
 
@@ -183,12 +183,12 @@ Bây giờ các đối tượng không thể truy cập được trong quy trìn
 
 Chúng ta cũng có thể tưởng tượng quá trình này giống như đổ một thùng sơn khổng lồ từ gốc, chảy qua tất cả các tham chiếu và đánh dấu tất cả các đối tượng có thể tiếp cận. Những cái không được đánh dấu sau đó được loại bỏ.
 
-Đó là khái niệm về cách hoạt động của thu gom rác. Các JavaScript engine áp dụng nhiều tối ưu hóa để làm cho nó chạy nhanh hơn và không ảnh hưởng đến việc thực thi.
+Đó là khái niệm về cách hoạt động của thu gom rác. Các JavaScript engine áp dụng nhiều tối ưu hóa để làm cho nó chạy nhanh hơn và không gây ra bất kỳ sự chậm trễ nào trong quá trình thực thi mã.
 
 Một số tối ưu hóa:
 
-- **Thu gom thế hệ** -- các đối tượng được chia thành hai bộ: "bộ mới" và "bộ cũ". Nhiều đối tượng xuất hiện, thực hiện công việc của chúng và chết nhanh chóng, chúng có thể được dọn dẹp một cách tích cực. Những đối tượng tồn tại đủ lâu, trở nên "già" và ít được kiểm tra thường xuyên hơn.
-- **Thu gom gia tăng** -- nếu có nhiều đối tượng và chúng ta cố gắng đi bộ và đánh dấu toàn bộ tập hợp đối tượng cùng một lúc, có thể mất một chút thời gian và gây ra sự chậm trễ có thể nhìn thấy được trong quá trình thực thi. Vì vậy, engine cố gắng chia bộ thu gom rác thành nhiều phần. Sau đó, các mảnh được thực hiện từng cái một, riêng biệt. Điều đó đòi hỏi một số kế toán bổ sung giữa chúng để theo dõi các thay đổi, nhưng chúng ta có nhiều sự chậm trễ nhỏ thay vì một sự chậm trễ lớn.
+- **Thu gom thế hệ** -- các đối tượng được chia thành hai bộ: "bộ mới" và "bộ cũ". Trong mã điển hình, nhiều đối tượng có tuổi thọ ngắn: chúng xuất hiện, thực hiện công việc của mình và chết nhanh chóng, vì vậy, việc theo dõi các đối tượng mới và xóa bộ nhớ khỏi chúng là điều hợp lý nếu đúng như vậy. Những đối tượng tồn tại đủ lâu, trở nên "già" và ít được kiểm tra thường xuyên hơn.
+- **Thu gom gia tăng** -- nếu có nhiều đối tượng và chúng ta cố gắng đi bộ và đánh dấu toàn bộ đối tượng cùng một lúc, có thể mất một chút thời gian và gây ra sự chậm trễ có thể nhìn thấy trong quá trình thực thi. Vì vậy, engine chia toàn bộ tập hợp các đối tượng hiện có thành nhiều phần. Và sau đó lần lượt xóa các phần này. Có nhiều bộ thu gom rác nhỏ thay vì một bộ lớn. Điều đó đòi hỏi một số kế toán bổ sung giữa chúng để theo dõi các thay đổi, nhưng chúng tôi nhận được nhiều sự chậm trễ nhỏ thay vì một sự chậm trễ lớn.
 - **Thu gom vào thời gian nhàn rỗi** -- bộ thu gom rác cố gắng chỉ chạy khi CPU không hoạt động, để giảm tác động có thể có đối với quá trình thực thi.
 
 Có tồn tại các tối ưu hóa và hương vị khác của thuật toán thu gom rác. Tôi muốn mô tả thêm nhiều nữa nhưng tôi phải dừng lại, bởi vì các engine khác nhau thực hiện các chỉnh sửa và kỹ thuật khác nhau. Và, điều quan trọng hơn nữa, mọi thứ thay đổi khi engine phát triển, vì vậy việc nghiên cứu sâu hơn "trước", nếu không có nhu cầu thực sự có lẽ không đáng. Tất nhiên, trừ khi đó là vấn đề hoàn toàn vì lợi ích, khi đó sẽ có một số liên kết dành cho bạn bên dưới.
@@ -199,14 +199,14 @@ Những điều chính cần biết:
 
 - Việc thu gom rác được thực hiện tự động. Chúng ta không thể ép buộc hay ngăn cản.
 - Các đối tượng được giữ lại trong bộ nhớ trong khi chúng có thể truy cập được.
-- Được tham chiếu không giống như có thể truy cập được (từ gốc): một gói các đối tượng được liên kết với nhau có thể trở nên không thể truy cập được như một tổng thể.
+- Được tham chiếu không giống như có thể truy cập được (từ gốc): một gói các đối tượng được liên kết với nhau có thể trở nên không thể truy cập được như một tổng thể, như chúng ta đã thấy trong ví dụ trên.
 
 Các engine hiện đại thực hiện các thuật toán thu gom rác tiên tiến.
 
 Một cuốn sách chung "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) đề cập đến một số trong số chúng.
 
-Nếu bạn đã quen với lập trình cấp thấp, thông tin chi tiết hơn về trình thu gom rác V8 có trong bài viết [Chuyến tham quan V8: Thu gom rác](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+Nếu bạn đã quen với lập trình cấp thấp, thông tin chi tiết hơn về bộ thu gom rác của V8 có trong bài viết [Chuyến tham quan V8: Thu gom rác](https://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-[Blog V8](https://v8.dev/) thỉnh thoảng cũng xuất bản các bài viết về những thay đổi trong quản lý bộ nhớ. Đương nhiên, để tìm hiểu về thu gom rác, tốt hơn hết bạn nên chuẩn bị bằng cách tìm hiểu về các bộ phận bên trong engine V8 nói chung và đọc blog của [Vyacheslav Egorov](http://mrale.ph), người từng là một trong những kỹ sư của engine V8. Tôi đang nói: "V8", bởi vì nó được đề cập tốt nhất với các bài báo trên internet. Đối với các công cụ khác, nhiều cách tiếp cận tương tự nhau, nhưng việc thu gom rác khác nhau ở nhiều khía cạnh.
+[Blog V8](https://v8.dev/) thỉnh thoảng cũng xuất bản các bài viết về những thay đổi trong quản lý bộ nhớ. Đương nhiên, để tìm hiểu thêm về thu gom rác, tốt hơn hết bạn nên chuẩn bị bằng cách tìm hiểu về các bộ phận bên trong engine V8 nói chung và đọc blog của [Vyacheslav Egorov](https://mrale.ph), người từng là một trong những kỹ sư của engine V8. Tôi đang nói: "V8", bởi vì nó được đề cập tốt nhất bởi các bài báo trên internet. Đối với các công cụ khác, nhiều cách tiếp cận tương tự nhau, nhưng việc thu gom rác khác nhau ở nhiều khía cạnh.
 
 Kiến thức chuyên sâu về các công cụ rất hữu ích khi bạn cần tối ưu hóa ở mức độ thấp. Sẽ là khôn ngoan nếu bạn lên kế hoạch cho bước tiếp theo sau khi bạn đã quen thuộc với ngôn ngữ này.
