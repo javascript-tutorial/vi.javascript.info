@@ -139,30 +139,30 @@ alert(obj.toString()); // giống nhau
 
 Thấy lạ không? Thực vậy. Hãy làm sáng tỏ
 
-By [specification](https://tc39.github.io/ecma262/#sec-object.prototype.tostring), the built-in `toString` can be extracted from the object and executed in the context of any other value. And its result depends on that value.
+Theo [thông số kỹ thuật](https://tc39.github.io/ecma262/#sec-object.prototype.tostring), `toString` tích hợp sẵn có thể được trích xuất từ đối tượng và được thực thi trong ngữ cảnh của bất kỳ giá trị nào khác. Và kết quả của nó phụ thuộc vào giá trị đó.
 
-- For a number, it will be `[object Number]`
-- For a boolean, it will be `[object Boolean]`
-- For `null`: `[object Null]`
-- For `undefined`: `[object Undefined]`
-- For arrays: `[object Array]`
-- ...etc (customizable).
+- Đối với một số, nó sẽ là `[object Number]`
+- Đối với một boolean, nó sẽ là `[object Boolean]`
+- Đối với `null`: `[object Null]`
+- Đối với `undefined`: `[object Undefined]`
+- Đối với các array: `[object Array]`
+- ...v.v (có thể tùy chỉnh).
 
-Let's demonstrate:
+Hãy chứng minh:
 
 ```js run
-// copy toString method into a variable for convenience
+// sao chép phương thức toString vào một biến để thuận tiện
 let objectToString = Object.prototype.toString;
 
-// what type is this?
+// đây là loại gì?
 let arr = [];
 
 alert( objectToString.call(arr) ); // [object *!*Array*/!*]
 ```
 
-Here we used [call](mdn:js/function/call) as described in the chapter [](info:call-apply-decorators) to execute the function `objectToString` in the context `this=arr`.
+Ở đây, chúng ta đã sử dụng [call](mdn:js/function/call) như được mô tả trong chương [](info:call-apply-decorators) để thực thi hàm `objectToString` trong ngữ cảnh `this=arr`.
 
-Internally, the `toString` algorithm examines `this` and returns the corresponding result. More examples:
+Bên trong, thuật toán `toString` kiểm tra `this` và trả về kết quả tương ứng. Thêm ví dụ:
 
 ```js run
 let s = Object.prototype.toString;
@@ -174,9 +174,9 @@ alert( s.call(alert) ); // [object Function]
 
 ### Symbol.toStringTag
 
-The behavior of Object `toString` can be customized using a special object property `Symbol.toStringTag`.
+Hành vi của Đối tượng `toString` có thể được tùy chỉnh bằng thuộc tính đối tượng đặc biệt `Symbol.toStringTag`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let user = {
@@ -186,10 +186,10 @@ let user = {
 alert( {}.toString.call(user) ); // [object User]
 ```
 
-For most environment-specific objects, there is such a property. Here are some browser specific examples:
+Đối với hầu hết các đối tượng dành riêng cho môi trường, có một thuộc tính như vậy. Dưới đây là một số ví dụ cụ thể về trình duyệt:
 
 ```js run
-// toStringTag for the environment-specific object and class:
+// toStringTag cho class và đối tượng dành riêng cho môi trường:
 alert( window[Symbol.toStringTag]); // Window
 alert( XMLHttpRequest.prototype[Symbol.toStringTag] ); // XMLHttpRequest
 
@@ -197,22 +197,22 @@ alert( {}.toString.call(window) ); // [object Window]
 alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 ```
 
-As you can see, the result is exactly `Symbol.toStringTag` (if exists), wrapped into `[object ...]`.
+Như bạn có thể thấy, kết quả chính xác là `Symbol.toStringTag` (nếu tồn tại), được bao bọc trong `[object...]`.
 
-At the end we have "typeof on steroids" that not only works for primitive data types, but also for built-in objects and even can be customized.
+Cuối cùng, chúng ta có "typeof on steroids" không chỉ hoạt động với các kiểu dữ liệu nguyên thủy mà còn cho các đối tượng tích hợp sẵn và thậm chí có thể được tùy chỉnh.
 
-We can use `{}.toString.call` instead of `instanceof` for built-in objects when we want to get the type as a string rather than just to check.
+Chúng ta có thể sử dụng `{}.toString.call` thay vì `instanceof` cho các đối tượng tích hợp khi chúng ta muốn lấy loại dưới dạng chuỗi thay vì chỉ để kiểm tra.
 
-## Summary
+## Tóm tắt
 
-Let's summarize the type-checking methods that we know:
+Hãy tóm tắt các phương pháp kiểm tra loại mà chúng ta biết:
 
-|               | works for   |  returns      |
+|               | hoạt động với |  trả về      |
 |---------------|-------------|---------------|
-| `typeof`      | primitives  |  string       |
-| `{}.toString` | primitives, built-in objects, objects with `Symbol.toStringTag`   |       string |
-| `instanceof`  | objects     |  true/false   |
+| `typeof`      | dạng nguyên thuỷ  |  chuỗi       |
+| `{}.toString` | dạng nguyên thuỷ, đối tượng tích hợp, đối tượng với `Symbol.toStringTag`   |       chuỗi |
+| `instanceof`  | đối tượng     |  true/false   |
 
-As we can see, `{}.toString` is technically a "more advanced" `typeof`.
+Như chúng ta có thể thấy, `{}.toString` về mặt kỹ thuật là một `typeof` "cao cấp hơn".
 
-And `instanceof` operator really shines when we are working with a class hierarchy and want to check for the class taking into account inheritance.
+Và toán tử `instanceof` thực sự tỏa sáng khi chúng ta làm việc với hệ thống phân cấp class và muốn kiểm tra class có tính đến tính kế thừa hay không.
