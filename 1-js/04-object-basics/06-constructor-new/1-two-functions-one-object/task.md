@@ -4,7 +4,7 @@ importance: 2
 
 # Hai hàm – một đối tượng
 
-Có thể tạo các hàm `A` và `B` chẳng hạn như `new A()==new B()` không?
+Có thể tạo các hàm `A` và `B` sao cho `new A() == new B()` không?
 
 ```js no-beautify
 function A() { ... }
