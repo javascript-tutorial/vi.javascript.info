@@ -1,7 +1,7 @@
 
 # Polyfill và bộ dịch mã
 
-Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [thông số kỹ thuật](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [thông số kỹ thuật](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/).
 
 Các nhóm đằng sau JavaScript engine có ý tưởng riêng của họ về những gì cần triển khai trước tiên. Họ có thể quyết định thực hiện các đề xuất trong bản nháp và hoãn lại những thứ đã có trong thông số kỹ thuật, bởi vì chúng kém thú vị hơn hoặc khó thực hiện hơn.
 
@@ -73,7 +73,7 @@ JavaScript là một ngôn ngữ rất năng động, các tập lệnh có th�
 
 Hai thư viện polyfill thú vị là:
 - [Core js](https://github.com/zloirock/core-js) hỗ trợ nhiều, chỉ cho phép đưa vào những tính năng cần thiết.
-- Dịch vụ [polyfill.io](http://polyfill.io) cung cấp tập lệnh có polyfill, tùy thuộc vào tính năng và trình duyệt của người dùng.
+- Dịch vụ [polyfill.io](https://polyfill.io) cung cấp tập lệnh có polyfill, tùy thuộc vào tính năng và trình duyệt của người dùng.
 
 
 ## Tóm tắt
