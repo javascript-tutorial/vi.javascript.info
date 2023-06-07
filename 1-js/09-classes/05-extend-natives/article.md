@@ -1,5 +1,5 @@
 
-# Extending built-in classes
+# Mở rộng các lớp dựng sẵn
 
 Built-in classes like Array, Map and others are extendable also.
 
