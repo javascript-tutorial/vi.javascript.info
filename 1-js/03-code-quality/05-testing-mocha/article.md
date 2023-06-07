@@ -41,7 +41,7 @@ Mô tả như vậy được gọi là *thông số kỹ thuật* hay nói ngắ
 ```js
 describe("pow", function() {
 
-  it("raises to n-th power", function() {
+  it("luỹ thừa n", function() {
     assert.equal(pow(2, 3), 8);
   });
 
@@ -67,27 +67,27 @@ Thông số kỹ thuật có thể được thực thi và nó sẽ chạy bài 
 
 Dòng phát triển thường trông như thế này:
 
-1. Thông số kỹ thuật ban đầu được viết, với các bài kiểm tra chức năng cơ bản nhất.
+1. Thông số kỹ thuật ban đầu được viết, với các bài kiểm tra hàm cơ bản nhất.
 2. Triển khai ban đầu được tạo.
-3. Để kiểm tra xem nó có hoạt động hay không, chúng ta chạy framework thử nghiệm [Mocha](http://mochajs.org/) (sẽ sớm có thêm thông tin chi tiết) để chạy thông số kỹ thuật đó. Trong khi chức năng không hoàn thành, lỗi được hiển thị. Chúng ta thực hiện chỉnh sửa cho đến khi mọi thứ hoạt động.
+3. Để kiểm tra xem nó có hoạt động hay không, chúng ta chạy framework kiểm tra [Mocha](http://mochajs.org/) (sẽ sớm có thêm thông tin chi tiết) để chạy thông số kỹ thuật đó. Trong khi hàm không hoàn thành, lỗi được hiển thị. Chúng ta thực hiện chỉnh sửa cho đến khi mọi thứ hoạt động.
 4. Bây giờ chúng ta có một thực hiện ban đầu đang hoạt động với bài kiểm tra.
 5. Chúng ta thêm nhiều trường hợp sử dụng hơn vào thông số kỹ thuật, có thể chưa được triển khai hỗ trợ. Các thử nghiệm bắt đầu thất bại.
 6. Đến bước 3, cập nhật việc triển khai cho đến khi kiểm tra không có lỗi.
-7. Lặp lại các bước 3-6 cho đến khi chức năng sẵn sàng.
+7. Lặp lại các bước 3-6 cho đến khi hàm sẵn sàng.
 
 Vì vậy, sự phát triển là * lặp đi lặp lại *. Chúng ta viết thông số kỹ thuật, triển khai nó, đảm bảo nó vượt qua các bài kiểm tra, sau đó viết thêm các bài kiểm tra khác, đảm bảo chúng hoạt động, v.v. Cuối cùng, chúng ta vừa có một triển khai hoạt động và các bài kiểm tra cho nó.
 
 Hãy xem dòng phát triển này trong trường hợp thực tế của chúng ta.
 
-Bước đầu tiên đã hoàn tất: chúng ta có thông số kỹ thuật ban đầu cho `pow`. Bây giờ, trước khi thực hiện, hãy sử dụng một số thư viện JavaScript để chạy thử nghiệm, chỉ để xem chúng có hoạt động không (tất cả chúng sẽ không thành công).
+Bước đầu tiên đã hoàn tất: chúng ta có thông số kỹ thuật ban đầu cho `pow`. Bây giờ, trước khi thực hiện, hãy sử dụng một số thư viện JavaScript để chạy bài kiểm tra, chỉ để xem chúng có hoạt động không (tất cả chúng sẽ không thành công).
 
 ## Thông số kỹ thuật hoạt động
 
-Ở đây trong hướng dẫn này, chúng ta sẽ sử dụng các thư viện JavaScript sau để kiểm tra:
+Ở trong hướng dẫn này, chúng ta sẽ sử dụng các thư viện JavaScript sau để kiểm tra:
 
-- [Mocha](http://mochajs.org/) -- framework cốt lõi: nó cung cấp các hàm thử nghiệm phổ biến bao gồm `describe` và `it` và hàm chính chạy thử nghiệm.
+- [Mocha](http://mochajs.org/) -- framework cốt lõi: nó cung cấp các hàm kiểm tra phổ biến bao gồm `describe` và `it` và hàm chính chạy các bài kiểm tra.
 - [Chai](http://chaijs.com) -- thư viện có nhiều xác nhận. Nó cho phép sử dụng rất nhiều xác nhận khác nhau, bây giờ chúng ta chỉ cần `assert.equal`.
-- [Sinon](http://sinonjs.org/) -- một thư viện để theo dõi các chức năng, mô phỏng các chức năng tích hợp sẵn và hơn thế nữa, chúng ta sẽ cần đến nó sau này.
+- [Sinon](http://sinonjs.org/) -- một thư viện để theo dõi các hàm, mô phỏng các hàm tích hợp sẵn và hơn thế nữa, chúng ta sẽ cần đến nó sau này.
 
 Các thư viện này phù hợp cho cả kiểm tra trên trình duyệt và phía máy chủ. Ở đây chúng ta sẽ xem xét biến thể trình duyệt.
 
@@ -110,7 +110,7 @@ Kết quả:
 
 Hiện tại, thử nghiệm không thành công, có lỗi. Điều đó hợp lý: chúng ta có một mã hàm trống trong `pow`, vì vậy `pow(2,3)` trả về `undefined` thay vì `8`.
 
-Trong tương lai, hãy lưu ý rằng có nhiều trình chạy thử nghiệm cấp cao hơn, như [karma](https://karma-runner.github.io/) và những trình chạy thử nghiệm khác, giúp dễ dàng tự động chạy nhiều bài kiểm tra khác nhau.
+Trong tương lai, hãy lưu ý rằng có nhiều trình chạy kiểm tra cấp cao hơn, như [karma](https://karma-runner.github.io/) và những trình chạy kiểm tra khác, giúp dễ dàng tự động chạy nhiều bài kiểm tra khác nhau.
 
 ## Thực hiện ban đầu
 
@@ -172,7 +172,7 @@ Thực hiện các bài kiểm tra riêng biệt rất hữu ích để có thê
 
 Và bên cạnh đó, có một quy tắc nữa rất tốt để tuân theo.
 
-**Mỗi bài kiểm tra một thứ.**
+**Mỗi bài kiểm tra chỉ kiểm tra một thứ.**
 
 Nếu chúng ta nhìn vào bài kiểm tra và thấy có hai lần kiểm tra độc lập trong đó, thì tốt hơn là chia nó thành hai lần kiểm tra đơn giản hơn.
 
@@ -238,7 +238,7 @@ describe("pow", function() {
 
     function makeTest(x) {
       let expected = x * x * x;
-      it(`${x} in the power 3 is ${expected}`, function() {
+      it(`${x} lũy thừa 3 là ${expected}`, function() {
         assert.equal(pow(x, 3), expected);
       });
     }
