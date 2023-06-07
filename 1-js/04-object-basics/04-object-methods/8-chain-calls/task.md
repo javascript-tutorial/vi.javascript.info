@@ -28,12 +28,14 @@ ladder.up();
 ladder.up();
 ladder.down();
 ladder.showStep(); // 1
+ladder.down();
+ladder.showStep(); // 0
 ```
 
 Sửa đổi mã của `up`, `down` và `showStep` để thực hiện các cuộc gọi có thể kết nối được, như thế này:
 
 ```js
-ladder.up().up().down().showStep(); // 1
+ladder.up().up().down().showStep().down().showStep(); // hiện 1 rồi 0
 ```
 
 Cách tiếp cận như vậy được sử dụng rộng rãi trên các thư viện JavaScript.
