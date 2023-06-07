@@ -21,4 +21,3 @@ alert( calculator.mul() );
 ```
 
 [demo]
-
