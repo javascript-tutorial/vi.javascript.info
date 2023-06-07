@@ -1,4 +1,4 @@
-# Hàm tạo, toán tử "mới"
+# Hàm tạo, toán tử "new"
 
 Cú pháp `{...}` thông thường cho phép tạo một đối tượng. Nhưng thường thì chúng ta cần tạo nhiều đối tượng tương tự, như nhiều người dùng hoặc mục menu, v.v.
 
@@ -6,7 +6,7 @@ Cú pháp `{...}` thông thường cho phép tạo một đối tượng. Nhưng
 
 ## Hàm tạo
 
-Hàm xây dựng về mặt kỹ thuật là các hàm thông thường. Có hai quy ước mặc dù:
+Hàm tạo về mặt kỹ thuật là các hàm thông thường. Có hai quy ước mặc dù:
 
 1. Chúng được đặt tên bằng chữ in hoa đầu tiên.
 2. Chúng chỉ nên được thực thi với toán tử `"new"`.
@@ -64,7 +64,7 @@ Bây giờ nếu chúng ta muốn tạo những người dùng khác, chúng ta 
 
 Đó là mục đích chính của hàm tạo -- để triển khai mã tạo đối tượng có thể tái sử dụng.
 
-Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào cũng có thể được sử dụng làm hàm tạo. Đó là: bất kỳ chức năng nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
+Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào cũng có thể được sử dụng làm hàm tạo. Đó là: bất kỳ hàm nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
 
 ````smart header="new function() { ... }"
 Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong hàm tạo, như sau:
@@ -128,7 +128,7 @@ alert(john.name); // John
 
 Cách tiếp cận này đôi khi được sử dụng trong các thư viện để làm cho cú pháp linh hoạt hơn. Vì vậy, mọi người có thể gọi hàm có hoặc không có `new`, và nó vẫn hoạt động.
 
-Tuy nhiên, có lẽ không phải là một điều tốt để sử dụng ở mọi nơi, bởi vì việc bỏ qua `new` làm cho nó ít rõ ràng hơn về những gì đang diễn ra. Với `mới`, tất cả chúng ta đều biết rằng đối tượng mới đang được tạo.
+Tuy nhiên, có lẽ không phải là một điều tốt để sử dụng ở mọi nơi, bởi vì việc bỏ qua `new` làm cho nó ít rõ ràng hơn về những gì đang diễn ra. Với `new`, tất cả chúng ta đều biết rằng đối tượng mới đang được tạo.
 
 ## Trả về từ hàm tạo
 
@@ -212,7 +212,7 @@ john = {
 */
 ```
 
-Để tạo các đối tượng phức tạp, có một cú pháp nâng cao hơn, [classes](info:classes), chúng ta sẽ đề cập sau.
+Để tạo các đối tượng phức tạp, có một cú pháp nâng cao hơn, [các class](info:classes), chúng ta sẽ đề cập sau.
 
 ## Tóm tắt
 
