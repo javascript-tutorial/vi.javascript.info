@@ -25,12 +25,20 @@ describe('Thang', function() {
     assert.equal(ladder.up().up().step, 2);
   });
 
-  it('down() should decrease step', function() {
+  it('down() nên giảm số bước', function() {
     assert.equal(ladder.down().step, -1);
   });
 
   it('down().up().up().up() ', function() {
     assert.equal(ladder.down().up().up().up().step, 2);
+  });
+  
+  it('showStep() nên trả về cái này', function() {
+    assert.equal(ladder.showStep(), ladder);
+  });
+
+  it('up().up().down().showStep().down().showStep()', function () {
+    assert.equal(ladder.up().up().down().showStep().down().showStep().step, 0)
   });
   
   after(function() {
