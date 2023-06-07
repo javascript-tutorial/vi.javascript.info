@@ -1,6 +1,6 @@
 # Hàm tạo, toán tử "new"
 
-Cú pháp `{...}` thông thường cho phép tạo một đối tượng. Nhưng thường thì chúng ta cần tạo nhiều đối tượng tương tự, như nhiều người dùng hoặc mục menu, v.v.
+Cú pháp `{...}` thông thường cho phép chúng ta tạo một đối tượng. Nhưng thường thì chúng ta cần tạo nhiều đối tượng tương tự, như nhiều người dùng hoặc mục menu, v.v.
 
 Điều đó có thể được thực hiện bằng cách sử dụng hàm khởi tạo và toán tử `"new"`.
 
@@ -64,13 +64,14 @@ Bây giờ nếu chúng ta muốn tạo những người dùng khác, chúng ta 
 
 Đó là mục đích chính của hàm tạo -- để triển khai mã tạo đối tượng có thể tái sử dụng.
 
-Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào cũng có thể được sử dụng làm hàm tạo. Đó là: bất kỳ hàm nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
+Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào (ngoại trừ arrow function, vì chúng không có `this`) đều có thể được sử dụng làm hàm tạo. Nó có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
 
 ````smart header="new function() { ... }"
-Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong hàm tạo, như sau:
+Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong một hàm tạo được gọi ngay lập tức, như sau:
 
 ```js
-let user = new function() {
+// tạo một hàm và ngay lập tức gọi nó với new
+let user = new function() { 
   this.name = "John";
   this.isAdmin = false;
 
@@ -80,7 +81,7 @@ let user = new function() {
 };
 ```
 
-Hàm tạo không thể được gọi lại vì nó không được lưu ở bất kỳ đâu, chỉ được tạo và gọi. Vì vậy, thủ thuật này nhằm mục đích đóng gói mã xây dựng một đối tượng mà không sử dụng lại trong tương lai.
+Hàm tạo này không thể được gọi lại vì nó không được lưu ở bất kỳ đâu, chỉ được tạo và gọi. Vì vậy, thủ thuật này nhằm mục đích đóng gói mã xây dựng một đối tượng mà không sử dụng lại trong tương lai.
 ````
 
 ## Kiểm tra chế độ hàm tạo: new.target
