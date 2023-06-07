@@ -171,7 +171,7 @@ alert( new SmallUser().name );  // John
 Thông thường các hàm tạo không có câu lệnh `return`. Ở đây chúng ta đề cập đến hành vi đặc biệt với các đối tượng trả về chủ yếu vì mục đích hoàn chỉnh.
 
 ````smart header="Bỏ qua dấu ngoặc đơn"
-Nhân tiện, chúng ta có thể bỏ qua dấu ngoặc đơn sau `new`, nếu nó không có đối số:
+Nhân tiện, chúng ta có thể bỏ qua dấu ngoặc đơn sau `new`:
 
 ```js
 let user = new User; // <-- không có dấu ngoặc đơn
