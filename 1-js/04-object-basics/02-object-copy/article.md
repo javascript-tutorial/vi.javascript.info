@@ -1,6 +1,6 @@
 # Tham chiếu và sao chép đối tượng
 
-Một trong những điểm khác biệt cơ bản của đối tượng so với đối tượng nguyên thủy là đối tượng được lưu trữ và sao chép "theo tham chiếu", trong khi các giá trị nguyên thủy: chuỗi, số, booleans, v.v. -- luôn được sao chép "dưới dạng toàn bộ giá trị".
+Một trong những điểm khác biệt cơ bản của đối tượng so với nguyên hàm là đối tượng được lưu trữ và sao chép "theo tham chiếu", trong khi các giá trị nguyên thủy: chuỗi, số, booleans, v.v. -- luôn được sao chép "dưới dạng toàn bộ giá trị".
 
 Điều đó dễ hiểu nếu chúng ta xem xét một chút về những gì xảy ra khi chúng ta sao chép một giá trị.
 
