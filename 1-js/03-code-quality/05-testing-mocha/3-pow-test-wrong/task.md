@@ -7,7 +7,7 @@ importance: 5
 Có gì sai trong bài kiểm tra `pow` bên dưới?
 
 ```js
-it("Raises x to the power n", function() {
+it("Nâng x lên luỹ thừa n", function() {
   let x = 5;
 
   let result = x;
