@@ -26,7 +26,7 @@ let ladder = {
 ladder.up().up().down().up().down().showStep(); // 1
 ```
 
-Chúng tôi cũng có thể viết một cuộc gọi trên mỗi dòng. Đối với chuỗi dài, nó dễ đọc hơn:
+Chúng ta cũng có thể viết một cuộc gọi trên mỗi dòng. Đối với chuỗi dài, nó dễ đọc hơn:
 
 ```js
 ladder
