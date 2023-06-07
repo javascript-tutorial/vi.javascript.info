@@ -27,7 +27,7 @@ alert(user.name); // Jack
 alert(user.isAdmin); // false
 ```
 
-Khi một chức năng được thực thi với `new`, nó sẽ thực hiện các bước sau:
+Khi một hàm được thực thi với `new`, nó sẽ thực hiện các bước sau:
 
 1. Một đối tượng trống mới được tạo và gán cho `this`.
 2. Thân hàm thực thi. Thông thường, nó sửa đổi `this`, thêm các thuộc tính mới cho nó.
@@ -115,8 +115,8 @@ Chúng ta cũng có thể thực hiện cả lệnh gọi `new` và thông thư�
 
 ```js run
 function User(name) {
-  if (!new.target) { // nếu bạn chạy tôi mà không có mới
-    return new User(name); // ...Tôi sẽ thêm mới cho bạn
+  if (!new.target) { // nếu bạn chạy tôi mà không có new
+    return new User(name); // ...Tôi sẽ thêm new cho bạn
   }
 
   this.name = name;
@@ -137,7 +137,7 @@ Thông thường, hàm tạo không có câu lệnh `return`. Nhiệm vụ của
 Nhưng nếu có câu lệnh `return`, thì quy tắc rất đơn giản:
 
 - Nếu `return` được gọi với một đối tượng, thì đối tượng đó sẽ được trả về thay vì `this`.
-- Nếu `return` được gọi với kiểu nguyên thủy, thì nó sẽ bị bỏ qua.
+- Nếu `return` được gọi với nguyên hàm, thì nó sẽ bị bỏ qua.
 
 Nói cách khác, `return` với một đối tượng sẽ trả về đối tượng đó, trong tất cả các trường hợp khác, `this` được trả về.
 
@@ -221,10 +221,10 @@ john = {
 
 Chúng ta có thể sử dụng các hàm tạo để tạo nhiều đối tượng tương tự.
 
-JavaScript cung cấp các hàm tạo cho nhiều đối tượng ngôn ngữ dựng sẵn: như `Date` cho ngày tháng, `Set` cho bộ và các đối tượng khác mà chúng ta dự định nghiên cứu.
+JavaScript cung cấp các hàm tạo cho nhiều đối tượng ngôn ngữ dựng sẵn: như `Date` cho ngày tháng, `Set` cho tập hợp và các đối tượng khác mà chúng ta dự định nghiên cứu.
 
 ```smart header="Đối tượng, chúng ta sẽ trở lại!"
-Trong chương này, chúng ta chỉ trình bày những điều cơ bản về đối tượng và hàm tạo. Chúng rất cần thiết để tìm hiểu thêm về các kiểu dữ liệu và chức năng trong các chương tiếp theo.
+Trong chương này, chúng ta chỉ trình bày những điều cơ bản về đối tượng và hàm tạo. Chúng rất cần thiết để tìm hiểu thêm về các kiểu dữ liệu và hàm trong các chương tiếp theo.
 
 Sau khi biết được điều đó, chúng ta quay lại các đối tượng và tìm hiểu sâu hơn về chúng trong các chương <info:prototypes> và <info:classes>.
 ```
