@@ -1,9 +1,9 @@
 
-# Chuyển đổi đối tượng thành nguyên thủy
+# Chuyển đổi đối tượng thành nguyên hàm
 
 Điều gì xảy ra khi các đối tượng được thêm `obj1 + obj2`, bớt `obj1 - obj2` hoặc được in bằng cách sử dụng `alert(obj)`?
 
-Trong trường hợp đó, các đối tượng được tự động chuyển đổi thành nguyên thủy và sau đó thao tác được thực hiện.
+Trong trường hợp đó, các đối tượng được tự động chuyển đổi thành nguyên hàm và sau đó thao tác được thực hiện.
 
 Trong chương <info:type-conversions> chúng ta đã thấy các quy tắc chuyển đổi số, chuỗi và boolean của nguyên hàm. Nhưng chúng ta đã không nói về các đối tượng. Bây giờ, khi chúng ta đã biết về các phương thức và ký hiệu, ta có thể nói về nó.
 
@@ -11,7 +11,7 @@ Trong chương <info:type-conversions> chúng ta đã thấy các quy tắc chuy
 2. Việc chuyển đổi số xảy ra khi chúng ta trừ các đối tượng hoặc áp dụng các hàm toán học. Ví dụ: có thể trừ các đối tượng `Date` (được trình bày trong chương <info:date>) và kết quả của `date1 - date2` là chênh lệch múi giờ giữa hai ngày.
 3. Đối với việc chuyển đổi chuỗi -- nó thường xảy ra khi chúng ta xuất một đối tượng như `alert(obj)` và trong các ngữ cảnh tương tự.
 
-## Nguyên thủy
+## ToPrimitive
 
 Chúng ta có thể tinh chỉnh chuyển đổi chuỗi và số, sử dụng các phương thức đối tượng đặc biệt.
 
