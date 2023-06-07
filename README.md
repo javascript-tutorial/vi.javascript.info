@@ -55,7 +55,7 @@ Nếu bạn thấy rằng phiên bản tiếng Anh còn có thể cải thiện 
 
 - Dịch các chú thích
 - Có thể dịch các thông báo gửi tới người dùng và các chuỗi ví dụ.
-- Đừng dịch các biến, class và các mã định danh.
+- Đừng dịch các biến, class và các định danh.
 - Chắc chắn rằng mã vẫn chạy sau khi bạn dịch nó :)
 
 Ví dụ:
