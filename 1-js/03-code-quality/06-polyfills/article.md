@@ -1,7 +1,7 @@
 
 # Polyfill và bộ dịch mã
 
-Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [thông số kỹ thuật](http:// www.ecma-international.org/publications/standards/Ecma-262.htm).
+Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [thông số kỹ thuật](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
 
 Các nhóm đằng sau JavaScript engine có ý tưởng riêng của họ về những gì cần triển khai trước tiên. Họ có thể quyết định thực hiện các đề xuất trong bản nháp và hoãn lại những thứ đã có trong thông số kỹ thuật, bởi vì chúng kém thú vị hơn hoặc khó thực hiện hơn.
 
@@ -82,7 +82,7 @@ Trong chương này, chúng tôi muốn khuyến khích bạn nghiên cứu các
 
 Chỉ cần đừng quên sử dụng bộ dịch mã (nếu sử dụng cú pháp hoặc toán tử hiện đại) và polyfill (để thêm các hàm có thể bị thiếu). Và chúng sẽ đảm bảo rằng mã hoạt động.
 
-Ví dụ: sau này khi bạn đã quen với JavaScript, bạn có thể thiết lập hệ thống xây dựng mã dựa trên [webpack](http://webpack.github.io/) với [babel-loader](https://github.com /babel/babel-loader).
+Ví dụ: sau này khi bạn đã quen với JavaScript, bạn có thể thiết lập hệ thống xây dựng mã dựa trên [webpack](http://webpack.github.io/) với [babel-loader](https://github.com/babel/babel-loader).
 
 Các tài nguyên tốt hiển thị trạng thái hỗ trợ hiện tại cho các tính năng khác nhau:
 - <https://kangax.github.io/compat-table/es6/> - dành cho JavaScript thuần túy.
