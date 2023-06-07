@@ -22,7 +22,7 @@ Có hai công cụ cho việc đó:
 
 ## Bộ dịch mã
 
-[Bộ dịch mã](https://en.wikipedia.org/wiki/Source-to-source_compiler) là một phần mềm đặc biệt có thể phân tích cú pháp ("đọc và hiểu") mã hiện đại và viết lại mã đó bằng các cấu trúc cú pháp cũ hơn, để kết quả sẽ giống nhau.
+[Bộ dịch mã](https://en.wikipedia.org/wiki/Source-to-source_compiler) là một phần mềm đặc biệt dịch mã nguồn này sang mã nguồn khác. Nó có thể phân tích cú pháp ("đọc và hiểu") mã hiện đại và viết lại mã đó bằng cách sử dụng các cấu trúc cú pháp cũ hơn để mã này cũng sẽ hoạt động trong các engine lỗi thời.
 
 Ví dụ. JavaScript trước năm 2020 không có "toán tử kết hợp vô giá trị" `??`. Vì vậy, nếu khách truy cập sử dụng trình duyệt lỗi thời, họ có thể không hiểu mã như `height = height ?? 100`.
 
@@ -42,13 +42,13 @@ Thông thường, nhà phát triển chạy bộ dịch mã trên máy tính c�
 
 Nhắc đến tên, [Babel](https://babeljs.io) là một trong những bộ dịch mã nổi bật nhất hiện có.
 
-Các hệ thống xây dựng dự án hiện đại, chẳng hạn như [webpack](http://webpack.github.io/), cung cấp phương tiện để chạy bộ dịch mã tự động trên mỗi thay đổi mã, vì vậy rất dễ tích hợp vào quá trình phát triển.
+Các hệ thống xây dựng dự án hiện đại, chẳng hạn như [webpack](https://webpack.github.io/), cung cấp phương tiện để chạy bộ dịch mã tự động trên mỗi thay đổi mã, vì vậy rất dễ tích hợp vào quá trình phát triển.
 
 ## Polyfill
 
 Các tính năng ngôn ngữ mới có thể bao gồm không chỉ cấu trúc cú pháp và toán tử, mà còn cả các hàm tích hợp sẵn.
 
-Ví dụ: `Math.trunc(n)` là hàm "cắt bỏ" phần thập phân của một số, ví dụ: `Math.trunc(1.23) = 1`.
+Ví dụ: `Math.trunc(n)` là hàm "cắt bỏ" phần thập phân của một số, ví dụ: `Math.trunc(1.23)` trả về `1`.
 
 Trong một số JavaScript engine (rất lỗi thời), không có `Math.trunc`, vì vậy mã như vậy sẽ bị lỗi.
 
