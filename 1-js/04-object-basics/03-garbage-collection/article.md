@@ -14,18 +14,18 @@ Nói một cách đơn giản, các giá trị "có thể tiếp cận" là nh�
 
      Ví dụ:
 
-     - Hàm hiện đang thực thi, các biến cục bộ và tham số của nó.
+     - Hàm hiện đang chạy, các biến cục bộ và tham số của nó.
      - Các hàm khác trên chuỗi lệnh gọi lồng nhau hiện tại, các biến cục bộ và tham số của chúng.
-     - Biến toàn cục.
-     - (có một số khác, nội bộ là tốt)
+     - Biến chung.
+     - (có một số khác, cũng có nội bộ)
 
      Những giá trị này được gọi là *gốc*.
 
 2. Bất kỳ giá trị nào khác được coi là có thể truy cập được nếu giá trị đó có thể truy cập được từ gốc bằng tham chiếu hoặc chuỗi tham chiếu.
 
-     Chẳng hạn, nếu có một đối tượng trong một biến toàn cục và đối tượng đó có một thuộc tính tham chiếu đến một đối tượng khác, thì đối tượng *that* đó được coi là có thể truy cập được. Và những thứ mà nó tham chiếu cũng có thể truy cập được. Ví dụ chi tiết để làm theo.
+     Chẳng hạn, nếu có một đối tượng trong một biến chung và đối tượng đó có một thuộc tính tham chiếu đến một đối tượng khác, thì đối tượng *đó* đó được coi là có thể truy cập được. Và những thứ mà nó tham chiếu cũng có thể truy cập được. Ví dụ chi tiết để làm theo.
 
-Có một quy trình nền trong JavaScript engine được gọi là [bộ gom rác](https://vi.wikipedia.org/wiki/Thu_gom_r%C3%A1c_(khoa_h%E1%BB%8Dc_m%C3%A1y_t%C3%ADnh)). Nó giám sát tất cả các đối tượng và loại bỏ những đối tượng không thể truy cập được.
+Có một quy trình nền trong JavaScript engine được gọi là [bộ gom rác](https://vi.wikipedia.org/wiki/Thu_gom_rác_(khoa_học_máy_tính)). Nó giám sát tất cả các đối tượng và loại bỏ những đối tượng không thể truy cập được.
 
 ## Một ví dụ đơn giản
 
@@ -40,7 +40,7 @@ let user = {
 
 ![](memory-user-john.svg)
 
-Ở đây mũi tên mô tả một tham chiếu đối tượng. Biến toàn cục `"user"` tham chiếu đối tượng `{name: "John"}` (chúng ta sẽ gọi nó là John cho ngắn gọn). Thuộc tính `"name"` của John lưu trữ một giá trị nguyên thủy, do đó, nó được vẽ bên trong đối tượng.
+Ở đây mũi tên mô tả một tham chiếu đối tượng. Biến chung `"user"` tham chiếu đối tượng `{name: "John"}` (chúng ta sẽ gọi nó là John cho ngắn gọn). Thuộc tính `"name"` của John lưu trữ một nguyên hàm, do đó, nó được vẽ bên trong đối tượng.
 
 Nếu giá trị của `user` bị ghi đè, tham chiếu sẽ bị mất:
 
@@ -74,11 +74,11 @@ Bây giờ nếu chúng ta làm như vậy:
 user = null;
 ```
 
-...Sau đó, đối tượng vẫn có thể truy cập được thông qua biến toàn cầu `admin`, do đó, đối tượng nằm trong bộ nhớ. Nếu chúng ta ghi đè lên `admin`, thì nó có thể bị xóa.
+...Sau đó, đối tượng vẫn có thể truy cập được thông qua biến chung `admin`, do đó, đối tượng nằm trong bộ nhớ. Nếu chúng ta ghi đè lên `admin`, thì nó có thể bị xóa.
 
 ## Các đối tượng liên kết với nhau
 
-Bây giờ là một ví dụ phức tạp hơn. Một gia đình:
+Bây giờ là một ví dụ phức tạp hơn. Gia đình:
 
 ```js
 function marry(man, woman) {
@@ -145,7 +145,7 @@ Ví dụ này cho thấy tầm quan trọng của khái niệm khả năng tiế
 
 Rõ ràng là John và Ann vẫn được liên kết với nhau, cả hai đều có tham chiếu sắp tới. Nhưng điều đó là không đủ.
 
-Đối tượng `"gia đình"` trước đây đã bị hủy liên kết khỏi thư mục gốc, không còn tham chiếu đến nó nữa, vì vậy toàn bộ đối tượng trở nên không thể truy cập được và sẽ bị xóa.
+Đối tượng `"family"` trước đây đã bị hủy liên kết khỏi thư mục gốc, không còn tham chiếu đến nó nữa, vì vậy toàn bộ đối tượng trở nên không thể truy cập được và sẽ bị xóa.
 
 ## Thuật toán nội bộ
 
@@ -169,11 +169,11 @@ Bước đầu tiên đánh dấu gốc:
 
 ![](garbage-collection-2.svg)
 
-Sau đó, tham chiếu của họ được đánh dấu:
+Sau đó, tham chiếu của chúng được đánh dấu:
 
 ![](garbage-collection-3.svg)
 
-...Và tham chiếu của họ, trong khi có thể:
+...Và tham chiếu của chúng, trong khi có thể:
 
 ![](garbage-collection-4.svg)
 
@@ -187,11 +187,11 @@ Chúng ta cũng có thể tưởng tượng quá trình này giống như đổ 
 
 Một số tối ưu hóa:
 
-- **Thu gom thế hệ** -- các đối tượng được chia thành hai bộ: "bộ mới" và "bộ cũ". Nhiều đối tượng xuất hiện, thực hiện công việc của chúng và chết nhanh chóng, chúng có thể được dọn dẹp một cách tích cực. Những người tồn tại đủ lâu, trở nên "già" và ít được kiểm tra thường xuyên hơn.
-- **Tập hợp gia tăng** -- nếu có nhiều đối tượng và chúng ta cố gắng đi bộ và đánh dấu toàn bộ tập hợp đối tượng cùng một lúc, có thể mất một chút thời gian và gây ra sự chậm trễ có thể nhìn thấy được trong quá trình thực thi. Vì vậy, engine cố gắng chia bộ sưu tập rác thành nhiều phần. Sau đó, các mảnh được thực hiện từng cái một, riêng biệt. Điều đó đòi hỏi một số kế toán bổ sung giữa chúng để theo dõi các thay đổi, nhưng chúng ta có nhiều sự chậm trễ nhỏ thay vì một sự chậm trễ lớn.
+- **Thu gom thế hệ** -- các đối tượng được chia thành hai bộ: "bộ mới" và "bộ cũ". Nhiều đối tượng xuất hiện, thực hiện công việc của chúng và chết nhanh chóng, chúng có thể được dọn dẹp một cách tích cực. Những đối tượng tồn tại đủ lâu, trở nên "già" và ít được kiểm tra thường xuyên hơn.
+- **Thu gom gia tăng** -- nếu có nhiều đối tượng và chúng ta cố gắng đi bộ và đánh dấu toàn bộ tập hợp đối tượng cùng một lúc, có thể mất một chút thời gian và gây ra sự chậm trễ có thể nhìn thấy được trong quá trình thực thi. Vì vậy, engine cố gắng chia bộ thu gom rác thành nhiều phần. Sau đó, các mảnh được thực hiện từng cái một, riêng biệt. Điều đó đòi hỏi một số kế toán bổ sung giữa chúng để theo dõi các thay đổi, nhưng chúng ta có nhiều sự chậm trễ nhỏ thay vì một sự chậm trễ lớn.
 - **Thu gom vào thời gian nhàn rỗi** -- bộ thu gom rác cố gắng chỉ chạy khi CPU không hoạt động, để giảm tác động có thể có đối với quá trình thực thi.
 
-Có tồn tại các tối ưu hóa và hương vị khác của thuật toán thu gom rác. Tôi muốn mô tả chúng ở đây nhiều như thế nào nhưng tôi phải dừng lại, bởi vì các công cụ khác nhau thực hiện các chỉnh sửa và kỹ thuật khác nhau. Và, điều quan trọng hơn nữa, mọi thứ thay đổi khi engine phát triển, vì vậy việc nghiên cứu sâu hơn "trước", nếu không có nhu cầu thực sự có lẽ không đáng. Tất nhiên, trừ khi đó là vấn đề hoàn toàn vì lợi ích, khi đó sẽ có một số liên kết dành cho bạn bên dưới.
+Có tồn tại các tối ưu hóa và hương vị khác của thuật toán thu gom rác. Tôi muốn mô tả thêm nhiều nữa nhưng tôi phải dừng lại, bởi vì các engine khác nhau thực hiện các chỉnh sửa và kỹ thuật khác nhau. Và, điều quan trọng hơn nữa, mọi thứ thay đổi khi engine phát triển, vì vậy việc nghiên cứu sâu hơn "trước", nếu không có nhu cầu thực sự có lẽ không đáng. Tất nhiên, trừ khi đó là vấn đề hoàn toàn vì lợi ích, khi đó sẽ có một số liên kết dành cho bạn bên dưới.
 
 ## Tóm tắt
 
