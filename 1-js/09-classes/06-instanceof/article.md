@@ -209,8 +209,8 @@ Hãy tóm tắt các phương pháp kiểm tra loại mà chúng ta biết:
 
 |               | hoạt động với |  trả về      |
 |---------------|-------------|---------------|
-| `typeof`      | dạng nguyên thuỷ  |  chuỗi       |
-| `{}.toString` | dạng nguyên thuỷ, đối tượng tích hợp, đối tượng với `Symbol.toStringTag`   |       chuỗi |
+| `typeof`      | đối tượng nguyên thuỷ  |  chuỗi       |
+| `{}.toString` | đối tượng nguyên thuỷ, đối tượng tích hợp, đối tượng với `Symbol.toStringTag`   |       chuỗi |
 | `instanceof`  | đối tượng     |  true/false   |
 
 Như chúng ta có thể thấy, `{}.toString` về mặt kỹ thuật là một `typeof` "cao cấp hơn".
