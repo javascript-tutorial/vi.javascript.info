@@ -18,7 +18,7 @@ Nói cách khác, thuộc tính `value` là tổng của tất cả các giá tr
 ```js
 let accumulator = new Accumulator(1); // giá trị ban đầu 1
 
-accumulator.read(); // adds the user-entered value
+accumulator.read(); // thêm giá trị do người dùng nhập
 accumulator.read(); // thêm giá trị do người dùng nhập
 
 alert(accumulator.value); // hiển thị tổng của các giá trị này
