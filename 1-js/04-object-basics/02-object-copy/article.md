@@ -138,16 +138,17 @@ Ngoài ra, chúng ta có thể sử dụng phương thức [Object.assign](mdn:j
 Cú pháp là:
 
 ```js
-Object.assign(dest, [src1, src2, src3...])
+Object.assign(dest, ...sources)
 ```
 
 - Đối số đầu tiên `dest` là một đối tượng đích.
-- Các đối số khác `src1, ..., srcN` (có thể bao nhiêu tùy ý) là các đối tượng nguồn.
-- Nó sao chép các thuộc tính của tất cả các đối tượng nguồn `src1, ..., srcN` vào đích `dest`. Nói cách khác, các thuộc tính của tất cả các đối số bắt đầu từ đối số thứ hai được sao chép vào đối tượng đầu tiên.
-- Cuộc gọi trả về `dest`.
+- Các đối số khác là danh sách các đối tượng nguồn.
 
-Chẳng hạn, chúng ta có thể sử dụng nó để hợp nhất nhiều đối tượng thành một:
-```js
+Nó sao chép các thuộc tính của tất cả các đối tượng nguồn vào `dest` đích, sau đó trả về nó dưới dạng kết quả.
+
+Ví dụ: chúng ta có đối tượng `user`, hãy thêm một số quyền cho đối tượng đó:
+
+```js run
 let user = { name: "John" };
 
 let permissions1 = { canView: true };
@@ -159,6 +160,9 @@ Object.assign(user, permissions1, permissions2);
 */!*
 
 // bây giờ người dùng = { name: "John", canView: true, canEdit: true }
+alert(user.name); // John
+alert(user.canView); // true
+alert(user.canEdit); // true
 ```
 
 Nếu tên thuộc tính được sao chép đã tồn tại, nó sẽ bị ghi đè:
@@ -171,7 +175,7 @@ Object.assign(user, { name: "Pete" });
 alert(user.name); // now user = { name: "Pete" }
 ```
 
-Chúng ta cũng có thể sử dụng `Object.assign` để thay thế vòng lặp `for..in` để sao chép đơn giản:
+Chúng ta cũng có thể sử dụng `Object.assign` để thực hiện nhân bản một đối tượng đơn giản:
 
 ```js
 let user = {
@@ -190,7 +194,7 @@ Ngoài ra còn có các phương pháp nhân bản đối tượng khác, ví d�
 
 ## Nhân bản lồng nhau
 
-Cho đến bây giờ, chúng ta giả định rằng tất cả các thuộc tính của `user` là nguyên thủy. Nhưng các thuộc tính có thể là tham chiếu đến các 
+Cho đến bây giờ, chúng ta giả định rằng tất cả các thuộc tính của `user` là nguyên hàm. Nhưng các thuộc tính có thể là tham chiếu đến các 
 đối tượng khác. Làm gì với chúng đây?
 
 Như thế này:
