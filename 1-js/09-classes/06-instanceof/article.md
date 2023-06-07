@@ -1,42 +1,42 @@
-# Class checking: "instanceof"
+# Kiểm tra class: "instanceof"
 
-The `instanceof` operator allows to check whether an object belongs to a certain class. It also takes inheritance into account.
+Toán tử `instanceof` cho phép kiểm tra xem một đối tượng có thuộc một class nào đó hay không. Nó cũng tính đến sự kế thừa.
 
-Such a check may be necessary in many cases. For example, it can be used for building a *polymorphic* function, the one that treats arguments differently depending on their type.
+Việc kiểm tra như vậy có thể cần thiết trong nhiều trường hợp. Ví dụ: nó có thể được sử dụng để xây dựng hàm *đa hình*, hàm xử lý các đối số khác nhau tùy thuộc vào loại của chúng.
 
-## The instanceof operator [#ref-instanceof]
+## Toán tử instanceof [#ref-instanceof]
 
-The syntax is:
+Cú pháp là:
 ```js
 obj instanceof Class
 ```
 
-It returns `true` if `obj` belongs to the `Class` or a class inheriting from it.
+Nó trả về `true` nếu `obj` thuộc về `Class` hoặc một class kế thừa từ nó.
 
-For instance:
+Ví dụ:
 
 ```js run
 class Rabbit {}
 let rabbit = new Rabbit();
 
-// is it an object of Rabbit class?
+// nó có phải là đối tượng của class Rabbit không?
 *!*
 alert( rabbit instanceof Rabbit ); // true
 */!*
 ```
 
-It also works with constructor functions:
+Nó cũng hoạt động với các hàm tạo:
 
 ```js run
 *!*
-// instead of class
+// thay vì class
 function Rabbit() {}
 */!*
 
 alert( new Rabbit() instanceof Rabbit ); // true
 ```
 
-...And with built-in classes like `Array`:
+...Và với các class tích hợp như `Array`:
 
 ```js run
 let arr = [1, 2, 3];
@@ -44,19 +44,19 @@ alert( arr instanceof Array ); // true
 alert( arr instanceof Object ); // true
 ```
 
-Please note that `arr` also belongs to the `Object` class. That's because `Array` prototypically inherits from `Object`.
+Hãy lưu ý rằng `arr` cũng thuộc class `Object`. Đó là bởi vì `Array` kế thừa nguyên mẫu từ `Object`.
 
-Normally, `instanceof` examines the prototype chain for the check. We can also set a custom logic in the static method `Symbol.hasInstance`.
+Thông thường, `instanceof` kiểm tra chuỗi nguyên mẫu để kiểm tra. Chúng ta cũng có thể đặt logic tùy chỉnh trong phương thức tĩnh `Symbol.hasInstance`.
 
-The algorithm of `obj instanceof Class` works roughly as follows:
+Thuật toán của `obj instanceof Class` hoạt động đại khái như sau:
 
-1. If there's a static method `Symbol.hasInstance`, then just call it: `Class[Symbol.hasInstance](obj)`. It should return either `true` or `false`, and we're done. That's how we can customize the behavior of `instanceof`.
+1. Nếu có một phương thức tĩnh `Symbol.hasInstance`, thì chỉ cần gọi nó là: `Class[Symbol.hasInstance](obj)`. Nó sẽ trả về `true` hoặc `false`, và chúng ta đã hoàn tất. Đó là cách chúng ta có thể tùy chỉnh hành vi của `instanceof`.
 
-    For example:
+    Ví dụ:
 
     ```js run
-    // setup instanceOf check that assumes that
-    // anything with canEat property is an animal
+    // thiết lập instanceOf kiểm tra giả định rằng
+    // bất cứ thứ gì có thuộc tính canEat đều là động vật
     class Animal {
       static [Symbol.hasInstance](obj) {
         if (obj.canEat) return true;
@@ -65,24 +65,24 @@ The algorithm of `obj instanceof Class` works roughly as follows:
 
     let obj = { canEat: true };
 
-    alert(obj instanceof Animal); // true: Animal[Symbol.hasInstance](obj) is called
+    alert(obj instanceof Animal); // true: Animal[Symbol.hasInstance](obj) được gọi
     ```
 
-2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceOf Class` checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
+2. Hầu hết các class không có `Symbol.hasInstance`. Trong trường hợp đó, logic tiêu chuẩn được sử dụng: `obj instanceOf Class` kiểm tra xem `Class.prototype` có bằng với một trong các nguyên mẫu trong chuỗi nguyên mẫu `obj` hay không.
 
-    In other words, compare one after another:
+    Nói cách khác, so sánh cái này với cái khác:
     ```js
     obj.__proto__ === Class.prototype?
     obj.__proto__.__proto__ === Class.prototype?
     obj.__proto__.__proto__.__proto__ === Class.prototype?
     ...
-    // if any answer is true, return true
-    // otherwise, if we reached the end of the chain, return false
+    // nếu bất kỳ câu trả lời nào là đúng, trả về true
+    // ngược lại, nếu chúng ta đến cuối chuỗi, hãy trả về false
     ```
 
-    In the example above `rabbit.__proto__ === Rabbit.prototype`, so that gives the answer immediately.
+    Trong ví dụ trên `rabbit.__proto__ === Rabbit.prototype`, do đó sẽ đưa ra câu trả lời ngay lập tức.
 
-    In the case of an inheritance, the match will be at the second step:
+    Trong trường hợp kế thừa, quá trình sẽ sang bước thứ hai:
 
     ```js run
     class Animal {}
@@ -95,49 +95,49 @@ The algorithm of `obj instanceof Class` works roughly as follows:
 
     // rabbit.__proto__ === Rabbit.prototype
     *!*
-    // rabbit.__proto__.__proto__ === Animal.prototype (match!)
+    // rabbit.__proto__.__proto__ === Animal.prototype (trùng khớp!)
     */!*
     ```
 
-Here's the illustration of what `rabbit instanceof Animal` compares with `Animal.prototype`:
+Đây là hình minh họa về những gì `rabbit instanceof Animal` so sánh với `Animal.prototype`:
 
 ![](instanceof.svg)
 
-By the way, there's also a method [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), that returns `true` if `objA` is somewhere in the chain of prototypes for `objB`. So the test of `obj instanceof Class` can be rephrased as `Class.prototype.isPrototypeOf(obj)`.
+Nhân tiện, cũng có một phương thức [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), trả về `true` nếu `objA` nằm ở đâu đó trong chuỗi nguyên mẫu cho `objB`. Vì vậy, bài kiểm tra của `obj instanceof Class` có thể được diễn đạt lại thành `Class.prototype.isPrototypeOf(obj)`.
 
-It's funny, but the `Class` constructor itself does not participate in the check! Only the chain of prototypes and `Class.prototype` matters.
+Thật buồn cười, nhưng bản thân hàm tạo `Class` không tham gia kiểm tra! Chỉ chuỗi nguyên mẫu và `Class.prototype` mới quan trọng.
 
-That can lead to interesting consequences when a `prototype` property is changed after the object is created.
+Điều đó có thể dẫn đến những hậu quả thú vị khi thuộc tính `prototype` bị thay đổi sau khi đối tượng được tạo.
 
-Like here:
+Như ở đây:
 
 ```js run
 function Rabbit() {}
 let rabbit = new Rabbit();
 
-// changed the prototype
+// đã thay đổi nguyên mẫu
 Rabbit.prototype = {};
 
-// ...not a rabbit any more!
+// ...không còn là thỏ nữa!
 *!*
 alert( rabbit instanceof Rabbit ); // false
 */!*
 ```
 
-## Bonus: Object.prototype.toString for the type
+## Bonus: Object.prototype.toString cho loại
 
-We already know that plain objects are converted to string as `[object Object]`:
+Chúng ta đã biết rằng các đối tượng đơn giản được chuyển đổi thành chuỗi dưới dạng `[object Object]`:
 
 ```js run
 let obj = {};
 
 alert(obj); // [object Object]
-alert(obj.toString()); // the same
+alert(obj.toString()); // giống nhau
 ```
 
-That's their implementation of `toString`. But there's a hidden feature that makes `toString` actually much more powerful than that. We can use it as an extended `typeof` and an alternative for `instanceof`.
+Đó là cách triển khai `toString` của chúng. Nhưng có một tính năng ẩn làm cho `toString` thực sự mạnh hơn thế nhiều. Chúng ta có thể sử dụng nó như một `typeof` mở rộng và thay thế cho `instanceof`.
 
-Sounds strange? Indeed. Let's demystify.
+Thấy lạ không? Thực vậy. Hãy làm sáng tỏ
 
 By [specification](https://tc39.github.io/ecma262/#sec-object.prototype.tostring), the built-in `toString` can be extracted from the object and executed in the context of any other value. And its result depends on that value.
 
