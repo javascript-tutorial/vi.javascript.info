@@ -24,7 +24,7 @@ Chẳng hạn, chúng ta đang tạo một hàm `f`. Ta đã viết một số m
 
 Hãy bắt đầu với một kỹ thuật có tên [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) hoặc, ngắn gọn, BDD.
 
-****BDD là ba thứ trong một: thử nghiệm VÀ tài liệu VÀ ví dụ.**
+****BDD là ba thứ trong một: kiểm tra VÀ tài liệu VÀ ví dụ.**
 
 Để hiểu BDD, chúng ta sẽ xem xét một trường hợp phát triển thực tế.
 
@@ -39,9 +39,9 @@ Trước khi tạo mã của `pow`, chúng ta có thể hình dung chức năng 
 Mô tả như vậy được gọi là *thông số kỹ thuật* hay nói ngắn gọn là thông số và chứa mô tả về các trường hợp sử dụng cùng với các bài kiểm tra dành cho chúng, như sau:
 
 ```js
-describe("pow", function() {
+describe("luỹ thừa", function() {
 
-  it("luỹ thừa n", function() {
+  it("nâng lên mũ n", function() {
     assert.equal(pow(2, 3), 8);
   });
 
@@ -139,9 +139,9 @@ Chúng ta có thể lựa chọn một trong hai cách tổ chức kiểm tra t�
 1. Biến thể đầu tiên -- thêm một `assert` nữa vào cùng `it`:
 
     ```js
-    describe("pow", function() {
+    describe("luỹ thừa", function() {
 
-      it("raises to n-th power", function() {
+      it("nâng lên mũ n", function() {
         assert.equal(pow(2, 3), 8);
     *!*
         assert.equal(pow(3, 4), 81);
@@ -153,13 +153,13 @@ Chúng ta có thể lựa chọn một trong hai cách tổ chức kiểm tra t�
 2. Thứ hai -- thực hiện hai bài kiểm tra:
 
     ```js
-    describe("pow", function() {
+    describe("luỹ thừa", function() {
 
-      it("2 raised to power 3 is 8", function() {
+      it("2 mũ 3 là 8", function() {
         assert.equal(pow(2, 3), 8);
       });
 
-      it("3 raised to power 4 is 81", function() {
+      it("3 mũ 4 là 81", function() {
         assert.equal(pow(3, 4), 81);
       });
 
@@ -203,11 +203,11 @@ function pow(x, n) {
 Để chắc chắn rằng hàm hoạt động tốt, hãy kiểm tra nó để biết thêm giá trị. Thay vì viết các khối `it` theo cách thủ công, chúng ta có thể tạo chúng trong `for`:
 
 ```js
-describe("pow", function() {
+describe("luỹ thừa", function() {
 
   function makeTest(x) {
     let expected = x * x * x;
-    it(`${x} in the power 3 is ${expected}`, function() {
+    it(`${x} mũ 3 là ${expected}`, function() {
       assert.equal(pow(x, 3), expected);
     });
   }
@@ -230,10 +230,10 @@ Chúng ta sẽ thêm nhiều bài kiểm tra hơn nữa. Nhưng trước đó, h
 Việc nhóm lại được thực hiện với một `describe` lồng nhau:
 
 ```js
-describe("pow", function() {
+describe("luỹ thừa", function() {
 
 *!*
-  describe("raises x to power 3", function() {
+  describe("nâng x lên mũ 3", function() {
 */!*
 
     function makeTest(x) {
@@ -267,7 +267,7 @@ Chúng ta có thể thiết lập các hàm `before/after` để thực thi trư
 Ví dụ:
 
 ```js no-beautify
-describe("test", function() {
+describe("kiểm tra", function() {
 
   before(() => alert("Bài kiểm tra bắt đầu – trước tất cả các bài kiểm tra"));
   after(() => alert("Bài kiểm tra kết thúc – sau tất cả các bài kiểm tra"));
@@ -275,8 +275,8 @@ describe("test", function() {
   beforeEach(() => alert("Trước khi kiểm tra – nhập một bài kiểm tra"));
   afterEach(() => alert("Sau khi kiểm tra – xóa một bài kiểm tra"));
 
-  it('test 1', () => alert(1));
-  it('test 2', () => alert(2));
+  it('bài kiểm tra 1', () => alert(1));
+  it('bài kiểm tra 2', () => alert(2));
 
 });
 ```
@@ -310,17 +310,17 @@ Như đã nói, hàm `pow(x, n)` có nghĩa là hoạt động với các giá t
 Trước tiên hãy thêm hành vi vào thông số kỹ thuật (!):
 
 ```js
-describe("pow", function() {
+describe("luỹ thừa", function() {
 
   // ...
 
-  it("for negative n the result is NaN", function() {
+  it("đối với n âm, kết quả là NaN", function() {
 *!*
     assert.isNaN(pow(2, -1));
 */!*
   });
 
-  it("for non-integer n the result is NaN", function() {
+  it("đối với n không nguyên, kết quả là NaN", function() {
 *!*
     assert.isNaN(pow(2, 1.5));    
 */!*
@@ -336,7 +336,7 @@ Kết quả với các bài kiểm tra mới:
 Các bài kiểm tra mới được thêm vào không thành công vì quá trình triển khai của chúng ta không hỗ trợ chúng. Đó là cách BDD được thực hiện: đầu tiên chúng ta viết các bài kiểm tra không thành công, sau đó thực hiện triển khai cho chúng.
 
 ```smart header="Các khẳng định khác"
-Vui lòng lưu ý xác nhận `assert.isNaN`: nó kiểm tra `NaN`.
+Hãy lưu ý xác nhận `assert.isNaN`: nó kiểm tra `NaN`.
 
 Chẳng hạn, có các xác nhận khác trong [Chai](http://chaijs.com):
 
@@ -353,8 +353,8 @@ Vì vậy, chúng ta nên thêm một vài dòng vào `pow`:
 ```js
 function pow(x, n) {
 *!*
-  if (n < 0) return NaN;
-  if (Math.round(n) != n) return NaN;
+  nếu (n < 0) trả về NaN;
+  nếu (Math.round(n) != n) trả về NaN;
 */!*
 
   let result = 1;
