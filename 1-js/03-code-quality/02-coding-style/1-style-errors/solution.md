@@ -15,7 +15,7 @@ let x=prompt("x?",''), n=prompt("n?",'') // <-- có thể trên lý thuyết,
 if (n<=0)  // <- không có khoảng trắng bên trong (n <= 0) và phải có thêm dòng phía trên nó
 { // <- dấu ngoặc trên một dòng riêng biệt
   // bên dưới - các dòng dài có thể được chia thành nhiều dòng để dễ đọc hơn
-  alert(`Nguồn ${n} không được hỗ trợ, vui lòng nhập một số nguyên lớn hơn 0`);
+  alert(`Luỹ thừa ${n} không được hỗ trợ, vui lòng nhập một số nguyên lớn hơn 0`);
 }
 else // <- có thể viết nó trên một dòng như "} else {"
 {
@@ -40,7 +40,7 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n <= 0) {
-  alert(`Nguồn ${n} không được hỗ trợ,
+  alert(`Luỹ thừa ${n} không được hỗ trợ,
   vui lòng nhập một số nguyên lớn hơn 0`);
 } else {
   alert( pow(x, n) );
