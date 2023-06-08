@@ -26,7 +26,7 @@ let n = prompt("n?", "");
 
 if (n < 0) {
   alert(`Luỹ thừa ${n} không được hỗ trợ,
-     vui lòng nhập số nguyên không âm`);
+    vui lòng nhập số nguyên không âm`);
 } else {
   alert( pow(x, n) );
 }
@@ -47,15 +47,14 @@ Trong hầu hết các dự án JavaScript, dấu ngoặc nhọn được viết
 ```js
 if (condition) {
   // làm cái này
-   // ...và cái kia
-   // ...và cái kia
+  // ...và cái kia
+  // ...và cái kia
 }
 ```
 
 Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`, là một trường hợp rìa quan trọng. Có nên sử dụng dấu ngoặc nhọn không?
 
-Dưới đây là các biến thể được chú thích để bạn có thể tự đánh giá khả năng đọc được của chúng:
-    
+Dưới đây là các biến thể được chú thích để bạn có thể tự đánh giá khả năng đọc được của chúng:    
 1. 😠 Người mới bắt đầu đôi khi làm điều đó. Tệ! Không cần dấu ngoặc nhọn: 
    ```js
     if (n < 0) *!*{*/!*alert(`Nguồn ${n} không được hỗ trợ`);*!*}*/!*
@@ -87,8 +86,8 @@ Ví dụ:
 // backtick quotes ` cho phép chia chuỗi thành nhiều dòng
 let str = `
   TC39 của ECMA International là một nhóm các nhà phát triển JavaScript,
-   người thực hiện, học giả, v.v., hợp tác với cộng đồng
-   để duy trì và phát triển định nghĩa của JavaScript.
+  người thực hiện, học giả, v.v., hợp tác với cộng đồng
+  để duy trì và phát triển định nghĩa của JavaScript.
 `;
 ```
 
@@ -112,18 +111,18 @@ Có hai loại thụt lề:
 
 - **Thụt lề ngang: 2 hoặc 4 dấu cách.**
 
-     Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Lựa chọn việc nên dùng cách nào đã gây nên một cuộc xung đột từ xưa đến nay. Ngày nay thì sử dụng dấu cách dường như đã phổ biến hơn.
+    Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Lựa chọn việc nên dùng cách nào đã gây nên một cuộc xung đột từ xưa đến nay. Ngày nay thì sử dụng dấu cách dường như đã phổ biến hơn.
 
-     Một lợi thế của dấu cách so với tab là nó cho phép cấu hình thụt lề linh hoạt hơn so với tab.
+    Một lợi thế của dấu cách so với tab là nó cho phép cấu hình thụt lề linh hoạt hơn so với tab.
 
-     Chẳng hạn, chúng ta có thể căn chỉnh các tham số với dấu ngoặc mở, như thế này:
+    Chẳng hạn, chúng ta có thể căn chỉnh các tham số với dấu ngoặc mở, như thế này:
 
     ```js no-beautify
     show(parameters,
          aligned, // 5 dấu cách đệm ở bên trái
-          one,
-          after,
-          another
+         one,
+         after,
+         another
       ) {
       // ...
     }
@@ -131,7 +130,7 @@ Có hai loại thụt lề:
 
 - **Thụt lề dọc: các dòng trống để tách mã thành các khối logic.**
 
-     Ngay cả một chức năng đơn lẻ thường có thể được chia thành các khối hợp lý. Trong ví dụ bên dưới, việc khởi tạo các biến, vòng lặp chính và trả về kết quả được chia theo chiều dọc:
+    Ngay cả một chức năng đơn lẻ thường có thể được chia thành các khối hợp lý. Trong ví dụ bên dưới, việc khởi tạo các biến, vòng lặp chính và trả về kết quả được chia theo chiều dọc:
 
     ```js
     function pow(x, n) {
@@ -269,7 +268,7 @@ Nếu bạn đang viết một số hàm "helper" và mã sử dụng chúng, c�
       ...
     }
     ```
-3.3. Hỗn hợp: một chức năng được khai báo ở nơi nó được sử dụng lần đầu tiên.
+3. Hỗn hợp: một chức năng được khai báo ở nơi nó được sử dụng lần đầu tiên.
 
 Hầu hết thời gian, biến thể thứ hai được ưa thích hơn.
 
@@ -333,7 +332,7 @@ Chẳng hạn, đối với ESLint, bạn nên làm như sau:
 }
 ```
 
-Ở đây, lệnh `"extends"` có nghĩa là cấu hình này dựa trên "eslint:recommended" bộ cài đặt. Sau đó, chúng ta có thể thay đổi theo cách của mình.
+Ở đây, lệnh `"extends"` có nghĩa là cấu hình này dựa trên bộ cài đặt "eslint:recommended". Sau đó, chúng ta có thể thay đổi theo cách của mình.
 
 Cũng có thể tải xuống các bộ quy tắc kiểu từ web và và thay đổi chúng. Xem <http://eslint.org/docs/user-guide/getting-started> để biết thêm chi tiết về cài đặt.
 
