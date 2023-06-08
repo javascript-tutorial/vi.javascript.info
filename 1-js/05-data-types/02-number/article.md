@@ -2,9 +2,9 @@
 
 Trong JavaScript hiện đại, có hai loại số:
 
-1. Các số thông thường trong JavaScript được lưu trữ ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), còn được gọi là "số dấu phẩy động có độ chính xác kép". Đây là những con số mà chúng tA sử dụng hầu hết thời gian và chúng ta sẽ nói về chúng trong chương này.
+1. Các số thông thường trong JavaScript được lưu trữ ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), còn được gọi là "số dấu phẩy động có độ chính xác kép". Đây là những con số mà chúng tA sử dụng hầu hết thời gian và chúng ta sẽ nói về chúng trong chương này.
 
-2. Số BigInt, để biểu diễn số nguyên có độ dài tùy ý. Đôi khi chúng cần thiết vì một số thông thường không được vượt quá <code>2<sup>53</sup></code> hoặc nhỏ hơn <code>-2<sup>53</sup></code> . Vì bigint được sử dụng trong một vài lĩnh vực đặc biệt nên chúng ta dành cho chúng một chương đặc biệt <info:bigint>.
+2. Số BigInt đại diện cho số nguyên có độ dài tùy ý. Đôi khi chúng cần thiết vì một số nguyên thông thường không thể an toàn vượt quá <code>(2<sup>53</sup>-1)</code> hoặc nhỏ hơn <code>-(2<sup>53</ sup>-1)</code>, như chúng ta đã đề cập trước đó trong chương <info:types>. Vì bigint được sử dụng trong một vài lĩnh vực đặc biệt nên chúng ta dành cho chúng một chương đặc biệt <info:bigint>.
 
 Vì vậy, ở đây chúng ta sẽ nói về các số thông thường. Hãy mở rộng kiến thức của chúng ta về chúng.
 
@@ -20,7 +20,7 @@ Chúng ta cũng có thể sử dụng dấu gạch dưới `_` làm dấu phân 
 let billion = 1_000_000_000;
 ```
 
-Ở đây, dấu gạch dưới `_` đóng vai trò "đường cú pháp", nó làm cho số dễ đọc hơn. JavaScript engine chỉ cần bỏ qua `_` giữa các chữ số, do đó, nó chính xác là một tỷ như trên.
+Ở đây, dấu gạch dưới `_` đóng vai trò của "[đường cú pháp](https://en.wikipedia.org/wiki/Syntactic_sugar)", nó làm cho số dễ đọc hơn. JavaScript engine chỉ cần bỏ qua `_` giữa các chữ số, do đó, nó chính xác là một tỷ như trên.
 
 Tuy nhiên, trong cuộc sống thực, chúng ta cố gắng tránh viết các chuỗi số 0 dài. Chúng ta quá lười biếng cho việc đó. Chúng ta sẽ cố gắng viết thứ gì đó như `"1 tỷ"` cho một tỷ hoặc `"7,3 tỷ"` cho 7 tỷ 300 triệu. Điều này cũng đúng với hầu hết các số lớn.
 
@@ -35,20 +35,20 @@ alert( 7.3e9 );  // 7,3 tỷ (giống như 7300000000 hoặc 7_300_000_000)
 Nói cách khác, `e` nhân số với `1` với số lượng các số 0 đã cho.
 
 ```js
-1e3 = 1 * 1000 // e3 nghĩa là *1000
-1.23e6 = 1.23 * 1000000 // e6 nghĩa là *1000000
+1e3 === 1 * 1000; // e3 nghĩa là *1000
+1.23e6 === 1.23 * 1000000; // e6 nghĩa là *1000000
 ```
 
 Bây giờ chúng ta hãy viết một cái gì đó rất nhỏ. Giả sử, 1 micro giây (một phần triệu giây):
 
 ```js
-let ms = 0.000001;
+let mcs = 0.000001;
 ```
 
-Giống như trước đây, việc sử dụng `"e"` có thể hữu ích. Nếu chúng ta muốn tránh viết các số 0 một cách rõ ràng, chúng ta có thể nói tương tự như:
+Giống như trước đây, việc sử dụng `"e"` có thể hữu ích. Nếu chúng ta muốn tránh viết các số 0 một cách rõ ràng, chúng ta có thể viết tương tự như:
 
 ```js
-let ms = 1e-6; // sáu số không ở bên trái từ 1
+let mcs = 1e-6; // năm số không ở bên trái từ 1
 ```
 
 Nếu chúng ta đếm các số 0 trong `0,000001`, thì có 6 số trong số đó. Vì vậy, tự nhiên đó là `1e-6`.
@@ -57,10 +57,13 @@ Nói cách khác, một số âm sau `"e"` có nghĩa là phép chia cho 1 với
 
 ```js
 // -3 chia cho 1 với 3 số 0
-1e-3 = 1 / 1000 (=0.001)
+1e-3 === 1 / 1000; // 0.001
 
 // -6 chia hết cho 1 với 6 chữ số 0
-1.23e-6 = 1.23 / 1000000 (=0.00000123)
+1.23e-6 === 1.23 / 1000000; // 0.00000123
+
+// một ví dụ với một số lớn hơn
+1234e-2 === 1234 / 100; // 12.34, dấu thập phân di chuyển 2 lần
 ```
 
 ### Số hex, nhị phân và bát phân
@@ -116,6 +119,7 @@ Hãy lưu ý rằng hai dấu chấm trong `123456..toString(36)` không phải 
 Nếu chúng ta đặt một dấu chấm đơn: `123456.toString(36)`, thì sẽ xảy ra lỗi, vì cú pháp JavaScript ngụ ý phần thập phân sau dấu chấm đầu tiên. Và nếu chúng ta đặt thêm một dấu chấm, thì JavaScript sẽ biết rằng phần thập phân trống và bây giờ sẽ thực hiện phương thức.
 
 Cũng có thể viết `(123456).toString(36)`.
+
 ```
 
 ## Làm tròn
@@ -154,7 +158,7 @@ Có hai cách để làm như vậy:
 
 1. Nhân chia.
 
-     Ví dụ: để làm tròn số đến chữ số thứ 2 sau dấu thập phân, chúng ta có thể nhân số đó với `100` (hoặc lũy thừa lớn hơn của 10), gọi hàm làm tròn rồi chia lại.
+     Ví dụ: để làm tròn số đến chữ số thứ 2 sau dấu thập phân, chúng ta có thể nhân số đó với `100`, gọi hàm làm tròn rồi chia lại.
     ```js run
     let num = 1.23456;
 
@@ -182,13 +186,13 @@ Có hai cách để làm như vậy:
     alert( num.toFixed(5) ); // "12.34000", thêm số 0 để tạo thành chính xác 5 chữ số
     ```
 
-    Chúng ta có thể chuyển đổi nó thành một số bằng cách sử dụng phép cộng đơn nguyên hoặc lệnh gọi `Number()`: `+num.toFixed(5)`.
+    Chúng ta có thể chuyển đổi nó thành một số bằng cách sử dụng phép cộng đơn nguyên hoặc lệnh gọi `Number()`, ví dụ viết `+num.toFixed(5)`.
 
 ## Tính toán không chính xác
 
-Bên trong, một số được thể hiện ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), do đó, có chính xác 64 bit để lưu trữ một số: 52 bit trong số đó được sử dụng để lưu trữ các chữ số, 11 trong số chúng lưu trữ vị trí của dấu thập phân (chúng bằng 0 đối với số nguyên) và 1 bit dành cho dấu.
+Bên trong, một số được thể hiện ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), do đó, có chính xác 64 bit để lưu trữ một số: 52 bit trong số đó được sử dụng để lưu trữ các chữ số, 11 trong số chúng lưu trữ vị trí của dấu thập phân và 1 bit dành cho dấu.
 
-Nếu một số quá lớn, nó sẽ tràn bộ nhớ 64-bit, có khả năng tạo ra vô số:
+Nếu một số thực sự lớn, nó có thể tràn bộ nhớ 64-bit và trở thành một giá trị số đặc biệt `Infinity`:
 
 ```js run
 alert( 1e500 ); // Vô hạn
@@ -196,7 +200,7 @@ alert( 1e500 ); // Vô hạn
 
 Điều có thể ít rõ ràng hơn một chút, nhưng lại xảy ra khá thường xuyên, đó là sự mất đi độ chính xác.
 
-Xem xét bài kiểm tra (sai!) này:
+Hãy xem xét bài kiểm tra bằng nhau (sai!) này:
 
 ```js run
 alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
@@ -210,13 +214,13 @@ Lạ lùng! Vậy thì đó là gì nếu không phải là `0,3`?
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
-Ôi! Có nhiều hậu quả hơn so với một so sánh không chính xác ở đây. Hãy tưởng tượng bạn đang tạo một trang web mua sắm điện tử và khách truy cập đặt hàng hóa `$0,1` và `$0,2` vào giỏ hàng của họ. Tổng đơn đặt hàng sẽ là `$0,30000000000000004`. Điều đó sẽ làm bất cứ ai ngạc nhiên.
+Ôi! Hãy tưởng tượng bạn đang tạo một trang web mua sắm điện tử và khách truy cập đặt hàng hóa `$0,1` và `$0,2` vào giỏ hàng của họ. Tổng đơn đặt hàng sẽ là `$0,30000000000000004`. Điều đó sẽ làm bất cứ ai ngạc nhiên.
 
 Nhưng tại sao điều này lại xảy ra?
 
 Một số được lưu trữ trong bộ nhớ ở dạng nhị phân, một chuỗi các bit - số một và số không. Nhưng các phân số như `0,1`, `0,2` trông có vẻ đơn giản trong hệ thống số thập phân thực ra là các phân số vô tận ở dạng nhị phân của chúng.
 
-Nói cách khác, `0,1` là gì? Nó là một chia cho mười `1/10`, một phần mười. Trong hệ thống số thập phân, những số như vậy có thể biểu diễn dễ dàng. So sánh nó với một phần ba: `1/3`. Nó trở thành phân số vô tận `0,33333(3)`.
+`0,1` là gì? Nó là một chia cho mười `1/10`, một phần mười. Trong hệ thống số thập phân, những số như vậy có thể biểu diễn dễ dàng. So sánh nó với một phần ba: `1/3`. Nó trở thành phân số vô tận `0,33333(3)`.
 
 Vì vậy, phép chia cho lũy thừa `10` được đảm bảo hoạt động tốt trong hệ thập phân, nhưng phép chia cho `3` thì không. Vì lý do tương tự, trong hệ thống số nhị phân, phép chia cho lũy thừa của `2` được đảm bảo hoạt động, nhưng `1/10` trở thành một phân số nhị phân vô tận.
 
@@ -243,7 +247,7 @@ Chúng ta có thể giải quyết vấn đề không? Chắc chắn rồi, phư
 
 ```js run
 let sum = 0.1 + 0.2;
-alert( sum.toFixed(2) ); // 0.30
+alert( sum.toFixed(2) ); // "0.30"
 ```
 
 Hãy lưu ý rằng `toFixed` luôn trả về một chuỗi. Nó đảm bảo rằng nó có 2 chữ số sau dấu thập phân. Điều đó thực sự tiện lợi nếu chúng tôi có một trang mua sắm điện tử và cần hiển thị `$0,3`. Đối với các trường hợp khác, chúng ta có thể sử dụng dấu cộng đơn nguyên để biến nó thành một số:
@@ -302,7 +306,7 @@ Chúng thuộc loại `số`, nhưng không phải là số "bình thường", v
     alert( isNaN("str") ); // true
     ```
 
-    Nhưng chúng ta có cần chức năng này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Xin lỗi, nhưng câu trả lời là không. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất kỳ giá trị nào, kể cả chính nó:
+    Nhưng chúng ta có cần chức năng này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Thật không may. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất kỳ giá trị nào, kể cả chính nó:
 
     ```js run
     alert( NaN === NaN ); // false
@@ -328,16 +332,42 @@ alert( isFinite(num) );
 
 Xin lưu ý rằng một chuỗi trống hoặc chỉ có khoảng trắng được coi là `0` trong tất cả các hàm số bao gồm `isFinite`.
 
-```smart header="so sánh với `Object.is`"
+````smart header="`Number.isNaN` và `Number.isFinite`"
+[Phương thức Number.isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) và [Number.isFinite](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) là các phiên bản "nghiêm ngặt" hơn của các hàm `isNaN` và `isFinite`. Chúng không tự động chuyển đổi đối số của chúng thành một số, nhưng thay vào đó kiểm tra xem nó có thuộc loại `number` hay không.
+- `Number.isNaN(value)` trả về `true` nếu đối số thuộc loại `number` và là `NaN`. Trong mọi trường hợp khác, nó trả về `false`.
+    ```js run
+    alert( Number.isNaN(NaN) ); // true
+    alert( Number.isNaN("str" / 2) ); // true
+    
+    // Lưu ý sự khác biệt:
+    alert( Number.isNaN("str") ); // false, vì "str" thuộc kiểu chuỗi, không phải kiểu số
+    alert( isNaN("str") ); // true, bởi vì isNaN chuyển đổi chuỗi "str" thành một số và nhận được NaN do chuyển đổi này
+    ```
+- `Number.isFinite(value)` trả về `true` nếu đối số thuộc loại `number` và không phải là `NaN/Infinity/-Infinity`. Trong mọi trường hợp khác, nó trả về `false`.
+    ```js run
+    alert( Number.isFinite(123) ); // true
+    alert( Number.isFinite(Infinity) ); // false
+    alert( Number.isFinite(2 / 0) ); // false
+    
+    // Lưu ý sự khác biệt:
+    alert( Number.isFinite("123") ); // false, vì "123" thuộc kiểu chuỗi, không phải kiểu số
+    alert( isFinite("123") ); // true, bởi vì isFinite chuyển chuỗi "123" thành số 123
+    ```
+    
+Theo một cách nào đó, `Number.isNaN` và `Number.isFinite` đơn giản và dễ hiểu hơn các hàm `isNaN` và `isFinite`. Tuy nhiên, trên thực tế, `isNaN` và `isFinite` chủ yếu được sử dụng vì chúng ngắn hơn để viết.
+````
 
-Có một phương thức tích hợp đặc biệt [`Object.is`](mdn:js/Object/is) so sánh các giá trị như `===`, nhưng đáng tin cậy hơn cho hai trường hợp cạnh:
+
+```smart header="So sánh với `Object.is`"
+
+Có một phương thức tích hợp đặc biệt `Object.is` để so sánh các giá trị như `===`, nhưng đáng tin cậy hơn cho hai trường hợp cạnh:
 
 1. Nó hoạt động với `NaN`: `Object.is(NaN, NaN) === true`, đó là một điều tốt.
 2. Các giá trị `0` và `-0` là khác nhau: `Object.is(0, -0) === false`, về mặt kỹ thuật, điều đó đúng, bởi vì bên trong số có một bit dấu có thể khác ngay cả khi tất cả các giá trị khác bit là số không.
 
 Trong tất cả các trường hợp khác, `Object.is(a, b)` giống như `a === b`.
 
-Cách so sánh này thường được sử dụng trong thông số kỹ thuật của JavaScript. Khi thuật toán nội bộ cần so sánh hai giá trị có giống nhau hoàn toàn không, thuật toán đó sẽ sử dụng `Object.is` (được gọi nội bộ là [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
+Chúng ta đề cập đến `Object.is` ở đây, bởi vì nó thường được sử dụng trong đặc điể kỹ thuật của JavaScript. Khi thuật toán nội bộ cần so sánh hai giá trị có giống nhau hoàn toàn không, thuật toán đó sẽ sử dụng `Object.is` (được gọi nội bộ là [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
 ```
 
 
@@ -397,8 +427,8 @@ Một vài ví dụ:
     alert( Math.random() ); // ... (bất kỳ số ngẫu nhiên nào)
     ```
 
-`Math.max(a, b, c...)` / `Math.min(a, b, c...)`
-: Trả về giá trị lớn nhất/nhỏ nhất từ số lượng đối số tùy ý.
+`Math.max(a, b, c...)` và `Math.min(a, b, c...)`
+: Trả về giá trị lớn nhất và nhỏ nhất từ số lượng đối số tùy ý.
 
     ```js run
     alert( Math.max(3, 5, -10, 0, 1) ); // 5
@@ -426,6 +456,11 @@ Có nhiều hàm và hằng số hơn trong đối tượng `Math`, bao gồm l�
 - Có thể viết số trực tiếp trong hệ thống hex (`0x`), bát phân (`0o`) và nhị phân (`0b`).
 - `parseInt(str, base)` phân tích chuỗi `str` thành một số nguyên trong hệ thống số với `base`, `2 ≤ base ≤ 36` đã cho.
 - `num.toString(base)` chuyển đổi một số thành một chuỗi trong hệ thống số với `base` đã cho.
+
+Đối với các bài kiểm tra số thông thường:
+
+- `isNaN(value)` chuyển đổi đối số của nó thành một số và sau đó kiểm tra xem nó có phải là `NaN` không
+- `isFinite(value)` chuyển đổi đối số của nó thành một số và trả về `true` nếu đó là số thông thường, không phải `NaN/Infinity/-Infinity`
 
 Để chuyển đổi các giá trị như `12pt` và `100px` thành một số:
 
