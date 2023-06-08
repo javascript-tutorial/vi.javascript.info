@@ -28,6 +28,6 @@ Lưu ý rằng `63,5` hoàn toàn không mất độ chính xác. Đó là vì p
 
 
 ```js run
-alert( Math.round(6.35 * 10) / 10); // 6.35 -> 63.5 -> 64(làm tròn) -> 6.4
+alert( Math.round(6.35 * 10) / 10 ); // 6.35 -> 63.5 -> 64(làm tròn) -> 6.4
 ```
 
