@@ -1,19 +1,19 @@
 
-# Unicode, String internals
+# Unicode, Nội bộ chuỗi
 
-```warn header="Advanced knowledge"
-The section goes deeper into string internals. This knowledge will be useful for you if you plan to deal with emoji, rare mathematical or hieroglyphic characters, or other rare symbols.
+```warn header="Kiến thức nâng cao"
+Phần này đi sâu hơn vào bên trong chuỗi. Kiến thức này sẽ hữu ích cho bạn nếu bạn định xử lý biểu tượng cảm xúc, ký tự toán học hoặc chữ tượng hình hiếm hoặc các ký hiệu hiếm khác.
 ```
 
-As we already know, JavaScript strings are based on [Unicode](https://en.wikipedia.org/wiki/Unicode): each character is represented by a byte sequence of 1-4 bytes.
+Như chúng ta đã biết, chuỗi JavaScript dựa trên [Unicode](https://en.wikipedia.org/wiki/Unicode): mỗi ký tự được đại diện bởi một chuỗi byte 1-4 byte.
 
-JavaScript allows us to insert a character into a string by specifying its hexadecimal Unicode code with one of these three notations:
+JavaScript cho phép chúng ta chèn một ký tự vào một chuỗi bằng cách chỉ định mã Unicode thập lục phân của nó bằng một trong ba ký hiệu sau:
 
 - `\xXX`
 
-    `XX` must be two hexadecimal digits with a value between `00` and `FF`, then `\xXX` is the character whose Unicode code is `XX`.
+    `XX` phải là hai chữ số thập lục phân có giá trị từ `00` đến `FF` thì `\xXX` là ký tự có mã Unicode là `XX`.
 
-    Because the `\xXX` notation supports only two hexadecimal digits, it can be used only for the first 256 Unicode characters.
+    Vì ký hiệu `\xXX` chỉ hỗ trợ hai chữ số thập lục phân, nên ký hiệu này chỉ có thể được sử dụng cho 256 ký tự Unicode đầu tiên.
 
     These first 256 characters include the Latin alphabet, most basic syntax characters, and some others. For example, `"\x7A"` is the same as `"z"` (Unicode `U+007A`).
 
