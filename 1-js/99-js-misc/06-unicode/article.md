@@ -1,5 +1,5 @@
 
-# Unicode, Nội bộ chuỗi
+# Unicode, Bên trong chuỗi
 
 ```warn header="Kiến thức nâng cao"
 Phần này đi sâu hơn vào bên trong chuỗi. Kiến thức này sẽ hữu ích cho bạn nếu bạn định xử lý biểu tượng cảm xúc, ký tự toán học hoặc chữ tượng hình hiếm hoặc các ký hiệu hiếm khác.
@@ -15,17 +15,17 @@ JavaScript cho phép chúng ta chèn một ký tự vào một chuỗi bằng c�
 
     Vì ký hiệu `\xXX` chỉ hỗ trợ hai chữ số thập lục phân, nên ký hiệu này chỉ có thể được sử dụng cho 256 ký tự Unicode đầu tiên.
 
-    These first 256 characters include the Latin alphabet, most basic syntax characters, and some others. For example, `"\x7A"` is the same as `"z"` (Unicode `U+007A`).
+    256 ký tự đầu tiên này bao gồm bảng chữ cái La-tinh, phần lớn kí tự cú pháp đơn giản, và một số ký tự khác. Ví dụ, `"\x7A"` giống như `"z"` (Unicode `U+007A`).
 
     ```js run
     alert( "\x7A" ); // z
-    alert( "\xA9" ); // ©, the copyright symbol
+    alert( "\xA9" ); // ©, ký hiệu bản quyền
     ```
 
 - `\uXXXX`
-    `XXXX` must be exactly 4 hex digits with the value between `0000` and `FFFF`, then `\uXXXX` is the character whose Unicode code is `XXXX`.
+    `XXXX` phải có chính xác 4 chữ số hex với giá trị giữa `0000` và `FFFF`, sau đó `\uXXXX` là ký tự có mã Unicode là `XXXX`.
 
-    Characters with Unicode values greater than `U+FFFF` can also be represented with this notation, but in this case, we will need to use a so called surrogate pair (we will talk about surrogate pairs later in this chapter).
+    Các ký tự với giá trị Unicode lớn hơn `U+FFFF` cũng có thể được đại diện với ký hiệu này, nhưng trong trường hợp này, chúng ta sẽ cần phải sử dụng cái gọi là cặp thay thế (chúng ta sẽ nói về cặp thay thế sau trong chương này).
 
     ```js run
     alert( "\u00A9" ); // ©, the same as \xA9, using the 4-digit hex notation
