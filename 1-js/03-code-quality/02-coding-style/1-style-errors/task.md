@@ -17,7 +17,7 @@ function pow(x,n)
 let x=prompt("x?",''), n=prompt("n?",'')
 if (n<=0)
 {
-  alert(`Nguồn ${n} không được hỗ trợ, vui lòng nhập một số nguyên lớn hơn 0`);
+  alert(`Luỹ thừa ${n} không được hỗ trợ, vui lòng nhập một số nguyên lớn hơn 0`);
 }
 else
 {
