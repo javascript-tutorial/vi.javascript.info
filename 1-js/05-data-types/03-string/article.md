@@ -504,7 +504,7 @@ Phương thức này thực sự có hai đối số bổ sung được chỉ đ
 
 - Có 3 loại trích dẫn. Backticks cho phép một chuỗi mở rộng trên nhiều dòng và nhúng các biểu thức `${…}`.
 - Chúng ta có thể sử dụng các ký tự đặc biệt, chẳng hạn như ngắt dòng `\n`.
-- Để lấy một ký tự, sử dụng: `[]`.
+- Để lấy một ký tự, sử dụng: `[]` hay phương thức `at`.
 - Để lấy chuỗi con, dùng: `slice` hoặc `substring`.
 - Để viết thường/viết hoa một chuỗi, sử dụng: `toLowerCase/toUpperCase`.
 - Để tìm một chuỗi con, hãy sử dụng: `indexOf`, hoặc `includes/startsWith/endsWith` để kiểm tra đơn giản.
