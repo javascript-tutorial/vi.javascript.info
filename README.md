@@ -7,7 +7,7 @@ Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutor
 - Xem issue [Vietnamese Translate Progress](https://github.com/javascript-tutorial/vi.javascript.info/issues/1).
 - Chọn một bài chưa được dịch (chưa được check) mà bạn muốn dịch.
 - Thêm bình luận vào issue với nội dung là tiêu đề bài bạn muốn dịch, ví dụ `An Introduction to JavaScript`.
-    - Bot của chúng tôi tự động đánh dấu nó trong issue, để cho người khác biết rằng bạn đang dịch bài này.
+    - Bot của chúng tôi sẽ tự động đánh dấu nó trong issue, để cho người khác biết rằng bạn đang dịch bài này.
     - Bình luận của bạn chỉ nên chứa một tiêu đề duy nhất.
 - Fork repository này, dịch và gửi một Pull Request khi hoàn thành.
     - Tiêu đề của Pull Request nên trùng với tiêu đề bài dịch, giúp bot tự động ghi số của bài vào issue.
