@@ -25,7 +25,7 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n < 0) {
-  alert(`Nguồn ${n} không được hỗ trợ,
+  alert(`Luỹ thừa ${n} không được hỗ trợ,
      vui lòng nhập số nguyên không âm`);
 } else {
   alert( pow(x, n) );
