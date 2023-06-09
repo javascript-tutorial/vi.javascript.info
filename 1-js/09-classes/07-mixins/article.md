@@ -109,22 +109,22 @@ Vì `super` tìm kiếm các phương thức gốc trong `[[HomeObject]].[[Proto
 
 Bây giờ hãy tạo một mixin cho cuộc sống thực.
 
-An important feature of many browser objects (for instance) is that they can generate events. Events are a great way to "broadcast information" to anyone who wants it. So let's make a mixin that allows us to easily add event-related functions to any class/object.
+Một tính năng quan trọng của nhiều đối tượng trình duyệt (ví dụ) là chúng có thể tạo ra các sự kiện. Các sự kiện là một cách tuyệt vời để "phát thông tin" cho bất kỳ ai muốn. Vì vậy, hãy tạo một mixin cho phép chúng ta dễ dàng thêm các hàm liên quan đến sự kiện vào bất kỳ class/đối tượng nào.
 
-- The mixin will provide a method `.trigger(name, [...data])` to "generate an event" when something important happens to it. The `name` argument is a name of the event, optionally followed by additional arguments with event data.
-- Also the method `.on(name, handler)` that adds `handler` function as the listener to events with the given name. It will be called when an event with the given `name` triggers, and get the arguments from the `.trigger` call.
-- ...And the method `.off(name, handler)` that removes the `handler` listener.
+- Mixin sẽ cung cấp phương thức `.trigger(name, [...data])` để "tạo sự kiện" khi có điều gì đó quan trọng xảy ra với nó. Đối số `name` là tên của sự kiện, tùy chọn theo sau là các đối số bổ sung có dữ liệu sự kiện.
+- Ngoài ra, phương thức `.on(name, handler)` có thêm hàm `handler` làm trình nghe các sự kiện có tên đã cho. Nó sẽ được gọi khi một sự kiện có trình kích hoạt `name` đã cho và nhận các đối số từ lệnh gọi `.trigger`.
+- ...Và phương thức `.off(name, handler)` loại bỏ trình nghe `handler`.
 
-After adding the mixin, an object `user` will be able to generate an event `"login"` when the visitor logs in. And another object, say, `calendar` may want to listen for such events to load the calendar for the logged-in person.
+Sau khi thêm mixin, đối tượng `user` sẽ có thể tạo sự kiện `"login"` khi khách truy cập đăng nhập. Và một đối tượng khác, chẳng hạn như `calendar` có thể muốn nghe các sự kiện như vậy để tải lịch cho người đăng nhập.
 
-Or, a `menu` can generate the event `"select"` when a menu item is selected, and other objects may assign handlers to react on that event. And so on.
+Hoặc, `menu` có thể tạo sự kiện `"select"` khi một mục menu được chọn và các đối tượng khác có thể chỉ định trình xử lý để phản ứng với sự kiện đó. Và như thế.
 
-Here's the code:
+Đây là mã:
 
 ```js run
 let eventMixin = {
   /**
-   * Subscribe to event, usage:
+   * Theo dõi sự kiện, cách sử dụng:
    *  menu.on('select', function(item) { ... }
   */
   on(eventName, handler) {
@@ -136,7 +136,7 @@ let eventMixin = {
   },
 
   /**
-   * Cancel the subscription, usage:
+   * Hủy đăng ký, sử dụng:
    *  menu.off('select', handler)
    */
   off(eventName, handler) {
@@ -150,40 +150,40 @@ let eventMixin = {
   },
 
   /**
-   * Generate an event with the given name and data
+   * Tạo một sự kiện với tên và dữ liệu đã cho
    *  this.trigger('select', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers?.[eventName]) {
-      return; // no handlers for that event name
+      return; // không có trình xử lý nào cho tên sự kiện đó
     }
 
-    // call the handlers
+    // gọi trình xử lý
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
 };
 ```
 
 
-- `.on(eventName, handler)` -- assigns function `handler` to run when the event with that name occurs. Technically, there's an `_eventHandlers` property that stores an array of handlers for each event name, and it just adds it to the list.
-- `.off(eventName, handler)` -- removes the function from the handlers list.
-- `.trigger(eventName, ...args)` -- generates the event: all handlers from `_eventHandlers[eventName]` are called, with a list of arguments `...args`.
+- `.on(eventName, handler)` -- chỉ định hàm `handler` để chạy khi sự kiện có tên đó xảy ra. Về mặt kỹ thuật, có một thuộc tính `_eventHandlers` lưu trữ một array các trình xử lý cho từng tên sự kiện và thuộc tính này chỉ cần thêm sự kiện đó vào danh sách.
+- `.off(eventName, handler)` -- xóa hàm khỏi danh sách xử lý.
+- `.trigger(eventName, ...args)` -- tạo sự kiện: tất cả các trình xử lý từ `_eventHandlers[eventName]` được gọi, với một danh sách các đối số `...args`.
 
-Usage:
+Cách sử dụng:
 
 ```js run
-// Make a class
+// Tạo một class
 class Menu {
   choose(value) {
     this.trigger("select", value);
   }
 }
-// Add the mixin with event-related methods
+// Thêm mixin với các phương thức liên quan đến sự kiện
 Object.assign(Menu.prototype, eventMixin);
 
 let menu = new Menu();
 
-// add a handler, to be called on selection:
+// thêm một trình xử lý, để được gọi khi lựa chọn:
 *!*
 menu.on("select", value => alert(`Value selected: ${value}`));
 */!*
