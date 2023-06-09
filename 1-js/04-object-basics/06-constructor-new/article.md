@@ -4,7 +4,7 @@ Cú pháp `{...}` thông thường cho phép chúng ta tạo một đối tượ
 
 Điều đó có thể được thực hiện bằng cách sử dụng constructor và toán tử `"new"`.
 
-## Constructor
+## Hàm constructor
 
 Constructor về mặt kỹ thuật là các hàm thông thường. Có hai quy ước mặc dù:
 
