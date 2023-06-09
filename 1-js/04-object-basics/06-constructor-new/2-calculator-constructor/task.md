@@ -4,7 +4,7 @@ importance: 5
 
 # Tạo một Máy tính mới
 
-Tạo constructor `Calculator` để tạo đối tượng với 3 phương thức:
+Tạo một constructor `Calculator` để tạo đối tượng với 3 phương thức:
 
 - `read()` nhắc hai giá trị và lưu chúng dưới dạng thuộc tính đối tượng với tên `a` và `b` tương ứng.
 - `sum()` trả về tổng của các thuộc tính này.
