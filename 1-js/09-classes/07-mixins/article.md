@@ -1,6 +1,6 @@
 # Mixin
 
-Trong JavaScript, chúng ta chỉ có thể kế thừa từ một đối tượng duy nhất. Chỉ có thể có một `[[Nguyên mẫu]]` cho một đối tượng. Và một class chỉ có thể mở rộng một class khác.
+Trong JavaScript, chúng ta chỉ có thể kế thừa từ một đối tượng duy nhất. Chỉ có thể có một `[[Prototype]]` cho một đối tượng. Và một class chỉ có thể mở rộng một class khác.
 
 Nhưng đôi khi điều đó cảm thấy hạn chế. Chẳng hạn, chúng ta có một class `StreetSweeper` và một class `Bicycle`, và muốn kết hợp chúng: một `StreetSweepingBicycle`.
 
@@ -12,11 +12,11 @@ Theo định nghĩa trong Wikipedia, một [mixin](https://en.wikipedia.org/wiki
 
 Nói cách khác, *mixin* cung cấp các phương thức thực hiện một hành vi nhất định, nhưng chúng ta không sử dụng nó một mình, chúng ta sử dụng nó để thêm hành vi vào các class khác.
 
-## A mixin example
+## Một ví dụ mixin
 
-The simplest way to implement a mixin in JavaScript is to make an object with useful methods, so that we can easily merge them into a prototype of any class.
+Cách đơn giản nhất để triển khai mixin trong JavaScript là tạo một đối tượng bằng các phương thức hữu ích, để chúng ta có thể dễ dàng hợp nhất chúng thành một nguyên mẫu của bất kỳ class nào.
 
-For instance here the mixin `sayHiMixin` is used to add some "speech" for `User`:
+Ví dụ ở đây, mixin `sayHiMixin` được sử dụng để thêm một số "lời nói" cho `User`:
 
 ```js run
 *!*
@@ -24,15 +24,15 @@ For instance here the mixin `sayHiMixin` is used to add some "speech" for `User`
 */!*
 let sayHiMixin = {
   sayHi() {
-    alert(`Hello ${this.name}`);
+    alert(`Xin chào ${this.name}`);
   },
   sayBye() {
-    alert(`Bye ${this.name}`);
+    alert(`Tạm biệt ${this.name}`);
   }
 };
 
 *!*
-// usage:
+// cách sử dụng:
 */!*
 class User {
   constructor(name) {
@@ -40,14 +40,14 @@ class User {
   }
 }
 
-// copy the methods
+// sao chép các phương thức
 Object.assign(User.prototype, sayHiMixin);
 
-// now User can say hi
-new User("Dude").sayHi(); // Hello Dude!
+// bây giờ User có thể nói xin chào
+new User("anh bạn").sayHi(); // Xin chào anh bạn!
 ```
 
-There's no inheritance, but a simple method copying. So `User` may inherit from another class and also include the mixin to "mix-in" the additional methods, like this:
+Không có kế thừa, nhưng một phương thức sao chép đơn giản. Vì vậy, `User` có thể kế thừa từ một class khác và cũng bao gồm mixin để "kết hợp" các phương thức bổ sung, như sau:
 
 ```js
 class User extends Person {
@@ -57,9 +57,9 @@ class User extends Person {
 Object.assign(User.prototype, sayHiMixin);
 ```
 
-Mixins can make use of inheritance inside themselves.
+Mixin có thể tận dụng sự kế thừa bên trong chính chúng.
 
-For instance, here `sayHiMixin` inherits from `sayMixin`:
+Chẳng hạn, ở đây `sayHiMixin` kế thừa từ `sayMixin`:
 
 ```js run
 let sayMixin = {
@@ -69,16 +69,16 @@ let sayMixin = {
 };
 
 let sayHiMixin = {
-  __proto__: sayMixin, // (or we could use Object.setPrototypeOf to set the prototype here)
+  __proto__: sayMixin, // (hoặc chúng ta có thể sử dụng Object.setPrototypeOf để đặt nguyên mẫu tại đây)
 
   sayHi() {
     *!*
-    // call parent method
+    // gọi phương thức gốc
     */!*
-    super.say(`Hello ${this.name}`); // (*)
+    super.say(`Xin chào ${this.name}`); // (*)
   },
   sayBye() {
-    super.say(`Bye ${this.name}`); // (*)
+    super.say(`Tạm biệt ${this.name}`); // (*)
   }
 };
 
@@ -88,26 +88,26 @@ class User {
   }
 }
 
-// copy the methods
+// sao chép các phương thức
 Object.assign(User.prototype, sayHiMixin);
 
-// now User can say hi
-new User("Dude").sayHi(); // Hello Dude!
+// bây giờ User có thể nói xin chào
+new User("anh bạn").sayHi(); // Xin chào anh bạn!
 ```
 
-Please note that the call to the parent method `super.say()` from `sayHiMixin` (at lines labelled with `(*)`) looks for the method in the prototype of that mixin, not the class.
+Hãy lưu ý rằng cuộc gọi đến phương thức gốc `super.say()` từ `sayHiMixin` (tại các dòng được gắn nhãn `(*)`) sẽ tìm phương thức trong nguyên mẫu của mixin đó, chứ không phải class.
 
-Here's the diagram (see the right part):
+Đây là sơ đồ (xem phần bên phải):
 
 ![](mixin-inheritance.svg)
 
-That's because methods `sayHi` and `sayBye` were initially created in `sayHiMixin`. So even though they got copied, their `[[HomeObject]]` internal property references `sayHiMixin`, as shown in the picture above.
+Đó là bởi vì các phương thức `sayHi` và `sayBye` ban đầu được tạo trong `sayHiMixin`. Vì vậy, mặc dù chúng đã được sao chép, nhưng tham chiếu thuộc tính bên trong `[[HomeObject]]` của chúng là `sayHiMixin`, như minh họa trong hình trên.
 
-As `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`, that means it searches `sayHiMixin.[[Prototype]]`, not `User.[[Prototype]]`.
+Vì `super` tìm kiếm các phương thức gốc trong `[[HomeObject]].[[Prototype]]`, điều đó có nghĩa là nó tìm kiếm `sayHiMixin.[[Prototype]]`, không phải `User.[[Prototype]]`.
 
 ## EventMixin
 
-Now let's make a mixin for real life.
+Bây giờ hãy tạo một mixin cho cuộc sống thực.
 
 An important feature of many browser objects (for instance) is that they can generate events. Events are a great way to "broadcast information" to anyone who wants it. So let's make a mixin that allows us to easily add event-related functions to any class/object.
 
