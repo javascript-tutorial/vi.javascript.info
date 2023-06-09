@@ -2,7 +2,7 @@
 
 Trong JavaScript hiện đại, có hai loại số:
 
-1. Các số thông thường trong JavaScript được lưu trữ ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), còn được gọi là "số dấu phẩy động có độ chính xác kép". Đây là những con số mà chúng tA sử dụng hầu hết thời gian và chúng ta sẽ nói về chúng trong chương này.
+1. Các số thông thường trong JavaScript được lưu trữ ở định dạng 64-bit [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), còn được gọi là "số dấu phẩy động có độ chính xác kép". Đây là những con số mà chúng ta sử dụng trong phần lớn thời gian và chúng ta sẽ nói về chúng trong chương này.
 
 2. Số BigInt đại diện cho số nguyên có độ dài tùy ý. Đôi khi chúng cần thiết vì một số nguyên thông thường không thể an toàn vượt quá <code>(2<sup>53</sup>-1)</code> hoặc nhỏ hơn <code>-(2<sup>53</ sup>-1)</code>, như chúng ta đã đề cập trước đó trong chương <info:types>. Vì bigint được sử dụng trong một vài lĩnh vực đặc biệt nên chúng ta dành cho chúng một chương đặc biệt <info:bigint>.
 
@@ -68,13 +68,13 @@ Nói cách khác, một số âm sau `"e"` có nghĩa là phép chia cho 1 với
 
 ### Số hex, nhị phân và bát phân
 
-[Hệ thập lục phân](https://en.wikipedia.org/wiki/Hệ thập lục phân) được sử dụng rộng rãi trong JavaScript để thể hiện màu sắc, ký tự mã hóa và cho nhiều thứ khác. Vì vậy, một cách tự nhiên, tồn tại một cách viết ngắn hơn: `0x` và sau đó là số.
+[Hệ thập lục phân](https://vi.wikipedia.org/wiki/Hệ_thập_lục_phân) được sử dụng rộng rãi trong JavaScript để thể hiện màu sắc, ký tự mã hóa và cho nhiều thứ khác. Vì vậy, một cách tự nhiên, tồn tại một cách viết ngắn hơn: `0x` và sau đó là số.
 
 Ví dụ:
 
 ```js run
 alert( 0xff ); // 255
-alert( 0xFF ); // 255 (giống nhau, tviết hoa không quan trọng)
+alert( 0xFF ); // 255 (giống nhau, viết hoa không quan trọng)
 ```
 
 Các hệ thống số nhị phân và bát phân hiếm khi được sử dụng, nhưng cũng được hỗ trợ bằng cách sử dụng tiền tố `0b` và `0o`:
@@ -107,7 +107,7 @@ Các trường hợp sử dụng phổ biến cho việc này là:
 
 - **base=16** được sử dụng cho màu hex, mã hóa ký tự, v.v., các chữ số có thể là `0..9` hoặc `A..F`.
 - **base=2** chủ yếu dùng để gỡ lỗi các hoạt động theo bit, các chữ số có thể là `0` hoặc `1`.
-- **base=36** là giá trị lớn nhất, các chữ số có thể là `0..9` hoặc `A..Z`. Toàn bộ bảng chữ cái Latinh được sử dụng để đại diện cho một số. Một trường hợp buồn cười nhưng hữu ích cho `36` là khi chúng ta cần biến một mã định danh số dài thành một số khác ngắn hơn, chẳng hạn như để tạo một url ngắn. Có thể đơn giản biểu diễn nó trong hệ thống số với cơ số `36`:
+- **base=36** là giá trị lớn nhất, các chữ số có thể là `0..9` hoặc `A..Z`. Toàn bộ bảng chữ cái Latinh được sử dụng để đại diện cho một số. Một trường hợp buồn cười nhưng hữu ích cho `36` là khi chúng ta cần biến một định danh số dài thành một số khác ngắn hơn, chẳng hạn như để tạo một url ngắn. Có thể đơn giản biểu diễn nó trong hệ thống số với cơ số `36`:
 
     ```js run
     alert( 123456..toString(36) ); // 2n9c
@@ -150,7 +150,7 @@ Có một số chức năng tích hợp để làm tròn:
 |`-1.6`| `-2` | `-1` | `-2` | `-1` |
 
 
-Các chức năng này bao gồm tất cả các cách có thể để xử lý phần thập phân của một số. Nhưng nếu chúng ta muốn làm tròn số đến chữ số `thứ n` sau dấu thập phân thì sao?
+Các hàm này bao gồm tất cả các cách có thể để xử lý phần thập phân của một số. Nhưng nếu chúng ta muốn làm tròn số đến chữ số `thứ n` sau dấu thập phân thì sao?
 
 Chẳng hạn, chúng ta có `1.2345` và muốn làm tròn nó thành 2 chữ số, chỉ nhận được `1.23`.
 
@@ -250,7 +250,7 @@ let sum = 0.1 + 0.2;
 alert( sum.toFixed(2) ); // "0.30"
 ```
 
-Hãy lưu ý rằng `toFixed` luôn trả về một chuỗi. Nó đảm bảo rằng nó có 2 chữ số sau dấu thập phân. Điều đó thực sự tiện lợi nếu chúng tôi có một trang mua sắm điện tử và cần hiển thị `$0,3`. Đối với các trường hợp khác, chúng ta có thể sử dụng dấu cộng đơn nguyên để biến nó thành một số:
+Hãy lưu ý rằng `toFixed` luôn trả về một chuỗi. Nó đảm bảo rằng nó có 2 chữ số sau dấu thập phân. Điều đó thực sự tiện lợi nếu chúng ta có một trang mua sắm điện tử và cần hiển thị `$0,3`. Đối với các trường hợp khác, chúng ta có thể sử dụng dấu cộng đơn nguyên để biến nó thành một số:
 
 ```js run
 let sum = 0.1 + 0.2;
@@ -268,7 +268,7 @@ Vì vậy, phương pháp nhân/chia giúp giảm lỗi, nhưng không loại b�
 
 Đôi khi chúng ta có thể cố gắng trốn tránh các phân số. Giống như nếu chúng ta đang giao dịch với một cửa hàng, thì chúng ta có thể lưu trữ giá bằng xu thay vì đô la. Nhưng nếu chúng ta áp dụng giảm giá 30% thì sao? Trong thực tế, hiếm khi có thể trốn tránh hoàn toàn các phân số. Chỉ cần làm tròn chúng để cắt "đuôi" khi cần thiết.
 
-````smart header="TĐiều buồn cười"
+````smart header="Điều buồn cười"
 Hãy thử chạy cái này:
 
 ```js run
@@ -276,7 +276,7 @@ Hãy thử chạy cái này:
 alert( 9999999999999999 ); // shows 10000000000000000
 ```
 
-Điều này bị cùng một vấn đề: mất độ chính xác. Có 64 bit cho số, 52 trong số đó có thể được sử dụng để lưu trữ các chữ số, nhưng điều đó là không đủ. Vì vậy, các chữ số ít quan trọng nhất biến mất.
+Điều này bị cùng một vấn đề: mất độ chính xác. Có 64 bit cho số, 52 trong số đó có thể được sử dụng để lưu trữ các chữ số, nhưng đó là không đủ. Vì vậy, các chữ số ít quan trọng nhất biến mất.
 
 JavaScript không gây ra lỗi trong các sự kiện như vậy. Nó cố gắng hết sức để khớp số vào định dạng mong muốn, nhưng thật không may, định dạng này không đủ lớn.
 ````
@@ -296,7 +296,7 @@ Nhớ hai giá trị số đặc biệt này không?
 - `Infinity` (và `-Infinity`) là một giá trị số đặc biệt lớn hơn (nhỏ hơn) bất kỳ giá trị nào.
 - `NaN` biểu thị lỗi.
 
-Chúng thuộc loại `số`, nhưng không phải là số "bình thường", vì vậy có các chức năng đặc biệt để kiểm tra chúng:
+Chúng thuộc loại `số`, nhưng không phải là số "bình thường", vì vậy có các hàm đặc biệt để kiểm tra chúng:
 
 
 - `isNaN(value)` chuyển đổi đối số của nó thành một số và sau đó kiểm tra xem nó có phải là `NaN`:
@@ -306,7 +306,7 @@ Chúng thuộc loại `số`, nhưng không phải là số "bình thường", v
     alert( isNaN("str") ); // true
     ```
 
-    Nhưng chúng ta có cần chức năng này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Thật không may. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất kỳ giá trị nào, kể cả chính nó:
+    Nhưng chúng ta có cần hàm này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Thật không may. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất kỳ giá trị nào, kể cả chính nó:
 
     ```js run
     alert( NaN === NaN ); // false
@@ -330,7 +330,7 @@ let num = +prompt("Nhập một số", '');
 alert( isFinite(num) );
 ```
 
-Xin lưu ý rằng một chuỗi trống hoặc chỉ có khoảng trắng được coi là `0` trong tất cả các hàm số bao gồm `isFinite`.
+Hãy lưu ý rằng một chuỗi trống hoặc chỉ có khoảng trắng được coi là `0` trong tất cả các hàm số bao gồm `isFinite`.
 
 ````smart header="`Number.isNaN` và `Number.isFinite`"
 [Phương thức Number.isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) và [Number.isFinite](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) là các phiên bản "nghiêm ngặt" hơn của các hàm `isNaN` và `isFinite`. Chúng không tự động chuyển đổi đối số của chúng thành một số, nhưng thay vào đó kiểm tra xem nó có thuộc loại `number` hay không.
@@ -367,7 +367,7 @@ Có một phương thức tích hợp đặc biệt `Object.is` để so sánh c
 
 Trong tất cả các trường hợp khác, `Object.is(a, b)` giống như `a === b`.
 
-Chúng ta đề cập đến `Object.is` ở đây, bởi vì nó thường được sử dụng trong đặc điể kỹ thuật của JavaScript. Khi thuật toán nội bộ cần so sánh hai giá trị có giống nhau hoàn toàn không, thuật toán đó sẽ sử dụng `Object.is` (được gọi nội bộ là [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
+Chúng ta đề cập đến `Object.is` ở đây, bởi vì nó thường được sử dụng trong đặc điểm kỹ thuật của JavaScript. Khi thuật toán nội bộ cần so sánh hai giá trị có giống nhau hoàn toàn không, thuật toán đó sẽ sử dụng `Object.is` (được gọi nội bộ là [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
 ```
 
 
@@ -385,7 +385,7 @@ Nhưng trong cuộc sống thực, chúng ta thường có các giá trị theo 
 
 Đó là mục đích của `parseInt` và `parseFloat`.
 
-Chúng "đọc" một số từ một chuỗi cho đến khi họ không thể. Trong trường hợp có lỗi, số đã thu thập được trả về. Hàm `parseInt` trả về một số nguyên, trong khi `parseFloat` sẽ trả về một số dấu phẩy động:
+Chúng "đọc" một số từ một chuỗi cho đến khi chúng không thể. Trong trường hợp có lỗi, số đã thu thập được trả về. Hàm `parseInt` trả về một số nguyên, trong khi `parseFloat` sẽ trả về một số dấu phẩy động:
 
 ```js run
 alert( parseInt('100px') ); // 100
