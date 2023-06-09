@@ -25,141 +25,141 @@ JavaScript cho phép chúng ta chèn một ký tự vào một chuỗi bằng c�
 - `\uXXXX`
     `XXXX` phải có chính xác 4 chữ số hex với giá trị giữa `0000` và `FFFF`, sau đó `\uXXXX` là ký tự có mã Unicode là `XXXX`.
 
-    Các ký tự với giá trị Unicode lớn hơn `U+FFFF` cũng có thể được đại diện với ký hiệu này, nhưng trong trường hợp này, chúng ta sẽ cần phải sử dụng cái gọi là cặp thay thế (chúng ta sẽ nói về cặp thay thế sau trong chương này).
+    Các ký tự với giá trị Unicode lớn hơn `U+FFFF` cũng có thể được biểu diễn với ký hiệu này, nhưng trong trường hợp này, chúng ta sẽ cần phải sử dụng cái gọi là cặp thay thế (chúng ta sẽ nói về cặp thay thế sau trong chương này).
 
     ```js run
-    alert( "\u00A9" ); // ©, the same as \xA9, using the 4-digit hex notation
-    alert( "\u044F" ); // я, the Cyrillic alphabet letter
-    alert( "\u2191" ); // ↑, the arrow up symbol
+    alert( "\u00A9" ); // ©, giống như \xA9, sử dụng ký hiệu hex 4 chữ số
+    alert( "\u044F" ); // я, chữ cái trong bảng chữ cái Cyrillic
+    alert( "\u2191" ); // ↑, biểu tượng mũi tên lên
     ```
 
 - `\u{X…XXXXXX}`
 
-    `X…XXXXXX` must be a hexadecimal value of 1 to 6 bytes between `0` and `10FFFF` (the highest code point defined by Unicode). This notation allows us to easily represent all existing Unicode characters.
+    `X…XXXXXX` phải là giá trị thập lục phân từ 1 đến 6 byte trong khoảng từ `0` đến `10FFFF` (điểm mã cao nhất do Unicode xác định). Ký hiệu này cho phép chúng ta dễ dàng biểu diễn tất cả các ký tự Unicode hiện có.
 
     ```js run
-    alert( "\u{20331}" ); // 佫, a rare Chinese character (long Unicode)
-    alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long Unicode)
+    alert( "\u{20331}" ); // 佫, một ký tự tiếng Trung hiếm (mã Unicode dài)
+    alert( "\u{1F60D}" ); // 😍, một biểu tượng mặt cười (một mã Unicode dài khác)
     ```
 
-## Surrogate pairs
+## Cặp thay thế
 
-All frequently used characters have 2-byte codes (4 hex digits). Letters in most European languages, numbers, and the basic unified CJK ideographic sets (CJK -- from Chinese, Japanese, and Korean writing systems), have a 2-byte representation.
+Tất cả các ký tự được sử dụng thường xuyên đều có mã 2 byte (4 chữ số hex). Các chữ cái trong hầu hết các ngôn ngữ châu Âu, số và bộ ký tự CJK thống nhất cơ bản (CJK - từ hệ thống chữ viết của Trung Quốc, Nhật Bản và Hàn Quốc), có biểu diễn 2 byte.
 
-Initially, JavaScript was based on UTF-16 encoding that only allowed 2 bytes per character. But 2 bytes only allow 65536 combinations and that's not enough for every possible symbol of Unicode.
+Ban đầu, JavaScript dựa trên mã hóa UTF-16 chỉ cho phép 2 byte cho mỗi ký tự. Nhưng 2 byte chỉ cho phép 65536 kết hợp và điều đó là không đủ cho mọi ký hiệu Unicode có thể có.
 
-So rare symbols that require more than 2 bytes are encoded with a pair of 2-byte characters called "a surrogate pair".
+Vì vậy, các ký hiệu hiếm yêu cầu nhiều hơn 2 byte được mã hóa bằng một cặp ký tự 2 byte được gọi là "cặp thay thế".
 
-As a side effect, the length of such symbols is `2`:
+Như một tác dụng phụ, độ dài của các ký hiệu như vậy là `2`:
 
 ```js run
-alert( '𝒳'.length ); // 2, MATHEMATICAL SCRIPT CAPITAL X
-alert( '😂'.length ); // 2, FACE WITH TEARS OF JOY
-alert( '𩷶'.length ); // 2, a rare Chinese character
+alert( '𝒳'.length ); // 2, CHỮ X IN HOA TRONG TOÁN HỌC
+alert( '😂'.length ); // 2, KHUÔN MẶT VỚI NHỮNG GIỌT NƯỚC MẮT HẠNH PHÚC
+alert( '𩷶'.length ); // 2, một Ký tự Trung Quốc hiếm
 ```
 
-That's because surrogate pairs did not exist at the time when JavaScript was created, and thus are not correctly processed by the language!
+Đó là bởi vì các cặp thay thế không tồn tại vào thời điểm JavaScript được tạo ra và do đó không được ngôn ngữ xử lý chính xác!
 
-We actually have a single symbol in each of the strings above, but the `length` property shows a length of `2`.
+Chúng ta thực sự có một ký hiệu duy nhất trong mỗi chuỗi ở trên, nhưng thuộc tính `length` hiển thị độ dài là `2`.
 
-Getting a symbol can also be tricky, because most language features treat surrogate pairs as two characters.
+Lấy một ký hiệu cũng có thể khó khăn, bởi vì hầu hết các tính năng ngôn ngữ coi các cặp thay thế là hai ký tự.
 
-For example, here we can see two odd characters in the output:
+Ví dụ, ở đây chúng ta có thể thấy hai ký tự lẻ trong đầu ra:
 
 ```js run
-alert( '𝒳'[0] ); // shows strange symbols...
-alert( '𝒳'[1] ); // ...pieces of the surrogate pair
+alert( '𝒳'[0] ); // hiện những ký tự lạ...
+alert( '𝒳'[1] ); // ...các mảnh của cặp thay thế
 ```
 
-Pieces of a surrogate pair have no meaning without each other. So the alerts in the example above actually display garbage.
+Các mảnh của một cặp thay thế không có ý nghĩa gì nếu không có nhau. Vì vậy, các cảnh báo trong ví dụ trên thực sự hiển thị rác.
 
-Technically, surrogate pairs are also detectable by their codes: if a character has the code in the interval of `0xd800..0xdbff`, then it is the first part of the surrogate pair. The next character (second part) must have the code in interval `0xdc00..0xdfff`. These intervals are reserved exclusively for surrogate pairs by the standard.
+Về mặt kỹ thuật, các cặp thay thế cũng có thể được phát hiện bằng mã của chúng: nếu một ký tự có mã trong khoảng `0xd800..0xdbff`, thì đó là phần đầu tiên của cặp thay thế. Ký tự tiếp theo (phần thứ hai) phải có mã trong khoảng `0xdc00..0xdfff`. Các khoảng thời gian này được dành riêng cho các cặp thay thế theo tiêu chuẩn.
 
-So the methods [String.fromCodePoint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) and [str.codePointAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt) were added in JavaScript to deal with surrogate pairs.
+Vì vậy, các phương thức [String.fromCodePoint](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint) và [str.codePointAt](https://developer. mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt) đã được thêm vào JavaScript để xử lý các cặp thay thế.
 
-They are essentially the same as [String.fromCharCode](mdn:js/String/fromCharCode) and [str.charCodeAt](mdn:js/String/charCodeAt), but they treat surrogate pairs correctly.
+Về cơ bản, chúng giống như [String.fromCharCode](mdn:js/String/fromCharCode) và [str.charCodeAt](mdn:js/String/charCodeAt), nhưng chúng xử lý chính xác các cặp thay thế.
 
-One can see the difference here:
+Ta có thể thấy sự khác biệt ở đây:
 
 ```js run
-// charCodeAt is not surrogate-pair aware, so it gives codes for the 1st part of 𝒳:
+// charCodeAt không nhận biết cặp thay thế, vì vậy nó cung cấp mã cho phần đầu tiên của 𝒳:
 
 alert( '𝒳'.charCodeAt(0).toString(16) ); // d835
 
-// codePointAt is surrogate-pair aware
-alert( '𝒳'.codePointAt(0).toString(16) ); // 1d4b3, reads both parts of the surrogate pair
+// codePointAt nhận biết cặp thay thế
+alert( '𝒳'.codePointAt(0).toString(16) ); // 1d4b3, đọc cả hai phần của cặp thay thế
 ```
 
-That said, if we take from position 1 (and that's rather incorrect here), then they both return only the 2nd part of the pair:
+Điều đó nói rằng, nếu chúng ta lấy từ vị trí 1 (và điều đó khá sai ở đây), thì cả hai đều chỉ trả về phần thứ 2 của cặp:
 
 ```js run
 alert( '𝒳'.charCodeAt(1).toString(16) ); // dcb3
 alert( '𝒳'.codePointAt(1).toString(16) ); // dcb3
-// meaningless 2nd half of the pair
+// nửa sau của cặp vô nghĩa
 ```
 
-You will find more ways to deal with surrogate pairs later in the chapter <info:iterable>. There are probably special libraries for that too, but nothing famous enough to suggest here.
+Bạn sẽ tìm thấy nhiều cách hơn để xử lý các cặp thay thế ở phần sau của chương <info:iterable>. Có lẽ cũng có những thư viện đặc biệt cho điều đó, nhưng không có gì đủ nổi tiếng để đề xuất ở đây.
 
-````warn header="Takeaway: splitting strings at an arbitrary point is dangerous"
-We can't just split a string at an arbitrary position, e.g. take `str.slice(0, 4)` and expect it to be a valid string, e.g.:
+````warn header="Điều rút ra: tách chuỗi tại một điểm tùy ý là nguy hiểm"
+Chúng ta không thể tách một chuỗi ở một vị trí tùy ý, ví dụ: lấy `str.slice(0, 4)` và mong đợi nó là một chuỗi hợp lệ, ví dụ:
 
 ```js run
-alert( 'hi 😂'.slice(0, 4) ); //  hi [?]
+alert( 'chào 😂'.slice(0, 4) ); //  chào [?]
 ```
 
-Here we can see a garbage character (first half of the smile surrogate pair) in the output.
+Ở đây chúng ta có thể thấy một ký tự rác (nửa đầu của cặp thay thế nụ cười) trong đầu ra.
 
-Just be aware of it if you intend to reliably work with surrogate pairs. May not be a big problem, but at least you should understand what happens.
+Chỉ cần lưu ý về nó nếu bạn có ý định làm việc với các cặp thay thế một cách đáng tin cậy. Có thể không phải là một vấn đề lớn, nhưng ít nhất bạn nên hiểu những gì xảy ra.
 ````
 
-## Diacritical marks and normalization
+## Dấu phụ và chuẩn hóa
 
-In many languages, there are symbols that are composed of the base character with a mark above/under it.
+Trong nhiều ngôn ngữ, có những ký hiệu bao gồm ký tự cơ sở có dấu ở trên/dưới ký tự đó.
 
-For instance, the letter `a` can be the base character for these characters: `àáâäãåā`.
+Chẳng hạn, ký tự `a` có thể là ký tự cơ bản cho các ký tự này: `àáâäãåā`.
 
-Most common "composite" characters have their own code in the Unicode table. But not all of them, because there are too many possible combinations.
+Hầu hết các ký tự "tổng hợp" phổ biến đều có mã riêng trong bảng Unicode. Nhưng không phải tất cả chúng, bởi vì có quá nhiều sự kết hợp có thể xảy ra.
 
-To support arbitrary compositions, the Unicode standard allows us to use several Unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
+Để hỗ trợ các thành phần tùy ý, tiêu chuẩn Unicode cho phép chúng ta sử dụng một số ký tự Unicode: ký tự cơ sở theo sau là một hoặc nhiều ký tự "đánh dấu" "trang trí" cho nó.
 
-For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
+Chẳng hạn, nếu chúng ta có `S` theo sau là ký tự "dấu chấm phía trên" đặc biệt (mã `\u0307`), nó sẽ được hiển thị là Ṡ.
 
 ```js run
 alert( 'S\u0307' ); // Ṡ
 ```
 
-If we need an additional mark above the letter (or below it) -- no problem, just add the necessary mark character.
+Nếu chúng ta cần một dấu bổ sung phía trên chữ cái (hoặc bên dưới nó) -- không vấn đề gì, chỉ cần thêm ký tự dấu cần thiết.
 
-For instance, if we append a character "dot below" (code `\u0323`), then we'll have "S with dots above and below": `Ṩ`.
+Ví dụ, nếu chúng ta thêm một ký tự "dấu chấm bên dưới" (mã `\u0323`), thì chúng ta sẽ có "S có dấu chấm bên trên và bên dưới": `Ṩ`.
 
-For example:
+Ví dụ:
 
 ```js run
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different Unicode compositions.
+Điều này mang lại sự linh hoạt tuyệt vời, nhưng cũng là một vấn đề thú vị: hai ký tự có thể trông giống nhau về mặt trực quan, nhưng được thể hiện bằng các thành phần Unicode khác nhau.
 
-For instance:
+Ví dụ:
 
 ```js run
-let s1 = 'S\u0307\u0323'; // Ṩ, S + dot above + dot below
-let s2 = 'S\u0323\u0307'; // Ṩ, S + dot below + dot above
+let s1 = 'S\u0307\u0323'; // Ṩ, S + chấm trên + chấm dưới
+let s2 = 'S\u0323\u0307'; // Ṩ, S + chấm dưới + chấm trên
 
 alert( `s1: ${s1}, s2: ${s2}` );
 
-alert( s1 == s2 ); // false though the characters look identical (?!)
+alert( s1 == s2 ); // false mặc dù các ký tự trông giống hệt nhau (?!)
 ```
 
-To solve this, there exists a "Unicode normalization" algorithm that brings each string to the single "normal" form.
+Để giải quyết vấn đề này, tồn tại thuật toán "Chuẩn hóa Unicode" đưa mỗi chuỗi về dạng "bình thường" duy nhất.
 
-It is implemented by [str.normalize()](mdn:js/String/normalize).
+Nó được thực hiện bởi [str.normalize()](mdn:js/String/normalize).
 
 ```js run
 alert( "S\u0307\u0323".normalize() == "S\u0323\u0307".normalize() ); // true
 ```
 
-It's funny that in our situation `normalize()` actually brings together a sequence of 3 characters to one: `\u1e68` (S with two dots).
+Thật buồn cười là trong tình huống của chúng ta, `normalize()` thực sự tập hợp một chuỗi gồm 3 ký tự thành một: `\u1e68` (S có hai dấu chấm).
 
 ```js run
 alert( "S\u0307\u0323".normalize().length ); // 1
@@ -167,6 +167,6 @@ alert( "S\u0307\u0323".normalize().length ); // 1
 alert( "S\u0307\u0323".normalize() == "\u1e68" ); // true
 ```
 
-In reality, this is not always the case. The reason is that the symbol `Ṩ` is "common enough", so Unicode creators included it in the main table and gave it the code.
+Trong thực tế, điều này không phải lúc nào cũng đúng. Lý do là ký hiệu `Ṩ` là "đủ phổ biến" nên những người tạo Unicode đã đưa nó vào bảng chính và đặt mã cho nó.
 
-If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](https://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
+Nếu bạn muốn tìm hiểu thêm về các biến thể và quy tắc chuẩn hóa -- chúng được mô tả trong phần phụ lục của tiêu chuẩn Unicode: [Biểu mẫu chuẩn hóa Unicode](https://www.unicode.org/reports/tr15/), nhưng với hầu hết mục đích thực tế, thông tin từ phần này là đủ rồi.
