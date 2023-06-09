@@ -1,4 +1,4 @@
-Bên trong, phân số thập phân `6,35` là một nhị phân vô tận. Như mọi khi trong những trường hợp như vậy, nó được lưu trữ với độ chính xác bị mất.
+Bên trong, phân số thập phân `6,35` là một số nhị phân vô tận. Như mọi khi trong những trường hợp như vậy, nó được lưu trữ với độ chính xác bị mất.
 
 Hãy xem nào:
 
