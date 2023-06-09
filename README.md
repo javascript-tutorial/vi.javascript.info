@@ -1,6 +1,6 @@
 # Modern JavaScript Tutorial bằng Tiếng Việt
 
-Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutorial, xuất bản tại [https://javascript.info](https://javascript.info).
+Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutorial, sẽ được xuất bản tại [https://vi.javascript.info](https://vi.javascript.info). Đây là URL gốc của bản tiếng Anh: [https://javascript.info](https://javascript.info).
 
 **Bạn có thể đóng góp vào bản dịch này bằng cách:**
 
@@ -14,15 +14,15 @@ Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutor
 
 Vui lòng cho phép các maintainer (nhà bào trì) xem xét (review) và hợp nhất (merge) các thay đổi của bạn vào bản dịch.
 
-Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành một maintainer, nói cho chúng tôi tại [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
+Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành một maintainer, nói cho chúng tôi tại [repository chính](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
 
-**Cho người khác biết rằng bạn đang dịch trong bảng thông báo hoặc nói chuyện bằng ngôn ngữ của bạn. Mời họ cùng tham gia!**
+**Cho người khác biết rằng bạn đang dịch trong bảng thông báo hoặc nói chuyện bằng tiếng Việt. Mời họ cùng tham gia!**
 
 🎉 Cảm ơn!
 
-Tên và phần đóng góp của bạn sẽ xuất hiện trong trang "About project" khi bản dịch được xuất bản.
+Tên và phần đóng góp của bạn sẽ xuất hiện trong trang "About the project" khi bản dịch được xuất bản.
 
-P.S. Danh sách đầy đủ các ngôn ngữ có thể thấy tại <https://javascript.info/translate>.
+Tái bút: Danh sách đầy đủ các ngôn ngữ có thể thấy tại <https://javascript.info/translate>.
 
 ## Cấu trúc
 
@@ -42,14 +42,14 @@ Các tài nguyên bổ sung và các ví dụ cho bài học hoặc bài tập c
 
 ## Hướng dẫn dịch
 
-Vui lòng giữ nguyên các đoạn và dấu xuống dòng: đừng thêm các dấu xuống dòng mới cũng như không xóa các dấu xuống dòng hiện tại. Việc này giúp việc hợp nhất các thay đổi từ phiên bản Tiếng Anh sang phiên bản Tiếng Việt trong tương lai trở nên dễ dàng.
+Vui lòng giữ nguyên các đoạn và dấu xuống dòng: đừng thêm các dấu xuống dòng mới cũng như không xóa các dấu xuống dòng hiện tại. Việc này giúp việc hợp nhất các thay đổi từ phiên bản tiếng Anh sang phiên bản tiếng Việt trong tương lai trở nên dễ dàng.
 
-Nếu bạn thấy rằng phiên bản Tiếng Anh còn có thể cải thiện - tuyệt, hãy gửi một Pull Request cho nó.
+Nếu bạn thấy rằng phiên bản tiếng Anh còn có thể cải thiện - tuyệt, hãy gửi một Pull Request cho nó.
 
 ### Các thuật ngữ
 
 - Một số thuật ngữ kỹ thuật không có trong ngôn ngữ, ví dụ "Function Declaration" thì để nguyên.
-- Với các thuật ngữ khác như `resolved promise`, `slash`, `regexp` ... - cố tìm một bản dịch đã có trong ngôn ngữ của bạn. Nếu không tìm các bản dịch đã có trong hướng dẫn sử dụng như [MDN](https://developer.mozilla.org/en-US/).
+- Với các thuật ngữ khác như `resolved promise`, `slash`, `regexp` ... - cố tìm một bản dịch đã có trong tiếng Việt. Nếu không tìm các bản dịch đã có trong hướng dẫn sử dụng như [MDN](https://developer.mozilla.org/en-US/).
 
 ### Văn bản trong khối mã
 
@@ -86,7 +86,7 @@ document.querySelector('.xinchào').innerHTML = text;
 
 ### Các liên kết ngoài
 
-Nếu là một liên kết tới Wikipedia, ví dụ `https://en.wikipedia.org/wiki/JavaScript`, và có một phiên bản viết bằng ngôn ngữ của bạn, hay chuyển sang phiên bản này.
+Nếu là một liên kết tới Wikipedia, ví dụ `https://en.wikipedia.org/wiki/JavaScript`, và có một phiên bản viết bằng tiếng Việt, hay chuyển sang phiên bản này.
 
 Ví dụ
 
@@ -100,9 +100,9 @@ Ví dụ
 [JavaScript](https://vi.wikipedia.org/wiki/JavaScript) là một ngôn ngữ lập trình.
 ```
 
-Nếu là liên kết tới MDN, cố gắng đưa tới phiên bản có dịch một phần sang ngôn ngữ của bạn.
+Nếu là liên kết tới MDN, cố gắng đưa tới phiên bản có dịch một phần sang tiếng Việt.
 
-Nếu liên kết tới nội dung không có bằng ngôn ngữ của bạn, hãy để nguyên.
+Nếu liên kết tới nội dung không có tiếng Việt, hãy để nguyên.
 
 ### Metadata
 
