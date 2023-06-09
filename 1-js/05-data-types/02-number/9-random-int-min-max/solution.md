@@ -25,7 +25,7 @@ values from 2.5  ... to 2.9999999999  become 3
 
 Bây giờ chúng ta có thể thấy rõ ràng rằng `1` có giá trị ít hơn `2` hai lần. Và tương tự với `3`.
 
-# giải pháp chính xác
+# Giải pháp chính xác
 
 Có nhiều giải pháp chính xác cho nhiệm vụ. Một trong số đó là điều chỉnh đường viền khoảng cách. Để đảm bảo các khoảng giống nhau, chúng ta có thể tạo các giá trị từ `0,5 đến 3,5`, do đó thêm các xác suất cần thiết cho các cạnh:
 
@@ -46,7 +46,7 @@ Một cách khác có thể là sử dụng `Math.floor` cho một số ngẫu n
 ```js run
 *!*
 function randomInteger(min, max) {
-  // here rand is from min to (max+1)
+  // ở đây rand là từ tối thiểu đến (tối đa + 1)
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 }
