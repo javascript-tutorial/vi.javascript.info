@@ -1,12 +1,12 @@
-# Coding Style
+# Phong cách viết code
 
-Our code must be as clean and easy to read as possible.
+Mã của chúng ta phải rõ ràng và dễ đọc nhất có thể.
 
-That is actually the art of programming -- to take a complex task and code it in a way that is both correct and human-readable. A good code style greatly assists in that.  
+Đó thực sự là nghệ thuật lập trình -- nhận một nhiệm vụ phức tạp và code nó theo cách vừa chính xác vừa có thể đọc được. Một cách viết code tốt hỗ trợ rất nhiều trong việc đó.
 
-## Syntax
+## Cú pháp
 
-Here is a cheat sheet with some suggested rules (see below for more details):
+Đây là một bảng hỗ trợ với một số quy tắc được đề xuất (xem bên dưới để biết thêm chi tiết):
 
 ![](code-style.svg)
 <!--
@@ -25,8 +25,8 @@ let x = prompt("x?", "");
 let n = prompt("n?", "");
 
 if (n < 0) {
-  alert(`Power ${n} is not supported,
-    please enter a non-negative integer number`);
+  alert(`Luỹ thừa ${n} không được hỗ trợ,
+    vui lòng nhập số nguyên không âm`);
 } else {
   alert( pow(x, n) );
 }
@@ -34,65 +34,64 @@ if (n < 0) {
 
 -->
 
-Now let's discuss the rules and reasons for them in detail.
+Bây giờ hãy thảo luận chi tiết về các quy tắc và lý do cho chúng.
 
-```warn header="There are no \"you must\" rules"
-Nothing is set in stone here. These are style preferences, not religious dogmas.
+```warn header="Không có quy tắc \"bạn phải\""
+Không có gì là cố định ở đây. Đây là những sở thích phong cách, không phải giáo điều tôn giáo.
 ```
 
-### Curly Braces
+### Dấu ngoặc nhọn
 
-In most JavaScript projects curly braces are written in "Egyptian" style with the opening brace on the same line as the corresponding keyword -- not on a new line. There should also be a space before the opening bracket, like this:
+Trong hầu hết các dự án JavaScript, dấu ngoặc nhọn được viết theo kiểu "Ai Cập" với dấu ngoặc nhọn mở trên cùng một dòng với từ khóa tương ứng -- không phải trên một dòng mới. Cũng nên có một khoảng trắng trước dấu ngoặc mở, như thế này:
 
 ```js
 if (condition) {
-  // do this
-  // ...and that
-  // ...and that
+  // làm cái này
+  // ...và cái kia
+  // ...và cái kia
 }
 ```
 
-A single-line construct, such as `if (condition) doSomething()`, is an important edge case. Should we use braces at all?
+Cấu trúc một dòng, chẳng hạn như `if (điều kiện) doSomething()`, là một trường hợp rìa quan trọng. Có nên sử dụng dấu ngoặc nhọn không?
 
-Here are the annotated variants so you can judge their readability for yourself:
-
-1. 😠 Beginners sometimes do that. Bad! Curly braces are not needed:
-    ```js
-    if (n < 0) *!*{*/!*alert(`Power ${n} is not supported`);*!*}*/!*
+Dưới đây là các biến thể được chú thích để bạn có thể tự đánh giá khả năng đọc được của chúng:    
+1. 😠 Người mới bắt đầu đôi khi làm điều đó. Tệ! Không cần dấu ngoặc nhọn: 
+   ```js
+    if (n < 0) *!*{*/!*alert(`Nguồn ${n} không được hỗ trợ`);*!*}*/!*
     ```
-2. 😠 Split to a separate line without braces. Never do that, easy to make an error when adding new lines:
+2. 😠 Tách sang dòng riêng không dấu ngoặc. Đừng bao giờ làm vậy, dễ bị lỗi khi thêm dòng mới:
     ```js
     if (n < 0)
-      alert(`Power ${n} is not supported`);
+      alert(`Nguồn ${n} không được hỗ trợ`);
     ```
-3. 😏 One line without braces - acceptable, if it's short:
+3. 😏 Một dòng không có dấu ngoặc nhọn - chấp nhận được, nếu ngắn:
     ```js
-    if (n < 0) alert(`Power ${n} is not supported`);
+    if (n < 0) alert(`Nguồn ${n} không được hỗ trợ`);
     ```
-4. 😃 The best variant:
+4. 😃 Biến thể tốt nhất:
     ```js
     if (n < 0) {
-      alert(`Power ${n} is not supported`);
+      alert(`Nguồn ${n} không được hỗ trợ`);
     }
     ```
 
-For a very brief code, one line is allowed, e.g. `if (cond) return null`. But a code block (the last variant) is usually more readable.
+Đối với một code rất ngắn gọn, một dòng được cho phép, ví dụ: `if (cond) return null`. Nhưng một code block (biến thể cuối cùng) thường dễ đọc hơn.
 
-### Line Length
+### Độ dài của dòng
 
-No one likes to read a long horizontal line of code. It's best practice to split them.
+Không ai thích đọc một dòng mã dài. Cách tốt nhất là tách chúng ra.
 
-For example:
+Ví dụ:
 ```js
-// backtick quotes ` allow to split the string into multiple lines
+// backtick quotes ` cho phép chia chuỗi thành nhiều dòng
 let str = `
-  ECMA International's TC39 is a group of JavaScript developers,
-  implementers, academics, and more, collaborating with the community
-  to maintain and evolve the definition of JavaScript.
+  TC39 của ECMA International là một nhóm các nhà phát triển JavaScript,
+  người thực hiện, học giả, v.v., hợp tác với cộng đồng
+  để duy trì và phát triển định nghĩa của JavaScript.
 `;
 ```
 
-And, for `if` statements:
+Và, đối với câu lệnh `if`:
 
 ```js
 if (
@@ -104,23 +103,23 @@ if (
 }
 ```
 
-The maximum line length should be agreed upon at the team-level. It's usually 80 or 120 characters.
+Độ dài tối đa của dòng phải được thống nhất ở cấp độ nhóm. Nó thường là 80 hoặc 120 ký tự.
 
-### Indents
+### Thụt lề
 
-There are two types of indents:
+Có hai loại thụt lề:
 
-- **Horizontal indents: 2 or 4 spaces.**
+- **Thụt lề ngang: 2 hoặc 4 dấu cách.**
 
-    A horizontal indentation is made using either 2 or 4 spaces or the horizontal tab symbol (key `key:Tab`). Which one to choose is an old holy war. Spaces are more common nowadays.
+    Thụt lề ngang được thực hiện bằng cách sử dụng 2 hoặc 4 dấu cách hoặc ký hiệu tab ngang (phím `key:Tab`). Lựa chọn việc nên dùng cách nào đã gây nên một cuộc xung đột từ xưa đến nay. Ngày nay thì sử dụng dấu cách dường như đã phổ biến hơn.
 
-    One advantage of spaces over tabs is that spaces allow more flexible configurations of indents than the tab symbol.
+    Một lợi thế của dấu cách so với tab là nó cho phép cấu hình thụt lề linh hoạt hơn so với tab.
 
-    For instance, we can align the parameters with the opening bracket, like this:
+    Chẳng hạn, chúng ta có thể căn chỉnh các tham số với dấu ngoặc mở, như thế này:
 
     ```js no-beautify
     show(parameters,
-         aligned, // 5 spaces padding at the left  
+         aligned, // 5 dấu cách đệm ở bên trái
          one,
          after,
          another
@@ -129,9 +128,9 @@ There are two types of indents:
     }
     ```
 
-- **Vertical indents: empty lines for splitting code into logical blocks.**
+- **Thụt lề dọc: các dòng trống để tách mã thành các khối logic.**
 
-    Even a single function can often be divided into logical blocks. In the example below, the initialization of variables, the main loop and returning the result are split vertically:
+    Ngay cả một chức năng đơn lẻ thường có thể được chia thành các khối hợp lý. Trong ví dụ bên dưới, việc khởi tạo các biến, vòng lặp chính và trả về kết quả được chia theo chiều dọc:
 
     ```js
     function pow(x, n) {
@@ -145,51 +144,51 @@ There are two types of indents:
     }
     ```
 
-    Insert an extra newline where it helps to make the code more readable. There should not be more than nine lines of code without a vertical indentation.
+    Chèn thêm một dòng mới để giúp mã dễ đọc hơn. Không được có nhiều hơn chín dòng mã mà không có thụt đầu dòng theo chiều dọc.
 
-### Semicolons
+### Dấu chấm phẩy
 
-A semicolon should be present after each statement, even if it could possibly be skipped.
+Dấu chấm phẩy phải có sau mỗi câu lệnh, ngay cả khi nó có thể bị bỏ qua.
 
-There are languages where a semicolon is truly optional and it is rarely used. In JavaScript, though, there are cases where a line break is not interpreted as a semicolon, leaving the code vulnerable to errors. See more about that in the chapter <info:structure#semicolon>.
+Có những ngôn ngữ mà dấu chấm phẩy thực sự là tùy chọn và hiếm khi được sử dụng. Tuy nhiên, trong JavaScript, có những trường hợp ngắt dòng không được hiểu là dấu chấm phẩy, khiến mã dễ bị lỗi. Xem thêm về điều đó trong chương <info:structure#semicolon>.
 
-If you're an experienced JavaScript programmer, you may choose a no-semicolon code style like [StandardJS](https://standardjs.com/). Otherwise, it's best to use semicolons to avoid possible pitfalls. The majority of developers put semicolons.
+Nếu là một lập trình viên JavaScript có kinh nghiệm, bạn có thể chọn kiểu mã không có dấu chấm phẩy như [StandardJS](https://standardjs.com/). Nếu không, tốt nhất là sử dụng dấu chấm phẩy để tránh những cạm bẫy có thể xảy ra. Phần lớn các nhà phát triển đặt dấu chấm phẩy.
 
-### Nesting Levels
+### Cấp độ lồng
 
-Try to avoid nesting code too many levels deep.
+Cố gắng tránh lồng mã quá nhiều cấp độ.
 
-For example, in the loop, it's sometimes a good idea to use the [`continue`](info:while-for#continue) directive to avoid extra nesting.
+Ví dụ: trong vòng lặp, đôi khi nên sử dụng chỉ thị [`continue`](info:while-for#continue) để tránh lồng thêm.
 
-For example, instead of adding a nested `if` conditional like this:
+Ví dụ: thay vì thêm điều kiện `if` lồng nhau như sau:
 
 ```js
 for (let i = 0; i < 10; i++) {
   if (cond) {
-    ... // <- one more nesting level
+    ... // <- thêm một cấp độ lồng nhau
   }
 }
 ```
 
-We can write:
+Ta có thể viết
 
 ```js
 for (let i = 0; i < 10; i++) {
   if (!cond) *!*continue*/!*;
-  ...  // <- no extra nesting level
+  ...  // <- không có cấp độ lồng thêm
 }
 ```
 
-A similar thing can be done with `if/else` and `return`.
+Điều tương tự có thể được thực hiện với `if/else` và `return`.
 
-For example, two constructs below are identical.
+Ví dụ, hai cấu trúc bên dưới giống hệt nhau.
 
-Option 1:
+Trường hợp 1:
 
 ```js
 function pow(x, n) {
   if (n < 0) {
-    alert("Negative 'n' not supported");
+    alert("Số âm `n` không được hỗ trợ");
   } else {
     let result = 1;
 
@@ -202,12 +201,12 @@ function pow(x, n) {
 }
 ```
 
-Option 2:
+Trường hợp 2:
 
 ```js
 function pow(x, n) {
   if (n < 0) {
-    alert("Negative 'n' not supported");
+    alert("Số âm `n` không được hỗ trợ");
     return;
   }
 
@@ -221,16 +220,16 @@ function pow(x, n) {
 }
 ```
 
-The second one is more readable because the "special case" of `n < 0` is handled early on. Once the check is done we can move on to the "main" code flow without the need for additional nesting.
+Cái thứ hai dễ đọc hơn vì "trường hợp đặc biệt" của `n < 0` được xử lý sớm. Sau khi kiểm tra xong, chúng ta có thể chuyển sang luồng mã "chính" mà không cần lồng bổ sung.
 
-## Function Placement
+## Vị trí chức năng
 
-If you are writing several "helper" functions and the code that uses them, there are three ways to organize the functions.
+Nếu bạn đang viết một số hàm "helper" và mã sử dụng chúng, có ba cách để tổ chức các hàm.
 
-1. Declare the functions *above* the code that uses them:
+1. Khai báo các hàm *ở trên* mã sử dụng chúng:
 
     ```js
-    // *!*function declarations*/!*
+    // *!*khai báo hàm*/!*
     function createElement() {
       ...
     }
@@ -243,20 +242,20 @@ If you are writing several "helper" functions and the code that uses them, there
       ...
     }
 
-    // *!*the code which uses them*/!*
+    // *!*mã sử dụng chúng*/!*
     let elem = createElement();
     setHandler(elem);
     walkAround();
     ```
-2. Code first, then functions
+2. Code trước, sau đó viết hàm
 
     ```js
-    // *!*the code which uses the functions*/!*
+    // *!*mã sử dụng các chức năng*/!*
     let elem = createElement();
     setHandler(elem);
     walkAround();
 
-    // --- *!*helper functions*/!* ---
+    // --- *!*hàm trợ giúp*/!* ---
     function createElement() {
       ...
     }
@@ -269,54 +268,54 @@ If you are writing several "helper" functions and the code that uses them, there
       ...
     }
     ```
-3. Mixed: a function is declared where it's first used.
+3. Hỗn hợp: một chức năng được khai báo ở nơi nó được sử dụng lần đầu tiên.
 
-Most of time, the second variant is preferred.
+Hầu hết thời gian, biến thể thứ hai được ưa thích hơn.
 
-That's because when reading code, we first want to know *what it does*. If the code goes first, then it becomes clear from the start. Then, maybe we won't need to read the functions at all, especially if their names are descriptive of what they actually do.
+Đó là bởi vì khi đọc mã, trước tiên chúng tôi muốn biết *nó làm gì*. Nếu mã đi trước, thì nó sẽ rõ ràng ngay từ đầu. Sau đó, có lẽ chúng ta sẽ không cần phải đọc các chức năng, đặc biệt nếu tên của chúng mô tả những gì chúng thực sự làm.
 
-## Style Guides
+## Hướng dẫn phong cách
 
-A style guide contains general rules about "how to write" code, e.g. which quotes to use, how many spaces to indent, the maximal line length, etc. A lot of minor things.
+Hướng dẫn phong cách chứa các quy tắc chung về "cách viết" mã, ví dụ: nên sử dụng trích dẫn nào, thụt lề bao nhiêu khoảng trắng, độ dài dòng tối đa, v.v. Rất nhiều điều nhỏ nhặt.
 
-When all members of a team use the same style guide, the code looks uniform, regardless of which team member wrote it.
+Khi tất cả các thành viên của một nhóm sử dụng cùng một hướng dẫn về phong cách, mã sẽ trông thống nhất, bất kể thành viên nào trong nhóm đã viết nó.
 
-Of course, a team can always write their own style guide, but usually there's no need to. There are many existing guides to choose from.
+Tất nhiên, một nhóm luôn có thể viết hướng dẫn phong cách của riêng họ, nhưng thường thì không cần thiết. Có rất nhiều hướng dẫn hiện có để lựa chọn.
 
-Some popular choices:
+Một số lựa chọn phổ biến:
 
-- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
-- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+- [Hướng dẫn về phong cách JavaScript của Google](https://google.github.io/styleguide/jsguide.html)
+- [Hướng dẫn về phong cách JavaScript của Airbnb](https://github.com/airbnb/javascript)
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
 - [StandardJS](https://standardjs.com/)
-- (plus many more)
+- (còn nhiều hơn nữa)
 
-If you're a novice developer, start with the cheat sheet at the beginning of this chapter. Then you can browse other style guides to pick up more ideas and decide which one you like best.
+Nếu bạn là một nhà phát triển mới làm quen, hãy bắt đầu với bảng hỗ trợ ở đầu chương này. Sau đó, bạn có thể duyệt qua các hướng dẫn về phong cách khác để chọn thêm ý tưởng và quyết định xem bạn thích ý tưởng nào nhất.
 
-## Automated Linters
+## Linters tự động
 
-Linters are tools that can automatically check the style of your code and make improving suggestions.
+Linters là công cụ có thể tự động kiểm tra kiểu mã của bạn và đưa ra các đề xuất cải tiến.
 
-The great thing about them is that style-checking can also find some bugs, like typos in variable or function names. Because of this feature, using a linter is recommended even if you don't want to stick to one particular "code style".
+Điều tuyệt vời về chúng là kiểm tra kiểu cũng có thể tìm thấy một số lỗi, như lỗi chính tả trong tên biến hoặc hàm. Do tính năng này, nên sử dụng linter ngay cả khi bạn không muốn dính vào một "kiểu mã" cụ thể.
 
-Here are some well-known linting tools:
+Dưới đây là một số công cụ linting nổi tiếng:
 
-- [JSLint](http://www.jslint.com/) -- one of the first linters.
-- [JSHint](http://www.jshint.com/) -- more settings than JSLint.
-- [ESLint](http://eslint.org/) -- probably the newest one.
+- [JSLint](http://www.jslint.com/) -- một trong những công cụ đầu tiên.
+- [JSHint](http://www.jshint.com/) -- nhiều cài đặt hơn JSLint.
+- [ESLint](http://eslint.org/) -- có lẽ là cái mới nhất.
 
-All of them can do the job. The author uses [ESLint](http://eslint.org/).
+Tất cả chúng đều có thể sử dụng. Ở đây, tác giả sử dụng [ESLint](http://eslint.org/).
 
-Most linters are integrated with many popular editors: just enable the plugin in the editor and configure the style.
+Hầu hết các linters đều được tích hợp với nhiều editor phổ biến: chỉ cần bật plugin trong trình chỉnh sửa và tùy chỉnh kiểu.
 
-For instance, for ESLint you should do the following:
+Chẳng hạn, đối với ESLint, bạn nên làm như sau:
 
-1. Install [Node.js](https://nodejs.org/).
-2. Install ESLint with the command `npm install -g eslint` (npm is a JavaScript package installer).
-3. Create a config file named `.eslintrc` in the root of your JavaScript project (in the folder that contains all your files).
-4. Install/enable the plugin for your editor that integrates with ESLint. The majority of editors have one.
+1. Cài đặt [Node.js](https://nodejs.org/).
+2. Cài đặt ESLint bằng lệnh `npm install -g eslint` (npm là trình cài đặt gói JavaScript).
+3. Tạo một tệp cấu hình có tên `.eslintrc` trong thư mục gốc của dự án JavaScript của bạn (trong thư mục chứa tất cả các tệp của bạn).
+4. Cài đặt/bật plugin cho trình chỉnh sửa tích hợp với ESLint của bạn. Đa số các editor đều có.
 
-Here's an example of an `.eslintrc` file:
+Đây là một ví dụ về tệp `.eslintrc`:
 
 ```js
 {
@@ -333,16 +332,16 @@ Here's an example of an `.eslintrc` file:
 }
 ```
 
-Here the directive `"extends"` denotes that the configuration is based on the "eslint:recommended" set of settings. After that, we specify our own.
+Ở đây, lệnh `"extends"` có nghĩa là cấu hình này dựa trên bộ cài đặt "eslint:recommended". Sau đó, chúng ta có thể thay đổi theo cách của mình.
 
-It is also possible to download style rule sets from the web and extend them instead. See <http://eslint.org/docs/user-guide/getting-started> for more details about installation.
+Cũng có thể tải xuống các bộ quy tắc kiểu từ web và và thay đổi chúng. Xem <http://eslint.org/docs/user-guide/getting-started> để biết thêm chi tiết về cài đặt.
 
-Also certain IDEs have built-in linting, which is convenient but not as customizable as ESLint.
+Ngoài ra, một số IDE nhất định có linting tích hợp, thuận tiện nhưng không thể tùy chỉnh như ESLint.
 
-## Summary
+## Tóm tắt
 
-All syntax rules described in this chapter (and in the style guides referenced) aim to increase the readability of your code. All of them are debatable.
+Tất cả các quy tắc cú pháp được mô tả trong chương này (và trong các hướng dẫn về phong cách được tham chiếu) nhằm mục đích tăng khả năng đọc mã của bạn. Tất cả chúng đều gây tranh cãi.
 
-When we think about writing "better" code, the questions we should ask ourselves are: "What makes the code more readable and easier to understand?" and "What can help us avoid errors?" These are the main things to keep in mind when choosing and debating code styles.
+Khi chúng ta nghĩ về việc viết mã "tốt hơn", các câu hỏi chúng ta nên tự hỏi mình là: "Điều gì làm cho mã dễ đọc hơn và dễ hiểu hơn?" và "Điều gì có thể giúp chúng ta tránh sai sót?" Đây là những điều chính cần lưu ý khi lựa chọn và tranh luận về kiểu mã.
 
-Reading popular style guides will allow you to keep up to date with the latest ideas about code style trends and best practices.
+Đọc các hướng dẫn về phong cách phổ biến sẽ cho phép bạn cập nhật những ý tưởng mới nhất về xu hướng phong cách mã và các phương pháp hay nhất.
