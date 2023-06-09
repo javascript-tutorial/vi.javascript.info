@@ -1,16 +1,16 @@
-# Mixins
+# Mixin
 
-In JavaScript we can only inherit from a single object. There can be only one `[[Prototype]]` for an object. And a class may extend only one other class.
+Trong JavaScript, chúng ta chỉ có thể kế thừa từ một đối tượng duy nhất. Chỉ có thể có một `[[Nguyên mẫu]]` cho một đối tượng. Và một class chỉ có thể mở rộng một class khác.
 
-But sometimes that feels limiting. For instance, we have a class `StreetSweeper` and a class `Bicycle`, and want to make their mix: a `StreetSweepingBicycle`.
+Nhưng đôi khi điều đó cảm thấy hạn chế. Chẳng hạn, chúng ta có một class `StreetSweeper` và một class `Bicycle`, và muốn kết hợp chúng: một `StreetSweepingBicycle`.
 
-Or we have a class `User` and a class `EventEmitter` that implements event generation, and we'd like to add the functionality of `EventEmitter` to `User`, so that our users can emit events.
+Hoặc chúng ta có một class `User` và một class `EventEmitter` thực hiện tạo sự kiện và chúng ta muốn thêm hàm của `EventEmitter` vào `User` để người dùng của chúng ta có thể tạo ra các sự kiện.
 
-There's a concept that can help here, called "mixins".
+Có một khái niệm có thể hữu ích ở đây, được gọi là "mixin".
 
-As defined in Wikipedia, a [mixin](https://en.wikipedia.org/wiki/Mixin) is a class containing methods that can be used by other classes without a need to inherit from it.
+Theo định nghĩa trong Wikipedia, một [mixin](https://en.wikipedia.org/wiki/Mixin) là một class chứa các phương thức có thể được sử dụng bởi các class khác mà không cần kế thừa từ nó.
 
-In other words, a *mixin* provides methods that implement a certain behavior, but we do not use it alone, we use it to add the behavior to other classes.
+Nói cách khác, *mixin* cung cấp các phương thức thực hiện một hành vi nhất định, nhưng chúng ta không sử dụng nó một mình, chúng ta sử dụng nó để thêm hành vi vào các class khác.
 
 ## A mixin example
 
