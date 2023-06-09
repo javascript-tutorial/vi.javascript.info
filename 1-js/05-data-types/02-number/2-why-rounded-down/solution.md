@@ -16,7 +16,7 @@ alert( 1.35.toFixed(20) ); // 1.35000000000000008882
 
 Ở đây, độ chính xác bị mất khiến con số lớn hơn một chút, vì vậy nó được làm tròn lên.
 
-**Làm cách nào chúng ta có thể khắc phục sự cố với `6.35` nếu chúng ta muốn nó được làm tròn đúng cách?**
+**Làm cách nào để chúng ta có thể khắc phục sự cố với `6.35` nếu chúng ta muốn nó được làm tròn đúng cách?**
 
 Chúng ta nên đưa nó đến gần một số nguyên hơn trước khi làm tròn:
 
