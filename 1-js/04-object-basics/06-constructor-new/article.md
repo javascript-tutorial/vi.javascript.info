@@ -1,12 +1,12 @@
-# Hàm tạo, toán tử "new"
+# Constructor, toán tử "new"
 
 Cú pháp `{...}` thông thường cho phép chúng ta tạo một đối tượng. Nhưng thường thì chúng ta cần tạo nhiều đối tượng tương tự, như nhiều người dùng hoặc mục menu, v.v.
 
-Điều đó có thể được thực hiện bằng cách sử dụng hàm khởi tạo và toán tử `"new"`.
+Điều đó có thể được thực hiện bằng cách sử dụng constructor và toán tử `"new"`.
 
-## Hàm tạo
+## Constructor
 
-Hàm tạo về mặt kỹ thuật là các hàm thông thường. Có hai quy ước mặc dù:
+Constructor về mặt kỹ thuật là các hàm thông thường. Có hai quy ước mặc dù:
 
 1. Chúng được đặt tên bằng chữ in hoa đầu tiên.
 2. Chúng chỉ nên được thực thi với toán tử `"new"`.
@@ -38,7 +38,7 @@ Nói cách khác, `new User(...)` thực hiện điều gì đó như:
 ```js
 function User(name) {
 *!*
-  // this = {};  (implicitly)
+  // this = {};  (mặc nhiên)
 */!*
 
   // thêm thuộc tính vào đây
@@ -62,12 +62,12 @@ let user = {
 
 Bây giờ nếu chúng ta muốn tạo những người dùng khác, chúng ta có thể gọi `new User("Ann")`, `new User("Alice")`, v.v. Ngắn hơn nhiều so với việc luôn sử dụng chữ và cũng dễ đọc.
 
-Đó là mục đích chính của hàm tạo -- để triển khai mã tạo đối tượng có thể tái sử dụng.
+Đó là mục đích chính của constructor -- để triển khai mã tạo đối tượng có thể tái sử dụng.
 
-Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào (ngoại trừ arrow function, vì chúng không có `this`) đều có thể được sử dụng làm hàm tạo. Nó có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
+Hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ hàm nào (ngoại trừ arrow function, vì chúng không có `this`) đều có thể được sử dụng làm constructor. Nó có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ viết hoa trước" là một thỏa thuận phổ biến, để làm rõ rằng một hàm sẽ được chạy với `new`.
 
 ````smart header="new function() { ... }"
-Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong một hàm tạo được gọi ngay lập tức, như sau:
+Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong một constructor được gọi ngay lập tức, như sau:
 
 ```js
 // tạo một hàm và ngay lập tức gọi nó với new
@@ -81,10 +81,10 @@ let user = new function() {
 };
 ```
 
-Hàm tạo này không thể được gọi lại vì nó không được lưu ở bất kỳ đâu, chỉ được tạo và gọi. Vì vậy, thủ thuật này nhằm mục đích đóng gói mã xây dựng một đối tượng mà không sử dụng lại trong tương lai.
+Constructor này không thể được gọi lại vì nó không được lưu ở bất kỳ đâu, chỉ được tạo và gọi. Vì vậy, thủ thuật này nhằm mục đích đóng gói mã xây dựng một đối tượng mà không sử dụng lại trong tương lai.
 ````
 
-## Kiểm tra chế độ hàm tạo: new.target
+## Kiểm tra chế độ constructor: new.target
 
 ```smart header="Nội dung nâng cao"
 Cú pháp từ phần này hiếm khi được sử dụng, hãy bỏ qua trừ khi bạn muốn biết mọi thứ.
@@ -110,7 +110,7 @@ new User(); // hàm User { ... }
 */!*
 ```
 
-Điều đó có thể được sử dụng bên trong hàm để biết liệu nó được gọi với `new`, "ở chế độ hàm tạo" hay không có nó, "ở chế độ thông thường".
+Điều đó có thể được sử dụng bên trong hàm để biết liệu nó được gọi với `new`, "ở chế độ constructor" hay không có nó, "ở chế độ thông thường".
 
 Chúng ta cũng có thể thực hiện cả lệnh gọi `new` và thông thường để làm như vậy, như sau:
 
@@ -131,9 +131,9 @@ Cách tiếp cận này đôi khi được sử dụng trong các thư viện đ
 
 Tuy nhiên, có lẽ không phải là một điều tốt để sử dụng ở mọi nơi, bởi vì việc bỏ qua `new` làm cho nó ít rõ ràng hơn về những gì đang diễn ra. Với `new`, tất cả chúng ta đều biết rằng đối tượng mới đang được tạo.
 
-## Trả về từ hàm tạo
+## Trả về từ constructor
 
-Thông thường, hàm tạo không có câu lệnh `return`. Nhiệm vụ của chúng là viết tất cả nội dung cần thiết vào `this`, và nó sẽ tự động trở thành kết quả.
+Thông thường, constructor không có câu lệnh `return`. Nhiệm vụ của chúng là viết tất cả nội dung cần thiết vào `this`, và nó sẽ tự động trở thành kết quả.
 
 Nhưng nếu có câu lệnh `return`, thì quy tắc rất đơn giản:
 
@@ -168,7 +168,7 @@ function SmallUser() {
 alert( new SmallUser().name );  // John
 ```
 
-Thông thường các hàm tạo không có câu lệnh `return`. Ở đây chúng ta đề cập đến hành vi đặc biệt với các đối tượng trả về chủ yếu vì mục đích hoàn chỉnh.
+Thông thường các constructor không có câu lệnh `return`. Ở đây chúng ta đề cập đến hành vi đặc biệt với các đối tượng trả về chủ yếu vì mục đích hoàn chỉnh.
 
 ````smart header="Bỏ qua dấu ngoặc đơn"
 Nhân tiện, chúng ta có thể bỏ qua dấu ngoặc đơn sau `new`:
@@ -179,12 +179,12 @@ let user = new User; // <-- không có dấu ngoặc đơn
 let user = new User();
 ```
 
-Bỏ qua dấu ngoặc đơn ở đây không được coi là "phong cách tốt", nhưng cú pháp được cho phép theo thông số kỹ thuật.
+Bỏ qua dấu ngoặc đơn ở đây không được coi là "phong cách tốt", nhưng cú pháp được cho phép theo đặc điểm kỹ thuật.
 ````
 
-## Các phương thức trong hàm tạo
+## Các phương thức trong constructor
 
-Việc sử dụng các hàm tạo để tạo các đối tượng mang lại rất nhiều tính linh hoạt. Hàm tạo có thể có các tham số xác định cách tạo đối tượng và những gì cần đặt trong đó.
+Việc sử dụng các constructor để tạo các đối tượng mang lại rất nhiều tính linh hoạt. Constructor có thể có các tham số xác định cách tạo đối tượng và những gì cần đặt trong đó.
 
 Tất nhiên, chúng ta có thể thêm vào `this` không chỉ các thuộc tính mà cả các phương thức.
 
@@ -217,15 +217,15 @@ john = {
 
 ## Tóm tắt
 
-- Các hàm khởi tạo hay ngắn gọn, hàm tạo là các hàm thông thường, nhưng có một thỏa thuận chung là đặt tên chúng bằng chữ in hoa trước.
-- Hàm tạo chỉ nên được gọi bằng cách sử dụng `new`. Một cuộc gọi như vậy ngụ ý việc tạo ra `this` trống ở đầu và trả về cái được điền ở cuối.
+- Các hàm constructor hay ngắn gọn, constructor là các hàm thông thường, nhưng có một thỏa thuận chung là đặt tên chúng bằng chữ in hoa trước.
+- Constructor chỉ nên được gọi bằng cách sử dụng `new`. Một cuộc gọi như vậy ngụ ý việc tạo ra `this` trống ở đầu và trả về cái được điền ở cuối.
 
-Chúng ta có thể sử dụng các hàm tạo để tạo nhiều đối tượng tương tự.
+Chúng ta có thể sử dụng các constructor để tạo nhiều đối tượng tương tự.
 
-JavaScript cung cấp các hàm tạo cho nhiều đối tượng ngôn ngữ dựng sẵn: như `Date` cho ngày tháng, `Set` cho tập hợp và các đối tượng khác mà chúng ta dự định nghiên cứu.
+JavaScript cung cấp các constructor cho nhiều đối tượng ngôn ngữ dựng sẵn: như `Date` cho ngày tháng, `Set` cho tập hợp và các đối tượng khác mà chúng ta dự định nghiên cứu.
 
 ```smart header="Đối tượng, chúng ta sẽ trở lại!"
-Trong chương này, chúng ta chỉ trình bày những điều cơ bản về đối tượng và hàm tạo. Chúng rất cần thiết để tìm hiểu thêm về các kiểu dữ liệu và hàm trong các chương tiếp theo.
+Trong chương này, chúng ta chỉ trình bày những điều cơ bản về đối tượng và constructor. Chúng rất cần thiết để tìm hiểu thêm về các kiểu dữ liệu và hàm trong các chương tiếp theo.
 
 Sau khi biết được điều đó, chúng ta quay lại các đối tượng và tìm hiểu sâu hơn về chúng trong các chương <info:prototypes> và <info:classes>.
 ```
