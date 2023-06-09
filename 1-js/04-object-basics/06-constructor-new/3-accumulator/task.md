@@ -4,11 +4,11 @@ importance: 5
 
 # Tạo bộ tích lũy mới
 
-Tạo một hàm tạo `Accumulator(startingValue)`.
+Tạo một constructor `Accumulator(startingValue)`.
 
 Đối tượng mà nó tạo nên:
 
-- Lưu trữ "giá trị hiện tại" trong thuộc tính `value`. Giá trị bắt đầu được đặt thành đối số của hàm tạo `startingValue`.
+- Lưu trữ "giá trị hiện tại" trong thuộc tính `value`. Giá trị bắt đầu được đặt thành đối số của constructor `startingValue`.
 - Phương thức `read()` nên sử dụng `prompt` để đọc một số mới và thêm nó vào `giá trị`.
 
 Nói cách khác, thuộc tính `value` là tổng của tất cả các giá trị do người dùng nhập với giá trị ban đầu là `startingValue`.
