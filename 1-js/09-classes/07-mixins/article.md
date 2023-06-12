@@ -136,7 +136,7 @@ let eventMixin = {
   },
 
   /**
-   * Hủy đăng ký, sử dụng:
+   * Hủy theo dõi, cách sử dụng:
    *  menu.off('select', handler)
    */
   off(eventName, handler) {
