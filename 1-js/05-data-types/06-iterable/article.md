@@ -1,16 +1,16 @@
 
 # Iterable
 
-Các đối tượng *có thể lặp lại* là sự tổng quát hóa của các array. Đó là một khái niệm cho phép chúng ta làm cho bất kỳ đối tượng nào có thể sử dụng được trong vòng lặp `for..of`.
+Các đối tượng *iterable* là sự tổng quát hóa của các array. Đó là một khái niệm cho phép chúng ta làm cho bất kỳ đối tượng nào có thể sử dụng được trong vòng lặp `for..of`.
 
-Tất nhiên, array có thể lặp lại. Nhưng có nhiều đối tượng tích hợp khác cũng có thể lặp lại. Chẳng hạn, các chuỗi cũng có thể lặp lại.
+Tất nhiên, array là iterable. Nhưng có nhiều đối tượng tích hợp khác cũng là iterable. Chẳng hạn, các chuỗi cũng là iterable.
 
 Nếu một đối tượng về mặt kỹ thuật không phải là một array, nhưng đại diện cho một tập hợp (danh sách, bộ) của một thứ gì đó, thì `for..of` là một cú pháp tuyệt vời để lặp qua nó, vì vậy hãy xem cách làm cho nó hoạt động.
 
 
 ## Symbol.iterator
 
-Chúng ta có thể dễ dàng nắm bắt khái niệm lặp lại bằng cách tạo một cái của riêng mình.
+Chúng ta có thể dễ dàng nắm bắt khái niệm iterable bằng cách tạo một cái của riêng mình.
 
 Chẳng hạn, chúng ta có một đối tượng không phải là một array, nhưng có vẻ phù hợp với `for..of`.
 
@@ -26,7 +26,7 @@ let range = {
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
-Để làm cho đối tượng `range` có thể lặp lại (và do đó để `for..of` hoạt động), chúng ta cần thêm một phương thức vào đối tượng có tên `Symbol.iterator` (một ký hiệu tích hợp đặc biệt dành riêng cho điều đó).
+Để làm cho đối tượng `range` là iterable (và do đó để `for..of` hoạt động), chúng ta cần thêm một phương thức vào đối tượng có tên `Symbol.iterator` (một ký hiệu tích hợp đặc biệt dành riêng cho điều đó).
 
 1. Khi `for..of` bắt đầu, nó sẽ gọi phương thức đó một lần (hoặc báo lỗi nếu không tìm thấy). Phương thức phải trả về một *iterator* -- một đối tượng có phương thức `next`.
 2. Về sau, `for..of` hoạt động *chỉ với đối tượng được trả về đó*.
@@ -44,7 +44,7 @@ let range = {
 // 1. gọi for..of ban đầu gọi đây
 range[Symbol.iterator] = function() {
 
-  // ...nó trả về đối tượng trình lặp:
+  // ...nó trả về đối tượng iterator:
    // 2. Trở đi, for..of chỉ hoạt động với iterator này, yêu cầu nó cho các giá trị tiếp theo
   return {
     current: this.from,
@@ -71,11 +71,11 @@ for (let num of range) {
 Hãy lưu ý tính năng cốt lõi của iterable: tách các mối liên quan.
 
 - Bản thân `range` không có phương thức `next()`.
-- Thay vào đó, một đối tượng khác, cái gọi là "trình lặp" được tạo bởi lệnh gọi `range[Symbol.iterator]()`, và `next()` của nó tạo ra các giá trị cho phép lặp.
+- Thay vào đó, một đối tượng khác, cái gọi là "iterator" được tạo bởi lệnh gọi `range[Symbol.iterator]()`, và `next()` của nó tạo ra các giá trị cho phép lặp.
 
-Vì vậy, đối tượng trình lặp tách biệt với đối tượng mà nó lặp lại.
+Vì vậy, đối tượng iterator tách biệt với đối tượng mà nó lặp lại.
 
-Về mặt kỹ thuật, chúng ta có thể hợp nhất chúng và sử dụng chính `range` làm trình vòng lặp để làm cho mã đơn giản hơn.
+Về mặt kỹ thuật, chúng ta có thể hợp nhất chúng và sử dụng chính `range` làm iterator để làm cho mã đơn giản hơn.
 
 Như thế này:
 
@@ -105,10 +105,10 @@ for (let num of range) {
 
 Bây giờ `range[Symbol.iterator]()` trả về chính đối tượng `range`: nó có phương thức `next()` cần thiết và ghi nhớ tiến trình lặp hiện tại trong `this.current`. Ngắn hơn ư? Đúng. Và đôi khi điều đó cũng tốt.
 
-Nhược điểm là bây giờ không thể có hai vòng lặp `for..of` chạy trên đối tượng đồng thời: chúng sẽ chia sẻ trạng thái lặp, bởi vì chỉ có một trình lặp -- chính đối tượng đó. Nhưng hai `for-of` song song là một điều hiếm gặp, ngay cả trong các tình huống không đồng bộ.
+Nhược điểm là bây giờ không thể có hai vòng lặp `for..of` chạy trên đối tượng đồng thời: chúng sẽ chia sẻ trạng thái lặp, bởi vì chỉ có một iterator -- chính đối tượng đó. Nhưng hai `for-of` song song là một điều hiếm gặp, ngay cả trong các tình huống không đồng bộ.
 
-```smart header="Trình lặp vô hạn"
-Trình lặp vô hạn cũng có thể làm được. Chẳng hạn, `range` trở thành vô hạn đối với `range.to = Infinity`. Hoặc chúng ta có thể tạo một đối tượng có thể lặp lại để tạo ra một chuỗi vô hạn các số giả ngẫu nhiên. Cũng có thể hữu ích.
+```smart header="Iterator vô hạn"
+Iterator vô hạn cũng có thể làm được. Chẳng hạn, `range` trở thành vô hạn đối với `range.to = Infinity`. Hoặc chúng ta có thể tạo một đối tượng iterable để tạo ra một chuỗi vô hạn các số giả ngẫu nhiên. Cũng có thể hữu ích.
 
 Không có giới hạn nào đối với `next`, nó có thể trả về ngày càng nhiều giá trị hơn, đó là điều bình thường.
 
@@ -116,7 +116,7 @@ Tất nhiên, vòng lặp `for..of` trên một lần lặp như vậy sẽ là 
 ```
 
 
-## Chuỗi có thể lặp lại
+## Chuỗi là iterable
 
 Array và chuỗi là các iterable tích hợp được sử dụng rộng rãi nhất.
 
@@ -125,7 +125,7 @@ Array và chuỗi là các iterable tích hợp được sử dụng rộng rãi
 ```js run
 for (let char of "test") {
   // kích hoạt 4 lần: một lần cho mỗi ký tự
-  alert( char ); // t, then e, then s, then t
+  alert( char ); // t, sau đó e, sau đó s, sau đó t
 }
 ```
 
@@ -138,11 +138,11 @@ for (let char of str) {
 }
 ```
 
-## Gọi một trình lặp một cách rõ ràng
+## Gọi một iterator một cách rõ ràng
 
-Để hiểu sâu hơn, hãy xem cách sử dụng trình lặp một cách rõ ràng.
+Để hiểu sâu hơn, hãy xem cách sử dụng iterator một cách rõ ràng.
 
-Chúng ta sẽ lặp qua một chuỗi theo cách chính xác giống như `for..of`, nhưng với các lệnh gọi trực tiếp. Mã này tạo một trình lặp chuỗi và nhận các giá trị từ nó "thủ công":
+Chúng ta sẽ lặp qua một chuỗi theo cách chính xác giống như `for..of`, nhưng với các lệnh gọi trực tiếp. Mã này tạo một iterator chuỗi và nhận các giá trị từ nó "thủ công":
 
 ```js run
 let str = "Hello";
@@ -163,22 +163,22 @@ while (true) {
 
 Điều đó hiếm khi cần thiết, nhưng cho phép chúng ta kiểm soát quy trình nhiều hơn so với `for..of`. Chẳng hạn, chúng ta có thể chia quá trình lặp lại: lặp lại một chút, sau đó dừng lại, làm việc khác rồi tiếp tục sau.
 
-## Lặp lại và dạng array [#array-like]
+## Iterable và dạng array [#array-like]
 
 Hai thuật ngữ chính thức trông giống nhau, nhưng rất khác nhau. Hãy chắc chắn rằng bạn hiểu rõ về chúng để tránh nhầm lẫn.
 
-- *Lặp lại* là các đối tượng triển khai phương thức `Symbol.iterator`, như được mô tả ở trên.
-- *Dạng array* là các đối tượng có chỉ mục và `length`, vì vậy chúng trông giống như array.
+- *Iterable* là các đối tượng triển khai phương thức `Symbol.iterator`, như được mô tả ở trên.
+- *Dạng array* là các đối tượng có chỉ mục và `length`, vì vậy chúng có dạng array.
 
-Khi chúng ta sử dụng JavaScript cho các tác vụ thực tế trong trình duyệt hoặc bất kỳ môi trường nào khác, chúng ta có thể gặp các đối tượng có thể lặp lại hoặc dạng array hoặc cả hai.
+Khi chúng ta sử dụng JavaScript cho các tác vụ thực tế trong trình duyệt hoặc bất kỳ môi trường nào khác, chúng ta có thể gặp các đối tượng iterable hoặc có dạng array hoặc cả hai.
 
-Chẳng hạn, các chuỗi đều có thể lặp lại (`for..of` hoạt động trên chúng) và dạng array (chúng có chỉ mục số và `length`).
+Chẳng hạn, các chuỗi đều là iterable (`for..of` hoạt động trên chúng) và có dạng array (chúng có chỉ mục số và `length`).
 
-Nhưng nếu đã có thể lặp lại thì có thể không có dạng array. Và ngược lại, một array giống như có thể không lặp lại được.
+Nhưng nếu đã là iterable thì có thể không có dạng array. Và ngược lại, một cái dạng array có thể không phải iterable.
 
-Ví dụ: `range` trong ví dụ trên là lặp lại được, nhưng không có dạng array, bởi vì nó không có các thuộc tính được lập chỉ mục và `length`.
+Ví dụ: `range` trong ví dụ trên là iterable, nhưng không có dạng array, bởi vì nó không có các thuộc tính được lập chỉ mục và `length`.
 
-Và đây là đối tượng dạng array, nhưng không lặp lại được:
+Và đây là đối tượng dạng array, nhưng không phải iterable:
 
 ```js run
 let arrayLike = { // có chỉ mục và length => dạng array
@@ -203,18 +203,18 @@ Ví dụ:
 
 ```js run
 let arrayLike = {
-  0: "Hello",
-  1: "World",
+  0: "Xin chào",
+  1: "Thế giới",
   length: 2
 };
 
 *!*
 let arr = Array.from(arrayLike); // (*)
 */!*
-alert(arr.pop()); // World (phương thức hoạt động)
+alert(arr.pop()); // Thế giới (phương thức hoạt động)
 ```
 
-`Array.from` tại dòng `(*)` lấy đối tượng, kiểm tra xem nó lặp lại được hay dạng array, sau đó tạo một array mới và sao chép tất cả các mục vào đó.
+`Array.from` tại dòng `(*)` lấy đối tượng, kiểm tra xem nó là iterable hay dạng array, sau đó tạo một array mới và sao chép tất cả các mục vào đó.
 
 Điều tương tự cũng xảy ra với một iterable:
 
@@ -224,7 +224,7 @@ let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (array toString chuyển đổi hoạt động)
 ```
 
-Cú pháp đầy đủ cho `Array.from` cũng cho phép chúng ta cung cấp hàm "lập bản đồ" tùy chọn:
+Cú pháp đầy đủ cho `Array.from` cũng cho phép chúng ta cung cấp hàm "mapping" tùy chọn:
 ```js
 Array.from(obj[, mapFn, thisArg])
 ```
@@ -290,18 +290,18 @@ alert( str.slice(1, 3) ); // rác (hai mảnh từ các cặp thay thế khác n
 
 ## Tóm tắt
 
-Các đối tượng có thể được sử dụng trong `for..of` được gọi là *lặp lại được*.
+Các đối tượng có thể được sử dụng trong `for..of` được gọi là *iterable*.
 
 - Về mặt kỹ thuật, iterable phải triển khai phương thức có tên `Symbol.iterator`.
-     - Kết quả của `obj[Symbol.iterator]()` được gọi là *trình lặp*. Nó xử lý quá trình lặp lại hơn nữa.
-     - Trình lặp phải có phương thức có tên `next()` trả về một đối tượng `{done: Boolean, value: any}`, ở đây `done:true` biểu thị kết thúc quá trình lặp, nếu không thì `value` là giá trị tiếp theo.
+     - Kết quả của `obj[Symbol.iterator]()` được gọi là *iterator*. Nó xử lý quá trình lặp lại hơn nữa.
+     - Iterator phải có phương thức có tên là `next()` trả về một đối tượng `{done: Boolean, value: any}`, ở đây `done:true` biểu thị kết thúc quá trình lặp, nếu không thì `value` là giá trị tiếp theo.
 - Phương thức `Symbol.iterator` được gọi tự động bởi `for..of`, nhưng chúng ta cũng có thể thực hiện trực tiếp.
-- Các trình lặp tích hợp sẵn như chuỗi hoặc array, cũng triển khai `Symbol.iterator`.
-- Trình lặp chuỗi biết về các cặp thay thế.
+- Các iterator tích hợp sẵn như chuỗi hoặc array, cũng triển khai `Symbol.iterator`.
+- Iterator chuỗi biết về các cặp thay thế.
 
 
 Các đối tượng có các thuộc tính được lập chỉ mục và `length` được gọi là *dạng array*. Các đối tượng như vậy cũng có thể có các thuộc tính và phương thức khác, nhưng thiếu các phương thức tích hợp sẵn của array.
 
-Nếu chúng ta xem xét bên trong thông số kỹ thuật -- chúng ta sẽ thấy rằng hầu hết các phương thức tích hợp sẵn đều giả định rằng chúng hoạt động với các lần lặp hoặc array giống như array thay vì array "thực", vì điều đó trừu tượng hơn.
+Nếu chúng ta xem xét bên trong đặc điểm kỹ thuật -- chúng ta sẽ thấy rằng hầu hết các phương thức tích hợp sẵn đều giả định rằng chúng hoạt động với các iterable hoặc dạng array thay vì array "thực", vì điều đó trừu tượng hơn.
 
-`Array.from(obj[, mapFn, thisArg])` tạo một `Array` thực từ một `obj` lặp lại được hoặc có dạng array, và sau đó chúng ta có thể sử dụng các phương thức array trên đó. Các đối số tùy chọn `mapFn` và `thisArg` cho phép chúng ta áp dụng một hàm cho từng mục.
+`Array.from(obj[, mapFn, thisArg])` tạo một `Array` thực từ một `obj` iterable hoặc có dạng array, và sau đó chúng ta có thể sử dụng các phương thức array trên đó. Các đối số tùy chọn `mapFn` và `thisArg` cho phép chúng ta áp dụng một hàm cho từng mục.
