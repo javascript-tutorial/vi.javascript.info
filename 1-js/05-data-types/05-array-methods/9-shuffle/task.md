@@ -6,7 +6,7 @@ importance: 3
 
 Viết hàm `shuffle(array)` để xáo trộn (sắp xếp lại ngẫu nhiên) các phần tử của array.
 
-Nhiều lần chạy `xáo trộn` có thể dẫn đến các thứ tự phần tử khác nhau. Ví dụ:
+Nhiều lần chạy `shuffle` có thể dẫn đến các thứ tự phần tử khác nhau. Ví dụ:
 
 ```js
 let arr = [1, 2, 3];
