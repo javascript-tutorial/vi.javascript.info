@@ -15,4 +15,3 @@ arr.push(function() {
 
 arr[2](); // ?
 ```
-
