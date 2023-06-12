@@ -47,5 +47,3 @@ let usersMapped = users.map(user => *!*({*/!*
 ```
 
 Bây giờ thì ổn.
-
-
