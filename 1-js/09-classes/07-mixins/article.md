@@ -175,7 +175,7 @@ Cách sử dụng:
 // Tạo một class
 class Menu {
   choose(value) {
-    this.trigger("select", value);
+    this.trigger("lựa chọn", value);
   }
 }
 // Thêm mixin với các phương thức liên quan đến sự kiện
@@ -185,7 +185,7 @@ let menu = new Menu();
 
 // thêm một trình xử lý, để được gọi khi lựa chọn:
 *!*
-menu.on("select", value => alert(`Value selected: ${value}`));
+menu.on("select", value => alert(`Giá trị đã chọn: ${value}`));
 */!*
 
 // triggers the event => the handler above runs and shows:
