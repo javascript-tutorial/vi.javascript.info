@@ -14,4 +14,3 @@ alert( fruits.length ); // 4
 ```
 
 Đó là bởi vì array là đối tượng. Vì vậy, cả `shoppingCart` và `fruits` đều là các tham chiếu đến cùng một array.
-
