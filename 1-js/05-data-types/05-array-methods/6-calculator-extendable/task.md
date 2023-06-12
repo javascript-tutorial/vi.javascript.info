@@ -4,7 +4,7 @@ importance: 5
 
 # Tạo một máy tính có thể mở rộng
 
-Tạo một hàm tạo `Máy tính` để tạo các đối tượng máy tính "có thể mở rộng".
+Tạo một constructor `Calculator` để tạo các đối tượng máy tính "có thể mở rộng".
 
 Nhiệm vụ bao gồm hai phần.
 
@@ -23,14 +23,14 @@ Nhiệm vụ bao gồm hai phần.
 
     ```js
     let powerCalc = new Calculator;
-    powerCalc.addMethod("*", (a, b) => a * b);
-    powerCalc.addMethod("/", (a, b) => a / b);
-    powerCalc.addMethod("**", (a, b) => a ** b);
+    powerCalc.addMethod("nhân", (a, b) => a * b);
+    powerCalc.addMethod("chia", (a, b) => a / b);
+    powerCalc.addMethod("luỹ thừa", (a, b) => a ** b);
 
     let result = powerCalc.calculate("2 ** 3");
     alert( result ); // 8
     ```
 
-- Không có dấu ngoặc đơn hoặc biểu thức phức tạp trong nhiệm vụ này.
+- Không có dấu ngoặc đơn hay biểu thức phức tạp trong nhiệm vụ này.
 - Các số và toán tử được phân cách bằng đúng một dấu cách.
 - Có thể xử lý lỗi nếu bạn muốn thêm nó.
