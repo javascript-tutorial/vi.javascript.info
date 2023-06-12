@@ -31,7 +31,7 @@ let range = {
 1. Khi `for..of` bắt đầu, nó sẽ gọi phương thức đó một lần (hoặc báo lỗi nếu không tìm thấy). Phương thức phải trả về một *iterator* -- một đối tượng có phương thức `next`.
 2. Về sau, `for..of` hoạt động *chỉ với đối tượng được trả về đó*.
 3. Khi `for..of` muốn giá trị tiếp theo, nó sẽ gọi `next()` trên đối tượng đó.
-4. Kết quả của `next()` phải có dạng `{done: Boolean, value: any}`, trong đó `done=true` có nghĩa là quá trình lặp đã kết thúc, nếu không thì `value` là giá trị tiếp theo.
+4. Kết quả của `next()` phải có dạng `{done: Boolean, value: any}`, trong đó `done=true` có nghĩa là vòng lặp kết thúc, nếu không thì `value` là giá trị tiếp theo.
 
 Đây là triển khai đầy đủ cho `range` với nhận xét:
 
@@ -45,10 +45,10 @@ let range = {
 range[Symbol.iterator] = function() {
 
   // ...nó trả về đối tượng iterator:
-   // 2. Trở đi, for..of chỉ hoạt động với iterator này, yêu cầu nó cho các giá trị tiếp theo
+   // 2. Về sau, for..of chỉ hoạt động với đối tượng iterator bên dưới, yêu cầu nó cung cấp các giá trị tiếp theo
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
     // 3. next() được gọi trên mỗi lần lặp bởi vòng lặp for..of
     next() {
@@ -218,7 +218,7 @@ alert(arr.pop()); // Thế giới (phương thức hoạt động)
 
 Điều tương tự cũng xảy ra với một iterable:
 
-```js
+```js run
 // giả sử range được lấy từ ví dụ trên
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (array toString chuyển đổi hoạt động)
@@ -233,7 +233,7 @@ Array.from(obj[, mapFn, thisArg])
 
 Ví dụ:
 
-```js
+```js run
 // giả sử range được lấy từ ví dụ trên
 
 // bình phương mỗi số
