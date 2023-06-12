@@ -51,7 +51,7 @@ Dòng tiếp theo đưa từ vào map:
 map.set(sorted, word);
 ```
 
-Nếu chúng ta gặp lại một từ có cùng dạng sắp xếp theo chữ cái, thì từ đó sẽ ghi đè lên giá trị trước đó bằng cùng một khóa trong bản đồ. Vì vậy, chúng tôi sẽ luôn có tối đa một từ cho mỗi mẫu dạng ký tự.
+Nếu chúng ta gặp lại một từ có cùng dạng sắp xếp theo chữ cái, thì từ đó sẽ ghi đè lên giá trị trước đó bằng cùng một khóa trong map. Vì vậy, chúng ta sẽ luôn có tối đa một từ cho mỗi mẫu dạng ký tự.
 
 Cuối cùng, `Array.from(map.values())` có thể lặp lại các giá trị map (chúng ta không cần khóa trong kết quả) và trả về một array của chúng.
 
