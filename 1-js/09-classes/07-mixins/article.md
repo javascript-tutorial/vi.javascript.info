@@ -185,24 +185,24 @@ let menu = new Menu();
 
 // thêm một trình xử lý, để được gọi khi lựa chọn:
 *!*
-menu.on("select", value => alert(`Giá trị đã chọn: ${value}`));
+menu.on("lựa chọn", value => alert(`Giá trị đã chọn: ${value}`));
 */!*
 
-// triggers the event => the handler above runs and shows:
-// Value selected: 123
+// kích hoạt sự kiện => trình xử lý ở trên chạy và hiển thị:
+// Giá trị đã chọn: 123
 menu.choose("123");
 ```
 
-Now, if we'd like any code to react to a menu selection, we can listen for it with `menu.on(...)`.
+Bây giờ, nếu chúng ta muốn bất kỳ mã nào phản ứng với lựa chọn menu, chúng ta có thể nghe mã đó bằng `menu.on(...)`.
 
-And `eventMixin` mixin makes it easy to add such behavior to as many classes as we'd like, without interfering with the inheritance chain.
+Và mixin `eventMixin` giúp dễ dàng thêm hành vi như vậy vào bao nhiêu class tùy thích mà không can thiệp vào chuỗi kế thừa.
 
-## Summary
+## Tóm tắt
 
-*Mixin* -- is a generic object-oriented programming term: a class that contains methods for other classes.
+*Mixin* -- là một thuật ngữ lập trình hướng đối tượng chung: một class chứa các phương thức cho các class khác.
 
-Some other languages allow multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying methods into prototype.
+Một số ngôn ngữ khác cho phép đa kế thừa. JavaScript không hỗ trợ đa kế thừa, nhưng mixin có thể được triển khai bằng cách sao chép các phương thức vào nguyên mẫu.
 
-We can use mixins as a way to augment a class by adding multiple behaviors, like event-handling as we have seen above.
+Chúng ta có thể sử dụng mixin như một cách để tăng cường class bằng cách thêm nhiều hành vi, như xử lý sự kiện như chúng ta đã thấy ở trên.
 
-Mixins may become a point of conflict if they accidentally overwrite existing class methods. So generally one should think well about the naming methods of a mixin, to minimize the probability of that happening.
+Mixin có thể trở thành một điểm xung đột nếu chúng vô tình ghi đè lên các phương thức class hiện có. Vì vậy, nói chung, người ta nên suy nghĩ kỹ về các phương pháp đặt tên của mixin, để giảm thiểu khả năng xảy ra điều đó.
