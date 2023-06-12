@@ -62,17 +62,17 @@ Kết quả của mã có thể khác nhau giữa các JavaScript engine, nhưng
 
 Tại sao nó không hoạt động? Nói chung, `sort` là một "hộp đen": chúng ta ném một array và một hàm so sánh vào đó và mong muốn array được sắp xếp. Nhưng do sự so sánh hoàn toàn ngẫu nhiên, hộp đen trở nên điên loạn và chính xác thì nó điên rồ như thế nào phụ thuộc vào việc triển khai cụ thể khác nhau giữa các engine.
 
-Có nhiều cách tốt khác để thực hiện nhiệm vụ. Chẳng hạn, có một thuật toán tuyệt vời gọi là [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle). Ý tưởng là di chuyển array theo thứ tự ngược lại và hoán đổi từng phần tử với một phần tử ngẫu nhiên trước nó:
+Có nhiều cách tốt khác để thực hiện nhiệm vụ. Chẳng hạn, có một thuật toán tuyệt vời gọi là [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher-Yates_shuffle). Ý tưởng là di chuyển array theo thứ tự ngược lại và hoán đổi từng phần tử với một phần tử ngẫu nhiên trước nó:
 
 ```js
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    let j = Math.floor(Math.random() * (i + 1)); // chỉ mục ngẫu nhiên từ 0 đến i
 
     // hoán đổi phần tử array[i] và array[j]
-     // chúng ta sử dụng cú pháp "phân công phá hủy" để đạt được điều đó
-     // bạn sẽ tìm thấy thêm chi tiết về cú pháp đó trong các chương sau
-     // tương tự có thể được viết là:
+    // chúng ta sử dụng cú pháp "phân công phá hủy" để đạt được điều đó
+    // bạn sẽ tìm thấy thêm chi tiết về cú pháp đó trong các chương sau
+    // tương tự có thể được viết là:
     // let t = array[i]; array[i] = array[j]; array[j] = t
     [array[i], array[j]] = [array[j], array[i]];
   }
