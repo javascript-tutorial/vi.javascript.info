@@ -26,7 +26,7 @@ let range = {
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
-Để làm cho đối tượng `range` có thể lặp lại (và do đó để `for..of` hoạt động), chúng ta cần thêm một phương thức vào đối tượng có tên `Symbol.iterator` (một ký tự tích hợp đặc biệt dành riêng cho điều đó).
+Để làm cho đối tượng `range` có thể lặp lại (và do đó để `for..of` hoạt động), chúng ta cần thêm một phương thức vào đối tượng có tên `Symbol.iterator` (một ký hiệu tích hợp đặc biệt dành riêng cho điều đó).
 
 1. Khi `for..of` bắt đầu, nó sẽ gọi phương thức đó một lần (hoặc báo lỗi nếu không tìm thấy). Phương thức phải trả về một *trình lặp* -- một đối tượng có phương thức `next`.
 2. Về sau, `for..of` hoạt động *chỉ với đối tượng được trả về đó*.
