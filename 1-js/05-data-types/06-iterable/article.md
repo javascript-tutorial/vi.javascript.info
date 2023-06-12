@@ -1,5 +1,5 @@
 
-# Lặp lại
+# Iterable
 
 Các đối tượng *có thể lặp lại* là sự tổng quát hóa của các array. Đó là một khái niệm cho phép chúng ta làm cho bất kỳ đối tượng nào có thể sử dụng được trong vòng lặp `for..of`.
 
@@ -14,7 +14,7 @@ Chúng ta có thể dễ dàng nắm bắt khái niệm lặp lại bằng cách
 
 Chẳng hạn, chúng ta có một đối tượng không phải là một array, nhưng có vẻ phù hợp với `for..of`.
 
-Giống như một đối tượng `phạm vi` đại diện cho một khoảng số:
+Giống như một đối tượng `range` đại diện cho một khoảng số:
 
 ```js
 let range = {
@@ -28,7 +28,7 @@ let range = {
 
 Để làm cho đối tượng `range` có thể lặp lại (và do đó để `for..of` hoạt động), chúng ta cần thêm một phương thức vào đối tượng có tên `Symbol.iterator` (một ký hiệu tích hợp đặc biệt dành riêng cho điều đó).
 
-1. Khi `for..of` bắt đầu, nó sẽ gọi phương thức đó một lần (hoặc báo lỗi nếu không tìm thấy). Phương thức phải trả về một *trình lặp* -- một đối tượng có phương thức `next`.
+1. Khi `for..of` bắt đầu, nó sẽ gọi phương thức đó một lần (hoặc báo lỗi nếu không tìm thấy). Phương thức phải trả về một *iterator* -- một đối tượng có phương thức `next`.
 2. Về sau, `for..of` hoạt động *chỉ với đối tượng được trả về đó*.
 3. Khi `for..of` muốn giá trị tiếp theo, nó sẽ gọi `next()` trên đối tượng đó.
 4. Kết quả của `next()` phải có dạng `{done: Boolean, value: any}`, trong đó `done=true` có nghĩa là quá trình lặp đã kết thúc, nếu không thì `value` là giá trị tiếp theo.
@@ -45,7 +45,7 @@ let range = {
 range[Symbol.iterator] = function() {
 
   // ...nó trả về đối tượng trình lặp:
-   // 2. Trở đi, for..of chỉ hoạt động với trình lặp này, yêu cầu nó cho các giá trị tiếp theo
+   // 2. Trở đi, for..of chỉ hoạt động với iterator này, yêu cầu nó cho các giá trị tiếp theo
   return {
     current: this.from,
     last: this.to,      
