@@ -1,4 +1,4 @@
-# Arrays
+# Array
 
 Các đối tượng cho phép bạn lưu trữ các bộ sưu tập giá trị có khóa. Tốt rồi.
 
@@ -92,6 +92,36 @@ let fruits = [
 Kiểu "dấu phẩy ở cuối" giúp chèn/xóa các mục dễ dàng hơn vì tất cả các dòng đều giống nhau.
 ````
 
+## Nhận các phần tử cuối cùng với "at"
+
+[recent browser="new"]
+
+Giả sử chúng ta muốn phần tử cuối cùng của array.
+
+Một số ngôn ngữ lập trình cho phép việc sử dụng chỉ mục âm cho cùng một mục đích, chẳng hạn như `trái cây[-1]`.
+
+Mặc dù, trong JavaScript nó sẽ không hoạt động. Kết quả sẽ là `undefined`, bởi vì chỉ mục trong ngoặc vuông được xử lý theo nghĩa đen.
+
+Chúng ta có thể tính toán chỉ mục phần tử cuối cùng một cách rõ ràng và sau đó truy cập nó: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Táo", "Cam", "Mận"];
+alert( fruits[fruits.length-1] ); // Mận
+```
+
+Hơi rườm rà phải không? Chúng ta cần viết tên biến tới hai lần.
+
+May mắn thay, có một cú pháp ngắn hơn: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Táo", "Cam", "Mận"];
+// giống như fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Mận
+```
+
+Nói cách khác, `arr.at(i)`:
+- hoàn toàn giống với `arr[i]`, nếu `i >= 0`.
+- đối với các giá trị âm của `i`, nó lùi lại từ cuối array.
 
 ## Các phương thức pop/push, shift/unshift
 
@@ -121,7 +151,7 @@ Một ngăn xếp thường được minh họa dưới dạng một bộ bài: 
 
 Đối với ngăn xếp, mục được đẩy mới nhất sẽ được nhận trước, đó còn được gọi là nguyên tắc LIFO (Last-In-First-Out). Đối với hàng đợi, chúng ta có FIFO (First-In-First-Out).
 
-Array trong JavaScript có thể hoạt động như một hàng đợi và ngăn xếp. Chúng cho phép bạn thêm/xóa các phần tử ở đầu hoặc cuối.
+Array trong JavaScript có thể hoạt động như một hàng đợi và ngăn xếp. Chúng cho phép bạn thêm/xóa các phần tử, cả vào đầu hay cuối.
 
 Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này được gọi là [deque](https://vi.wikipedia.org/wiki/Hàng_đợi).
 
@@ -137,6 +167,8 @@ Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này đư
 
     alert( fruits ); // Táo,Cam
     ```
+
+  Cả `fruits.pop()` và `fruits.at(-1)` đều trả về phần tử cuối cùng của array, nhưng `fruits.pop()` cũng sửa đổi array bằng cách loại bỏ nó.
 
 `push`
 : Nối phần tử vào cuối array:
@@ -247,7 +279,7 @@ Tại sao làm việc với phần cuối của một array nhanh hơn so với 
 fruits.shift(); // lấy 1 phần tử từ phần đầu
 ```
 
-Việc lấy và xóa phần tử có số `0` là không đủ. Các yếu tố khác cũng cần được đánh số lại.
+Việc lấy và xóa phần tử có chỉ mục `0` là không đủ. Các yếu tố khác cũng cần được đánh số lại.
 
 Thao tác `shift` phải thực hiện 3 việc:
 
@@ -365,7 +397,7 @@ Còn một cú pháp nữa để tạo array:
 let arr = *!*new Array*/!*("Táo", "Lê", "v.v");
 ```
 
-Nó hiếm khi được sử dụng vì dấu ngoặc vuông `[]` ngắn hơn. Ngoài ra còn có một tính năng phức tạp với nó.
+Nó hiếm khi được sử dụng vì dấu ngoặc vuông `[]` ngắn hơn. Ngoài ra, còn có một tính năng phức tạp với nó.
 
 Nếu `new Array` được gọi với một đối số duy nhất là một số, thì nó sẽ tạo một array *không có phần tử, nhưng có độ dài cho trước*.
 
@@ -378,8 +410,6 @@ alert( arr[0] ); // undefined! không có yếu tố.
 
 alert( arr.length ); // độ dài 2
 ```
-
-Trong đoạn mã trên, `new Array(number)` có tất cả các phần tử `undefined`.
 
 Để tránh những bất ngờ như vậy, chúng ta thường sử dụng dấu ngoặc vuông, trừ khi chúng ta thực sự biết mình đang làm gì.
 
@@ -479,20 +509,25 @@ Rất đơn giản: không sử dụng toán tử `==`. Thay vào đó, hãy so 
 
 Array là một loại đối tượng đặc biệt, phù hợp để lưu trữ và quản lý các mục dữ liệu có thứ tự.
 
-- Khai báo:
+Khai báo:
 
-    ```js
-    // ngoặc vuông (thông thường)
-    let arr = [item1, item2...];
+ ```js
+ // ngoặc vuông (thông thường)
+let arr = [item1, item2...];
 
-    // new Array (đặc biệt hiếm)
-    let arr = new Array(item1, item2...);
-    ```
+// new Array (đặc biệt hiếm)
+let arr = new Array(item1, item2...);
+```
 
-    Cuộc gọi đến `new Array(number)` tạo một array có độ dài nhất định, nhưng không có phần tử.
+Cuộc gọi đến `new Array(number)` tạo một array có độ dài nhất định, nhưng không có phần tử.
 
 - Thuộc tính `length` là độ dài của array hay nói chính xác là chỉ mục cuối cùng của nó cộng với một. Nó được tự động điều chỉnh bằng các phương thức array.
 - Nếu chúng ta rút ngắn `độ dài` theo cách thủ công, array sẽ bị cắt bớt.
+
+Lấy các phần tử:
+
+- chúng ta có thể lấy phần tử theo chỉ mục của nó, như `arr[0]`
+- ngoài ra, chúng ta có thể sử dụng phương thức `at(i)` cho phép lập chỉ mục âm. Đối với các giá trị âm của `i`, nó lùi lại từ cuối array. Nếu `i >= 0`, nó hoạt động giống như `arr[i]`.
 
 Chúng ta có thể sử dụng một array như một deque với các thao tác sau:
 
