@@ -10,5 +10,4 @@ function filterRangeInPlace(arr, a, b) {
       i--;
     }
   }
-
 }
