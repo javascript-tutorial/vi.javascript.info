@@ -1,4 +1,4 @@
-Để tìm tất cả các đảo chữ cái, hãy tách từng từ thành các chữ cái và sắp xếp chúng. Khi sắp xếp theo chữ cái, tất cả các đảo ngữ đều giống nhau.
+Để tìm tất cả các đảo chữ, hãy tách từng từ thành các chữ cái và sắp xếp chúng. Khi sắp xếp theo chữ cái, tất cả các đảo chữ đều giống nhau.
 
 Ví dụ:
 
@@ -9,14 +9,14 @@ cheaters, hectares, teachers -> aceehrst
 ...
 ```
 
-Chúng ta sẽ sử dụng các biến thể được sắp xếp theo chữ cái làm khóa map để chỉ lưu trữ một giá trị cho mỗi khóa:
+Chúng ta sẽ sử dụng các biến thể được sắp xếp theo chữ làm khóa map để chỉ lưu trữ một giá trị cho mỗi khóa:
 
 ```js run
 function aclean(arr) {
   let map = new Map();
 
   for (let word of arr) {
-    // tách từ bằng các chữ cái, sắp xếp chúng và nối lại
+    // tách từ bằng các chữ, sắp xếp chúng và nối lại
 *!*
     let sorted = word.toLowerCase().split('').sort().join(''); // (*)
 */!*
