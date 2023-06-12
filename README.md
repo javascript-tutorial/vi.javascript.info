@@ -34,7 +34,7 @@ Một thư mục có nhiều tệp:
 
 - `index.md` cho một chương,
 - `article.md` cho một bài,
-- `task.md` cho một bài tập (giải pháp cũng phải được cung cấp trong tệp solution.md).
+- `task.md` cho một bài tập (lời giải cũng phải được cung cấp trong tệp solution.md).
 
 Một tệp bắt đầu bằng `# Tiêu đề`, và sau đó là văn bản viết theo định dạng Markdown, có thể chỉnh sửa bằng một trình soạn thảo đơn giản.
 
