@@ -27,4 +27,4 @@ Nếu tất cả các mục đều âm, điều đó có nghĩa là chúng ta kh
 getMaxSubSum([-1, -2, -3]) = 0
 ```
 
-Vui lòng thử nghĩ ra một giải pháp nhanh chóng: [O(n<sup>2</sup>)](https://vi.wikipedia.org/wiki/K%C3%BD_hi%E1%BB%87u_O_l%E1%BB%9Bn) hoặc thậm chí là O(n) nếu có thể.
+Vui lòng thử nghĩ ra một giải pháp nhanh chóng: [O(n<sup>2</sup>)](https://vi.wikipedia.org/wiki/Kí_hiệu_O_lớn) hoặc thậm chí là O(n) nếu có thể.
