@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Vẽ bản đồ đến tên
+# Map đến names
 
-Bạn có một array các đối tượng `user`, mỗi đối tượng có `user.name`. Viết mã chuyển đổi nó thành một array tên.
+Bạn có một array các đối tượng `user`, mỗi đối tượng có `user.name`. Viết mã chuyển đổi nó thành một array names.
 
 Ví dụ:
 
