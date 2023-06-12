@@ -16,4 +16,3 @@ shoppingCart.push("Chuối");
 // có gì trong fruits?
 alert( fruits.length ); // ?
 ```
-
