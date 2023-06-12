@@ -11,14 +11,14 @@ Nhưng nó không hoạt động:
 ```js run
 let map = new Map();
 
-map.set("name", "John");
+map.set("tên", "John");
 
 let keys = map.keys();
 
 *!*
-// Error: keys.push không phải một hàm
-keys.push("more");
+// Error: keys.push is not a function
+keys.push("thêm");
 */!*
 ```
 
-Tại sao? Làm cách nào mà chúng ta có thể sửa mã để làm cho `keys.push` hoạt động?
+Tại sao? Chúng ta có thể sửa mã để làm cho `keys.push` hoạt động bằng cách nào?
