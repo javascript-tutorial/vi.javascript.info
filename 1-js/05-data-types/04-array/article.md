@@ -6,9 +6,9 @@ Nhưng khá thường xuyên, chúng ta thấy rằng chúng ta cần một *b�
 
 Sẽ không thuận tiện khi sử dụng một đối tượng ở đây vì nó không cung cấp phương thức nào để quản lý thứ tự của các phần tử. Chúng ta không thể chèn một thuộc tính mới “giữa” những thuộc tính hiện có. Các đối tượng không có nghĩa là để sử dụng như vậy.
 
-Tồn tại một cấu trúc dữ liệu đặc biệt có tên `Arrays`, để lưu trữ các bộ sưu tập có thứ tự.
+Tồn tại một cấu trúc dữ liệu đặc biệt có tên là `Array`, để lưu trữ các bộ sưu tập có thứ tự.
 
-## Tuyên bố
+## Khai báo
 
 Có hai cú pháp để tạo một array trống:
 
@@ -79,7 +79,7 @@ arr[3](); // xin chào
 ```
 
 
-````smart header="Dấu phẩy cuối"
+````smart header="Dấu phẩy ở cuối"
 Một array, giống như một đối tượng, có thể kết thúc bằng dấu phẩy:
 ```js
 let fruits = [
@@ -95,20 +95,20 @@ Kiểu "dấu phẩy ở cuối" giúp chèn/xóa các mục dễ dàng hơn vì
 
 ## Các phương thức pop/push, shift/unshift
 
-[Hàng đợi](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) là một trong những cách sử dụng array phổ biến nhất. Trong khoa học máy tính, điều này có nghĩa là một tập hợp các phần tử được sắp xếp theo thứ tự hỗ trợ hai thao tác:
+  [Hàng đợi](https://vi.wikipedia.org/wiki/Hàng đợi) là một trong những cách sử dụng array phổ biến nhất. Trong khoa học máy tính, điều này có nghĩa là một tập hợp các phần tử được sắp xếp theo thứ tự hỗ trợ hai thao tác:
 
 - `push` nối một phần tử vào cuối.
 - `shift` lấy phần tử từ đầu, tăng hàng đợi, sao cho phần tử thứ 2 trở thành phần tử thứ nhất.
 
 ![](queue.svg)
 
-Array hỗ trợ cả hai hoạt động.
+Array hỗ trợ cả hai hành động.
 
-Trong thực tế, chúng ta cần nó rất thường xuyên. Ví dụ: một hàng thư cần được hiển thị trên màn hình.
+Trong thực tế, chúng ta cần nó rất thường xuyên. Ví dụ: một hàng tin nhắn cần được hiển thị trên màn hình.
 
-Có một trường hợp sử dụng khác cho array -- cấu trúc dữ liệu có tên [ngăn xếp](https://vi.wikipedia.org/wiki/Ng%C4%83n_x%E1%BA%BFp).
+Có một trường hợp sử dụng khác cho array -- cấu trúc dữ liệu có tên [ngăn xếp](https://vi.wikipedia.org/wiki/Ngăn_xếp).
 
-Nó hỗ trợ hai hoạt động:
+Nó hỗ trợ hai hành động:
 
 - `push` thêm một phần tử vào cuối.
 - `pop` lấy một phần tử từ cuối.
@@ -123,7 +123,7 @@ Một ngăn xếp thường được minh họa dưới dạng một bộ bài: 
 
 Array trong JavaScript có thể hoạt động như một hàng đợi và ngăn xếp. Chúng cho phép bạn thêm/xóa các phần tử ở đầu hoặc cuối.
 
-Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này được gọi là [deque](https://vi.wikipedia.org/wiki/H%C3%A0ng_%C4%91%E1%BB%A3i).
+Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này được gọi là [deque](https://vi.wikipedia.org/wiki/Hàng_đợi).
 
 **Các phương thức hoạt động với phần cuối của array:**
 
@@ -133,9 +133,9 @@ Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này đư
     ```js run
     let fruits = ["Táo", "Cam", "Lê"];
 
-    alert( fruits.pop() ); // loại bỏ "Pear" và alert nó
+    alert( fruits.pop() ); // loại bỏ "Lê" và alert nó
 
-    alert( fruits ); // Táo, Cam
+    alert( fruits ); // Táo,Cam
     ```
 
 `push`
@@ -146,12 +146,12 @@ Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này đư
 
     fruits.push("Lê");
 
-    alert( fruits ); // Táo, Cam, Lê
+    alert( fruits ); // Táo,Cam,Lê
     ```
 
     Cuộc gọi `fruits.push(...)` bằng `fruits[fruits.length] = ...`.
 
-**Các phương thức hoạt động với sự khởi đầu của array:**
+**Các phương thức hoạt động với phần đầu của array:**
 
 `shift`
 : Trích xuất phần tử đầu tiên của array và trả về nó:
@@ -159,9 +159,9 @@ Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này đư
     ```js run
       let fruits = ["Táo", "Cam", "Lê"];
 
-    alert( fruits.shift() ); // xóa Apple và alert nó
+    alert( fruits.shift() ); // xóa Táo và alert nó
 
-    alert( fruits ); // Táo, Lê
+    alert( fruits ); // Táo,Lê
     ```
 
 `unshift`
@@ -172,7 +172,7 @@ Trong khoa học máy tính, cấu trúc dữ liệu cho phép điều này đư
 
     fruits.unshift('Táo');
 
-    alert( fruits ); // Táo, Cam, Lê
+    alert( fruits ); // Táo,Cam,Lê
     ```
 
 Các phương thức `push` và `unshift` có thể thêm nhiều phần tử cùng một lúc:
@@ -187,7 +187,7 @@ fruits.unshift("Dứa", "Chanh");
 alert( fruits );
 ```
 
-## Nội bộ
+## Bên trong
 
 Array là một loại đối tượng đặc biệt. Dấu ngoặc vuông được sử dụng để truy cập một thuộc tính `arr[0]` thực sự đến từ cú pháp đối tượng. Điều đó về cơ bản giống như `obj[key]`, trong đó `arr` là đối tượng, trong khi các số được sử dụng làm khóa.
 
@@ -195,7 +195,7 @@ Chúng mở rộng các đối tượng cung cấp các phương thức đặc b
 
 Hãy nhớ rằng, chỉ có tám loại dữ liệu cơ bản trong JavaScript (xem chương [Kiểu dữ liệu](info:type) để biết thêm thông tin). Array là một đối tượng và do đó hoạt động như một đối tượng.
 
-Chẳng hạn, nó được sao chép bằng cách tham khảo:
+Chẳng hạn, nó được sao chép bằng cách tham chiếu:
 
 ```js run
 let fruits = ["Chuối"]
@@ -206,10 +206,10 @@ alert( arr === fruits ); // true
 
 arr.push("Pear"); // sửa đổi array bằng tham chiếu
 
-alert( fruits ); // Chuối, Lê - bây giờ có 2 item
+alert( fruits ); // Chuối,Lê - bây giờ có 2 item
 ```
 
-...Nhưng điều làm cho aray thực sự đặc biệt là biểu diễn bên trong của chúng. Công cụ cố gắng lưu trữ các phần tử của nó trong vùng bộ nhớ liền kề, lần lượt, giống như được mô tả trên các hình minh họa trong chương này, và cũng có các tối ưu hóa khác, để làm cho các array hoạt động rất nhanh.
+...Nhưng điều làm cho aray thực sự đặc biệt là biểu diễn bên trong của chúng. Engine cố gắng lưu trữ các phần tử của nó trong vùng bộ nhớ liền kề, lần lượt, giống như được mô tả trên các hình minh họa trong chương này, và cũng có các tối ưu hóa khác, để làm cho các array hoạt động rất nhanh.
 
 Nhưng tất cả chúng đều hỏng nếu chúng ta ngừng làm việc với một array như với một "bộ sưu tập có thứ tự" và bắt đầu làm việc với nó như thể nó là một đối tượng thông thường.
 
@@ -233,7 +233,7 @@ Các cách để lạm dụng một array:
 - Tạo lỗ, chẳng hạn như: thêm `arr[0]` và sau đó `arr[1000]` (và không có gì giữa chúng).
 - Điền vào array theo thứ tự ngược lại, như `arr[1000]`, `arr[999]`, v.v.
 
-Vui lòng coi array là cấu trúc đặc biệt để làm việc với *dữ liệu được sắp xếp*. Chúng cung cấp các phương pháp đặc biệt cho điều đó. Array được điều chỉnh cẩn thận bên trong các JavaScript engine để hoạt động với dữ liệu được sắp xếp liền kề, vui lòng sử dụng chúng theo cách này. Và nếu bạn cần các khóa tùy ý, rất có thể bạn thực sự cần một đối tượng thông thường `{}`.
+Hãy coi array là cấu trúc đặc biệt để làm việc với *dữ liệu được sắp xếp*. Chúng cung cấp các phương thức đặc biệt cho điều đó. Array được điều chỉnh cẩn thận bên trong các JavaScript engine để hoạt động với dữ liệu được sắp xếp liền kề, hãy sử dụng chúng theo cách này. Và nếu bạn cần các khóa tùy ý, rất có thể bạn thực sự cần một đối tượng thông thường `{}`.
 
 ## Hiệu suất
 
@@ -261,7 +261,7 @@ Thao tác `shift` phải thực hiện 3 việc:
 
 Điều tương tự cũng xảy ra với `unshift`: để thêm một phần tử vào đầu array, trước tiên chúng ta cần di chuyển các phần tử hiện có sang bên phải, tăng chỉ số của chúng.
 
-Và chuyện gì xảy ra với `push/pop`? Họ không cần phải di chuyển bất cứ điều gì. Để trích xuất một phần tử từ cuối, phương thức `pop` sẽ xóa chỉ mục và rút ngắn `length`.
+Và chuyện gì xảy ra với `push/pop`? Chúng không cần phải di chuyển bất cứ cái gì. Để trích xuất một phần tử từ cuối, phương thức `pop` sẽ xóa chỉ mục và rút ngắn `length`.
 
 Các hành động cho thao tác `pop`:
 
@@ -277,7 +277,7 @@ fruits.pop(); // lấy 1 phần tử từ phần cuối
 
 ## Vòng lặp
 
-Một trong những cách lâu đời nhất để quay vòng các mục mảng là vòng lặp `for` trên các chỉ mục:
+Một trong những cách lâu đời nhất để quay vòng các mục array là vòng lặp `for` trên các chỉ mục:
 
 ```js run
 let arr = ["Táo", "Cam", "Lê"];
@@ -310,7 +310,7 @@ Về mặt kỹ thuật, vì array là đối tượng nên cũng có thể sử
 *!*
 for (let key in arr) {
 */!*
-  alert( arr[key] ); // Táo, Cam, Lê
+  alert( arr[key] ); // Táo,Cam,Lê
 }
 ```
 
@@ -318,11 +318,11 @@ Nhưng đó thực sự là một ý tưởng tồi. Có những vấn đề ti�
 
 1. Vòng lặp `for..in` lặp qua *tất cả các thuộc tính*, không chỉ các thuộc tính số.
 
-     Có cái gọi là các đối tượng "giống như array" trong trình duyệt và trong các môi trường khác *trông giống như array*. Nghĩa là, chúng có các thuộc tính `độ dài` và chỉ mục, nhưng chúng cũng có thể có các thuộc tính và phương thức không phải là số khác mà chúng ta thường không cần đến. Mặc dù vậy, vòng lặp `for..in` sẽ liệt kê chúng. Vì vậy, nếu chúng ta cần làm việc với các đối tượng giống như array, thì các thuộc tính "phụ" này có thể trở thành một vấn đề.
+     Có cái gọi là các đối tượng "dạng array" trong trình duyệt và trong các môi trường khác *dạng array*. Nghĩa là, chúng có các thuộc tính `length` và chỉ mục, nhưng chúng cũng có thể có các thuộc tính và phương thức không phải là số khác mà chúng ta thường không cần đến. Mặc dù vậy, vòng lặp `for..in` sẽ liệt kê chúng. Vì vậy, nếu chúng ta cần làm việc với các đối tượng dạng array, thì các thuộc tính "phụ" này có thể trở thành một vấn đề.
 
 2. Vòng lặp `for..in` được tối ưu hóa cho các đối tượng chung, không phải array và do đó chậm hơn 10-100 lần. Tất nhiên, nó vẫn rất nhanh. Việc tăng tốc có thể chỉ quan trọng trong các nút cổ chai. Nhưng chúng ta vẫn nên nhận thức được sự khác biệt.
 
-Nói chung, chúng ta không nên sử dụng `for..in` cho mảng.
+Nói chung, chúng ta không nên sử dụng `for..in` cho array.
 
 
 ## Một từ về "length"
@@ -338,7 +338,7 @@ fruits[123] = "Táo";
 alert( fruits.length ); // 124
 ```
 
-Lưu ý rằng chúng ta thường không sử dụng các aray như vậy.
+Lưu ý là chúng ta thường không sử dụng các aray như vậy.
 
 Một điều thú vị khác về thuộc tính `length` là nó có thể ghi được.
 
@@ -359,7 +359,7 @@ Vì vậy, cách đơn giản nhất để xóa array là: `arr.length = 0;`.
 
 ## new Array() [#new-array]
 
-Còn một cú pháp nữa để tạo mảng:
+Còn một cú pháp nữa để tạo array:
 
 ```js
 let arr = *!*new Array*/!*("Táo", "Lê", "v.v");
@@ -385,7 +385,7 @@ Trong đoạn mã trên, `new Array(number)` có tất cả các phần tử `un
 
 ## Array nhiều chiều
 
-Array có thể có các mục cũng là Array. Chúng ta có thể sử dụng nó cho array nhiều chiều, ví dụ để lưu trữ ma trận:
+Array có thể có các mục cũng là array. Chúng ta có thể sử dụng nó cho array nhiều chiều, ví dụ để lưu trữ ma trận:
 
 ```js run
 let matrix = [
@@ -437,7 +437,7 @@ Toán tử này không có cách xử lý đặc biệt nào đối với array,
 Hãy nhớ lại các quy tắc:
 
 - Hai đối tượng bằng nhau `==` chỉ khi chúng tham chiếu đến cùng một đối tượng.
-- Nếu một trong các đối số của `==` là đối tượng và đối số còn lại là đối số nguyên thủy, thì đối tượng sẽ được chuyển đổi thành đối tượng nguyên thủy, như được giải thích trong chương <info:object-toprimitive>.
+- Nếu một trong các đối số của `==` là đối tượng và đối số còn lại là đối số nguyên thủy, thì đối tượng sẽ được chuyển đổi thành đối tượng nguyên hàm, như được giải thích trong chương <info:object-toprimitive>.
 - ...Ngoại trừ `null` và `undefined` bằng `==` lẫn nhau và không có gì khác.
 
 So sánh nghiêm ngặt `===` thậm chí còn đơn giản hơn vì nó không chuyển đổi các loại.
@@ -452,7 +452,7 @@ alert( [0] == [0] ); // false
 
 Các array này là các đối tượng khác nhau về mặt kỹ thuật. Vì vậy, chúng không bằng nhau. Toán tử `==` không thực hiện so sánh từng mục.
 
-So sánh với nguyên thủy cũng có thể cho kết quả có vẻ kỳ lạ:
+So sánh với nguyên hàm cũng có thể cho kết quả có vẻ kỳ lạ:
 
 ```js run
 alert( 0 == [] ); // true
@@ -460,9 +460,9 @@ alert( 0 == [] ); // true
 alert('0' == [] ); // false
 ```
 
-Ở đây, trong cả hai trường hợp, chúng ta so sánh một đối tượng nguyên thủy với một đối tượng array. Vì vậy, array `[]` được chuyển thành nguyên hàm cho mục đích so sánh và trở thành một chuỗi rỗng `''`.
+Ở đây, trong cả hai trường hợp, chúng ta so sánh một đối tượng nguyên hàm với một đối tượng array. Vì vậy, array `[]` được chuyển thành nguyên hàm cho mục đích so sánh và trở thành một chuỗi rỗng `''`.
 
-Sau đó, quá trình so sánh tiếp tục với các nguyên thủy, như được mô tả trong chương <info:type-conversions>:
+Sau đó, quá trình so sánh tiếp tục với các nguyên hàm, như được mô tả trong chương <info:type-conversions>:
 
 ```js run
 // sau khi [] được chuyển đổi thành ''
@@ -473,7 +473,7 @@ alert('0' == '' ); // false, không chuyển đổi loại, các chuỗi khác n
 
 Vì vậy, làm thế nào để so sánh các array?
 
-Rất đơn giản: không sử dụng toán tử `==`. Thay vào đó, hãy so sánh chúng từng mục trong một vòng lặp hoặc sử dụng các phương pháp lặp được giải thích trong chương tiếp theo.
+Rất đơn giản: không sử dụng toán tử `==`. Thay vào đó, hãy so sánh từng mục của chúng trong một vòng lặp hoặc sử dụng các phương thức lặp được giải thích trong chương tiếp theo.
 
 ## Tóm tắt
 
@@ -491,7 +491,7 @@ Array là một loại đối tượng đặc biệt, phù hợp để lưu tr�
 
     Cuộc gọi đến `new Array(number)` tạo một array có độ dài nhất định, nhưng không có phần tử.
 
-- Thuộc tính `length` là độ dài của array hay nói chính xác là chỉ số cuối cùng của nó cộng với một. Nó được tự động điều chỉnh bằng các phương thức array.
+- Thuộc tính `length` là độ dài của array hay nói chính xác là chỉ mục cuối cùng của nó cộng với một. Nó được tự động điều chỉnh bằng các phương thức array.
 - Nếu chúng ta rút ngắn `độ dài` theo cách thủ công, array sẽ bị cắt bớt.
 
 Chúng ta có thể sử dụng một array như một deque với các thao tác sau:
