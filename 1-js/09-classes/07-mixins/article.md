@@ -103,7 +103,7 @@ Hãy lưu ý rằng cuộc gọi đến phương thức gốc `super.say()` từ
 
 Đó là bởi vì các phương thức `sayHi` và `sayBye` ban đầu được tạo trong `sayHiMixin`. Vì vậy, mặc dù chúng đã được sao chép, nhưng tham chiếu thuộc tính bên trong `[[HomeObject]]` của chúng là `sayHiMixin`, như minh họa trong hình trên.
 
-Vì `super` tìm kiếm các phương thức gốc trong `[[HomeObject]].[[Prototype]]`, điều đó có nghĩa là nó tìm kiếm `sayHiMixin.[[Prototype]]`, không phải `User.[[Prototype]]`.
+Vì `super` tìm kiếm các phương thức gốc trong `[[HomeObject]].[[Prototype]]`, điều đó có nghĩa là nó tìm kiếm `sayHiMixin.[[Prototype]]`.
 
 ## EventMixin
 
