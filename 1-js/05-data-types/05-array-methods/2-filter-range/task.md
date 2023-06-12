@@ -19,4 +19,3 @@ alert( filtered ); // 3,1 (giá trị trùng khớp)
 
 alert( arr ); // 5,3,8,1 (không bị sửa đổi)
 ```
-
