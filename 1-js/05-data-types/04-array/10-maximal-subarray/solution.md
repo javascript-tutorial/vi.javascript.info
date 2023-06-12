@@ -57,7 +57,7 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
-Giải pháp có độ phức tạp về thời gian là [O(n<sup>2</sup>)](https://vi.wikipedia.org/wiki/K%C3%BD_hi%E1%BB%87u_O_l%E1%BB%9Bn). Nói cách khác, nếu chúng ta tăng kích thước array lên 2 lần, thuật toán sẽ hoạt động lâu hơn 4 lần.
+Giải pháp có độ phức tạp về thời gian là [O(n<sup>2</sup>)](https://vi.wikipedia.org/wiki/Kí_hiệu_O_lớn). Nói cách khác, nếu chúng ta tăng kích thước array lên 2 lần, thuật toán sẽ hoạt động lâu hơn 4 lần.
 
 Đối với các array lớn (1000, 10000 mục trở lên), các thuật toán như vậy có thể dẫn đến tình trạng chậm chạp nghiêm trọng.
 
@@ -65,7 +65,7 @@ Giải pháp có độ phức tạp về thời gian là [O(n<sup>2</sup>)](http
 
 Hãy di chuyển array và giữ tổng một phần hiện tại của các phần tử trong biến `s`. Nếu `s` trở thành số âm tại một thời điểm nào đó, thì hãy gán `s=0`. Tối đa của tất cả `s` như vậy sẽ là câu trả lời.
 
-Nếu mô tả quá mơ hồ, vui lòng xem mã, nó đủ ngắn:
+Nếu mô tả quá mơ hồ, hãy xem mã, nó đủ ngắn:
 
 ```js run demo
 function getMaxSubSum(arr) {
