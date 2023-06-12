@@ -25,4 +25,3 @@ function sumInput() {
 
 alert( sumInput() ); 
 ```
-
