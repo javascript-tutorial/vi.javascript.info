@@ -34,4 +34,4 @@ Hàm như vậy thực sự tiện dụng khi làm việc với dữ liệu máy
 
 Trong nhiệm vụ này, chúng ta giả định rằng `id` là duy nhất. Có thể không có hai mục array nào có cùng `id`.
 
-Vui lòng sử dụng phương thức mảng `.reduce` trong giải pháp.
+Hãy sử dụng phương thức array `.reduce` trong giải pháp.
