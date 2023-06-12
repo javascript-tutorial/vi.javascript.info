@@ -2,14 +2,14 @@
 
 Array cung cấp rất nhiều phương thức. Để làm cho mọi thứ dễ dàng hơn, trong chương này chúng được chia thành các nhóm.
 
-## Thêm/xóa mục
+## Thêm/xóa item
 
-Chúng ta đã biết các phương thức thêm và xóa các mục từ đầu hoặc cuối:
+Chúng ta đã biết các phương thức thêm và xóa các item từ đầu hoặc cuối:
 
-- `arr.push(...items)` -- thêm các mục vào cuối,
-- `arr.pop()` -- trích xuất một mục từ cuối,
-- `arr.shift()` -- trích xuất một mục từ đầu,
-- `arr.unshift(...items)` -- thêm các mục vào đầu.
+- `arr.push(...items)` -- thêm các item vào cuối,
+- `arr.pop()` -- trích xuất một item từ cuối,
+- `arr.shift()` -- trích xuất một item từ đầu,
+- `arr.unshift(...items)` -- thêm các item vào đầu.
 
 Dưới đây là một số khác.
 
@@ -26,7 +26,7 @@ delete arr[1]; // loại bỏ "về"
 
 alert( arr[1] ); // undefined
 
-// bây giờ arr = ["Tôi",  , "nhà"];
+// bây giờ arr = ["Tôi",,"nhà"];
 alert( arr.length ); // 3
 ```
 
@@ -57,7 +57,7 @@ let arr = ["Tôi", "học", "JavaScript"];
 arr.splice(1, 1); // từ chỉ mục 1 loại bỏ 1 phần tử
 */!*
 
-alert( arr ); // ["Tôi", "JavaScript"]
+alert( arr ); // ["Tôi","JavaScript"]
 ```
 
 Dễ, phải không? Bắt đầu từ chỉ mục `1` nó đã loại bỏ phần tử `1`.
@@ -65,7 +65,7 @@ Dễ, phải không? Bắt đầu từ chỉ mục `1` nó đã loại bỏ ph�
 Trong ví dụ tiếp theo, chúng ta loại bỏ 3 phần tử và thay thế chúng bằng hai phần tử còn lại:
 
 ```js run
-let arr = [*!*"Tôi", "học", "JavaScript",*/!* "ngay", "bây giờ"];
+let arr = [*!*"Tôi", "đang học", "JavaScript",*/!* "ngay", "bây giờ"];
 
 // xóa 3 phần tử đầu tiên và thay thế chúng bằng phần tử khác
 arr.splice(0, 3, "Hãy", "nhảy");
@@ -76,12 +76,12 @@ alert( arr ) // now [*!*"Hãy", "nhảy"*/!*, "ngay", "bây giờ"]
 Ở đây chúng ta có thể thấy rằng `splice` trả về array các phần tử đã loại bỏ:
 
 ```js run
-let arr = [*!*"Tôi", "học",*/!* "JavaScript", "ngay", "bây giờ"];
+let arr = [*!*"Tôi", "đang học",*/!* "JavaScript", "ngay", "bây giờ"];
 
 // loại bỏ 2 phần tử đầu tiên
 let removed = arr.splice(0, 2);
 
-alert( removed ); // "Tôi", "học" <-- array of của các phần tử bị loại bỏ
+alert( removed ); // "Tôi","học" <-- array của các phần tử bị loại bỏ
 ```
 
 Phương thức `splice` cũng có thể chèn các phần tử mà không cần xóa. Để làm được điều đó, chúng ta cần đặt `deleteCount` thành `0`:
@@ -94,10 +94,10 @@ let arr = ["Tôi", "học", "JavaScript"];
 // sau đó chèn "ngôn ngữ" và "phức tạp"
 arr.splice(2, 0, "ngôn ngữ", "phức tạp");
 
-alert( arr ); // "Tôi", "học", "ngôn ngữ", "phức tạp", "JavaScript"
+alert( arr ); // Tôi,học,ngôn ngữ,phức tạp,JavaScript
 ```
 
-````smart header="Cho phép chỉ mục phủ định"
+````smart header="Cho phép chỉ mục âm"
 Ở đây và trong các phương thức array khác, chỉ mục âm được cho phép. Chúng chỉ định vị trí từ cuối array, như ở đây:
 
 ```js run
@@ -169,7 +169,7 @@ alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Thông thường, nó chỉ sao chép các phần tử từ array. Các đối tượng khác, ngay cả khi chúng trông giống như array, được thêm vào như một tổng thể:
+Thông thường, nó chỉ sao chép các phần tử từ array. Các đối tượng khác, ngay cả khi chúng có dạng array, được thêm vào như một tổng thể:
 
 ```js run
 let arr = [1, 2];
@@ -213,7 +213,7 @@ arr.forEach(function(item, index, array) {
 Chẳng hạn, thứ này cho thấy từng phần tử của aray:
 
 ```js run
-// cho mỗi alert cuộc gọi phần tử
+// cho mỗi cuộc gọi alert phần tử
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
@@ -234,7 +234,7 @@ Bây giờ hãy xem các phương thức tìm kiếm trong một array.
 
 ### indexOf/lastIndexOf và includes
 
-Các phương thức [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) và [arr.includes](mdn:js/Array/includes) có cùng cú pháp và về cơ bản giống như các đối tác chuỗi của chúng, nhưng hoạt động trên các mục thay vì các ký tự:
+Các phương thức [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) và [arr.includes](mdn:js/Array/includes) có cùng cú pháp và về cơ bản giống như các đối tác chuỗi của chúng, nhưng hoạt động trên các item thay vì các ký tự:
 
 - `arr.indexOf(item, from)` -- tìm kiếm `item` bắt đầu từ chỉ mục `from` và trả về chỉ mục nơi nó được tìm thấy, nếu không thì `-1`.
 - `arr.lastIndexOf(item, from)` -- tương tự, nhưng tìm kiếm từ phải sang trái.
@@ -273,8 +273,8 @@ Hãy tưởng tượng chúng ta có một array các đối tượng. Làm th�
 Cú pháp là:
 ```js
 let result = arr.find(function(item, index, array) {
-  // nếu true được trả về, mục được trả lại và quá trình lặp lại bị dừng
-   // đối với kịch bản sai trả về undefined
+  // nếu true được trả về, item được trả lại và quá trình lặp lại bị dừng
+  // đối với tập lệnh sai trả về undefined
 });
 ```
 
@@ -286,7 +286,7 @@ Hàm được gọi lần lượt cho các phần tử của array:
 
 Nếu nó trả về `true`, quá trình tìm kiếm được dừng, `item` được trả về. Nếu không tìm thấy gì, `undefined` được trả về.
 
-Ví dụ: chúng ta có một array người dùng, mỗi người có các trường `id` và `name`. Hãy tìm cái có `id == 1`:
+Ví dụ: chúng ta có một array user, mỗi người có các `id` và `name`. Hãy tìm cái có `id == 1`:
 
 ```js run
 let users = [
@@ -317,7 +317,7 @@ Cú pháp tương tự như `find`, nhưng `filter` trả về một array gồm
 ```js
 let results = arr.filter(function(item, index, array) {
   // nếu true, item được đẩy đến kết quả và quá trình lặp lại tiếp tục
-   // trả về array rỗng nếu không tìm thấy gì
+  // trả về array rỗng nếu không tìm thấy gì
 });
 ```
 
@@ -378,9 +378,9 @@ arr.sort();
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Bạn có nhận thấy bất cứ điều gì lạ trong kết quả?
+Bạn có nhận thấy bất cứ điều gì lạ trong kết quả không?
 
-Thứ tự trở thành `1, 15, 2`. Không đúng. Nhưng tại sao?
+Thứ tự trở thành `1, 15, 2`. Nó không đúng. Nhưng tại sao?
 
 **Các mục được sắp xếp theo chuỗi theo mặc định.**
 
@@ -391,7 +391,7 @@ Theo nghĩa đen, tất cả các phần tử được chuyển đổi thành ch
 Hàm sẽ so sánh hai giá trị tùy ý và trả về:
 ```js
 function compare(a, b) {
-  if (a > b) return 1; // nếu giá trị đầu tiên lớn hơn giá trị thứ hai
+  if (a > b) return 1;  // nếu giá trị đầu tiên lớn hơn giá trị thứ hai
   if (a == b) return 0; // nếu các giá trị bằng nhau
   if (a < b) return -1; // nếu giá trị đầu tiên nhỏ hơn giá trị thứ hai
 }
@@ -415,11 +415,11 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Bây giờ nó hoạt động như dự định.
+Bây giờ nó hoạt động như dự tính.
 
-Hãy bước sang một bên và suy nghĩ những gì đang xảy ra. `array` có thể là array của bất kỳ thứ gì, phải không? Nó có thể chứa số hoặc chuỗi hoặc đối tượng hoặc bất cứ thứ gì. Chúng ta có một bộ *một số mục*. Để sắp xếp nó, chúng ta cần một *hàm sắp xếp thứ tự* biết cách so sánh các phần tử của nó. Mặc định là thứ tự chuỗi.
+Hãy bước sang một bên và suy nghĩ những gì đang xảy ra. `array` có thể là array của bất kỳ thứ gì, phải không? Nó có thể chứa số hoặc chuỗi hoặc đối tượng hoặc bất cứ thứ gì. Chúng ta có một tập hợp *một số item*. Để sắp xếp nó, chúng ta cần một *hàm sắp xếp thứ tự* biết cách so sánh các phần tử của nó. Mặc định là thứ tự chuỗi.
 
-Phương thức `arr.sort(fn)` triển khai thuật toán sắp xếp chung. Chúng ta không cần quan tâm nó hoạt động bên trong như thế nào ([quicksort](https://vi.wikipedia.org/wiki/S%E1%BA%AFp_x%E1%BA%BFp_nhanh) được tối ưu hóa) hay [Timsort](https://en.wikipedia.org/wiki/Timsort) ) hầu hết thời gian). Nó sẽ duyệt array, so sánh các phần tử của nó bằng cách sử dụng hàm được cung cấp và sắp xếp lại chúng, tất cả những gì chúng ta cần là cung cấp `fn` để so sánh.
+Phương thức `arr.sort(fn)` triển khai thuật toán sắp xếp chung. Chúng ta không cần quan tâm nó hoạt động bên trong như thế nào ([quicksort](https://vi.wikipedia.org/wiki/Sắp_xếp_nhanh) được tối ưu hóa) hay [Timsort](https://en.wikipedia.org/wiki/Timsort) ) hầu hết thời gian). Nó sẽ duyệt array, so sánh các phần tử của nó bằng cách sử dụng hàm được cung cấp và sắp xếp lại chúng, tất cả những gì chúng ta cần là cung cấp `fn` để so sánh.
 
 Nhân tiện, nếu chúng ta muốn biết phần tử nào được so sánh -- không có gì ngăn cản việc alert chúng:
 
@@ -446,14 +446,14 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow function cho tốt nhất"
+````smart header="Arrow function để tốt nhất"
 Bạn có nhớ [arrow function](info:arrow-functions-basics) không? Chúng ta có thể sử dụng chúng ở đây để sắp xếp gọn gàng hơn:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-Điều này hoạt động chính xác giống như phiên bản dài hơn ở trên.
+Cái này hoạt động chính xác giống như phiên bản dài hơn ở trên.
 ````
 
 ````smart header="Sử dụng `localeCompare` cho các chuỗi"
@@ -464,11 +464,11 @@ Nhớ thuật toán so sánh [các chuỗi](info:string#true-comparisons) không
 Ví dụ: hãy sắp xếp một vài quốc gia bằng tiếng Đức:
 
 ```js run
-let countries = ['Österreich', 'Andorra', 'Việt Nam'];
+let countries = ['Österreich', 'Andorra', 'Vietnam'];
 
-alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Việt Nam, Österreich (sai)
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (sai)
 
-alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Việt Nam (chính xác!)
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (chính xác!)
 ```
 ````
 
