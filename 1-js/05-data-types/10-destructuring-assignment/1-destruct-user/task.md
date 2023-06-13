@@ -13,7 +13,7 @@ let user = {
 };
 ```
 
-Viết mhiem65 vụ phá hủy có nội dung:
+Viết nhiệm vụ phá hủy có nội dung:
 
 - `name` thuộc tính vào biến `name`.
 - `years` thuộc tính vào biến `age`.
