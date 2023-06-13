@@ -19,4 +19,4 @@ Tạo hàm `topSalary(salaries)` trả về tên của người được trả l
 - Nếu `salaries` trống, nó nên trả về `null`.
 - Nếu có nhiều người được trả lương cao nhất, trả lại bất kỳ ai trong số họ.
 
-Tái bút: Sử dụng `Object.entries` và phá hủy để lặp lại các cặp khóa/giá trị.
+Tái bút: Sử dụng `Object.entries` và destructuring để lặp lại các cặp khóa/giá trị.
