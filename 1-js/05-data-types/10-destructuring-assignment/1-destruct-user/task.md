@@ -2,7 +2,7 @@ importance: 5
 
 ---
 
-# Nhiệm vụ phá hủy
+# Destructuring assignment
 
 Chúng ta có một đối tượng:
 
@@ -13,7 +13,7 @@ let user = {
 };
 ```
 
-Viết nhiệm vụ phá hủy có nội dung:
+Viết destructuring assignment có nội dung:
 
 - `name` thuộc tính vào biến `name`.
 - `years` thuộc tính vào biến `age`.
