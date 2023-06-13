@@ -18,6 +18,6 @@ Mã của bạn có thể truy cập nó, nhưng các tin nhắn được quản
 
 Bây giờ, bạn có thể sử dụng cấu trúc dữ liệu nào để lưu trữ thông tin về việc thư "đã được đọc" chưa? Cấu trúc phải phù hợp để đưa ra câu trả lời "đã đọc chưa?" cho đối tượng thông báo đã cho.
 
-Tái bút: Khi một tin nhắn bị xóa khỏi `tin nhắn`, nó cũng sẽ biến mất khỏi cấu trúc của bạn.
+Tái bút: Khi một tin nhắn bị xóa khỏi `messages`, nó cũng sẽ biến mất khỏi cấu trúc của bạn.
 
 Tái bút nữa: Chúng ta không nên sửa đổi các đối tượng tin nhắn, hãy thêm các thuộc tính của chúng ta vào chúng. Vì chúng được quản lý bởi mã của người khác, điều đó có thể dẫn đến hậu quả xấu.
