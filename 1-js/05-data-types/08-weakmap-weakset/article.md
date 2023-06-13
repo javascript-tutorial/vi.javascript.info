@@ -60,7 +60,7 @@ Hãy xem ý nghĩa của nó trong các ví dụ.
 
 ## WeakMap
 
-Sự khác biệt đầu tiên giữa `Map` và `WeakMap` là các khóa phải là đối tượng, không phải giá trị nguyên thủy:
+Sự khác biệt đầu tiên giữa `Map` và `WeakMap` là các khóa phải là đối tượng, không phải giá trị nguyên hàm:
 
 ```js run
 let weakMap = new WeakMap();
@@ -99,9 +99,9 @@ So sánh nó với ví dụ `Map` thông thường ở trên. Bây giờ nếu `
 - `weakMap.delete(key)`
 - `weakMap.has(key)`
 
-Tại sao lại có hạn chế như vậy? Đó là vì lý do kỹ thuật. Nếu một đối tượng bị mất tất cả các tham chiếu khác (như `john` trong mã ở trên), thì đối tượng đó sẽ được thu gom rác tự động. Nhưng về mặt kỹ thuật, nó không được chỉ định chính xác *khi quá trình dọn dẹp diễn ra*.
+Tại sao lại có hạn chế như vậy? Đó là vì lý do kỹ thuật. Nếu một đối tượng bị mất tất cả các tham chiếu khác (như `john` trong mã ở trên), thì đối tượng đó sẽ được thu gom rác tự động. Nhưng về mặt kỹ thuật, nó không được chỉ định chính xác *khi quá trình thu gom diễn ra*.
 
-JavaScript engine quyết định điều đó. Nó có thể chọn thực hiện dọn dẹp bộ nhớ ngay lập tức hoặc đợi và thực hiện dọn dẹp sau khi có nhiều thao tác xóa hơn. Vì vậy, về mặt kỹ thuật, số phần tử hiện tại của `WeakMap` không được biết. Engine có thể đã làm sạch nó hoặc chưa, hoặc đã làm một phần. Vì lý do đó, các phương thức truy cập tất cả khóa/giá trị không được hỗ trợ.
+JavaScript engine quyết định điều đó. Nó có thể chọn thực hiện dọn dẹp bộ nhớ ngay lập tức hoặc đợi và thực hiện dọn dẹp sau khi có nhiều thao tác xóa hơn. Vì vậy, về mặt kỹ thuật, số phần tử hiện tại của `WeakMap` không được biết. Engine có thể đã dọn nó hoặc chưa, hoặc đã làm một phần. Vì lý do đó, các phương thức truy cập tất cả khóa/giá trị không được hỗ trợ.
 
 Bây giờ, chúng ta cần một cấu trúc dữ liệu như vậy ở đâu?
 
@@ -114,8 +114,8 @@ Nếu chúng ta đang làm việc với một đối tượng "thuộc về" m�
 Chúng ta đặt dữ liệu vào `WeakMap`, sử dụng đối tượng làm khóa và khi đối tượng được thu gom rác, dữ liệu đó cũng sẽ tự động biến mất.
 
 ```js
-weakMap.set(john, "secret documents");
-// nếu john chết, các tài liệu bí mật sẽ tự động bị hủy
+weakMap.set(john, "tài liệu bí mật");
+// nếu john chết, tài liệu bí mật sẽ tự động bị hủy
 ```
 
 Hãy xem một ví dụ.
@@ -143,7 +143,7 @@ let john = { name: "John" };
 
 countUser(john); // đếm số lượt truy cập của anh ấy
 
-// sau đó john rời khỏi chúng tôi
+// sau đó john rời khỏi đây
 john = null;
 ```
 
@@ -168,7 +168,7 @@ Bây giờ chúng ta không phải xóa `visitsCountMap`. Sau khi không thể t
 
 ## Trường hợp sử dụng: bộ nhớ đệm
 
-Một ví dụ phổ biến khác là bộ nhớ đệm. Chúng ta có thể lưu trữ ("bộ đệm") kết quả từ một hàm, để các cuộc gọi trong tương lai trên cùng một đối tượng có thể sử dụng lại nó.
+Một ví dụ phổ biến khác là bộ nhớ đệm. Chúng ta có thể lưu trữ ("bộ nhớ đệm") kết quả từ một hàm, để các cuộc gọi trong tương lai trên cùng một đối tượng có thể sử dụng lại nó.
 
 Để đạt được điều đó, chúng ta có thể sử dụng `Map` (kịch bản không tối ưu):
 
@@ -179,7 +179,7 @@ let cache = new Map();
 // tính toán và ghi nhớ kết quả
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculations of the result for */ obj;
+    let result = /* tính toán kết quả cho */ obj;
 
     cache.set(obj, result);
   }
@@ -192,7 +192,7 @@ function process(obj) {
 */!*
 
 // 📁 main.js
-let obj = {/* let's say we have an object */};
+let obj = {/* giả sử chúng ta có một đối tượng */};
 
 let result1 = process(obj); // tính toán
 
@@ -205,7 +205,7 @@ obj = null;
 alert(cache.size); // 1 (Ôi! Đối tượng vẫn còn trong bộ đệm, chiếm bộ nhớ!)
 ```
 
-Đối với nhiều lệnh gọi `process(obj)` với cùng một đối tượng, nó chỉ tính toán kết quả lần đầu tiên và sau đó chỉ lấy kết quả từ `cache`. Nhược điểm là chúng ta cần dọn dẹp `cache` khi đối tượng không còn cần thiết nữa.
+Đối với nhiều lệnh gọi `process(obj)` với cùng một đối tượng, nó chỉ tính toán kết quả lần đầu tiên và sau đó chỉ lấy kết quả từ `cache`. Nhược điểm là chúng ta cần dọn `cache` khi đối tượng không còn cần thiết nữa.
 
 Nếu chúng ta thay thế `Map` bằng `WeakMap` thì vấn đề này sẽ biến mất. Kết quả được lưu trong bộ nhớ đệm sẽ tự động bị xóa khỏi bộ nhớ sau khi đối tượng được thu gom rác.
 
@@ -218,7 +218,7 @@ let cache = new WeakMap();
 // tính toán và ghi nhớ kết quả
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculate the result for */ obj;
+    let result = /* tính toán kết quả cho */ obj;
 
     cache.set(obj, result);
   }
@@ -244,7 +244,7 @@ obj = null;
 
 `WeakSet` hoạt động tương tự:
 
-- Tương tự như `Set`, nhưng chúng ta chỉ có thể thêm các đối tượng vào `WeakSet` (không phải các đối tượng nguyên thủy).
+- Tương tự như `Set`, nhưng chúng ta chỉ có thể thêm các đối tượng vào `WeakSet` (không phải các đối tượng nguyên hàm).
 - Một đối tượng tồn tại trong set trong khi nó có thể truy cập được từ một nơi khác.
 - Giống như `Set`, nó hỗ trợ `add`, `has` và `delete`, nhưng không hỗ trợ `size`, `keys()` và không lặp lại.
 
@@ -273,7 +273,7 @@ alert(visitedSet.has(mary)); // false
 
 john = null;
 
-// visitedSet sẽ được dọn dẹp tự động
+// visitedSet sẽ được dọn tự động
 ```
 
 Hạn chế đáng chú ý nhất của `WeakMap` và `WeakSet` là không có phép lặp và không thể lấy tất cả nội dung hiện tại. Điều đó có vẻ bất tiện, nhưng không ngăn cản `WeakMap/WeakSet` thực hiện công việc chính của chúng -- trở thành nơi lưu trữ dữ liệu "bổ sung" cho các đối tượng được lưu trữ/quản lý ở một nơi khác.
@@ -288,4 +288,4 @@ Hạn chế đáng chú ý nhất của `WeakMap` và `WeakSet` là không có p
 
 Điều đó phải trả giá bằng việc không hỗ trợ `clear`, `size`, `keys`, `values`...
 
-`WeakMap` và `WeakSet` được sử dụng làm cấu trúc dữ liệu "phụ" ngoài bộ lưu trữ đối tượng "chính". Sau khi đối tượng bị xóa khỏi bộ lưu trữ chính, nếu đối tượng chỉ được tìm thấy dưới dạng khóa của `WeakMap` hoặc trong `WeakSet`, thì đối tượng đó sẽ tự động được dọn sạch.
+`WeakMap` và `WeakSet` được sử dụng làm cấu trúc dữ liệu "phụ" ngoài bộ lưu trữ đối tượng "chính". Sau khi đối tượng bị xóa khỏi bộ lưu trữ chính, nếu đối tượng chỉ được tìm thấy dưới dạng khóa của `WeakMap` hoặc trong `WeakSet`, thì đối tượng đó sẽ tự động được dọn.
