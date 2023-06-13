@@ -10,17 +10,17 @@ Nhưng điều đó là không đủ cho cuộc sống thực. Đó là lý do t
 
 ## Map
 
-[Map](mdn:js/Map) là tập hợp các mục dữ liệu có khóa, giống như một `Đối tượng`. Nhưng điểm khác biệt chính là `Map` cho phép các loại khóa bất kỳ.
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) là tập hợp các mục dữ liệu có khóa, giống như một `Đối tượng`. Nhưng điểm khác biệt chính là `Map` cho phép các loại khóa bất kỳ.
 
 Các phương thức và thuộc tính là:
 
-- `new Map()` -- tạo map.
-- `map.set(key, value)` -- lưu trữ value theo key.
-- `map.get(key)` -- trả về value theo key, `undefined` nếu `key` không tồn tại trong map.
-- `map.has(key)` -- trả về `true` nếu `key` tồn tại, `false` nếu không.
-- `map.delete(key)` -- xóa value theo key.
-- `map.clear()` -- xóa mọi thứ khỏi map.
-- `map.size` -- trả về số phần tử hiện tại.
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- tạo map.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- lưu trữ value theo key.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- trả về value theo key, `undefined` nếu `key` không tồn tại trong map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- trả về `true` nếu `key` tồn tại, `false` nếu không.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- xóa phần tử (cặp khóa/giá trị) theo khóa.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- xóa mọi thứ khỏi map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- trả về số lượng phần tử hiện tại.
 
 Ví dụ:
 
@@ -105,9 +105,9 @@ map.set('1', 'str1')
 
 Để lặp qua `map`, có 3 phương thức:
 
-- `map.keys()` -- trả về một iterable cho các khóa,
-- `map.values()` -- trả về một iterable cho giá trị,
-- `map.entries()` -- trả về một iterable cho các mục nhập `[key, value]`, nó được sử dụng theo mặc định trong `for..of`.
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- trả về một iterable cho các khóa,
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- trả về một iterable cho các giá trị,
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- trả về một iterable cho các mục nhập `[key, value]`, nó được sử dụng theo mặc định trong `for..of`.
 
 Ví dụ:
 
@@ -162,7 +162,7 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
-Nếu chúng ta có một đối tượng đơn giản và chúng ta muốn tạo một `Map` từ nó, thì chúng ta có thể sử dụng phương thức tích hợp [Object.entries(obj)](mdn:js/Object/entries) trả về một array của các cặp khóa/giá trị cho một đối tượng chính xác ở định dạng đó.
+Nếu chúng ta có một đối tượng đơn giản và chúng ta muốn tạo một `Map` từ nó, thì chúng ta có thể sử dụng phương thức tích hợp [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) trả về một array của các cặp khóa/giá trị cho một đối tượng chính xác ở định dạng đó.
 
 Vì vậy, chúng ta có thể tạo map từ một đối tượng như thế này:
 
@@ -195,7 +195,7 @@ let prices = Object.fromEntries([
   ['thịt', 4]
 ]);
 
-// bây giờ giá = {chuối: 1, cam: 2, thịt: 4}
+// bây giờ prices = {chuối: 1, cam: 2, thịt: 4}
 
 alert(prices.orange); // 2
 ```
@@ -233,16 +233,16 @@ let obj = Object.fromEntries(map); // omit .entries()
 
 ## Set
 
-`Set` là một bộ sưu tập loại đặc biệt - "bộ giá trị" (không có khóa), trong đó mỗi giá trị chỉ có thể xuất hiện một lần.
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) là một bộ sưu tập loại đặc biệt - "bộ giá trị" (không có khóa), trong đó mỗi giá trị chỉ có thể xuất hiện một lần.
 
 Các phương pháp chính của nó là:
 
-- `new Set(iterable)` -- tạo tập hợp và nếu một đối tượng `iterable` được cung cấp (thường là một array), sao chép các giá trị từ đối tượng đó vào tập hợp.
-- `set.add(value)` -- thêm một giá trị, trả về chính tập hợp đó.
-- `set.delete(value)` -- xóa giá trị, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
-- `set.has(value)` -- trả về `true` nếu giá trị tồn tại trong tập hợp, nếu không thì `false`.
-- `set.clear()` -- xóa mọi thứ khỏi tập hợp.
-- `set.size` -- là số lượng phần tử.
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- tạo tập hợp và nếu một đối tượng `iterable` được cung cấp (thường là một array), sao chép các giá trị từ đối tượng đó vào tập hợp.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- thêm một giá trị, trả về chính tập hợp đó.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- xóa giá trị, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- trả về `true` nếu giá trị tồn tại trong tập hợp, nếu không thì `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- xóa mọi thứ khỏi tập hợp.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- là số lượng phần tử.
 
 Đặc điểm chính là các lệnh gọi lặp lại `set.add(value)` với cùng một giá trị không làm được gì cả. Đó là lý do tại sao mỗi giá trị chỉ xuất hiện trong `Set` một lần.
 
@@ -272,7 +272,7 @@ for (let user of set) {
 }
 ```
 
-Lựa chọn thay thế cho `Set` có thể là một array người dùng và mã để kiểm tra các trùng lặp trên mỗi lần chèn bằng cách sử dụng [arr.find](mdn:js/Array/find). Nhưng hiệu năng sẽ tệ hơn nhiều, bởi vì phương thức này duyệt qua toàn bộ array để kiểm tra mọi phần tử. `Set` được tối ưu hóa bên trong tốt hơn nhiều để kiểm tra tính duy nhất.
+Lựa chọn thay thế cho `Set` có thể là một array người dùng và mã để kiểm tra các trùng lặp trên mỗi lần chèn bằng cách sử dụng [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). Nhưng hiệu năng sẽ tệ hơn nhiều, bởi vì phương thức này duyệt qua toàn bộ array để kiểm tra mọi phần tử. `Set` được tối ưu hóa bên trong tốt hơn nhiều để kiểm tra tính duy nhất.
 
 ## Lặp lại qua Set
 
@@ -291,42 +291,42 @@ set.forEach((value, valueAgain, set) => {
 
 Lưu ý điều buồn cười này. Hàm gọi lại được truyền trong `forEach` có 3 đối số: `value`, sau đó là *giá trị giống nhau* `valueAgain`, sau đó là đối tượng đích. Thật vậy, cùng một giá trị xuất hiện trong các đối số hai lần.
 
-Đó là để tương thích với `Map` trong đó cuộc gọi lại được thông qua `forEach` có ba đối số. Chắc chắn nó sẽ trông hơi lạ. Nhưng có thể giúp thay thế `Map` bằng `Set` trong một số trường hợp một cách dễ dàng và ngược lại.
+Đó là để tương thích với `Map` trong đó cuộc gọi lại được thông qua `forEach` có ba đối số. Trông hơi lạ, chắc chắn. Nhưng điều này có thể giúp thay thế `Map` bằng `Set` trong một số trường hợp một cách dễ dàng và ngược lại.
 
 Các phương thức tương tự mà `Map` dành cho các iterator cũng được hỗ trợ:
 
-- `set.keys()` -- trả về một đối tượng có thể lặp lại cho các giá trị,
-- `set.values()` -- giống như `set.keys()`, để tương thích với `Map`,
-- `set.entries()` -- trả về một đối tượng có thể lặp lại cho các mục nhập `[giá trị, giá trị]`, tồn tại để tương thích với `Map`.
+- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- trả về một đối tượng có thể lặp lại cho các giá trị,
+- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- giống như `set.keys()`, để tương thích với `Map`,
+- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- trả về một đối tượng có thể lặp lại cho các mục nhập `[giá trị, giá trị]`, tồn tại để tương thích với `Map`.
 
 ## Tóm tắt
 
-`Map` -- là tập hợp các giá trị được khóa.
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- là tập hợp các giá trị được khóa.
 
 Các phương thức và thuộc tính:
 
-- `new Map([iterable])` -- tạo map, với `iterable` (ví dụ: array) tùy chọn của các cặp `[key,value]` để khởi tạo.
-- `map.set(key, value)` -- lưu trữ value theo key, trả về chính map.
-- `map.get(key)` -- trả về giá trị theo khóa, `undefined` nếu `key` không tồn tại trong map.
-- `map.has(key)` -- trả về `true` nếu `key` tồn tại, `false` nếu không.
-- `map.delete(key)` -- xóa value theo key, trả về `true` nếu `key` tồn tại tại thời điểm gọi, nếu không thì `false`.
-- `map.clear()` -- xóa mọi thứ khỏi map.
-- `map.size` -- trả về số phần tử hiện tại.
+- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- tạo map, với `iterable` (ví dụ: array) tùy chọn của các cặp `[key,value]` để khởi tạo.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- lưu trữ value theo key, trả về chính map.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- trả về giá trị theo khóa, `undefined` nếu `key` không tồn tại trong map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- trả về `true` nếu `key` tồn tại, `false` nếu không.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- xóa phần tử theo key, trả về `true` nếu `key` tồn tại tại thời điểm gọi, nếu không thì `false`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- xóa mọi thứ khỏi map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- trả về số phần tử hiện tại.
 
 Sự khác biệt so với `Đối tượng` thông thường:
 
 - Bất kỳ khóa, đối tượng nào cũng có thể là key.
 - Các phương thức tiện lợi bổ sung, thuộc tính `size`.
 
-`Set` -- là tập hợp các giá trị duy nhất.
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- là tập hợp các giá trị duy nhất.
 
 Các phương thức và thuộc tính:
 
-- `new Set([iterable])` -- tạo set, với `iterable` tùy chọn (ví dụ: array) các giá trị để khởi tạo.
-- `set.add(value)` -- thêm một value (không làm gì nếu `value` tồn tại), trả về chính set đó.
-- `set.delete(value)` -- xóa value, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
-- `set.has(value)` -- trả về `true` nếu value tồn tại trong set, nếu không thì `false`.
-- `set.clear()` -- xóa mọi thứ khỏi set.
-- `set.size` -- là số lượng phần tử.
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- tạo set, với `iterable` tùy chọn (ví dụ: array) các giá trị để khởi tạo.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- thêm một value (không làm gì nếu `value` tồn tại), trả về chính set đó.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- xóa value, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- trả về `true` nếu value tồn tại trong set, nếu không thì `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- xóa mọi thứ khỏi set.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- là số lượng phần tử.
 
 Việc lặp lại `Map` và `Set` luôn theo thứ tự chèn, vì vậy chúng ta không thể nói rằng các bộ sưu tập này không có thứ tự, nhưng chúng ta không thể sắp xếp lại các phần tử hoặc lấy trực tiếp một phần tử theo số của nó.
