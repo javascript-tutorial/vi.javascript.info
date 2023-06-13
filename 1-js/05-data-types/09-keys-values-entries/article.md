@@ -77,7 +77,7 @@ Các đối tượng thiếu nhiều phương thức tồn tại cho array, ví 
 Nếu chúng ta muốn áp dụng chúng, thì chúng ta có thể sử dụng `Object.entries` theo sau là `Object.fromEntries`:
 
 1. Sử dụng `Object.entries(obj)` để lấy một array các cặp khóa/giá trị từ `obj`.
-2. Sử dụng các phương thức array trên array đó, ví dụ `map`.
+2. Sử dụng các phương thức array trên array đó, ví dụ: `map`, để chuyển đổi các cặp khóa/giá trị này.
 3. Sử dụng `Object.fromEntries(array)` trên array kết quả để biến nó trở lại thành một đối tượng.
 
 Ví dụ: chúng ta có một đối tượng có giá và muốn nhân đôi chúng:
@@ -91,12 +91,13 @@ let prices = {
 
 *!*
 let doublePrices = Object.fromEntries(
-  // chuyển đổi thành array, map và sau đó fromEntries trả lại đối tượng
-  Object.entries(prices).map(([key, value]) => [key, value * 2])
+  // chuyển đổi prices thành array, map từng cặp khóa/giá trị thành một cặp khác
+  // và sau đó fromEntries trả lại đối tượng
+  Object.entries(prices).map(entry => [entry[0], entry[1] * 2])
 );
 */!*
 
 alert(doublePrices.meat); // 8
 ```   
 
-Nó có thể trông khó khăn ngay từ cái nhìn đầu tiên, nhưng sẽ trở nên dễ hiểu sau khi bạn sử dụng nó một hoặc hai lần. Chúng ta có thể tạo ra những chuỗi biến đổi mạnh mẽ theo cách này.
+Thoạt nhìn có vẻ khó, nhưng sẽ trở nên dễ hiểu sau khi bạn sử dụng một hoặc hai lần. Chúng ta có thể tạo ra những chuỗi biến đổi mạnh mẽ theo cách này.
