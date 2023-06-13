@@ -4,7 +4,7 @@ importance: 5
 
 # Lưu trữ ngày đọc
 
-Có một array tin nhắn như trong [nhiệm vụ trước đó](info:task/recipients-read). Tình hình cũng tương tự.
+Có một array tin nhắn như trong [bài tập trước đó](info:task/recipients-read). Tình hình cũng tương tự.
 
 ```js
 let messages = [
