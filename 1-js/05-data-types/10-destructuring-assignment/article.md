@@ -1,4 +1,4 @@
-# Nhiệm vụ phá hủy
+# Destructuring assignment
 
 Hai cấu trúc dữ liệu được sử dụng nhiều nhất trong JavaScript là `Object` và `Array`.
 
@@ -7,20 +7,20 @@ Hai cấu trúc dữ liệu được sử dụng nhiều nhất trong JavaScript
 
 Mặc dù, khi chúng ta chuyển chúng cho một hàm, nó có thể không cần toàn bộ đối tượng/array. Nó có thể cần các mảnh riêng lẻ.
 
-*Phân công hủy cấu trúc* là một cú pháp đặc biệt cho phép chúng ta "giải nén" các array hoặc đối tượng thành một loạt các biến, vì đôi khi điều đó thuận tiện hơn.
+*Destructuring assignment* là một cú pháp đặc biệt cho phép chúng ta "giải nén" các array hoặc đối tượng thành một loạt các biến, vì đôi khi điều đó thuận tiện hơn.
 
-Việc hủy cấu trúc cũng hoạt động hiệu quả với các hàm phức tạp có nhiều tham số, giá trị mặc định, v.v. Chúng ta sẽ sớm thấy điều đó.
+Destructuring assignment cũng hoạt động hiệu quả với các hàm phức tạp có nhiều tham số, giá trị mặc định, v.v. Chúng ta sẽ sớm thấy điều đó.
 
-## Phá hủy array
+## Destructuring array
 
-Đây là một ví dụ về cách một array bị hủy cấu trúc thành các biến:
+Đây là một ví dụ về cách một array bị destructuring thành các biến:
 
 ```js
 // chúng ta có một array với tên và họ
 let arr = ["John", "Smith"]
 
 *!*
-// nhiệm vụ phá hủy
+// destructuring assignment
 // đặt firstName = arr[0]
 // và surname = arr[1]
 let [firstName, surname] = arr;
@@ -42,8 +42,8 @@ alert(surname);  // Smith
 
 Như bạn có thể thấy, cú pháp rất đơn giản. Có một số chi tiết đặc biệt mặc dù. Hãy xem thêm các ví dụ, để hiểu rõ hơn về nó.
 
-````smart header="\"Phá hủy\" does not mean \"phá hoại\"."
-Nó được gọi là "phân công phá hủy" bởi vì nó "phá hủy" bằng cách sao chép các mục vào các biến. Nhưng bản thân array không được sửa đổi.
+````smart header="\"Destructuring\" không có nghĩa là \"phá hoại\"."
+Nó được gọi là "destructuring assignment" bởi vì nó "phá huỷ" bằng cách sao chép các mục vào các biến. Nhưng bản thân array không được sửa đổi.
 
 Nó chỉ là một cách ngắn hơn để viết:
 ```js
@@ -65,7 +65,7 @@ let [firstName, , title] = ["Julius", "Caesar", "Lãnh đạo", "của Cộng h�
 alert( title ); // Lãnh đạo
 ```
 
-Trong đoạn mã trên, phần tử thứ hai của array bị bỏ qua, phần tử thứ ba được gán cho `title` và phần còn lại của các mục array cũng bị bỏ qua (vì không có biến nào cho chúng).
+Trong đoạn mã trên, phần tử thứ hai của array bị bỏ qua, phần tử thứ ba được gán cho `title` và phần còn lại của các item array cũng bị bỏ qua (vì không có biến nào cho chúng).
 ````
 
 ````smart header="Hoạt động với bất kỳ iterable nào ở phía bên phải"
@@ -76,7 +76,7 @@ Trong đoạn mã trên, phần tử thứ hai của array bị bỏ qua, phần
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-Nó hoạt động, bởi vì bên trong một nhiệm vụ phá hủy hoạt động bằng cách lặp lại giá trị phù hợp. Đó là loại đường cú pháp để gọi `for..of` trên giá trị ở bên phải của `=` và gán các giá trị.
+Nó hoạt động, bởi vì bên trong một destructuring assignment hoạt động bằng cách lặp lại giá trị phù hợp. Đó là loại đường cú pháp để gọi `for..of` trên giá trị ở bên phải của `=` và gán các giá trị.
 ````
 
 
@@ -169,7 +169,7 @@ Nếu chúng ta cũng muốn thu thập tất cả những gì sau đây -- chú
 let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Lãnh đạo", "của Cộng hòa La Mã"*/!*];
 
 *!*
-// phần còn lại là array các mục, bắt đầu từ mục thứ 3
+// phần còn lại là array các mục, bắt đầu từ item thứ 3
 alert(rest[0]); // Lãnh đạo
 alert(rest[1]); // của Cộng hòa La Mã
 alert(rest.length); // 2
