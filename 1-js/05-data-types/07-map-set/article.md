@@ -10,15 +10,15 @@ Nhưng điều đó là không đủ cho cuộc sống thực. Đó là lý do t
 
 ## Map
 
-[Map](mdn:js/Map) là tập hợp các mục dữ liệu có khóa, giống như một `Object`. Nhưng điểm khác biệt chính là `Map` cho phép các loại khóa bất kỳ.
+[Map](mdn:js/Map) là tập hợp các mục dữ liệu có khóa, giống như một `Đối tượng`. Nhưng điểm khác biệt chính là `Map` cho phép các loại khóa bất kỳ.
 
 Các phương thức và thuộc tính là:
 
 - `new Map()` -- tạo map.
-- `map.set(key, value)` -- lưu trữ giá trị theo khóa.
-- `map.get(key)` -- trả về giá trị theo khóa, `undefined` nếu `key` không tồn tại trong map.
+- `map.set(key, value)` -- lưu trữ value theo key.
+- `map.get(key)` -- trả về value theo key, `undefined` nếu `key` không tồn tại trong map.
 - `map.has(key)` -- trả về `true` nếu `key` tồn tại, `false` nếu không.
-- `map.delete(key)` -- xóa giá trị theo khóa.
+- `map.delete(key)` -- xóa value theo key.
 - `map.clear()` -- xóa mọi thứ khỏi map.
 - `map.size` -- trả về số phần tử hiện tại.
 
@@ -31,7 +31,7 @@ map.set('1', 'str1');   // một khóa chuỗi
 map.set(1, 'num1');     // một khóa số
 map.set(true, 'bool1'); // một khóa boolean
 
-// nhớ Object thông thường không? nó sẽ chuyển đổi các khóa thành chuỗi
+// nhớ Đối tượng thông thường không? nó sẽ chuyển đổi các khóa thành chuỗi
 // Map giữ nguyên kiểu, vì vậy hai cái này khác nhau:
 alert( map.get(1)   ); // 'num1'
 alert( map.get('1') ); // 'str1'
@@ -39,7 +39,7 @@ alert( map.get('1') ); // 'str1'
 alert( map.size ); // 3
 ```
 
-Như chúng ta có thể thấy, không giống như các đối tượng, các khóa không được chuyển thành chuỗi. Bất kỳ loại khóa nào đều có thể.
+Như chúng ta có thể thấy, không giống như các đối tượng, các khóa không được chuyển thành chuỗi. Bất kỳ loại khóa nào đều có thể tồn tại.
 
 ```smart header="`map[key]` không phải là cách đúng đắn để sử dụng `Map`"
 Mặc dù `map[key]` cũng hoạt động, ví dụ: chúng ta có thể đặt `map[key] = 2`, điều này đang coi `map` là một đối tượng JavaScript đơn giản, do đó, nó bao hàm tất cả các giới hạn tương ứng (chỉ các khóa chuỗi/ký hiệu, v.v.).
@@ -57,13 +57,13 @@ let john = { name: "John" };
 // đối với mọi người dùng, hãy lưu trữ số lượt truy cập của họ
 let visitsCountMap = new Map();
 
-// john là chìa khóa cho map
+// john là khóa cho map
 visitsCountMap.set(john, 123);
 
 alert( visitsCountMap.get(john) ); // 123
 ```
 
-Sử dụng các đối tượng làm khóa là một trong những tính năng `Map` đáng chú ý và quan trọng nhất. Điều tương tự không được tính cho `Object`. Chuỗi làm khóa trong   `Object` thì được, nhưng chúng ta không thể sử dụng `Object` khác làm khóa trong `Object`.
+Sử dụng các đối tượng làm khóa là một trong những tính năng `Map` đáng chú ý và quan trọng nhất. Điều tương tự không được tính cho `Đối tượng`. Chuỗi làm khóa trong `Đối tượng` thì được, nhưng chúng ta không thể sử dụng `Đối tượng` khác làm khóa trong `Đối tượng`.
 
 Hãy thử:
 
@@ -90,8 +90,8 @@ Vì `visitsCountObj` là một đối tượng nên nó chuyển đổi tất c�
 Thuật toán này không thể thay đổi hoặc tùy chỉnh.
 ```
 
-````smart header="Dây chuyền"
-Mỗi lệnh gọi `map.set` đều trả về chính bản đồ, vì vậy chúng ta có thể "xâu chuỗi" các lệnh gọi:
+````smart header="Xâu chuỗi"
+Mỗi lệnh gọi `map.set` đều trả về chính map, vì vậy chúng ta có thể "xâu chuỗi" các lệnh gọi:
 
 ```js
 map.set('1', 'str1')
@@ -101,12 +101,12 @@ map.set('1', 'str1')
 ````
 
 
-## Lặp lại trên Map
+## Lặp lại qua Map
 
 Để lặp qua `map`, có 3 phương thức:
 
 - `map.keys()` -- trả về một iterable cho các khóa,
-- `map.values()` -- trả về một giá trị có thể lặp lại,
+- `map.values()` -- trả về một iterable cho giá trị,
 - `map.entries()` -- trả về một iterable cho các mục nhập `[key, value]`, nó được sử dụng theo mặc định trong `for..of`.
 
 Ví dụ:
@@ -120,12 +120,12 @@ let recipeMap = new Map([
 
 // lặp lại các khóa (rau)
 for (let vegetable of recipeMap.keys()) {
-  alert(vegetable); // dưa leo, cà chua, hành
+  alert(vegetable); // dưa leo,cà chua,hành
 }
 
 // lặp lại các giá trị (số lượng)
 for (let amount of recipeMap.values()) {
-  alert(amount); // 500, 350, 50
+  alert(amount); // 500,350,50
 }
 
 // lặp lại các mục [key, value]
@@ -135,13 +135,13 @@ for (let entry of recipeMap) { // giống như của RecipeMap.entries()
 ```
 
 ```smart header="Thứ tự chèn được sử dụng"
-Việc lặp đi lặp lại theo thứ tự như các giá trị đã được chèn vào. `Map` duy trì thứ tự này, không giống như `Object` thông thường.
+Việc lặp đi lặp lại theo thứ tự như các giá trị đã được chèn vào. `Map` duy trì thứ tự này, không giống như `Đối tượng` thông thường.
 ```
 
 Bên cạnh đó, `Map` có phương thức `forEach` tích hợp, tương tự như `Array`:
 
 ```js
-// chạy chức năng cho từng cặp (khóa, giá trị)
+// chạy hàm cho từng cặp (key, value)
 recipeMap.forEach( (value, key, map) => {
   alert(`${key}: ${value}`); // dưa leo: 500 v.v
 });
@@ -149,7 +149,7 @@ recipeMap.forEach( (value, key, map) => {
 
 ## Object.entries: Map từ Đối tượng
 
-Khi một `Map` được tạo, chúng ta có thể truyền một array (hoặc một array khác có thể lặp lại) với các cặp khóa/giá trị để khởi tạo, như sau:
+Khi một `Map` được tạo, chúng ta có thể truyền một array (hoặc một iterable) với các cặp khóa/giá trị để khởi tạo, như sau:
 
 ```js run
 // array của các cặp [key, value]
@@ -222,14 +222,14 @@ let obj = Object.fromEntries(map.entries()); // tạo một đối tượng đơ
 alert(obj.orange); // 2
 ```
 
-Lệnh gọi `map.entries()` trả về một cặp khóa/giá trị có thể lặp lại, chính xác ở định dạng phù hợp cho `Object.fromEntries`.
+Lệnh gọi `map.entries()` trả về một iterable của cặp khóa/giá trị, chính xác ở định dạng phù hợp cho `Object.fromEntries`.
 
 Chúng ta cũng có thể làm cho dòng `(*)` ngắn hơn:
 ```js
 let obj = Object.fromEntries(map); // omit .entries()
 ```
 
-Điều đó cũng tương tự, bởi vì `Object.fromEntries` mong đợi một đối tượng có thể lặp lại làm đối số. Không nhất thiết phải là một array. Và phép lặp tiêu chuẩn cho `map` trả về các cặp khóa/giá trị giống như `map.entries()`. Vì vậy, chúng ta nhận được một đối tượng đơn giản có cùng khóa/giá trị với `map`.
+Điều đó cũng tương tự, bởi vì `Object.fromEntries` mong đợi một đối tượng iterable làm đối số. Không nhất thiết phải là một array. Và phép lặp tiêu chuẩn cho `map` trả về các cặp khóa/giá trị giống như `map.entries()`. Vì vậy, chúng ta nhận được một đối tượng đơn giản có cùng khóa/giá trị với `map`.
 
 ## Set
 
@@ -237,7 +237,7 @@ let obj = Object.fromEntries(map); // omit .entries()
 
 Các phương pháp chính của nó là:
 
-- `new Set(iterable)` -- tạo tập hợp và nếu một đối tượng `có thể lặp lại` được cung cấp (thường là một array), sao chép các giá trị từ đối tượng đó vào tập hợp.
+- `new Set(iterable)` -- tạo tập hợp và nếu một đối tượng `iterable` được cung cấp (thường là một array), sao chép các giá trị từ đối tượng đó vào tập hợp.
 - `set.add(value)` -- thêm một giá trị, trả về chính tập hợp đó.
 - `set.delete(value)` -- xóa giá trị, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
 - `set.has(value)` -- trả về `true` nếu giá trị tồn tại trong tập hợp, nếu không thì `false`.
@@ -246,7 +246,7 @@ Các phương pháp chính của nó là:
 
 Đặc điểm chính là các lệnh gọi lặp lại `set.add(value)` với cùng một giá trị không làm được gì cả. Đó là lý do tại sao mỗi giá trị chỉ xuất hiện trong `Set` một lần.
 
-Ví dụ: chúng ta có khách đến thăm và chúng ta muốn ghi nhớ tất cả mọi người. Nhưng các lượt truy cập iterable không nên dẫn đến trùng lặp. Một khách truy cập chỉ được "đếm" một lần.
+Ví dụ: chúng ta có khách đến thăm và chúng ta muốn ghi nhớ tất cả mọi người. Nhưng các lượt truy cập lặp lại không nên dẫn đến trùng lặp. Một khách truy cập chỉ được "đếm" một lần.
 
 `Set` chỉ là thứ phù hợp cho việc đó:
 
@@ -272,7 +272,7 @@ for (let user of set) {
 }
 ```
 
-Lựa chọn thay thế cho `Set` có thể là một array người dùng và mã để kiểm tra các bản trùng lặp trên mỗi lần chèn bằng cách sử dụng [arr.find](mdn:js/Array/find). Nhưng hiệu suất sẽ tệ hơn nhiều, bởi vì phương thức này duyệt qua toàn bộ array để kiểm tra mọi phần tử. `Set` được tối ưu hóa bên trong tốt hơn nhiều để kiểm tra tính duy nhất.
+Lựa chọn thay thế cho `Set` có thể là một array người dùng và mã để kiểm tra các trùng lặp trên mỗi lần chèn bằng cách sử dụng [arr.find](mdn:js/Array/find). Nhưng hiệu năng sẽ tệ hơn nhiều, bởi vì phương thức này duyệt qua toàn bộ array để kiểm tra mọi phần tử. `Set` được tối ưu hóa bên trong tốt hơn nhiều để kiểm tra tính duy nhất.
 
 ## Lặp lại qua Set
 
@@ -306,26 +306,26 @@ Các phương thức tương tự mà `Map` dành cho các iterator cũng đư�
 Các phương thức và thuộc tính:
 
 - `new Map([iterable])` -- tạo map, với `iterable` (ví dụ: array) tùy chọn của các cặp `[key,value]` để khởi tạo.
-- `map.set(key, value)` -- lưu trữ giá trị theo khóa, trả về chính map.
+- `map.set(key, value)` -- lưu trữ value theo key, trả về chính map.
 - `map.get(key)` -- trả về giá trị theo khóa, `undefined` nếu `key` không tồn tại trong map.
 - `map.has(key)` -- trả về `true` nếu `key` tồn tại, `false` nếu không.
-- `map.delete(key)` -- xóa giá trị theo khóa, trả về `true` nếu `key` tồn tại tại thời điểm gọi, nếu không thì `false`.
-- `map.clear()` -- xóa mọi thứ khỏi bản map.
+- `map.delete(key)` -- xóa value theo key, trả về `true` nếu `key` tồn tại tại thời điểm gọi, nếu không thì `false`.
+- `map.clear()` -- xóa mọi thứ khỏi map.
 - `map.size` -- trả về số phần tử hiện tại.
 
-Sự khác biệt so với `Object` thông thường:
+Sự khác biệt so với `Đối tượng` thông thường:
 
-- Bất kỳ chìa khóa, đồ vật nào cũng có thể là khóa.
+- Bất kỳ khóa, đối tượng nào cũng có thể là key.
 - Các phương thức tiện lợi bổ sung, thuộc tính `size`.
 
 `Set` -- là tập hợp các giá trị duy nhất.
 
 Các phương thức và thuộc tính:
 
-- `new Set([iterable])` -- tạo tập hợp, với `iterable` tùy chọn (ví dụ: array) các giá trị để khởi tạo.
-- `set.add(value)` -- thêm một giá trị (không làm gì nếu `value` tồn tại), trả về chính set đó.
-- `set.delete(value)` -- xóa giá trị, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
-- `set.has(value)` -- trả về `true` nếu giá trị tồn tại trong set, nếu không thì `false`.
+- `new Set([iterable])` -- tạo set, với `iterable` tùy chọn (ví dụ: array) các giá trị để khởi tạo.
+- `set.add(value)` -- thêm một value (không làm gì nếu `value` tồn tại), trả về chính set đó.
+- `set.delete(value)` -- xóa value, trả về `true` nếu `value` tồn tại tại thời điểm gọi, nếu không thì `false`.
+- `set.has(value)` -- trả về `true` nếu value tồn tại trong set, nếu không thì `false`.
 - `set.clear()` -- xóa mọi thứ khỏi set.
 - `set.size` -- là số lượng phần tử.
 
