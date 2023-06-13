@@ -11,9 +11,9 @@ Mặc dù, khi chúng ta chuyển chúng cho một hàm, nó có thể không c�
 
 Destructuring assignment cũng hoạt động hiệu quả với các hàm phức tạp có nhiều tham số, giá trị mặc định, v.v. Chúng ta sẽ sớm thấy điều đó.
 
-## Destructuring array
+## Phá huỷ array
 
-Đây là một ví dụ về cách một array bị destructuring thành các biến:
+Đây là một ví dụ về cách một array bị phá huỷ thành các biến:
 
 ```js
 // chúng ta có một array với tên và họ
@@ -42,8 +42,8 @@ alert(surname);  // Smith
 
 Như bạn có thể thấy, cú pháp rất đơn giản. Có một số chi tiết đặc biệt mặc dù. Hãy xem thêm các ví dụ, để hiểu rõ hơn về nó.
 
-````smart header="\"Destructuring\" không có nghĩa là \"phá hoại\"."
-Nó được gọi là "destructuring assignment" bởi vì nó "phá huỷ" bằng cách sao chép các mục vào các biến. Nhưng bản thân array không được sửa đổi.
+````smart header="\"Phá huỷ\" không có nghĩa là \"phá hoại\"."
+Nó được gọi là "destructuring assignment" bởi vì nó "phá huỷ" bằng cách sao chép các item vào các biến. Nhưng bản thân array không được sửa đổi.
 
 Nó chỉ là một cách ngắn hơn để viết:
 ```js
@@ -76,7 +76,7 @@ Trong đoạn mã trên, phần tử thứ hai của array bị bỏ qua, phần
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-Nó hoạt động, bởi vì bên trong một destructuring assignment hoạt động bằng cách lặp lại giá trị phù hợp. Đó là loại đường cú pháp để gọi `for..of` trên giá trị ở bên phải của `=` và gán các giá trị.
+Nó hoạt động, bởi vì ở bên trong, một destructuring assignment hoạt động bằng cách lặp lại giá trị phù hợp. Đó là loại đường cú pháp để gọi `for..of` trên giá trị ở bên phải của `=` và gán các giá trị.
 ````
 
 
@@ -95,9 +95,9 @@ alert(user.surname); // Smith
 ````
 
 ````smart header="Vòng lặp với .entries()"
-Trong chương trước, chúng ta đã thấy phương thức [Object.entries(obj)](mdn:js/Object/entries).
+Trong chương trước, chúng ta đã thấy phương thức [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries).
 
-Chúng ta có thể sử dụng nó với tính năng hủy để lặp lại các khóa và giá trị của một đối tượng:
+Chúng ta có thể sử dụng nó với destructuring để lặp lại các khóa và giá trị của một đối tượng:
 
 ```js run
 let user = {
@@ -113,24 +113,24 @@ for (let [key, value] of Object.entries(user)) {
 }
 ```
 
-Mã tương tự cho `Map` đơn giản hơn vì nó có thể lặp lại:
+Mã tương tự cho `Map` đơn giản hơn vì nó là iterable:
 
 ```js run
 let user = new Map();
-user.set("name", "John");
-user.set("age", "30");
+user.set("tên", "John");
+user.set("tuổi", "30");
 
 *!*
 // Map lặp lại dưới dạng các cặp [key, value], rất thuận tiện cho việc phá hủy
 for (let [key, value] of user) {
 */!*
-  alert(`${key}:${value}`); // tên: John, sau đó tuổi: 30
+  alert(`${key}:${value}`); // tên:John, sau đó tuổi:30
 }
 ```
 ````
 
 ````smart header="Mẹo hoán đổi biến"
-Có một mẹo nổi tiếng để hoán đổi giá trị của hai biến bằng cách sử dụng phép gán hủy:
+Có một mẹo nổi tiếng để hoán đổi giá trị của hai biến bằng cách sử dụng destructuring assignment:
 
 ```js run
 let guest = "Jane";
@@ -151,7 +151,7 @@ Chúng ta có thể hoán đổi nhiều hơn hai biến theo cách này.
 
 ### Phần còn lại '...'
 
-Thông thường, nếu array dài hơn danh sách ở bên trái, các mục "phụ" sẽ bị bỏ qua.
+Thông thường, nếu array dài hơn danh sách ở bên trái, các item "phụ" sẽ bị bỏ qua.
 
 Ví dụ: ở đây chỉ có hai mục được lấy và phần còn lại chỉ bị bỏ qua:
 
