@@ -1,8 +1,10 @@
+
 # WeakMap and WeakSet
 
-Như chúng ta đã biết từ chương <info:garbage-collection>, JavaScript engine lưu trữ một giá trị trong bộ nhớ trong khi nó có thể truy cập được (và có thể được sử dụng).
+Như chúng ta đã biết từ chương <info:garbage-collection>, JavaScript engine giữ một giá trị trong bộ nhớ khi giá trị đó "có thể truy cập được" và có khả năng được sử dụng.
 
 Ví dụ:
+
 ```js
 let john = { name: "John" };
 
@@ -54,13 +56,13 @@ john = null; // ghi đè tham chiếu
 */!*
 ```
 
-`WeakMap` về cơ bản là khác nhau trong khía cạnh này. Nó không ngăn việc thu gom rác của các đối tượng chính.
+[`WeakMap`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) về cơ bản là khác nhau trong khía cạnh này. Nó không ngăn việc thu gom rác của các đối tượng chính.
 
 Hãy xem ý nghĩa của nó trong các ví dụ.
 
 ## WeakMap
 
-Sự khác biệt đầu tiên giữa `Map` và `WeakMap` là các khóa phải là đối tượng, không phải giá trị nguyên hàm:
+Sự khác biệt đầu tiên giữa `Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) và [`WeakMap`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) là các khóa phải là đối tượng, không phải giá trị nguyên hàm:
 
 ```js run
 let weakMap = new WeakMap();
@@ -94,10 +96,10 @@ So sánh nó với ví dụ `Map` thông thường ở trên. Bây giờ nếu `
 
 `WeakMap` chỉ có các phương thức sau:
 
-- `weakMap.get(key)`
-- `weakMap.set(key, value)`
-- `weakMap.delete(key)`
-- `weakMap.has(key)`
+- [`weakMap.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap/set)
+- [`weakMap.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap/get)
+- [`weakMap.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap/delete)
+- [`weakMap.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap/has)
 
 Tại sao lại có hạn chế như vậy? Đó là vì lý do kỹ thuật. Nếu một đối tượng bị mất tất cả các tham chiếu khác (như `john` trong mã ở trên), thì đối tượng đó sẽ được thu gom rác tự động. Nhưng về mặt kỹ thuật, nó không được chỉ định chính xác *khi quá trình thu gom diễn ra*.
 
@@ -182,6 +184,7 @@ function process(obj) {
     let result = /* tính toán kết quả cho */ obj;
 
     cache.set(obj, result);
+    return result;
   }
 
   return cache.get(obj);
@@ -221,6 +224,7 @@ function process(obj) {
     let result = /* tính toán kết quả cho */ obj;
 
     cache.set(obj, result);
+    return result;
   }
 
   return cache.get(obj);
@@ -242,11 +246,11 @@ obj = null;
 
 ## WeakSet
 
-`WeakSet` hoạt động tương tự:
+[`WeakSet`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet) hoạt động tương tự:
 
 - Tương tự như `Set`, nhưng chúng ta chỉ có thể thêm các đối tượng vào `WeakSet` (không phải các đối tượng nguyên hàm).
 - Một đối tượng tồn tại trong set trong khi nó có thể truy cập được từ một nơi khác.
-- Giống như `Set`, nó hỗ trợ `add`, `has` và `delete`, nhưng không hỗ trợ `size`, `keys()` và không lặp lại.
+- Giống như `Set`, nó hỗ trợ [`add`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Weakset/add), [`has`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Weakset/has) và [`delete`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Weakset/delete), nhưng không hỗ trợ `size`, `keys()` và không lặp lại.
 
 Là "yếu", nó cũng đóng vai trò là bộ nhớ bổ sung. Nhưng không phải cho dữ liệu tùy ý, mà là cho các dữ kiện "có/không". Tư cách thành viên trong `WeakSet` có thể có ý nghĩa gì đó về đối tượng.
 
@@ -280,9 +284,9 @@ Hạn chế đáng chú ý nhất của `WeakMap` và `WeakSet` là không có p
 
 ## Tóm tắt
 
-`WeakMap` là bộ sưu tập giống như `Map` chỉ cho phép các đối tượng làm khóa và loại bỏ chúng cùng với giá trị được liên kết sau khi chúng không thể truy cập được bằng các phương tiện khác.
+[`WeakMap`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) là bộ sưu tập giống như `Map` chỉ cho phép các đối tượng làm khóa và loại bỏ chúng cùng với giá trị được liên kết sau khi chúng không thể truy cập được bằng các phương tiện khác.
 
-`WeakSet` là bộ sưu tập giống như `Set` chỉ lưu trữ các đối tượng và loại bỏ chúng khi chúng không thể truy cập được bằng các cách khác.
+[`WeakSet`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet) là bộ sưu tập giống như `Set` chỉ lưu trữ các đối tượng và loại bỏ chúng khi chúng không thể truy cập được bằng các cách khác.
 
 Ưu điểm chính của chúng là chúng có tham chiếu yếu đến các đối tượng, vì vậy chúng có thể dễ dàng bị loại bỏ bởi trình thu gom rác.
 
