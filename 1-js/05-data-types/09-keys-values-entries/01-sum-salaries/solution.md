@@ -21,7 +21,7 @@ Hoặc, theo tùy chọn, chúng ta cũng có thể lấy tổng bằng cách s�
 
 ```js
 // giảm các vòng lặp trên array tiền lương,
-// thêm chúng lên
+// thêm chúng
 // và trả về kết quả
 function sumSalaries(salaries) {
   return Object.values(salaries).reduce((a, b) => a + b, 0) // 650
