@@ -16,6 +16,6 @@ let messages = [
 
 Câu hỏi bây giờ là: bạn muốn đề xuất cấu trúc dữ liệu nào để lưu trữ thông tin: "khi tin nhắn được đọc?".
 
-Trong tác vụ trước, chúng ta chỉ cần lưu trữ dữ kiện "có/không". Bây giờ chúng ta cần lưu trữ ngày tháng và nó chỉ nên lưu lại trong bộ nhớ cho đến khi thư được thu gom rác.
+Trong bài tập trước, chúng ta chỉ cần lưu trữ dữ kiện "có/không". Bây giờ chúng ta cần lưu trữ ngày tháng và nó chỉ nên lưu lại trong bộ nhớ cho đến khi thư được thu gom rác.
 
-Tái bút: Ngày tháng có thể được lưu trữ dưới dạng đối tượng của lớp `Date` tích hợp sẵn, mà chúng ta sẽ đề cập sau.
+Tái bút: Ngày tháng có thể được lưu trữ dưới dạng đối tượng của class `Date` tích hợp sẵn, mà chúng ta sẽ đề cập sau.
