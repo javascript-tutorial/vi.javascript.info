@@ -19,9 +19,9 @@ Các đối tượng đơn giản cũng hỗ trợ các phương thức tương 
 
 Đối với các đối tượng đơn giản, có các phương thức sau:
 
-- [Object.keys(obj)](mdn:js/Object/keys) -- trả về một array khóa.
-- [Object.values(obj)](mdn:js/Object/values) -- trả về một array giá trị.
-- [Object.entries(obj)](mdn:js/Object/entries) -- trả về một array các cặp `[key, value]`.
+- [Object.keys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/keys) -- trả về một array khóa.
+- [Object.values(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/values) -- trả về một array giá trị.
+- [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/entries) -- trả về một array các cặp `[key, value]`.
 
 Hãy lưu ý các điểm khác biệt (ví dụ so với map):
 
@@ -66,7 +66,7 @@ for (let value of Object.values(user)) {
 ```warn header="Object.keys/values/entries bỏ qua các thuộc tính tượng trưng"
 Giống như vòng lặp `for..in`, các phương thức này bỏ qua các thuộc tính sử dụng `Symbol(...)` làm khóa.
 
-Thông thường đó là thuận tiện. Nhưng nếu chúng ta cũng muốn có các khóa tượng trưng, thì có một phương thức riêng [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) trả về một array chỉ các khóa tượng trưng. Ngoài ra, tồn tại một phương thức [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) trả về các khóa *tất cả*.
+Thông thường đó là thuận tiện. Nhưng nếu chúng ta cũng muốn có các khóa tượng trưng, thì có một phương thức riêng [Object.getOwnPropertySymbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols) trả về một array chỉ các khóa tượng trưng. Ngoài ra, tồn tại một phương thức [Reflect.ownKeys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) trả về các khóa *tất cả*.
 ```
 
 
