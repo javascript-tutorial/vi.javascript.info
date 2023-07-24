@@ -28,7 +28,7 @@ Tái bút: Danh sách đầy đủ các ngôn ngữ có thể thấy tại <http
 
 Mỗi chương, mỗi bài hoặc mỗi bài tập đều được đặt trong một thư mục riêng.
 
-Tên thư mục đặt theo cấu trúc `N-url`, ở đó `N` là số thứ tự dùng để sắp xếp (các bài được sắp xếp theo thứ tự), và `URL` là URL-slug của nó trên website.
+Tên thư mục đặt theo cấu trúc `N-URL`, ở đó `N` là số thứ tự dùng để sắp xếp (các bài được sắp xếp theo thứ tự), và `URL` là URL-slug của nó trên website.
 
 Một thư mục có nhiều tệp:
 
