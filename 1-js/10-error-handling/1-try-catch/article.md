@@ -1,14 +1,14 @@
-# Error handling, "try...catch"
+# Xử lý lỗi, "try...catch"
 
-No matter how great we are at programming, sometimes our scripts have errors. They may occur because of our mistakes, an unexpected user input, an erroneous server response, and for a thousand other reasons.
+Cho dù chúng ta giỏi lập trình đến đâu, đôi khi tập lệnh của chúng ta có lỗi. Chúng có thể xảy ra do sai lầm của chúng ta, do một đầu vào không ngờ đến từ người dùng, do một lỗi phản hồi của máy chủ, và hàng ngàn lý do khác.
 
-Usually, a script "dies" (immediately stops) in case of an error, printing it to console.
+Thông thường, khi có lỗi xảy ra, tập lệnh sẽ "chết" (dừng ngay lập tức) và in ra màn hình console.
 
-But there's a syntax construct `try...catch` that allows us to "catch" errors so the script can, instead of dying, do something more reasonable.
+Tuy nhiên có một cấu trúc cú pháp `try...catch` cho phép chúng ta "bắt" lỗi để tập lệnh có thể làm điều gí đó hợp lý hơn thay vì chết.
 
-## The "try...catch" syntax
+## Cú pháp "try...catch"
 
-The `try...catch` construct has two main blocks: `try`, and then `catch`:
+Cấu trúc `try...catch` có hai phần chính là: `try` và `catch`:
 
 ```js
 try {
@@ -17,195 +17,194 @@ try {
 
 } catch (err) {
 
-  // error handling
+  // xử lý lỗi
 
 }
 ```
 
-It works like this:
+Nó thực hiện các bước sau:
 
-1. First, the code in `try {...}` is executed.
-2. If there were no errors, then `catch (err)` is ignored: the execution reaches the end of `try` and goes on, skipping `catch`.
-3. If an error occurs, then the `try` execution is stopped, and control flows to the beginning of `catch (err)`. The `err` variable (we can use any name for it) will contain an error object with details about what happened.
-
+1. Đầu tiên, code trong `try {...}` được thực thi.
+2. Nếu không có lỗi, thì `catch (err)` sẽ bị bỏ qua: quá trình thực thi sẽ bỏ qua `catch` sau khi kết thúc khối `try`.
+3. Nếu có lỗi xảy ra, thì quá trình thực thi khối `try` sẽ dừng lại, và chuyển sang bắt đầu khối `catch (err)`. Biến `err` (chúng ta có thể sử dụng bất kỳ tên nào) sẽ chứa một đối tượng lỗi với chi tiết về những điều đã xảy ra.
 ![](try-catch-flow.svg)
 
-So, an error inside the `try {...}` block does not kill the script -- we have a chance to handle it in `catch`.
+Vì vậy, một lỗi trong khối `try {...}` không làm chết tập lệnh -- chúng ta có cơ hội xử lý nó ở trong `catch`.
 
-Let's look at some examples.
+Hãy xem một số ví dụ sau.
 
-- An errorless example: shows `alert` `(1)` and `(2)`:
+- Ví dụ không có lỗi: hiển thị `alert` `(1)` và `(2)`:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('Bắt đầu chạy khối try');  // *!*(1) <--*/!*
 
-      // ...no errors here
+      // ...không có lỗi
 
-      alert('End of try runs');   // *!*(2) <--*/!*
+      alert('Kết thúc chạy khối try');   // *!*(2) <--*/!*
 
     } catch (err) {
 
-      alert('Catch is ignored, because there are no errors'); // (3)
+      alert('Khối catch bị bỏ qua, vì không có lỗi'); // (3)
 
     }
     ```
-- An example with an error: shows `(1)` and `(3)`:
+- Ví dụ có lỗi: hiển thị `(1)` và `(3)`:
 
     ```js run
     try {
 
-      alert('Start of try runs');  // *!*(1) <--*/!*
+      alert('Bắt đầu chạy khối try');  // *!*(1) <--*/!*
 
     *!*
-      lalala; // error, variable is not defined!
+      lalala; // lỗi, biến không xác định!
     */!*
 
-      alert('End of try (never reached)');  // (2)
+      alert('Kết thúc khối try (không được thực thi)');  // (2)
 
     } catch (err) {
 
-      alert(`Error has occurred!`); // *!*(3) <--*/!*
+      alert(`Có lỗi xảy ra!`); // *!*(3) <--*/!*
 
     }
     ```
 
 
-````warn header="`try...catch` only works for runtime errors"
-For `try...catch` to work, the code must be runnable. In other words, it should be valid JavaScript.
+````warn header="`try...catch` chỉ hoạt động với các lỗi trong thời gian chạy"
+Để `try...catch` hoạt động, code phải thực thi được. Nói cách khác, nó phải là code JavaScript hợp lệ.
 
-It won't work if the code is syntactically wrong, for instance it has unmatched curly braces:
+Nó sẽ không hoạt động nếu code có lỗi cú pháp, chẳng hạn như dấu ngoặc nhọn không khớp:
 
 ```js run
 try {
   {{{{{{{{{{{{
 } catch (err) {
-  alert("The engine can't understand this code, it's invalid");
+  alert("JavaScript engine không thể hiểu lỗi này, nó không hợp lệ");
 }
 ```
 
-The JavaScript engine first reads the code, and then runs it. The errors that occur on the reading phase are called "parse-time" errors and are unrecoverable (from inside that code). That's because the engine can't understand the code.
+Đầu tiên, JavaScript engine đọc code, sau đó chạy code. Các lỗi xảy ra trong thời gian đọc được gọi là lỗi "parse-time" và không thể khôi phục được (từ bên trong code). Đó là bởi vì engine không thể hiểu code.
 
-So, `try...catch` can only handle errors that occur in valid code. Such errors are called "runtime errors" or, sometimes, "exceptions".
+Vì vậy, `try...catch` chỉ có thể xử lý lỗi xảy ra trong code hợp lệ. Các lỗi này được gọi là "runtime errors" hoặc, đôi khi là "exceptions".
 ````
 
 
-````warn header="`try...catch` works synchronously"
-If an exception happens in "scheduled" code, like in `setTimeout`, then `try...catch` won't catch it:
+````warn header="`try...catch` hoạt động đồng bộ"
+Nếu một ngoại lệ xảy ra trong code "đã lên lịch", như trong `setTimeout` thì `try...catch` sẽ không bắt được:
 
 ```js run
 try {
   setTimeout(function() {
-    noSuchVariable; // script will die here
+    noSuchVariable; // tập lệnh sẽ chết ở đây
   }, 1000);
 } catch (err) {
-  alert( "won't work" );
+  alert( "sẽ không hoạt động" );
 }
 ```
 
-That's because the function itself is executed later, when the engine has already left the `try...catch` construct.
+Đó là bởi vì hàm trong code "đã lên lịch" được thực thi sau, khi engine đã rời khỏi cấu trúc `try...catch`.
 
-To catch an exception inside a scheduled function, `try...catch` must be inside that function:
+Để bắt được ngoại lệ bên trong một hàm đã lên lịch, `try...catch` phải nằm bên trong hàm đó:
 ```js run
 setTimeout(function() {
   try {    
-    noSuchVariable; // try...catch handles the error!
+    noSuchVariable; // try...catch xử lý lỗi!
   } catch {
-    alert( "error is caught here!" );
+    alert( "lỗi được bắt ở đây!" );
   }
 }, 1000);
 ```
 ````
 
-## Error object
+## Đối tượng error
 
-When an error occurs, JavaScript generates an object containing the details about it. The object is then passed as an argument to `catch`:
+Khi xảy ra lỗi, JavaScript sẽ tạo một đối tượng chứa chi tiết về lỗi đó. Sau đó chuyển đối tượng đó thành đối số để `catch`:
 
 ```js
 try {
   // ...
-} catch (err) { // <-- the "error object", could use another word instead of err
+} catch (err) { // <-- "đối tượng error", có thể sử dụng tên khác thay cho err
   // ...
 }
 ```
 
-For all built-in errors, the error object has two main properties:
+Với tất cả các lỗi đã dựng sẵn, đối tượng error có hai thuộc tính chính:
 
 `name`
-: Error name. For instance, for an undefined variable that's `"ReferenceError"`.
+: Tên lỗi. Ví dụ, đối với một biến không xác định là `"ReferenceError"`.
 
 `message`
-: Textual message about error details.
+: Một văn bản mô tả chi tiết về lỗi.
 
-There are other non-standard properties available in most environments. One of most widely used and supported is:
+Các thuộc tính không chuẩn khác có sẵn trong hầu hết các môi trường. Được sử dụng và hỗ trợ rộng rãi nhất là:
 
 `stack`
-: Current call stack: a string with information about the sequence of nested calls that led to the error. Used for debugging purposes.
+: Ngăn xếp lần gọi hiện tại: một chuỗi có thông tin về chuỗi các lần gọi lồng nhau dẫn đến lỗi. Được sử dụng cho mục đích gỡ lỗi.
 
-For instance:
+Ví dụ:
 
 ```js run untrusted
 try {
 *!*
-  lalala; // error, variable is not defined!
+  lalala; // lỗi, biến không xác định!
 */!*
 } catch (err) {
   alert(err.name); // ReferenceError
   alert(err.message); // lalala is not defined
   alert(err.stack); // ReferenceError: lalala is not defined at (...call stack)
 
-  // Can also show an error as a whole
-  // The error is converted to string as "name: message"
+  // Có thể hiển thị toàn bộ lỗi
+  // Thông báo lỗi được chuyển thành một chuỗi như "name: message"
   alert(err); // ReferenceError: lalala is not defined
 }
 ```
 
-## Optional "catch" binding
+## Tùy chọn ràng buộc "catch"
 
 [recent browser=new]
 
-If we don't need error details, `catch` may omit it:
+Nếu chúng ta không cần thông tin về chi tiết lỗi, `catch` có thể bỏ qua nó:
 
 ```js
 try {
   // ...
-} catch { // <-- without (err)
+} catch { // <-- không có (err)
   // ...
 }
 ```
 
-## Using "try...catch"
+## Sử dụng "try...catch"
 
-Let's explore a real-life use case of `try...catch`.
+Hãy khám phá một trường hợp sử dụng `try...catch` trong thực tế.
 
-As we already know, JavaScript supports the [JSON.parse(str)](mdn:js/JSON/parse) method to read JSON-encoded values.
+Như chúng ta đã biết, JavaScript hỗ trợ phương thức [JSON.parse(str)](mdn:js/JSON/parse) để phân tích chuỗi mã hóa dạng JSON.
 
-Usually it's used to decode data received over the network, from the server or another source.
+Thông thường nó được sử dụng để phân tích dữ liệu nhận được từ mạng, từ server hoặc là từ nguồn khác.
 
-We receive it and call `JSON.parse` like this:
+Sau khi nhận được dữ liệu thì chúng ta sẽ gọi `JSON.parse` như thế này:
 
 ```js run
-let json = '{"name":"John", "age": 30}'; // data from the server
+let json = '{"name":"John", "age": 30}'; // dữ liệu từ server
 
 *!*
-let user = JSON.parse(json); // convert the text representation to JS object
+let user = JSON.parse(json); // chuyển đổi dạng văn bản thành đối tượng JS
 */!*
 
-// now user is an object with properties from the string
+// bây giờ user là một đối tượng có các thuộc tính được phân tích từ chuỗi
 alert( user.name ); // John
 alert( user.age );  // 30
 ```
 
-You can find more detailed information about JSON in the <info:json> chapter.
+Bạn có thể tìm thêm thông tin về JSON trong chương <info:json>.
 
-**If `json` is malformed, `JSON.parse` generates an error, so the script "dies".**
+**Nếu `json` không đúng định dạng, `JSON.parse` sẽ phát sinh lỗi, do đó tập lệnh sẽ "chết".**
 
-Should we be satisfied with that? Of course not!
+Chúng ta có hài lòng với điều đó không? Dĩ nhiên là không!
 
-This way, if something's wrong with the data, the visitor will never know that (unless they open the developer console). And people really don't like when something "just dies" without any error message.
+Khi bạn làm điều này, khi có vấn đề với dữ liệu, khách truy cập sẽ không bao giờ biết tại sao (trừ khi họ mở giao diện console lên). Và người ta sẽ không thích nếu một cái gì đó "tự nhiên chết" mà không thông báo một lỗi nào.
 
-Let's use `try...catch` to handle the error:
+Thử sử dụng `try...catch` để xử lý lỗi:
 
 ```js run
 let json = "{ bad json }";
@@ -213,83 +212,83 @@ let json = "{ bad json }";
 try {
 
 *!*
-  let user = JSON.parse(json); // <-- when an error occurs...
+  let user = JSON.parse(json); // <-- khi xảy ra lỗi...
 */!*
-  alert( user.name ); // doesn't work
+  alert( user.name ); // không chạy
 
 } catch (err) {
 *!*
-  // ...the execution jumps here
-  alert( "Our apologies, the data has errors, we'll try to request it one more time." );
+  // ...việc thực thi sẽ nhảy đến đây
+  alert( "Rất tiếc, dữ liệu có lỗi, chúng tôi sẽ cố gắng lấy lai nó một lần nữa." );
   alert( err.name );
   alert( err.message );
 */!*
 }
 ```
 
-Here we use the `catch` block only to show the message, but we can do much more: send a new network request, suggest an alternative to the visitor, send information about the error to a logging facility, ... . All much better than just dying.
+Ở đây chúng tôi chỉ sử dụng khối `catch` để hiển thị thông tin, nhưng chúng ta có thể làm nhiều hơn: gửi một yêu cầu mới, đề xuất giải pháp thay thế cho người dùng, gửi thông tin về lỗi tới thiết bị ghi log, ... . Tất cả đều tốt hơn là cứ để code bị chết.
 
-## Throwing our own errors
+## Ném ra lỗi của chính chúng ta
 
-What if `json` is syntactically correct, but doesn't have a required `name` property?
+Điều gì sẽ xảy ra nếu `json` đúng về mặt cú pháp, nhưng không có thuộc tính bắt buộc `name`?
 
-Like this:
+Giống như này:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // dữ liệu không đầy đủ
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- không có lỗi
 *!*
-  alert( user.name ); // no name!
+  alert( user.name ); // không có name!
 */!*
 
 } catch (err) {
-  alert( "doesn't execute" );
+  alert( "không thực hiện" );
 }
 ```
 
-Here `JSON.parse` runs normally, but the absence of `name` is actually an error for us.
+Ở đây `JSON.parse` chạy bình thường, nhưng thuộc tính `name` bị thiếu thực sự là một lỗi của chúng ta.
 
-To unify error handling, we'll use the `throw` operator.
+Để xử lý lỗi thống nhất, chúng ta sẽ sử dụng toán tử `throw`.
 
-### "Throw" operator
+### Toán tử "throw"
 
-The `throw` operator generates an error.
+Toán tử `throw` tạo ra một lỗi.
 
-The syntax is:
+Cú pháp như sau:
 
 ```js
 throw <error object>
 ```
 
-Technically, we can use anything as an error object. That may be even a primitive, like a number or a string, but it's better to use objects, preferably with `name` and `message` properties (to stay somewhat compatible with built-in errors).
+Về mặt kỹ thuật, chúng ta có thể sử dụng bất cứ thứ gì để làm đối tượng lỗi. Nó thậm chí có thể là dữ liệu kiểu nguyên thủy, chẳng hạn như một số hay một chuỗi, nhưng tốt hơn nên sử dụng một đối tượng, tốt hơn nữa là một đối tượng với các thuộc tính `name` và `message` (để tương thích phần nào với các lỗi đã tích hợp sẵn).
 
-JavaScript has many built-in constructors for standard errors: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` and others. We can use them to create error objects as well.
+JavaScript có nhiều hàm khởi tạo tích hợp sẵn cho các lỗi tiêu chuẩn: `Error`, `SyntaxError`, `ReferenceError`, `TypeError` và nhiều lỗi khác. Chúng ta cũng có thể sử dụng chúng để tạo các đối tượng lỗi.
 
-Their syntax is:
+Cú pháp của chúng là:
 
 ```js
 let error = new Error(message);
-// or
+// hoặc
 let error = new SyntaxError(message);
 let error = new ReferenceError(message);
 // ...
 ```
 
-For built-in errors (not for any objects, just for errors), the `name` property is exactly the name of the constructor. And `message` is taken from the argument.
+Đối với các lỗi tích hợp sẵn (không dành có đối tượng nào khác, chỉ dành cho lỗi), thuộc tính `name` sẽ là tên của hàm khởi tạo. Và `message` được lấy từ đối số.
 
-For instance:
+Ví dụ:
 
 ```js run
-let error = new Error("Things happen o_O");
+let error = new Error("Vài thứ đã xảy ra o_O");
 
 alert(error.name); // Error
-alert(error.message); // Things happen o_O
+alert(error.message); // Vài thứ đã xảy ra o_O
 ```
 
-Let's see what kind of error `JSON.parse` generates:
+Hãy xem loại lỗi mà `JSON.parse` tạo ra:
 
 ```js run
 try {
@@ -302,70 +301,69 @@ try {
 }
 ```
 
-As we can see, that's a `SyntaxError`.
+Như chúng ta có thể thấy, đó là một `SyntaxError`.
 
-And in our case, the absence of `name` is an error, as users must have a `name`.
+Trong ví dụ của chúng ta, việc thiếu thuộc tính `name` là một lỗi, vì người dùng phải có `name`.
 
-So let's throw it:
+Vì vậy hãy ném ra lỗi này:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // dữ liệu không đầy đủ
 
 try {
 
-  let user = JSON.parse(json); // <-- no errors
+  let user = JSON.parse(json); // <-- không có lỗi
 
   if (!user.name) {
 *!*
-    throw new SyntaxError("Incomplete data: no name"); // (*)
+    throw new SyntaxError("Dữ liệu không đầy đủ: không có name"); // (*)
 */!*
   }
 
   alert( user.name );
 
 } catch (err) {
-  alert( "JSON Error: " + err.message ); // JSON Error: Incomplete data: no name
+  alert( "JSON Error: " + err.message ); // JSON Error: Dữ liệu không đầy đủ: không có name
 }
 ```
 
-In the line `(*)`, the `throw` operator generates a `SyntaxError` with the given `message`, the same way as JavaScript would generate it itself. The execution of `try` immediately stops and the control flow jumps into `catch`.
+Trên dòng `(*)`, toán tử `throw` ném ra một lỗi `SyntaxError` chứa `message` mà chúng ta đưa vào, giống như cách mà chính JavaScript đã tạo ra nó. Việc thực hiện `try` sẽ dừng ngay lập tức và nhảy sang khối `catch`.
 
-Now `catch` became a single place for all error handling: both for `JSON.parse` and other cases.
+Bây giờ `catch` trở thành nơi duy nhất cho việc xử lý lỗi: cho cả `JSON.parse` và những thứ khác.
 
-## Rethrowing
+## Ném lại (rethrowing)
 
-In the example above we use `try...catch` to handle incorrect data. But is it possible that *another unexpected error* occurs within the `try {...}` block? Like a programming error (variable is not defined) or something else, not just this "incorrect data" thing.
+Trong ví dụ trên chúng ta sử dụng `try...catch` để xử lý dữ liệu không chính xác. Nhưng liệu có thể xảy ra *một lỗi ngoài ý muốn khác* bên trong khối `try {...}` không? Chẳng hạn như lỗi lập trình (biến không xác định) hoặc các lỗi khác, không chỉ là `dữ liệu không chính xác`.
 
-For example:
+Ví dụ:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // dữ liệu không đầy đủ
 
 try {
-  user = JSON.parse(json); // <-- forgot to put "let" before user
-
+  user = JSON.parse(json); // <-- quên đặt "let" trước user
   // ...
 } catch (err) {
-  alert("JSON Error: " + err); // JSON Error: ReferenceError: user is not defined
-  // (no JSON Error actually)
+  alert("Lỗi JSON: " + err); // Lỗi JSON: ReferenceError: user is not defined
+  // (thực ra không phải lỗi JSON)
 }
 ```
 
-Of course, everything's possible! Programmers do make mistakes. Even in open-source utilities used by millions for decades -- suddenly a bug may be discovered that leads to terrible hacks.
+Tất nhiên, mọi thứ đều có thể xảy ra! Lập trình viên cũng phạm sai lầm. Ngay cả trong một dự án mã nguồn mở được sử dụng bởi hàng triệu người trong nhiều thập kỷ -- một lỗi đột nhiên có thể được phát hiện và dẫn đến một vụ hack khủng khiếp.
 
-In our case, `try...catch` is placed to catch "incorrect data" errors. But by its nature, `catch` gets *all* errors from `try`. Here it gets an unexpected error, but still shows the same `"JSON Error"` message. That's wrong and also makes the code more difficult to debug.
+Trong trường hợp của chúng ta, `try...catch`  được thiết kế để phát hiện lỗi "dữ liệu không chính xác". Nhưng trên thực tế, `catch` sẽ bắt *tất cả* lỗi từ `try`. Tại đây nó phát hiện một lỗi không mong muốn nhưng vẫn đưa ra thông báo `"Lỗi JSON"`. Điều này là không chính xác và cũng làm cho code khó debug hơn.
 
-To avoid such problems, we can employ the "rethrowing" technique. The rule is simple:
+Để tránh những vấn đề như vậy, chúng ta có thể sử dụng kỹ thuật "ném lại". Quy tắc rất đơn giản:
 
-**Catch should only process errors that it knows and "rethrow" all others.**
+**Catch chỉ nên xử lý các lỗi mà nó biết và "ném lại" tất cả lỗi khác.**
 
-The "rethrowing" technique can be explained in more detail as:
+Kỹ thuật "ném lại" có thể được giải thích chi tiết hơn như sau: 
 
-1. Catch gets all errors.
-2. In the `catch (err) {...}` block we analyze the error object `err`.
-3. If we don't know how to handle it, we do `throw err`.
+1. Catch bắt tất cả các lỗi.
+2. Trong khối `catch (err) {...}` chúng ta phân tích đối tượng lỗi `err`.
+3. Nếu chúng ta không biết cách xử lý nó, chúng ta sẽ `throw err`.
 
-Usually, we can check the error type using the `instanceof` operator:
+Thông thường, chúng ta có thể sử dụng toán tử `instanceof` để xác định loại lỗi: 
 
 ```js run
 try {
@@ -374,27 +372,27 @@ try {
 *!*
   if (err instanceof ReferenceError) {
 */!*
-    alert('ReferenceError'); // "ReferenceError" for accessing an undefined variable
+    alert('ReferenceError'); // truy cập một biến không xác định sẽ tạo ra lỗi "ReferenceError"
   }
 }
 ```
 
-We can also get the error class name from `err.name` property. All native errors have it. Another option is to read `err.constructor.name`.
+Chúng ta cũng có thể lấy tên lớp lỗi từ thuộc tính `err.name`. Tất cả các lỗi mặc định đều có thuộc tính này. Một cách khác là lấy từ `err.constructor.name`.
 
-In the code below, we use rethrowing so that `catch` only handles `SyntaxError`:
+Trong đoạn code sau, chúng ta sử dụng rethrowing để chỉ `catch` những lỗi `SyntaxError`:
 
 ```js run
-let json = '{ "age": 30 }'; // incomplete data
+let json = '{ "age": 30 }'; // dữ liệu không đầy đủ
 try {
 
   let user = JSON.parse(json);
 
   if (!user.name) {
-    throw new SyntaxError("Incomplete data: no name");
+    throw new SyntaxError("Dữ liệu không đầy đủ: không có  name");
   }
 
 *!*
-  blabla(); // unexpected error
+  blabla(); // lỗi không mong muốn
 */!*
 
   alert( user.name );
@@ -405,18 +403,18 @@ try {
   if (err instanceof SyntaxError) {
     alert( "JSON Error: " + err.message );
   } else {
-    throw err; // rethrow (*)
+    throw err; // ném lại (*)
   }
 */!*
 
 }
 ```
 
-The error throwing on line `(*)` from inside `catch` block "falls out" of `try...catch` and can be either caught by an outer `try...catch` construct (if it exists), or it kills the script.
+Lỗi xuất hiện trên dòng `(*)` từ bên trong khối `catch` "rơi ra" của `try..catch` có thể bị bắt bởi cấu trúc `try...catch` bên ngoài (nếu có), hoặc là nó sẽ làm chết tập lệnh.
 
-So the `catch` block actually handles only errors that it knows how to deal with and "skips" all others.
+Vì vậy khối `catch` thực sự chỉ xử lý các lỗi mà nó biết cách xử lý và "bỏ qua" tất cả các lỗi khác.
 
-The example below demonstrates how such errors can be caught by one more level of `try...catch`:
+Ví dụ sau mô tả cách các lỗi được bắt bởi một cấp độ khác của `try...catch`:
 
 ```js run
 function readData() {
@@ -425,13 +423,13 @@ function readData() {
   try {
     // ...
 *!*
-    blabla(); // error!
+    blabla(); // lỗi!
 */!*
   } catch (err) {
     // ...
     if (!(err instanceof SyntaxError)) {
 *!*
-      throw err; // rethrow (don't know how to deal with it)
+      throw err; // ném lại (không biết phải làm gì với nó)
 */!*
     }
   }
@@ -441,70 +439,70 @@ try {
   readData();
 } catch (err) {
 *!*
-  alert( "External catch got: " + err ); // caught it!
+  alert( "Catch bên ngoài bắt được: " + err ); // bắt được lỗi!
 */!*
 }
 ```
 
-Here `readData` only knows how to handle `SyntaxError`, while the outer `try...catch` knows how to handle everything.
+Ở đây hàm `readData` chỉ biết xử lý lỗi `SyntaxError`, trong khi đó `try...catch bên ngoài` biết cách xử lý mọi thứ.
 
 ## try...catch...finally
 
-Wait, that's not all.
+Đợi chút, những điều trên không phải là tất cả.
 
-The `try...catch` construct may have one more code clause: `finally`.
+Cấu trúc `try...catch` có thể có thêm một mệnh đề nữa: `finally`.
 
-If it exists, it runs in all cases:
+Nếu nó tồn tại, nó sẽ chạy trong mọi trường hợp:
 
-- after `try`, if there were no errors,
-- after `catch`, if there were errors.
+- sau khi `try`, nếu không có lỗi,
+- sau khi `catch`, nếu có lỗi.
 
-The extended syntax looks like this:
+Cú pháp mở rộng như sau:
 
 ```js
 *!*try*/!* {
-   ... try to execute the code ...
+   ... cố gắng thực hiện đoạn code này ...
 } *!*catch*/!* (err) {
-   ... handle errors ...
+   ... xử lý lỗi ...
 } *!*finally*/!* {
-   ... execute always ...
+   ... luôn được thực thi ...
 }
 ```
 
-Try running this code:
+Thử chạy đoạn code này:
 
 ```js run
 try {
-  alert( 'try' );
-  if (confirm('Make an error?')) BAD_CODE();
+  alert( 'thử' );
+  if (confirm('Có tạo ra lỗi không?')) BAD_CODE();
 } catch (err) {
-  alert( 'catch' );
+  alert( 'bắt' );
 } finally {
-  alert( 'finally' );
+  alert( 'cuối cùng' );
 }
 ```
 
-The code has two ways of execution:
+Code này có thể thực thi theo hai cách:
 
-1. If you answer "Yes" to "Make an error?", then `try -> catch -> finally`.
-2. If you say "No", then `try -> finally`.
+1. Nếu bạn trả lời "Yes" cho câu hỏi "Có tạo ra lỗi không?", thì `try -> catch -> finally`.
+2. Nếu bạn nói "No", thì `try -> finally`.
 
-The `finally` clause is often used when we start doing something and want to finalize it in any case of outcome.
+Mệnh đề `finally` thường được sử dụng khi chúng ta bắt đầu làm một cái gì đó và muốn hoàn thành nó cho dù có chuyện gì xảy ra.
 
-For instance, we want to measure the time that a Fibonacci numbers function `fib(n)` takes. Naturally, we can start measuring before it runs and finish afterwards. But what if there's an error during the function call? In particular, the implementation of `fib(n)` in the code below returns an error for negative or non-integer numbers.
+Ví dụ, chúng ta muốn đo thời gian cần thiết để hàm `fib(n)` thực thi. Thông thường, chúng ta có thể bắt đầu đo trước khi chạy và dừng đo khi chạy xong. Nhưng nếu xảy ra lỗi trong hàm đó thì sao? Cụ thể, việc triển khai `fib(n)` trong code dưới đây sẽ trả về lỗi nếu gặp số âm hoặc không phải số nguyên.
 
-The `finally` clause is a great place to finish the measurements no matter what.
+Trong mọi trường hợp, mệnh đề `finally` là nơi tuyệt vời để kết thúc phép đo.
 
-Here `finally` guarantees that the time will be measured correctly in both situations -- in case of a successful execution of `fib` and in case of an error in it:
+Ở đây `finally` đảm bảo rằng thời gian sẽ được đo chính xác trong cả hai trường hợp -- trong trường hợp thực thi thành công `fib` và trong trường hợp có lỗi trong đó:
 
 ```js run
-let num = +prompt("Enter a positive integer number?", 35)
+let num = +prompt("Nhâp một số nguyên dương?", 35)
 
 let diff, result;
 
 function fib(n) {
   if (n < 0 || Math.trunc(n) != n) {
-    throw new Error("Must not be negative, and also an integer.");
+    throw new Error("Số không được âm, và phải là số nguyên.");
   }
   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
 }
@@ -521,26 +519,26 @@ try {
 }
 */!*
 
-alert(result || "error occurred");
+alert(result || "xảy ra lỗi");
 
-alert( `execution took ${diff}ms` );
+alert( `việc thực thi mất ${diff}ms` );
 ```
 
-You can check by running the code with entering `35` into `prompt` -- it executes normally, `finally` after `try`. And then enter `-1` -- there will be an immediate error, and the execution will take `0ms`. Both measurements are done correctly.
+Bạn có thể kiểm tra điều này bằng cách chạy code ở trên và nhập `35` vào `prompt` -- nó thực thi bình thường, `try` rồi đến `finally`. Nếu bạn nhập `-1` -- lỗi sẽ xảy ra ngay lập tức, và việc thực thi sẽ mất `0ms`. Phép đo thời gian được thực hiện chính xác trong cả hai trường hợp.
 
-In other words, the function may finish with `return` or `throw`, that doesn't matter. The `finally` clause executes in both cases.
+Nói cách khác, việc hoàn thành hàm với `return` hay `throw`, là không quan trọng. Mệnh đề `finally` được thực thi trong cả hai trường hợp.
 
 
-```smart header="Variables are local inside `try...catch...finally`"
-Please note that `result` and `diff` variables in the code above are declared *before* `try...catch`.
+```smart header="Các biến là cục bộ bên trong `try...catch...finally`"
+Lưu ý rằng các biến `result` và `diff` trong đoạn code trên đều được khai báo *trước* `try...catch`.
 
-Otherwise, if we declared `let` in `try` block, it would only be visible inside of it.
+Mặt khác, nếu chúng ta sử dụng `let` để khai báo ở  trong khối `try`, thì biến đó sẽ chỉ tồn tại trong khối đó thôi.
 ```
 
-````smart header="`finally` and `return`"
-The `finally` clause works for *any* exit from `try...catch`. That includes an explicit `return`.
+````smart header="`finally` và `return`"
+Mệnh đề `finally` áp dụng cho *bất kỳ* lần thoát nào của `try...catch`. Nó bao gồm cả một `return` rõ ràng (explicit return).
 
-In the example below, there's a `return` in `try`. In this case, `finally` is executed just before the control returns to the outer code.
+Trong ví dụ dưới đây, có một `return` bên trong `try`. Trong trường hợp này, `finally` sẽ được thực thi trước khi ra code bên ngoài.
 
 ```js run
 function func() {
@@ -554,45 +552,45 @@ function func() {
     /* ... */
   } finally {
 *!*
-    alert( 'finally' );
+    alert( 'cuối cùng' );
 */!*
   }
 }
 
-alert( func() ); // first works alert from finally, and then this one
+alert( func() ); // thực hiện alert trong finally trước, xong mới đến alert ở đây
 ```
 ````
 
 ````smart header="`try...finally`"
 
-The `try...finally` construct, without `catch` clause, is also useful. We apply it when we don't want to handle errors here (let them fall through), but want to be sure that processes that we started are finalized.
+Cấu trúc `try...finally`, không có `catch`, cũng hữu ích. Khi chúng ta không muốn xử lý lỗi ở đây (hãy để chúng trôi qua), nhưng cần đảm bảo rằng quá trình xử lý mà chúng ta bắt đầu cần phải được hoàn thành.
 
 ```js
 function func() {
-  // start doing something that needs completion (like measurements)
+  // bắt đầu làm gì đó cần được hoàn thành (ví dụ như đo lường)
   try {
     // ...
   } finally {
-    // complete that thing even if all dies
+    // hoàn thành nó ngay cả khi tất cả bị chết
   }
 }
 ```
-In the code above, an error inside `try` always falls out, because there's no `catch`. But `finally` works before the execution flow leaves the function.
+Trong đoạn code trên, một lỗi trong `try` sẽ luôn rơi ra ngoài, bởi vì không có `catch`. Nhưng `finally` vẫn thực thi trước khi rời khỏi hàm.
 ````
 
-## Global catch
+## Catch toàn cục
 
-```warn header="Environment-specific"
-The information from this section is not a part of the core JavaScript.
+```warn header="Môi trường cụ thể"
+Nội dung của phần này không phải là một phần trong cốt lõi của JavaScript.
 ```
 
-Let's imagine we've got a fatal error outside of `try...catch`, and the script died. Like a programming error or some other terrible thing.
+Hãy thử tưởng tượng rằng chúng ta gặp một lỗi nghiêm trọng bên ngoài `try...catch`, và tập lệnh bị chết. Giống như một lỗi lập trình hay một thứ gì đó khủng khiếp.
 
-Is there a way to react on such occurrences? We may want to log the error, show something to the user (normally they don't see error messages), etc.
+Có cách nào để đối phó với tình huống này không? Chúng ta có thể ghi lại lỗi này, hiển thị cái gì đó cho người dùng (thông thường người dùng không nhìn thấy thông báo lỗi), v.v.
 
-There is none in the specification, but environments usually provide it, because it's really useful. For instance, Node.js has [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception) for that. And in the browser we can assign a function to the special [window.onerror](mdn:api/GlobalEventHandlers/onerror) property, that will run in case of an uncaught error.
+Không có gì trong thông số kỹ thuật, nhưng mỗi trường thường sẽ cung cấp nó, bởi vì nó thực sự hữu ích. Chẳng hạn, Node.js có [`process.on("uncaughtException")`](https://nodejs.org/api/process.html#process_event_uncaughtexception). Trong các trình duyệt chúng ta có thể gán một hàm cho thuộc tính  [window.onerror](mdn:api/GlobalEventHandlers/onerror), nó sẽ chạy khi xảy ra lỗi chưa được phát hiện.
 
-The syntax:
+Cú pháp:
 
 ```js
 window.onerror = function(message, url, line, col, error) {
@@ -601,75 +599,75 @@ window.onerror = function(message, url, line, col, error) {
 ```
 
 `message`
-: Error message.
+: Thông báo lỗi.
 
 `url`
-: URL of the script where error happened.
+: URL của tập lệnh nơi xảy ra lỗi.
 
 `line`, `col`
-: Line and column numbers where error happened.
+: Số dòng và cột của code xảy ra lỗi.
 
 `error`
-: Error object.
+: Đối tượng lỗi.
 
-For instance:
+Ví dụ:
 
 ```html run untrusted refresh height=1
 <script>
 *!*
   window.onerror = function(message, url, line, col, error) {
-    alert(`${message}\n At ${line}:${col} of ${url}`);
+    alert(`${message}\n tại ${line}:${col} của ${url}`);
   };
 */!*
 
   function readData() {
-    badFunc(); // Whoops, something went wrong!
+    badFunc(); // Ồ, có gì đó không đúng!
   }
 
   readData();
 </script>
 ```
 
-The role of the global handler `window.onerror` is usually not to recover the script execution -- that's probably impossible in case of programming errors, but to send the error message to developers.
+Vai trò của trình xử lý lỗi chung `window.onerror` nói chung không phải là tiếp tục thực thi tập lệnh -- điều không thể trong trường hợp xảy ra lỗi lập trình, mà là gửi thông báo lỗi cho các nhà phát triển.
 
-There are also web-services that provide error-logging for such cases, like <https://errorception.com> or <http://www.muscula.com>.
+Ngoài ra cũng có các dịch vụ web cung cấp nhật ký lỗi cho trường hợp này, như <https://errorception.com> hay <http://www.muscula.com>.
 
-They work like this:
+Chúng hoạt động như sau:
 
-1. We register at the service and get a piece of JS (or a script URL) from them to insert on pages.
-2. That JS script sets a custom `window.onerror` function.
-3. When an error occurs, it sends a network request about it to the service.
-4. We can log in to the service web interface and see errors.
+1. Chúng ta đăng ký dịch vụ và nhận được một đoạn code JS (hoặc URL tới tập lệnh) và chèn nó vào trang.
+2. Tập lệnh JS này là một hàm `window.onerror` tùy chỉnh.
+3. Khi có lỗi xảy ra, nó sẽ gửi một yêu cầu liên quan đến lỗi đến nhà cung cấp dịch vụ,
+4. Chúng ta có thể đăng nhập vào giao diện web của máy chủ để xem các lỗi này.
 
-## Summary
+## Tóm tắt
 
-The `try...catch` construct allows to handle runtime errors. It literally allows to "try" running the code and "catch" errors that may occur in it.
+Cấu trúc `try...catch` cho phép chúng ta xử lý các lỗi xảy ra trog quá trình thực thi. Theo nghĩa đen, nó cho phép "try" chạy code và "catch" bắt các lỗi xảy ra trong đó.
 
-The syntax is:
+Cú pháp như sau:
 
 ```js
 try {
-  // run this code
+  // chạy code ở đây
 } catch (err) {
-  // if an error happened, then jump here
-  // err is the error object
+  // nếu có lỗi xảy ra, thì nhảy đến đây
+  // err là một đối tượng lỗi
 } finally {
-  // do in any case after try/catch
+  // thực thi trong mọi trường hợp sau khi try/catch
 }
 ```
 
-There may be no `catch` section or no `finally`, so shorter constructs `try...catch` and `try...finally` are also valid.
+Có thể không có `catch` hoặc không có `finally`, vì vậy các cấu trúc ngắn hơn như `try...catch` và `try...finally` đều được chấp nhận.
 
-Error objects have following properties:
+Các đối tượng lỗi có những thuộc tính sau:
 
-- `message` -- the human-readable error message.
-- `name` -- the string with error name (error constructor name).
-- `stack` (non-standard, but well-supported) -- the stack at the moment of error creation.
+- `message` -- thông báo lỗi mà người dùng có thể đọc được
+- `name` -- một chuỗi có tên của lỗi (tên của hàm khởi tạo lỗi).
+- `stack` (không chuẩn, nhưng được hỗ trợ tốt) -- ngăn xếp các lần gọi khi xảy ra lỗi.
 
-If an error object is not needed, we can omit it by using `catch {` instead of `catch (err) {`.
+Nếu không cần đối tượng lỗi, chúng ta có thể bỏ qua nó bằng cách sử dụng `catch {` thay vì `catch (err) {`.
 
-We can also generate our own errors using the `throw` operator. Technically, the argument of `throw` can be anything, but usually it's an error object inheriting from the built-in `Error` class. More on extending errors in the next chapter.
+Chúng ta cũng có thể dùng toán tử `throw` để tạo lỗi của chính chúng ta. Về mặt kỹ thuật, đối số của `throw` có thể là bất kỳ thứ gì, nhưng thường là đối tượng lỗi kế thừa từ lớp `Error` tích hợp sẵn. Trong chương tiếp theo, chúng tôi sẽ giới thiệu chi tiết lỗi mở rộng.
 
-*Rethrowing* is a very important pattern of error handling: a `catch` block usually expects and knows how to handle the particular error type, so it should rethrow errors it doesn't know.
+*Ném lại* (rethrowing) là một mô hình xử lý lỗi quan trọng: một khối `catch` thường mong đợi và biết cách xử lý một loại lỗi cụ thể, do đó, nó sẽ ném lại những lỗi mà nó không biết.
 
-Even if we don't have `try...catch`, most environments allow us to setup a "global" error handler to catch errors that "fall out". In-browser, that's `window.onerror`.
+Ngay cả khi chúng ta không `try...catch`, hầu hết các môi trường đều cho phép chúng ta đặt một trình xử lý lỗi "toàn cục" để bắt những lỗi "rơi ra". Trong trình duyệt, đó là `window.onerror`.
