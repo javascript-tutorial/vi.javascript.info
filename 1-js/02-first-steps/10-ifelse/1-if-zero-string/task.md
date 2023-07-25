@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# if (a string with zero)
+# if (chuỗi văn bản với số 0)
 
-Will `alert` be shown?
+`alert` có hiện ra không?
 
 ```js
 if ("0") {
-  alert( 'Hello' );
+  alert( 'Xin chào' );
 }
 ```
 
