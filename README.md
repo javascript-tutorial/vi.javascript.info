@@ -7,14 +7,14 @@ Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutor
 - Xem issue [Vietnamese Translate Progress](https://github.com/javascript-tutorial/vi.javascript.info/issues/1).
 - Chọn một bài chưa được dịch (chưa được check) mà bạn muốn dịch.
 - Thêm bình luận vào issue với nội dung là tiêu đề bài bạn muốn dịch, ví dụ `An Introduction to JavaScript`.
-    - Bot của chúng tôi tự động đánh dấu nó trong issue, để cho người khác biết rằng bạn đang dịch bài này.
+    - Bot của chúng tôi sẽ tự động đánh dấu nó trong issue, để cho người khác biết rằng bạn đang dịch bài này.
     - Bình luận của bạn chỉ nên chứa một tiêu đề duy nhất.
 - Fork repository này, dịch và gửi một Pull Request khi hoàn thành.
     - Tiêu đề của Pull Request nên trùng với tiêu đề bài dịch, giúp bot tự động ghi số của bài vào issue.
 
-Vui lòng cho phép các maintainer (nhà bào trì) xem xét (review) và hợp nhất (merge) các thay đổi của bạn vào bản dịch.
+Vui lòng cho phép các maintainer (nhà bảo trì) xem xét (review) và hợp nhất (merge) các thay đổi của bạn vào bản dịch.
 
-Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành một maintainer, nói cho chúng tôi tại [repository chính](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
+Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành một maintainer, nói cho chúng tôi biết tại [repository chính](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
 
 **Cho người khác biết rằng bạn đang dịch trong bảng thông báo hoặc nói chuyện bằng tiếng Việt. Mời họ cùng tham gia!**
 
@@ -28,15 +28,15 @@ Tái bút: Danh sách đầy đủ các ngôn ngữ có thể thấy tại <http
 
 Mỗi chương, mỗi bài hoặc mỗi bài tập đều được đặt trong một thư mục riêng.
 
-Tên thư mục đặt theo cấu trúc `N-url`, ở đó `N` là số thứ tự dùng để sắp xếp (các bài được sắp xếp theo thứ tự), và `url` là URL-slug của nó trên website.
+Tên thư mục đặt theo cấu trúc `N-URL`, ở đó `N` là số thứ tự dùng để sắp xếp (các bài được sắp xếp theo thứ tự), và `URL` là URL-slug của nó trên website.
 
 Một thư mục có nhiều tệp:
 
 - `index.md` cho một chương,
 - `article.md` cho một bài,
-- `task.md` cho một bài tập (+`solution.md` cho lời giải).
+- `task.md` cho một bài tập (lời giải cũng phải được cung cấp trong tệp solution.md).
 
-Một tệp bắt đầu bằng `# Title Header`, và sau đó là văn bản viết theo định dạng Markdown, có thể chỉnh sửa bằng một trình soạn thảo đơn giản.
+Một tệp bắt đầu bằng `# Tiêu đề`, và sau đó là văn bản viết theo định dạng Markdown, có thể chỉnh sửa bằng một trình soạn thảo đơn giản.
 
 Các tài nguyên bổ sung và các ví dụ cho bài học hoặc bài tập cũng nằm trong cùng thư mục.
 
@@ -48,8 +48,8 @@ Nếu bạn thấy rằng phiên bản tiếng Anh còn có thể cải thiện 
 
 ### Các thuật ngữ
 
-- Một số thuật ngữ kỹ thuật không có trong ngôn ngữ, ví dụ "Function Declaration" thì để nguyên.
-- Với các thuật ngữ khác như `resolved promise`, `slash`, `regexp` ... - cố tìm một bản dịch đã có trong tiếng Việt. Nếu không tìm các bản dịch đã có trong hướng dẫn sử dụng như [MDN](https://developer.mozilla.org/en-US/).
+- Một số thuật ngữ kỹ thuật không có trong tiếng Việt, ví dụ "Function Declaration" thì để nguyên.
+- Với các thuật ngữ khác như `resolved promise`, `slash`, `regexp` ... - cố tìm một bản dịch đã có trong tiếng Việt. Nếu không thì tìm các bản dịch đã có trong hướng dẫn sử dụng như [MDN](https://developer.mozilla.org/en-US/).
 
 ### Văn bản trong khối mã
 
