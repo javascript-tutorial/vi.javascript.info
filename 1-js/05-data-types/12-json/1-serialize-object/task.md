@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Turn the object into JSON and back
+# Biến đối tượng thành JSON và ngược lại
 
-Turn the `user` into JSON and then read it back into another variable.
+Biến `user` thành JSON và sau đó đọc lại thành một biến khác.
 
 ```js
 let user = {

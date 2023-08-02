@@ -1,10 +1,10 @@
-# JSON methods, toJSON
+# Các phương thức JSON, toJSON
 
-Let's say we have a complex object, and we'd like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+Giả sử chúng ta có một đối tượng phức tạp và chúng ta muốn chuyển đổi nó thành một chuỗi, để gửi nó qua mạng hoặc chỉ xuất nó cho mục đích ghi nhật ký.
 
-Naturally, such a string should include all important properties.
+Đương nhiên, một chuỗi như vậy phải bao gồm tất cả các thuộc tính quan trọng.
 
-We could implement the conversion like this:
+Chúng tôi có thể thực hiện chuyển đổi như thế này:
 
 ```js run
 let user = {
@@ -13,28 +13,28 @@ let user = {
 
 *!*
   toString() {
-    return `{name: "${this.name}", age: ${this.age}}`;
+    return `{tên: "${this.name}", tuổi: ${this.age}}`;
   }
 */!*
 };
 
-alert(user); // {name: "John", age: 30}
+alert(user); // {tên: "John", tuổi: 30}
 ```
 
-...But in the process of development, new properties are added, old properties are renamed and removed. Updating such `toString` every time can become a pain. We could try to loop over properties in it, but what if the object is complex and has nested objects in properties? We'd need to implement their conversion as well.
+...Nhưng trong quá trình phát triển, các thuộc tính mới được thêm vào, các thuộc tính cũ được đổi tên và xóa. Việc cập nhật `toString` như vậy mỗi lần có thể trở thành một vấn đề khó khăn. Chúng ta có thể thử lặp qua các thuộc tính trong đó, nhưng nếu đối tượng phức tạp và có các đối tượng lồng nhau trong các thuộc tính thì sao? Chúng ta cũng cần thực hiện chuyển đổi của chúng.
 
-Luckily, there's no need to write the code to handle all this. The task has been solved already.
+May mắn thay, không cần phải viết mã để xử lý tất cả điều này. Nhiệm vụ đã được giải quyết rồi.
 
 ## JSON.stringify
 
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+[JSON](http://vi.wikipedia.org/wiki/JSON) (Ký hiệu đối tượng JavaScript) là một định dạng chung để biểu thị các giá trị và đối tượng. Nó được mô tả như trong tiêu chuẩn [RFC 4627](http://tools.ietf.org/html/rfc4627). Ban đầu, nó được tạo cho JavaScript, nhưng nhiều ngôn ngữ khác cũng có thư viện để xử lý nó. Vì vậy, thật dễ dàng để sử dụng JSON để trao đổi dữ liệu khi máy khách sử dụng JavaScript và máy chủ được viết trên Ruby/PHP/Java/Sao cũng được.
 
-JavaScript provides methods:
+JavaScript cung cấp các phương thức:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` để chuyển đổi các đối tượng thành JSON.
+- `JSON.parse` để chuyển đổi JSON trở lại thành một đối tượng.
 
-For instance, here we `JSON.stringify` a student:
+Chẳng hạn, ở đây chúng ta `JSON.stringify` một sinh viên:
 ```js run
 let student = {
   name: 'John',
@@ -48,11 +48,11 @@ let student = {
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // chúng ta đã có một chuỗi!
 
 alert(json);
 *!*
-/* JSON-encoded object:
+/* Đối tượng được mã hóa JSON:
 {
   "name": "John",
   "age": 30,
@@ -64,35 +64,35 @@ alert(json);
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+Phương thức `JSON.stringify(student)` lấy đối tượng và chuyển đổi nó thành một chuỗi.
 
-The resulting `json` string is called a *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+Chuỗi `json` kết quả được gọi là đối tượng *được mã hóa JSON* hoặc *nối tiếp* hoặc *xâu chuỗi* hoặc *thống nhất*. Chúng ta đã sẵn sàng để gửi nó qua dây hoặc đưa vào kho lưu trữ dữ liệu đơn giản.
 
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+Hãy lưu ý rằng một đối tượng được mã hóa JSON có một số điểm khác biệt quan trọng so với đối tượng theo nghĩa đen:
 
-- Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
-- Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
+- Chuỗi sử dụng dấu ngoặc kép. Không có dấu nháy đơn hoặc dấu ngược trong JSON. Vì vậy, `'John'` trở thành `"John"`.
+- Tên thuộc tính đối tượng cũng được trích dẫn kép. Đó là bắt buộc. Vì vậy, `tuổi:30` trở thành `"tuổi":30`.
 
-`JSON.stringify` can be applied to primitives as well.
+`JSON.stringify` cũng có thể được áp dụng cho nguyên thủy.
 
-JSON supports following data types:
+JSON hỗ trợ các kiểu dữ liệu sau:
 
-- Objects `{ ... }`
-- Arrays `[ ... ]`
-- Primitives:
-    - strings,
-    - numbers,
-    - boolean values `true/false`,
-    - `null`.
+- Đối tượng `{ ... }`
+- Mảng `[ ... ]`
+- Nguyên thủy:
+     - chuỗi,
+     - số,
+     - giá trị boolean `true/false`,
+     - `không`.
 
-For instance:
+Ví dụ:
 
 ```js run
-// a number in JSON is just a number
+// một số trong JSON chỉ là một số
 alert( JSON.stringify(1) ) // 1
 
-// a string in JSON is still a string, but double-quoted
+// một chuỗi trong JSON vẫn là một chuỗi, nhưng có dấu ngoặc kép
 alert( JSON.stringify('test') ) // "test"
 
 alert( JSON.stringify(true) ); // true
@@ -100,31 +100,31 @@ alert( JSON.stringify(true) ); // true
 alert( JSON.stringify([1, 2, 3]) ); // [1,2,3]
 ```
 
-JSON is data-only language-independent specification, so some JavaScript-specific object properties are skipped by `JSON.stringify`.
+JSON là thông số kỹ thuật ngôn ngữ độc lập với dữ liệu, do đó, một số thuộc tính đối tượng dành riêng cho JavaScript bị `JSON.stringify` bỏ qua.
 
-Namely:
+Cụ thể là:
 
-- Function properties (methods).
-- Symbolic keys and values.
-- Properties that store `undefined`.
+- Thuộc tính hàm (phương thức).
+- Các khóa và giá trị tượng trưng.
+- Thuộc tính lưu trữ `undefined`.
 
 ```js run
 let user = {
-  sayHi() { // ignored
-    alert("Hello");
+  sayHi() { // làm ngơ
+    alert("Xin chào");
   },
-  [Symbol("id")]: 123, // ignored
-  something: undefined // ignored
+  [Symbol("id")]: 123, // làm ngơ
+  something: undefined // làm ngơ
 };
 
-alert( JSON.stringify(user) ); // {} (empty object)
+alert( JSON.stringify(user) ); // {} (đối tượng trống)
 ```
 
-Usually that's fine. If that's not what we want, then soon we'll see how to customize the process.
+Thường thì tốt thôi. Nếu đó không phải là điều chúng ta muốn, thì chúng ta sẽ sớm xem cách tùy chỉnh quy trình.
 
-The great thing is that nested objects are supported and converted automatically.
+Điều tuyệt vời là các đối tượng lồng nhau được hỗ trợ và chuyển đổi tự động.
 
-For instance:
+Ví dụ:
 
 ```js run
 let meetup = {
@@ -138,7 +138,7 @@ let meetup = {
 };
 
 alert( JSON.stringify(meetup) );
-/* The whole structure is stringified:
+/* Toàn bộ cấu trúc được xâu chuỗi:
 {
   "title":"Conference",
   "room":{"number":23,"participants":["john","ann"]},
@@ -146,9 +146,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-The important limitation: there must be no circular references.
+Hạn chế quan trọng: không được có tham chiếu vòng tròn.
 
-For instance:
+Ví dụ:
 
 ```js run
 let room = {
@@ -160,41 +160,41 @@ let meetup = {
   participants: ["john", "ann"]
 };
 
-meetup.place = room;       // meetup references room
-room.occupiedBy = meetup; // room references meetup
+meetup.place = room;       // meetup tham chiếu room
+room.occupiedBy = meetup; // room tham chiếu meetup
 
 *!*
-JSON.stringify(meetup); // Error: Converting circular structure to JSON
+JSON.stringify(meetup); // Lỗi: Chuyển đổi cấu trúc vòng tròn thành JSON
 */!*
 ```
 
-Here, the conversion fails, because of circular reference: `room.occupiedBy` references `meetup`, and `meetup.place` references `room`:
+Ở đây, quá trình chuyển đổi không thành công do tham chiếu vòng: `room.occupiedBy` tham chiếu `meetup` và `meetup.place` tham chiếu `room`:
 
 ![](json-meetup.svg)
 
 
-## Excluding and transforming: replacer
+## Loại trừ và biến đổi: thay thế
 
-The full syntax of `JSON.stringify` is:
+Cú pháp đầy đủ của `JSON.stringify` là:
 
 ```js
 let json = JSON.stringify(value[, replacer, space])
 ```
 
 value
-: A value to encode.
+: Một giá trị để mã hóa.
 
 replacer
-: Array of properties to encode or a mapping function `function(key, value)`.
+: Array thuộc tính để mã hóa hoặc hàm vẽ bản đồ `function(key, value)`.
 
 space
-: Amount of space to use for formatting
+: Lượng không gian sử dụng để định dạng
 
-Most of the time, `JSON.stringify` is used with the first argument only. But if we need to fine-tune the replacement process, like to filter out circular references, we can use the second argument of `JSON.stringify`.
+Hầu hết thời gian, `JSON.stringify` chỉ được sử dụng với đối số đầu tiên. Nhưng nếu chúng ta cần tinh chỉnh quá trình thay thế, chẳng hạn như lọc ra các tham chiếu vòng tròn, thì chúng ta có thể sử dụng đối số thứ hai của `JSON.stringify`.
 
-If we pass an array of properties to it, only these properties will be encoded.
+Nếu chúng ta chuyển một array thuộc tính cho nó, thì chỉ những thuộc tính này sẽ được mã hóa.
 
-For instance:
+Ví dụ:
 
 ```js run
 let room = {
@@ -204,18 +204,18 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // meetup tham chiếu room
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // room tham chiếu meetup
 
 alert( JSON.stringify(meetup, *!*['title', 'participants']*/!*) );
 // {"title":"Conference","participants":[{},{}]}
 ```
 
-Here we are probably too strict. The property list is applied to the whole object structure. So the objects in `participants` are empty, because `name` is not in the list.
+Ở đây có lẽ chúng ta quá khắt khe. Danh sách thuộc tính được áp dụng cho toàn bộ cấu trúc đối tượng. Vì vậy, các đối tượng trong `participants` trống vì `name` không có trong danh sách.
 
-Let's include in the list every property except `room.occupiedBy` that would cause the circular reference:
+Hãy đưa vào danh sách mọi thuộc tính ngoại trừ `room.occupiedBy` sẽ gây ra tham chiếu vòng:
 
 ```js run
 let room = {
@@ -225,10 +225,10 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // meetup tham chiếu room
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // room tham chiếu meetup
 
 alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'number']*/!*) );
 /*
@@ -240,13 +240,13 @@ alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'num
 */
 ```
 
-Now everything except `occupiedBy` is serialized. But the list of properties is quite long.
+Bây giờ mọi thứ ngoại trừ `occupiedBy` đều được đánh số thứ tự. Nhưng danh sách các thuộc tính là khá dài.
 
-Fortunately, we can use a function instead of an array as the `replacer`.
+May mắn thay, chúng ta có thể sử dụng một hàm thay vì một array làm `replacer`.
 
-The function will be called for every `(key, value)` pair and should return the "replaced" value, which will be used instead of the original one. Or `undefined` if the value is to be skipped.
+Hàm sẽ được gọi cho mọi cặp `(key, value)` và sẽ trả về giá trị "đã thay thế", giá trị này sẽ được sử dụng thay cho giá trị ban đầu. Hoặc `undefined` nếu giá trị sẽ bị bỏ qua.
 
-In our case, we can return `value` "as is" for everything except `occupiedBy`. To ignore `occupiedBy`, the code below returns `undefined`:
+Trong trường hợp của chúng ta, chúng ta có thể trả lại `value` "nguyên trạng" cho mọi thứ ngoại trừ `occupiedBy`. Để bỏ qua `occupiedBy`, mã bên dưới trả về `undefined`:
 
 ```js run
 let room = {
@@ -256,17 +256,17 @@ let room = {
 let meetup = {
   title: "Conference",
   participants: [{name: "John"}, {name: "Alice"}],
-  place: room // meetup references room
+  place: room // meetup tham chiếu room
 };
 
-room.occupiedBy = meetup; // room references meetup
+room.occupiedBy = meetup; // room tham chiếu meetup
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
   alert(`${key}: ${value}`);
   return (key == 'occupiedBy') ? undefined : value;
 }));
 
-/* key:value pairs that come to replacer:
+/* khóa: cặp value đi đến replacer:
 :             [object Object]
 title:        Conference
 participants: [object Object],[object Object]
@@ -280,20 +280,20 @@ occupiedBy: [object Object]
 */
 ```
 
-Please note that `replacer` function gets every key/value pair including nested objects and array items. It is applied recursively. The value of `this` inside `replacer` is the object that contains the current property.
+Hãy lưu ý rằng hàm `replacer` nhận mọi cặp khóa/giá trị bao gồm các đối tượng lồng nhau và các mục array. Nó được áp dụng đệ quy. Giá trị của `this` bên trong `replacer` là đối tượng chứa thuộc tính hiện tại.
 
-The first call is special. It is made using a special "wrapper object": `{"": meetup}`. In other words, the first `(key, value)` pair has an empty key, and the value is the target object as a whole. That's why the first line is `":[object Object]"` in the example above.
+Cuộc gọi đầu tiên là đặc biệt. Nó được tạo bằng cách sử dụng một "đối tượng bao bọc" đặc biệt: `{"": meetup}`. Nói cách khác, cặp `(key, value)` đầu tiên có một khóa trống và giá trị là toàn bộ đối tượng mục tiêu. Đó là lý do tại sao dòng đầu tiên là `":[object Object]"` trong ví dụ trên.
 
-The idea is to provide as much power for `replacer` as possible: it has a chance to analyze and replace/skip even the whole object if necessary.
+Ý tưởng là cung cấp càng nhiều quyền lực cho `replacer` càng tốt: nó có cơ hội phân tích và thay thế/bỏ qua thậm chí toàn bộ đối tượng nếu cần.
 
 
-## Formatting: space
+## Định dạng: dấu cách
 
-The third argument of `JSON.stringify(value, replacer, space)` is the number of spaces to use for pretty formatting.
+Đối số thứ ba của `JSON.stringify(value, replacer, space)` là số lượng khoảng trắng để sử dụng cho định dạng đẹp.
 
-Previously, all stringified objects had no indents and extra spaces. That's fine if we want to send an object over a network. The `space` argument is used exclusively for a nice output.
+Trước đây, tất cả các đối tượng được xâu chuỗi đều không có khoảng cách thụt vào và khoảng trắng thừa. Điều đó tốt nếu chúng ta muốn gửi một đối tượng qua mạng. Đối số `space` được sử dụng riêng cho đầu ra đẹp.
 
-Here `space = 2` tells JavaScript to show nested objects on multiple lines, with indentation of 2 spaces inside an object:
+Ở đây `space = 2` yêu cầu JavaScript hiển thị các đối tượng lồng nhau trên nhiều dòng, với thụt lề 2 khoảng trắng bên trong một đối tượng:
 
 ```js run
 let user = {
@@ -306,7 +306,7 @@ let user = {
 };
 
 alert(JSON.stringify(user, null, 2));
-/* two-space indents:
+/* thụt lề hai dấu cách:
 {
   "name": "John",
   "age": 25,
@@ -317,7 +317,7 @@ alert(JSON.stringify(user, null, 2));
 }
 */
 
-/* for JSON.stringify(user, null, 4) the result would be more indented:
+/* đối với JSON.stringify(user, null, 4) kết quả sẽ được thụt vào nhiều hơn:
 {
     "name": "John",
     "age": 25,
@@ -329,15 +329,15 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
-The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+Đối số thứ ba cũng có thể là một chuỗi. Trong trường hợp này, chuỗi được sử dụng để thụt đầu dòng thay vì một số khoảng trắng.
 
-The `space` parameter is used solely for logging and nice-output purposes.
+Tham số `space` chỉ được sử dụng cho mục đích ghi nhật ký và đầu ra đẹp.
 
-## Custom "toJSON"
+## "toJSON" tùy chỉnh
 
-Like `toString` for string conversion, an object may provide method `toJSON` for to-JSON conversion. `JSON.stringify` automatically calls it if available.
+Giống như `toString` để chuyển đổi chuỗi, một đối tượng có thể cung cấp phương thức `toJSON` để chuyển đổi sang JSON. `JSON.stringify` tự động gọi nó nếu có.
 
-For instance:
+Ví dụ:
 
 ```js run
 let room = {
@@ -362,9 +362,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-Here we can see that `date` `(1)` became a string. That's because all dates have a built-in `toJSON` method which returns such kind of string.
+Ở đây chúng ta có thể thấy rằng `date` `(1)` đã trở thành một chuỗi. Đó là bởi vì tất cả các ngày đều có phương thức `toJSON` tích hợp trả về loại chuỗi như vậy.
 
-Now let's add a custom `toJSON` for our object `room` `(2)`:
+Bây giờ, hãy thêm một `toJSON` tùy chỉnh cho đối tượng của chúng ta `room` `(2)`:
 
 ```js run
 let room = {
@@ -396,12 +396,12 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested in another encoded object.
+Như chúng ta có thể thấy, `toJSON` được sử dụng cho cả lệnh gọi trực tiếp `JSON.stringify(room)` và khi `room` được lồng trong một đối tượng được mã hóa khác.
 
 
 ## JSON.parse
 
-To decode a JSON-string, we need another method named [JSON.parse](mdn:js/JSON/parse).
+Để giải mã một chuỗi JSON, chúng ta cần một phương thức khác có tên [JSON.parse](mdn:js/JSON/parse).
 
 The syntax:
 ```js
@@ -409,15 +409,15 @@ let value = JSON.parse(str, [reviver]);
 ```
 
 str
-: JSON-string to parse.
+: Chuỗi JSON để phân tích cú pháp.
 
 reviver
-: Optional function(key,value) that will be called for each `(key, value)` pair and can transform the value.
+: Hàm (khóa, giá trị) tùy chọn sẽ được gọi cho từng cặp `(khóa, giá trị)` và có thể chuyển đổi giá trị.
 
-For instance:
+Ví dụ:
 
 ```js run
-// stringified array
+// array xâu chuỗi
 let numbers = "[0, 1, 2, 3]";
 
 numbers = JSON.parse(numbers);
@@ -425,7 +425,7 @@ numbers = JSON.parse(numbers);
 alert( numbers[1] ); // 1
 ```
 
-Or for nested objects:
+Hoặc cho các đối tượng lồng nhau:
 
 ```js run
 let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
@@ -435,40 +435,40 @@ let user = JSON.parse(userData);
 alert( user.friends[1] ); // 1
 ```
 
-The JSON may be as complex as necessary, objects and arrays can include other objects and arrays. But they must obey the same JSON format.
+JSON có thể phức tạp đến mức cần thiết, các đối tượng và array có thể bao gồm các đối tượng và array khác. Nhưng chúng phải tuân theo cùng một định dạng JSON.
 
-Here are typical mistakes in hand-written JSON (sometimes we have to write it for debugging purposes):
+Dưới đây là những lỗi điển hình trong JSON viết tay (đôi khi chúng ta phải viết nó cho mục đích gỡ lỗi):
 
 ```js
 let json = `{
-  *!*name*/!*: "John",                     // mistake: property name without quotes
-  "surname": *!*'Smith'*/!*,               // mistake: single quotes in value (must be double)
-  *!*'isAdmin'*/!*: false                  // mistake: single quotes in key (must be double)
-  "birthday": *!*new Date(2000, 2, 3)*/!*, // mistake: no "new" is allowed, only bare values
-  "friends": [0,1,2,3]              // here all fine
+  *!*name*/!*: "John",                     // lỗi: tên thuộc tính không có dấu ngoặc kép
+  "surname": *!*'Smith'*/!*,               // lỗi: dấu ngoặc đơn trong giá trị (phải kép)
+  *!*'isAdmin'*/!*: false                  // lỗi: dấu nháy đơn trong khóa (phải kép)
+  "birthday": *!*new Date(2000, 2, 3)*/!*, // lỗi: không cho phép "new", chỉ các giá trị trống
+  "friends": [0,1,2,3]              // ở đây tất cả đều ổn
 }`;
 ```
 
-Besides, JSON does not support comments. Adding a comment to JSON makes it invalid.
+Ngoài ra, JSON không hỗ trợ nhận xét. Thêm một nhận xét vào JSON làm cho nó không hợp lệ.
 
-There's another format named [JSON5](http://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+Có một định dạng khác có tên [JSON5](http://json5.org/), cho phép các khóa, nhận xét không được trích dẫn, v.v. Nhưng đây là một thư viện độc lập, không có trong thông số kỹ thuật của ngôn ngữ.
 
-The regular JSON is that strict not because its developers are lazy, but to allow easy, reliable and very fast implementations of the parsing algorithm.
+JSON thông thường nghiêm ngặt như vậy không phải vì các nhà phát triển của nó lười biếng, mà để cho phép triển khai thuật toán phân tích cú pháp dễ dàng, đáng tin cậy và rất nhanh.
 
-## Using reviver
+## Sử dụng máy hồi sinh
 
-Imagine, we got a stringified `meetup` object from the server.
+Hãy tưởng tượng, chúng ta có một đối tượng `meetup` được xâu chuỗi từ máy chủ.
 
-It looks like this:
+Nó trông như thế này:
 
 ```js
-// title: (meetup title), date: (meetup date)
+// tiêu đề: (meetup title), date: (meetup date)
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 ```
 
-...And now we need to *deserialize* it, to turn back into JavaScript object.
+...Và bây giờ chúng ta cần *bỏ nối tiếp* nó, để quay trở lại đối tượng JavaScript.
 
-Let's do it by calling `JSON.parse`:
+Hãy làm điều đó bằng cách gọi `JSON.parse`:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -476,15 +476,15 @@ let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 let meetup = JSON.parse(str);
 
 *!*
-alert( meetup.date.getDate() ); // Error!
+alert( meetup.date.getDate() ); // Lỗi!
 */!*
 ```
 
-Whoops! An error!
+Rất tiếc! Một lỗi!
 
-The value of `meetup.date` is a string, not a `Date` object. How could `JSON.parse` know that it should transform that string into a `Date`?
+Giá trị của `meetup.date` là một chuỗi, không phải đối tượng `Date`. Làm cách nào để `JSON.parse` biết rằng nó sẽ chuyển đổi chuỗi đó thành `Date`?
 
-Let's pass to `JSON.parse` the reviving function as the second argument, that returns all values "as is", but `date` will become a `Date`:
+Hãy chuyển sang `JSON.parse` hàm hồi sinh làm đối số thứ hai, hàm này trả về tất cả các giá trị "nguyên trạng", nhưng `date` sẽ trở thành `Date`:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -496,10 +496,10 @@ let meetup = JSON.parse(str, function(key, value) {
 });
 */!*
 
-alert( meetup.date.getDate() ); // now works!
+alert( meetup.date.getDate() ); // bây giờ hoạt động!
 ```
 
-By the way, that works for nested objects as well:
+Nhân tiện, nó cũng hoạt động với các đối tượng lồng nhau:
 
 ```js run
 let schedule = `{
@@ -515,16 +515,16 @@ schedule = JSON.parse(schedule, function(key, value) {
 });
 
 *!*
-alert( schedule.meetups[1].date.getDate() ); // works!
+alert( schedule.meetups[1].date.getDate() ); // hoạt động!
 */!*
 ```
 
 
 
-## Summary
+## Tóm tắt
 
-- JSON is a data format that has its own independent standard and libraries for most programming languages.
-- JSON supports plain objects, arrays, strings, numbers, booleans, and `null`.
-- JavaScript provides methods [JSON.stringify](mdn:js/JSON/stringify) to serialize into JSON and [JSON.parse](mdn:js/JSON/parse) to read from JSON.
-- Both methods support transformer functions for smart reading/writing.
-- If an object has `toJSON`, then it is called by `JSON.stringify`.
+- JSON là một định dạng dữ liệu có tiêu chuẩn và thư viện độc lập riêng cho hầu hết các ngôn ngữ lập trình.
+- JSON hỗ trợ các đối tượng đơn giản, array, chuỗi, số, booleans và `null`.
+- JavaScript cung cấp các phương thức [JSON.stringify](mdn:js/JSON/stringify) để tuần tự hóa thành JSON và [JSON.parse](mdn:js/JSON/parse) để đọc từ JSON.
+- Cả hai phương pháp đều hỗ trợ các hàm biến đổi để đọc/ghi thông minh.
+- Nếu một đối tượng có `toJSON`, thì nó được gọi bởi `JSON.stringify`.
