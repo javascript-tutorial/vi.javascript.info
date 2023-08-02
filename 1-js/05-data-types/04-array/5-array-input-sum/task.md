@@ -2,14 +2,14 @@ importance: 4
 
 ---
 
-# Sum input numbers
+# Tổng số đầu vào
 
-Write the function `sumInput()` that:
+Viết hàm `sumInput()` để:
 
-- Asks the user for values using `prompt` and stores the values in the array.
-- Finishes asking when the user enters a non-numeric value, an empty string, or presses "Cancel".
-- Calculates and returns the sum of array items.
+- Hỏi người dùng các giá trị bằng cách sử dụng `prompt` và lưu trữ các giá trị trong array.
+- Kết thúc hỏi khi người dùng nhập giá trị không phải là số, chuỗi rỗng hoặc nhấn "Hủy".
+- Tính toán và trả về tổng của các phần tử array.
 
-P.S. A zero `0` is a valid number, please don't stop the input on zero.
+Tái bút: Số không `0` là một số hợp lệ, vui lòng không dừng đầu vào ở số không.
 
 [demo]

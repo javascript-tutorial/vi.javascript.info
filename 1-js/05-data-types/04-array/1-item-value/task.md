@@ -2,18 +2,17 @@ importance: 3
 
 ---
 
-# Is array copied?
+# Array có được sao chép không?
 
-What is this code going to show?
+Mã này sẽ hiển thị là gì?
 
 ```js
-let fruits = ["Apples", "Pear", "Orange"];
+let fruits = ["Táo", "Lê", "Cam"];
 
-// push a new value into the "copy"
+// đẩy một giá trị mới vào "bản sao"
 let shoppingCart = fruits;
-shoppingCart.push("Banana");
+shoppingCart.push("Chuối");
 
-// what's in fruits?
+// có gì trong fruits?
 alert( fruits.length ); // ?
 ```
-
