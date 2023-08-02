@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Sum with closures
+# Tổng có bao đóng
 
-Write function `sum` that works like this: `sum(a)(b) = a+b`.
+Viết hàm `sum` hoạt động như sau: `sum(a)(b) = a+b`.
 
-Yes, exactly this way, using double parentheses (not a mistype).
+Vâng, chính xác theo cách này, sử dụng dấu ngoặc kép (không phải gõ nhầm).
 
-For instance:
+Ví dụ:
 
 ```js
 sum(1)(2) = 3

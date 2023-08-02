@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Does a function pickup latest changes?
+# Hàm có nhận thay đổi mới nhất không?
 
-The function sayHi uses an external variable name. When the function runs, which value is it going to use?
+Hàm sayHi sử dụng tên biến ngoài. Khi hàm chạy, nó sẽ sử dụng giá trị nào?
 
 ```js
 let name = "John";
@@ -15,9 +15,9 @@ function sayHi() {
 
 name = "Pete";
 
-sayHi(); // what will it show: "John" or "Pete"?
+sayHi(); // nó sẽ hiển thị gì: "John" hay "Pete"?
 ```
 
-Such situations are common both in browser and server-side development. A function may be scheduled to execute later than it is created, for instance after a user action or a network request.
+Những tình huống như vậy là phổ biến cả trong phát triển trình duyệt và phía máy chủ. Một hàm có thể được lên lịch để thực thi muộn hơn so với khi nó được tạo, chẳng hạn như sau một hành động của người dùng hoặc một yêu cầu mạng.
 
-So, the question is: does it pick up the latest changes?
+Vì vậy, câu hỏi là: nó có nhận những thay đổi mới nhất không?

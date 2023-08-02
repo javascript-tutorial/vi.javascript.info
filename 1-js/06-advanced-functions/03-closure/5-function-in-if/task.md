@@ -1,7 +1,7 @@
 
-# Function in if
+# Hàm trong if
 
-Look at the code. What will be the result of the call at the last line?
+Nhìn vào mã. Cái gì sẽ là kết quả của cuộc gọi ở dòng cuối cùng?
 
 ```js run
 let phrase = "Hello";

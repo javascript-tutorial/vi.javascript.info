@@ -1,5 +1,5 @@
-The answer is: **Pete**.
+Đáp án là: **Pete**.
 
-A function gets outer variables as they are now, it uses the most recent values.
+Một hàm nhận các biến bên ngoài như hiện tại, nó sử dụng các giá trị gần đây nhất.
 
-Old variable values are not saved anywhere. When a function wants a variable, it takes the current value from its own Lexical Environment or the outer one.
+Giá trị biến cũ không được lưu ở bất cứ đâu. Khi một hàm muốn một biến, nó sẽ lấy giá trị hiện tại từ Lexical Environment của chính nó hoặc environment bên ngoài.
