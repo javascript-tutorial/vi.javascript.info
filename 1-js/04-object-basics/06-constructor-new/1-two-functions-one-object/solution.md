@@ -1,9 +1,8 @@
-Yes, it's possible.
+Vâng, nó có thể.
 
-If a function returns an object then `new` returns it instead of `this`.
+Nếu một hàm trả về một đối tượng thì `new` sẽ trả về nó thay vì `this`.
 
-So they can, for instance, return the same externally defined object `obj`:
-
+Vì vậy, chẳng hạn, chúng có thể trả về cùng một đối tượng được xác định bên ngoài `obj`:
 ```js run no-beautify
 let obj = {};
 
