@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The maximal salary 
+# Mức lương tối đa
 
-There is a `salaries` object:
+Có một đối tượng `salaries`:
 
 ```js
 let salaries = {
@@ -14,9 +14,9 @@ let salaries = {
 };
 ```
 
-Create the function `topSalary(salaries)` that returns the name of the top-paid person.
+Tạo hàm `topSalary(salaries)` trả về tên của người được trả lương cao nhất.
 
-- If `salaries` is empty, it should return `null`.
-- If there are multiple top-paid persons, return any of them.
+- Nếu `salaries` trống, nó nên trả về `null`.
+- Nếu có nhiều người được trả lương cao nhất, trả lại bất kỳ ai trong số họ.
 
-P.S. Use `Object.entries` and destructuring to iterate over key/value pairs.
+Tái bút: Sử dụng `Object.entries` và destructuring để lặp lại các cặp khóa/giá trị.
