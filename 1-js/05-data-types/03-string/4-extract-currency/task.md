@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Extract the money
+# Trích xuất tiền
 
-We have a cost in the form `"$120"`. That is: the dollar sign goes first, and then the number.
+Chúng ta có chi phí ở dạng `"$120"`. Đó là: ký hiệu đô la đi trước, sau đó là số.
 
-Create a function `extractCurrencyValue(str)` that would extract the numeric value from such string and return it. 
+Tạo một hàm `extractCurrencyValue(str)` sẽ trích xuất giá trị số từ chuỗi đó và trả về giá trị đó.
 
-The example:
+Ví dụ:
 
 ```js
 alert( extractCurrencyValue('$120') === 120 ); // true

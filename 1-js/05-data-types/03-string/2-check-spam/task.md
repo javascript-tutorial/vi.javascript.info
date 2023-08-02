@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Check for spam
+# Kiểm tra spam
 
-Write a function `checkSpam(str)` that returns `true` if `str` contains 'viagra' or 'XXX', otherwise `false`.
+Viết hàm `checkSpam(str)` trả về `true` nếu `str` chứa 'viagra' hoặc 'XXX', nếu không thì `false`.
 
-The function must be case-insensitive:
+Hàm phải phân biệt chữ hoa chữ thường:
 
 ```js
 checkSpam('buy ViAgRA now') == true

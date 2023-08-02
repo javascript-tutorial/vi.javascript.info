@@ -1,6 +1,6 @@
-The maximal length must be `maxlength`, so we need to cut it a little shorter, to give space for the ellipsis.
+Độ dài tối đa phải là `maxlength`, vì vậy chúng ta cần cắt nó ngắn hơn một chút để tạo khoảng trống cho dấu chấm lửng.
 
-Note that there is actually a single Unicode character for an ellipsis. That's not three dots.
+Lưu ý rằng thực tế có một ký tự Unicode duy nhất cho dấu chấm lửng. Đó không phải là ba chấm.
 
 ```js run demo
 function truncate(str, maxlength) {
