@@ -1,7 +1,7 @@
-Yeah, looks strange indeed.
+Ừ, trông lạ thật đấy.
 
-But `instanceof` does not care about the function, but rather about its `prototype`, that it matches against the prototype chain.
+Nhưng `instanceof` không quan tâm đến hàm, mà quan tâm đến `nguyên mẫu` của nó, rằng nó phù hợp với chuỗi nguyên mẫu.
 
-And here `a.__proto__ == B.prototype`, so `instanceof` returns `true`.
+Và ở đây `a.__proto__ == B.prototype`, vì vậy `instanceof` trả về `true`.
 
-So, by the logic of `instanceof`, the `prototype` actually defines the type, not the constructor function.
+Vì vậy, theo logic của `instanceof`, `prototype` thực sự xác định loại chứ không phải hàm tạo.
