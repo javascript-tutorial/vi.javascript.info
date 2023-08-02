@@ -1,9 +1,9 @@
 
-1. For the whole thing to work *anyhow*, the result of `sum` must be function.
-2. That function must keep in memory the current value between calls.
-3. According to the task, the function must become the number when used in `==`. Functions are objects, so the conversion happens as described in the chapter <info:object-toprimitive>, and we can provide our own method that returns the number.
+1. Để toàn bộ hoạt động *dù sao đi nữa*, kết quả của `sum` phải là hàm.
+2. Hàm đó phải giữ trong bộ nhớ giá trị hiện tại giữa các cuộc gọi.
+3. Theo nhiệm vụ, hàm phải trở thành số khi được sử dụng trong `==`. Các hàm là các đối tượng, vì vậy việc chuyển đổi diễn ra như được mô tả trong chương <info:object-toprimitive> và chúng ta có thể cung cấp phương thức trả về số của riêng mình.
 
-Now the code:
+Bây giờ là mã:
 
 ```js demo run
 function sum(a) {
@@ -28,28 +28,28 @@ alert( sum(6)(-1)(-2)(-3) ); // 0
 alert( sum(0)(1)(2)(3)(4)(5) ); // 15
 ```
 
-Please note that the `sum` function actually works only once. It returns function `f`.
+Hãy lưu ý rằng chức năng `sum` thực sự chỉ hoạt động một lần. Nó trả về hàm `f`.
 
-Then, on each subsequent call, `f` adds its parameter to the sum `currentSum`, and returns itself.
+Sau đó, trong mỗi lệnh gọi tiếp theo, `f` thêm tham số của nó vào tổng `currentSum` và trả về chính nó.
 
-**There is no recursion in the last line of `f`.**
+**Không có đệ quy trong dòng cuối cùng của `f`.**
 
-Here is what recursion looks like:
-
-```js
-function f(b) {
-  currentSum += b;
-  return f(); // <-- recursive call
-}
-```
-
-And in our case, we just return the function, without calling it:
+Đây là những gì đệ quy trông giống:
 
 ```js
 function f(b) {
   currentSum += b;
-  return f; // <-- does not call itself, returns itself
+  return f(); // <-- cuộc gọi đệ quy
 }
 ```
 
-This `f` will be used in the next call, again return itself, as many times as needed. Then, when used as a number or a string -- the `toString` returns the `currentSum`. We could also use `Symbol.toPrimitive` or `valueOf` here for the conversion.
+Và trong trường hợp của chúng ta, chúng ta chỉ trả về hàm mà không gọi nó:
+
+```js
+function f(b) {
+  currentSum += b;
+  return f; // <-- không tự gọi, tự trả về
+}
+```
+
+`f` này sẽ được sử dụng trong lần gọi tiếp theo, một lần nữa sẽ tự trả về chính nó, nhiều lần nếu cần. Sau đó, khi được sử dụng làm số hoặc chuỗi -- `toString` trả về `currentSum`. Chúng ta cũng có thể sử dụng `Symbol.toPrimitive` hoặc `valueOf` tại đây để chuyển đổi.
