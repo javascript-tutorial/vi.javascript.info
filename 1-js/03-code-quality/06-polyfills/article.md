@@ -1,92 +1,92 @@
 
-# Polyfills and transpilers
+# Polyfill và bộ dịch mã
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, sẽ được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [thông số kỹ thuật](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/).
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+Các nhóm đằng sau JavaScript engine có ý tưởng riêng của họ về những gì cần triển khai trước tiên. Họ có thể quyết định thực hiện các đề xuất trong bản nháp và hoãn lại những thứ đã có trong thông số kỹ thuật, bởi vì chúng kém thú vị hơn hoặc khó thực hiện hơn.
 
-So it's quite common for an engine to implement only the part of the standard.
+Vì vậy, việc một engine chỉ thực hiện một phần của tiêu chuẩn là điều khá phổ biến.
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+Một trang tốt để xem trạng thái hỗ trợ hiện tại cho các tính năng ngôn ngữ là <https://kangax.github.io/compat-table/es6/> (nó khá lớn, chúng ta còn nhiều điều phải nghiên cứu).
 
-As programmers, we'd like to use most recent features. The more good stuff - the better!
+Là lập trình viên, chúng ta muốn sử dụng các tính năng mới nhất. Càng nhiều thứ tốt - càng tốt!
 
-On the other hand, how to make our modern code work on older engines that don't understand recent features yet?
+Mặt khác, làm cách nào để mã hiện đại của chúng ta hoạt động trên các công cụ cũ hơn chưa hiểu các tính năng gần đây?
 
-There are two tools for that:
+Có hai công cụ cho việc đó:
 
-1. Transpilers.
-2. Polyfills.
+1. Bộ dịch mã.
+2. Polyfill.
 
-Here, in this chapter, our purpose is to get the gist of how they work, and their place in web development.
+Ở đây, trong chương này, mục đích của chúng ta là nắm được ý chính về cách chúng hoạt động và vị trí của chúng trong quá trình phát triển web.
 
-## Transpilers
+## Bộ dịch mã
 
-A [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) is a special piece of software that can parse ("read and understand") modern code, and rewrite it using older syntax constructs, so that the result would be the same.
+[Bộ dịch mã](https://en.wikipedia.org/wiki/Source-to-source_compiler) là một phần mềm đặc biệt dịch mã nguồn này sang mã nguồn khác. Nó có thể phân tích cú pháp ("đọc và hiểu") mã hiện đại và viết lại mã đó bằng cách sử dụng các cấu trúc cú pháp cũ hơn để mã này cũng sẽ hoạt động trong các engine lỗi thời.
 
-E.g. JavaScript before year 2020 didn't have the "nullish coalescing operator" `??`. So, if a visitor uses an outdated browser, it may fail to understand the code like `height = height ?? 100`.
+Ví dụ. JavaScript trước năm 2020 không có "toán tử kết hợp vô giá trị" `??`. Vì vậy, nếu khách truy cập sử dụng trình duyệt lỗi thời, họ có thể không hiểu mã như `height = height ?? 100`.
 
-A transpiler would analyze our code and rewrite `height ?? 100` into `(height !== undefined && height !== null) ? height : 100`.
+Trình dịch mã sẽ phân tích mã của chúng ta và viết lại `height ?? 100` thành `(height !== undefined && height !== null) ? height : 100`.
 
 ```js
-// before running the transpiler
+// trước khi chạy bộ dịch mã
 height = height ?? 100;
 
-// after running the transpiler
+// sau khi chạy bộ dịch mã
 height = (height !== undefined && height !== null) ? height : 100;
 ```
 
-Now the rewritten code is suitable for older JavaScript engines.
+Bây giờ mã được viết lại phù hợp với các JavaScript engine cũ hơn.
 
-Usually, a developer runs the transpiler on their own computer, and then deploys the transpiled code to the server.
+Thông thường, nhà phát triển chạy bộ dịch mã trên máy tính của chính họ, sau đó triển khai mã đã dịch tới máy chủ.
 
-Speaking of names, [Babel](https://babeljs.io) is one of the most prominent transpilers out there. 
+Nhắc đến tên, [Babel](https://babeljs.io) là một trong những bộ dịch mã nổi bật nhất hiện có.
 
-Modern project build systems, such as [webpack](http://webpack.github.io/), provide means to run transpiler automatically on every code change, so it's very easy to integrate into development process.
+Các hệ thống xây dựng dự án hiện đại, chẳng hạn như [webpack](https://webpack.github.io/), cung cấp phương tiện để chạy bộ dịch mã tự động trên mỗi thay đổi mã, vì vậy rất dễ tích hợp vào quá trình phát triển.
 
-## Polyfills
+## Polyfill
 
-New language features may include not only syntax constructs and operators, but also built-in functions.
+Các tính năng ngôn ngữ mới có thể bao gồm không chỉ cấu trúc cú pháp và toán tử, mà còn cả các hàm tích hợp sẵn.
 
-For example, `Math.trunc(n)` is a function that "cuts off" the decimal part of a number, e.g `Math.trunc(1.23) = 1`.
+Ví dụ: `Math.trunc(n)` là hàm "cắt bỏ" phần thập phân của một số, ví dụ: `Math.trunc(1.23)` trả về `1`.
 
-In some (very outdated) JavaScript engines, there's no `Math.trunc`, so such code will fail.
+Trong một số JavaScript engine (rất lỗi thời), không có `Math.trunc`, vì vậy mã như vậy sẽ bị lỗi.
 
-As we're talking about new functions, not syntax changes, there's no need to transpile anything here. We just need to declare the missing function.
+Vì chúng ta đang nói về các hàm mới, không phải thay đổi cú pháp, nên không cần phải dịch mã bất kỳ thứ gì ở đây. Chúng ta chỉ cần khai báo hàm còn thiếu.
 
-A script that updates/adds new functions is called "polyfill". It "fills in" the gap and adds missing implementations.
+Tập lệnh cập nhật/thêm hàm mới được gọi là "polyfill". Nó "lấp đầy" khoảng trống và bổ sung các triển khai còn thiếu.
 
-For this particular case, the polyfill for `Math.trunc` is a script that implements it, like this:
+Đối với trường hợp cụ thể này, polyfill cho `Math.trunc` là một tập lệnh triển khai nó, như sau:
 
 ```js
-if (!Math.trunc) { // if no such function
-  // implement it
+if (!Math.trunc) { // nếu không có hàm như vậy
+  // thực hiện nó
   Math.trunc = function(number) {
-    // Math.ceil and Math.floor exist even in ancient JavaScript engines
-    // they are covered later in the tutorial
+    // Math.ceil và Math.floor tồn tại ngay cả trong các JavaScript engine cổ đại
+    // chúng được đề cập sau trong hướng dẫn
     return number < 0 ? Math.ceil(number) : Math.floor(number);
   };
 }
 ```
 
-JavaScript is a highly dynamic language, scripts may add/modify any functions, even including built-in ones. 
+JavaScript là một ngôn ngữ rất năng động, các tập lệnh có thể thêm/sửa đổi bất kỳ hàm nào, kể cả những hàm được tích hợp sẵn.
 
-Two interesting libraries of polyfills are:
-- [core js](https://github.com/zloirock/core-js) that supports a lot, allows to include only needed features.
-- [polyfill.io](http://polyfill.io) service that provides a script with polyfills, depending on the features and user's browser.
+Hai thư viện polyfill thú vị là:
+- [Core js](https://github.com/zloirock/core-js) hỗ trợ nhiều, chỉ cho phép đưa vào những tính năng cần thiết.
+- Dịch vụ [polyfill.io](https://polyfill.io) cung cấp tập lệnh có polyfill, tùy thuộc vào tính năng và trình duyệt của người dùng.
 
 
-## Summary
+## Tóm tắt
 
-In this chapter we'd like to motivate you to study modern and even "bleeding-edge" language features, even if they aren't yet well-supported by JavaScript engines.
+Trong chương này, chúng tôi muốn khuyến khích bạn nghiên cứu các tính năng ngôn ngữ hiện đại và thậm chí là "tiên tiến", ngay cả khi chúng chưa được các JavaScript engine hỗ trợ tốt.
 
-Just don't forget to use transpiler (if using modern syntax or operators) and polyfills (to add functions that may be missing). And they'll ensure that the code works.
+Chỉ cần đừng quên sử dụng bộ dịch mã (nếu sử dụng cú pháp hoặc toán tử hiện đại) và polyfill (để thêm các hàm có thể bị thiếu). Và chúng sẽ đảm bảo rằng mã hoạt động.
 
-For example, later when you're familiar with JavaScript, you can setup a code build system based on [webpack](http://webpack.github.io/) with [babel-loader](https://github.com/babel/babel-loader) plugin.
+Ví dụ: sau này khi bạn đã quen với JavaScript, bạn có thể thiết lập hệ thống xây dựng mã dựa trên [webpack](http://webpack.github.io/) với [babel-loader](https://github.com/babel/babel-loader).
 
-Good resources that show the current state of support for various features:
-- <https://kangax.github.io/compat-table/es6/> - for pure JavaScript.
-- <https://caniuse.com/> - for browser-related functions.
+Các tài nguyên tốt hiển thị trạng thái hỗ trợ hiện tại cho các tính năng khác nhau:
+- <https://kangax.github.io/compat-table/es6/> - dành cho JavaScript thuần túy.
+- <https://caniuse.com/> - cho các hàm liên quan đến trình duyệt.
 
-P.S. Google Chrome is usually the most up-to-date with language features, try it if a tutorial demo fails. Most tutorial demos work with any modern browser though.
+Tái bút: Google Chrome thường là phiên bản cập nhật nhất với các tính năng ngôn ngữ, hãy dùng thử nếu bản giới thiệu hướng dẫn không thành công. Tuy nhiên, hầu hết các bản giới thiệu hướng dẫn đều hoạt động với bất kỳ trình duyệt hiện đại nào.
 
