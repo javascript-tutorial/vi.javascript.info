@@ -2,20 +2,20 @@ importance: 4
 
 ---
 
-# Which day of month was many days ago?
+# Ngày nào trong tháng cách đây nhiều ngày?
 
-Create a function `getDateAgo(date, days)` to return the day of month `days` ago from the `date`.
+Tạo một hàm `getDateAgo(date, days)` để trả về ngày trong tháng `days` trước từ `date`.
 
-For instance, if today is 20th, then `getDateAgo(new Date(), 1)` should be 19th and `getDateAgo(new Date(), 2)` should be 18th.
+Ví dụ: nếu hôm nay là ngày 20, thì `getDateAgo(new Date(), 1)` sẽ là ngày 19 và `getDateAgo(new Date(), 2)` sẽ là ngày 18.
 
-Should work reliably for `days=365` or more:
+Nên hoạt động đáng tin cậy trong `day=365` trở lên:
 
 ```js
 let date = new Date(2015, 0, 2);
 
-alert( getDateAgo(date, 1) ); // 1, (1 Jan 2015)
-alert( getDateAgo(date, 2) ); // 31, (31 Dec 2014)
-alert( getDateAgo(date, 365) ); // 2, (2 Jan 2014)
+alert( getDateAgo(date, 1) ); // 1, (1 Thg 1 2015)
+alert( getDateAgo(date, 2) ); // 31, (31 Thg 12 2014)
+alert( getDateAgo(date, 365) ); // 2, (2 Thg 1 2014)
 ```
 
-P.S. The function should not modify the given `date`.
+Tái bút: Hàm này nên được sửa đổi `date` đã cho.
