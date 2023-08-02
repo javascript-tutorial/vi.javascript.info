@@ -1,42 +1,42 @@
 
 # Object.keys, values, entries
 
-Let's step away from the individual data structures and talk about the iterations over them.
+Hãy bỏ qua các cấu trúc dữ liệu riêng lẻ và nói về các lần lặp lại trên chúng.
 
-In the previous chapter we saw methods `map.keys()`, `map.values()`, `map.entries()`.
+Trong chương trước chúng ta đã thấy các phương thức `map.keys()`, `map.values()`, `map.entries()`.
 
-These methods are generic, there is a common agreement to use them for data structures. If we ever create a data structure of our own, we should implement them too.
+Các phương pháp này là chung chung, có một thỏa thuận chung để sử dụng chúng cho các cấu trúc dữ liệu. Nếu chúng ta từng tạo cấu trúc dữ liệu của riêng mình, chúng ta cũng nên triển khai chúng.
 
-They are supported for:
+Chúng được hỗ trợ cho:
 
 - `Map`
 - `Set`
 - `Array`
 
-Plain objects also support similar methods, but the syntax is a bit different.
+Các đối tượng đơn giản cũng hỗ trợ các phương thức tương tự, nhưng cú pháp hơi khác một chút.
 
 ## Object.keys, values, entries
 
-For plain objects, the following methods are available:
+Đối với các đối tượng đơn giản, có các phương thức sau:
 
-- [Object.keys(obj)](mdn:js/Object/keys) -- returns an array of keys.
-- [Object.values(obj)](mdn:js/Object/values) -- returns an array of values.
-- [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of `[key, value]` pairs.
+- [Object.keys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/keys) -- trả về một array khóa.
+- [Object.values(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/values) -- trả về một array giá trị.
+- [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/entries) -- trả về một array các cặp `[key, value]`.
 
-Please note the distinctions (compared to map for example):
+Hãy lưu ý các điểm khác biệt (ví dụ so với map):
 
-|             | Map              | Object       |
-|-------------|------------------|--------------|
-| Call syntax | `map.keys()`  | `Object.keys(obj)`, but not `obj.keys()` |
-| Returns     | iterable    | "real" Array                     |
+| | Map | Đối tượng |
+|---------------------|------------------|--------------|
+| Cú pháp gọi | `map.keys()` | `Object.keys(obj)`, chứ không phải `obj.keys()` |
+| Trả lại | iterable | Array "thực" |
 
-The first difference is that we have to call `Object.keys(obj)`, and not `obj.keys()`.
+Sự khác biệt đầu tiên là chúng ta phải gọi `Object.keys(obj)`, chứ không phải `obj.keys()`.
 
-Why so? The main reason is flexibility. Remember, objects are a base of all complex structures in JavaScript. So we may have an object of our own like `data` that implements its own `data.values()` method. And we still can call `Object.values(data)` on it.
+Tại sao như vậy? Lý do chính là tính linh hoạt. Hãy nhớ rằng, các đối tượng là cơ sở của tất cả các cấu trúc phức tạp trong JavaScript. Vì vậy, chúng ta có thể có một đối tượng của riêng mình như `data` thực hiện phương thức `data.values()` của chính nó. Và chúng ta vẫn có thể gọi `Object.values(data)` trên đó.
 
-The second difference is that `Object.*` methods return "real" array objects, not just an iterable. That's mainly for historical reasons.
+Điểm khác biệt thứ hai là các phương thức `Object.*` trả về các đối tượng array "thực", không chỉ là một đối tượng iterable. Đó chủ yếu là vì lý do lịch sử.
 
-For instance:
+Ví dụ:
 
 ```js
 let user = {
@@ -49,7 +49,7 @@ let user = {
 - `Object.values(user) = ["John", 30]`
 - `Object.entries(user) = [ ["name","John"], ["age",30] ]`
 
-Here's an example of using `Object.values` to loop over property values:
+Đây là một ví dụ về việc sử dụng `Object.values` để lặp qua các giá trị thuộc tính:
 
 ```js run
 let user = {
@@ -57,30 +57,30 @@ let user = {
   age: 30
 };
 
-// loop over values
+// lặp lại các giá trị
 for (let value of Object.values(user)) {
   alert(value); // John, then 30
 }
 ```
 
-```warn header="Object.keys/values/entries ignore symbolic properties"
-Just like a `for..in` loop, these methods ignore properties that use `Symbol(...)` as keys.
+```warn header="Object.keys/values/entries bỏ qua các thuộc tính tượng trưng"
+Giống như vòng lặp `for..in`, các phương thức này bỏ qua các thuộc tính sử dụng `Symbol(...)` làm khóa.
 
-Usually that's convenient. But if we want symbolic keys too, then there's a separate method [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) that returns an array of only symbolic keys. Also, there exist a method [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys.
+Thông thường đó là thuận tiện. Nhưng nếu chúng ta cũng muốn có các khóa tượng trưng, thì có một phương thức riêng [Object.getOwnPropertySymbols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols) trả về một array chỉ các khóa tượng trưng. Ngoài ra, tồn tại một phương thức [Reflect.ownKeys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) trả về các khóa *tất cả*.
 ```
 
 
-## Transforming objects
+## Chuyển đổi đối tượng
 
-Objects lack many methods that exist for arrays, e.g. `map`, `filter` and others.
+Các đối tượng thiếu nhiều phương thức tồn tại cho array, ví dụ: `map`, `filter` và những thứ khác.
 
-If we'd like to apply them, then we can use `Object.entries` followed by `Object.fromEntries`:
+Nếu chúng ta muốn áp dụng chúng, thì chúng ta có thể sử dụng `Object.entries` theo sau là `Object.fromEntries`:
 
-1. Use `Object.entries(obj)` to get an array of key/value pairs from `obj`.
-2. Use array methods on that array, e.g. `map`.
-3. Use `Object.fromEntries(array)` on the resulting array to turn it back into an object.
+1. Sử dụng `Object.entries(obj)` để lấy một array các cặp khóa/giá trị từ `obj`.
+2. Sử dụng các phương thức array trên array đó, ví dụ: `map`, để chuyển đổi các cặp khóa/giá trị này.
+3. Sử dụng `Object.fromEntries(array)` trên array kết quả để biến nó trở lại thành một đối tượng.
 
-For example, we have an object with prices, and would like to double them:
+Ví dụ: chúng ta có một đối tượng có giá và muốn nhân đôi chúng:
 
 ```js run
 let prices = {
@@ -91,12 +91,13 @@ let prices = {
 
 *!*
 let doublePrices = Object.fromEntries(
-  // convert to array, map, and then fromEntries gives back the object
-  Object.entries(prices).map(([key, value]) => [key, value * 2])
+  // chuyển đổi prices thành array, map từng cặp khóa/giá trị thành một cặp khác
+  // và sau đó fromEntries trả lại đối tượng
+  Object.entries(prices).map(entry => [entry[0], entry[1] * 2])
 );
 */!*
 
 alert(doublePrices.meat); // 8
 ```   
 
-It may look difficult from the first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way. 
+Thoạt nhìn có vẻ khó, nhưng sẽ trở nên dễ hiểu sau khi bạn sử dụng một hoặc hai lần. Chúng ta có thể tạo ra những chuỗi biến đổi mạnh mẽ theo cách này.
