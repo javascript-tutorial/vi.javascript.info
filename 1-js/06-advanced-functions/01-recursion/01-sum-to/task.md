@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sum all numbers till the given one
+# Tính tổng tất cả các số cho đến một số đã cho
 
-Write a function `sumTo(n)` that calculates the sum of numbers `1 + 2 + ... + n`.
+Viết hàm `sumTo(n)` để tính tổng các số `1 + 2 + ... + n`.
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 sumTo(1) = 1
@@ -17,20 +17,20 @@ sumTo(4) = 4 + 3 + 2 + 1 = 10
 sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
 ```
 
-Make 3 solution variants:
+Thực hiện 3 biến thể giải pháp:
 
-1. Using a for loop.
-2. Using a recursion, cause `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
-3. Using the [arithmetic progression](https://en.wikipedia.org/wiki/Arithmetic_progression) formula.
+1. Sử dụng vòng lặp for.
+2. Sử dụng đệ quy, gây ra `sumTo(n) = n + sumTo(n-1)` cho `n > 1`.
+3. Sử dụng công thức [cấp số cộng](https://vi.wikipedia.org/wiki/C%E1%BA%A5p_s%E1%BB%91_c%E1%BB%99ng).
 
-An example of the result:
+Một ví dụ về kết quả:
 
 ```js
-function sumTo(n) { /*... your code ... */ }
+function sumTo(n) { /*... mã của bạn ... */ }
 
 alert( sumTo(100) ); // 5050
 ```
 
-P.S. Which solution variant is the fastest? The slowest? Why?
+Tái bút: Biến thể giải pháp nào là nhanh nhất? Chậm nhất? Tại sao?
 
-P.P.S. Can we use recursion to count `sumTo(100000)`? 
+Tái bút nữa: Chúng ta có thể sử dụng đệ quy để đếm `sumTo(100000)` không?

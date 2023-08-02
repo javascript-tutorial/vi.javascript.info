@@ -1,6 +1,6 @@
-# Loop-based solution
+# Giải pháp dựa trên vòng lặp
 
-The loop-based variant of the solution:
+Biến thể dựa trên vòng lặp của giải pháp:
 
 ```js run
 let list = {
@@ -30,7 +30,7 @@ function printList(list) {
 printList(list);
 ```
 
-Please note that we use a temporary variable `tmp` to walk over the list. Technically, we could use a function parameter `list` instead:
+Hãy lưu ý rằng chúng ta sử dụng một biến tạm thời `tmp` để duyệt qua danh sách. Về mặt kỹ thuật, chúng ta có thể sử dụng tham số chức năng `list` để thay thế:
 
 ```js
 function printList(list) {
@@ -43,15 +43,15 @@ function printList(list) {
 }
 ```
 
-...But that would be unwise. In the future we may need to extend a function, do something else with the list. If we change `list`, then we lose such ability.
+...Nhưng đó sẽ là không khôn ngoan. Trong tương lai, chúng ta có thể cần mở rộng một hàm, làm điều gì đó khác với danh sách. Nếu chúng ta thay đổi `list`, thì chúng ta sẽ mất khả năng đó.
 
-Talking about good variable names, `list` here is the list itself. The first element of it. And it should remain like that. That's clear and reliable.
+Nói về tên biến tốt, `list` ở đây chính là danh sách. Yếu tố đầu tiên của nó. Và nó nên giữ nguyên như vậy. Điều đó rõ ràng và đáng tin cậy.
 
-From the other side, the role of `tmp` is exclusively a list traversal, like `i` in the `for` loop.
+Mặt khác, vai trò của `tmp` chỉ là duyệt danh sách, giống như `i` trong vòng lặp `for`.
 
-# Recursive solution
+# Giải pháp đệ quy
 
-The recursive variant of `printList(list)` follows a simple logic: to output a list we should output the current element `list`, then do the same for `list.next`:
+Biến thể đệ quy của `printList(list)` tuân theo logic đơn giản: để xuất danh sách, chúng ta nên xuất phần tử hiện tại `list`, sau đó thực hiện tương tự cho `list.next`:
 
 ```js run
 let list = {
@@ -70,10 +70,10 @@ let list = {
 
 function printList(list) {
 
-  alert(list.value); // output the current item
+  alert(list.value); // xuất mục hiện tại
 
   if (list.next) {
-    printList(list.next); // do the same for the rest of the list
+    printList(list.next); // làm tương tự cho phần còn lại của danh sách
   }
 
 }
@@ -81,8 +81,8 @@ function printList(list) {
 printList(list);
 ```
 
-Now what's better?
+Bây giờ cái nào tốt hơn?
 
-Technically, the loop is more effective. These two variants do the same, but the loop does not spend resources for nested function calls.
+Về mặt kỹ thuật, vòng lặp hiệu quả hơn. Hai biến thể này thực hiện tương tự, nhưng vòng lặp không dành tài nguyên cho các lệnh gọi hàm lồng nhau.
 
-From the other side, the recursive variant is shorter and sometimes easier to understand.
+Mặt khác, biến thể đệ quy ngắn hơn và đôi khi dễ hiểu hơn.

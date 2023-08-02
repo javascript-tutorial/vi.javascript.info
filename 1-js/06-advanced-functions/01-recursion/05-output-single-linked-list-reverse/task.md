@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output a single-linked list in the reverse order
+# Xuất danh sách liên kết đơn theo thứ tự ngược lại
 
-Output a single-linked list from the previous task <info:task/output-single-linked-list> in the reverse order.
+Xuất danh sách liên kết đơn từ tác vụ trước đó <info:task/output-single-linked-list> theo thứ tự ngược lại.
 
-Make two solutions: using a loop and using a recursion.
+Thực hiện hai giải pháp: sử dụng vòng lặp và sử dụng đệ quy.

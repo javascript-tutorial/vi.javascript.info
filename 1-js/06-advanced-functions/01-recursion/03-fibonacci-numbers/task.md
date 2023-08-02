@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Fibonacci numbers
+# Dãy Fibonacci
 
-The sequence of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) has the formula <code>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></code>. In other words, the next number is a sum of the two preceding ones.
+Dãy [số Fibonacci](https://vi.wikipedia.org/wiki/D%C3%A3y_Fibonacci) có công thức <code>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></code>. Nói cách khác, số tiếp theo là tổng của hai số trước.
 
-First two numbers are `1`, then `2(1+1)`, then `3(1+2)`, `5(2+3)` and so on: `1, 1, 2, 3, 5, 8, 13, 21...`.
+Hai số đầu tiên là `1`, sau đó là `2(1+1)`, sau đó là `3(1+2)`, `5(2+3)`, v.v.: `1, 1, 2, 3, 5 , 8, 13, 21...`.
 
-Fibonacci numbers are related to the [Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio) and many natural phenomena around us.
+Các số Fibonacci có liên quan đến [Tỷ lệ vàng](https://vi.wikipedia.org/wiki/T%E1%BB%B7_l%E1%BB%87_v%C3%A0ng) và nhiều hiện tượng tự nhiên xung quanh chúng ta.
 
-Write a function `fib(n)` that returns the `n-th` Fibonacci number.
+Viết hàm `fib(n)` trả về số Fibonacci thứ n-th`.
 
-An example of work:
+Một ví dụ về công việc:
 
 ```js
-function fib(n) { /* your code */ }
+function fib(n) { /* mã của bạn */ }
 
 alert(fib(3)); // 2
 alert(fib(7)); // 13
 alert(fib(77)); // 5527939700884757
 ```
 
-P.S. The function should be fast. The call to `fib(77)` should take no more than a fraction of a second.
+Tái bút: Các hàm nên được nhanh chóng. Lệnh gọi `fib(77)` sẽ mất không quá một phần giây.
