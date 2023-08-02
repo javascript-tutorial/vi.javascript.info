@@ -2,13 +2,13 @@ importance: 2
 
 ---
 
-# A random number from min to max
+# Một số ngẫu nhiên từ tối thiểu đến tối đa
 
-The built-in function `Math.random()` creates a random value from `0` to `1` (not including `1`).
+Hàm tích hợp `Math.random()` tạo một giá trị ngẫu nhiên từ `0` đến `1` (không bao gồm `1`).
 
-Write the function `random(min, max)` to generate a random floating-point number from `min` to `max` (not including `max`).
+Viết hàm `random(min, max)` để tạo một số dấu phẩy động ngẫu nhiên từ `min` đến `max` (không bao gồm `max`).
 
-Examples of its work:
+Ví dụ về công việc của nó:
 
 ```js
 alert( random(1, 5) ); // 1.2345623452

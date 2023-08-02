@@ -1,33 +1,33 @@
-Internally the decimal fraction `6.35` is an endless binary. As always in such cases, it is stored with a precision loss.
+Bên trong, phân số thập phân `6,35` là một số nhị phân vô tận. Như mọi khi trong những trường hợp như vậy, nó được lưu trữ với độ chính xác bị mất.
 
-Let's see:
+Hãy xem nào:
 
 ```js run
 alert( 6.35.toFixed(20) ); // 6.34999999999999964473
 ```
 
-The precision loss can cause both increase and decrease of a number. In this particular case the number becomes a tiny bit less, that's why it rounded down.
+Mất độ chính xác có thể gây ra cả tăng và giảm số. Trong trường hợp cụ thể này, con số trở nên nhỏ hơn một chút, đó là lý do tại sao nó được làm tròn xuống.
 
-And what's for `1.35`?
+Và `1,35` là gì?
 
 ```js run
 alert( 1.35.toFixed(20) ); // 1.35000000000000008882
 ```
 
-Here the precision loss made the number a little bit greater, so it rounded up.
+Ở đây, độ chính xác bị mất khiến con số lớn hơn một chút, vì vậy nó được làm tròn lên.
 
-**How can we fix the problem with `6.35` if we want it to be rounded the right way?**
+**Làm cách nào để chúng ta có thể khắc phục sự cố với `6.35` nếu chúng ta muốn nó được làm tròn đúng cách?**
 
-We should bring it closer to an integer prior to rounding:
+Chúng ta nên đưa nó đến gần một số nguyên hơn trước khi làm tròn:
 
 ```js run
 alert( (6.35 * 10).toFixed(20) ); // 63.50000000000000000000
 ```
 
-Note that `63.5` has no precision loss at all. That's because the decimal part `0.5` is actually `1/2`. Fractions divided by powers of `2` are exactly represented in the binary system, now we can round it:
+Lưu ý rằng `63,5` hoàn toàn không mất độ chính xác. Đó là vì phần thập phân `0,5` thực ra là `1/2`. Các phân số chia cho lũy thừa của `2` được biểu diễn chính xác trong hệ thống nhị phân, bây giờ chúng ta có thể làm tròn nó:
 
 
 ```js run
-alert( Math.round(6.35 * 10) / 10); // 6.35 -> 63.5 -> 64(rounded) -> 6.4
+alert( Math.round(6.35 * 10) / 10 ); // 6.35 -> 63.5 -> 64(làm tròn) -> 6.4
 ```
 
