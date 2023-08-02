@@ -1,10 +1,10 @@
 function camelize(str) {
   return str
-    .split('-') // splits 'my-long-word' into array ['my', 'long', 'word']
+    .split('-') // tách 'my-long-word' thành array ['my', 'long', 'word']
     .map(
-      // capitalizes first letters of all array items except the first one
-      // converts ['my', 'long', 'word'] into ['my', 'Long', 'Word']
+      // viết hoa các chữ cái đầu tiên của tất cả các phần tử array ngoại trừ phần tử đầu tiên
+       // chuyển ['my', 'long', 'word'] thành ['my', 'Long', 'Word']
       (word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1)
     )
-    .join(''); // joins ['my', 'Long', 'Word'] into 'myLongWord'
+    .join(''); // nối ['my', 'Long', 'Word'] thành 'myLongWord'
 }

@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Translate border-left-width to borderLeftWidth
+# Dịch border-left-width sang borderLeftWidth
 
-Write the function `camelize(str)` that changes dash-separated words like "my-short-string" into camel-cased "myShortString".
+Viết hàm `camelize(str)` để thay đổi các từ được phân tách bằng dấu gạch ngang như "my-short-string" thành "myShortString" có viết hoa.
 
-That is: removes all dashes, each word after dash becomes uppercased.
+Đó là: loại bỏ tất cả các dấu gạch ngang, mỗi từ sau dấu gạch ngang sẽ được viết hoa.
 
-Examples:
+Ví dụ:
 
 ```js
 camelize("background-color") == 'backgroundColor';
@@ -16,4 +16,4 @@ camelize("list-style-image") == 'listStyleImage';
 camelize("-webkit-transition") == 'WebkitTransition';
 ```
 
-P.S. Hint: use `split` to split the string into an array, transform it and `join` back.
+Tái bút: Gợi ý: sử dụng `split` để chia chuỗi thành một array, biến đổi nó và `join` trở lại.

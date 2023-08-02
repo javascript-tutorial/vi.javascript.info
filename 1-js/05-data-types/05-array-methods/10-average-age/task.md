@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Get average age
+# Lấy tuổi trung bình
 
-Write the function `getAverageAge(users)` that gets an array of objects with property `age` and returns the average age.
+Viết hàm `getAverageAge(users)` để lấy một array các đối tượng có thuộc tính `age` và trả về tuổi trung bình.
 
-The formula for the average is `(age1 + age2 + ... + ageN) / N`.
+Công thức tính trung bình là `(age1 + age2 + ... + ageN) / N`.
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let john = { name: "John", age: 25 };

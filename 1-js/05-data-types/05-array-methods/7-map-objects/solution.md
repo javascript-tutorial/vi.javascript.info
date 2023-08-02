@@ -25,9 +25,9 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // John Smith
 ```
 
-Please note that in the arrow functions we need to use additional brackets. 
+Hãy lưu ý rằng trong các arrow function, chúng ta cần sử dụng các dấu ngoặc bổ sung.
 
-We can't write like this:
+Chúng ta không thể viết như thế này:
 ```js
 let usersMapped = users.map(user => *!*{*/!*
   fullName: `${user.name} ${user.surname}`,
@@ -35,9 +35,9 @@ let usersMapped = users.map(user => *!*{*/!*
 });
 ```
 
-As we remember, there are two arrow functions: without body `value => expr` and with body `value => {...}`.
+Như chúng ta đã nhớ, có hai arrow function: không có phần thân `value => expr` và có phần thân `value => {...}`.
 
-Here JavaScript would treat `{` as the start of function body, not the start of the object. The workaround is to wrap them in the "normal" brackets:
+Ở đây, JavaScript sẽ coi `{` là phần bắt đầu của thân hàm, không phải phần đầu của đối tượng. Cách giải quyết là bọc chúng trong dấu ngoặc "bình thường":
 
 ```js
 let usersMapped = users.map(user => *!*({*/!*
@@ -46,6 +46,4 @@ let usersMapped = users.map(user => *!*({*/!*
 }));
 ```
 
-Now fine.
-
-
+Bây giờ thì ổn.
