@@ -1,6 +1,6 @@
-**Answer: an error.**
+**Trả lời: có lỗi.**
 
-Try it:
+Hãy thử nó:
 ```js run
 function makeUser() {
   return {
@@ -14,26 +14,26 @@ let user = makeUser();
 alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 ```
 
-That's because rules that set `this` do not look at object definition. Only the moment of call matters.
+Đó là bởi vì các quy tắc đặt `this` không nhìn vào định nghĩa đối tượng. Chỉ có thời điểm sử dụng mới là quan trọng.
 
-Here the value of `this` inside `makeUser()` is `undefined`, because it is called as a function, not as a method with "dot" syntax.
+Ở đây, giá trị của `this` bên trong `makeUser()` là `undefined`, bởi vì nó được gọi dưới dạng một hàm, không phải dưới dạng một phương thức có cú pháp "dấu chấm".
 
-The value of `this` is one for the whole function, code blocks and object literals do not affect it.
+Giá trị của `this` là một cho toàn bộ hàm, các khối mã và các object literal không ảnh hưởng đến giá trị đó.
 
-So `ref: this` actually takes current `this` of the function.
+Vì vậy, `ref: this` thực sự lấy `this` hiện tại của hàm.
 
-We can rewrite the function and return the same `this` with `undefined` value: 
+Chúng ta có thể viết lại hàm và trả về cùng giá trị `this` với giá trị `undefined`:
 
 ```js run
 function makeUser(){
-  return this; // this time there's no object literal
+  return this; // lần này không có đối tượng theo nghĩa đen
 }
 
 alert( makeUser().name ); // Error: Cannot read property 'name' of undefined
 ```
-As you can see the result of `alert( makeUser().name )` is the same as the result of `alert( user.ref.name )` from the previous example.
+Như bạn có thể thấy kết quả của `alert( makeUser().name )` giống với kết quả của `alert( user.ref.name )` trong ví dụ trước.
 
-Here's the opposite case:
+Đây là trường hợp ngược lại:
 
 ```js run
 function makeUser() {
@@ -52,4 +52,4 @@ let user = makeUser();
 alert( user.ref().name ); // John
 ```
 
-Now it works, because `user.ref()` is a method. And the value of `this` is set to the object before dot `.`.
+Bây giờ nó hoạt động, bởi vì `user.ref()` là một phương thức. Và giá trị của `this` được đặt cho đối tượng trước dấu chấm `.`.

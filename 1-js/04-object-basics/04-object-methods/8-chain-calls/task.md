@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Chaining
+# Kết nối
 
-There's a `ladder` object that allows to go up and down:
+Có một đối tượng `ladder` cho phép đi lên và đi xuống:
 
 ```js
 let ladder = {
@@ -15,25 +15,27 @@ let ladder = {
   down() { 
     this.step--;
   },
-  showStep: function() { // shows the current step
+  showStep: function() { // hiển thị bước hiện tại
     alert( this.step );
   }
 };
 ```
 
-Now, if we need to make several calls in sequence, can do it like this:
+Bây giờ, nếu chúng ta cần thực hiện một số cuộc gọi theo trình tự, có thể thực hiện như sau:
 
 ```js
 ladder.up();
 ladder.up();
 ladder.down();
 ladder.showStep(); // 1
+ladder.down();
+ladder.showStep(); // 0
 ```
 
-Modify the code of `up`, `down` and `showStep` to make the calls chainable, like this:
+Sửa đổi mã của `up`, `down` và `showStep` để thực hiện các cuộc gọi có thể kết nối được, như thế này:
 
 ```js
-ladder.up().up().down().showStep(); // 1
+ladder.up().up().down().showStep().down().showStep(); // hiện 1 rồi 0
 ```
 
-Such approach is widely used across JavaScript libraries.
+Cách tiếp cận như vậy được sử dụng rộng rãi trên các thư viện JavaScript.
