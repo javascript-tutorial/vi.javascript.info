@@ -2,8 +2,8 @@
 let eventMixin = {
 
   /**
-   * Subscribe to event, usage:
-   *  menu.on('select', function(item) { ... }
+   * Theo dõi sự kiện, cách sử dụng:
+   *  menu.on('lựa chọn', function(item) { ... }
   */
   on(eventName, handler) {
     if (!this._eventHandlers) this._eventHandlers = {};
@@ -14,8 +14,8 @@ let eventMixin = {
   },
 
   /**
-   * Cancel the subscription, usage:
-   *  menu.off('select', handler)
+   * Hủy theo dõi, sử dụng:
+   *  menu.off('lựa chọn', handler)
    */
   off(eventName, handler) {
     let handlers = this._eventHandlers?.[eventName];
@@ -28,15 +28,15 @@ let eventMixin = {
   },
 
   /**
-   * Generate the event and attach the data to it
-   *  this.trigger('select', data1, data2);
+   * Tạo sự kiện và đính kèm dữ liệu vào nó 
+   *  this.trigger('lựa chọn', data1, data2);
    */
   trigger(eventName, ...args) {
     if (!this._eventHandlers || !this._eventHandlers[eventName]) {
-      return; // no handlers for that event name
+      return; // không có trình xử lý nào cho tên sự kiện đó
     }
 
-    // call the handlers
+    // gọi trình xử lý
     this._eventHandlers[eventName].forEach(handler => handler.apply(this, args));
   }
 };
