@@ -1,11 +1,9 @@
+# Re-resolve một promise?
 
-# Re-resolve a promise?
-
-
-What's the output of the code below? 
+Đoạn code dưới đây sẽ in ra gì?
 
 ```js
-let promise = new Promise(function(resolve, reject) {
+let promise = new Promise(function (resolve, reject) {
   resolve(1);
 
   setTimeout(() => resolve(2), 1000);

@@ -1,92 +1,93 @@
 # Promise
 
-Imagine that you're a top singer, and fans ask day and night for your upcoming song.
+Tưởng tượng rằng bạn là một ca sĩ hàng đầu, từ sáng đến tối bạn liên tục nhận được câu hỏi khi nào sẽ phát hành bài hát mới từ những người hâm mộ.
 
-To get some relief, you promise to send it to them when it's published. You give your fans a list. They can fill in their email addresses, so that when the song becomes available, all subscribed parties instantly receive it. And even if something goes very wrong, say, a fire in the studio, so that you can't publish the song, they will still be notified.
+Để giải thoát cho mình, bạn hứa sẽ gửi bài hát ngay khi phát hành tới họ. Bạn đưa cho những người hâm mộ một danh sách đăng ký. Trong danh sách này, người hâm mộ có thể điền vào thông tin địa chỉ hòm thư điện tử để nhận được thông báo ngay khi bài hát được phát hành. Thông báo này sẽ bao gồm cả những trường hợp xấu nhất, ví dụ như một vụ cháy tại phòng thu, khiến cho bạn không thể phát hành bài hát, họ vẫn sẽ được thông báo.
 
-Everyone is happy: you, because the people don't crowd you anymore, and fans, because they won't miss the song.
+Tất cả mọi người đều cảm thấy hạnh phúc: bản thân bạn, không còn người làm phiền, những người hâm mộ thì không bỏ lỡ bài hát mới.
 
-This is a real-life analogy for things we often have in programming:
+Đây là một ví dụ thực tế cho những điều chúng ta thường gặp trong lập trình:
 
-1. A "producing code" that does something and takes time. For instance, some code that loads the data over a network. That's a "singer".
-2. A "consuming code" that wants the result of the "producing code" once it's ready. Many functions  may need that result. These are the "fans".
-3. A *promise* is a special JavaScript object that links the "producing code" and the "consuming code" together. In terms of our analogy: this is the "subscription list". The "producing code" takes whatever time it needs to produce the promised result, and the "promise" makes that result available to all of the subscribed code when it's ready.
+1. Một đoạn "producing code" (mã sản xuất) cần một khoảng thời gian để thực hiện công việc. Ví dụ, một số đoạn mã cần phải tải dữ liệu qua mạng. Đây là "ca sĩ".
+2. Một đoạn mã "consuming code" (mã tiêu thụ) sử dụng kết quả của "producing code" khi nó đã sãn sàng. Có rất nhiều hàm có thể cần tới kết quả, các hàm này chính là "người hâm mộ".
+3. Một _promise_ là một đối tượng đặc biệt (Object) trong JavaScript kết nối giữa "producing code" và "consuming code". Trong ngữ cảnh của ví dụ trên: đây chính là "danh sách đăng ký". "Producing code" cần một khoảng thời để tạo ra kết quả cần thiết, và "promise" làm cho kết quả đó sẵn sàng cho tất cả các mã tiêu thụ khi nó đã sẵn sàng.
 
-The analogy isn't terribly accurate, because JavaScript promises are more complex than a simple subscription list: they have additional features and limitations. But it's fine to begin with.
+Sự so sánh này không chính xác lắm, vì promise trong JavaScript phức tạp hơn một danh sách đăng ký đơn giản: chúng có những tính năng và hạn chế bổ sung. Nhưng đó là một bắt đầu tốt.
 
-The constructor syntax for a promise object is:
+Cấu trúc constructor cho một đối tượng promise là:
 
 ```js
-let promise = new Promise(function(resolve, reject) {
-  // executor (the producing code, "singer")
+let promise = new Promise(function (resolve, reject) {
+  // Thực hiện (mã sản xuất , "singer")
 });
 ```
 
-The function passed to `new Promise` is called the *executor*. When `new Promise` is created, the executor runs automatically. It contains the producing code which should eventually produce the result. In terms of the analogy above: the executor is the "singer".
+Hàm được truyền vào `new Promise` được gọi là _executor_ (hàm thực thi). Khi `new Promise` được tạo, executor chạy tự động. Nó chứa mã sản xuất mà cuối cùng sẽ tạo ra kết quả. Trong ngữ cảnh của ví dụ trên: executor chính là "ca sĩ".
 
-Its arguments `resolve` and `reject` are callbacks provided by JavaScript itself. Our code is only inside the executor.
+Nó nhận tham số là 2 hàm `resolve` và `reject` được cung cấp bởi JavaScript. Mã của chúng ta chỉ nằm trong executor.
 
-When the executor obtains the result, be it soon or late, doesn't matter, it should call one of these callbacks:
+Khi mà executor nhận được kết quả, dù sớm hay muộn, điều này không quan trọng, nó sẽ gọi một trong hai hàm callback:
 
-- `resolve(value)` — if the job finished successfully, with result `value`.
-- `reject(error)` — if an error occurred, `error` is the error object.
+- `resolve(value)` — nếu công việc đã hoàn thành thành công, sẽ trả về kết quả `value`.
+- `reject(error)` - nếu có lỗi xảy ra, sẽ trả về kết quả đối tượng lỗi `error`.
 
-So to summarize: the executor runs automatically and attempts to perform a job. When it is finished with the attempt it calls `resolve` if it was successful or `reject` if there was an error.
+Tóm lại, executor chạy tự động và cố gắng thực hiện công việc. Khi nó hoàn thành công việc, nó gọi `resolve` nếu thành công hoặc `reject` nếu có lỗi.
 
-The `promise` object returned by the `new Promise` constructor has these internal properties:
+Một đối tượng `promise` được trả về bởi constructor `new Promise` có những thuộc tính nội bộ sau:
 
-- `state` — initially `"pending"`, then changes to either `"fulfilled"` when `resolve` is called or `"rejected"` when `reject` is called.
-- `result` — initially `undefined`, then changes to `value` when `resolve(value)` called or `error` when `reject(error)` is called.
+- `state` — khởi tạo là `"pending"`, sau đó chuyển sang `"fulfilled"` khi `resolve` được gọi hoặc `"rejected"` khi `reject` được gọi.
+- `result` (kết quả) - ban đầu là `undefined`, sau đó thay đổi thành `value` khi `resolve(value)` được gọi hoặc `error` khi `reject(error)` được gọi.
 
-So the executor eventually moves `promise` to one of these states:
+Vậy executor cuối cùng sẽ chuyển `promise` sang một trong hai trạng thái:
 
 ![](promise-resolve-reject.svg)
 
-Later we'll see how "fans" can subscribe to these changes.
+Sau đó chúng ta sẽ hiểu cách "người hâm mộ" có thể đăng ký những thay đổi này.
 
-Here's an example of a promise constructor and a simple executor function with  "producing code" that takes time (via `setTimeout`):
+Sau đây là 1 ví dụ của một constructor của promise và một hàm executor đơn giản với "producing code" cần khoảng thời gian để thực thi (thông qua `setTimeout`):
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  // the function is executed automatically when the promise is constructed
+  // Hàm được tự động thực thi khi promise được tạo
 
-  // after 1 second signal that the job is done with the result "done"
+  // Sau 1 giây thông báo rằng công việc đã hoàn thành với kết quả "done"
   setTimeout(() => *!*resolve("done")*/!*, 1000);
 });
 ```
 
-We can see two things by running the code above:
+Chúng ta có thể thấy hai điều khi chạy mã trên:
 
-1. The executor is called automatically and immediately (by `new Promise`).
-2. The executor receives two arguments: `resolve` and `reject`. These functions are pre-defined by the JavaScript engine, so we don't need to create them. We should only call one of them when ready.
+1. Executor được tự động gọi ngay lập tức (bởi `new Promise`).
+2. Executor nhận hai tham số: `resolve` và `reject`. Hai hàm này được định nghĩa sẵn bởi JavaScript, nên chúng ta không cần phải tạo chúng. Chúng ta chỉ cần gọi một trong hai khi đã sẵn sàng.
 
-    After one second of "processing" the executor calls `resolve("done")` to produce the result. This changes the state of the `promise` object:
+   Sau một giây "xử lý" executor gọi `resolve("done")` để tạo ra kết quả. Điều này thay đổi trạng thái của đối tượng của `promise`:
 
-    ![](promise-resolve-1.svg)
+   ![](promise-resolve-1.svg)
 
-That was an example of a successful job completion, a "fulfilled promise".
+Đây là một ví dụ về việc hoàn thành công việc thành công, một "fulfilled promise".
 
-And now an example of the executor rejecting the promise with an error:
+Và sau đây là một ví dụ về việc executor từ chối promise với một lỗi:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
-  // after 1 second signal that the job is finished with an error
+  // Sau 1 giây thông báo rằng công việc đã hoàn thành với lỗi "Whoops!"
   setTimeout(() => *!*reject(new Error("Whoops!"))*/!*, 1000);
 });
 ```
 
-The call to `reject(...)` moves the promise object to `"rejected"` state:
+Cuộc gọi `reject(...)` chuyể đối tượng promise sang trạng thái `"rejected"`:
 
 ![](promise-reject-1.svg)
 
-To summarize, the executor should perform a job (usually something that takes time) and then call `resolve` or `reject` to change the state of the corresponding promise object.
+Tóm lại, executor nên thực hiện một công việc (thường là một công việc mất thời gian) và sau đó gọi `resolve` hoặc `reject` để thay đổi trạng thái của đối tượng promise tương ứng.
 
-A promise that is either resolved or rejected is called "settled", as opposed to an initially "pending" promise.
+Một promise có thể ở một trong hai trạng thái: resolved hoặc rejected hay được gọi là "settled", như đối lại với trạng thái ban đầu "pending".
 
-````smart header="There can be only a single result or an error"
-The executor should call only one `resolve` or one `reject`. Any state change is final.
+````smart header="Tại đây chỉ có thể là một kết quả hoặc một lỗi"
+Executor chỉ nên gọi một trong hai hàm `resolve` hoặc `reject`. Bất kỳ thay đổi trạng thái nào đều là cuối cùng.
 
-All further calls of `resolve` and `reject` are ignored:
+Tất cả các cuộc gọi `resolve` và `reject` sau đó sẽ bị bỏ qua:
+
 
 ```js
 let promise = new Promise(function(resolve, reject) {
@@ -98,91 +99,91 @@ let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve("…")); // ignored
 });
 ```
+Ý tưởng là công việc được thực hiện bởi executor chỉ có thể có một kết quả hoặc một lỗi.
 
-The idea is that a job done by the executor may have only one result or an error.
-
-Also, `resolve`/`reject` expect only one argument (or none) and will ignore additional arguments.
+Đồng thời, `resolve`/`reject` chỉ chấp nhận một đối số (hoặc không) và sẽ bỏ qua thêm các đối số.
 ````
 
-```smart header="Reject with `Error` objects"
-In case something goes wrong, the executor should call `reject`. That can be done with any type of argument (just like `resolve`). But it is recommended to use `Error` objects (or objects that inherit from `Error`). The reasoning for that will soon become apparent.
-```
+```smart header="Từ chối với đối tượng `Error`"
+Trong trường hợp có lỗi sai, executor nên gọi `reject`. Điều này có thể được thực hiện với bất kỳ loại đối số nào (giống như `resolve`). Nhưng nó chỉ nên được khuyến khích sử dụng đối tượng `Error`(hoặc đối tượng kế thừa từ`Error`). Lý do cho điều này sẽ sớm trở nên rõ ràng.
 
-````smart header="Immediately calling `resolve`/`reject`"
-In practice, an executor usually does something asynchronously and calls `resolve`/`reject` after some time, but it doesn't have to. We also can call `resolve` or `reject` immediately, like this:
+`````
+
+````smart header="Gọi ngay lập tức `resolve`/`reject`"
+Trong thực tế, một executor thường thực hiện một công việc bất đồng bộ và gọi `resolve`/`reject` sau một khoảng thời gian, nhưng không nhất thiết phải làm như vậy. Chúng ta cũng có thể gọi `resolve` hoặc `reject` ngay lập tức, như sau:
+
 
 ```js
-let promise = new Promise(function(resolve, reject) {
-  // not taking our time to do the job
-  resolve(123); // immediately give the result: 123
+let promise = new Promise(function (resolve, reject) {
+  // Không cần thời gian để làm công việc này
+  resolve(123); // Ngay lập tức đưa ra kết quả: 123
 });
-```
+`````
 
-For instance, this might happen when we start to do a job but then see that everything has already been completed and cached.
+Điều này có thể xảy ra khi chúng ta bắt đầu thực hiện một công việc nhưng sau đó thấy rằng mọi thứ đã được hoàn thành và được lưu vào bộ nhớ cache.
 
-That's fine. We immediately have a resolved promise.
+Đây là điều tốt. Chúng ta ngay lập tức có một promise đã được giải quyết (resolved promise).
+
+`````
+
+```smart header="The `state` và `result` là  nội bộ"
+Các thuộc tính `state` và `result` của đối tượng Promise là nội bộ. Chúng ta không thể truy cập trực tiếp vào chúng. Chúng ta có thể sử dụng các phương thức `.then`/`.catch`/`.finally` để làm điều đó. Chúng được mô tả bên dưới.
+
 ````
 
-```smart header="The `state` and `result` are internal"
-The properties `state` and `result` of the Promise object are internal. We can't directly access them. We can use the methods `.then`/`.catch`/`.finally` for that. They are described below.
-```
+## Hàm xử lý tiếp theo (Consumers): then, catch, finally
 
-## Consumers: then, catch, finally
-
-A Promise object serves as a link between the executor (the "producing code" or "singer") and the consuming functions (the "fans"), which will receive the result or error. Consuming functions can be registered (subscribed) using methods `.then`, `.catch` and `.finally`.
+Một đối tượng Promise hoạt động như một liên kết giữa executor (mã sản xuất hoặc ca sĩ) và các hàm tiêu thụ (người hâm mộ), những hàm này sẽ nhận kết quả hoặc lỗi. Các hàm xử lý tiếp theo có thể đăng ký (theo dõi) bằng cách sử dụng các phương thức `.then`, `.catch` và `.finally`.
 
 ### then
+Điều quan trọng nhất, cơ bản nhất là `.then`.
 
-The most important, fundamental one is `.then`.
-
-The syntax is:
+Cú pháp là:
 
 ```js
 promise.then(
-  function(result) { *!*/* handle a successful result */*/!* },
-  function(error) { *!*/* handle an error */*/!* }
+  function(result) { *!*/* xử lý khi kết quả được trả về thành công */*/!* },
+  function(error) { *!*/* xử lý một lỗi */*/!* }
 );
-```
+````
+Tham số đầu tiên của `.then` là một hàm chạy khi promise được giải quyết, và nhận kết quả.
 
-The first argument of `.then` is a function that runs when the promise is resolved, and receives the result.
+Tham số thứ 2 của `.then` là một hàm chạy khi promise bị từ chối, và nhận lỗi.
 
-The second argument of `.then` is a function that runs when the promise is rejected, and receives the error.
-
-For instance, here's a reaction to a successfully resolved promise:
+Ví dụ, đây là một phản ứng với một promise được giải quyết thành công:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve("done!"), 1000);
 });
 
-// resolve runs the first function in .then
+// giải quyết chạy trong hàm đầu tiên tại .then
 promise.then(
 *!*
-  result => alert(result), // shows "done!" after 1 second
+  result => alert(result), // hiển thị kết quả "done!" sau 1 giây
 */!*
-  error => alert(error) // doesn't run
+  error => alert(error) // không chạy
 );
 ```
 
-The first function was executed.
+Hàm đầu tiên được thực thi.
 
-And in the case of a rejection, the second one:
+Và trong trường hợp bị từ chối, hàm thứ hai:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => reject(new Error("Whoops!")), 1000);
 });
 
-// reject runs the second function in .then
+// Từ chối chạy hàm thứ hai tại .then
 promise.then(
-  result => alert(result), // doesn't run
+  result => alert(result), // hiển thị không chạy
 *!*
-  error => alert(error) // shows "Error: Whoops!" after 1 second
+  error => alert(error) // hiển thị lỗi "Whoops!" sau 1 giây
 */!*
 );
 ```
-
-If we're interested only in successful completions, then we can provide only one function argument to `.then`:
+Nếu chúng ta chỉ quan tâm đến việc hoàn thành thành công, chúng ta chỉ cần cung cấp một hàm cho `.then`:
 
 ```js run
 let promise = new Promise(resolve => {
@@ -190,13 +191,13 @@ let promise = new Promise(resolve => {
 });
 
 *!*
-promise.then(alert); // shows "done!" after 1 second
+promise.then(alert); //  hiển thị kết quả "done!" sau 1 giây
 */!*
 ```
 
 ### catch
 
-If we're interested only in errors, then we can use `null` as the first argument: `.then(null, errorHandlingFunction)`. Or we can use `.catch(errorHandlingFunction)`, which is exactly the same:
+Nếu chúng ta chỉ qaun tâm tới lỗi, chúng ta có thể sử dụng `null` như tham số đầu tiên: `.then(null, errorHandlingFunction)`. Hoặc chúng ta có thể sử dụng `.catch(errorHandlingFunction)`, đó chính là cách viết ngắn gọn:
 
 
 ```js run
@@ -205,90 +206,87 @@ let promise = new Promise((resolve, reject) => {
 });
 
 *!*
-// .catch(f) is the same as promise.then(null, f)
-promise.catch(alert); // shows "Error: Whoops!" after 1 second
+// .catch(f) tương tự như promise.then(null, f)
+promise.catch(alert); // hiển thị lỗi "Whoops!" sau 1 giây
 */!*
 ```
-
-The call `.catch(f)` is a complete analog of `.then(null, f)`, it's just a shorthand.
+Gọi `.catch(f)` là một bản sao hoàn toàn của `.then(null, f)`, đó chỉ là một cách viết ngắn gọn.
 
 ### finally
 
-Just like there's a `finally` clause in a regular `try {...} catch {...}`, there's `finally` in promises.
+Giống như có một mệnh đề `finally` trong một `try {...} catch {...}` thông thường, cũng có `finally` trong promise.
 
-The call `.finally(f)` is similar to `.then(f, f)` in the sense that `f` always runs when the promise is settled: be it resolve or reject.
+Mệnh đề `.finally(f)` tương tự như `.then(f, f)` trong việc rằng `f` luôn chạy khi promise được giải quyết: có thể là giải quyết hoặc từ chối.
 
-`finally` is a good handler for performing cleanup, e.g. stopping our loading indicators, as they are not needed anymore, no matter what the outcome is.
+`finally` là một hàm xử lý tốt để thực hiện việc dọn dẹp, ví dụ như dừng các chỉ báo tải, vì chúng không cần nữa, không quan trọng kết quả là gì.
 
-Like this:
+Giống như sau:
 
 ```js
 new Promise((resolve, reject) => {
-  /* do something that takes time, and then call resolve/reject */
+  /* làm một công việc mất thời gian, sau đó gọi resolve/reject */
 })
 *!*
-  // runs when the promise is settled, doesn't matter successfully or not
+  // chạy khi promise được giải quyết, không quan trọng thành công hay thất bại
   .finally(() => stop loading indicator)
-  // so the loading indicator is always stopped before we process the result/error
+  // và sau đó tải chỉ bảo luôn là dừng trước khi chúng ta xử lý kết quả/lỗi
 */!*
   .then(result => show result, err => show error)
 ```
+Nói như vậy nhưng `finally(f)` không thực sự chính xác như là tên khác của `then(f,f)`. Có một số sự khác biệt tinh tế:
 
-That said, `finally(f)` isn't exactly an alias of `then(f,f)` though. There are few subtle differences:
+1. Một hàm `finally` không có đối số. Trong `finally` chúng ta không biết promise có thành công hay không. Điều này hoàn toàn đúng, vì công việc của chúng ta thường là thực hiện các thủ tục "tổng quát" cuối cùng.
+2. Một hàm `finally` chuyển kết quả và lỗi cho hàm xử lý tiếp theo.
 
-1. A `finally` handler has no arguments. In `finally` we don't know whether the promise is successful or not. That's all right, as our task is usually to perform "general" finalizing procedures.
-2. A `finally` handler passes through results and errors to the next handler.
+   Ví dụ, ở đây kết quả được chuyển qua `finally` tới `then`:
 
-    For instance, here the result is passed through `finally` to `then`:
-    ```js run
-    new Promise((resolve, reject) => {
-      setTimeout(() => resolve("result"), 2000)
-    })
-      .finally(() => alert("Promise ready"))
-      .then(result => alert(result)); // <-- .then handles the result
-    ```
+   ```js run
+   new Promise((resolve, reject) => {
+     setTimeout(() => resolve("result"), 2000);
+   })
+     .finally(() => alert("Promise ready"))
+     .then((result) => alert(result)); // <-- .then kiểm soát kết quả 'result'
+   ```
 
-    And here there's an error in the promise, passed through `finally` to `catch`:
+   Và ở đây có một lỗi trong promise, được chuyển qua `finally` tới `catch`:
 
-    ```js run
-    new Promise((resolve, reject) => {
-      throw new Error("error");
-    })
-      .finally(() => alert("Promise ready"))
-      .catch(err => alert(err));  // <-- .catch handles the error object
-    ```
+   ```js run
+   new Promise((resolve, reject) => {
+     throw new Error("error");
+   })
+     .finally(() => alert("Promise ready"))
+     .catch((err) => alert(err)); // <-- .catch xử lý đối tượng lỗi 'error'
+   ```
 
-That's very convenient, because `finally` is not meant to process a promise result. So it passes it through.
+Điều này thực sự tiện lợi, vì `finally` không được thiết kế để xử lý kết quả của promise. Vì vậy nó chuyển kết quả qua.
 
-We'll talk more about promise chaining and result-passing between handlers in the next chapter.
+Chúng ta sẽ nói thêm về chuỗi promise và chuyển kết quả giữa các hàm xử lý trong chương tiếp theo.
 
-
-````smart header="We can attach handlers to settled promises"
-If a promise is pending, `.then/catch/finally` handlers wait for it. Otherwise, if a promise has already settled, they just run:
+````smart header="Chúng ta có thể đính kèm các hàm xử lý vào promise đã giải quyết"
+Nếu một hàm promise bị pending, các hàm xử lý `.then/catch/finally` sẽ chờ đợi nó. Nếu một promise đã giải quyết, chúng sẽ chạy ngay lập tức:
 
 ```js run
-// the promise becomes resolved immediately upon creation
+// promise được giải quyết ngay lập tức khi được tạo
 let promise = new Promise(resolve => resolve("done!"));
 
-promise.then(alert); // done! (shows up right now)
+promise.then(alert); // Xong! (Hiển thị nói ngay lập tức)
 ```
 
-Note that this makes promises more powerful than the real life "subscription list" scenario. If the singer has already released their song and then a person signs up on the subscription list, they probably won't receive that song. Subscriptions in real life must be done prior to the event.
+Lưu ý rằng việc này sẽ giúp các hàm promises mạnh mẽ hơn so với trường hợp thực tế "danh sách đăng ký". Nếu ca sĩ đã phát hành bài hát của mình và sau đó một người đăng ký vào danh sách theo dõi, họ có thể không nhận được bài hát đó. Việc đăng ký trong thực tế phải được thực hiện trước sự kiện.
 
-Promises are more flexible. We can add handlers any time: if the result is already there, they just execute.
-````
+Promises thì linh hoạt hơn. Chúng ta có thể thêm các hàm xử lý bất cứ lúc nào: nếu kết quả đã có sẵn, chúng chỉ chạy.
+`````
 
 Next, let's see more practical examples of how promises can help us write asynchronous code.
 
-## Example: loadScript [#loadscript]
+## Ví dụ: loadScript [#loadscript]
 
-We've got the `loadScript` function for loading a script from the previous chapter.
-
-Here's the callback-based variant, just to remind us of it:
+Chúng ta đã có hàm `loadScript` để tải một script từ chương trước.
+Sau đây là phiên bản dựa trên callback, chỉ để nhắc nhở chúng ta:
 
 ```js
 function loadScript(src, callback) {
-  let script = document.createElement('script');
+  let script = document.createElement("script");
   script.src = src;
 
   script.onload = () => callback(null, script);
@@ -298,14 +296,14 @@ function loadScript(src, callback) {
 }
 ```
 
-Let's rewrite it using Promises.
+Cùng viết lại hàm này sử dụng Promise.
 
-The new function `loadScript` will not require a callback. Instead, it will create and return a Promise object that resolves when the loading is complete. The outer code can add handlers (subscribing functions) to it using `.then`:
+Hàm mới `loadScript` sẽ không yêu cầu một callback. Thay vào đó, nó sẽ tạo và trả về một đối tượng Promise mà giải quyết khi tải hoàn tất. Mã bên ngoài có thể thêm các xử lý (đăng ký hàm) vào nó bằng cách sử dụng `.then`:
 
 ```js run
 function loadScript(src) {
-  return new Promise(function(resolve, reject) {
-    let script = document.createElement('script');
+  return new Promise(function (resolve, reject) {
+    let script = document.createElement("script");
     script.src = src;
 
     script.onload = () => resolve(script);
@@ -316,25 +314,25 @@ function loadScript(src) {
 }
 ```
 
-Usage:
+Cách sử dụng:
 
 ```js run
-let promise = loadScript("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
-
-promise.then(
-  script => alert(`${script.src} is loaded!`),
-  error => alert(`Error: ${error.message}`)
+let promise = loadScript(
+  "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"
 );
 
-promise.then(script => alert('Another handler...'));
+promise.then(
+  (script) => alert(`${script.src} is loaded!`),
+  (error) => alert(`Error: ${error.message}`)
+);
+
+promise.then((script) => alert("Another handler..."));
 ```
 
-We can immediately see a few benefits over the callback-based pattern:
-
-
+Chúng ta có thể thấy ngày lập tức một vài lợi ích so với mẫu dựa trên callback:
 | Promises | Callbacks |
-|----------|-----------|
-| Promises allow us to do things in the natural order. First, we run `loadScript(script)`, and `.then` we write what to do with the result. | We must have a `callback` function at our disposal when calling `loadScript(script, callback)`. In other words, we must know what to do with the result *before* `loadScript` is called. |
-| We can call `.then` on a Promise as many times as we want. Each time, we're adding a new "fan", a new subscribing function, to the "subscription list". More about this in the next chapter: [](info:promise-chaining). | There can be only one callback. |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Các hàm Promise cho phép chúng ta thực hiện các công việc theo thứ tự tự nhiên. Đầu tiên, chúng ta chạy `loadScript(script)`, và `.then` chúng ta viết những gì cần làm với kết quả. | Chúng ta phải có một hàm `callback` sẵn sàng khi gọi `loadScript(script, callback)`. Nói cách khác, chúng ta phải biết phải làm gì với kết quả _trước khi_ gọi `loadScript`.| We must have a `callback` function at our disposal when calling `loadScript(script, callback)`. In other words, we must know what to do with the result _before_ `loadScript` is called.
+Chúng ta có thể gọi `.then` nhiều lần mà chúng ta muốn. Mỗi lần, chúng ta sẽ thêm một "người hâm mộ", một hàm theo dõi mới, vào danh sách "đăng ký". Thêm về điều này trong chương tiếp theo: [promise-chaining](info:promise-chaining). | Chỉ có thể có một callback.
 
-So promises give us better code flow and flexibility. But there's more. We'll see that in the next chapters.
+Như vậy, các promise giúp chúng ta viết mã dễ đọc hơn và dễ bảo trì hơn. Chúng ta sẽ thấy thêm về điều này trong các chương tiếp theo.

@@ -4,13 +4,13 @@ Hãy xem JavaScript có gì đặc biệt, chúng ta có thể đạt được g
 
 ## JavaScript là gì?
 
-*JavaScript* ban đầu được tạo ra để "làm cho các trang web trở nên sống động".
+_JavaScript_ ban đầu được tạo ra để "làm cho các trang web trở nên sống động".
 
-Các chương trình trong ngôn ngữ này được gọi là *kịch bản (scripts)*. Chúng có thể được viết ngay trong HTML của trang web và chạy khi tải trang.
+Các chương trình trong ngôn ngữ này được gọi là _kịch bản (scripts)_. Chúng có thể được viết ngay trong HTML của trang web và chạy khi tải trang.
 
 Các tập lệnh (scripts) được cung cấp và thực thi dưới dạng văn bản thuần túy. Chúng không cần chuẩn bị hay biên dịch để có thể chạy được.
 
-Ở khía cạnh này, JavaScript rất khác với ngôn ngữ lập trình có tên là [Java](https://vi.wikipedia.org/wiki/Java_(ng%C3%B4n_ng%E1%BB%AF_l%E1%BA%ADp_tr%C3%ACnh)).
+Ở khía cạnh này, JavaScript rất khác với ngôn ngữ lập trình có tên là [Java](<https://vi.wikipedia.org/wiki/Java_(ng%C3%B4n_ng%E1%BB%AF_l%E1%BA%ADp_tr%C3%ACnh)>).
 
 ```smart header="Vì sao nó được gọi là <u>Java</u>Script?"
 Khi Javascript được tạo ra, ban đầu nó có một cái tên khác: "LiveScript". Nhưng lúc đó Java đang rất phổ biến, vì vậy người ta đã quyết định rằng đặt một ngôn ngữ mới là "em trai" của Java sẽ có ích.
@@ -53,7 +53,7 @@ Ví dụ, JavaScript trong trình duyệt có khả năng:
 
 - Thêm HTML mới vào trang, thay đổi nội dung có sẵn, sửa đổi phong cách (styles).
 - Phản ứng với các hành động của người dùng, chạy khi nhấp chuột, chuyển động của con trỏ, nhấn phím.
-- Gửi yêu cầu qua mạng đến các máy chủ từ xa, tải xuống và tải lên file (cái gọi là [AJAX](https://vi.wikipedia.org/wiki/Ajax_(l%E1%BA%ADp_tr%C3%ACnh)) và công nghệ [COMET](https://en.wikipedia.org/wiki/Comet_(programming))).
+- Gửi yêu cầu qua mạng đến các máy chủ từ xa, tải xuống và tải lên file (cái gọi là [AJAX](<https://vi.wikipedia.org/wiki/Ajax_(l%E1%BA%ADp_tr%C3%ACnh)>) và công nghệ [COMET](<https://en.wikipedia.org/wiki/Comet_(programming)>)).
 - Lấy và đặt cookie, đặt câu hỏi cho người truy cập, hiện tin nhắn.
 - Ghi nhớ dữ liệu ở phía máy khách ("lưu trữ cục bộ - local storage").
 
@@ -65,14 +65,16 @@ Một số hạn chế có thể kể là:
 
 - JavaScript trên một trang web không thể đọc/ghi các tệp tùy ý trên đĩa cứng, sao chép chúng hoặc thực thi các chương trình. Nó không có quyền truy cập trực tiếp vào các chức năng của hệ điều hành.
 
-    Nhiều trình duyệt hiện đại cho phép làm việc với tập tin, nhưng bị giới hạn và chỉ được truy cập nếu như người dùng thực hiện một hành động nhất định nào đó, ví dụ như "thả" các tập tin vào cửa sổ trình duyệt hoặc chọn chúng qua thẻ `<input>`.
+  Nhiều trình duyệt hiện đại cho phép làm việc với tập tin, nhưng bị giới hạn và chỉ được truy cập nếu như người dùng thực hiện một hành động nhất định nào đó, ví dụ như "thả" các tập tin vào cửa sổ trình duyệt hoặc chọn chúng qua thẻ `<input>`.
 
-    Có nhiều cách để tương tác với camera/microphone và thiết bị khác, nhưng chúng yêu cầu sự cho phép rõ ràng của người dùng. Vì vậy, một trang web hỗ trợ Javascript sẽ không bật lén camera, quan sát và gửi thông tin cho [NSA](https://vi.wikipedia.org/wiki/C%C6%A1_quan_An_ninh_Qu%E1%BB%91c_gia_(Hoa_K%E1%BB%B3)).
+  Có nhiều cách để tương tác với camera/microphone và thiết bị khác, nhưng chúng yêu cầu sự cho phép rõ ràng của người dùng. Vì vậy, một trang web hỗ trợ Javascript sẽ không bật lén camera, quan sát và gửi thông tin cho [NSA](<https://vi.wikipedia.org/wiki/C%C6%A1_quan_An_ninh_Qu%E1%BB%91c_gia_(Hoa_K%E1%BB%B3)>).
+
 - Các tab/cửa sổ nhìn chung không biết gì về nhau. Thỉnh thoảng có, ví dụ như một cửa sổ dùng Javascript để mở cửa sổ khác. Nhưng kể cả như vậy, JavaScript từ trang này vẫn không thể can thiệp vào trang kia nếu như chúng đến từ tên miền, giao thức hoặc port khác.
 
-    Cái này được gọi là "Same Origin Policy". Để làm việc với nó, *cả 2 trang web* cần phải đồng ý cho việc trao đổi dữ liệu và bao gồm cả các đoạn mã Javascript đặc biệt nhằm xử lí nó. Chúng ta sẽ nhắc đến trong phần hướng dẫn sau.
+  Cái này được gọi là "Same Origin Policy". Để làm việc với nó, _cả 2 trang web_ cần phải đồng ý cho việc trao đổi dữ liệu và bao gồm cả các đoạn mã Javascript đặc biệt nhằm xử lí nó. Chúng ta sẽ nhắc đến trong phần hướng dẫn sau.
 
-    Hạn chế ở đây là, một lần nữa, cho an toàn của người dùng. Một trang web từ `http://anysite.com` mà người dùng vừa mở không được can thiệp vào trang web có URL là `http://gmail.com` ở tab khác với mục đích đánh cắp thông tin cá nhân.
+  Hạn chế ở đây là, một lần nữa, cho an toàn của người dùng. Một trang web từ `http://anysite.com` mà người dùng vừa mở không được can thiệp vào trang web có URL là `http://gmail.com` ở tab khác với mục đích đánh cắp thông tin cá nhân.
+
 - Javascript có thể dễ dàng giao tiếp qua mạng để đến máy chủ - nơi đang chứa trang web hiện tại. Nhưng khả năng nhận dữ liệu từ trang web khác hoàn toàn bị tê liệt. Mặc dù có thể, nó đòi hỏi phải có thỏa thuận rõ ràng (được thể hiện trong HTTP headers) từ phía điều khiển. Lại lần nữa, đây là giới hạn vì an toàn.
 
 ![](limitations.svg)
@@ -81,7 +83,7 @@ Những giới hạn trên sẽ không tồn tại nếu như Javascript đượ
 
 ## Điều gì khiến cho Javascript khác biệt?
 
-Có ít nhất *ba* điều tuyệt vời ở Javascript:
+Có ít nhất _ba_ điều tuyệt vời ở Javascript:
 
 ```compare
 + Tích hợp hoàn toàn với HTML/CSS.
@@ -101,7 +103,7 @@ Cú pháp của Javascript không phù hợp cho tất cả mọi người. Nh�
 
 Đó là điều được mong đợi, vì các dự án và yêu cầu đều khác nhau đối với mọi người.
 
-Vì vậy gần đây có rất nhiêu ngôn ngữ mới xuất hiện, chúng được *dịch mã* (chuyển đổi) sang Javascript trước khi chúng chạy trên trình duyệt.
+Vì vậy gần đây có rất nhiêu ngôn ngữ mới xuất hiện, chúng được _dịch mã_ (chuyển đổi) sang Javascript trước khi chúng chạy trên trình duyệt.
 
 Những công cụ hiện đại làm cho việc dịch trở nên nhanh chóng và minh bạch, thực sự cho phép các nhà phát triển viết mã bằng ngôn ngữ khác và tự động chuyển đổi nó trơn tru và hiệu quả.
 
