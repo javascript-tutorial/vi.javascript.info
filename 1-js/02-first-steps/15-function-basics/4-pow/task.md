@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Function pow(x,n)
+# Hàm pow(x,n)
 
-Write a function `pow(x,n)` that returns `x` in power `n`. Or, in other words, multiplies `x` by itself `n` times and returns the result.
+Viết một hàm `pow(x,n)` trả về biến `x` với số mũ `n`. Hoặc, nói theo cách khác, thì nhân `x` với chính nó `n` lần và trả về kết quả.
 
 ```js
 pow(3, 2) = 3 * 3 = 9
@@ -12,8 +12,8 @@ pow(3, 3) = 3 * 3 * 3 = 27
 pow(1, 100) = 1 * 1 * ...* 1 = 1
 ```
 
-Create a web-page that prompts for `x` and `n`, and then shows the result of `pow(x,n)`.
+Tạo 1 trang web gợi ý cho `x` và `n`, và sau đó đưa ra kết quả của `pow(x,n)`.
 
 [demo]
 
-P.S. In this task the function should support only natural values of `n`: integers up from `1`.
+Tái bút: Trong nhiệm vụ này, hàm chỉ hỗ trợ các giá trị tự nhiên của `n`: các số nguyên dương lớn hơn hoặc bằng `1`.
