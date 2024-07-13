@@ -18,4 +18,4 @@ function min(a, b) {
 }
 ```
 
-Tái bút: Trong trường hợp có một phương trình `a == b` thì nó không còn quan trọng việc trả về giá trị gì.
+"Tái bút: Trong trường hợp so sánh bằng nhau `a == b` thì không quan trọng giá trị trả về là gì."

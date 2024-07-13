@@ -14,4 +14,4 @@ function checkAge(age) {
 }
 ```
 
-Lưu ý rằng dấu ngoặc đơn quanh `age > 18` thì không được yêu cầu ở đây. Chúng tồn tại để dễ hơn cho việc đọc.
+Lưu ý rằng dấu ngoặc đơn quanh `age > 18` là không bắt buộc. Chúng tồn tại để chúng ta dễ đọc hơn.
