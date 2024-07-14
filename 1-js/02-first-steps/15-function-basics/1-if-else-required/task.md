@@ -2,7 +2,7 @@ importance: 4
 
 ---
 
-# "else" có bắt buộc không
+# "else" có bắt buộc không?
 
 Hàm sau đây sẽ trả về `true` nếu tham số `age` là lớn hơn `18`.
 

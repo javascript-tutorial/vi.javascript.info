@@ -2,7 +2,7 @@
 
 Thông thường chúng ta cần thực hiện một hành động tương tự ở nhiều nơi trong tập lệnh.
 
-Ví dụ: chúng ta cần hiển thị một thông báo đẹp mắt khi khách hàng truy cập đăng nhập, đăng xuất và có thể ở một nơi khác 
+Ví dụ: chúng ta cần hiển thị một thông báo đẹp mắt khi khách hàng khi khách hàng đăng nhập, đăng xuất và có thể ở một nơi khác 
 
 Các hàm là "khối xây dựng" chính của chương trình. Chúng cho phép chúng ta viết một đoạn mã chỉ một lần nhưng lại có thể thực hiện nó nhiều lần, thay vì phải viết lặp lại đoạn mã đó mỗi khi muốn thực hiện nó.
 
@@ -20,7 +20,7 @@ function showMessage() {
 }
 ```
 
-Từ khoá `function` được bắt đầu trước, sau đó đến *tên của hàm*, và có một danh sách các *tham số* giữa các dấu ngoặc đơn (được phân tách bằng dấu phẩy, những cũng có thể để trống như trong ví dụ trên) và cuối cùng là mã của hàm, còn được đặt tên là "thân hàm", giữa các dấu ngoặc nhọn.
+Từ khoá `function` được bắt đầu trước, sau đó đến *tên của hàm*, và có một danh sách các *tham số* giữa các dấu ngoặc đơn (được phân tách bằng dấu phẩy, nhưng cũng có thể để trống như trong ví dụ trên) và cuối cùng là mã của hàm, còn được gọi là "thân hàm", giữa các dấu ngoặc nhọn.
 
 ```js
 function name(parameters) {
@@ -272,7 +272,7 @@ let result = sum(1, 2);
 alert( result ); // 3
 ```
 
-Lệnh `return` có thể ở bất kỳ vị trí nào của hàm. Khi quá trình thực thi đạt đến mức đó, hàm sẽ dừng và giá trị được trả về mã gọi (được gán cho `result` ở trên).
+Lệnh `return` có thể ở bất kỳ vị trí nào của hàm. Khi thực thi lệnh đó, hàm sẽ dừng và giá trị được trả về mã gọi (được gán cho `result` ở trên).
 
 Có thể có nhiều lần xuất hiện của `return` trong một hàm. Ví dụ:
 
@@ -317,7 +317,7 @@ function showMovie(age) {
 
 Ở đoạn mã ở trên, nếu `checkAge(age)` trả về `false`, thì `showMovie` sẽ không thực hiện hàm `alert`.
 
-````smart header="Một hàm trả với `return` rỗng hoặc không có `return` thì trả về `undefined`"
+````smart header="Một hàm với `return` rỗng hoặc không có `return` thì trả về `undefined`"
 Nếu một hàm không trả về một giá trị thì cũng giống như là nó trả về `undefined`:
 
 ```js run
@@ -383,7 +383,7 @@ Chức năng bắt đầu bằng...
 Các ví dụ cho những tên kể trên:
 
 ```js no-beautify
-showMessage(..)     // một thông báo (hoặc thông điệp)
+showMessage(..)     // đưa ra một thông báo
 getAge(..)          // trả về tuổi (lấy nó bằng cách nào đó)
 calcSum(..)         // tính tổng và trả về kết quả
 createForm(..)      // tạo một biểu mẫu (và thường trả về nó)
@@ -418,7 +418,7 @@ Ví dụ: khung [jQuery](http://jquery.com) định nghĩa một hàm tên là `
 
 Các hàm phải ngắn gọn và thực hiện chính xác một việc. Nếu thứ đó lớn, có lẽ nên chia hàm thành một vài hàm nhỏ hơn. Đôi khi việc tuân theo quy tắc này có thể không dễ dàng nhưng đó chắc chắn là một điều tốt.
 
-Một chức năng riêng biệt không chỉ dễ kiểm tra và gỡ lỗi hơn -- là một chú thích tuyệt vời!
+Một hàm riêng biệt không chỉ dễ kiểm tra và gỡ lỗi hơn -- nó còn là một chú thích tuyệt vời!
 
 Ví dụ: so sánh hai hàm `showPrimes(n)` bên dưới. Mỗi cái xuất ra [số nguyên tố](https://en.wikipedia.org/wiki/Prime_number) tối đa `n`.
 
@@ -477,11 +477,11 @@ function name(parameters, delimited, by, comma) {
 
 Để làm cho mã rõ ràng và dễ hiểu, bạn nên sử dụng chủ yếu các biến cục bộ và tham số trong hàm, không nên sử dụng các biến bên ngoài.
 
-Việc hiểu một hàm nhận các tham số, sử dụng chúng rồi trả về một kết quả, luôn dễ hiểu hơn một hàm không nhận tham số nào, nhưng lại thay đổi giá trị của các biến ngoài, như một tác dụng phụ.
+Hàm có tham số nhưng không gây tác dụng phụ thì dễ hiểu hơn hàm không tham số nhưng lại gây tác dụng phụ.
 
 Đặt tên cho hàm:
 
-- Tên phải mô tả rõ ràng chức năng của nó. Khi chúng ta thấy một lệnh gọi hàm trong mã, một cái tên hay sẽ ngay lập tức giúp chúng ta hiểu nó làm gì và trả về gì.
+- Tên hàm nên mô tả rõ hàm thực hiện công việc gì. Khi chúng ta thấy một lệnh gọi hàm trong mã, một cái tên hay sẽ ngay lập tức giúp chúng ta hiểu nó làm gì và trả về gì.
 - Hàm là một hành động nên tên hàm thường là động từ.
 - Tồn tại nhiều tiền tố hàm phổ biến như `create…`, `show…`, `get…`, `check…`, v.v. Sử dụng chúng để gợi ý chức năng của một hàm.
 

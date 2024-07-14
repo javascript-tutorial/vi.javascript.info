@@ -18,4 +18,4 @@ function min(a, b) {
 }
 ```
 
-"Tái bút: Trong trường hợp so sánh bằng nhau `a == b` thì không quan trọng giá trị trả về là gì."
+Tái bút: Trong trường hợp so sánh bằng nhau `a == b` thì không quan trọng giá trị trả về là gì.
