@@ -2,11 +2,11 @@ importance: 1
 
 ---
 
-# Function min(a, b)
+# Hàm min(a, b)
 
-Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
+Viết một hàm `min(a,b)` trả về giá trị nhỏ nhất trong hai số `a` và `b`.
 
-For instance:
+Ví dụ:
 
 ```js
 min(2, 5) == 2

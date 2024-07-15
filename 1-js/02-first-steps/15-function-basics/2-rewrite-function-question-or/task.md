@@ -2,7 +2,7 @@ importance: 4
 
 ---
 
-# Rewrite the function using '?' or '||'
+# Viết lại hàm sử dụng '?' hoặc '||'
 
 The following function returns `true` if the parameter `age` is greater than `18`.
 

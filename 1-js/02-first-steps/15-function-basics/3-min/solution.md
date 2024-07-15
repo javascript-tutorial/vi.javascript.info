@@ -1,4 +1,4 @@
-A solution using `if`:
+Một phương án sử dụng `if`:
 
 ```js
 function min(a, b) {
@@ -10,7 +10,7 @@ function min(a, b) {
 }
 ```
 
-A solution with a question mark operator `'?'`:
+Giải pháp với toán tử `'?'`:
 
 ```js
 function min(a, b) {
@@ -18,4 +18,4 @@ function min(a, b) {
 }
 ```
 
-P.S. In the case of an equality `a == b` it does not matter what to return.
+Tái bút: Trong trường hợp so sánh bằng nhau `a == b` thì không quan trọng giá trị trả về là gì.
