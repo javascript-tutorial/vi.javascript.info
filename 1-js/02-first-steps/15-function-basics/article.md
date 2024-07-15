@@ -2,7 +2,7 @@
 
 Thông thường chúng ta cần thực hiện một hành động tương tự ở nhiều nơi trong tập lệnh.
 
-Ví dụ: chúng ta cần hiển thị một thông báo đẹp mắt khi khách hàng khi khách hàng đăng nhập, đăng xuất và có thể ở một nơi khác 
+Ví dụ: chúng ta cần hiển thị một thông báo đẹp mắt khi khách hàng đăng nhập, đăng xuất và có thể ở một nơi khác.
 
 Các hàm là "khối xây dựng" chính của chương trình. Chúng cho phép chúng ta viết một đoạn mã chỉ một lần nhưng lại có thể thực hiện nó nhiều lần, thay vì phải viết lặp lại đoạn mã đó mỗi khi muốn thực hiện nó.
 
@@ -477,7 +477,7 @@ function name(parameters, delimited, by, comma) {
 
 Để làm cho mã rõ ràng và dễ hiểu, bạn nên sử dụng chủ yếu các biến cục bộ và tham số trong hàm, không nên sử dụng các biến bên ngoài.
 
-Hàm có tham số nhưng không gây tác dụng phụ thì dễ hiểu hơn hàm không tham số nhưng lại gây tác dụng phụ.
+Một hàm nhận các tham số, sử dụng chúng rồi trả về một kết quả, luôn dễ hiểu hơn một hàm không nhận tham số nào, nhưng lại thay đổi giá trị của các biến ngoài, như một tác dụng phụ.
 
 Đặt tên cho hàm:
 
