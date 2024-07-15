@@ -132,7 +132,7 @@ Các biến được khai báo bên ngoài bất kỳ hàm nào, chẳng hạn n
 
 Các biến toàn cục có thể nhìn thấy được từ bất kỳ hàm nào (trừ phi bị che bởi biến cục bộ).
 
-Đó là một cách thực hành tốt là giảm thiểu việc sử dụng các biến toàn cục. Mã nguồn hiện đại có ít hoặc không có toàn cục. Hầu hết các biến đều nằm trong hàm của chúng. Tuy nhiên, đôi khi chúng có thể hữu ích để lưu trữ dữ liệu cấp dự án.
+Một cách thực hành tốt là giảm thiểu việc sử dụng các biến toàn cục. Mã nguồn hiện đại có ít hoặc không có toàn cục. Hầu hết các biến đều nằm trong hàm của chúng. Tuy nhiên, đôi khi chúng có thể hữu ích để lưu trữ dữ liệu cấp dự án.
 ```
 
 ## Các tham số
