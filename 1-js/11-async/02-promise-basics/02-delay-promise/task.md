@@ -1,14 +1,13 @@
+# Trì hoãn với promise
 
-# Delay with a promise
+Xây dựng bên trong một hàm `setTimeout` sử dụng callbacks. Tạo một giải pháp dựa trên promise.
 
-The built-in function `setTimeout` uses callbacks. Create a promise-based alternative.
-
-The function `delay(ms)` should return a promise. That promise should resolve after `ms` milliseconds, so that we can add `.then` to it, like this:
+Hàm `delay(ms)` sẽ trả về một promise. Promise đó sẽ được giải quyết sau `ms` mili giây, để chúng ta có thể thêm `.then` vào nó, như sau:
 
 ```js
 function delay(ms) {
   // your code
 }
 
-delay(3000).then(() => alert('runs after 3 seconds'));
+delay(3000).then(() => alert("runs after 3 seconds"));
 ```
