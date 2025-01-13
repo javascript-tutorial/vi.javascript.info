@@ -2,7 +2,11 @@
 
 Cuốn sách này là một *hướng dẫn*. Nó nhằm mục đích giúp bạn dần dần học ngôn ngữ. Nhưng một khi bạn quen với những thứ căn bản, bạn sẽ cần các nguồn khác.
 
+<<<<<<< HEAD
 ## Đặc tả
+=======
+This book is a *tutorial*. It aims to help you gradually learn the language. But once you're familiar with the basics, you'll need other resources.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 [Đặc tả ECMA-262](https://www.ecma-international.org/publications/standards/Ecma-262.htm) chứa thông tin chuyên sâu, chi tiết và chính thức nhất về JavaScript. Nó xác định đặc điểm ngôn ngữ.
 
@@ -10,7 +14,11 @@ Nhưng với việc được chính thức hóa như vậy, thoạt đầu nó t
 
 Một phiên bản đặc tả mới được phát hành hàng năm. Giữa các bản phát hành này, bản nháp đặc tả mới nhất có tại <https://tc39.es/ecma262/>.
 
+<<<<<<< HEAD
 Để đọc về những tính năng mới nhất, bao gồm cả các tính năng gần như tiêu chuẩn (được gọi là "stage-3") xem tại: <https://github.com/tc39/proposals>.
+=======
+A new specification version is released every year. Between these releases, the latest specification draft is at <https://tc39.es/ecma262/>.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các đặc tả khác được đề cập trong [phần thứ hai](info:browser-environment) của hướng dẫn.
 
@@ -20,8 +28,14 @@ Ngoài ra, nếu bạn đang phát triển cho trình duyệt, thì có các đ�
 
     Bạn có thể tìm thấy nó tại <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
+<<<<<<< HEAD
 
 Dầu vậy, thông thường tốt nhất là sử dụng tìm kiếm trên Internet. Chỉ cần sử dụng "MDN [term]" trong truy vấn, ví dụ: <https://google.com/search?q=MDN+parseInt> để tìm kiếm hàm `parseInt`.
+=======
+    You can find it at <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
+
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for the `parseInt` function.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ## Bảng tương thích
 
@@ -29,9 +43,16 @@ JavaScript là một ngôn ngữ đang phát triển, các tính năng mới đ�
 
 Để xem sự hỗ trợ chúng giữa các engine dựa trên trình duyệt và các engine khác, hãy xem:
 
+<<<<<<< HEAD
 - <http://caniuse.com> - các bảng hỗ trợ theo từng tính năng, ví dụ: để xem engine nào hỗ trợ các hàm mã hóa hiện đại: <http://caniuse.com/#feat=cryptography>.
 - <https://kangax.github.io/compat-table> - một bảng với các tính năng và các engine mà có hoặc không hỗ trợ các tính năng đó.
 
 Tất cả các tài nguyên này đều hữu ích cho việc phát triển trong đời thực, vì chúng chứa thông tin có giá trị về các chi tiết ngôn ngữ, sự hỗ trợ chúng v.v.
+=======
+- <https://caniuse.com> - per-feature tables of support, e.g. to see which engines support modern cryptography functions: <https://caniuse.com/#feat=cryptography>.
+- <https://kangax.github.io/compat-table> - a table with language features and engines that support those or don't support.
+
+All these resources are useful in real-life development, as they contain valuable information about language details, their support, etc.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Vui lòng ghi nhớ những tài nguyên trên (hoặc trang này) trong các trường hợp bạn cần thông tin chuyên sâu về một tính năng cụ thể.

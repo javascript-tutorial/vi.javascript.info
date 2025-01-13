@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Gỡ lỗi trong Chrome
+=======
+# Debugging in the browser
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Trước khi viết mã phức tạp hơn, hãy nói về gỡ lỗi.
 
@@ -37,7 +41,11 @@ Nếu chúng ta nhấn `key:Esc`, thì bảng điều khiển (console) sẽ m�
 
 Sau khi một câu lệnh được thực thi, kết quả của nó được hiển thị bên dưới.
 
+<<<<<<< HEAD
 Ví dụ: ở đây `1+2` cho kết quả là `3` và `hello("debugger")` không trả về kết quả nào, vì vậy kết quả là `undefined`:
+=======
+For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ![](chrome-sources-console.svg)
 
@@ -61,13 +69,22 @@ Chúng ta luôn có thể tìm thấy danh sách các điểm dừng trong bản
 - Loại bỏ breakpoint bằng cách click chuột phải chọn Remove.
 - ...Vân vân.
 
+<<<<<<< HEAD
 ```smart header="Điểm dừng có điều kiện"
 *Nhấp chuột phải* vào số dòng cho phép tạo điểm ngắt *có điều kiện*. Nó chỉ kích hoạt khi biểu thức đã cho là đúng đắn.
+=======
+```smart header="Conditional breakpoints"
+*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Điều đó rất hữu ích khi chúng ta chỉ cần dừng đối với một giá trị biến nhất định hoặc đối với các tham số nhất định.
 ```
 
+<<<<<<< HEAD
 ## Lệnh gỡ lỗi
+=======
+## The command "debugger"
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Chúng ta cũng có thể tạm dừng mã bằng cách sử dụng lệnh `debugger` trong đó, như sau:
 
@@ -83,9 +100,13 @@ function hello(name) {
 }
 ```
 
+<<<<<<< HEAD
 Điều đó rất thuận tiện khi chúng ta đang ở trong trình chỉnh sửa mã và không muốn chuyển sang trình duyệt và tra cứu tập lệnh trong các công cụ dành cho nhà phát triển để đặt điểm dừng.
 
 ## Tạm dừng và nhìn xung quanh
+=======
+Such command works only when the development tools are open, otherwise the browser ignores it.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Trong ví dụ của chúng ta, `hello()` được gọi trong khi tải trang, vì vậy cách dễ nhất để kích hoạt trình gỡ lỗi (sau khi chúng ta đã đặt các điểm ngắt) là tải lại trang. Vì vậy, hãy nhấn `key:F5` (Windows, Linux) hoặc `key:Cmd+R` (Mac).
 
@@ -97,7 +118,11 @@ Vui lòng mở menu thả xuống thông tin ở bên phải (được đánh d�
 
 1. **`Watch` -- hiển thị các giá trị hiện tại cho bất kỳ biểu thức nào.**
 
+<<<<<<< HEAD
      Bạn có thể nhấp vào dấu cộng `+` và nhập một biểu thức. Trình gỡ lỗi sẽ hiển thị giá trị của nó bất kỳ lúc nào, tự động tính toán lại giá trị đó trong quá trình thực thi.
+=======
+    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 2. **`Ngăn xếp cuộc gọi (Call Stack)` -- hiển thị chuỗi cuộc gọi lồng nhau.**
 
@@ -132,12 +157,21 @@ Có các nút cho nó ở trên cùng của bảng điều khiển bên phải. 
 
     Nhấp đi bấm lại vào đây sẽ lần lượt duyệt qua tất cả các câu lệnh trong tập lệnh.
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": chạy lệnh tiếp theo, nhưng *không đi vào hàm*, phím nóng `key :F10`.
 : Tương tự như lệnh "Step" trước đó, nhưng hoạt động khác nếu câu lệnh tiếp theo là lệnh gọi hàm. Đó là: không phải là hàm tích hợp sẵn, như `alert`, mà là một hàm của riêng chúng ta.
 
     Lệnh "Step" đi vào nó và tạm dừng thực thi ở dòng đầu tiên, trong khi "Step over" thực hiện lời gọi hàm lồng nhau một cách vô hình, bỏ qua các phần bên trong hàm.
 
     Việc thực thi sau đó bị tạm dừng ngay sau hàm đó.
+=======
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+
+    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+
+    The execution is then paused immediately after that function call.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
     Điều đó tốt nếu chúng ta không quan tâm đến việc xem điều gì xảy ra bên trong lời gọi hàm.
 
@@ -152,8 +186,13 @@ Có các nút cho nó ở trên cùng của bảng điều khiển bên phải. 
 <span class="devtools" style="background-position:-61px -74px"></span> -- bật/tắt tất cả các điểm dừng.
 : Nút đó không di chuyển việc thực hiện. Chỉ cần bật/tắt hàng loạt cho các điểm dừng.
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-90px -146px"></span> -- bật/tắt tự động tạm dừng trong trường hợp có lỗi.
 : Khi được bật và các công cụ dành cho nhà phát triển đang mở, lỗi tập lệnh sẽ tự động tạm dừng quá trình thực thi. Sau đó, chúng ta có thể phân tích các biến để xem điều gì đã xảy ra. Vì vậy, nếu tập lệnh của chúng ta chết do lỗi, chúng ta có thể mở trình gỡ lỗi, bật tùy chọn này và tải lại trang để xem tập lệnh chết ở đâu và bối cảnh tại thời điểm đó là gì.
+=======
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```smart header="Continue to here"
 Nhấp chuột phải vào một dòng mã sẽ mở menu ngữ cảnh với một tùy chọn tuyệt vời có tên "Continue to here".
@@ -185,7 +224,11 @@ Như chúng ta có thể thấy, có ba cách chính để tạm dừng tập l�
 2. Các câu lệnh `debugger`.
 3. Lỗi (nếu công cụ dành cho nhà phát triển đang mở và nút <span class="devtools" style="background-position:-90px -146px"></span> đang "bật").
 
+<<<<<<< HEAD
 Khi tạm dừng, chúng ta có thể gỡ lỗi - kiểm tra các biến và theo dõi mã để xem nơi thực thi sai.
+=======
+When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Có nhiều tùy chọn hơn trong các công cụ dành cho nhà phát triển ngoài những gì được đề cập ở đây. Hướng dẫn đầy đủ có tại <https://developers.google.com/web/tools/chrome-devtools>.
 
