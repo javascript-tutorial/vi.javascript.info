@@ -2,7 +2,11 @@
 
 Thuộc tính `"prototype"` được dùng rộng rãi bởi chính JavaScript. Tất cả các hàm constructor có sẵn đều sử dụng nó.
 
+<<<<<<< HEAD
 Đầu tiên chúng ta sẽ xem chi tiết và sau đó là cách sử dụng nó để thêm các khả năng mới cho các đối tượng có sẵn.
+=======
+First we'll look at the details, and then how to use it for adding new capabilities to built-in objects.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## Object.prototype
 

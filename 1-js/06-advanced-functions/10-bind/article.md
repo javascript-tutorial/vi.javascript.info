@@ -185,8 +185,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Hello"); // Xin chào, John (đối số "Xin chào" được truyền tới say)
 say("Bye"); // Tạm biệt, John ("Tạm biệt" được truyền tới say)
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ```
 
 ````smart header="Convenience method: `bindAll`"
@@ -200,7 +205,11 @@ for (let key in user) {
 }
 ```
 
+<<<<<<< HEAD
 Các thư viện JavaScript cũng cung cấp các chức năng để thuận tiện ràng buộc hàng loạt, ví dụ [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) trong lodash.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](https://lodash.com/docs#bindAll) in lodash.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ````
 
 ## Các hàm một phần
