@@ -20,11 +20,15 @@ function showMessage() {
 }
 ```
 
+<<<<<<< HEAD
 Từ khoá `function` được bắt đầu trước, sau đó đến *tên của hàm*, và có một danh sách các *tham số* giữa các dấu ngoặc đơn (được phân tách bằng dấu phẩy, nhưng cũng có thể để trống như trong ví dụ trên) và cuối cùng là mã của hàm, còn được gọi là "thân hàm", giữa các dấu ngoặc nhọn.
+=======
+The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above, we'll see examples later) and finally the code of the function, also named "the function body", between curly braces.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
-function name(parameters) {
-  ...body...
+function name(parameter1, parameter2, ... parameterN) {
+ // body
 }
 ```
 
@@ -137,25 +141,33 @@ Một cách thực hành tốt là giảm thiểu việc sử dụng các biến
 
 ## Các tham số
 
+<<<<<<< HEAD
 Chúng ta có thể truyền dữ liệu tùy ý đến các hàm bằng cách sử dụng tham số (còn được gọi là *đối số hàm*) .
+=======
+We can pass arbitrary data to functions using parameters.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 In the example below, the function has two parameters: `from` and `text`.
 
 ```js run
-function showMessage(*!*from, text*/!*) { // arguments: from, text
+function showMessage(*!*from, text*/!*) { // parameters: from, text
   alert(from + ': ' + text);
 }
 
+<<<<<<< HEAD
 *!*
 showMessage('Ann', 'Xin chào!'); // Ann: Hello! (*)
 showMessage('Ann', "Có chuyện gì á?"); // Ann: What's up? (**)
 */!*
+=======
+*!*showMessage('Ann', 'Hello!');*/!* // Ann: Hello! (*)
+*!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 Khi hàm được gọi trong các dòng `(*)` và `(**)`, các giá trị đã cho sẽ được sao chép sang các biến cục bộ `from` và `text`. Sau đó, hàm sẽ sử dụng chúng.
 
 Đây là một ví dụ nữa: chúng ta có một biến `from` và truyền nó cho hàm. Xin lưu ý: hàm thay đổi `from`, nhưng sự thay đổi không được nhìn thấy từ bên ngoài, vì hàm luôn nhận được bản sao của giá trị:
-
 
 ```js run
 function showMessage(from, text) {
@@ -175,9 +187,27 @@ showMessage(from, "Xin chào"); // *Ann*: Xin chào
 alert( from ); // Ann
 ```
 
+<<<<<<< HEAD
 ## Những giá trị mặc định
 
 Nếu một tham số không được cung cấp thì giá trị của nó sẽ trở thành `undefined`.
+=======
+When a value is passed as a function parameter, it's also called an *argument*.
+
+In other words, to put these terms straight:
+
+- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term).
+- An argument is the value that is passed to the function when it is called (it's a call time term).
+
+We declare functions listing their parameters, then call them passing arguments.
+
+In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+
+
+## Default values
+
+If a function is called, but an argument is not provided, then the corresponding value becomes `undefined`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Ví dụ, hàm `showMessage(from, text)` nói trên có thể được gọi bằng một đối số duy nhất:
 
@@ -185,9 +215,15 @@ Ví dụ, hàm `showMessage(from, text)` nói trên có thể được gọi b�
 showMessage("Ann");
 ```
 
+<<<<<<< HEAD
 Đó không phải là một lỗi. Lệnh gọi như vậy sẽ xuất ra `"*Ann*: undefined"`. Không có `text`, vì vậy giả định rằng `text === undefined`.
 
 Nếu chúng ta muốn sử dụng một `text` "mặc định" trong trường hợp này thì chúng ta có thể chỉ định nó sau `=`:
+=======
+That's not an error. Such a call would output `"*Ann*: undefined"`. As the value for `text` isn't passed, it becomes `undefined`.
+
+We can specify the so-called "default" (to use if omitted) value for a parameter in the function declaration, using `=`:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
 function showMessage(from, *!*text = "không có văn bản nào được đưa ra"*/!*) {
@@ -197,7 +233,17 @@ function showMessage(from, *!*text = "không có văn bản nào được đưa 
 showMessage("Ann"); // Ann: không có văn bản nào được đưa ra
 ```
 
+<<<<<<< HEAD
 Bây giờ nếu tham số `text` không được truyền, nó sẽ nhận giá trị `"không có văn bản nào được đưa ra"`
+=======
+Now if the `text` parameter is not passed, it will get the value `"no text given"`.
+
+The default value also jumps in if the parameter exists, but strictly equals `undefined`, like this:
+
+```js
+showMessage("Ann", undefined); // Ann: no text given
+```
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Ở đây `"không có văn bản nào được đưa ra"` là một chuỗi, nhưng nó có thể là một biểu thức phức tạp hơn, chỉ được đánh giá và gán nếu thiếu tham số. Vì vậy, điều này cũng có thể:
 
@@ -211,20 +257,68 @@ function showMessage(from, text = anotherFunction()) {
 ```smart header="Đánh giá các tham số mặc định"
 Trong JavaScript, một tham số mặc định được đánh giá mỗi khi hàm được gọi mà không có tham số tương ứng.
 
+<<<<<<< HEAD
 Trong ví dụ trên, `anotherFunction()` được gọi mỗi khi `showMessage()` được gọi mà không có tham số `text`.
 ```
 
 ### Các tham số mặc định thay thế
+=======
+In the example above, `anotherFunction()` isn't called at all, if the `text` parameter is provided.
 
-Sometimes it makes sense to set default values for parameters not in the function declaration, but at a later stage, during its execution.
+On the other hand, it's independently called every time when `text` is missing.
+```
 
-To check for an omitted parameter, we can compare it with `undefined`:
+````smart header="Default parameters in old JavaScript code"
+Several years ago, JavaScript didn't support the syntax for default parameters. So people used other ways to specify them.
+
+Nowadays, we can come across them in old scripts.
+
+For example, an explicit check for `undefined`:
+
+```js
+function showMessage(from, text) {
+*!*
+  if (text === undefined) {
+    text = 'no text given';
+  }
+*/!*
+
+  alert( from + ": " + text );
+}
+```
+
+...Or using the `||` operator:
+
+```js
+function showMessage(from, text) {
+  // If the value of text is falsy, assign the default value
+  // this assumes that text == "" is the same as no text at all
+  text = text || 'no text given';
+  ...
+}
+```
+````
+
+
+### Alternative default parameters
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
+
+Sometimes it makes sense to assign default values for parameters at a later stage after the function declaration.
+
+We can check if the parameter is passed during the function execution, by comparing it with `undefined`:
 
 ```js run
 function showMessage(text) {
+  // ...
+
 *!*
+<<<<<<< HEAD
   if (text === undefined) {
     text = 'tin nhắn rỗng';
+=======
+  if (text === undefined) { // if the parameter is missing
+    text = 'empty message';
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
   }
 */!*
 
@@ -237,18 +331,26 @@ showMessage(); // tin nhắn rỗng
 ...Hoặc chúng ta có thể dùng toán tử `||`:
 
 ```js
-// if text parameter is omitted or "" is passed, set it to 'empty'
 function showMessage(text) {
+<<<<<<< HEAD
   text = text || 'trống';
+=======
+  // if text is undefined or otherwise falsy, set it to 'empty'
+  text = text || 'empty';
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
   ...
 }
 ```
 
+<<<<<<< HEAD
 Các công cụ JavaScript hiện đại hỗ trợ [toán tử hợp nhất nullish](info:nullish-coalescing-operator) `??`, sẽ tốt hơn khi các giá trị sai, chẳng hạn như `0`, được coi là thông thường:
+=======
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when most falsy values, such as `0`, should be considered "normal":
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
-// if there's no "count" parameter, show "unknown"
 function showCount(count) {
+  // if count is undefined or null, show "unknown"
   alert(count ?? "unknown");
 }
 
@@ -409,9 +511,15 @@ Những ví dụ này giả định ý nghĩa chung của tiền tố. Bạn và
 ```smart header="Những tên hàm siêu ngắn"
 Các hàm được sử dụng *rất thường xuyên* đôi khi có tên cực ngắn.
 
+<<<<<<< HEAD
 Ví dụ: khung [jQuery](http://jquery.com) định nghĩa một hàm tên là `$`. Thư viện [Lodash](http://lodash.com/) có hàm cốt lõi tên là `_`.
 
 Đây là những trường hợp ngoại lệ. Nói chung tên hàm phải ngắn gọn và mang tính mô tả.
+=======
+For example, the [jQuery](https://jquery.com/) framework defines a function with `$`. The [Lodash](https://lodash.com/) library has its core function named `_`.
+
+These are exceptions. Generally function names should be concise and descriptive.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 ## Hàm == Chú thích
@@ -477,7 +585,11 @@ function name(parameters, delimited, by, comma) {
 
 Để làm cho mã rõ ràng và dễ hiểu, bạn nên sử dụng chủ yếu các biến cục bộ và tham số trong hàm, không nên sử dụng các biến bên ngoài.
 
+<<<<<<< HEAD
 Một hàm nhận các tham số, sử dụng chúng rồi trả về một kết quả, luôn dễ hiểu hơn một hàm không nhận tham số nào, nhưng lại thay đổi giá trị của các biến ngoài, như một tác dụng phụ.
+=======
+It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side effect.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Đặt tên cho hàm:
 

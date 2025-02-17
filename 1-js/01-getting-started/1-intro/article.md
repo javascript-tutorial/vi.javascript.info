@@ -24,26 +24,44 @@ Trình duyệt đã có sẵn một Javascript engine đôi khi được gọi l
 
 Những engine khác nhau thì sẽ có những "tên mã" khác nhau. Chẳng hạn:
 
+<<<<<<< HEAD
 - [V8](https://vi.wikipedia.org/wiki/Chrome_V8) -- trong Chrome và Opera.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- trong Firefox.
 - ...Có một số tên mã khác như "Chakra" cho IE, "ChakraCore" cho Microsoft Edge, "Nitro" và "SquirrelFish" cho Safari v.v.
 
 Nên ghi nhớ các thuật ngữ trên bởi vì chúng được sử dụng khá nhiều trong các bài viết dành cho nhà phát triển (developer) trên Internet, và cả chúng ta. Ví dụ, nếu "tính năng X được hỗ trợ bởi V8", vậy nó có lẽ sẽ hoạt động trên Chrome và Opera.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```smart header="Engine hoạt động như thế nào?"
 
 Engine khá phức tạp, tuy nhiên có thể hiểu đơn giản như sau:
 
+<<<<<<< HEAD
 1. Engine (được nhúng nếu là trình duyệt) đọc ("phân tích cú pháp") tập lệnh.
 2. Tiếp theo nó chuyển đổi ("biên dịch") tập lệnh sang mã máy.
 3. Và sau đó mã máy chạy, khá nhanh.
+=======
+1. The engine (embedded if it's a browser) reads ("parses") the script.
+2. Then it converts ("compiles") the script to machine code.
+3. And then the machine code runs, pretty fast.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Engine áp dụng tối ưu hóa ở mỗi bước của quá trình. Nó thậm chí còn theo dõi tập lệnh đã biên dịch khi nó chạy, phân tích dữ liệu chạy qua nó và tối ưu hóa hơn nữa mã máy dựa trên kiến thức đó.
 ```
 
 ## JavaScript có thể làm gì trong trình duyệt?
 
+<<<<<<< HEAD
 Javascript hiện đại là một ngôn ngữ lập trình "an toàn". Nó không cung cấp quyền truy cập cấp thấp vào bộ nhớ hay CPU, bởi vì ban đầu nó được tạo ra cho trình duyệt vốn dĩ không yêu cầu những điều đó.
+=======
+Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or the CPU, because it was initially created for browsers which do not require it.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Sức mạnh của Javascript phụ thuộc rất lớn vào môi trường mà nó đang hoạt động. Chẳng hạn, [Node.js](https://vi.wikipedia.org/wiki/Node.js) hỗ trợ các hàm giúp cho Javascript có thể đọc/ghi các tập tin tùy ý, thực hiện các yêu cầu mạng, etc.
 
@@ -59,7 +77,11 @@ Ví dụ, JavaScript trong trình duyệt có khả năng:
 
 ## JavaScript không thể làm gì trong trình duyệt?
 
+<<<<<<< HEAD
 Nhiều tính năng của Javascript trong trình duyệt bị giới hạn vì lợi ích an toàn của người dùng. Mục đích là để ngăn chặn những trang web độc hại truy cập thông tin cá nhân hoặc gây hại đến dữ liệu của người dùng.
+=======
+JavaScript's abilities in the browser are limited to protect the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Một số hạn chế có thể kể là:
 
@@ -67,6 +89,7 @@ Một số hạn chế có thể kể là:
 
     Nhiều trình duyệt hiện đại cho phép làm việc với tập tin, nhưng bị giới hạn và chỉ được truy cập nếu như người dùng thực hiện một hành động nhất định nào đó, ví dụ như "thả" các tập tin vào cửa sổ trình duyệt hoặc chọn chúng qua thẻ `<input>`.
 
+<<<<<<< HEAD
     Có nhiều cách để tương tác với camera/microphone và thiết bị khác, nhưng chúng yêu cầu sự cho phép rõ ràng của người dùng. Vì vậy, một trang web hỗ trợ Javascript sẽ không bật lén camera, quan sát và gửi thông tin cho [NSA](https://vi.wikipedia.org/wiki/C%C6%A1_quan_An_ninh_Qu%E1%BB%91c_gia_(Hoa_K%E1%BB%B3)).
 - Các tab/cửa sổ nhìn chung không biết gì về nhau. Thỉnh thoảng có, ví dụ như một cửa sổ dùng Javascript để mở cửa sổ khác. Nhưng kể cả như vậy, JavaScript từ trang này vẫn không thể can thiệp vào trang kia nếu như chúng đến từ tên miền, giao thức hoặc port khác.
 
@@ -78,20 +101,43 @@ Một số hạn chế có thể kể là:
 ![](limitations.svg)
 
 Những giới hạn trên sẽ không tồn tại nếu như Javascript được sử dụng bên ngoài trình duyệt, như máy chủ chẳng hạn. Các trình duyệt hiện đại cũng cho phép các plugin/tiện ích có thể hỏi cho các quyền mở rộng.
+=======
+    There are ways to interact with the camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other page if they come from different sites (from a different domain, protocol or port).
+
+    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and must contain special JavaScript code that handles it. We'll cover that in the tutorial.
+
+    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com`, for example, and steal information from there.
+- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+
+![](limitations.svg)
+
+Such limitations do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugins/extensions which may ask for extended permissions.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ## Điều gì khiến cho Javascript khác biệt?
 
 Có ít nhất *ba* điều tuyệt vời ở Javascript:
 
 ```compare
+<<<<<<< HEAD
 + Tích hợp hoàn toàn với HTML/CSS.
 + Những điều đơn giản được thực hiện một cách đơn giản.
 + Được hỗ trợ bởi tất cả các trình duyệt chính và được bật theo mặc định.
+=======
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều trên.
 
+<<<<<<< HEAD
 Đó là những thứ khiến cho Javascript trở nên độc đáo. Đó là lí do tại sao nó là công cụ phổ biến nhất để tạo giao diện trình duyệt.
+=======
+That said, JavaScript can be used to create servers, mobile applications, etc.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Điều đó nói rằng, JavaScript cũng cho phép tạo các ứng dụng di động, máy chủ v.v.
 
@@ -99,12 +145,17 @@ Javascript là công nghệ trình duyệt duy nhất kết hợp cả 3 điều
 
 Cú pháp của Javascript không phù hợp cho tất cả mọi người. Những người khác nhau lại muốn các tính năng khác nhau.
 
+<<<<<<< HEAD
 Đó là điều được mong đợi, vì các dự án và yêu cầu đều khác nhau đối với mọi người.
+=======
+So, recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Vì vậy gần đây có rất nhiêu ngôn ngữ mới xuất hiện, chúng được *dịch mã* (chuyển đổi) sang Javascript trước khi chúng chạy trên trình duyệt.
 
 Những công cụ hiện đại làm cho việc dịch trở nên nhanh chóng và minh bạch, thực sự cho phép các nhà phát triển viết mã bằng ngôn ngữ khác và tự động chuyển đổi nó trơn tru và hiệu quả.
 
+<<<<<<< HEAD
 Có thể kể đến một số ngôn ngữ:
 
 - [CoffeeScript](http://coffeescript.org/) là một "cú pháp đặc biệt" cho JavaScript. Nó giới thiệu cú pháp ngắn hơn, cho phép chúng ta viết mã rõ ràng và chính xác hơn. Thông thường thì các nhà phát triển Ruby thích nó.
@@ -113,11 +164,27 @@ Có thể kể đến một số ngôn ngữ:
 - [Dart](https://www.dartlang.org/) là một ngôn ngữ độc lập có engine riêng và có thể chạy trong môi trường khác ngoài trình duyệt, nó cũng có thể được dịch sang Javascript. Phát triển bởi Google.
 - [Brython](https://brython.info/) là một trình chuyển tiếp Python sang JavaScript cho phép viết các ứng dụng bằng Python thuần túy mà không cần JavaScript.
 - [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) là một ngôn ngữ lập trình hiện đại, ngắn gọn và an toàn, mà có thể nhắm đến trình duyệt hoặc Node.
+=======
+- [CoffeeScript](https://coffeescript.org/) is "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](https://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](https://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+
+There are more. Of course, even if we use one of these transpiled languages, we should also know JavaScript to really understand what we're doing.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Sẽ có nhiều hơn số kể trên. Dĩ nhiên, ngay cả khi chúng ta sử dụng một trong những ngôn ngữ đó, chúng ta cũng nên biết Javascript để thực sự hiểu chúng ta đang làm gì.
 
+<<<<<<< HEAD
 ## Tóm tắt
 
 - Javascript được tạo ra với mục đích ban đầu chỉ cho trình duyệt, nhưng bây giờ đã được sử dụng rộng rãi trên nhiều môi trường khác.
 - Ngày nay, Javascript có một vị trí khác biệt như là ngôn ngữ trình duyệt được sử dụng rộng rãi nhất với sự tích hợp đầy đủ với HTML/CSS.
 - Có nhiều ngôn ngữ được "dịch" sang JavaScript và cung cấp một số tính năng nhất định. Nên xem qua chúng, ít nhất là một thời gian ngắn sau khi thành thạo JavaScript.
+=======
+- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
+- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a

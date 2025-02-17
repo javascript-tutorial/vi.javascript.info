@@ -105,7 +105,11 @@ class Rabbit extends Animal {
 }
 ```
 
+<<<<<<< HEAD
 Thông thường, chúng ta không muốn thay thế hoàn toàn một phương thức cha mà thay vào đó là xây dựng thêm trên phương thức đó để điều chỉnh hoặc mở rộng chức năng của nó. Chúng ta thực hiện việc gì đó trong phương thức của mình, nhưng gọi phương thức cha trước, sau, hoặc trong quá trình đó.
+=======
+Usually, however, we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Các class cung cấp từ khóa `"super"` cho điều đó.
 
@@ -158,7 +162,12 @@ Giờ `Rabbit` có phương thức `stop` mà gọi `super.stop()` của cha tro
 ````smart header="Các hàm mũi tên không có `super`"
 Như đã nói trong chương <info:arrow-functions>, các hàm mũi tên không có `super`.
 
+<<<<<<< HEAD
 Nếu truy cập, nó sẽ được lấy từ hàm bao ngoài. Ví dụ:
+=======
+If accessed, it's taken from the outer function. For instance:
+
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```js
 class Rabbit extends Animal {
   stop() {
@@ -175,9 +184,13 @@ setTimeout(function() { super.stop() }, 1000);
 ```
 ````
 
+<<<<<<< HEAD
 ## Ghi đè constructor
 
 Với các hàm tạo, nó đòi hỏi phải tinh tế một chút.
+=======
+## Overriding constructor
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Đến giờ, `Rabbit` chưa có `constructor` riêng.
 
@@ -278,12 +291,16 @@ alert(rabbit.earLength); // 10
 */!*
 ```
 
+<<<<<<< HEAD
 ### Ghi đề các trường của class: một lưu ý tinh tế
 
 ```warn header="Lưu ý nâng cao"
 Lưu ý này giả định rằng bạn có kinh nghiệm nhất định với các class, có thể trong các ngôn ngữ lập trình khác.
 
 Nó cung cấp cái nhìn sâu sắc hơn về ngôn ngữ và cũng giải thích hành vi mà có thể là nguồn gốc của các lỗi (nhưng không thường xuyên).
+=======
+### Overriding class fields: a tricky note
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Nếu bạn thấy nó khó hiểu, cứ đọc tiếp, rồi quay lại tìm hiểu nó vào một thời điểm nào đó sau này.
 ```
@@ -313,13 +330,21 @@ new Rabbit(); // động vật
 */!*
 ```
 
+<<<<<<< HEAD
 Ở đây class `Rabbit` mở rộng class `Animal` và ghi đè trường `name` với giá trị của riêng nó.
+=======
+Here, class `Rabbit` extends `Animal` and overrides the `name` field with its own value.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Không có constructor của riêng `Rabbit`, cho nên constructor của `Animal` được gọi.
 
 Điều thú vị là trong cả hai trường hợp: `new Animal()` và `new Rabbit()`, `alert` ở dòng đánh dấu `(*)` đều hiển thị `động vật`.
 
+<<<<<<< HEAD
 **Nói cách khác, constructor cha luôn sử dụng giá trị trường của chính nó, chứ không phải giá trị trường ghi đè.**
+=======
+**In other words, the parent constructor always uses its own field value, not the overridden one.**
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Có gì kỳ lạ về nó?
 
@@ -356,24 +381,40 @@ Và đó là những gì chúng ta vốn mong đợi. Khi constructor cha đư�
 
 ...Nhưng với các trường của class thì không phải như vậy. Như đã nói, constructor cha luôn sử dụng trường cha.
 
+<<<<<<< HEAD
 Tại sao lại có sự khác biệt này?
 
 Lí do là ở thứ tự khởi tạo trường. Trường của class được khởi tạo:
+=======
+Why is there a difference?
+
+Well, the reason is the field initialization order. The class field is initialized:
+- Before constructor for the base class (that doesn't extend anything),
+- Immediately after `super()` for the derived class.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 - Trước constructor đối với class cơ sở (mà không mở rộng bất kỳ class nào nữa),
 - Ngay sau `super()` đối với class con.
 
 Trong tình huống của chúng ta, `Rabbit` là class con. Nó không có `constructor()`. Như đã nói trước đây, điều đó giống như thể có một constructor rỗng với duy nhất `super(...args)`.
 
+<<<<<<< HEAD
 Vì vậy, `new Rabbit()` gọi `super()`, do đó thực thi constructor cha và chỉ sau đó các trường của nó mới được khởi tạo (theo quy tắc cho các class con). Tại thời điểm thực thi constructor cha, chưa có trường nào của `Rabbit`, đó là lý do tại sao các trường của `Animal` được sử dụng.
+=======
+This subtle difference between fields and methods is specific to JavaScript.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Sự khác biệt tinh vi giữa các trường và các phương thức này là đặc trưng cho JavaSript.
 
 May mắn thay, loại hành vi này chỉ tự lộ ra nếu một trường ghi đè được sử dụng trong constructor cha. Sau đó có thể khó để hiểu được những gì đang diễn ra, vậy nên chúng ta mới đang giải thích nó ở đây.
 
+<<<<<<< HEAD
 Nếu nó trở thành một vấn đề, người ta có thể khắc phục nó bằng cách sử dụng các phương thức hoặc getter/setter thay vì các trường.
 
 ## Super: bản chất, [[HomeObject]]
+=======
+## Super: internals, [[HomeObject]]
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```warn header="Thông tin nâng cao"
 Nếu bạn lần đầu tiên đọc hướng dẫn này - phần này có thể bỏ qua.
