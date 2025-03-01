@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Strange instanceof
+# instanceof lạ
 
-In the code below, why does `instanceof` return `true`? We can easily see that `a` is not created by `B()`.
+Trong mã bên dưới, tại sao `instanceof` lại trả về `true`? Chúng ta có thể dễ dàng thấy rằng `a` không được tạo bởi `B()`.
 
 ```js run
 function A() {}
