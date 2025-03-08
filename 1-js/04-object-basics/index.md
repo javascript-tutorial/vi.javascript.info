@@ -1,1 +1,1 @@
-# Objects: the basics
+# Đối tượng: Những thứ cơ bản
