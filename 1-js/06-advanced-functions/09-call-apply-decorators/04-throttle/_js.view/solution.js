@@ -7,23 +7,23 @@ function throttle(func, ms) {
   function wrapper() {
 
     if (isThrottled) {
-      // memo last arguments to call after the cooldown
+      // ghi nhớ đối số cuối cùng để gọi sau thời gian hồi
       savedArgs = arguments;
       savedThis = this;
       return;
     }
 
-    // otherwise go to cooldown state
+    // nếu không thì chuyển sang trạng thái hồi
     func.apply(this, arguments);
 
     isThrottled = true;
 
-    // plan to reset isThrottled after the delay
+    // kế hoạch thiết lập lại isThrottled sau sự chậm trễ
     setTimeout(function() {
       isThrottled = false;
       if (savedArgs) {
-        // if there were calls, savedThis/savedArgs have the last one
-        // recursive call runs the function and sets cooldown again
+        // nếu có cuộc gọi, thì saveThis/savedArgs có cuộc gọi cuối cùng
+        //cuộc gọi đệ quy chạy hàm và đặt lại thời gian hồi
         wrapper.apply(savedThis, savedArgs);
         savedArgs = savedThis = null;
       }

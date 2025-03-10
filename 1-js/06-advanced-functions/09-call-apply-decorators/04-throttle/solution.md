@@ -29,10 +29,10 @@ function throttle(func, ms) {
 }
 ```
 
-A call to `throttle(func, ms)` returns `wrapper`.
+Lệnh gọi `throttle(func, ms)` trả về `wrapper`.
 
-1. During the first call, the `wrapper` just runs `func` and sets the cooldown state (`isThrottled = true`).
-2. In this state all calls are memorized in `savedArgs/savedThis`. Please note that both the context and the arguments are equally important and should be memorized. We need them simultaneously to reproduce the call.
-3. After `ms` milliseconds pass, `setTimeout` triggers. The cooldown state is removed (`isThrottled = false`) and, if we had ignored calls, `wrapper` is executed with the last memorized arguments and context.
+1. Trong lần gọi đầu tiên, `wrapper` chỉ chạy `func` và đặt trạng thái hồi (`isThrottled = true`).
+2. Ở trạng thái này, tất cả các lệnh gọi đều được ghi nhớ trong `savedArgs/savedThis`. Hãy lưu ý rằng cả ngữ cảnh và đối số đều quan trọng như nhau và cần được ghi nhớ. Chúng ta cần chúng đồng thời để tái tạo cuộc gọi.
+3. Sau khi `ms` mili giây trôi qua, `setTimeout` sẽ kích hoạt. Trạng thái hồi bị loại bỏ (`isThrottled = false`) và nếu chúng ta đã bỏ qua các lệnh gọi, `wrapper` sẽ được thực thi với các đối số và ngữ cảnh được ghi nhớ cuối cùng.
 
-The 3rd step runs not `func`, but `wrapper`, because we not only need to execute `func`, but once again enter the cooldown state and setup the timeout to reset it.
+Bước thứ 3 chạy không phải `func`, mà là `wrapper`, bởi vì chúng ta không chỉ cần thực thi `func`, mà một lần nữa vào trạng thái hồi và thiết lập thời gian chờ để đặt lại nó.
