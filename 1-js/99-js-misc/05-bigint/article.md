@@ -2,21 +2,21 @@
 
 [recent caniuse="bigint"]
 
-`BigInt` is a special numeric type that provides support for integers of arbitrary length.
+`BigInt` là một kiểu số đặc biệt hỗ trợ cho các số nguyên có độ dài tùy ý.
 
-A bigint is created by appending `n` to the end of an integer literal or by calling the function `BigInt` that creates bigints from strings, numbers etc.
+Một bigint được tạo bằng cách thêm `n` vào cuối một chữ số nguyên hoặc bằng cách gọi hàm `BigInt`, hàm này tạo ra các bigint từ chuỗi, số, v.v.
 
 ```js
 const bigint = 1234567890123456789012345678901234567890n;
 
 const sameBigint = BigInt("1234567890123456789012345678901234567890");
 
-const bigintFromNumber = BigInt(10); // same as 10n
+const bigintFromNumber = BigInt(10); // giống với 10n
 ```
 
-## Math operators
+## Toán tử toán học
 
-`BigInt` can mostly be used like a regular number, for example:
+`BigInt` hầu hết có thể được sử dụng như một số thông thường, ví dụ:
 
 ```js run
 alert(1n + 2n); // 3
@@ -24,44 +24,44 @@ alert(1n + 2n); // 3
 alert(5n / 2n); // 2
 ```
 
-Please note: the division `5/2` returns the result rounded towards zero, without the decimal part. All operations on bigints return bigints.
+Xin lưu ý: phép chia `5/2` trả về kết quả được làm tròn về 0, không có phần thập phân. Tất cả các phép toán trên bigint đều trả về một bigint.
 
-We can't mix bigints and regular numbers:
+Chúng ta không thể trộn lẫn số bigint và số thông thường:
 
 ```js run
-alert(1n + 2); // Error: Cannot mix BigInt and other types
+alert(1n + 2); // Error: Không thể trộn BigInt and other types
 ```
 
-We should explicitly convert them if needed: using either `BigInt()` or `Number()`, like this:
+Chúng ta nên chuyển đổi chúng một cách rõ ràng nếu cần: sử dụng một trong hai `BigInt()` hoặc `Number()`, như thế này:
 
 ```js run
 let bigint = 1n;
 let number = 2;
 
-// number to bigint
+// number ➡ bigint
 alert(bigint + BigInt(number)); // 3
 
-// bigint to number
+// bigint ➡ number
 alert(Number(bigint) + number); // 3
 ```
 
-The conversion operations are always silent, never give errors, but if the bigint is too huge and won't fit the number type, then extra bits will be cut off, so we should be careful doing such conversion.
+Các thao tác chuyển đổi luôn diễn ra âm thầm, không bao giờ có error, nhưng nếu bigint quá lớn và không vừa với kiểu số thì các bit thừa sẽ bị cắt đi, vì vậy chúng ta nên cẩn thận khi thực hiện chuyển đổi như vậy.
 
-````smart header="The unary plus is not supported on bigints"
-The unary plus operator `+value` is a well-known way to convert `value` to a number.
+````smart header="Dấu cộng không được hỗ trợ trên bigint"
+Toán tử cộng `+value` là một cách phổ biến để chuyển đổi `value` thành số.
 
-In order to avoid confusion, it's not supported on bigints:
+Để tránh nhầm lẫn, nó không được hỗ trợ trên bigint:
 ```js run
 let bigint = 1n;
 
 alert( +bigint ); // error
 ```
-So we should use `Number()` to convert a bigint to a number.
+Vì vậy chúng ta nên sử dụng `Number()` để chuyển đổi một bigint thành một số.
 ````
 
-## Comparisons
+## So sánh
 
-Comparisons, such as `<`, `>` work with bigints and numbers just fine:
+Các phép so sánh, chẳng hạn như `<`, `>` hoạt động tốt với các bigint và số:
 
 ```js run
 alert( 2n > 1n ); // true
@@ -69,7 +69,7 @@ alert( 2n > 1n ); // true
 alert( 2n > 1 ); // true
 ```
 
-Please note though, as numbers and bigints belong to different types, they can be equal `==`, but not strictly equal `===`:
+Tuy nhiên, xin lưu ý vì số và bigint thuộc các loại khác nhau nên chúng có thể bằng nhau `==`, nhưng không hoàn toàn bằng nhau `===`:
 
 ```js run
 alert( 1 == 1n ); // true
@@ -77,54 +77,54 @@ alert( 1 == 1n ); // true
 alert( 1 === 1n ); // false
 ```
 
-## Boolean operations
+## Các phép toán Boolean
 
-When inside `if` or other boolean operations, bigints behave like numbers.
+Khi ở bên trong `if` hoặc các phép toán boolean khác, bigint hoạt động giống như một số.
 
-For instance, in `if`, bigint `0n` is falsy, other values are truthy:
+Ví dụ: trong `if`, bigint `0n` là false, các giá trị khác là true:
 
 ```js run
 if (0n) {
-  // never executes
+  // không bao giờ thực thi
 }
 ```
 
-Boolean operators, such as `||`, `&&` and others also work with bigints similar to numbers:
+Các toán tử Boolean, chẳng hạn như `||`, `&&` và các toán tử khác cũng hoạt động với các bigint tương tự như số:
 
 ```js run
-alert( 1n || 2 ); // 1 (1n is considered truthy)
+alert( 1n || 2 ); // 1 (1n được coi là true)
 
-alert( 0n || 2 ); // 2 (0n is considered falsy)
+alert( 0n || 2 ); // 2 (0n được coi là false)
 ```
 
-## Polyfills
+## Polyfill
 
-Polyfilling bigints is tricky. The reason is that many JavaScript operators, such as `+`, `-` and so on behave differently with bigints compared to regular numbers.
+Polyfill bigint là một công việc khó khăn. Lý do là nhiều toán tử JavaScript, chẳng hạn như `+`, `-` v.v., hoạt động khác với bigint so với các số thông thường.
 
-For example, division of bigints always returns a bigint (rounded if necessary).
+Ví dụ: phép chia bigint luôn trả về một bigint (làm tròn nếu cần).
 
-To emulate such behavior, a polyfill would need to analyze the code and replace all such operators with its functions. But doing so is cumbersome and would cost a lot of performance.
+Để mô phỏng hành vi như vậy, một polyfill sẽ cần phân tích code và thay thế tất cả các toán tử đó bằng các hàm của nó. Nhưng làm như vậy thì cồng kềnh và tốn nhiều công sức.
 
-So, there's no well-known good polyfill.
+Vì vậy, không có polyfill nào tốt được nhiều người biết.
 
-Although, the other way around is proposed by the developers of [JSBI](https://github.com/GoogleChromeLabs/jsbi) library.
+Mặc dù vậy, một cách giải quyết khác đã được đề xuất bởi các nhà phát triển của thư viện [JSBI](https://github.com/GoogleChromeLabs/jsbi).
 
-This library implements big numbers using its own methods. We can use them instead of native bigints:
+Thư viện này sử dụng các phương pháp riêng của mình để thực hiện big number. Chúng ta có thể sử dụng cái này thay vì bigint gốc:
 
-| Operation | native `BigInt` | JSBI |
+| Thao tác | `BigInt` gốc | JSBI |
 |-----------|-----------------|------|
-| Creation from Number | `a = BigInt(789)` | `a = JSBI.BigInt(789)` |
-| Addition | `c = a + b` | `c = JSBI.add(a, b)` |
-| Subtraction	| `c = a - b` | `c = JSBI.subtract(a, b)` |
+| Tạo từ số | `a = BigInt(789)` | `a = JSBI.BigInt(789)` |
+| Phép cộng | `c = a + b` | `c = JSBI.add(a, b)` |
+| Phép trừ	| `c = a - b` | `c = JSBI.subtract(a, b)` |
 | ... | ... | ... |
 
-...And then use the polyfill (Babel plugin) to convert JSBI calls to native bigints for those browsers that support them.
+...Và sau đó, sử dụng polyfill (plugin Babel) để chuyển đổi lệnh gọi JSBI thành bigint gốc được trình duyệt hỗ trợ.
 
-In other words, this approach suggests that we write code in JSBI instead of native bigints. But JSBI works with numbers as with bigints internally, emulates them closely following the specification, so the code will be "bigint-ready".
+Nói cách khác, cách tiếp cận này gợi ý rằng chúng ta viết code bằng JSBI thay vì viết bằng bigint gốc. Nhưng JSBI hoạt động với các con số giống như với bigint trong nội bộ, mô phỏng chúng theo sát với thông số kỹ thuật nên code này "nhận biết được bigint".
 
-We can use such JSBI code "as is" for engines that don't support bigints and for those that do support - the polyfill will convert the calls to native bigints.
+Chúng ta có thể sử dụng mã JSBI "nguyên si" như vậy cho các công cụ không hỗ trợ bigint và cho cả những công cụ có hỗ trợ - polyfill sẽ chuyển đổi các lệnh gọi thành bigint gốc.
 
-## References
+## Tham khảo
 
-- [MDN docs on BigInt](mdn:/JavaScript/Reference/Global_Objects/BigInt).
-- [Specification](https://tc39.es/ecma262/#sec-bigint-objects).
+- [Tài liệu BigInt trên MDN](mdn:/JavaScript/Reference/Global_Objects/BigInt).
+- [Đặc điểm kỹ thuật](https://tc39.es/ecma262/#sec-bigint-objects).
