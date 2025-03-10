@@ -1,141 +1,141 @@
-# Date and time
+# Ngày và giờ
 
-Let's meet a new built-in object: [Date](mdn:js/Date). It stores the date, time and provides methods for date/time management.
+Hãy làm quen với một đối tượng được tích hợp mới: [Date](mdn:js/Date). Nó lưu trữ ngày, giờ và cung cấp các phương thức để quản lý ngày/giờ.
 
-For instance, we can use it to store creation/modification times, to measure time, or just to print out the current date.
+Chẳng hạn, chúng ta có thể sử dụng nó để lưu trữ, tạo/sửa đổi thời gian, để đo thời gian hoặc chỉ để in ra ngày hiện tại.
 
-## Creation
+## Tạo
 
-To create a new `Date` object call `new Date()` with one of the following arguments:
+Để tạo một đối tượng `Date` mới, hãy gọi `new Date()` với một trong các đối số sau:
 
 `new Date()`
-: Without arguments -- create a `Date` object for the current date and time:
+: Không có đối số -- tạo đối tượng `Date` cho ngày và giờ hiện tại:
 
     ```js run
     let now = new Date();
-    alert( now ); // shows current date/time
+    alert( now ); // hiển thị ngày/giờ hiện tại
     ```
 
 `new Date(milliseconds)`
-: Create a `Date` object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+: Tạo đối tượng `Date` với thời gian bằng số mili giây (1/1000 giây) được chuyển sau ngày 1 tháng 1 năm 1970 UTC+0.
 
     ```js run
-    // 0 means 01.01.1970 UTC+0
+    // 0 nghĩa là 01.01.1970 UTC+0
     let Jan01_1970 = new Date(0);
     alert( Jan01_1970 );
 
-    // now add 24 hours, get 02.01.1970 UTC+0
+    // bây giờ thêm 24 giờ, nhận được 02.01.1970 UTC+0
     let Jan02_1970 = new Date(24 * 3600 * 1000);
     alert( Jan02_1970 );
     ```
 
-    An integer number representing the number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
+    Một số nguyên đại diện cho số mili giây đã trôi qua kể từ đầu năm 1970 được gọi là *dấu thời gian*.
 
-    It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
+    Đó là một đại diện số nhẹ của một ngày. Chúng ta luôn có thể tạo ngày từ dấu thời gian bằng cách sử dụng `new Date(timestamp)` và chuyển đổi đối tượng `Date` hiện có thành dấu thời gian bằng cách sử dụng phương thức `date.getTime()` (xem bên dưới).
 
-    Dates before 01.01.1970 have negative timestamps, e.g.:
+    Ngày trước 01.01.1970 có dấu thời gian âm, ví dụ:
     ```js run
-    // 31 Dec 1969
+    // 31 tháng 12 năm 1969
     let Dec31_1969 = new Date(-24 * 3600 * 1000);
     alert( Dec31_1969 );
     ```
 
 `new Date(datestring)`
-: If there is a single argument, and it's a string, then it is parsed automatically. The algorithm is the same as `Date.parse` uses, we'll cover it later.
+: Nếu có một đối số duy nhất và đó là một chuỗi thì nó sẽ được phân tích cú pháp tự động. Thuật toán giống như cách sử dụng `Date.parse`, chúng ta sẽ đề cập đến nó sau.
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // The time is not set, so it's assumed to be midnight GMT and
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
-    // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
-    // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
+    // Thời gian không được đặt, do đó, nó được coi là nửa đêm theo giờ GMT và
+    // được điều chỉnh theo múi giờ mà mã được chạy
+    // Vì vậy, kết quả có thể là
+    // Thứ Năm, ngày 26 tháng 1 năm 2017 11:00:00 GMT+1100 (Giờ ban ngày miền Đông nước Úc)
+    // hoặc
+    // Thứ tư ngày 25 tháng 1 năm 2017 16:00:00 GMT-0800 (Giờ chuẩn Thái Bình Dương)
     ```
 
 `new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+: Tạo ngày với các thành phần đã cho theo múi giờ địa phương. Chỉ có hai đối số đầu tiên là bắt buộc.
 
-    - The `year` must have 4 digits: `2013` is okay, `98` is not.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+    - `year` phải có 4 chữ số: `2013` được, `98` thì không.
+    - Số lượng `month` bắt đầu bằng `0` (tháng 1), cho đến `11` (tháng 12).
+    - Tham số `date` thực sự là ngày trong tháng, nếu không có thì `1` được giả định.
+    - Nếu `hours/minute/seconds/ms` không có, chúng được coi là bằng `0`.
 
-    For instance:
+    Ví dụ:
 
     ```js
-    new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    new Date(2011, 0, 1, 0, 0, 0, 0); // Ngày 1 tháng 1 năm 2011, 00:00:00
+    new Date(2011, 0, 1); // giống nhau, giờ vv là 0 theo mặc định
     ```
 
-    The maximal precision is 1 ms (1/1000 sec):
+    Độ chính xác tối đa là 1 ms (1/1000 giây):
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
     alert( date ); // 1.01.2011, 02:03:04.567
     ```
 
-## Access date components
+## Truy cập thành phần ngày
 
-There are methods to access the year, month and so on from the `Date` object:
+Có các phương thức để truy cập năm, tháng, v.v. từ đối tượng `Date`:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Get the year (4 digits)
+: Lấy năm (4 chữ số)
 
 [getMonth()](mdn:js/Date/getMonth)
-: Get the month, **from 0 to 11**.
+: Lấy tháng, **từ 0 đến 11**.
 
 [getDate()](mdn:js/Date/getDate)
-: Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
+: Lấy ngày trong tháng, từ 1 đến 31, tên của phương thức trông hơi lạ.
 
 [getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
-: Get the corresponding time components.
+: Lấy các thành phần thời gian tương ứng.
 
-```warn header="Not `getYear()`, but `getFullYear()`"
-Many JavaScript engines implement a non-standard method `getYear()`. This method is deprecated. It returns 2-digit year sometimes. Please never use it. There is `getFullYear()` for the year.
+```warn header="Không phải `getYear()`, mà là `getFullYear()`"
+Nhiều JavaScript engine triển khai một phương thức không chuẩn `getYear()`. Phương pháp này không được chấp nhận. Đôi khi nó trả về năm có 2 chữ số. Xin vui lòng không bao giờ sử dụng nó. Có `getFullYear()` cho năm.
 ```
 
-Additionally, we can get a day of week:
+Ngoài ra, chúng ta có thể nhận được một ngày trong tuần:
 
 [getDay()](mdn:js/Date/getDay)
-: Get the day of week, from `0` (Sunday) to `6` (Saturday). The first day is always Sunday, in some countries that's not so, but can't be changed.
+: Lấy ngày trong tuần, từ `0` (Chủ Nhật) đến `6` (Thứ Bảy). Ngày đầu tiên luôn là Chủ nhật, ở một số quốc gia thì không như vậy nhưng không thể thay đổi.
 
-**All the methods above return the components relative to the local time zone.**
+**Tất cả các phương pháp trên trả về các thành phần liên quan đến múi giờ địa phương.**
 
-There are also their UTC-counterparts, that return day, month, year and so on for the time zone UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Just insert the `"UTC"` right after `"get"`.
+Ngoài ra còn có các đối tác UTC của chúng, trả về ngày, tháng, năm, v.v. cho múi giờ UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js /Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Chỉ cần chèn `"UTC"` ngay sau `"get"`.
 
-If your local time zone is shifted relative to UTC, then the code below shows different hours:
+Nếu múi giờ địa phương của bạn bị thay đổi so với UTC, thì mã bên dưới sẽ hiển thị các giờ khác nhau:
 
 ```js run
-// current date
+// ngày hiện tại
 let date = new Date();
 
-// the hour in your current time zone
+// giờ trong múi giờ hiện tại của bạn
 alert( date.getHours() );
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// giờ theo múi giờ UTC+0 (giờ Luân Đôn không tiết kiệm ánh sáng ban ngày)
 alert( date.getUTCHours() );
 ```
 
-Besides the given methods, there are two special ones that do not have a UTC-variant:
+Bên cạnh các phương thức đã cho, có hai phương thức đặc biệt không có biến thể UTC:
 
 [getTime()](mdn:js/Date/getTime)
-: Returns the timestamp for the date -- a number of milliseconds passed from the January 1st of 1970 UTC+0.
+: Trả về dấu thời gian cho ngày -- một số mili giây được truyền từ ngày 1 tháng 1 năm 1970 UTC+0.
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-: Returns the difference between UTC and the local time zone, in minutes:
+: Trả về sự khác biệt giữa UTC và múi giờ địa phương, tính bằng phút:
 
     ```js run
-    // if you are in timezone UTC-1, outputs 60
-    // if you are in timezone UTC+3, outputs -180
+    // nếu bạn đang ở múi giờ UTC-1, kết quả là 60
+    // nếu bạn đang ở múi giờ UTC+3, kết quả là -180
     alert( new Date().getTimezoneOffset() );
 
     ```
 
-## Setting date components
+## Đặt thành phần ngày
 
-The following methods allow to set date/time components:
+Các phương pháp sau đây cho phép thiết lập các thành phần ngày/giờ:
 
 - [`setFullYear(year, [month], [date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month, [date])`](mdn:js/Date/setMonth)
@@ -144,38 +144,38 @@ The following methods allow to set date/time components:
 - [`setMinutes(min, [sec], [ms])`](mdn:js/Date/setMinutes)
 - [`setSeconds(sec, [ms])`](mdn:js/Date/setSeconds)
 - [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
-- [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
+- [`setTime(milliseconds)`](mdn:js/Date/setTime) (đặt toàn bộ ngày theo mili giây kể từ 01.01.1970 UTC)
 
-Every one of them except `setTime()` has a UTC-variant, for instance: `setUTCHours()`.
+Mỗi một trong số chúng ngoại trừ `setTime()` đều có một biến thể UTC, ví dụ: `setUTCHours()`.
 
-As we can see, some methods can set multiple components at once, for example `setHours`. The components that are not mentioned are not modified.
+Như chúng ta có thể thấy, một số phương thức có thể thiết lập nhiều thành phần cùng một lúc, ví dụ `setHours`. Các thành phần không được đề cập không được sửa đổi.
 
-For instance:
+Ví dụ:
 
 ```js run
 let today = new Date();
 
 today.setHours(0);
-alert(today); // still today, but the hour is changed to 0
+alert(today); // vẫn là hôm nay, nhưng giờ được đổi thành 0
 
 today.setHours(0, 0, 0, 0);
-alert(today); // still today, now 00:00:00 sharp.
+alert(today); // vẫn là hôm nay, bây giờ 00:00:00 đúng.
 ```
 
-## Autocorrection
+## Tự động sửa lỗi
 
-The *autocorrection* is a very handy feature of `Date` objects. We can set out-of-range values, and it will auto-adjust itself.
+*Tự động sửa lỗi* là một tính năng rất tiện dụng của các đối tượng `Date`. Chúng ta có thể đặt các giá trị nằm ngoài phạm vi và nó sẽ tự động điều chỉnh.
 
-For instance:
+Ví dụ:
 
 ```js run
-let date = new Date(2013, 0, *!*32*/!*); // 32 Jan 2013 ?!?
-alert(date); // ...is 1st Feb 2013!
+let date = new Date(2013, 0, *!*32*/!*); // 32 tháng 1 năm 2013 ?!?
+alert(date); // ...là ngày 1 tháng 2 năm 2013!
 ```
 
-Out-of-range date components are distributed automatically.
+Các thành phần ngày nằm ngoài phạm vi được phân phối tự động.
 
-Let's say we need to increase the date "28 Feb 2016" by 2 days. It may be "2 Mar" or "1 Mar" in case of a leap-year. We don't need to think about it. Just add 2 days. The `Date` object will do the rest:
+Giả sử chúng ta cần tăng ngày "28 Feb 2016" thêm 2 ngày. Nó có thể là "2 tháng 3" hoặc "1 tháng 3" trong trường hợp năm nhuận. Chúng ta không cần phải suy nghĩ về nó. Chỉ cần thêm 2 ngày. Đối tượng `Date` sẽ làm phần còn lại:
 
 ```js run
 let date = new Date(2016, 1, 28);
@@ -183,112 +183,112 @@ let date = new Date(2016, 1, 28);
 date.setDate(date.getDate() + 2);
 */!*
 
-alert( date ); // 1 Mar 2016
+alert( date ); // 1 Tháng 3 năm 2016
 ```
 
-That feature is often used to get the date after the given period of time. For instance, let's get the date for "70 seconds after now":
+Tính năng đó thường được sử dụng để lấy ngày sau một khoảng thời gian nhất định. Chẳng hạn, hãy lấy ngày cho "70 giây sau bây giờ":
 
 ```js run
 let date = new Date();
 date.setSeconds(date.getSeconds() + 70);
 
-alert( date ); // shows the correct date
+alert( date ); // hiển thị ngày chính xác
 ```
 
-We can also set zero or even negative values. For example:
+Chúng ta cũng có thể đặt giá trị bằng 0 hoặc thậm chí âm. Ví dụ:
 
 ```js run
-let date = new Date(2016, 0, 2); // 2 Jan 2016
+let date = new Date(2016, 0, 2); // 2 tháng 1 năm 2016
 
-date.setDate(1); // set day 1 of month
+date.setDate(1); // đặt ngày 1 của tháng
 alert( date );
 
-date.setDate(0); // min day is 1, so the last day of the previous month is assumed
-alert( date ); // 31 Dec 2015
+date.setDate(0); // ngày tối thiểu là 1, vì vậy ngày cuối cùng của tháng trước được giả định
+alert( date ); // 31 tháng 12 năm 2015
 ```
 
-## Date to number, date diff
+## Ngày thành số, ngày khác
 
-When a `Date` object is converted to number, it becomes the timestamp same as `date.getTime()`:
+Khi một đối tượng `Date` được chuyển đổi thành số, nó sẽ trở thành dấu thời gian giống như `date.getTime()`:
 
 ```js run
 let date = new Date();
-alert(+date); // the number of milliseconds, same as date.getTime()
+alert(+date); // số mili giây, giống như date.getTime()
 ```
 
-The important side effect: dates can be subtracted, the result is their difference in ms.
+Tác dụng phụ quan trọng: ngày có thể được trừ đi, kết quả là sự khác biệt của chúng tính bằng ms.
 
-That can be used for time measurements:
+Điều đó có thể được sử dụng để đo thời gian:
 
 ```js run
-let start = new Date(); // start measuring time
+let start = new Date(); // bắt đầu đo thời gian
 
-// do the job
+// thực hiện công việc
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-let end = new Date(); // end measuring time
+let end = new Date(); // kết thúc thời gian đo
 
 alert( `The loop took ${end - start} ms` );
 ```
 
 ## Date.now()
 
-If we only want to measure time, we don't need the `Date` object.
+Nếu chúng ta chỉ muốn đo thời gian, chúng ta không cần đối tượng `Date`.
 
-There's a special method `Date.now()` that returns the current timestamp.
+Có một phương thức đặc biệt `Date.now()` trả về dấu thời gian hiện tại.
 
-It is semantically equivalent to `new Date().getTime()`, but it doesn't create an intermediate `Date` object. So it's faster and doesn't put pressure on garbage collection.
+Về mặt ngữ nghĩa, nó tương đương với `new Date().getTime()`, nhưng nó không tạo đối tượng `Date` trung gian. Vì vậy, nó nhanh hơn và không gây áp lực cho việc thu gom rác.
 
-It is used mostly for convenience or when performance matters, like in games in JavaScript or other specialized applications.
+Nó được sử dụng chủ yếu để thuận tiện hoặc khi hiệu suất quan trọng, chẳng hạn như trong các trò chơi bằng JavaScript hoặc các ứng dụng chuyên dụng khác.
 
-So this is probably better:
+Vì vậy, điều này có lẽ là tốt hơn:
 
 ```js run
 *!*
-let start = Date.now(); // milliseconds count from 1 Jan 1970
+let start = Date.now(); // mili giây tính từ ngày 1 tháng 1 năm 1970
 */!*
 
-// do the job
+// thực hiện công việc
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
 *!*
-let end = Date.now(); // done
+let end = Date.now(); // xong
 */!*
 
-alert( `The loop took ${end - start} ms` ); // subtract numbers, not dates
+alert( `The loop took ${end - start} ms` ); // trừ số, không phải ngày
 ```
 
-## Benchmarking
+## Chấm điểm
 
-If we want a reliable benchmark of CPU-hungry function, we should be careful.
+Nếu chúng ta muốn có một điểm chuẩn đáng tin cậy của hàm ngốn CPU, chúng ta nên cẩn thận.
 
-For instance, let's measure two functions that calculate the difference between two dates: which one is faster?
+Chẳng hạn, hãy đo lường hai hàm tính toán sự khác biệt giữa hai ngày: hàm nào nhanh hơn?
 
-Such performance measurements are often called "benchmarks".
+Các phép đo hiệu suất như vậy thường được gọi là "chấm điểm".
 
 ```js
-// we have date1 and date2, which function faster returns their difference in ms?
+// chúng ta có date1 và date2, hàm nào trả về chênh lệch đơn vị ms nhanh hơn?
 function diffSubtract(date1, date2) {
   return date2 - date1;
 }
 
-// or
+// hoặc
 function diffGetTime(date1, date2) {
   return date2.getTime() - date1.getTime();
 }
 ```
 
-These two do exactly the same thing, but one of them uses an explicit `date.getTime()` to get the date in ms, and the other one relies on a date-to-number transform. Their result is always the same.
+Hai cái này thực hiện chính xác cùng một việc, nhưng một trong số chúng sử dụng `date.getTime()` rõ ràng để lấy ngày tính bằng ms và cái còn lại dựa vào phép biến đổi ngày thành số. Kết quả của chúng luôn giống nhau.
 
-So, which one is faster?
+Vậy, cái nào nhanh hơn?
 
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
+Ý tưởng đầu tiên có thể là chạy chúng nhiều lần liên tiếp và đo chênh lệch thời gian. Đối với trường hợp của chúng ta, các hàm rất đơn giản, vì vậy chúng ta phải thực hiện ít nhất 100000 lần.
 
-Let's measure:
+Hãy đo:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -312,19 +312,19 @@ alert( 'Time of diffSubtract: ' + bench(diffSubtract) + 'ms' );
 alert( 'Time of diffGetTime: ' + bench(diffGetTime) + 'ms' );
 ```
 
-Wow! Using `getTime()` is so much faster! That's because there's no type conversion, it is much easier for engines to optimize.
+Ồ! Sử dụng `getTime()` nhanh hơn rất nhiều! Đó là bởi vì không có chuyển đổi loại, các engine sẽ tối ưu hóa dễ dàng hơn nhiều.
 
-Okay, we have something. But that's not a good benchmark yet.
+Được rồi, chúng ta có một cái gì đó. Nhưng đó vẫn chưa phải là một điểm chuẩn tốt.
 
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
+Hãy tưởng tượng rằng tại thời điểm chạy `bench(diffSubtract)` CPU đang làm một việc gì đó song song và nó đang lấy tài nguyên. Và vào thời điểm chạy `bench(diffGetTime)` thì công việc đó đã hoàn thành.
 
-A pretty real scenario for a modern multi-process OS.
+Một kịch bản khá thực tế cho một hệ điều hành đa tiến trình hiện đại.
 
-As a result, the first benchmark will have less CPU resources than the second. That may lead to wrong results.
+Do đó, điểm chuẩn đầu tiên sẽ có ít tài nguyên CPU hơn điểm chuẩn thứ hai. Điều đó có thể dẫn đến kết quả sai.
 
-**For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.**
+**Để đo điểm chuẩn đáng tin cậy hơn, toàn bộ màn chấm điểm phải được chạy lại nhiều lần.**
 
-For example, like this:
+Ví dụ, như thế này:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -348,7 +348,7 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
+// chạy màn chấm điểm (diffSubtract) và màn chấm điểm (diffGetTime) mỗi lần 10 lần xen kẽ
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -359,50 +359,50 @@ alert( 'Total time for diffSubtract: ' + time1 );
 alert( 'Total time for diffGetTime: ' + time2 );
 ```
 
-Modern JavaScript engines start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+Các JavaScript engine hiện đại chỉ bắt đầu áp dụng tối ưu hóa nâng cao cho "mã nóng" thực thi nhiều lần (không cần tối ưu hóa những thứ hiếm khi được thực thi). Vì vậy, trong ví dụ trên, lần thực thi đầu tiên không được tối ưu hóa tốt. Chúng ta có thể muốn thêm một lần khởi động:
 
 ```js
-// added for "heating up" prior to the main loop
+// được thêm vào để "làm nóng" trước vòng lặp chính
 bench(diffSubtract);
 bench(diffGetTime);
 
-// now benchmark
+// bây giờ chấm điểm
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
 }
 ```
 
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+```warn header="Hãy cẩn thận khi thực hiện chấm điểm rất nhỏ"
+Các JavaScript engine hiện đại thực hiện nhiều tối ưu hóa. Họ có thể điều chỉnh kết quả của "các bài kiểm tra nhân tạo" so với "việc sử dụng thông thường", đặc biệt là khi chúng ta đánh giá một thứ gì đó rất nhỏ, chẳng hạn như cách thức hoạt động của một toán tử hoặc một hàm tích hợp sẵn. Vì vậy, nếu bạn thực sự muốn hiểu hiệu suất, thì hãy nghiên cứu cách thức hoạt động của công cụ JavaScript. Và sau đó, bạn có thể sẽ không cần chấm điểm rất nhỏ nữa.
 
-The great pack of articles about V8 can be found at <http://mrale.ph>.
+Bạn có thể tìm thấy những bài viết tuyệt vời về V8 tại <http://mrale.ph>.
 ```
 
-## Date.parse from a string
+## Date.parse từ một chuỗi
 
-The method [Date.parse(str)](mdn:js/Date/parse) can read a date from a string.
+Phương thức [Date.parse(str)](mdn:js/Date/parse) có thể đọc ngày từ một chuỗi.
 
-The string format should be: `YYYY-MM-DDTHH:mm:ss.sssZ`, where:
+Định dạng chuỗi nên là: `YYYY-MM-DDTHH:mm:ss.sssZ`, trong đó:
 
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+- `YYYY-MM-DD` -- là ngày: năm-tháng-ngày.
+- Ký tự `"T"` được sử dụng làm dấu phân cách.
+- `HH:mm:ss.sss` -- là thời gian: giờ, phút, giây và mili giây.
+- Phần `'Z'` tùy chọn biểu thị múi giờ ở định dạng `+-hh:mm`. Một chữ cái `Z` có nghĩa là UTC+0.
 
-Shorter variants are also possible, like `YYYY-MM-DD` or `YYYY-MM` or even `YYYY`.
+Cũng có thể có các biến thể ngắn hơn, chẳng hạn như `YYYY-MM-DD` hoặc `YYYY-MM` hoặc thậm chí `YYYY`.
 
-The call to `Date.parse(str)` parses the string in the given format and returns the timestamp (number of milliseconds from 1 Jan 1970 UTC+0). If the format is invalid, returns `NaN`.
+Lệnh gọi `Date.parse(str)` phân tích cú pháp chuỗi ở định dạng đã cho và trả về dấu thời gian (số mili giây từ ngày 1 tháng 1 năm 1970 UTC+0). Nếu định dạng không hợp lệ, trả về `NaN`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 
-alert(ms); // 1327611110417  (timestamp)
+alert(ms); // 1327611110417  (dấu thời gian)
 ```
 
-We can instantly create a `new Date` object from the timestamp:
+Chúng ta có thể tạo ngay một đối tượng `new Date` từ dấu thời gian:
 
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
@@ -410,24 +410,24 @@ let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 alert(date);  
 ```
 
-## Summary
+## Tóm tắt
 
-- Date and time in JavaScript are represented with the [Date](mdn:js/Date) object. We can't create "only date" or "only time": `Date` objects always carry both.
-- Months are counted from zero (yes, January is a zero month).
-- Days of week in `getDay()` are also counted from zero (that's Sunday).
-- `Date` auto-corrects itself when out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Dates can be subtracted, giving their difference in milliseconds. That's because a `Date` becomes the timestamp when converted to a number.
-- Use `Date.now()` to get the current timestamp fast.
+- Ngày và giờ trong JavaScript được biểu thị bằng đối tượng [Date](mdn:js/Date). Chúng ta không thể tạo "chỉ ngày" hoặc "chỉ thời gian": Các đối tượng `Date` luôn mang cả hai.
+- Các tháng được tính từ 0 (đúng, tháng 1 là tháng 0).
+- Các ngày trong tuần trong `getDay()` cũng được tính từ 0 (đó là Chủ Nhật).
+- `Ngày` tự động sửa khi các thành phần nằm ngoài phạm vi được đặt. Tốt cho việc cộng/trừ ngày/tháng/giờ.
+- Ngày có thể được trừ đi, đưa ra sự khác biệt của chúng tính bằng mili giây. Đó là vì `Ngày` trở thành dấu thời gian khi được chuyển đổi thành số.
+- Sử dụng `Date.now()` để lấy nhanh dấu thời gian hiện tại.
 
-Note that unlike many other systems, timestamps in JavaScript are in milliseconds, not in seconds.
+Lưu ý rằng không giống như nhiều hệ thống khác, dấu thời gian trong JavaScript tính bằng mili giây chứ không phải giây.
 
-Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+Đôi khi chúng ta cần các phép đo thời gian chính xác hơn. Bản thân JavaScript không có cách đo thời gian tính bằng micro giây (1 phần triệu giây), nhưng hầu hết các môi trường đều cung cấp tính năng này. Chẳng hạn, trình duyệt có [performance.now()](mdn:api/Performance/now) cung cấp số mili giây kể từ khi bắt đầu tải trang với độ chính xác micro giây (3 chữ số sau dấu chấm):
 
 ```js run
-alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+alert(`Bắt đầu tải ${performance.now()}ms trước`);
+// Cái gì đó như: "Bắt đầu tải 34731.26000000001ms trước"
+// .26 là micro giây (260 micro giây)
+// hơn 3 chữ số sau dấu thập phân là lỗi chính xác, chỉ 3 chữ số đầu tiên là đúng
 ```
 
-Node.js has `microtime` module and other ways. Technically, almost any device and environment allows to get more precision, it's just not in `Date`.
+Node.js có mô-đun `microtime` và các cách khác. Về mặt kỹ thuật, hầu hết mọi thiết bị và môi trường đều cho phép đạt được độ chính xác cao hơn, chỉ là không ở `Date`.

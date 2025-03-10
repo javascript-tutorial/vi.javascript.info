@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# How many seconds till tomorrow?
+# Còn bao nhiêu giây cho đến ngày mai?
 
-Create a function `getSecondsToTomorrow()` that returns the number of seconds till tomorrow.
+Tạo một hàm `getSecondsToTomorrow()` trả về số giây cho đến ngày mai.
 
-For instance, if now is `23:00`, then:
+Chẳng hạn, nếu bây giờ là `23:00`, thì:
 
 ```js
 getSecondsToTomorrow() == 3600
 ```
 
-P.S. The function should work at any day, the "today" is not hardcoded.
+Tái bút: Hàm sẽ hoạt động vào bất kỳ ngày nào, "hôm nay" không được mã hóa cứng.

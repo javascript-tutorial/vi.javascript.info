@@ -2,16 +2,16 @@ importance: 4
 
 ---
 
-# Format the relative date
+# Định dạng ngày tương đối
 
-Write a function `formatDate(date)` that should format `date` as follows:
+Viết một hàm `formatDate(date)` sẽ định dạng `date` như sau:
 
-- If since `date` passed less than 1 second, then `"right now"`.
-- Otherwise, if since `date` passed less than 1 minute, then `"n sec. ago"`.
-- Otherwise, if less than an hour, then `"m min. ago"`.
-- Otherwise, the full date in the format `"DD.MM.YY HH:mm"`. That is: `"day.month.year hours:minutes"`, all in 2-digit format, e.g. `31.12.16 10:00`.
+- Nếu kể từ `date` trôi qua chưa đến 1 giây, thì `"right now"`.
+- Ngược lại, nếu kể từ `date` chưa đến 1 phút, thì `"n sec. ago"`.
+- Ngược lại, nếu ít hơn một giờ, thì `"m min. ago"`.
+- Nếu không, ngày đầy đủ ở định dạng `"DD.MM.YY HH:mm"`. Đó là: `"ngày.tháng.năm giờ:phút"`, tất cả đều ở định dạng 2 chữ số, ví dụ: `31.12.16 10:00`.
 
-For instance:
+Ví dụ:
 
 ```js
 alert( formatDate(new Date(new Date - 1)) ); // "right now"
@@ -20,6 +20,6 @@ alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sec. ago"
 
 alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 min. ago"
 
-// yesterday's date like 31.12.16 20:00
+// ngày hôm qua như 31.12.16 20:00
 alert( formatDate(new Date(new Date - 86400 * 1000)) );
 ```

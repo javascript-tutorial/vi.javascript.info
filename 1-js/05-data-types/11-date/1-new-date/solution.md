@@ -1,15 +1,15 @@
-The `new Date` constructor uses the local time zone. So the only important thing to remember is that months start from zero.
+Hàm tạo `new Date` sử dụng múi giờ địa phương. Vì vậy, điều quan trọng duy nhất cần nhớ là tháng bắt đầu từ con số không.
 
-So February has number 1.
+Vậy tháng 2 có số 1.
 
-Here's an example with numbers as date components:
+Đây là một ví dụ với các số là thành phần ngày:
 
 ```js run
 //new Date(year, month, date, hour, minute, second, millisecond)
 let d1 = new Date(2012, 1, 20, 3, 12);
 alert( d1 );
 ```
-We could also create a date from a string, like this:
+Chúng ta cũng có thể tạo một ngày từ một chuỗi, như thế này:
 
 ```js run
 //new Date(datastring)
