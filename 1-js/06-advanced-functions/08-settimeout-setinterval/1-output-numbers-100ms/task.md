@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Output every second
+# Đầu ra mỗi giây
 
-Write a function `printNumbers(from, to)` that outputs a number every second, starting from `from` and ending with `to`.
+Viết hàm `printNumbers(from, to)` xuất ra một số mỗi giây, bắt đầu từ `from` và kết thúc bằng `to`.
 
-Make two variants of the solution.
+Thực hiện hai biến thể của giải pháp.
 
-1. Using `setInterval`.
-2. Using nested `setTimeout`.
+1. Sử dụng `setInterval`.
+2. Sử dụng `setTimeout` lồng nhau.

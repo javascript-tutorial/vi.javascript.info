@@ -1,5 +1,5 @@
 
-Using `setInterval`:
+Sử dụng `setInterval`:
 
 ```js run
 function printNumbers(from, to) {
@@ -18,7 +18,7 @@ function printNumbers(from, to) {
 printNumbers(5, 10);
 ```
 
-Using nested `setTimeout`:
+Sử dụng `setTimeout` lồng nhau:
 
 
 ```js run
@@ -38,9 +38,9 @@ function printNumbers(from, to) {
 printNumbers(5, 10);
 ```
 
-Note that in both solutions, there is an initial delay before the first output. The function is called after `1000ms` the first time.
+Lưu ý rằng trong cả hai giải pháp, có độ trễ ban đầu trước đầu ra đầu tiên. Hàm được gọi sau `1000ms` lần đầu tiên.
 
-If we also want the function to run immediately, then we can add an additional call on a separate line, like this:
+Nếu chúng ta cũng muốn hàm chạy ngay lập tức, thì chúng ta có thể thêm lệnh gọi bổ sung trên một dòng riêng, như sau:
 
 ```js run
 function printNumbers(from, to) {
