@@ -1,6 +1,6 @@
-The first solution we could try here is the recursive one.
+Giải pháp đầu tiên chúng ta có thể thử ở đây là giải pháp đệ quy.
 
-Fibonacci numbers are recursive by definition:
+Các số Fibonacci được đệ quy theo định nghĩa:
 
 ```js run
 function fib(n) {
@@ -12,11 +12,11 @@ alert( fib(7) ); // 13
 // fib(77); // will be extremely slow!
 ```
 
-...But for big values of `n` it's very slow. For instance, `fib(77)` may hang up the engine for some time eating all CPU resources.
+...Nhưng đối với các giá trị lớn của `n` thì tốc độ rất chậm. Chẳng hạn, `fib(77)` có thể làm treo engine trong một thời gian và ăn hết tài nguyên CPU.
 
-That's because the function makes too many subcalls. The same values are re-evaluated again and again.
+Đó là bởi vì hàm thực hiện quá nhiều cuộc gọi phụ. Các giá trị tương tự được đánh giá lại nhiều lần.
 
-For instance, let's see a piece of calculations for `fib(5)`:
+Chẳng hạn, chúng ta hãy xem một đoạn tính toán cho `fib(5)`:
 
 ```js no-beautify
 ...
@@ -25,68 +25,68 @@ fib(4) = fib(3) + fib(2)
 ...
 ```
 
-Here we can see that the value of `fib(3)` is needed for both `fib(5)` and `fib(4)`. So `fib(3)` will be called and evaluated two times completely independently.
+Ở đây chúng ta có thể thấy rằng giá trị của `fib(3)` là cần thiết cho cả `fib(5)` và `fib(4)`. Vì vậy, `fib(3)` sẽ được gọi và đánh giá hai lần hoàn toàn độc lập.
 
-Here's the full recursion tree:
+Đây là cây đệ quy đầy đủ:
 
 ![fibonacci recursion tree](fibonacci-recursion-tree.svg)
 
-We can clearly notice that `fib(3)` is evaluated two times and `fib(2)` is evaluated three times. The total amount of computations grows much faster than `n`, making it enormous even for `n=77`.
+Chúng ta có thể nhận thấy rõ ràng rằng `fib(3)` được đánh giá hai lần và `fib(2)` được đánh giá ba lần. Tổng lượng tính toán tăng nhanh hơn nhiều so với `n`, khiến nó trở nên khổng lồ ngay cả đối với `n=77`.
 
-We can optimize that by remembering already-evaluated values: if a value of say `fib(3)` is calculated once, then we can just reuse it in future computations.
+Chúng ta có thể tối ưu hóa điều đó bằng cách ghi nhớ các giá trị đã được đánh giá: nếu giá trị nói `fib(3)` được tính một lần, thì chúng ta chỉ có thể sử dụng lại giá trị đó trong các tính toán trong tương lai.
 
-Another variant would be to give up recursion and use a totally different loop-based algorithm.
+Một biến thể khác là từ bỏ đệ quy và sử dụng thuật toán dựa trên vòng lặp hoàn toàn khác.
 
-Instead of going from `n` down to lower values, we can make a loop that starts from `1` and `2`, then gets `fib(3)` as their sum, then `fib(4)` as the sum of two previous values, then `fib(5)` and goes up and up, till it gets to the needed value. On each step we only need to remember two previous values.
+Thay vì đi từ `n` xuống các giá trị thấp hơn, chúng ta có thể tạo một vòng lặp bắt đầu từ `1` và `2`, sau đó lấy `fib(3)` làm tổng, rồi `fib(4)` làm tổng của hai giá trị trước đó, sau đó là `fib(5)` và tăng dần cho đến khi đạt giá trị cần thiết. Trên mỗi bước chúng ta chỉ cần nhớ hai giá trị trước đó.
 
-Here are the steps of the new algorithm in details.
+Dưới đây là các bước của thuật toán mới một cách chi tiết.
 
-The start:
+Bắt đầu:
 
 ```js
-// a = fib(1), b = fib(2), these values are by definition 1
+// a = fib(1), b = fib(2), các giá trị này theo định nghĩa 1
 let a = 1, b = 1;
 
-// get c = fib(3) as their sum
+// lấy c = fib(3) làm tổng của chúng
 let c = a + b;
 
-/* we now have fib(1), fib(2), fib(3)
+/* bây giờ chúng ta có  fib(1), fib(2), fib(3)
 a  b  c
 1, 1, 2
 */
 ```
 
-Now we want to get `fib(4) = fib(2) + fib(3)`.
+Bây giờ chúng ta muốn có `fib(4) = fib(2) + fib(3)`.
 
-Let's shift the variables: `a,b` will get `fib(2),fib(3)`, and `c` will get their sum:
+Hãy dịch chuyển các biến: `a,b` sẽ nhận được `fib(2),fib(3)`, và `c` sẽ nhận được tổng của chúng:
 
 ```js no-beautify
-a = b; // now a = fib(2)
-b = c; // now b = fib(3)
+a = b; // bây giờ a = fib(2)
+b = c; // bây giờ b = fib(3)
 c = a + b; // c = fib(4)
 
-/* now we have the sequence:
+/* bây giờ chúng ta có trình tự:
    a  b  c
 1, 1, 2, 3
 */
 ```
 
-The next step gives another sequence number:
+Bước tiếp theo đưa ra một số thứ tự khác:
 
 ```js no-beautify
-a = b; // now a = fib(3)
-b = c; // now b = fib(4)
+a = b; // bây giờ a = fib(3)
+b = c; // bây giờ b = fib(4)
 c = a + b; // c = fib(5)
 
-/* now the sequence is (one more number):
+/* bây giờ trình tự là (thêm một số):
       a  b  c
 1, 1, 2, 3, 5
 */
 ```
 
-...And so on until we get the needed value. That's much faster than recursion and involves no duplicate computations.
+...Và cứ như vậy cho đến khi chúng ta nhận được giá trị cần thiết. Điều đó nhanh hơn nhiều so với đệ quy và không cần tính toán trùng lặp.
 
-The full code:
+Mã đầy đủ:
 
 ```js run
 function fib(n) {
@@ -105,6 +105,6 @@ alert( fib(7) ); // 13
 alert( fib(77) ); // 5527939700884757
 ```
 
-The loop starts with `i=3`, because the first and the second sequence values are hard-coded into variables `a=1`, `b=1`.
+Vòng lặp bắt đầu với `i=3`, bởi vì các giá trị chuỗi thứ nhất và thứ hai được mã hóa cứng thành các biến `a=1`, `b=1`.
 
-The approach is called [dynamic programming bottom-up](https://en.wikipedia.org/wiki/Dynamic_programming).
+Cách tiếp cận này được gọi là [quy hoạch động](https://vi.wikipedia.org/wiki/Quy_ho%E1%BA%A1ch_%C4%91%E1%BB%99ng).

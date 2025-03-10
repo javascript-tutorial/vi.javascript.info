@@ -1,8 +1,8 @@
-# Using a recursion
+# Sử dụng đệ quy
 
-The recursive logic is a little bit tricky here.
+Logic đệ quy hơi rắc rối ở đây.
 
-We need to first output the rest of the list and *then* output the current one:
+Đầu tiên chúng ta cần xuất phần còn lại của danh sách và *sau đó* xuất danh sách hiện tại:
 
 ```js run
 let list = {
@@ -31,13 +31,13 @@ function printReverseList(list) {
 printReverseList(list);
 ```
 
-# Using a loop
+# Sử dụng một vòng lặp
 
-The loop variant is also a little bit more complicated then the direct output.
+Biến thể vòng lặp cũng phức tạp hơn một chút so với đầu ra trực tiếp.
 
-There is no way to get the last value in our `list`. We also can't "go back".
+Không có cách nào để lấy giá trị cuối cùng trong `danh sách` của chúng ta. Chúng ta cũng không thể "quay lại".
 
-So what we can do is to first go through the items in the direct order and remember them in an array, and then output what we remembered in the reverse order:
+Vì vậy, những gì chúng ta có thể làm là trước tiên xem qua các mục theo thứ tự trực tiếp và ghi nhớ chúng trong một array, sau đó xuất ra những gì chúng ta đã nhớ theo thứ tự ngược lại:
 
 ```js run
 let list = {
@@ -71,4 +71,4 @@ function printReverseList(list) {
 printReverseList(list);
 ```
 
-Please note that the recursive solution actually does exactly the same: it follows the list, remembers the items in the chain of nested calls (in the execution context stack), and then outputs them. 
+Hãy lưu ý rằng giải pháp đệ quy thực sự hoạt động chính xác như vậy: nó tuân theo danh sách, ghi nhớ các mục trong chuỗi các lệnh gọi lồng nhau (trong ngăn xếp ngữ cảnh thực thi), sau đó xuất chúng.

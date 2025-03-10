@@ -1,4 +1,4 @@
-The solution using a loop:
+Giải pháp sử dụng vòng lặp:
 
 ```js run
 function sumTo(n) {
@@ -12,7 +12,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using recursion:
+Giải pháp sử dụng đệ quy:
 
 ```js run
 function sumTo(n) {
@@ -23,7 +23,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using the formula: `sumTo(n) = n*(n+1)/2`:
+Giải pháp sử dụng công thức: `sumTo(n) = n*(n+1)/2`:
 
 ```js run
 function sumTo(n) {
@@ -33,8 +33,8 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-P.S. Naturally, the formula is the fastest solution. It uses only 3 operations for any number `n`. The math helps!
+Tái bút: Đương nhiên, công thức là giải pháp nhanh nhất. Nó chỉ sử dụng 3 thao tác cho bất kỳ số `n` nào. Có toán giúp đỡ!
 
-The loop variant is the second in terms of speed. In both the recursive and the loop variant we sum the same numbers. But the recursion involves nested calls and execution stack management. That also takes resources, so it's slower.
+Biến thể vòng lặp là biến thể thứ hai về tốc độ. Trong cả biến thể đệ quy và vòng lặp, chúng ta tính tổng các số giống nhau. Nhưng đệ quy liên quan đến các cuộc gọi lồng nhau và quản lý ngăn xếp thực thi. Điều đó cũng cần tài nguyên, vì vậy nó chậm hơn.
 
-P.P.S. Some engines support the "tail call" optimization: if a recursive call is the very last one in the function (like in `sumTo` above), then the outer function will not need to resume the execution, so the engine doesn't need to remember its execution context. That removes the burden on memory, so counting `sumTo(100000)` becomes possible. But if the JavaScript engine does not support tail call optimization (most of them don't), there will be an error: maximum stack size exceeded, because there's usually a limitation on the total stack size.
+Tái bút nữa: Một số engine hỗ trợ tối ưu hóa "cuộc gọi đuôi": nếu một cuộc gọi đệ quy là cuộc gọi cuối cùng trong hàm (như trong `sumTo` ở trên), thì hàm bên ngoài sẽ không cần tiếp tục thực thi, vì vậy engine không cần để ghi nhớ bối cảnh thực hiện của nó. Điều đó loại bỏ gánh nặng cho bộ nhớ, vì vậy việc đếm `sumTo(100000)` trở nên khả thi. Nhưng nếu JavaScript engine không hỗ trợ tối ưu hóa lệnh gọi đuôi (hầu hết chúng không hỗ trợ), sẽ có lỗi: vượt quá kích thước ngăn xếp tối đa, vì thường có giới hạn về tổng kích thước ngăn xếp.
