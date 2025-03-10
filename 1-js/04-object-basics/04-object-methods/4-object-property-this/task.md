@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Using "this" in object literal
+# Sử dụng "this" trong nghĩa đen của đối tượng
 
-Here the function `makeUser` returns an object.
+Ở đây hàm `makeUser` trả về một đối tượng.
 
-What is the result of accessing its `ref`? Why?
+Kết quả của việc truy cập `ref` của nó là gì? Tại sao?
 
 ```js
 function makeUser() {
@@ -18,6 +18,6 @@ function makeUser() {
 
 let user = makeUser();
 
-alert( user.ref.name ); // What's the result?
+alert( user.ref.name ); // Kết quả là gì?
 ```
 

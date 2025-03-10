@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Create a calculator
+# Tạo ra một máy tính
 
-Create an object `calculator` with three methods:
+Tạo một đối tượng `máy tính` bằng ba phương thức:
 
-- `read()` prompts for two values and saves them as object properties.
-- `sum()` returns the sum of saved values.
-- `mul()` multiplies saved values and returns the result.
+- `read()` nhắc nhập hai giá trị và lưu chúng dưới dạng thuộc tính đối tượng với tên `a` và `b` tương ứng.
+- `sum()` trả về tổng các giá trị đã lưu.
+- `mul()` nhân các giá trị đã lưu và trả về kết quả.
 
 ```js
 let calculator = {
-  // ... your code ...
+  // ... mã của bạn ...
 };
 
 calculator.read();
@@ -21,4 +21,3 @@ alert( calculator.mul() );
 ```
 
 [demo]
-
