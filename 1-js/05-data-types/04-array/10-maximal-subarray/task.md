@@ -2,29 +2,29 @@ importance: 2
 
 ---
 
-# A maximal subarray
+# Một array con tối đa
 
-The input is an array of numbers, e.g. `arr = [1, -2, 3, 4, -9, 6]`.
+Đầu vào là một dãy số, ví dụ: `array = [1, -2, 3, 4, -9, 6]`.
 
-The task is: find the contiguous subarray of `arr` with the maximal sum of items.
+Nhiệm vụ là: tìm array con liền kề của `arr` với tổng các phần tử lớn nhất.
 
-Write the function `getMaxSubSum(arr)` that will return that sum.
+Viết hàm `getMaxSubSum(arr)` sẽ trả về tổng đó.
 
-For instance:
+Ví dụ:
 
 ```js
-getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (the sum of highlighted items)
+getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (tổng các mục được đánh dấu)
 getMaxSubSum([*!*2, -1, 2, 3*/!*, -9]) == 6
 getMaxSubSum([-1, 2, 3, -9, *!*11*/!*]) == 11
 getMaxSubSum([-2, -1, *!*1, 2*/!*]) == 3
 getMaxSubSum([*!*100*/!*, -9, 2, -3, 5]) == 100
-getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (take all)
+getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (lấy tất cả)
 ```
 
-If all items are negative, it means that we take none (the subarray is empty), so the sum is zero:
+Nếu tất cả các mục đều âm, điều đó có nghĩa là chúng ta không lấy gì (array con trống), vì vậy tổng bằng 0:
 
 ```js
 getMaxSubSum([-1, -2, -3]) = 0
 ```
 
-Please try to think of a fast solution: [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation) or even O(n) if you can.
+Vui lòng thử nghĩ ra một giải pháp nhanh chóng: [O(n<sup>2</sup>)](https://vi.wikipedia.org/wiki/Kí_hiệu_O_lớn) hoặc thậm chí là O(n) nếu có thể.

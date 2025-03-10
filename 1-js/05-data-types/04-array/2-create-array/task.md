@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Array operations.
+# Các phép toán array.
 
-Let's try 5 array operations.
+Hãy thử 5 phép toán array.
 
-1. Create an array `styles` with items "Jazz" and "Blues".
-2. Append "Rock-n-Roll" to the end.
-3. Replace the value in the middle by "Classics". Your code for finding the middle value should work for any arrays with odd length.
-4. Strip off the first value of the array and show it.
-5. Prepend `Rap` and `Reggae` to the array.
+1. Tạo một array `style` với các mục "Jazz" và "Blues".
+2. Nối "Rock-n-Roll" vào cuối.
+3. Thay giá trị ở giữa với "Classics". Mã của bạn để tìm giá trị ở giữa sẽ hoạt động đối với bất kỳ array nào có độ dài lẻ.
+4. Tách giá trị đầu tiên của array và hiển thị nó.
+5. Thêm `Rap` và `Reggae` vào array.
 
-The array in the process:
+Array trong quá trình:
 
 ```js no-beautify
 Jazz, Blues

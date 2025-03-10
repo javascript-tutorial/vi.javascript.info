@@ -1,6 +1,6 @@
-The call `arr[2]()` is syntactically the good old `obj[method]()`, in the role of `obj` we have `arr`, and in the role of `method` we have `2`.
+Lệnh gọi `arr[2]()` về mặt cú pháp là `obj[method]()` cũ và tốt, ở vai trò `obj` chúng ta có `arr` và ở vai trò `method` chúng ta có `2` .
 
-So we have a call of the function `arr[2]` as an object method. Naturally, it receives `this` referencing the object `arr` and outputs the array:
+Vì vậy, chúng ta có một lệnh gọi hàm `arr[2]` như một phương thức đối tượng. Đương nhiên, nó nhận được `this` tham chiếu đến đối tượng `arr` và xuất ra array:
 
 ```js run
 let arr = ["a", "b"];
@@ -12,4 +12,4 @@ arr.push(function() {
 arr[2](); // a,b,function(){...}
 ```
 
-The array has 3 values: initially it had two, plus the function. 
+Array có 3 giá trị: ban đầu nó có hai giá trị, cộng với hàm.

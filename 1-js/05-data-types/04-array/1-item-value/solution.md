@@ -1,17 +1,16 @@
-The result is `4`:
+Kết quả là `4`:
 
 
 ```js run
-let fruits = ["Apples", "Pear", "Orange"];
+let fruits = ["Táo", "Lê", "Cam"];
 
 let shoppingCart = fruits;
 
-shoppingCart.push("Banana");
+shoppingCart.push("Chuối");
 
 *!*
 alert( fruits.length ); // 4
 */!*
 ```
 
-That's because arrays are objects. So both `shoppingCart` and `fruits` are the references to the same array.
-
+Đó là bởi vì array là đối tượng. Vì vậy, cả `shoppingCart` và `fruits` đều là các tham chiếu đến cùng một array.
