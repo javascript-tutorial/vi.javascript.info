@@ -1,117 +1,121 @@
-# Conditional branching: if, '?'
+# Toán tử điều kiện: if, '?'
 
-Sometimes, we need to perform different actions based on different conditions.
+Đôi khi, ta cần thực hiện các hành động khác nhau dựa trên các điều kiện khác nhau.
 
-To do that, we can use the `if` statement and the conditional operator `?`, that's also called a "question mark" operator.
+Để làm điều đó, ta có thể dùng câu lệnh `if` và toán tử điều kiện `?`, còn được gọi là toán tử "chẩm hỏi".
 
-## The "if" statement
+## Câu lệnh "if"
 
-The `if(...)` statement evaluates a condition in parentheses and, if the result is `true`, executes a block of code.
+Câu lệnh `if(...)` lấy giá trị một điều kiện trong ngoặc và, nếu kết quả là `true`, chạy một đoạn lệnh.
 
-For example:
+Ví dụ:
 
 ```js run
-let year = prompt('In which year was ECMAScript-2015 specification published?', '');
+let year = prompt('Vào năm nào bản đặc tả ECMAScript-2015 được xuất bản?', '');
 
 *!*
-if (year == 2015) alert( 'You are right!' );
+if (year == 2015) alert( 'Đúng rồi!' );
 */!*
 ```
 
-In the example above, the condition is a simple equality check (`year == 2015`), but it can be much more complex.
+Trong ví dụ trên, điểu kiện là một phép kiểm tra bằng nhau đơn giản (`year == 2015`), nhưng nó có thể phức tạp hơn rất nhiều.
 
-If we want to execute more than one statement, we have to wrap our code block inside curly braces:
+Nếu ta muốn thực hiện nhiều hơn một câu lệnh, ta cần bao đoạn mã trong ngoặc móc:
 
 ```js
 if (year == 2015) {
-  alert( "That's correct!" );
-  alert( "You're so smart!" );
+  alert( "Đúng rồi!" );
+  alert( "Bạn giỏi quá!" );
 }
 ```
 
-We recommend wrapping your code block with curly braces `{}` every time you use an `if` statement, even if there is only one statement to execute. Doing so improves readability.
+Chúng tôi khuyên bạn bọc đoạn mã của bạn vào ngoặc móc `{}` mỗi khi bạn dùng câu lệnh `if`, ngay cả khi chỉ có một lệnh để thực hiện. Làm vậy sẽ dễ đọc hơn.
 
-## Boolean conversion
+## Chuyển đổi boolean
 
-The `if (…)` statement evaluates the expression in its parentheses and converts the result to a boolean.
+Câu lệnh `if (...)` lấy giá trị của biểu thức trong cặp ngoặc của nó và chuyển đổi kết quả sang boolean.
 
-Let's recall the conversion rules from the chapter <info:type-conversions>:
+Hãy cùng nhớ lại các quy tắc chuyển đổi từ chương <info:type-conversions>:
 
-- A number `0`, an empty string `""`, `null`, `undefined`, and `NaN` all become `false`. Because of that they are called "falsy" values.
-- Other values become `true`, so they are called "truthy".
+- Một số `0`, một chuỗi văn bản trống `""`, `null`, `undefined`, và `NaN` đều trở thành `false`. Vì vậy chúng được gọi là các giá trị "sai".
+- Các giá trị khác trở thành `true`, cho nên được gọi là "đúng".
 
-So, the code under this condition would never execute:
+Do đó, đoạn mã dưới điều kiện này sẽ không bao giờ chạy:
 
 ```js
-if (0) { // 0 is falsy
+if (0) { // 0 là giá trị sai.
   ...
 }
 ```
 
-...and inside this condition -- it always will:
+...và trong điều kiện này – nó sẽ luôn chạy:
 
 ```js
-if (1) { // 1 is truthy
+if (1) { // 1 là giá trị đúng.
   ...
 }
 ```
 
-We can also pass a pre-evaluated boolean value to `if`, like this:
+Ta còn có thể đưa một giá trị boolean đã tính trước đó vào `if`, như thế này:
 
 ```js
-let cond = (year == 2015); // equality evaluates to true or false
+let cond = (year == 2015); // Toán tử bằng nhau cho giá trị true hoặc false.
 
 if (cond) {
   ...
 }
 ```
 
-## The "else" clause
+## Mệnh để "else"
 
+<<<<<<< HEAD
 The `if` statement may contain an optional "else" block. It executes when the condition is falsy.
+=======
+Câu lệnh `if` có thể chứa một khối "else" tùy chọn. Nó chạy khi điều kiện là sai.
+>>>>>>> 916e0332 (Translated 1.02.10 – Conditional branching: if, '?'.)
 
-For example:
+Ví dụ:
 ```js run
-let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+let year = prompt('Vào năm nào bản đặc tả ECMAScript-2015 được xuất bản?', '');
 
 if (year == 2015) {
-  alert( 'You guessed it right!' );
+  alert( 'Bạn đoán đúng rồi!' );
 } else {
-  alert( 'How can you be so wrong?' ); // any value except 2015
+  alert( 'Sao bạn lại có thể sai như vậy?' ); // Bất kì giá trị nào ngoài 2015.
 }
 ```
 
-## Several conditions: "else if"
+## Nhiều điều kiện: "else if"
 
-Sometimes, we'd like to test several variants of a condition. The `else if` clause lets us do that.
+Đôi khi, ta muốn kiểm tra nhiều biến thể của một điều kiện. Mệnh đề `else if` cho ta làm việc đó.
 
-For example:
+Ví dụ:
 
 ```js run
-let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+let year = prompt('Vào năm nào bản đặc tả ECMAScript-2015 được xuất bản?', '');
 
 if (year < 2015) {
-  alert( 'Too early...' );
+  alert( 'Quá sớm...' );
 } else if (year > 2015) {
-  alert( 'Too late' );
+  alert( 'Quá muộn' );
 } else {
-  alert( 'Exactly!' );
+  alert( 'Chuẩn!' );
 }
 ```
 
-In the code above, JavaScript first checks `year < 2015`. If that is falsy, it goes to the next condition `year > 2015`. If that is also falsy, it shows the last `alert`.
+Trong đoạn mã trên, JavaScript trước tiên kiểm tra `year < 2015`. Nếu đó là sai, nó xét tiếp điều kiện `year > 2015`. Nếu điều đó cũng sai, nó hiện cái `alert` cuối cùng.
 
-There can be more `else if` blocks. The final `else` is optional.
+Có thể có thêm nhiều khối `else if` nữa. Cái `else` cuối cùng là tùy chọn.
 
-## Conditional operator '?'
+## Toán tử điều kiện '?'
 
-Sometimes, we need to assign a variable depending on a condition.
+Đôi khi, ta cần gán một biến dựa trên một điều kiện.
 
-For instance:
+Chẳng hạn:
 
 ```js run no-beautify
 let accessAllowed;
-let age = prompt('How old are you?', '');
+let age = prompt('Bạn bao nhiêu tuổi?', '');
 
 *!*
 if (age > 18) {
@@ -124,116 +128,116 @@ if (age > 18) {
 alert(accessAllowed);
 ```
 
-The so-called "conditional" or "question mark" operator lets us do that in a shorter and simpler way.
+Toán tử được gọi là "có điều kiện" hay "chấm hỏi" cho ta làm việc đó ngắn và đơn giản hơn.
 
-The operator is represented by a question mark `?`. Sometimes it's called "ternary", because the operator has three operands. It is actually the one and only operator in JavaScript which has that many.
+Toán tử được thể hiện bằng một dấu chẩm hỏi `?`. Đôi khi nó được gọi là "ba ngôi', vì toán tử có ba toán hạng. Nó thực ra là một toán tử và toán tử duy nhất trong JavaScript có nhiều như vậy.
 
-The syntax is:
+Cú pháp là:
 ```js
 let result = condition ? value1 : value2;
 ```
 
-The `condition` is evaluated: if it's truthy then `value1` is returned, otherwise -- `value2`.
+`condition` được lấy giá trị: nếu nó là đúng thì `value1` được trả về, nếu không, `value2`.
 
-For example:
+Ví dụ:
 
 ```js
 let accessAllowed = (age > 18) ? true : false;
 ```
 
-Technically, we can omit the parentheses around `age > 18`. The question mark operator has a low precedence, so it executes after the comparison `>`.
+Đúng ra, ta có thể bỏ cặp ngoặc quanh `age > 18`. Toán tử chấm hỏi có mức ưu tiên thấp, do đó nó được thực hiện sau phép so sánh `>`.
 
-This example will do the same thing as the previous one:
+Ví dụ sau đây sẽ làm y như ví dụ trước:
 
 ```js
-// the comparison operator "age > 18" executes first anyway
-// (no need to wrap it into parentheses)
+// Toán tử so sánh "age > 18" đằng nào cũng được thực hiện trước
+// (không cần bao nó vào ngoặc).
 let accessAllowed = age > 18 ? true : false;
 ```
 
-But parentheses make the code more readable, so we recommend using them.
+Nhưng ngoặc làm mã dễ đọc hơn, nên chúng tôi khuyên nên dùng.
 
 ````smart
-In the example above, you can avoid using the question mark operator because the comparison itself returns `true/false`:
+Trong ví dụ trên, bạn có thể tránh dùng toán tử chấm hỏi vì bản thân phép so sánh đã trả về `true`/`false`:
 
 ```js
-// the same
+// Y hệt.
 let accessAllowed = age > 18;
 ```
 ````
 
-## Multiple '?'
+## Nhiều '?'
 
-A sequence of question mark operators `?` can return a value that depends on more than one condition.
+Một chuỗi toán tử chấm hỏi `?` có thể trả về một giá trị phụ thuộc vào nhiều điều kiện.
 
-For instance:
+Ví dụ:
 ```js run
-let age = prompt('age?', 18);
+let age = prompt('Tuổi?', 18);
 
-let message = (age < 3) ? 'Hi, baby!' :
-  (age < 18) ? 'Hello!' :
-  (age < 100) ? 'Greetings!' :
-  'What an unusual age!';
+let message = (age < 3) ? 'Chào em bé!' :
+  (age < 18) ? 'Chào!' :
+  (age < 100) ? 'Xin kính chào!' :
+  'Tuổi gì lạ thế!';
 
 alert( message );
 ```
 
-It may be difficult at first to grasp what's going on. But after a closer look, we can see that it's just an ordinary sequence of tests:
+Có thể ban đầu sẽ khó một chút để hiểu điều gì đang diễn ra. Nhưng khi nhìn sâu hơn, ta có thể thấy đó chỉ là một chuỗi kiểm tra thông thường:
 
-1. The first question mark checks whether `age < 3`.
-2. If true -- it returns `'Hi, baby!'`. Otherwise, it continues to the expression after the colon '":"', checking `age < 18`.
-3. If that's true -- it returns `'Hello!'`. Otherwise, it continues to the expression after the next colon '":"', checking `age < 100`.
-4. If that's true -- it returns `'Greetings!'`. Otherwise, it continues to the expression after the last colon '":"', returning `'What an unusual age!'`.
+1. Dấu chấm hỏi đầu tiên kiểm tra liệu `age < 3`.
+2. Nếu đúng, nó trả về `'Chào em bé!'`. Nếu không, nó xét tiếp biểu thức sau dấu hai chấm '":"', kiểm tra `age < 18`.
+3. Nếu điều đó đúng, nó trả về `'Chào!'`. Nếu không, nó xét tiếp biểu thức sau dấu hai chấm tiếp theo '":"', kiểm tra `age < 100`.
+4. Nếu điều đó đúng, nó trả về `'Xin kính chào!'`. Nếu không, nó xét tiếp biểu thức sau dấu hai chấm cuối cùng '":"', trả về `'Tuổi gì lạ thế!'`.
 
-Here's how this looks using `if..else`:
+Đây là đoạn mã nếu dùng `if..else`:
 
 ```js
 if (age < 3) {
-  message = 'Hi, baby!';
+  message = 'Chào em bé!';
 } else if (age < 18) {
-  message = 'Hello!';
+  message = 'Chào!';
 } else if (age < 100) {
-  message = 'Greetings!';
+  message = 'Xin kính chào!';
 } else {
-  message = 'What an unusual age!';
+  message = 'Tuổi gì lạ thế!';
 }
 ```
 
-## Non-traditional use of '?'
+## Dùng '?' theo cách không truyền thống
 
-Sometimes the question mark `?` is used as a replacement for `if`:
+Đôi khi dấu chấm hỏi được dùng thay cho `if`:
 
 ```js run no-beautify
-let company = prompt('Which company created JavaScript?', '');
+let company = prompt('Công ty nào đã tạo ra JavaScript?', '');
 
 *!*
 (company == 'Netscape') ?
-   alert('Right!') : alert('Wrong.');
+   alert('Đúng rồi!') : alert('Sai.');
 */!*
 ```
 
-Depending on the condition `company == 'Netscape'`, either the first or the second expression after the `?` gets executed and shows an alert.
+Tùy vào điều kiện `company == 'Netscape'`, hoặc là biểu thức đầu hoặc là biểu thức sau `?` được thực hiện và hiện ra một thông báo.
 
-We don't assign a result to a variable here. Instead, we execute different code depending on the condition.
+Ta không gán kết quả vào một biến ở đây. Thay vào đó, ta chạy các đoạn mã khác nhau tùy vào điệu kiện.
 
-**It's not recommended to use the question mark operator in this way.**
+**Không nên dùng toán tử chấm hỏi theo cách này.**
 
-The notation is shorter than the equivalent `if` statement, which appeals to some programmers. But it is less readable.
+Cách viết trên ngắn hơn câu lệnh `if` tương ứng, làm một số lập trình viên ưa thích. Nhưng nó khó đọc hơn.
 
-Here is the same code using `if` for comparison:
+Đây là cùng đoạn mã đó dùng `if` để so sánh:
 
 ```js run no-beautify
-let company = prompt('Which company created JavaScript?', '');
+let company = prompt('Công ty nào đã tạo ra JavaScript?', '');
 
 *!*
 if (company == 'Netscape') {
-  alert('Right!');
+  alert('Đúng rồi!');
 } else {
-  alert('Wrong.');
+  alert('Sai.');
 }
 */!*
 ```
 
-Our eyes scan the code vertically. Code blocks which span several lines are easier to understand than a long, horizontal instruction set.
+Mắt ta lướt qua mã theo chiều dọc. Các đoạn mã trải ra nhiều dòng sẽ dễ hiểu hơn là một chuỗi chỉ dẫn dài theo chiều ngang.
 
-The purpose of the question mark operator `?` is to return one value or another depending on its condition. Please use it for exactly that. Use `if` when you need to execute different branches of code.
+Mục đích của toán tử chấm hỏi `?` là để trả về một giá trị này hoặc giá trị khác tùy vào điều kiện. Hãy chỉ dùng nó cho chính mục đích đó. Dùng `if` khi bạn cần thực hiện các nhánh mã khác nhau.
