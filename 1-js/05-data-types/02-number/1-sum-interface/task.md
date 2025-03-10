@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Sum numbers from the visitor
+# Tổng số từ khách truy cập
 
-Create a script that prompts the visitor to enter two numbers and then shows their sum.
+Tạo tập lệnh nhắc khách nhập hai số rồi hiển thị tổng của chúng.
 
 [demo]
 
-P.S. There is a gotcha with types.
+Tái bút: Có một gotcha với các loại.

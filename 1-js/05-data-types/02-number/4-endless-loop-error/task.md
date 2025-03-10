@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# An occasional infinite loop
+# Một vòng lặp vô hạn không thường xuyên
 
-This loop is infinite. It never ends. Why?
+Vòng lặp này là vô tận. No không bao giờ kết thúc. Tại sao?
 
 ```js
 let i = 0;

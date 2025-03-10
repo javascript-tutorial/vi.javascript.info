@@ -1,6 +1,6 @@
-That's because `i` would never equal `10`.
+Đó là bởi vì `i` sẽ không bao giờ bằng `10`.
 
-Run it to see the *real* values of `i`:
+Chạy nó để xem các giá trị *thực* của `i`:
 
 ```js run
 let i = 0;
@@ -10,8 +10,8 @@ while (i < 11) {
 }
 ```
 
-None of them is exactly `10`.
+Không cái nào trong số chúng chính xác là `10`.
 
-Such things happen because of the precision losses when adding fractions like `0.2`.
+Những điều như vậy xảy ra do mất độ chính xác khi cộng các phân số như `0,2`.
 
-Conclusion: evade equality checks when working with decimal fractions.
+Kết luận: Tránh kiểm tra bằng nhau khi làm việc với phân số thập phân.

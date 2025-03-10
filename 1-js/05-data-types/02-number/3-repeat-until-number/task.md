@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Repeat until the input is a number
+# Lặp lại cho đến khi đầu vào là một số
 
-Create a function `readNumber` which prompts for a number until the visitor enters a valid numeric value.
+Tạo một hàm `readNumber` để nhắc nhập một số cho đến khi khách truy cập nhập một giá trị số hợp lệ.
 
-The resulting value must be returned as a number.
+Giá trị kết quả phải được trả về dưới dạng số.
 
-The visitor can also stop the process by entering an empty line or pressing "CANCEL". In that case, the function should return `null`.
+Khách truy cập cũng có thể dừng quá trình bằng cách nhập một dòng trống hoặc nhấn "HỦY". Trong trường hợp đó, hàm sẽ trả về `null`.
 
 [demo]
 

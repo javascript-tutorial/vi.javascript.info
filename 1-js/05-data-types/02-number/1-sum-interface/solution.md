@@ -1,12 +1,12 @@
 
 
 ```js run demo
-let a = +prompt("The first number?", "");
-let b = +prompt("The second number?", "");
+let a = +prompt("Số đầu tiên?", "");
+let b = +prompt("Số thứ hai?", "");
 
 alert( a + b );
 ```
 
-Note the unary plus `+` before `prompt`. It immediately converts the value to a number.
+Lưu ý dấu cộng đơn nguyên `+` trước `prompt`. Nó ngay lập tức chuyển đổi giá trị thành một số.
 
-Otherwise, `a` and `b` would be string their sum would be their concatenation, that is: `"1" + "2" = "12"`.
+Nếu không, `a` và `b` sẽ là chuỗi, tổng của chúng sẽ là phần nối của chúng, nghĩa là: `"1" + "2" = "12"`.

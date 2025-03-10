@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# A random integer from min to max
+# Một số nguyên ngẫu nhiên từ tối thiểu đến tối đa
 
-Create a function `randomInteger(min, max)` that generates a random *integer* number from `min` to `max` including both `min` and `max` as possible values.
+Tạo một hàm `randomInteger(min, max)` để tạo ra một số *số nguyên* ngẫu nhiên từ `min` đến `max` bao gồm cả `min` và `max` như các giá trị có thể.
 
-Any number from the interval `min..max` must appear with the same probability.
+Bất kỳ số nào trong khoảng `min..max` phải xuất hiện với xác suất như nhau.
 
 
-Examples of its work:
+Ví dụ về công việc của nó:
 
 ```js
 alert( randomInteger(1, 5) ); // 1
@@ -17,4 +17,4 @@ alert( randomInteger(1, 5) ); // 3
 alert( randomInteger(1, 5) ); // 5
 ```
 
-You can use the solution of the [previous task](info:task/random-min-max) as the base.
+Bạn có thể sử dụng giải pháp của [nhiệm vụ trước](info:task/random-min-max) làm cơ sở.
