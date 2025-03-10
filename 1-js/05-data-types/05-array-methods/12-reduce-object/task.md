@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Create keyed object from array
+# Tạo đối tượng có khóa từ array
 
-Let's say we received an array of users in the form `{id:..., name:..., age... }`.
+Giả sử chúng ta nhận được một array người dùng ở dạng `{id:..., name:..., age... }`.
 
-Create a function `groupById(arr)` that creates an object from it, with `id` as the key, and array items as values.
+Tạo một hàm `groupById(arr)` để tạo một đối tượng từ nó, với `id` là khóa và các mục array là giá trị.
 
-For example:
+Ví dụ:
 
 ```js
 let users = [
@@ -20,7 +20,7 @@ let users = [
 let usersById = groupById(users);
 
 /*
-// after the call we should have:
+// sau cuộc gọi chúng ta nên có:
 
 usersById = {
   john: {id: 'john', name: "John Smith", age: 20},
@@ -30,8 +30,8 @@ usersById = {
 */
 ```
 
-Such function is really handy when working with server data.
+Hàm như vậy thực sự tiện dụng khi làm việc với dữ liệu máy chủ.
 
-In this task we assume that `id` is unique. There may be no two array items with the same `id`.
+Trong nhiệm vụ này, chúng ta giả định rằng `id` là duy nhất. Có thể không có hai mục array nào có cùng `id`.
 
-Please use array `.reduce` method in the solution.
+Hãy sử dụng phương thức array `.reduce` trong giải pháp.

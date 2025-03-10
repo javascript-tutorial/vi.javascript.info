@@ -1,4 +1,4 @@
-The simple solution could be:
+Giải pháp đơn giản có thể là:
 
 ```js run
 *!*
@@ -12,18 +12,18 @@ shuffle(arr);
 alert(arr);
 ```
 
-That somewhat works, because `Math.random() - 0.5` is a random number that may be positive or negative, so the sorting function reorders elements randomly.
+Điều đó phần nào có tác dụng, bởi vì `Math.random() - 0.5` là một số ngẫu nhiên có thể dương hoặc âm, vì vậy hàm sắp xếp sẽ sắp xếp lại các phần tử một cách ngẫu nhiên.
 
-But because the sorting function is not meant to be used this way, not all permutations have the same probability.
+Nhưng vì hàm sắp xếp không được sử dụng theo cách này nên không phải tất cả các hoán vị đều có cùng xác suất.
 
-For instance, consider the code below. It runs `shuffle` 1000000 times and counts appearances of all possible results:
+Ví dụ, hãy xem xét đoạn mã dưới đây. Nó chạy `shuffle` 1000000 lần và đếm số lần xuất hiện của tất cả các kết quả có thể có:
 
 ```js run
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
 }
 
-// counts of appearances for all possible permutations
+// số lần xuất hiện cho tất cả các hoán vị có thể
 let count = {
   '123': 0,
   '132': 0,
@@ -39,13 +39,13 @@ for (let i = 0; i < 1000000; i++) {
   count[array.join('')]++;
 }
 
-// show counts of all possible permutations
+// hiển thị số lượng của tất cả các hoán vị có thể
 for (let key in count) {
   alert(`${key}: ${count[key]}`);
 }
 ```
 
-An example result (depends on JS engine):
+Một kết quả ví dụ (phụ thuộc vào JS engine):
 
 ```js
 123: 250706
@@ -56,30 +56,30 @@ An example result (depends on JS engine):
 321: 125223
 ```
 
-We can see the bias clearly: `123` and `213` appear much more often than others.
+Chúng ta có thể thấy rõ sự thiên vị: `123` và `213` xuất hiện thường xuyên hơn nhiều so với các số khác.
 
-The result of the code may vary between JavaScript engines, but we can already see that the approach is unreliable.
+Kết quả của mã có thể khác nhau giữa các JavaScript engine, nhưng chúng ta có thể thấy rằng cách tiếp cận này không đáng tin cậy.
 
-Why it doesn't work? Generally speaking, `sort` is a "black box": we throw an array and a comparison function into it and expect the array to be sorted. But due to the utter randomness of the comparison the black box goes mad, and how exactly it goes mad depends on the concrete implementation that differs between engines.
+Tại sao nó không hoạt động? Nói chung, `sort` là một "hộp đen": chúng ta ném một array và một hàm so sánh vào đó và mong muốn array được sắp xếp. Nhưng do sự so sánh hoàn toàn ngẫu nhiên, hộp đen trở nên điên loạn và chính xác thì nó điên rồ như thế nào phụ thuộc vào việc triển khai cụ thể khác nhau giữa các engine.
 
-There are other good ways to do the task. For instance, there's a great algorithm called [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle). The idea is to walk the array in the reverse order and swap each element with a random one before it:
+Có nhiều cách tốt khác để thực hiện nhiệm vụ. Chẳng hạn, có một thuật toán tuyệt vời gọi là [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher-Yates_shuffle). Ý tưởng là di chuyển array theo thứ tự ngược lại và hoán đổi từng phần tử với một phần tử ngẫu nhiên trước nó:
 
 ```js
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    let j = Math.floor(Math.random() * (i + 1)); // chỉ mục ngẫu nhiên từ 0 đến i
 
-    // swap elements array[i] and array[j]
-    // we use "destructuring assignment" syntax to achieve that
-    // you'll find more details about that syntax in later chapters
-    // same can be written as:
+    // hoán đổi phần tử array[i] và array[j]
+    // chúng ta sử dụng cú pháp "phân công phá hủy" để đạt được điều đó
+    // bạn sẽ tìm thấy thêm chi tiết về cú pháp đó trong các chương sau
+    // tương tự có thể được viết là:
     // let t = array[i]; array[i] = array[j]; array[j] = t
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
 ```
 
-Let's test it the same way:
+Hãy kiểm tra nó theo cùng một cách:
 
 ```js run
 function shuffle(array) {
@@ -89,7 +89,7 @@ function shuffle(array) {
   }
 }
 
-// counts of appearances for all possible permutations
+// số lần xuất hiện cho tất cả các hoán vị có thể
 let count = {
   '123': 0,
   '132': 0,
@@ -105,13 +105,13 @@ for (let i = 0; i < 1000000; i++) {
   count[array.join('')]++;
 }
 
-// show counts of all possible permutations
+// hiển thị số lượng của tất cả các hoán vị có thể
 for (let key in count) {
   alert(`${key}: ${count[key]}`);
 }
 ```
 
-The example output:
+Đầu ra ví dụ:
 
 ```js
 123: 166693
@@ -122,6 +122,6 @@ The example output:
 321: 166316
 ```
 
-Looks good now: all permutations appear with the same probability.
+Bây giờ có vẻ tốt: tất cả các hoán vị xuất hiện với cùng xác suất.
 
-Also, performance-wise the Fisher-Yates algorithm is much better, there's no "sorting" overhead.
+Ngoài ra, về hiệu suất, thuật toán Fisher-Yates tốt hơn nhiều, không có chi phí "sắp xếp".

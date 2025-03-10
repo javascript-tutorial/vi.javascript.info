@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Shuffle an array
+# Xáo trộn một array
 
-Write the function `shuffle(array)` that shuffles (randomly reorders) elements of the array.
+Viết hàm `shuffle(array)` để xáo trộn (sắp xếp lại ngẫu nhiên) các phần tử của array.
 
-Multiple runs of `shuffle` may lead to different orders of elements. For instance:
+Nhiều lần chạy `shuffle` có thể dẫn đến các thứ tự phần tử khác nhau. Ví dụ:
 
 ```js
 let arr = [1, 2, 3];
@@ -22,4 +22,4 @@ shuffle(arr);
 // ...
 ```
 
-All element orders should have an equal probability. For instance, `[1,2,3]` can be reordered as `[1,2,3]` or `[1,3,2]` or `[3,1,2]` etc, with equal probability of each case.
+Tất cả các thứ tự phần tử phải có xác suất bằng nhau. Chẳng hạn, `[1,2,3]` có thể được sắp xếp lại thành `[1,2,3]` hoặc `[1,3,2]` hoặc `[3,1,2]`, v.v. với xác suất bằng nhau của từng trường hợp.

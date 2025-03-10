@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Filter unique array members
+# Lọc các thành viên array duy nhất
 
-Let `arr` be an array.
+Đặt `arr` là một array.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+Tạo một hàm `unique(arr)` sẽ trả về một array với các phần tử duy nhất của `arr`.
 
-For instance:
+Ví dụ:
 
 ```js
 function unique(arr) {

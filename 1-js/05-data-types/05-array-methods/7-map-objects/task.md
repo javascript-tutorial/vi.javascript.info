@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Map to objects
+# Map tới các đối tượng
 
-You have an array of `user` objects, each one has `name`, `surname` and `id`.
+Bạn có một array các đối tượng `user`, mỗi đối tượng có `name`, `surname` và `id`.
 
-Write the code to create another array from it, of objects with `id` and `fullName`, where `fullName` is generated from `name` and `surname`.
+Viết mã để tạo một array khác từ nó, gồm các đối tượng có `id` và `fullName`, trong đó `fullName` được tạo từ `name` và `surname`.
 
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let john = { name: "John", surname: "Smith", id: 1 };
@@ -18,7 +18,7 @@ let mary = { name: "Mary", surname: "Key", id: 3 };
 let users = [ john, pete, mary ];
 
 *!*
-let usersMapped = /* ... your code ... */
+let usersMapped = /* ... mã của bạn ... */
 */!*
 
 /*
@@ -33,4 +33,4 @@ alert( usersMapped[0].id ) // 1
 alert( usersMapped[0].fullName ) // John Smith
 ```
 
-So, actually you need to map one array of objects to another. Try using `=>` here. There's a small catch.
+Vì vậy, trên thực tế, bạn cần map một array đối tượng này sang array đối tượng khác. Hãy thử sử dụng `=>` tại đây. Có một nhược điểm nhỏ.
