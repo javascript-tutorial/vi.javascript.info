@@ -2,22 +2,20 @@ importance: 5
 
 ---
 
-# Create new Calculator
+# Tạo một Máy tính mới
 
-Create a constructor function `Calculator` that creates objects with 3 methods:
+Tạo một constructor `Calculator` để tạo đối tượng với 3 phương thức:
 
-- `read()` asks for two values using `prompt` and remembers them in object properties.
-- `sum()` returns the sum of these properties.
-- `mul()` returns the multiplication product of these properties.
-
-For instance:
+- `read()` nhắc hai giá trị và lưu chúng dưới dạng thuộc tính đối tượng với tên `a` và `b` tương ứng.
+- `sum()` trả về tổng của các thuộc tính này.
+- `mul()` trả về tích nhân của các thuộc tính này.
 
 ```js
 let calculator = new Calculator();
 calculator.read();
 
-alert( "Sum=" + calculator.sum() );
-alert( "Mul=" + calculator.mul() );
+alert( "Tổng=" + calculator.sum() );
+alert( "Tích=" + calculator.mul() );
 ```
 
 [demo]
