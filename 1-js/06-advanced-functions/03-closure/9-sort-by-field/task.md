@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Sort by field
+# Sắp xếp theo lĩnh vực
 
-We've got an array of objects to sort:
+Chúng ta đã có một array các đối tượng để sắp xếp:
 
 ```js
 let users = [
@@ -14,23 +14,23 @@ let users = [
 ];
 ```
 
-The usual way to do that would be:
+Cách thông thường để làm điều đó sẽ là:
 
 ```js
-// by name (Ann, John, Pete)
+// theo tên (Ann, John, Pete)
 users.sort((a, b) => a.name > b.name ? 1 : -1);
 
-// by age (Pete, Ann, John)
+// theo tuổi (Pete, Ann, John)
 users.sort((a, b) => a.age > b.age ? 1 : -1);
 ```
 
-Can we make it even less verbose, like this?
+Chúng ta có thể làm cho nó ít dài dòng hơn như thế này không?
 
 ```js
 users.sort(byField('name'));
 users.sort(byField('age'));
 ```
 
-So, instead of writing a function, just put `byField(fieldName)`.
+Vì vậy, thay vì viết một hàm, chỉ cần đặt `byField(fieldName)`.
 
-Write the function `byField` that can be used for that.
+Viết hàm `byField` có thể được sử dụng cho việc đó.

@@ -1,7 +1,7 @@
 
-Surely it will work just fine.
+Chắc chắn nó sẽ hoạt động tốt.
 
-Both nested functions are created within the same outer Lexical Environment, so they share access to the same `count` variable:
+Cả hai hàm lồng nhau đều được tạo trong cùng một Lexical Environment bên ngoài, vì vậy chúng chia sẻ quyền truy cập vào cùng một biến `count`:
 
 ```js run
 function Counter() {

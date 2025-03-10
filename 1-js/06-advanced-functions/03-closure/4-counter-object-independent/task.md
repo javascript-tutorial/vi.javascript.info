@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Counter object
+# Đối tượng bộ đếm
 
-Here a counter object is made with the help of the constructor function.
+Ở đây, một đối tượng bộ đếm được tạo với sự trợ giúp của hàm tạo.
 
-Will it work? What will it show?
+Nó có hoạt động không? Nó sẽ hiển thị cái gì?
 
 ```js
 function Counter() {

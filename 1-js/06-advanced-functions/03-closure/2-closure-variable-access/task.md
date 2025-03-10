@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Which variables are available?
+# Những biến nào có sẵn?
 
-The function `makeWorker` below makes another function and returns it. That new function can be called from somewhere else.
+Hàm `makeWorker` bên dưới tạo một hàm khác và trả về hàm đó. Hàm mới đó có thể được gọi từ một nơi khác.
 
-Will it have access to the outer variables from its creation place, or the invocation place, or both?
+Nó sẽ có quyền truy cập vào các biến bên ngoài từ nơi tạo của nó, hay nơi gọi, hay cả hai?
 
 ```js
 function makeWorker() {
@@ -19,11 +19,11 @@ function makeWorker() {
 
 let name = "John";
 
-// create a function
+// tạo một hàm
 let work = makeWorker();
 
-// call it
-work(); // what will it show?
+// gọi nó
+work(); // nó sẽ hiển thị những gì?
 ```
 
-Which value it will show? "Pete" or "John"?
+Nó sẽ hiển thị giá trị nào? "Pete" hay "John"?

@@ -1,3 +1,3 @@
-The result is **an error**.
+Kết quả là **một lỗi**.
 
-The function `sayHi` is declared inside the `if`, so it only lives inside it. There is no `sayHi` outside.
+Hàm `sayHi` được khai báo bên trong `if`, vì vậy nó chỉ tồn tại bên trong nó. Không có `sayHi` bên ngoài.

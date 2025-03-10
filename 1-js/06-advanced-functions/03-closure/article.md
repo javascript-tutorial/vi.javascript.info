@@ -1,75 +1,75 @@
 
-# Variable scope, closure
+# Phạm vi biến, bao đóng
 
-JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created at any moment, passed as an argument to another function, and then called from a totally different place of code later.
+JavaScript là một ngôn ngữ rất hướng hàm. Nó cho chúng ta rất nhiều sự tự do. Một hàm có thể được tạo bất cứ lúc nào, được chuyển dưới dạng đối số cho một hàm khác và sau đó được gọi từ một vị trí mã hoàn toàn khác sau đó.
 
-We already know that a function can access variables outside of it ("outer" variables).
+Chúng ta đã biết rằng một hàm có thể truy cập các biến bên ngoài nó (các biến "bên ngoài").
 
-But what happens if outer variables change since a function is created? Will the function get newer values or the old ones?
+Nhưng điều gì sẽ xảy ra nếu các biến bên ngoài thay đổi kể từ khi một hàm được tạo? Hàm sẽ nhận giá trị mới hơn hay giá trị cũ?
 
-And what if a function is passed along as a parameter and called from another place of code, will it get access to outer variables at the new place?
+Và điều gì sẽ xảy ra nếu một hàm được truyền dưới dạng tham số và được gọi từ một vị trí khác của mã, liệu nó có được truy cập vào các biến bên ngoài ở vị trí mới không?
 
-Let's expand our knowledge to understand these scenarios and more complex ones.
+Hãy mở rộng kiến thức của chúng ta để hiểu những tình huống này và những tình huống phức tạp hơn.
 
-```smart header="We'll talk about `let/const` variables here"
-In JavaScript, there are 3 ways to declare a variable: `let`, `const` (the modern ones), and `var` (the remnant of the past).
+```smart header="Chúng ta sẽ nói về các biến `let/const` ở đây"
+Trong JavaScript, có 3 cách để khai báo một biến: `let`, `const` (cách hiện đại) và `var` (phần còn lại của quá khứ).
 
-- In this article we'll use `let` variables in examples.
-- Variables, declared with `const`, behave the same, so this article is about `const` too.
-- The old `var` has some notable differences, they will be covered in the article <info:var>.
+- Trong bài viết này, chúng ta sẽ sử dụng các biến `let` trong các ví dụ.
+- Các biến, được khai báo bằng `const`, hoạt động giống nhau, vì vậy bài viết này cũng nói về `const`.
+- `var` cũ có một số điểm khác biệt đáng chú ý, chúng sẽ được đề cập trong bài viết <info:var>.
 ```
 
-## Code blocks
+## Khối mã
 
-If a variable is declared inside a code block `{...}`, it's only visible inside that block.
+Nếu một biến được khai báo bên trong khối mã `{...}`, thì nó chỉ hiển thị bên trong khối đó.
 
-For example:
+Ví dụ:
 
 ```js run
 {
-  // do some job with local variables that should not be seen outside
+  // thực hiện một số công việc với các biến cục bộ không nên nhìn thấy bên ngoài
 
-  let message = "Hello"; // only visible in this block
+  let message = "Hello"; // chỉ hiển thị trong khối này
 
   alert(message); // Hello
 }
 
-alert(message); // Error: message is not defined
+alert(message); // Lỗi: tin nhắn không xác định
 ```
 
-We can use this to isolate a piece of code that does its own task, with variables that only belong to it:
+Chúng ta có thể sử dụng điều này để cô lập một đoạn mã thực hiện nhiệm vụ riêng của nó, với các biến chỉ thuộc về nó:
 
 ```js run
 {
-  // show message
+  // hiển thị tin nhắn
   let message = "Hello";
   alert(message);
 }
 
 {
-  // show another message
-  let message = "Goodbye";
+  // hiển thị một tin nhắn khác
+  let message = "Bye";
   alert(message);
 }
 ```
 
-````smart header="There'd be an error without blocks"
-Please note, without separate blocks there would be an error, if we use `let` with the existing variable name:
+````smart header="Sẽ có lỗi nếu không có khối"
+Hãy lưu ý, nếu không có các khối riêng biệt sẽ xảy ra lỗi, nếu chúng ta sử dụng `let` với tên biến hiện có:
 
 ```js run
-// show message
+// hiển thị tin nhắn
 let message = "Hello";
 alert(message);
 
-// show another message
+// hiển thị một tin nhắn khác
 *!*
-let message = "Goodbye"; // Error: variable already declared
+let message = "Bye"; // Lỗi: biến đã được khai báo
 */!*
 alert(message);
 ```
 ````
 
-For `if`, `for`, `while` and so on, variables declared in `{...}` are also only visible inside:
+Đối với `if`, `for`, `while`, v.v., các biến được khai báo trong `{...}` cũng chỉ hiển thị bên trong:
 
 ```js run
 if (true) {
@@ -78,53 +78,53 @@ if (true) {
   alert(phrase); // Hello!
 }
 
-alert(phrase); // Error, no such variable!
+alert(phrase); // Lỗi, không có biến như vậy!
 ```
 
-Here, after `if` finishes, the `alert` below won't see the `phrase`, hence the error.
+Ở đây, sau khi `if` kết thúc, `alert` bên dưới sẽ không thấy `phrase`, do đó xảy ra lỗi.
 
-That's great, as it allows us to create block-local variables, specific to an `if` branch.
+Điều đó thật tuyệt, vì nó cho phép chúng ta tạo các biến cục bộ khối, dành riêng cho một nhánh `if`.
 
-The similar thing holds true for `for` and `while` loops:
+Điều tương tự cũng đúng với các vòng lặp `for` và `while`:
 
 ```js run
 for (let i = 0; i < 3; i++) {
-  // the variable i is only visible inside this for
+  // biến i chỉ hiển thị bên trong cái này cho
   alert(i); // 0, then 1, then 2
 }
 
-alert(i); // Error, no such variable
+alert(i); // Lỗi, không có biến như vậy
 ```
 
-Visually, `let i` is outside of `{...}`. But the `for` construct is special here: the variable, declared inside it, is considered a part of the block.
+Về mặt trực quan, `let i` nằm ngoài `{...}`. Nhưng cấu trúc `for` ở đây đặc biệt: biến, được khai báo bên trong nó, được coi là một phần của khối.
 
-## Nested functions
+## Các hàm lồng nhau
 
-A function is called "nested" when it is created inside another function.
+Một hàm được gọi là "lồng nhau" khi nó được tạo bên trong một hàm khác.
 
-It is easily possible to do this with JavaScript.
+Có thể dễ dàng làm điều này với JavaScript.
 
-We can use it to organize our code, like this:
+Chúng ta có thể sử dụng nó để sắp xếp mã của ta, như thế này:
 
 ```js
 function sayHiBye(firstName, lastName) {
 
-  // helper nested function to use below
+  // hàm lồng nhau của người trợ giúp để sử dụng bên dưới
   function getFullName() {
     return firstName + " " + lastName;
   }
 
-  alert( "Hello, " + getFullName() );
-  alert( "Bye, " + getFullName() );
+  alert( "Xin chào, " + getFullName() );
+  alert( "Tạm biệt, " + getFullName() );
 
 }
 ```
 
-Here the *nested* function `getFullName()` is made for convenience. It can access the outer variables and so can return the full name. Nested functions are quite common in JavaScript.
+Ở đây, hàm *lồng nhau* `getFullName()` được tạo ra để thuận tiện. Nó có thể truy cập các biến bên ngoài và do đó có thể trả về tên đầy đủ. Các hàm lồng nhau khá phổ biến trong JavaScript.
 
-What's much more interesting, a nested function can be returned: either as a property of a new object or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
+Điều thú vị hơn nhiều, một hàm lồng nhau có thể được trả về: dưới dạng thuộc tính của một đối tượng mới hoặc là kết quả của chính nó. Sau đó nó có thể được sử dụng ở một nơi khác. Bất kể ở đâu, nó vẫn có quyền truy cập vào các biến bên ngoài giống nhau.
 
-Below, `makeCounter` creates the "counter" function that returns the next number on each invocation:
+Bên dưới, `makeCounter` tạo hàm "bộ đếm" trả về số tiếp theo trên mỗi lệnh gọi:
 
 ```js run
 function makeCounter() {
@@ -142,123 +142,123 @@ alert( counter() ); // 1
 alert( counter() ); // 2
 ```
 
-Despite being simple, slightly modified variants of that code have practical uses, for instance, as a [random number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator) to generate random values for automated tests.
+Mặc dù đơn giản, các biến thể được sửa đổi một chút của mã đó có những ứng dụng thực tế, chẳng hạn như [trình tạo số ngẫu nhiên](https://vi.wikipedia.org/wiki/B%E1%BB%99_sinh_s%E1%BB%91_gi%E1%BA%A3_ng%E1%BA%ABu_nhi%C3%AAn) để tạo các giá trị ngẫu nhiên cho các bài kiểm tra tự động.
 
-How does this work? If we create multiple counters, will they be independent? What's going on with the variables here?
+Cái này hoạt động ra sao? Nếu chúng ta tạo nhiều bộ đếm, chúng có độc lập không? Điều gì đang xảy ra với các biến ở đây?
 
-Understanding such things is great for the overall knowledge of JavaScript and beneficial for more complex scenarios. So let's go a bit in-depth.
+Hiểu những điều như vậy là rất tốt cho kiến thức tổng thể về JavaScript và có lợi cho các tình huống phức tạp hơn. Vì vậy, chúng ta hãy đi sâu hơn một chút.
 
 ## Lexical Environment
 
-```warn header="Here be dragons!"
-The in-depth technical explanation lies ahead.
+```warn header="Đây là những con rồng!"
+Phần giải thích kỹ thuật chuyên sâu nằm ở phía trước.
 
-As far as I'd like to avoid low-level language details, any understanding without them would be lacking and incomplete, so get ready.
+Theo như tôi muốn tránh các chi tiết ngôn ngữ cấp thấp, mọi hiểu biết nếu không có chúng sẽ thiếu sót và không đầy đủ, vì vậy hãy sẵn sàng.
 ```
 
-For clarity, the explanation is split into multiple steps.
+Để rõ ràng, giải thích được chia thành nhiều bước.
 
-### Step 1. Variables
+### Bước 1. Biến
 
-In JavaScript, every running function, code block `{...}`, and the script as a whole have an internal (hidden) associated object known as the *Lexical Environment*.
+Trong JavaScript, mọi hàm đang chạy, khối mã `{...}` và toàn bộ tập lệnh đều có một đối tượng liên quan (ẩn) bên trong được gọi là *Môi trường Từ vựng*.
 
-The Lexical Environment object consists of two parts:
+Đối tượng Lexical Environment bao gồm hai phần:
 
-1. *Environment Record* -- an object that stores all local variables as its properties (and some other information like the value of `this`).
-2. A reference to the *outer lexical environment*, the one associated with the outer code.
+1. *Environment Record* -- một đối tượng lưu trữ tất cả các biến cục bộ làm thuộc tính của nó (và một số thông tin khác như giá trị của `this`).
+2. Tham chiếu đến *Lexical Environment bên ngoài*, environment được liên kết với mã bên ngoài.
 
-**A "variable" is just a property of the special internal object, `Environment Record`. "To get or change a variable" means "to get or change a property of that object".**
+**"Biến" chỉ là thuộc tính của đối tượng bên trong đặc biệt, `Environment Record`. "Nhận hoặc thay đổi một biến" có nghĩa là "lấy hoặc thay đổi một thuộc tính của đối tượng đó".**
 
-In this simple code without functions, there is only one Lexical Environment:
+Trong mã đơn giản không có hàm này, chỉ có một Lexical Environment:
 
 ![lexical environment](lexical-environment-global.svg)
 
-This is the so-called *global* Lexical Environment, associated with the whole script.
+Đây được gọi là Lexical Environment *chung*, được liên kết với toàn bộ tập lệnh.
 
-On the picture above, the rectangle means Environment Record (variable store) and the arrow means the outer reference. The global Lexical Environment has no outer reference, that's why the arrow points to `null`.
+Trong hình trên, hình chữ nhật có nghĩa là Environment Recordg (lưu trữ biến) và mũi tên có nghĩa là tham chiếu bên ngoài. Lexical Environment chung không có tham chiếu bên ngoài, đó là lý do tại sao mũi tên trỏ đến `null`.
 
-As the code starts executing and goes on, the Lexical Environment changes.
+Khi mã bắt đầu thực thi và tiếp tục, Môi trường Từ vựng sẽ thay đổi.
 
-Here's a little bit longer code:
+Đây là mã dài hơn một chút:
 
 ![lexical environment](closure-variable-phrase.svg)
 
-Rectangles on the right-hand side demonstrate how the global Lexical Environment changes during the execution:
+Các hình chữ nhật ở phía bên tay phải thể hiện cách Môi trường Từ vựng chung thay đổi trong quá trình thực thi:
 
-1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
-    - Initially, they are in the "Uninitialized" state. That's a special internal state, it means that the engine knows about the variable, but it cannot be referenced until it has been declared with `let`. It's almost the same as if the variable didn't exist.
-2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable from this point forward.
-3. `phrase` is assigned a value.
-4. `phrase` changes the value.
+1. Khi tập lệnh bắt đầu, Lexical Environment được điền trước với tất cả các biến đã khai báo.
+     - Ban đầu, chúng ở trạng thái "Chưa khởi tạo". Đó là một trạng thái bên trong đặc biệt, nó có nghĩa là engine biết về biến, nhưng nó không thể được tham chiếu cho đến khi nó được khai báo với `let`. Nó gần giống như thể biến không tồn tại.
+2. Sau đó, định nghĩa `let phrase` xuất hiện. Chưa có nhiệm vụ nào, vì vậy giá trị của nó là `undefined`. Chúng ta có thể sử dụng biến từ thời điểm này trở đi.
+3. `phrase` được gán một giá trị.
+4. `phrase` thay đổi giá trị.
 
-Everything looks simple for now, right?
+Mọi thứ có vẻ đơn giản cho bây giờ, phải không?
 
-- A variable is a property of a special internal object, associated with the currently executing block/function/script.
-- Working with variables is actually working with the properties of that object.
+- Biến là thuộc tính của một đối tượng bên trong đặc biệt, được liên kết với khối/hàm/tập lệnh hiện đang thực thi.
+- Làm việc với biến thực chất là làm việc với thuộc tính của đối tượng đó.
 
-```smart header="Lexical Environment is a specification object"
-"Lexical Environment" is a specification object: it only exists "theoretically" in the [language specification](https://tc39.es/ecma262/#sec-lexical-environments) to describe how things work. We can't get this object in our code and manipulate it directly.
+```smart header="Lexical Environment là một đối tượng thông số"
+"Lexical Environment" là một đối tượng thông số: nó chỉ tồn tại "về mặt lý thuyết" trong [thông số kỹ thuật ngôn ngữ](https://tc39.es/ecma262/#sec-lexical-environments) để mô tả cách mọi thứ hoạt động. Chúng ta không thể lấy đối tượng này trong mã của mình và thao tác trực tiếp với nó.
 
-JavaScript engines also may optimize it, discard variables that are unused to save memory and perform other internal tricks, as long as the visible behavior remains as described.
+Các JavaScript engine cũng có thể tối ưu hóa nó, loại bỏ các biến không được sử dụng để tiết kiệm bộ nhớ và thực hiện các thủ thuật nội bộ khác, miễn là hành vi hiển thị vẫn như mô tả.
 ```
 
-### Step 2. Function Declarations
+### Bước 2. Khai báo hàm
 
-A function is also a value, like a variable.
+Một hàm cũng là một giá trị, giống như một biến.
 
-**The difference is that a Function Declaration is instantly fully initialized.**
+**Sự khác biệt là một Khai báo hàm được khởi tạo đầy đủ ngay lập tức.**
 
-When a Lexical Environment is created, a Function Declaration immediately becomes a ready-to-use function (unlike `let`, that is unusable till the declaration).
+Khi một Lexical Environment được tạo, một Khai báo hàm ngay lập tức trở thành một hàm sẵn sàng sử dụng (không giống như `let`, không thể sử dụng được cho đến khi khai báo).
 
-That's why we can use a function, declared as Function Declaration, even before the declaration itself.
+Đó là lý do tại sao chúng ta có thể sử dụng một hàm, được khai báo là Khai báo hàm, ngay cả trước khi chính khai báo đó.
 
-For example, here's the initial state of the global Lexical Environment when we add a function:
+Ví dụ: đây là trạng thái ban đầu của Lexical Environment chung khi chúng ta thêm một hàm:
 
 ![](closure-function-declaration.svg)
 
-Naturally, this behavior only applies to Function Declarations, not Function Expressions where we assign a function to a variable, such as `let say = function(name)...`.
+Đương nhiên, hành vi này chỉ áp dụng cho Khai báo hàm, không áp dụng cho Biểu thức hàm trong đó chúng ta gán một hàm cho một biến, chẳng hạn như `hãy nói = hàm(tên)...`.
 
-### Step 3. Inner and outer Lexical Environment
+### Bước 3. Lexical Environment bên trong và bên ngoài
 
-When a function runs, at the beginning of the call, a new Lexical Environment is created automatically to store local variables and parameters of the call.
+Khi một hàm chạy, khi bắt đầu cuộc gọi, một Lexical Environment mới được tạo tự động để lưu trữ các biến cục bộ và tham số của cuộc gọi.
 
-For instance, for `say("John")`, it looks like this (the execution is at the line, labelled with an arrow):
+Chẳng hạn, đối với `say("John")`, nó trông như thế này (việc thực thi nằm ở dòng, được đánh dấu bằng một mũi tên):
 
 <!--
     ```js
-    let phrase = "Hello";
+    let phrase = "Xin chào";
 
     function say(name) {
      alert( `${phrase}, ${name}` );
     }
 
-    say("John"); // Hello, John
+    say("John"); // Xin chào, John
     ```-->
 
 ![](lexical-environment-simple.svg)
 
-During the function call we have two Lexical Environments: the inner one (for the function call) and the outer one (global):
+Trong khi gọi hàm, chúng ta có hai Lexical Environment: environment bên trong (đối với lệnh gọi hàm) và environment bên ngoài (chung):
 
-- The inner Lexical Environment corresponds to the current execution of `say`. It has a single property: `name`, the function argument. We called `say("John")`, so the value of the `name` is `"John"`.
-- The outer Lexical Environment is the global Lexical Environment. It has the `phrase` variable and the function itself.
+- Lexical Environment bên trong tương ứng với việc thực thi `say` hiện tại. Nó có một thuộc tính duy nhất: `name`, đối số của hàm. Chúng ta đã gọi `say("John")`, vì vậy giá trị của `name` là `"John"`.
+- Lexical Environment bên ngoài là Môi trường Từ vựng chung. Nó có biến `phrase` và chính hàm đó.
 
-The inner Lexical Environment has a reference to the `outer` one.
+Lexical Environment bên trong có tham chiếu đến môi trường `bên ngoài`.
 
-**When the code wants to access a variable -- the inner Lexical Environment is searched first, then the outer one, then the more outer one and so on until the global one.**
+**Khi mã muốn truy cập một biến -- Lexical Environment bên trong được tìm kiếm trước, sau đó đến environment bên ngoài, rồi đến environment bên ngoài hơn, v.v. cho đến môi trường chung.**
 
-If a variable is not found anywhere, that's an error in strict mode (without `use strict`, an assignment to a non-existing variable creates a new global variable, for compatibility with old code).
+Nếu không tìm thấy biến ở bất kỳ đâu, thì đó là lỗi trong chế độ nghiêm ngặt (không có `usestrict`, việc gán cho một biến không tồn tại sẽ tạo ra một biến chung mới, để tương thích với mã cũ).
 
-In this example the search proceeds as follows:
+Trong ví dụ này, quá trình tìm kiếm diễn ra như sau:
 
-- For the `name` variable, the `alert` inside `say` finds it immediately in the inner Lexical Environment.
-- When it wants to access `phrase`, then there is no `phrase` locally, so it follows the reference to the outer Lexical Environment and finds it there.
+- Đối với biến `name`, `alert` bên trong `say` tìm thấy nó ngay lập tức trong Lexical Environment bên trong.
+- Khi nó muốn truy cập `phrase`, thì không có `phrase` cục bộ, vì vậy nó sẽ theo tham chiếu đến Lexical Environment bên ngoài và tìm thấy nó ở đó.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.svg)
 
 
-### Step 4. Returning a function
+### Bước 4. Trả về một hàm
 
-Let's return to the `makeCounter` example.
+Hãy quay lại ví dụ `makeCounter`.
 
 ```js
 function makeCounter() {
@@ -272,53 +272,53 @@ function makeCounter() {
 let counter = makeCounter();
 ```
 
-At the beginning of each `makeCounter()` call, a new Lexical Environment object is created, to store variables for this `makeCounter` run.
+Khi bắt đầu mỗi lệnh gọi `makeCounter()`, một đối tượng Lexical Environment mới được tạo để lưu trữ các biến cho lần chạy `makeCounter` này.
 
-So we have two nested Lexical Environments, just like in the example above:
+Vì vậy, chúng ta có hai Lexical Environment lồng nhau, giống như trong ví dụ trên:
 
 ![](closure-makecounter.svg)
 
-What's different is that, during the execution of `makeCounter()`, a tiny nested function is created of only one line: `return count++`. We don't run it yet, only create.
+Điều khác biệt là, trong quá trình thực thi `makeCounter()`, một hàm nhỏ lồng nhau được tạo chỉ từ một dòng: `return count++`. Chúng ta chưa chạy nó, chỉ tạo.
 
-All functions remember the Lexical Environment in which they were made. Technically, there's no magic here: all functions have the hidden property named `[[Environment]]`, that keeps the reference to the Lexical Environment where the function was created:
+Tất cả các hàm ghi nhớ Lexical Environment mà chúng được tạo ra. Về mặt kỹ thuật, không có phép thuật nào ở đây: tất cả các hàm đều có thuộc tính ẩn có tên `[[Môi trường]]`, giữ tham chiếu đến Lexical Environment nơi hàm được tạo:
 
 ![](closure-makecounter-environment.svg)
 
-So, `counter.[[Environment]]` has the reference to `{count: 0}` Lexical Environment. That's how the function remembers where it was created, no matter where it's called. The `[[Environment]]` reference is set once and forever at function creation time.
+Vì vậy, `counter.[[Environment]]` có tham chiếu đến `{count: 0}` Lexical Environment. Đó là cách hàm ghi nhớ nơi nó được tạo, bất kể nó được gọi ở đâu. Tham chiếu `[[Môi trường]]` được đặt một lần và mãi mãi tại thời điểm tạo hàm.
 
-Later, when `counter()` is called, a new Lexical Environment is created for the call, and its outer Lexical Environment reference is taken from `counter.[[Environment]]`:
+Sau đó, khi `counter()` được gọi, một Lexical Environment mới được tạo cho lệnh gọi và tham chiếu Lexical Environment bên ngoài của nó được lấy từ `bộ đếm.[[Environment]]`:
 
 ![](closure-makecounter-nested-call.svg)
 
-Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
+Bây giờ, khi mã bên trong `counter()` tìm kiếm biến `count`, trước tiên, nó tìm kiếm Lexical Environment của chính nó (trống, vì không có biến cục bộ nào ở đó), sau đó là Lexical Environment của lệnh gọi `makeCounter()` bên ngoài, nơi nó tìm thấy và thay đổi nó.
 
-**A variable is updated in the Lexical Environment where it lives.**
+**Một biến được cập nhật trong Lexical Environment nơi nó tồn tại.**
 
-Here's the state after the execution:
+Đây là trạng thái sau khi thực hiện:
 
 ![](closure-makecounter-nested-call-2.svg)
 
-If we call `counter()` multiple times, the `count` variable will be increased to `2`, `3` and so on, at the same place.
+Nếu chúng ta gọi `counter()` nhiều lần, biến `count` sẽ được tăng lên thành `2`, `3`, v.v., tại cùng một vị trí.
 
-```smart header="Closure"
-There is a general programming term "closure", that developers generally should know.
+```smart header="Bao đóng"
+Có một thuật ngữ lập trình chung là "bao đóng" mà các nhà phát triển thường nên biết.
 
-A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exception, to be covered in <info:new-function>).
+[Bao đóng](https://vi.wikipedia.org/wiki/Bao_%C4%91%C3%B3ng_(l%E1%BA%ADp_tr%C3%ACnh_m%C3%A1y_t%C3%ADnh)) là một hàm ghi nhớ các biến bên ngoài của nó và có thể truy cập chúng. Trong một số ngôn ngữ, điều đó là không thể, hoặc một hàm phải được viết theo một cách đặc biệt để làm cho nó xảy ra. Nhưng như đã giải thích ở trên, trong JavaScript, tất cả các hàm đều là các hàm đóng một cách tự nhiên (chỉ có một ngoại lệ, được đề cập trong <info:new-function>).
 
-That is: they automatically remember where they were created using a hidden `[[Environment]]` property, and then their code can access outer variables.
+Đó là: chúng tự động ghi nhớ nơi chúng được tạo bằng thuộc tính `[[Môi trường]]` ẩn, và sau đó mã của chúng có thể truy cập các biến bên ngoài.
 
-When on an interview, a frontend developer gets a question about "what's a closure?", a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe a few more words about technical details: the `[[Environment]]` property and how Lexical Environments work.
+Khi tham gia một cuộc phỏng vấn, một nhà phát triển giao diện người dùng nhận được câu hỏi về "bao đóng là gì?", một câu trả lời hợp lệ sẽ là định nghĩa về bao đóng và giải thích rằng tất cả các hàm trong JavaScript đều là đóng và có thể thêm một vài từ về chi tiết kỹ thuật: thuộc tính `[[Môi trường]]` và cách thức hoạt động của Môi trường Từ vựng.
 ```
 
-## Garbage collection
+## Thu gom rác
 
-Usually, a Lexical Environment is removed from memory with all the variables after the function call finishes. That's because there are no references to it. As any JavaScript object, it's only kept in memory while it's reachable.
+Thông thường, một Lexical Environmentg sẽ bị xóa khỏi bộ nhớ cùng với tất cả các biến sau khi lệnh gọi hàm kết thúc. Đó là bởi vì không có tham chiếu cho nó. Giống như bất kỳ đối tượng JavaScript nào, nó chỉ được lưu trong bộ nhớ khi có thể truy cập được.
 
-However, if there's a nested function that is still reachable after the end of a function, then it has `[[Environment]]` property that references the lexical environment.
+Tuy nhiên, nếu có một hàm lồng nhau vẫn có thể truy cập được sau khi kết thúc hàm, thì hàm đó có thuộc tính `[[Environment]]` tham chiếu Lexical Environment.
 
-In that case the Lexical Environment is still reachable even after the completion of the function, so it stays alive.
+Trong trường hợp đó, Lexical Environment vẫn có thể truy cập được ngay cả sau khi hoàn thành hàm, vì vậy nó vẫn tồn tại.
 
-For example:
+Ví dụ:
 
 ```js
 function f() {
@@ -329,11 +329,11 @@ function f() {
   }
 }
 
-let g = f(); // g.[[Environment]] stores a reference to the Lexical Environment
-// of the corresponding f() call
+let g = f(); // g.[[Environment]] lưu trữ một tham chiếu đến Lexical Environment
+// của f() call tương ứng
 ```
 
-Please note that if `f()` is called many times, and resulting functions are saved, then all corresponding Lexical Environment objects will also be retained in memory. In the code below, all 3 of them:
+Hãy lưu ý rằng nếu `f()` được gọi nhiều lần và các hàm kết quả được lưu, thì tất cả các đối tượng Lexical Environment tương ứng cũng sẽ được giữ lại trong bộ nhớ. Trong đoạn mã dưới đây, cả 3 cái trong số chúng:
 
 ```js
 function f() {
@@ -342,14 +342,14 @@ function f() {
   return function() { alert(value); };
 }
 
-// 3 functions in array, every one of them links to Lexical Environment
-// from the corresponding f() run
+// 3 hàm trong array, mỗi hàm đều liên kết với Môi trường Từ vựng
+// từ f() run tương ứng
 let arr = [f(), f(), f()];
 ```
 
-A Lexical Environment object dies when it becomes unreachable (just like any other object). In other words, it exists only while there's at least one nested function referencing it.
+Một đối tượng Lexical Environment sẽ chết khi không thể truy cập được (giống như bất kỳ đối tượng nào khác). Nói cách khác, nó chỉ tồn tại khi có ít nhất một hàm lồng nhau tham chiếu đến nó.
 
-In the code below, after the nested function is removed, its enclosing Lexical Environment (and hence the `value`) is cleaned from memory:
+Trong mã bên dưới, sau khi hàm lồng nhau bị xóa, Lexical Environment kèm theo của nó (và do đó, `value`) sẽ bị xóa khỏi bộ nhớ:
 
 ```js
 function f() {
@@ -360,29 +360,29 @@ function f() {
   }
 }
 
-let g = f(); // while g function exists, the value stays in memory
+let g = f(); // trong khi hàm g tồn tại, giá trị vẫn nằm trong bộ nhớ
 
-g = null; // ...and now the memory is cleaned up
+g = null; // ...và bây giờ bộ nhớ đã được dọn sạch
 ```
 
-### Real-life optimizations
+### Tối ưu hóa thực tế
 
-As we've seen, in theory while a function is alive, all outer variables are also retained.
+Như chúng ta đã thấy, theo lý thuyết, khi một hàm còn hoạt động, tất cả các biến bên ngoài cũng được giữ lại.
 
-But in practice, JavaScript engines try to optimize that. They analyze variable usage and if it's obvious from the code that an outer variable is not used -- it is removed.
+Nhưng trên thực tế, các JavaScript engine cố gắng tối ưu hóa điều đó. Họ phân tích việc sử dụng biến và nếu mã cho thấy rõ ràng rằng biến bên ngoài không được sử dụng -- biến đó sẽ bị xóa.
 
-**An important side effect in V8 (Chrome, Edge, Opera) is that such variable will become unavailable in debugging.**
+**Một tác dụng phụ quan trọng trong V8 (Chrome, Edge, Opera) là biến đó sẽ không khả dụng trong quá trình gỡ lỗi.**
 
-Try running the example below in Chrome with the Developer Tools open.
+Hãy thử chạy ví dụ bên dưới trong Chrome khi mở Công cụ dành cho nhà phát triển (console).
 
-When it pauses, in the console type `alert(value)`.
+Khi nó tạm dừng, trong bảng điều khiển hãy nhập `alert(value)`.
 
 ```js run
 function f() {
   let value = Math.random();
 
   function g() {
-    debugger; // in console: type alert(value); No such variable!
+    debugger; // trong bảng điều khiển: nhập alert (value); Không có biến như vậy!
   }
 
   return g;
@@ -392,18 +392,18 @@ let g = f();
 g();
 ```
 
-As you could see -- there is no such variable! In theory, it should be accessible, but the engine optimized it out.
+Như bạn có thể thấy -- không có biến như vậy! Về lý thuyết, nó có thể truy cập được, nhưng engine đã tối ưu hóa nó.
 
-That may lead to funny (if not such time-consuming) debugging issues. One of them -- we can see a same-named outer variable instead of the expected one:
+Điều đó có thể dẫn đến các vấn đề gỡ lỗi buồn cười (nếu không muốn nói là tốn thời gian). Một trong số chúng -- chúng ta có thể thấy một biến ngoài cùng tên thay vì biến như mong đợi:
 
 ```js run global
-let value = "Surprise!";
+let value = "Bất ngờ chưa!";
 
 function f() {
-  let value = "the closest value";
+  let value = "giá trị gần nhất";
 
   function g() {
-    debugger; // in console: type alert(value); Surprise!
+    debugger; // trong bảng điều khiển: nhập alert (value); Bất ngờ chưa!
   }
 
   return g;
@@ -413,6 +413,6 @@ let g = f();
 g();
 ```
 
-This feature of V8 is good to know. If you are debugging with Chrome/Edge/Opera, sooner or later you will meet it.
+Tính năng này của V8 là tốt để biết. Nếu bạn đang gỡ lỗi bằng Chrome/Edge/Opera, sớm muộn gì bạn cũng sẽ gặp nó.
 
-That is not a bug in the debugger, but rather a special feature of V8. Perhaps it will be changed sometime. You can always check for it by running the examples on this page.
+Đó không phải là một lỗi trong trình gỡ lỗi, mà là một tính năng đặc biệt của V8. Có lẽ nó sẽ được thay đổi đôi khi. Bạn luôn có thể kiểm tra nó bằng cách chạy các ví dụ trên trang này.

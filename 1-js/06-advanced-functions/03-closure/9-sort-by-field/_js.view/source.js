@@ -1,5 +1,5 @@
 function byField(fieldName){
 
-  // Your code goes here.
+  // Mã của bạn ở đây.
 
 }
