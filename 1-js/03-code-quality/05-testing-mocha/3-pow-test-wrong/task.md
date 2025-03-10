@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# What's wrong in the test?
+# Có gì sai trong bài kiểm tra?
 
-What's wrong in the test of `pow` below?
+Có gì sai trong bài kiểm tra `pow` bên dưới?
 
 ```js
-it("Raises x to the power n", function() {
+it("Nâng x lên luỹ thừa n", function() {
   let x = 5;
 
   let result = x;
@@ -21,4 +21,4 @@ it("Raises x to the power n", function() {
 });
 ```
 
-P.S. Syntactically the test is correct and passes.
+Tái bút: Về mặt cú pháp, bài kiểm tra là chính xác và đỗ.
