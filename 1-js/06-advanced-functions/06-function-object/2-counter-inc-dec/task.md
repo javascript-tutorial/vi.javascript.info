@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Set and decrease for counter
+# Đặt và giảm cho bộ đếm
 
-Modify the code of `makeCounter()` so that the counter can also decrease and set the number:
+Sửa đổi mã của `makeCounter()` để bộ đếm cũng có thể giảm và đặt số:
 
-- `counter()` should return the next number (as before).
-- `counter.set(value)` should set the counter to `value`.
-- `counter.decrease()` should decrease the counter by 1.
+- `counter()` nên trả lại số tiếp theo (như trước).
+- `counter.set(value)` nên đặt bộ đếm thành `value`.
+- `counter.decrease()` nên giảm của bộ đếm 1 đơn vị.
 
-See the sandbox code for the complete usage example.
+Xem mã sandbox để biết ví dụ sử dụng đầy đủ.
 
-P.S. You can use either a closure or the function property to keep the current count. Or write both variants.
+Tái bút: Bạn có thể sử dụng bao đóng hoặc thuộc tính hàm để giữ số lượng hiện tại. Hoặc viết cả hai biến thể.

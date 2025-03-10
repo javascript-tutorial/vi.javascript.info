@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Sum with an arbitrary amount of brackets
+# Tổng với số lượng dấu ngoặc tùy ý
 
-Write function `sum` that would work like this:
+Viết hàm `sum` sẽ hoạt động như thế này:
 
 ```js
 sum(1)(2) == 3; // 1 + 2
@@ -14,4 +14,5 @@ sum(6)(-1)(-2)(-3) == 0
 sum(0)(1)(2)(3)(4)(5) == 15
 ```
 
-P.S. Hint: you may need to setup custom object to primitive conversion for your function.
+Tái bút:
+Gợi ý: Bạn có thể cần thiết lập đối tượng tùy chỉnh thành chuyển đổi nguyên thủy cho hàm của mình.
