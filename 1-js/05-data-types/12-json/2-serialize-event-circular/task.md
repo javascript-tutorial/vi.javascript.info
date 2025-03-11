@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Exclude backreferences
+# Loại trừ phản hồi
 
-In simple cases of circular references, we can exclude an offending property from serialization by its name.
+Trong các trường hợp đơn giản của tham chiếu vòng tròn, chúng ta có thể loại trừ một thuộc tính vi phạm khỏi việc tuần tự hóa theo tên của nó.
 
-But sometimes we can't just use the name, as it may be used both in circular references and normal properties. So we can check the property by its value.
+Nhưng đôi khi chúng ta không thể chỉ sử dụng tên, vì nó có thể được sử dụng cả trong tham chiếu vòng và thuộc tính bình thường. Vì vậy, chúng ta có thể kiểm tra thuộc tính theo giá trị của nó.
 
-Write `replacer` function to stringify everything, but remove properties that reference `meetup`:
+Viết hàm `replacer` để xâu chuỗi mọi thứ, nhưng xóa các thuộc tính tham chiếu `meetup`:
 
 ```js run
 let room = {
@@ -22,16 +22,16 @@ let meetup = {
 };
 
 *!*
-// circular references
+// tham chiếu vòng
 room.occupiedBy = meetup;
 meetup.self = meetup;
 */!*
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
-  /* your code */
+  /* mã của bạn */
 }));
 
-/* result should be:
+/* kết quả nên là:
 {
   "title":"Conference",
   "occupiedBy":[{"name":"John"},{"name":"Alice"}],
