@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Count properties
+# Đếm thuộc tính
 
-Write a function `count(obj)` that returns the number of properties in the object:
+Viết hàm `count(obj)` trả về số thuộc tính trong đối tượng:
 
 ```js
 let user = {
@@ -15,7 +15,7 @@ let user = {
 alert( count(user) ); // 2
 ```
 
-Try to make the code as short as possible.
+Cố gắng làm cho mã càng ngắn càng tốt.
 
-P.S. Ignore symbolic properties, count only "regular" ones.
+Tái bút: Bỏ qua các thuộc tính tượng trưng, chỉ tính những thuộc tính "thông thường".
 

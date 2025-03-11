@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Sum the properties
+# Tính tổng các thuộc tính
 
-There is a `salaries` object with arbitrary number of salaries. 
+Có một đối tượng `salaries` với số lương tùy ý.
 
-Write the function `sumSalaries(salaries)` that returns the sum of all salaries using `Object.values` and the `for..of` loop.
+Viết hàm `sumSalary(salaries)` trả về tổng của tất cả các khoản lương bằng cách sử dụng `Object.values` và vòng lặp `for..of`.
 
-If `salaries` is empty, then the result must be `0`.
+Nếu `salaries` trống, thì kết quả phải là `0`.
 
-For instance:
+Ví dụ:
 
 ```js
 let salaries = {
