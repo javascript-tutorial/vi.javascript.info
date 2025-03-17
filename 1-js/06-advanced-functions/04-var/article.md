@@ -3,7 +3,14 @@
 ```smart header="Bài viết này là để hiểu các tập lệnh cũ"
 Thông tin trong bài viết này rất hữu ích để hiểu các tập lệnh cũ.
 
+<<<<<<< HEAD
 Đó không phải là cách chúng ta viết mã mới.
+=======
+```smart header="This article is for understanding old scripts"
+The information in this article is useful for understanding old scripts.
+
+That's not how we write new code.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```
 
 Trong chương đầu tiên về [variables](info:variables), chúng ta đã nói đến ba cách khai báo biến:
@@ -57,7 +64,7 @@ alert(test); // ReferenceError: test is not defined
 
 Tương tự với vòng lặp: `var` không thể bị block:
 
-```js
+```js run
 for (var i = 0; i < 10; i++) {
   var one = 1;
   // ...
@@ -169,7 +176,7 @@ Với ví dụ ở trên, nhánh `if (false)` chưa bao giờ được thực th
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
   var phrase = "Xin chào";
@@ -255,12 +262,21 @@ Có những cách khác ngoài dấu ngoặc đơn để nói với JavaScript r
 ```js run
 // Các cách tạo IIFE
 
+<<<<<<< HEAD
 (function() {
   alert("Dấu ngoặc đơn xung quanh hàm");
 }*!*)*/!*();
 
 (function() {
   alert("Dấu ngoặc đơn xung quanh toàn bộ");
+=======
+*!*(*/!*function() {
+  alert("Parentheses around the function");
+}*!*)*/!*();
+
+*!*(*/!*function() {
+  alert("Parentheses around the whole thing");
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 }()*!*)*/!*;
 
 *!*!*/!*function() {

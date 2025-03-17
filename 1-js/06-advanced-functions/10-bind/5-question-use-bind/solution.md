@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 Có lỗi xuất hiện vì `askPassword` chỉ nhận hàm `loginOk/loginFail` chứ không nhận được đối tượng `user` do vậy `this` bị mất.
+=======
+The error occurs because `askPassword` gets functions `loginOk/loginFail` without the object.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Khi gọi các hàm này `this=undefined`.
 
