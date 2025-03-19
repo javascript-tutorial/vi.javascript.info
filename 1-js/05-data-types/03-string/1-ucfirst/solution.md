@@ -1,19 +1,19 @@
-We can't "replace" the first character, because strings in JavaScript are immutable.
+Chúng ta không thể "thay thế" ký tự đầu tiên, bởi vì các chuỗi trong JavaScript là bất biến.
 
-But we can make a new string based on the existing one, with the uppercased first character:
+Nhưng chúng ta có thể tạo một chuỗi mới dựa trên chuỗi hiện có, với ký tự đầu tiên được viết hoa:
 
 ```js
 let newStr = str[0].toUpperCase() + str.slice(1);
 ```
 
-There's a small problem though. If `str` is empty, then `str[0]` is `undefined`, and as `undefined` doesn't have the `toUpperCase()` method, we'll get an error.
+Có một vấn đề nhỏ mặc dù. Nếu `str` trống, thì `str[0]` là `undefined` và vì `undefined` không có phương thức `toUpperCase()` nên chúng ta sẽ gặp lỗi.
 
-There are two variants here:
+Có hai biến thể ở đây:
 
-1. Use `str.charAt(0)`, as it always returns a string (maybe empty).
-2. Add a test for an empty string.
+1. Sử dụng `str.charAt(0)`, vì nó luôn trả về một chuỗi (có thể trống).
+2. Thêm kiểm tra cho chuỗi trống.
 
-Here's the 2nd variant:
+Đây là biến thể thứ 2:
 
 ```js run demo
 function ucFirst(str) {

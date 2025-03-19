@@ -1,4 +1,4 @@
-To make the search case-insensitive, let's bring the string to lower case and then search:
+Để làm cho tìm kiếm không phân biệt chữ hoa chữ thường, hãy chuyển chuỗi thành chữ thường và sau đó tìm kiếm:
 
 ```js run demo
 function checkSpam(str) {
