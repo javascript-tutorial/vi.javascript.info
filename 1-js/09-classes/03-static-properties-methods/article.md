@@ -2,7 +2,13 @@
 
 Chúng ta cũng có thể gán một phương thức cho chính hàm class, không phải cho `"prototype"` của nó. Các phương thức như vậy được gọi là *static*.
 
+<<<<<<< HEAD
 Trong một class, chúng được thêm vào trước bởi từ khóa `static`, như sau:
+=======
+We can also assign a method to the class as a whole. Such methods are called *static*.
+
+In a class declaration, they are prepended by `static` keyword, like this:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js run
 class User {
@@ -30,9 +36,17 @@ User.staticMethod(); // true
 
 Giá trị của `this` trong lời gọi `User.staticMethod()` chính là `User` (quy tắc "đối tượng trước dấu chấm").
 
+<<<<<<< HEAD
 Các phương thức tĩnh thường được sử dụng để cài đặt các hàm thuộc về class, chứ không phải cho bất kỳ đối tượng cụ thể nào của nó.
 
 Ví dụ, chúng ta có các đối tượng bài báo `Article` và cần một hàm để so sánh chúng. Một giải pháp tự nhiên là thêm phương thức `Article.compare`, như sau:
+=======
+Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it.
+
+For instance, we have `Article` objects and need a function to compare them.
+
+A natural solution would be to add `Article.compare` static method:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js run
 class Article {
@@ -62,9 +76,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
+<<<<<<< HEAD
 Ở đây `Article.compare` ở "phía trên" các đối tượng bài báo, như là một phương tiện để so sánh chúng. Nó không phải là phương thức của một đối tượng bài báo nào, mà là của cả class.
 
 Một ví dụ khác là một phương thức gọi là "factory". Hãy tưởng tượng, chúng ta cần một số cách để tạo một bài báo:
+=======
+Here `Article.compare` method stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+
+Another example would be a so-called "factory" method.
+
+Let's say, we need multiple ways to create an article:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 1. Tạo bằng cách cung cấp các tham số (`title`, `date` v.v.).
 2. Tạo một bài báo rỗng với ngày tháng hiện tại.
@@ -72,7 +94,11 @@ Một ví dụ khác là một phương thức gọi là "factory". Hãy tưởn
 
 Cách đầu tiên có thể được cài đặt bằng constructor. Đối với cách thứ hai chúng ta có thể tạo một phương thức tĩnh của class.
 
+<<<<<<< HEAD
 Giống như `Article.createTodays()` ở đây:
+=======
+Such as `Article.createTodays()` here:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js run
 class Article {
@@ -99,12 +125,32 @@ Bây giờ mỗi khi chúng ta cần tạo một tin vắn hôm nay, chúng ta c
 Các phương thức tĩnh cũng được sử dụng trong các class liên quan đến cơ sở dữ liệu để tìm kiếm/lưu trữ/xóa các mục dữ liệu khỏi cơ sở dữ liệu, như thế này:
 
 ```js
+<<<<<<< HEAD
 // giả sử Article là một class đặc biệt để quản lý các bài báo
 // phương thức tĩnh để xóa bài báo là:
 Article.remove({id: 12345});
 ```
 
 ## Các thuộc tính tĩnh
+=======
+// assuming Article is a special class for managing articles
+// static method to remove the article by id:
+Article.remove({id: 12345});
+```
+
+````warn header="Static methods aren't available for individual objects"
+Static methods are callable on classes, not on individual objects.
+
+E.g. such code won't work:
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
+## Static properties
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 [recent browser=Chrome]
 
