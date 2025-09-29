@@ -46,13 +46,23 @@ Ngoài các số thông thường, còn có các giá trị số đặc biệt k
     alert( "not a number" / 2 ); // NaN, phép chia như vậy là sai lầm
     ```
 
+<<<<<<< HEAD
     `NaN` rất khó chịu. Bất kỳ thao tác nào khác trên `NaN` sẽ trả về` NaN`:
+=======
+    `NaN` is sticky. Any further mathematical operation on `NaN` returns `NaN`:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     ```js run
-    alert( "not a number" / 2 + 5 ); // NaN
+    alert( NaN + 1 ); // NaN
+    alert( 3 * NaN ); // NaN
+    alert( "not a number" / 2 - 1 ); // NaN
     ```
 
+<<<<<<< HEAD
     Cho nên, nếu `NaN` xuất hiện trong một biểu thức toán học, nó lan truyền tới kết quả của cả biểu thức.
+=======
+    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result (there's only one exception to that: `NaN ** 0` is `1`).
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```smart header="Các phép tính toán học luôn an toàn"
 Làm toán trong JavaScript rất "an toàn". Ta có thể làm bất cứ thứ gì: chia cho không, coi một chuỗi như một số, ...
@@ -64,11 +74,28 @@ Các giá trị số đặc biệt chính thức thuộc về kiểu "number". T
 
 Ta sẽ học được nhiều hơn về các số ở chương <info:number>.
 
-## BigInt
+## BigInt [#bigint-type]
 
+<<<<<<< HEAD
 Trong JavaScript, loại "số" không thể biểu diễn cho các giá trị số nguyên lớn hơn <code>(2<sup>53</sup>-1)</code> (đó là 9007199254740991) hoặc nhỏ hơn <code>-(2<sup>53</sup>-1)</code> đối với số âm. Đó là một hạn chế kỹ thuật do sự biểu diễn nội bộ của chúng gây ra.
 
 Đối với hầu hết các mục đích đó là đủ, nhưng đôi khi chúng ta cần những con số thực sự lớn, ví dụ cho mật mã hoặc thời điểm chính xác đến micro giây.
+=======
+In JavaScript, the "number" type cannot safely represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives.
+
+To be really precise, the "number" type can store larger integers (up to <code>1.7976931348623157 * 10<sup>308</sup></code>), but outside of the safe integer range <code>±(2<sup>53</sup>-1)</code> there'll be a precision error, because not all digits fit into the fixed 64-bit storage. So an "approximate" value may be stored.
+
+For example, these two numbers (right above the safe range) are the same:
+
+```js
+console.log(9007199254740991 + 1); // 9007199254740992
+console.log(9007199254740991 + 2); // 9007199254740992
+```
+
+So to say, all odd integers greater than <code>(2<sup>53</sup>-1)</code> can't be stored at all in the "number" type.
+
+For most purposes <code>±(2<sup>53</sup>-1)</code> range is quite enough, but sometimes we need the entire range of really big integers, e.g. for cryptography or microsecond-precision timestamps.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Kiểu `BigInt` gần đây đã được thêm vào ngôn ngữ để biểu diễn các số nguyên có độ dài tùy ý.
 
@@ -81,6 +108,7 @@ const bigInt = 1234567890123456789012345678901234567890n;
 
 Vì các số `BigInt` hiếm khi cần thiết, chúng tôi không trình bày chúng ở đây mà dành cho chúng một chương riêng <info: bigint>. Hãy đọc nó khi bạn cần những con số lớn như vậy.
 
+<<<<<<< HEAD
 ```smart header="Vấn đề tương thích"
 Hiện tại, `BigInt` được hỗ trợ trong Firefox / Chrome / Edge / Safari, nhưng không hỗ trợ trong IE.
 ```
@@ -88,6 +116,9 @@ Hiện tại, `BigInt` được hỗ trợ trong Firefox / Chrome / Edge / Safar
 Bạn có thể kiểm tra [*MDN* BigInt compatibility table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt#Browser_compatibility) để biết phiên bản trình duyệt nào có hỗ trợ.
 
 ## Kiểu chuỗi
+=======
+## String
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Một chuỗi trong JavaScript bắt buộc phải nằm giữa các dấu nháy.
 
@@ -210,6 +241,7 @@ Kiểu `symbol` (biểu tượng) được sử dụng để tạo các định 
 
 ## Toán tử typeof [#type-typeof]
 
+<<<<<<< HEAD
 Toán tử `typeof` trả về kiểu của đối số. Nó hữu dụng khi chúng ta muốn kiểm tra kiểu dữ liệu của một giá trị để thực hiện các công việc khác nhau dựa trên kết quả.
 
 Nó hỗ trợ hai cú pháp:
@@ -220,6 +252,11 @@ Nó hỗ trợ hai cú pháp:
 Nói cách khác, nó làm việc với cả dạng có dấu ngoặc đơn hoặc không có dấu ngoặc đơn. Kết quả hoàn toàn giống nhau.
 
 Gọi `typeof x` trả về một chuỗi mô tả tên của kiểu dữ liệu:
+=======
+The `typeof` operator returns the type of the operand. It's useful when we want to process values of different types differently or just want to do a quick check.
+
+A call to `typeof x` returns a string with the type name:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js
 typeof undefined // "undefined"
@@ -249,14 +286,33 @@ typeof alert // "function"  (3)
 
 Ba dòng cuối cần phải giải thích thêm:
 
+<<<<<<< HEAD
 1. `Math` là một đối tượng có sẵn cung cấp các phép tính toán học. Chúng ta sẽ tìm hiểu nó trong chương <info:number>. Ở đây, nó chỉ đóng vai trò như một ví dụ về một đối tượng.
 2. Kết quả của `typeof null` là `"object"`. Đó là một lỗi được chính thức công nhận trong hành vi của `typeof`, xuất hiện từ những ngày đầu của JavaScript và được giữ lại để tương thích. Chắc chắn, `null` không phải là một đối tượng. Nó là một giá trị đặc biệt với một kiểu riêng biệt của nó.
 3. Kết quả của `typeof alert` là `"function"`, vì `alert` là một hàm. Chúng ta sẽ nghiên cứu các hàm trong các chương tiếp theo, chúng ta cũng sẽ thấy rằng không có kiểu "function" đặc biệt nào trong JavaScript. Các hàm thuộc về kiểu đối tượng. Nhưng `typeof` xử lý chúng theo cách khác, trả về `"function"`. Điều đó cũng đến từ những ngày đầu của JavaScript. Về mặt kỹ thuật, hành vi như vậy không đúng, nhưng có thể thuận tiện trong thực tế.
 
 ## Tóm tắt
+=======
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+
+```smart header="The `typeof(x)` syntax"
+You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+
+To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+
+Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+
+Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+```
+
+## Summary
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Có 8 kiểu dữ liệu cơ bản trong JavaScript.
 
+<<<<<<< HEAD
 - `number` dành cho các số thuộc bất kỳ loại nào: số nguyên hoặc dấu phẩy động, số nguyên được giới hạn bởi <code>±(2<sup>53</sup>-1)</code>.
 - `bigint` dành cho các số nguyên có độ dài tùy ý.
 - `string` dành cho các chuỗi. Một chuỗi có thể có không hoặc nhiều ký tự, không có kiểu ký tự đơn riêng biệt.
@@ -265,11 +321,29 @@ Có 8 kiểu dữ liệu cơ bản trong JavaScript.
 - `undefined` dành cho các giá trị chưa được gán -- một kiểu độc lập có một giá trị duy nhất `undefined`.
 - `object` dành cho các cấu trúc dữ liệu phức tạp hơn.
 - `symbol` dành cho các định danh duy nhất.
+=======
+- Seven primitive data types:
+    - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+    - `bigint` for integer numbers of arbitrary length.
+    - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+    - `boolean` for `true`/`false`.
+    - `null` for unknown values -- a standalone type that has a single value `null`.
+    - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+    - `symbol` for unique identifiers.
+- And one non-primitive data type:
+    - `object` for more complex data structures.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Toán tử `typeof` cho phép chúng ta xem kiểu nào được lưu trữ trong một biến.
 
+<<<<<<< HEAD
 - Hai dạng: `typeof x` hoặc `typeof(x)`.
 - Trả về một chuỗi với tên của kiểu dữ liêu, ví dụ `"string"`.
 - Với `null` nó trả về `"object"` -- đây là một lỗi còn tồn tại trong ngôn ngữ, nó không thực sự là một đối tượng.
+=======
+- Usually used as `typeof x`, but `typeof(x)` is also possible.
+- Returns a string with the name of the type, like `"string"`.
+- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Trong các chương tiếp theo, chúng ta sẽ tập trung vào các giá trị nguyên thủy và khi chúng ta đã quen thuộc với chúng, chúng ta sẽ chuyển sang các đối tượng.
