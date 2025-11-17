@@ -300,11 +300,19 @@ Linters là công cụ có thể tự động kiểm tra kiểu mã của bạn 
 
 Dưới đây là một số công cụ linting nổi tiếng:
 
+<<<<<<< HEAD
 - [JSLint](http://www.jslint.com/) -- một trong những công cụ đầu tiên.
 - [JSHint](http://www.jshint.com/) -- nhiều cài đặt hơn JSLint.
 - [ESLint](http://eslint.org/) -- có lẽ là cái mới nhất.
 
 Tất cả chúng đều có thể sử dụng. Ở đây, tác giả sử dụng [ESLint](http://eslint.org/).
+=======
+- [JSLint](https://www.jslint.com/) -- one of the first linters.
+- [JSHint](https://jshint.com/) -- more settings than JSLint.
+- [ESLint](https://eslint.org/) -- probably the newest one.
+
+All of them can do the job. The author uses [ESLint](https://eslint.org/).
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Hầu hết các linters đều được tích hợp với nhiều editor phổ biến: chỉ cần bật plugin trong trình chỉnh sửa và tùy chỉnh kiểu.
 
@@ -334,7 +342,11 @@ Chẳng hạn, đối với ESLint, bạn nên làm như sau:
 
 Ở đây, lệnh `"extends"` có nghĩa là cấu hình này dựa trên bộ cài đặt "eslint:recommended". Sau đó, chúng ta có thể thay đổi theo cách của mình.
 
+<<<<<<< HEAD
 Cũng có thể tải xuống các bộ quy tắc kiểu từ web và và thay đổi chúng. Xem <http://eslint.org/docs/user-guide/getting-started> để biết thêm chi tiết về cài đặt.
+=======
+It is also possible to download style rule sets from the web and extend them instead. See <https://eslint.org/docs/user-guide/getting-started> for more details about installation.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Ngoài ra, một số IDE nhất định có linting tích hợp, thuận tiện nhưng không thể tùy chỉnh như ESLint.
 

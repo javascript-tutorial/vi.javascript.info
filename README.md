@@ -1,6 +1,10 @@
 # Modern JavaScript Tutorial bằng Tiếng Việt
 
+<<<<<<< HEAD
 Repository này chứa phiên bản tiếng Việt của Modern JavaScript Tutorial, sẽ được xuất bản tại [https://vi.javascript.info](https://vi.javascript.info). Đây là URL gốc của bản tiếng Anh: [https://javascript.info](https://javascript.info).
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 **Bạn có thể đóng góp vào bản dịch này bằng cách:**
 
@@ -18,17 +22,29 @@ Nếu maintainer không hồi đáp, hoặc bạn cũng muốn trở thành mộ
 
 **Cho người khác biết rằng bạn đang dịch trong bảng thông báo hoặc nói chuyện bằng tiếng Việt. Mời họ cùng tham gia!**
 
+<<<<<<< HEAD
 🎉 Cảm ơn!
 
 Tên và phần đóng góp của bạn sẽ xuất hiện trong trang "About the project" khi bản dịch được xuất bản.
+=======
+Something's wrong? A topic is missing? Explain it to people, add it as PR 👏
+
+**You can edit the text in any editor.** The tutorial uses an enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Tái bút: Danh sách đầy đủ các ngôn ngữ có thể thấy tại <https://javascript.info/translate>.
 
 ## Cấu trúc
 
+<<<<<<< HEAD
 Mỗi chương, mỗi bài hoặc mỗi bài tập đều được đặt trong một thư mục riêng.
 
 Tên thư mục đặt theo cấu trúc `N-URL`, ở đó `N` là số thứ tự dùng để sắp xếp (các bài được sắp xếp theo thứ tự), và `URL` là URL-slug của nó trên website.
+=======
+Every chapter, article, or task has its folder.
+
+The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Một thư mục có nhiều tệp:
 
