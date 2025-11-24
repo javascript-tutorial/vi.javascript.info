@@ -21,14 +21,22 @@ alert( rabbit.hasOwnProperty('name') ); // true
 
 Nhưng đó chưa phải là tất cả.
 
+<<<<<<< HEAD
 Thậm chí sau khi sửa, vẫn có một sự khác biệt quan trọng giữa `"class Rabbit extends Object"` và `class Rabbit`.
+=======
+Even after the fix, there's still an important difference between `"class Rabbit extends Object"` and `class Rabbit`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Như chúng ta biết, cú pháp "extends" thiết lập hai nguyên mẫu:
 
 1. Giữa `"prototype"` của các hàm constructor (để kế thừa các phương thức thường).
 2. Giữa chính các hàm constructor (để kế thừa các phương thức tĩnh).
 
+<<<<<<< HEAD
 Trong trường hợp của chúng ta, `class Rabbit extends Object` nghĩa là:
+=======
+In the case of `class Rabbit extends Object` it means:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 class Rabbit extends Object {}
@@ -37,7 +45,11 @@ alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) true
 ```
 
+<<<<<<< HEAD
 Nên giờ `Rabbit` cung cấp quyền sử dụng các phương thức tĩnh của `Object` thông qua `Rabbit`, như sau:
+=======
+So `Rabbit` now provides access to the static methods of `Object` via `Rabbit`, like this:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 class Rabbit extends Object {}
@@ -67,7 +79,11 @@ alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Lỗi
 
 Vì vậy `Rabbit` không cung cấp quyền sử dụng các phương thức tĩnh của `Object` trong trường hợp đó.
 
+<<<<<<< HEAD
 Nhận tiện, `Function.prototype` có các phương thức "chung", như `call`, `bind` v.v. Cuối cùng chúng đều có sẵn trong cả hai trường hợp, bởi vì với constructor của `Object` có sẵn thì `Object.__proto__ === Function.prototype`.
+=======
+By the way, `Function.prototype` also has "generic" function methods, like `call`, `bind` etc. They are ultimately available in both cases, because for the built-in `Object` constructor, `Object.__proto__ === Function.prototype`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Đây là hình ảnh minh họa:
 
