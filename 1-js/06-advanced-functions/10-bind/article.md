@@ -124,7 +124,11 @@ funcUser(); // John
 */!*
 ```
 
+<<<<<<< HEAD
 Ở đây `func.bind(user)` có thể coi là một "biến thể đã ràng buộc" của `func`, với `this` cố định là `user`.
+=======
+Here `func.bind(user)` is a "bound variant" of `func`, with fixed `this=user`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Tất cả đối số được truyền "nguyên trạng" cho hàm `func` gốc, ví dụ:
 
@@ -185,8 +189,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Hello"); // Xin chào, John (đối số "Xin chào" được truyền tới say)
 say("Bye"); // Tạm biệt, John ("Tạm biệt" được truyền tới say)
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ````smart header="Convenience method: `bindAll`"
@@ -200,7 +209,11 @@ for (let key in user) {
 }
 ```
 
+<<<<<<< HEAD
 Các thư viện JavaScript cũng cung cấp các chức năng để thuận tiện ràng buộc hàng loạt, ví dụ [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) trong lodash.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](https://lodash.com/docs#bindAll) in lodash.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ````
 
 ## Các hàm một phần
