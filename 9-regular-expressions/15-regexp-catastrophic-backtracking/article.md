@@ -242,7 +242,7 @@ And in the original example `pattern:^(\w+\s?)*$` we may want to forbid backtrac
 
 Modern regular expression engines support possessive quantifiers for that. Regular quantifiers become possessive if we add `pattern:+` after them. That is, we use `pattern:\d++` instead of `pattern:\d+` to stop `pattern:+` from backtracking.
 
-Possessive quantifiers are in fact simpler than "regular" ones. They just match as many as they can, without any backtracking. The search process without bracktracking is simpler.
+Possessive quantifiers are in fact simpler than "regular" ones. They just match as many as they can, without any backtracking. The search process without backtracking is simpler.
 
 There are also so-called "atomic capturing groups" - a way to disable backtracking inside parentheses.
 
@@ -283,7 +283,7 @@ alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
 We can put a more complex regular expression into `pattern:(?=(\w+))\1` instead of `pattern:\w`, when we need to forbid backtracking for `pattern:+` after it.
 
 ```smart
-There's more about the relation between possessive quantifiers and lookahead in articles [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) and [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups).
+There's more about the relation between possessive quantifiers and lookahead in articles [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](https://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) and [Mimicking Atomic Groups](https://blog.stevenlevithan.com/archives/mimic-atomic-groups).
 ```
 
 Let's rewrite the first example using lookahead to prevent backtracking:
