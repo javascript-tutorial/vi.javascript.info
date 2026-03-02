@@ -28,4 +28,8 @@ alert(dictionary); // "apple,__proto__"
 
 Khi tạo thuộc tính bằng descriptor, tất cả các cờ không được cung cấp có giá trị mặc định là `false`. Cho nên, `dictionary.toString` không thể liệt kê.
 
+<<<<<<< HEAD
 Xem lại bài [](info:property-descriptors) để hiểu rõ hơn.
+=======
+See the chapter [](info:property-descriptors) for review.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
