@@ -6,7 +6,11 @@ Loại đầu tiên là các *thuộc tính dữ liệu*. Chúng ta đã biết 
 
 Loại thuộc tính thứ hai là một cái mới. Đó là các *thuộc tính truy cập*. Về cơ bản, chúng là các hàm thực thi khi lấy và đặt giá trị, nhưng trông giống như các thuộc tính thông thường đối với mã bên ngoài.
 
+<<<<<<< HEAD
 ## Các getter và setter
+=======
+The second type of property is something new. It's an *accessor property*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Các thuộc tính truy cập được biểu diễn bằng hai phương thức gọi là "getter" và "setter". Trong một object literal chúng được nhận biết bởi hai từ khóa `get` và `set`:
 
