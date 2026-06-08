@@ -5,7 +5,11 @@ Như chúng ta đã biết ở chương <info:types>, có tám loại dữ liệ
 
 Ngược lại, các đối tượng được sử dụng để lưu trữ các bộ sưu tập có khóa của các dữ liệu khác nhau và các thực thể phức tạp hơn. Trong JavaScript, các đối tượng thâm nhập vào hầu hết mọi khía cạnh của ngôn ngữ. Vì vậy, chúng ta phải hiểu chúng trước khi đi sâu vào bất cứ nơi nào khác.
 
+<<<<<<< HEAD
 Một đối tượng có thể được tạo bằng dấu ngoặc hình `{…}` với một danh sách *thuộc tính* tùy chọn. Một thuộc tính là một cặp "khóa: giá trị", trong đó `khóa` là một chuỗi (còn được gọi là "tên thuộc tính"), và `giá trị` có thể là bất cứ thứ gì.
+=======
+An object can be created with curly braces `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Chúng ta có thể tưởng tượng một đối tượng như một cái tủ với các tập tin đã ký. Mỗi phần dữ liệu được lưu trữ trong tệp của nó bằng từ khóa. Thật dễ dàng để tìm một tệp theo tên của nó hoặc thêm/xóa một tệp.
 
@@ -20,7 +24,11 @@ let user = {};  // cú pháp "đối tượng theo nghĩa đen"
 
 ![](object-user-empty.svg)
 
+<<<<<<< HEAD
 Thông thường, dấu ngoặc `{...}` được sử dụng. Loại khai báo đó được gọi là *đối tượng theo nghĩa đen*.
+=======
+Usually, the curly braces `{...}` are used. That declaration is called an *object literal*.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ## Đối tượng theo nghĩa đen và thuộc tính
 
@@ -46,7 +54,11 @@ Kết quả là đối tượng `user` có thể được tưởng tượng như
 
 ![user object](object-user.svg)
 
+<<<<<<< HEAD
 Chúng ta có thể thêm, xóa và đọc tệp từ chúng mọi lúc.
+=======
+We can add, remove and read files from it at any time.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Các giá trị của thuộc tính có thể truy cập bằng cách sử dụng dấu chấm:
 
@@ -64,7 +76,11 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
+<<<<<<< HEAD
 Để xóa thuộc tính, ta có thể dùng `delete`:
+=======
+To remove a property, we can use the `delete` operator:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js
 delete user.age;
@@ -203,13 +219,21 @@ let bag = {
 };
 ```
 
+<<<<<<< HEAD
 Dấu ngoặc vuông có mạnh hơn dấu chấm. Chúng chấp nhận bất cứ tên của thuộc tính và biến nào. Nhưng ngoài ra chúng cũng cồng kềnh khi viết.
+=======
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Vì vậy hầu hết thời gian, khi tên thuộc tính được biết và đơn giản, dấu chấm được sử dụng. Và nếu chúng ta cần một cái gì đó phức tạp hơn, thì chúng ta chuyển sang dấu ngoặc vuông.
 
 ## Property value shorthand
 
+<<<<<<< HEAD
 Trong code chúng ta thường sử dụng các biến sẵn có làm giá trị cho tên của các thuộc tính.
+=======
+In real code, we often use existing variables as values for property names.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Ví dụ:
 
@@ -255,7 +279,13 @@ let user = {
 
 Như ta đã biết, một biến không thể có tên trùng với những từ dành riêng cho ngôn ngữ lập trình như "for", "let", "return" vâng vâng.
 
+<<<<<<< HEAD
 Nhưng thuộc tính của object thì không giới hạn:
+=======
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run
 // những thuộc tính này đều đúng
@@ -326,7 +356,11 @@ alert( "blabla" in user ); // false, user.blabla không tồn tại
 
 Hãy lưu ý rằng ở phía bên trái của `in` phải có *tên thuộc tính*. Đó thường là một chuỗi được bao bọc trong dấu ngoặc kép.
 
+<<<<<<< HEAD
 Nếu chúng ta bỏ qua dấu ngoặc kép, điều đó có nghĩa là một biến chứa tên thực tế sẽ được kiểm tra. Ví dụ:
+=======
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run
 let user = { age: 30 };
@@ -358,7 +392,11 @@ Các tình huống như thế này rất hiếm khi xảy ra, vì `undefined` th
 
 ## Vòng lặp "for..in"
 
+<<<<<<< HEAD
 Để đi qua tất cả các khóa của một đối tượng, ta có một dạng vòng lặp đặc biệt: `for..in`. Đây là một điều hoàn toàn khác với cấu trúc `for (;;)` mà chúng ta đã học trước đây.
+=======
+## The "for..in" loop [#forin]
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Cú pháp:
 
@@ -414,7 +452,11 @@ for (let code in codes) {
 */!*
 ```
 
+<<<<<<< HEAD
 Đối tượng có thể được sử dụng để đề xuất một danh sách các tùy chọn cho người dùng. Nếu chúng ta tạo một trang chủ yếu cho người Đức thì có lẽ chúng ta muốn `49` đứng đầu tiên.
+=======
+The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Nhưng nếu chúng ta chạy code, chúng ta sẽ thấy một bức tranh hoàn toàn khác:
 
@@ -426,6 +468,7 @@ Các mã điện thoại đi theo thứ tự tăng dần, bởi vì chúng là s
 ````smart header="Integer properties? What's that?"
 Thuật ngữ "thuộc tính số nguyên" ở đây có nghĩa là một chuỗi có thể được chuyển đổi thành và từ một số nguyên mà không thay đổi.
 
+<<<<<<< HEAD
 Do đó, "49" là thuộc thuộc tính số nguyên, vì khi nó được chuyển đổi sang số nguyên và ngược lại, nó vẫn giống nhau. Nhưng "+49" và "1.2" thì không:
 
 ```js run
@@ -433,6 +476,16 @@ Do đó, "49" là thuộc thuộc tính số nguyên, vì khi nó được chuy�
 alert( String(Math.trunc(Number("49"))) ); // "49", giống nhau, thuộc tính số nguyên
 alert( String(Math.trunc(Number("+49"))) ); // "49", không giống "+49" ⇒ không phải thuộc tính số nguyên
 alert( String(Math.trunc(Number("1.2"))) ); // "1", không giống "1.2" ⇒ không phải thuộc tính số nguyên
+=======
+So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+
+```js run
+// Number(...) explicitly converts to a number
+// Math.trunc is a built-in function that removes the decimal part
+alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
+alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
+alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 ```
 ````
 
@@ -481,9 +534,15 @@ Họ lưu trữ các thuộc tính (các cặp khóa-giá trị), trong đó:
 - Thuộc tính khóa phải là chuỗi hoặc ký hiệu (thường là chuỗi).
 - Giá trị có thể là bất kỳ loại nào.
 
+<<<<<<< HEAD
 Để truy cập một thuộc tính, chúng ta có thể sử dụng:
 - Ký hiệu dấu chấm: `obj.property`.
 - Ký hiệu ngoặc vuông `obj["property"]`. Dấu ngoặc vuông cho phép lấy khóa từ một biến, như `obj[varWithKey]`.
+=======
+To access a property, we can use:
+- The dot notation: `obj.property`.
+- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Toán tử bổ sung:
 - Để xóa một thuộc tính: `delete obj.prop`.
