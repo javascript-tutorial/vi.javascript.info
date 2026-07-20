@@ -25,7 +25,11 @@ Sau khi tạo, chúng ta có thể lưu thông tin vào biến bằng toán tử
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hello'; // lưu chuỗi
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 */!*
 ```
 
@@ -64,7 +68,12 @@ let age = 25;
 let message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Một vài người định nghĩa nhiều biến theo cách đặc biệt:
+=======
+Some people also define multiple variables in this multiline style:
+
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```js no-beautify
 let user = 'John',
   age = 25,
@@ -88,22 +97,37 @@ Trong các mã chương trình cũ, bạn sẽ bắt gặp từ khóa `var` thay
 *!*var*/!* message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Từ khóa `var` *hầu như* giống hệt `let`. Nó cũng khai báo biến, nhưng có chút khác biệt, bởi nó làm việc theo cách cũ.
 
 Các khác biệt này được đề cập đến ở bài <info:var>, giờ ta chưa cần quan tâm đến chúng.
+=======
+The `var` keyword is *almost* the same as `let`. It also declares a variable but in a slightly different, "old-school" way.
+
+There are subtle differences between `let` and `var`, but they do not matter to us yet. We'll cover them in detail in the chapter <info:var>.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ````
 
 ## Sự tương tự với đời thực
 
 Chúng ta có thể dễ dàng nắm bắt khái niệm "biến" nếu tưởng tượng nó như một "hộp" chứa dữ liệu được gắn nhãn.
 
+<<<<<<< HEAD
 Ví dụ, biến `message` có thể xem như một hộp gắn nhãn `"message"` lưu giá trị `"Hello!"` bên trong:
+=======
+For instance, the variable `message` can be imagined as a box labelled `"message"` with the value `"Hello!"` in it:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ![](variable.svg)
 
 Ta có thể đặt bất cứ giá trị nào trong hộp:
 
+<<<<<<< HEAD
 Ta cũng có thể thay thế giá trị trong hộp nếu muốn:
+=======
+We can also change it as many times as we want:
+
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```js run
 let message;
 
@@ -149,12 +173,21 @@ let message = "That"; // SyntaxError: 'message' đã được khai báo rồi
 Vì thế, chúng ta nên khai báo mỗi biến một lần và tham chiếu đến nó mà không có `let`.
 ````
 
+<<<<<<< HEAD
 ```smart header="Ngôn ngữ lập trình hàm"
 Cần chú ý rằng chúng ta cũng có các ngôn ngữ [lập trình hàm](https://vi.wikipedia.org/wiki/L%E1%BA%ADp_tr%C3%ACnh_h%C3%A0m), như [Scala](http://www.scala-lang.org/) hay [Erlang](http://www.erlang.org/) không cho phép thay đổi giá trị biến.
+=======
+```smart header="Functional languages"
+It's interesting to note that there exist so-called [pure functional](https://en.wikipedia.org/wiki/Purely_functional_programming) programming languages, such as [Haskell](https://en.wikipedia.org/wiki/Haskell), that forbid changing variable values.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Trong các ngôn ngữ này, một khi giá trị đã nằm trong "hộp", nó ở đó mãi mãi. Nếu cần lưu giá trị khác, chúng ta cần tạo ra "hộp" mới (khai báo một biến mới). Ta không thể tái sử dụng một biến đã có.
 
+<<<<<<< HEAD
 Dù có vẻ kỳ lạ, chúng khá hiệu quả khi phát triển ứng dụng. Hơn nữa, có một số lĩnh vực, như tính toán song song, những hạn chế này lại trở thành ưu điểm. Nghiên cứu những ngôn ngữ này (dù không có kế hoạch sử dụng) vẫn được khuyến khích vì nó mở mang đầu óc của bạn.
+=======
+Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```
 
 ## Đặt tên biến [#variable-naming]
@@ -171,7 +204,11 @@ let userName;
 let test123;
 ```
 
+<<<<<<< HEAD
 Khi tên biến chứa nhiều từ, cách viết [camelCase](https://en.wikipedia.org/wiki/CamelCase) thường được sử dụng. Đó là: các từ viết liền nhau, ngoài từ đầu tiên các chữ cái bắt đầu mỗi từ đều được viết hoa: `myVeryLongName`.
+=======
+When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, with each word except the first starting with a capital letter: `myVeryLongName`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Điều thú vị là kí tự `'$'` và `'_'` được phép dùng. Chúng cũng chỉ là những kí tự thông thường, giống như các chữ cái, không có ý nghĩa gì đặc biệt.
 
@@ -192,19 +229,32 @@ let 1a; // không được bắt đầu là chữ số
 let my-name; // dấu gạch ngang '-' không được phép sử dụng
 ```
 
+<<<<<<< HEAD
 ```smart header="JavaScript phân biệt chữ hoa và chữ thường"
 Các biến có tên `apple` và `AppLE` khác nhau.
 ```
 
 ````smart header="Các kí tự không phải chữ cái Lating được phép dùng, nhưng không được khuyến khích"
 Có thể sử dụng chữ cái trong bất cứ ngôn ngữ nào để đặt tên biến, ví dụ:
+=======
+```smart header="Case matters"
+Variables named `apple` and `APPLE` are two different variables.
+```
+
+````smart header="Non-Latin letters are allowed, but not recommended"
+It is possible to use any language, including Cyrillic letters, Chinese logograms and so on, like this:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Toàn bộ những tên biến như vậy hợp lệ, nhưng có một quy tắc được áp dụng rộng rãi là chỉ sử dụng các chữ cái trong bảng chữ cái tiếng Anh làm tên biến. Quy tắc này đảm bảo mọi người từ nhiều quốc gia có thể hiểu được.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it sometime.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ````
 
 ````warn header="Các từ khóa"
@@ -259,12 +309,20 @@ const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // lỗi, không thể gán lại một hằng!
 ```
 
+<<<<<<< HEAD
 Khi một lập trình viên muốn một biến sẽ không bao giờ thay đổi, họ có thể khai báo biến bằng `const` để chắc chắn điều này.
 
+=======
+When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and communicate that fact to everyone.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ### Các hằng được viết hoa
 
+<<<<<<< HEAD
 Có một quy ước được sử dụng rộng rãi là dùng hẳng để đặt tên cho những giá trị "khó nhớ" không thay đổi trong suốt chương trình.
+=======
+There is a widespread practice to use constants as aliases for difficult-to-remember values that are known before execution.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Các hằng này được đặt tên bằng chữ viết hoa và ngăn cách các từ bằng "_".
 
@@ -289,16 +347,29 @@ alert(color); // #FF7F00
 
 Khi nào nên sử dụng chữ hoa để đặt hằng và khi nào thì sử dụng chữ thường?
 
+<<<<<<< HEAD
 Một "hằng" có nghĩa là giá trị không bao giờ thay đổi. Nhưng có những hằng mà giá trị đã biết trước khi chạy (như các hằng mã màu ở trên) và những hằng được *tính* khi chạy chương trình, và không thay đổi sau đó.
 
 Ví dụ:
+=======
+Being a "constant" just means that a variable's value never changes. But some constants are known before execution (like a hexadecimal value for red) and some constants are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+
+For instance:
+
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```js
 const pageLoadTime = /* time taken by a webpage to load */;
 ```
 
+<<<<<<< HEAD
 Giá trị của `pageLoadTime` không được biết trước khi chương trình chạy, nên nó đặt tên theo cách bình thường. Nhưng nó vẫn là hẳng vì giá trị của nó không đổi sau đó.
 
 Nói cách khác, hằng chỉ được viết hoa nếu giá trị của nó đã biết trước khi chạy chương trình.
+=======
+The value of `pageLoadTime` is not known before the page load, so it's named normally. But it's still a constant because it doesn't change after the assignment.
+
+In other words, capital-named constants are only used as aliases for "hard-coded" values.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## Đặt tên sao cho đúng?
 
@@ -306,18 +377,31 @@ Nói về biến, có một thứ cực kỳ quan trọng.
 
 Tên biến cần rõ ràng, mang nhiều ý nghĩa, mô tả dữ liệu nó chứa.
 
+<<<<<<< HEAD
 Đặt tên biến sao cho có nghĩa là một trong những kỹ năng quan trọng và phức tạp nhất trong lập trình. Nhìn thoáng qua tên biến ta có thể phân biệt được đây là đoạn mã viết bởi một lập trình viên dày dạn kinh nghiệm hay lập trình viên nghiệp dư.
 
 Trong dự án thực tế, hầu hết thời gian được sử dụng để chỉnh sửa và mở rộng các đoạn mã hiện có hơn là viết lại từ đầu. Khi ta cần đọc lại các mã đã được chỉnh sửa trước đó, sẽ dễ hơn nếu các thông tin được mô tả tốt. Hay nói cách khác các biến được đặt tên tốt.
+=======
+Variable naming is one of the most important and complex skills in programming. A glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+
+In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labelled. Or, in other words, when the variables have good names.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Hãy dành thời gian suy nghĩ về việc đặt tên biến trước khi khai báo nó. Bạn sẽ được đền đáp xứng đáng sau này.
 
 Đây là vài quy tắc đặt tên bạn nên tuân theo:
 
+<<<<<<< HEAD
 - Đặt tên để mọi người hiểu được như `userName` hoặc `shoppingCart`.
 - Đừng đặt tên viết tắt hoặc tên quá ngắn như `a`, `b`, `c`, trừ khi bạn biết mình đang làm gì.
 - Tên cần ngắn gọn nhất nhưng mang tính mô tả nhiều nhất. Các ví dụ về cái tên tệ là `data` và `value`. Bởi chúng không nói lên điều gì đặc biệt. Chúng chỉ sử dụng được nếu ngữ cảnh của mã khiến dữ liệu hoặc giá trị mà chúng tham chiếu khác biệt rõ ràng với giá trị và dữ liệu ở nơi khác trong chương trình.
 - Tuân thủ các quy tắc đặt tên biến trong nhóm của bạn và các quy tắc cá nhân. Nếu người thăm trang web được gọi là một "user" thì ta nên đặt tên các biến liên quan là `currentUser` hoặc `newUser` thay vì `currentVisitor` hay `newManInTown`.
+=======
+- Use human-readable names like `userName` or `shoppingCart`.
+- Stay away from abbreviations or short names like `a`, `b`, and `c`, unless you know what you're doing.
+- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
+- Agree on terms within your team and in your mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Nghe có vẻ đơn giản? Đúng là như vậy thật! Nhưng tạo ra các tên biến vừa ngắn gọn vừa mô tả tốt thì không đơn giản chút nào.
 
