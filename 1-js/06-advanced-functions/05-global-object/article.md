@@ -24,7 +24,11 @@ var gVar = 5;
 alert(window.gVar); // 5 (trở thành thuộc tính của đối tượng toàn cục)
 ```
 
+<<<<<<< HEAD
 Tác dụng tương tự với các khai báo hàm (các câu lệnh có từ khóa `function` trong dòng mã chính, không phải biểu thức hàm).
+=======
+Function declarations have the same effect (statements with `function` keyword in the main code flow, not function expressions).
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Xin đừng dựa vào đó! Hành vi này tồn tại vì lý do tương thích. Các tập lệnh hiện đại sử dụng [JavaScript modules](info:modules) khiến điều đó không thể xảy ra.
 
