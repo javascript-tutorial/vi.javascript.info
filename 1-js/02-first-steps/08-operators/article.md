@@ -51,8 +51,14 @@ Kết quả của `a % b` là [phần dư](https://en.wikipedia.org/wiki/Remaind
 Ví dụ:
 
 ```js run
+<<<<<<< HEAD
 alert( 5 % 2 ); // 1, phần dư của 5 chia 2
 alert( 8 % 3 ); // 2, phần dư của 8 chia 3
+=======
+alert( 5 % 2 ); // 1, the remainder of 5 divided by 2
+alert( 8 % 3 ); // 2, the remainder of 8 divided by 3
+alert( 8 % 4 ); // 0, the remainder of 8 divided by 4
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ### Exponentiation **
@@ -64,12 +70,12 @@ In school maths, we write that as a<sup>b</sup>.
 For instance:
 
 ```js run
-alert( 2 ** 2 ); // 2² = 4  
-alert( 2 ** 3 ); // 2³ = 8 
+alert( 2 ** 2 ); // 2² = 4
+alert( 2 ** 3 ); // 2³ = 8
 alert( 2 ** 4 ); // 2⁴ = 16
 ```
 
-Just like in maths, the exponentiation operator is defined for non-integer numbers as well. 
+Just like in maths, the exponentiation operator is defined for non-integer numbers as well.
 
 For example, a square root is an exponentiation by ½:
 
@@ -81,7 +87,7 @@ alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 
 ## String concatenation with binary +
 
-Let's meet features of JavaScript operators that are beyond school arithmetics.
+Let's meet the features of JavaScript operators that are beyond school arithmetics.
 
 Usually, the plus operator `+` sums numbers.
 
@@ -205,6 +211,7 @@ Có nhiều toán tử trong JavaScript. Mỗi toán tử có một số ưu ti�
 | Độ ưu tiên | Tên | Kí hiệu |
 |------------|-----|---------|
 | ... | ... | ... |
+<<<<<<< HEAD
 | 17 | cộng đơn nguyên | `+` |
 | 17 | trừ đơn nguyên | `-` |
 | 16 | lũy thừa | `**` |
@@ -217,10 +224,28 @@ Có nhiều toán tử trong JavaScript. Mỗi toán tử có một số ưu ti�
 | ... | ... | ... |
 
 Như chúng ta thấy, phép "cộng đơn nguyên" có độ ưu tiên là `17` cao hơn `13` của phép "cộng" (cộng nhị phân). Đó là lý do, trong biểu thức `"+apples + +oranges"`, cộng đơn nguyên chạy trước cộng nhị phân.
+=======
+| 14 | unary plus | `+` |
+| 14 | unary negation | `-` |
+| 13 | exponentiation | `**` |
+| 12 | multiplication | `*` |
+| 12 | division | `/` |
+| 11 | addition | `+` |
+| 11 | subtraction | `-` |
+| ... | ... | ... |
+| 2 | assignment | `=` |
+| ... | ... | ... |
+
+As we can see, the "unary plus" has a priority of `14` which is higher than the `11` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ## Phép gán
 
+<<<<<<< HEAD
 Hãy lưu ý rằng một phép gán `=` cũng là một toán tử. Nó được liệt kê trong bảng ưu tiên với mức ưu tiên rất thấp là `3`.
+=======
+Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `2`.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Đó là lý do tại sao, khi chúng ta gán một biến, như `x = 2 * 2 + 1`, các phép tính được thực hiện trước và sau đó dấu ` = `được chạy, lưu trữ kết quả trong` x`.
 
@@ -276,7 +301,11 @@ alert( c ); // 4
 
 Gán chuỗi đánh giá từ phải sang trái. Đầu tiên, biểu thức ngoài cùng bên phải `2 + 2` được tính rồi gán cho các biến ở bên trái: `c`, `b` và `a`. Cuối cùng, tất cả các biến chia sẻ một giá trị duy nhất.
 
+<<<<<<< HEAD
 Một lần nữa, với mục tiêu dễ đọc dễ hiểu, ta nên chia code thành nhiều dòng:
+=======
+Once again, for the purposes of readability it's better to split such code into a few lines:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 c = 2 + 2;
@@ -315,9 +344,13 @@ Các toán tử như vậy có cùng mức độ ưu tiên như một phép gán
 ```js run
 let n = 2;
 
-n *= 3 + 5;
+n *= 3 + 5; // right part evaluated first, same as n *= 8
 
+<<<<<<< HEAD
 alert( n ); // 16  (phần bên phải thực hiện trước, giống như n *= 8)
+=======
+alert( n ); // 16
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ## Tăng/giảm
@@ -451,7 +484,11 @@ Danh sách các toán tử:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
+<<<<<<< HEAD
 Các toán tử này rất hiếm khi được sử dụng, khi chúng ta cần xử lý các số ở mức rất thấp (bitwise). Chúng ta sẽ không cần đến những toán tử này trong thời gian tới, vì việc phát triển web ít sử dụng chúng, nhưng trong một số lĩnh vực đặc biệt, chẳng hạn như mật mã, chúng rất hữu ích. Bạn có thể đọc chương [Toán tử Bitwise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) trên MDN khi có nhu cầu.
+=======
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) chapter on MDN when a need arises.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ## Dấu phẩy
 
