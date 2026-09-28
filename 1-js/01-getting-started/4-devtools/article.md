@@ -8,7 +8,7 @@ To see errors and get a lot of other useful information about scripts, "develope
 
 Most developers lean towards Chrome or Firefox for development because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing "catch-up" to Chrome or Firefox. So most developers have a "favorite" browser and switch to others if a problem is browser-specific.
 
-Developer tools are potent, they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
+Developer tools are potent; they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
 
 ## Google Chrome
 
@@ -22,7 +22,7 @@ The developer tools will open on the Console tab by default.
 
 It looks somewhat like this:
 
-![chrome](chrome.png)
+![chrome](chrome.webp)
 
 The exact look of developer tools depends on your version of Chrome. It changes from time to time but should be similar.
 
@@ -49,7 +49,7 @@ The look & feel of them is quite similar. Once you know how to use one of these 
 
 Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the "Develop menu" first.
 
-Open Preferences and go to the "Advanced" pane. There's a checkbox at the bottom:
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
 
 ![safari](safari.png)
 
