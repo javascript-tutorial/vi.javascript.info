@@ -7,7 +7,7 @@ In JavaScript they are written like this:
 - Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
 - Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
 - Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
-- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+- Not equals: In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
 
 In this article we'll learn more about different types of comparisons, how JavaScript makes them, including important peculiarities.
 
@@ -212,5 +212,5 @@ Why did we go over these examples? Should we remember these peculiarities all th
 - Comparison operators return a boolean value.
 - Strings are compared letter-by-letter in the "dictionary" order.
 - When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
-- The values `null` and `undefined` equal `==` each other and do not equal any other value.
+- The values `null` and `undefined` are equal `==` to themselves and each other, but do not equal any other value.
 - Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
