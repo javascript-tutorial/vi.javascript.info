@@ -5,10 +5,10 @@ There's another very simple and concise syntax for creating functions, that's of
 It's called "arrow functions", because it looks like this:
 
 ```js
-let func = (arg1, arg2, ..., argN) => expression
+let func = (arg1, arg2, ..., argN) => expression;
 ```
 
-...This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
 
 In other words, it's the shorter version of:
 
@@ -33,7 +33,7 @@ let sum = function(a, b) {
 alert( sum(1, 2) ); // 3
 ```
 
-As you can, see `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+As you can see, `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
 
 - If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
 
@@ -48,7 +48,7 @@ As you can, see `(a, b) => a + b` means a function that accepts two arguments na
     alert( double(3) ); // 6
     ```
 
-- If there are no arguments, parentheses will be empty (but they should be present):
+- If there are no arguments, parentheses are empty, but they must be present:
 
     ```js run
     let sayHi = () => alert("Hello!");
@@ -64,7 +64,7 @@ For instance, to dynamically create a function:
 let age = prompt("What is your age?", 18);
 
 let welcome = (age < 18) ?
-  () => alert('Hello') :
+  () => alert('Hello!') :
   () => alert("Greetings!");
 
 welcome();
@@ -76,9 +76,9 @@ They are very convenient for simple one-line actions, when we're just too lazy t
 
 ## Multiline arrow functions
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+The arrow functions that we've seen so far were very simple. They took arguments from the left of `=>`, evaluated and returned the right-side expression with them.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
+Sometimes we need a more complex function, with multiple expressions and statements. In that case, we can enclose them in curly braces. The major difference is that curly braces require a `return` within them to return a value (just like a regular function does).
 
 Like this:
 
@@ -86,7 +86,7 @@ Like this:
 let sum = (a, b) => {  // the curly brace opens a multiline function
   let result = a + b;
 *!*
-  return result; // if we use curly braces, then we need an explicit "return" 
+  return result; // if we use curly braces, then we need an explicit "return"
 */!*
 };
 
@@ -105,7 +105,7 @@ For now, we can already use arrow functions for one-line actions and callbacks.
 
 ## Summary
 
-Arrow functions are handy for one-liners. They come in two flavors:
+Arrow functions are handy for simple actions, especially for one-liners. They come in two flavors:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
+1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there's only a single argument, e.g. `n => n*2`.
 2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
